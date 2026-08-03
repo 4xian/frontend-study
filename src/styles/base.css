@@ -1,0 +1,153 @@
+/* 全局基础样式：reset、字体栈、基础质感（需求文档 §7.3） */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  color: var(--color-text);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition:
+    color var(--duration-base) var(--ease-out),
+    background-color var(--duration-base) var(--ease-out);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+code,
+pre,
+kbd {
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 62%, transparent);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+
+/* 页面切换保持背景连续，新页面进入时旧页面同步淡出。 */
+.page-enter-active {
+  transition:
+    opacity 320ms var(--ease-out),
+    transform 320ms var(--ease-spring);
+}
+
+.page-leave-active {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  pointer-events: none;
+  transition: opacity 180ms var(--ease-out);
+}
+
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+/* 视口高度外壳只做淡入，避免向下位移触发根文档滚动条。 */
+.content-shell.page-enter-from {
+  transform: none;
+}
+
+.page-leave-to {
+  opacity: 0;
+}
+
+/* v-reveal 滚动渐入：进入视口后由指令加 is-visible 触发 */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 600ms var(--ease-out),
+    transform 600ms var(--ease-spring);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  :root {
+    --color-bg-glass: var(--color-bg-elevated);
+    --color-nav-curtain: rgba(232, 232, 237, 0.82);
+  }
+
+  .dark {
+    --color-nav-curtain: rgba(0, 0, 0, 0.82);
+  }
+}
+
+@media (prefers-contrast: more) {
+  a:focus-visible,
+  button:focus-visible,
+  [tabindex]:focus-visible {
+    outline-color: currentColor;
+  }
+}
+
+/* 系统减弱动态效果时取消空间位移，保留短淡入反馈。 */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .page-enter-active,
+  .page-leave-active,
+  .reveal {
+    transition-duration: 120ms !important;
+    transition-property: opacity !important;
+  }
+
+  .page-enter-from,
+  .reveal {
+    transform: none !important;
+  }
+
+  .reveal {
+    opacity: 1;
+  }
+}
