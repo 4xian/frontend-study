@@ -1,0 +1,336 @@
+/**
+ * 课程：RouterView 插槽与过渡
+ * 查证日期：2026-08-04
+ * 适用版本：Vue 3.5.40、Vue Router 5.2.0
+ * 查证工具：Tavily、Vue/Vue Router 官方文档与 vuejs/router v5.2.0 固定标签源码
+ */
+import { defineLesson, defineLessonMeta } from '@/content/schema'
+
+const routerViewEntryId = 'vue.router.learn.basics.router-link-view-active'
+const lazyLoadingEntryId = 'vue.router.learn.intermediate.lazy-loading'
+const navigationFailuresEntryId = 'vue.router.learn.advanced.navigation-failures'
+
+export const meta = defineLessonMeta({
+  id: 'vue.router.learn.advanced.router-view-slots-transitions',
+  type: 'lesson',
+  title: 'RouterView 插槽与过渡',
+  summary: '在 RouterView 插槽内组合路由组件的实例身份、缓存与页面过渡',
+  ecosystem: 'vue',
+  module: 'router',
+  collection: 'advanced',
+  level: 'advanced',
+  prerequisites: [routerViewEntryId, lazyLoadingEntryId, navigationFailuresEntryId],
+  related: [routerViewEntryId, lazyLoadingEntryId, navigationFailuresEntryId],
+  tags: ['Vue Router', 'RouterView slot', 'Transition', 'KeepAlive', 'key'],
+  sources: [
+    {
+      title: 'Vue Router：RouterView slot',
+      url: 'https://router.vuejs.org/guide/advanced/router-view-slot',
+    },
+    {
+      title: 'Vue Router：Transitions',
+      url: 'https://router.vuejs.org/guide/advanced/transitions',
+    },
+    {
+      title: 'Vue Router API：RouterView',
+      url: 'https://router.vuejs.org/api/variables/routerview',
+    },
+    {
+      title: 'Vue Router API：Router.isReady()',
+      url: 'https://router.vuejs.org/api/interfaces/router#isready',
+    },
+    {
+      title: 'Vue：Transition',
+      url: 'https://vuejs.org/guide/built-ins/transition',
+    },
+    {
+      title: 'Vue：KeepAlive',
+      url: 'https://vuejs.org/guide/built-ins/keep-alive',
+    },
+    {
+      title: 'Vue 3.5.40 BaseTransition.ts',
+      url: 'https://github.com/vuejs/core/blob/v3.5.40/packages/runtime-core/src/components/BaseTransition.ts',
+    },
+    {
+      title: 'Vue Router 5.2.0 RouterView.ts',
+      url: 'https://github.com/vuejs/router/blob/v5.2.0/packages/router/src/RouterView.ts',
+    },
+    {
+      title: 'Vue Router 5.2.0 router.ts',
+      url: 'https://github.com/vuejs/router/blob/v5.2.0/packages/router/src/router.ts',
+    },
+  ],
+  appliesTo: 'Vue 3.5.40、Vue Router 5.2.0',
+  verifiedAt: '2026-08-04',
+  estimatedMinutes: 70,
+})
+
+export default defineLesson({
+  meta,
+  objectives: [
+    '读取 RouterView slot 提供的 Component 与 route',
+    '按 Transition、KeepAlive、route component 的顺序组合视图',
+    '区分默认复用、key 强制替换与 KeepAlive 缓存',
+    '分别观察导航结算、组件生命周期与 transition hooks',
+    '在独立 memory router 挂载前等待初始导航 ready',
+  ],
+  blocks: [
+    { type: 'heading', content: '插槽交付的是当前视图的 VNode 与 route' },
+    {
+      type: 'text',
+      content:
+        '`RouterView` 先解析当前 depth、命名视图、route props 与 attrs，再把已经创建的组件 VNode 作为 `Component` 交给插槽。插槽中的 `route` 则是该视图实际用于匹配的位置；key、诊断与过渡方向都应读取这份 route。',
+    },
+    {
+      type: 'code',
+      lang: 'vue',
+      content: `<RouterView v-slot="{ Component, route }">
+  <component :is="Component" :key="route.path" />
+</RouterView>`,
+    },
+    { type: 'heading', content: '让过渡与缓存作用于 route component' },
+    {
+      type: 'text',
+      content:
+        '`Transition` 与 `KeepAlive` 都放在 `RouterView` 插槽内。外层 Transition 协调新旧视图，内层 KeepAlive 保存失活实例，最内层才渲染 slot 给出的 route component；不要缓存长期存在的 RouterView 本身。',
+    },
+    {
+      type: 'code',
+      lang: 'vue',
+      content: `<RouterView v-slot="{ Component, route }">
+  <Transition name="route-fade" mode="out-in">
+    <KeepAlive>
+      <component :is="Component" :key="route.path" />
+    </KeepAlive>
+  </Transition>
+</RouterView>`,
+    },
+    {
+      type: 'table',
+      headers: ['组合', 'alpha -> beta', 'workspace -> review -> workspace'],
+      rows: [
+        ['无 KeepAlive、无 key', '同一 workspace 实例原位复用', '返回时创建新实例'],
+        ['无 KeepAlive、path key', '替换并销毁旧实例', '返回时创建新实例'],
+        ['KeepAlive、无 key', '同一 workspace 实例原位复用', '失活后恢复原实例'],
+        ['KeepAlive、path key', 'alpha 与 beta 分别缓存', '按 pathname 恢复实例'],
+      ],
+    },
+    { type: 'heading', content: 'key 是产品身份选择，不是固定样板' },
+    {
+      type: 'text',
+      content:
+        '同一 route record 只改变 params 时，Vue Router 默认复用组件实例。`route.path` key 会让不同 pathname 拥有不同 VNode 身份，但不会把 query 与 hash 纳入身份；只有确实需要独立状态或过渡时才应添加。KeepAlive 保存的是实例，不会把状态序列化到 store。',
+    },
+    { type: 'heading', content: '先完成初始导航，再挂载 memory router' },
+    {
+      type: 'code',
+      lang: 'ts',
+      content: `const router = createRouter({
+  history: createMemoryHistory(),
+  routes,
+})
+
+await router.push('/workspace/alpha')
+await router.isReady()
+
+app.use(router)
+app.mount('#app')`,
+    },
+    {
+      type: 'text',
+      content:
+        '`isReady()` 等待初始导航结算，不是延时工具。先导航并等待 ready，再 mount，能避免空 RouterView 后插入首个页面时产生非预期 initial enter；导航失败时它也可能 reject。',
+    },
+    { type: 'heading', content: '用一个受控实验分开观察三条时间线' },
+    {
+      type: 'text',
+      content:
+        '下面的独立 memory router 固定使用 `/workspace/:id` 与 `/review`。切换 KeepAlive、path key 或 transition 都会卸载旧 mini-app 并创建新 generation，避免旧 cache 污染结论。导航结果、组件生命周期与 transition hooks 分区记录。',
+    },
+    {
+      type: 'demo',
+      id: 'vue.router.learn.advanced.router-view-slots-transitions.router-view-transitions-lab-demo',
+      description: '比较 RouterView 插槽内的实例复用、缓存生命周期与 out-in 过渡事件',
+      playground: true,
+    },
+    { type: 'heading', content: '导航提交与视觉离入场不是同一时刻' },
+    {
+      type: 'text',
+      content:
+        '`await router.push()` 只说明导航已经结算。`mode="out-in"` 另行协调旧视图完成离场后再插入新视图。Vue 3.5.40 的公开回调日志是 `before-leave -> before-enter -> after-leave -> after-enter`：内部 afterLeave 会先触发新视图更新，再调用公开 `onAfterLeave`。应等待可见 hook 事件，而不是用固定毫秒数猜测完成时间。',
+    },
+    { type: 'heading', content: '易错使用提示' },
+    {
+      type: 'pitfalls',
+      items: [
+        {
+          title: '把 Transition 或 KeepAlive 包在 RouterView 外',
+          description: '包装目标变成长期存在的 RouterView，而不是实际 route component。',
+          consequence: '缓存与过渡的实例边界错误，并触发 Router 的弃用诊断。',
+          wrong: {
+            lang: 'vue',
+            content: `<KeepAlive>
+  <RouterView />
+</KeepAlive>`,
+          },
+          correct: {
+            lang: 'vue',
+            content: `<RouterView v-slot="{ Component }">
+  <KeepAlive><component :is="Component" /></KeepAlive>
+</RouterView>`,
+          },
+        },
+        {
+          title: '给所有视图无条件添加 route key',
+          description: 'key 改变 VNode 身份，也会改变实例与生命周期行为。',
+          consequence: '原本应复用的表单、请求与局部状态被重建。',
+          wrong: { lang: 'vue', content: `<component :is="Component" :key="route.fullPath" />` },
+          correct: {
+            lang: 'vue',
+            content: `<component :is="Component" /> <!-- 默认复用符合需求时 -->`,
+          },
+        },
+        {
+          title: '把 slot Component 当成组件定义或懒加载函数',
+          description: 'Vue Router 5.2.0 交给 slot 的 Component 已经是创建完成的 VNode。',
+          consequence:
+            '重复解析 route record，并可能丢失 RouterView 已合并的 props、attrs 与 ref。',
+          wrong: { lang: 'ts', content: `const resolved = await Component()` },
+          correct: {
+            lang: 'vue',
+            content: `<RouterView v-slot="{ Component }">
+  <component :is="Component" />
+</RouterView>`,
+          },
+        },
+        {
+          title: '不加 key，却期待同记录参数变化触发过渡',
+          description: '同一路由记录通常复用同一个组件实例，参数变化只会更新现有 VNode。',
+          consequence: 'route 已切换到新参数，但不会出现预期的 leave 和 enter。',
+          wrong: { lang: 'vue', content: `<component :is="Component" />` },
+          correct: {
+            lang: 'vue',
+            content: `<component :is="Component" :key="route.path" />`,
+          },
+        },
+        {
+          title: '把 KeepAlive 当成状态序列化工具',
+          description: 'KeepAlive 只保留当前缓存边界里的组件实例，不会把状态写入持久化存储。',
+          consequence: '重建应用、缓存边界或刷新页面后，仍错误期待旧状态存在。',
+          wrong: { lang: 'ts', content: `// 使用 KeepAlive 后刷新页面也能恢复表单` },
+          correct: {
+            lang: 'ts',
+            content: `// 跨刷新状态交给 store 或持久化层；KeepAlive 只负责实例缓存`,
+          },
+        },
+        {
+          title: '把 deactivated 当成 unmounted',
+          description: '缓存组件离场时仍保留实例，之后会再次 activated。',
+          consequence: '资源被过早永久释放，或错误断言 setup 返回时会重新执行。',
+          wrong: { lang: 'ts', content: `onDeactivated(disposePermanently)` },
+          correct: {
+            lang: 'ts',
+            content: `onDeactivated(pauseWork)
+onUnmounted(disposePermanently)`,
+          },
+        },
+        {
+          title: 'memory router 未发起初始导航就等待 isReady',
+          description: 'memory history 不会替独立应用自动选择初始 URL。',
+          consequence: 'ready Promise 没有真实的初始导航可以结算。',
+          wrong: { lang: 'ts', content: `await router.isReady()` },
+          correct: {
+            lang: 'ts',
+            content: `await router.push('/workspace/alpha')
+await router.isReady()`,
+          },
+        },
+        {
+          title: '把 mode="out-in" 当成导航等待策略',
+          description:
+            'out-in 只协调旧 VNode 离场和新 VNode 入场，不改变 Router Promise 的结算点。',
+          consequence: 'router.push 已成功返回时，界面仍可能处在 leave 或 enter 阶段。',
+          wrong: {
+            lang: 'ts',
+            content: `await router.push('/review')
+// 错误假设：after-enter 此时一定已经完成`,
+          },
+          correct: {
+            lang: 'ts',
+            content: `await router.push('/review')
+await waitForVisibleTransitionState()`,
+          },
+        },
+        {
+          title: '用 sleep 等待页面过渡',
+          description: 'CSS 时长会受样式、设备与 reduced motion 影响。',
+          consequence: '自动化断言在不同环境中随机提前或超时。',
+          wrong: {
+            lang: 'ts',
+            content: `await new Promise((resolve) => setTimeout(resolve, 300))`,
+          },
+          correct: { lang: 'ts', content: `await expect(log).toContainText('after-enter')` },
+        },
+      ],
+    },
+    { type: 'heading', content: '从源码推导适用场景' },
+    {
+      type: 'steps',
+      items: [
+        {
+          title: '1. slot 是装饰现有视图 VNode 的边界',
+          content:
+            '`RouterView.ts` 在调用默认 slot 前已经创建 route component VNode，并合并 route props、attrs、ref 与卸载回调。适合在 slot 内增加 Transition、KeepAlive、统一 ref 或页面级观测，不适合重新执行 loader。',
+        },
+        {
+          title: '2. key 应跟随当前 outlet 实际使用的 route',
+          content:
+            '`routeToDisplay` 同时驱动 depth、matched record 与 slot route。嵌套或显式传入 route 时，应读取 slot 的 route 决定 key 和过渡方向，避免从外层全局 route 猜测当前 outlet 身份。',
+        },
+        {
+          title: '3. RouterView depth 会跳过无组件记录',
+          content:
+            '`RouterView.ts` 会越过没有 `components` 的 matched record，再为下一层 outlet 提供新的 depth。多层布局不能自行用固定 `matched[index]` 猜当前组件，应让每层 RouterView 完成自己的匹配解析。',
+        },
+        {
+          title: '4. 默认复用是 Router 支持的正常路径',
+          content:
+            'RouterView 在组件实例复用到新记录时会更新 record instance，并按条件迁移 leave/update guards。详情筛选、分页参数等需要保留局部状态的场景，应先利用默认复用，再按产品身份决定是否加 key。',
+        },
+        {
+          title: '5. KeepAlive 离场不等于真正卸载',
+          content:
+            'RouterView 只在 route component VNode 真正 unmount 后清除 record instance；deactivation 仍保留组件。需要暂停订阅时使用 activated/deactivated，需要永久释放资源时使用 unmounted。',
+        },
+        {
+          title: '6. isReady 等待导航结算，不等待视觉动画',
+          content:
+            'Router 在初始导航 finalize 后标记 ready，失败则拒绝同一等待队列。独立 memory router 应先 push 初始位置再等待 ready；Transition hooks 则另行观察视觉离入场，二者不能互相替代。',
+        },
+        {
+          title: '7. 测试应分开锁定导航、实例与过渡',
+          content:
+            'Vue Router 固定测试分别覆盖 RouterView slot、KeepAlive 与 isReady 失败路径。业务回归也应分别断言 current route、instance ID/count 和 transition hook，避免一个日志字符串同时冒充三种证据。',
+        },
+      ],
+    },
+    {
+      type: 'checklist',
+      items: [
+        { label: '在 RouterView slot 内组合 route component、Transition 与 KeepAlive' },
+        { label: '先确认产品身份边界，再选择无 key、route.path 或其他稳定 key' },
+        { label: '分别处理 activated/deactivated 与 mounted/unmounted' },
+        { label: 'memory router 先 push 初始位置，再等待 isReady' },
+        { label: '分开观察导航结果、组件实例和 transition hooks' },
+        { label: 'reduced motion 下仍验证最终状态，不依赖固定等待时间' },
+      ],
+    },
+  ],
+  recap: [
+    'RouterView slot 交付已创建的 Component VNode 与该视图实际使用的 route。',
+    'Transition 与 KeepAlive 应放在 slot 内，直接作用于 route component。',
+    '默认复用、route.path key 和 KeepAlive 分别控制原位更新、实例身份与缓存。',
+    'memory router 应先完成初始导航并等待 isReady，再挂载 mini-app。',
+    '导航结算、组件生命周期与 transition hooks 是三条需要分开观察的时间线。',
+  ],
+})

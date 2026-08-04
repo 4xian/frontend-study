@@ -13,6 +13,13 @@ const depthLabels = {
   quick: '快速参考',
 } as const
 
+const sourceTagLabels = {
+  public: '公开',
+  internal: '内部',
+  alpha: 'Alpha',
+  deprecated: '已弃用',
+} as const
+
 /** 当前模块的公开导航信息。 */
 const navigation = computed(() =>
   learningCatalog.getNavigation({
@@ -58,12 +65,15 @@ const resultCount = computed(() =>
   ),
 )
 
-/** 判断参考条目的名称或别名是否命中当前关键词。 */
+/** 判断参考条目的名称、别名或来源标签是否命中当前关键词。 */
 function matchesReferenceItem(item: ReferenceOverviewItem): boolean {
   if (!normalizedQuery.value) return true
-  return [item.name, ...(item.aliases ?? [])].some((value) =>
-    value.toLocaleLowerCase().includes(normalizedQuery.value),
-  )
+  return [
+    item.name,
+    item.sourceTag ?? '',
+    sourceTagLabels[item.sourceTag ?? 'public'],
+    ...(item.aliases ?? []),
+  ].some((value) => value.toLocaleLowerCase().includes(normalizedQuery.value))
 }
 
 /** 清除页内筛选关键词并恢复完整索引。 */
@@ -163,10 +173,22 @@ function clearFilter(): void {
                   :to="item.path"
                 >
                   <span class="api-name">{{ item.name }}</span>
+                  <small
+                    v-if="item.sourceTag && item.sourceTag !== 'public'"
+                    class="api-source-tag"
+                  >
+                    {{ sourceTagLabels[item.sourceTag] }}
+                  </small>
                   <span class="api-depth">{{ depthLabels[item.depth] }}</span>
                 </RouterLink>
                 <div v-else class="api-planned" aria-disabled="true">
                   <span class="api-name">{{ item.name }}</span>
+                  <small
+                    v-if="item.sourceTag && item.sourceTag !== 'public'"
+                    class="api-source-tag"
+                  >
+                    {{ sourceTagLabels[item.sourceTag] }}
+                  </small>
                   <span class="api-depth">规划中</span>
                 </div>
                 <small v-if="item.aliases?.length" class="api-aliases">
@@ -512,6 +534,17 @@ function clearFilter(): void {
   padding-left: var(--space-2);
   color: var(--color-text-tertiary);
   font-size: var(--font-size-xs);
+}
+
+.api-source-tag {
+  flex: 0 0 auto;
+  margin-left: var(--space-2);
+  padding: 2px 5px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  font-size: 10px;
+  line-height: 1.2;
 }
 
 .api-link .api-depth {

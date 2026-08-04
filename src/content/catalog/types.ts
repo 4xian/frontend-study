@@ -97,6 +97,8 @@ export interface LearningTrackScope {
 
 export type ReferenceCoverageDepth = 'detail' | 'merged' | 'quick'
 
+export type ReferenceSourceTag = 'public' | 'internal' | 'alpha' | 'deprecated'
+
 export interface ReferenceTargetManifest {
   entryId: string
   anchor?: string
@@ -108,6 +110,7 @@ export interface ReferenceIndexItemManifest {
   officialUrl: string
   aliases?: string[]
   depth: ReferenceCoverageDepth
+  sourceTag?: ReferenceSourceTag
   status: CatalogStatus
   target?: ReferenceTargetManifest
 }

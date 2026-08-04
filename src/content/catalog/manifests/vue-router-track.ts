@@ -18,15 +18,11 @@ export const vueRouterTrackManifest: TrackManifest = {
           entries: [
             {
               id: 'vue.router.learn.basics.setup-first-router',
-              title: '建立第一个路由器',
-              summary: '完成路由器创建、注册与首条路由配置。',
-              status: 'planned',
+              status: 'available',
             },
             {
               id: 'vue.router.learn.basics.router-link-view-active',
-              title: '链接、视图与激活状态',
-              summary: '使用 RouterLink 和 RouterView 构建基础导航。',
-              status: 'planned',
+              status: 'available',
             },
           ],
         },
@@ -38,21 +34,15 @@ export const vueRouterTrackManifest: TrackManifest = {
           entries: [
             {
               id: 'vue.router.learn.basics.route-params-query-matching',
-              title: '路由参数、查询与匹配',
-              summary: '从地址中读取参数和查询，并理解路由匹配。',
-              status: 'planned',
+              status: 'available',
             },
             {
               id: 'vue.router.learn.basics.nested-routes',
-              title: '嵌套路由',
-              summary: '让路由结构与嵌套界面层级保持一致。',
-              status: 'planned',
+              status: 'available',
             },
             {
               id: 'vue.router.learn.basics.composition-programmatic-navigation',
-              title: '组合式 API 与编程式导航',
-              summary: '在组件逻辑中读取当前路由并主动导航。',
-              status: 'planned',
+              status: 'available',
             },
           ],
         },
@@ -71,15 +61,11 @@ export const vueRouterTrackManifest: TrackManifest = {
           entries: [
             {
               id: 'vue.router.learn.intermediate.named-routes-redirects-aliases',
-              title: '命名路由、重定向与别名',
-              summary: '为路由建立稳定名称并组织地址兼容关系。',
-              status: 'planned',
+              status: 'available',
             },
             {
               id: 'vue.router.learn.intermediate.named-views-route-props',
-              title: '命名视图与路由 Props',
-              summary: '在一个地址中组织多个视图并解耦路由参数。',
-              status: 'planned',
+              status: 'available',
             },
           ],
         },
@@ -91,21 +77,15 @@ export const vueRouterTrackManifest: TrackManifest = {
           entries: [
             {
               id: 'vue.router.learn.intermediate.meta-navigation-guards',
-              title: '路由 Meta 与导航守卫',
-              summary: '用路由元信息和守卫控制导航流程。',
-              status: 'planned',
+              status: 'available',
             },
             {
               id: 'vue.router.learn.intermediate.route-data-fetching',
-              title: '路由数据获取',
-              summary: '围绕路由变化安排页面数据的获取时机。',
-              status: 'planned',
+              status: 'available',
             },
             {
               id: 'vue.router.learn.intermediate.lazy-loading',
-              title: '路由懒加载',
-              summary: '按路由拆分并按需加载页面代码。',
-              status: 'planned',
+              status: 'available',
             },
           ],
         },
@@ -124,15 +104,11 @@ export const vueRouterTrackManifest: TrackManifest = {
           entries: [
             {
               id: 'vue.router.learn.advanced.navigation-failures',
-              title: '导航失败',
-              summary: '识别并处理取消、重复和被守卫阻止的导航。',
-              status: 'planned',
+              status: 'available',
             },
             {
               id: 'vue.router.learn.advanced.router-view-slots-transitions',
-              title: 'RouterView 插槽与过渡',
-              summary: '通过 RouterView 插槽组织页面过渡与缓存。',
-              status: 'planned',
+              status: 'available',
             },
           ],
         },
@@ -144,21 +120,15 @@ export const vueRouterTrackManifest: TrackManifest = {
           entries: [
             {
               id: 'vue.router.learn.advanced.scroll-history-deployment',
-              title: '滚动、历史模式与部署',
-              summary: '配置滚动行为并正确部署不同历史模式。',
-              status: 'planned',
+              status: 'available',
             },
             {
               id: 'vue.router.learn.advanced.dynamic-routing-router-link',
-              title: '动态路由与 RouterLink 扩展',
-              summary: '在运行时调整路由，并扩展导航链接行为。',
-              status: 'planned',
+              status: 'available',
             },
             {
               id: 'vue.router.learn.advanced.typed-file-based-routing',
-              title: '类型化与文件路由',
-              summary: '理解类型化路由和文件路由的工程化取舍。',
-              status: 'planned',
+              status: 'available',
             },
           ],
         },
