@@ -1,42 +1,37 @@
-# vue3-study-tmp
+# IT 学习站
 
-This template should help get you started developing with Vue 3 in Vite.
+面向多个 IT 技术领域的统一学习平台。当前前端域已经提供 Vue Core、Vue Router 和 Pinia 的系统课程与
+Reference，后续按 TypeScript、Vite、React 及其客户端生态继续扩展；后端域独立维护 Java、Go 等路线。
 
-## Recommended IDE Setup
+## 文档入口
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- [前端文档](./docs/frontend/README.md)：前端规范、路线计划、模板和覆盖基线。
+- [后端文档](./docs/backend/)：后端规范、计划与审计资产，由后端任务独立维护。
+- [贡献指南](./AGENTS.md)：仓库结构、编码约束和验证命令。
 
-## Recommended Browser Setup
+## 技术栈
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+站点宿主使用 Vue 3、TypeScript、Vite、Vue Router、Pinia 和 Shiki。课程、Reference 与项目使用独立
+内容模板，通过 `LearningCatalog` 提供目录、搜索、路由和正文懒加载。
 
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
+## 本地开发
 
 ```sh
 npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
 npm run dev
 ```
 
-### Type-Check, Compile and Minify for Production
+现有本地服务已经运行时直接复用，不启动重复实例。
+
+## 质量检查
 
 ```sh
+npm run type-check
+npm run test
+npm run lint
+npm run format:check
 npm run build
 ```
+
+根据改动范围选择命令；文档改动无需运行生产构建。不要修改 `dist/`、`node_modules/` 或不属于当前
+任务的未跟踪资产。

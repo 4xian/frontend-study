@@ -393,7 +393,7 @@ defineExpose({ focusFirstItem })
               </svg>
             </button>
             <span v-else class="sheet-brand" aria-hidden="true">F</span>
-            <p class="sheet-site-title">前端学习站</p>
+            <p class="sheet-site-title">IT 学习站</p>
             <button
               ref="closeButtonEl"
               type="button"

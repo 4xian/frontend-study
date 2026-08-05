@@ -139,7 +139,7 @@ watch(() => route.fullPath, closeNavigation)
         </button>
         <RouterLink to="/" class="logo" @click="closeNavigation">
           <span class="logo-mark">F</span>
-          <span class="logo-text">前端学习站</span>
+          <span class="logo-text">IT 学习站</span>
         </RouterLink>
       </div>
 

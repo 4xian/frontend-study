@@ -51,7 +51,7 @@ const purposeLinks = [
       <div class="hero-inner">
         <header class="hero-copy">
           <p class="eyebrow">框架与工程化学习平台</p>
-          <h1 id="home-title">前端学习站</h1>
+          <h1 id="home-title">IT 学习站</h1>
           <p class="hero-summary">从理解一个概念，到独立完成一个项目。</p>
           <div class="hero-actions">
             <RouterLink class="primary-action" :to="primaryLearningAction.path">
