@@ -88,7 +88,7 @@ function clearFilter(): void {
       <div class="header-copy">
         <p class="eyebrow">技术参考</p>
         <h1>{{ navigation.module?.title ?? 'API 总览' }}</h1>
-        <p class="header-summary">Vue 官方 API 的站内覆盖索引。</p>
+        <p class="header-summary">{{ navigation.module?.title ?? '官方 API' }} 的站内覆盖索引。</p>
       </div>
 
       <dl v-if="overview" class="coverage-status" aria-label="官方参考覆盖状态">

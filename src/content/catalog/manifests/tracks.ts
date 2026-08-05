@@ -1,6 +1,7 @@
 import type { TrackManifest } from '../types'
 import { vueCoreReferenceManifest } from './vue-core-reference'
 import { vueCoreTrackManifest } from './vue-core-track'
+import { vuePiniaReferenceManifest } from './vue-pinia-reference'
 import { vuePiniaTrackManifest } from './vue-pinia-track'
 import { vueRouterTrackManifest } from './vue-router-track'
 import { vueRouterReferenceManifest } from './vue-router-reference'
@@ -11,6 +12,7 @@ export const trackManifests: TrackManifest[] = [
   vuePiniaTrackManifest,
   vueCoreReferenceManifest,
   vueRouterReferenceManifest,
+  vuePiniaReferenceManifest,
   {
     purpose: 'projects',
     ecosystem: 'vue',

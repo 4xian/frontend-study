@@ -144,7 +144,8 @@ function onKeydown(e: KeyboardEvent): void {
     e.preventDefault()
     selected.value = Math.max(selected.value - 1, 0)
   }
-  if (e.key === 'Enter') {
+  if (e.key === 'Enter' && document.activeElement === inputEl.value) {
+    e.preventDefault()
     const hit = orderedResults.value[selected.value]
     if (hit) navigateToHit(hit)
   }

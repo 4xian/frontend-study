@@ -46,6 +46,7 @@ defineProps<{ items: PitfallItem[] }>()
 }
 
 .pitfall-item h3 {
+  overflow-wrap: anywhere;
   color: var(--color-warning);
   font-size: var(--font-size-lg);
   line-height: 1.4;

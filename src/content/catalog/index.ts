@@ -3,6 +3,7 @@ import { createLearningCatalog } from './LearningCatalog'
 import { ecosystemManifests } from './manifests/ecosystems'
 import { trackManifests } from './manifests/tracks'
 import { vueCoreReferenceIndexManifest } from './manifests/vue-core-reference-index'
+import { vuePiniaReferenceIndexManifest } from './manifests/vue-pinia-reference-index'
 import { vueRouterReferenceIndexManifest } from './manifests/vue-router-reference-index'
 import type { EntryLoader } from './types'
 
@@ -24,7 +25,11 @@ const entryLoaders = Object.fromEntries(
 export const learningCatalog = createLearningCatalog({
   ecosystems: ecosystemManifests,
   tracks: trackManifests,
-  referenceIndexes: [vueCoreReferenceIndexManifest, vueRouterReferenceIndexManifest],
+  referenceIndexes: [
+    vueCoreReferenceIndexManifest,
+    vueRouterReferenceIndexManifest,
+    vuePiniaReferenceIndexManifest,
+  ],
   metas: entryMetas,
   loaders: entryLoaders,
 })
@@ -48,6 +53,7 @@ export type {
   ReferenceOverviewGroup,
   ReferenceOverviewItem,
   ReferenceOverviewSection,
+  ReferenceSearchItemManifest,
   ReferenceSourceTag,
   SearchHit,
   SearchProvider,

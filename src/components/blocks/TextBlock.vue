@@ -24,6 +24,7 @@ const parts = computed(() => props.content.split('`'))
 }
 
 .inline-code {
+  overflow-wrap: anywhere;
   padding: 2px 6px;
   border-radius: var(--radius-sm);
   background: var(--color-accent-soft);

@@ -222,6 +222,15 @@ function validateSource(source: CatalogSource): void {
         }
       }
     }
+    for (const item of index.searchItems ?? []) {
+      const targetMeta = metaById.get(item.target.entryId)
+      if (!targetMeta || targetMeta.type !== 'reference') {
+        throw new Error(`参考搜索目标不存在：${item.id}`)
+      }
+      if (targetMeta.ecosystem !== index.ecosystem || targetMeta.module !== index.module) {
+        throw new Error(`参考搜索目标与模块不一致：${item.id}`)
+      }
+    }
   }
 
   for (const meta of source.metas) {
@@ -564,13 +573,65 @@ export function createLearningCatalog(source: CatalogSource): LearningCatalog {
   }
 
   /**
-   * 仅使用轻量元数据执行当前目录范围内的搜索。
+   * 使用轻量元数据与结构化 Reference 目标执行当前目录范围内的搜索。
    */
   function search(query: string, scope?: CatalogScope): SearchHit[] {
     if (scope && !getNavigation(scope).valid) return []
     const normalizedQuery = query.trim().toLocaleLowerCase()
-    return source.metas
+    const referenceHits = normalizedQuery
+      ? (source.referenceIndexes ?? [])
+          .filter(
+            (index) =>
+              (!scope || scope.purpose === 'reference') &&
+              (!scope?.ecosystem || index.ecosystem === scope.ecosystem) &&
+              (!scope?.module || index.module === scope.module),
+          )
+          .flatMap((index) => {
+            const indexedItems = index.groups.flatMap((group) =>
+              group.sections.flatMap((section) =>
+                section.items.filter((item) => item.status === 'available' && item.target),
+              ),
+            )
+            return [...indexedItems, ...(index.searchItems ?? [])]
+              .filter((item) =>
+                [item.name, ...(item.aliases ?? []), item.sourceTag ?? ''].some((value) =>
+                  value.toLocaleLowerCase().includes(normalizedQuery),
+                ),
+              )
+              .flatMap<SearchHit>((item) => {
+                const target = item.target
+                if (!target) return []
+                const targetMeta = metaById.get(target.entryId)
+                if (
+                  !targetMeta ||
+                  (scope?.collection && targetMeta.collection !== scope.collection)
+                ) {
+                  return []
+                }
+                const targetPath = getMetaPath(targetMeta)
+                return [
+                  {
+                    id: item.id,
+                    title: item.name,
+                    summary: targetMeta.summary,
+                    path: target.anchor ? `${targetPath}#${target.anchor}` : targetPath,
+                    group: `${index.ecosystem}.${index.module}`,
+                    groupLabel:
+                      source.ecosystems
+                        .find((ecosystem) => ecosystem.id === index.ecosystem)
+                        ?.modules.find((module) => module.id === index.module)?.title ??
+                      index.module,
+                  },
+                ]
+              })
+          })
+      : []
+    const isReferenceSourceTagQuery =
+      referenceHits.length > 0 &&
+      ['public', 'internal', 'alpha', 'deprecated'].includes(normalizedQuery)
+    const metaHits = source.metas
       .filter((meta) => !scope || matchesScope(meta, scope))
+      .filter((meta) => !isReferenceSourceTagQuery || meta.type !== 'reference')
       .filter((meta) => {
         if (!normalizedQuery) return true
         const anchors = meta.type === 'reference' ? ((meta as ReferenceMeta).anchors ?? []) : []
@@ -589,6 +650,7 @@ export function createLearningCatalog(source: CatalogSource): LearningCatalog {
             .find((item) => item.id === meta.ecosystem)
             ?.modules.find((item) => item.id === meta.module)?.title ?? meta.module,
       }))
+    return [...referenceHits, ...metaHits]
   }
 
   /**

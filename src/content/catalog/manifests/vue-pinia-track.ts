@@ -18,27 +18,19 @@ export const vuePiniaTrackManifest: TrackManifest = {
           entries: [
             {
               id: 'vue.pinia.learn.basics.setup-first-store',
-              title: '建立第一个 Store',
-              summary: '完成 Pinia 安装并创建首个 Store。',
-              status: 'planned',
+              status: 'available',
             },
             {
               id: 'vue.pinia.learn.basics.state-patch-reset',
-              title: 'State、Patch 与 Reset',
-              summary: '读取和修改状态，并掌握批量更新与重置。',
-              status: 'planned',
+              status: 'available',
             },
             {
               id: 'vue.pinia.learn.basics.getters',
-              title: 'Getters',
-              summary: '声明由 Store 状态派生的可复用值。',
-              status: 'planned',
+              status: 'available',
             },
             {
               id: 'vue.pinia.learn.basics.actions-async',
-              title: 'Actions 与异步流程',
-              summary: '用 Actions 封装同步和异步业务操作。',
-              status: 'planned',
+              status: 'available',
             },
           ],
         },
@@ -50,9 +42,7 @@ export const vuePiniaTrackManifest: TrackManifest = {
           entries: [
             {
               id: 'vue.pinia.learn.basics.component-store-to-refs',
-              title: '组件接入与 storeToRefs',
-              summary: '在组件中保持 Store 状态解构后的响应性。',
-              status: 'planned',
+              status: 'available',
             },
           ],
         },
@@ -71,21 +61,15 @@ export const vuePiniaTrackManifest: TrackManifest = {
           entries: [
             {
               id: 'vue.pinia.learn.intermediate.setup-stores',
-              title: 'Setup Store',
-              summary: '使用组合式 API 定义 Store 的状态与行为。',
-              status: 'planned',
+              status: 'available',
             },
             {
               id: 'vue.pinia.learn.intermediate.store-composition',
-              title: 'Store 组合',
-              summary: '在多个 Store 之间建立清晰的依赖关系。',
-              status: 'planned',
+              status: 'available',
             },
             {
               id: 'vue.pinia.learn.intermediate.store-modeling',
-              title: 'Store 建模',
-              summary: '按业务职责划分 Store 的状态和操作边界。',
-              status: 'planned',
+              status: 'available',
             },
           ],
         },
@@ -97,15 +81,11 @@ export const vuePiniaTrackManifest: TrackManifest = {
           entries: [
             {
               id: 'vue.pinia.learn.intermediate.subscriptions-actions',
-              title: '状态与 Action 订阅',
-              summary: '订阅状态变更和 Action 执行过程。',
-              status: 'planned',
+              status: 'available',
             },
             {
               id: 'vue.pinia.learn.intermediate.outside-components-router',
-              title: '组件外使用与路由集成',
-              summary: '在路由等组件外场景中正确取得 Store。',
-              status: 'planned',
+              status: 'available',
             },
           ],
         },
@@ -124,9 +104,7 @@ export const vuePiniaTrackManifest: TrackManifest = {
           entries: [
             {
               id: 'vue.pinia.learn.advanced.plugins-persistence',
-              title: '插件与持久化边界',
-              summary: '扩展 Store 能力并明确持久化策略的责任边界。',
-              status: 'planned',
+              status: 'available',
             },
           ],
         },
@@ -138,21 +116,15 @@ export const vuePiniaTrackManifest: TrackManifest = {
           entries: [
             {
               id: 'vue.pinia.learn.advanced.store-testing',
-              title: 'Store 测试',
-              summary: '隔离并验证 Store 的状态和业务行为。',
-              status: 'planned',
+              status: 'available',
             },
             {
               id: 'vue.pinia.learn.advanced.ssr-hydration',
-              title: 'SSR 与 Hydration',
-              summary: '在服务端渲染中隔离状态并安全完成水合。',
-              status: 'planned',
+              status: 'available',
             },
             {
               id: 'vue.pinia.learn.advanced.hmr-devtools-maintenance',
-              title: 'HMR、Devtools 与维护',
-              summary: '使用开发工具和热更新维护复杂 Store。',
-              status: 'planned',
+              status: 'available',
             },
           ],
         },

@@ -13,6 +13,7 @@ defineProps<{ items: { title: string; content: string }[] }>()
 
 <style scoped>
 .steps {
+  overflow-wrap: anywhere;
   padding-left: var(--space-6);
 }
 

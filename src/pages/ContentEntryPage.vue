@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
 import type { Component } from 'vue'
 import { useRoute } from 'vue-router'
 import LessonLayout from '@/layouts/LessonLayout.vue'
@@ -62,11 +62,25 @@ async function loadCurrentEntry(entryId?: string): Promise<void> {
   if (entryNode.value?.entryId !== entryId) return
   entry.value = loadedEntry
   if (loadedEntry.meta.type === 'lesson') progress.recordVisit(entryId)
+  await scrollToHash()
+}
+
+/** 在正文挂载后定位当前 URL hash 对应的公开锚点。 */
+async function scrollToHash(): Promise<void> {
+  await nextTick()
+  const anchorId = decodeURIComponent(route.hash.slice(1))
+  if (anchorId) document.getElementById(anchorId)?.scrollIntoView()
 }
 
 watch(
-  () => entryNode.value?.entryId,
-  (entryId) => void loadCurrentEntry(entryId),
+  () => [entryNode.value?.entryId, route.hash] as const,
+  ([entryId, hash], previous) => {
+    if (entryId !== previous?.[0]) {
+      void loadCurrentEntry(entryId)
+    } else if (hash !== previous?.[1]) {
+      void scrollToHash()
+    }
+  },
   { immediate: true },
 )
 </script>

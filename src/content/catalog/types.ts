@@ -108,11 +108,19 @@ export interface ReferenceIndexItemManifest {
   id: string
   name: string
   officialUrl: string
-  aliases?: string[]
+  aliases?: readonly string[]
   depth: ReferenceCoverageDepth
   sourceTag?: ReferenceSourceTag
   status: CatalogStatus
   target?: ReferenceTargetManifest
+}
+
+export interface ReferenceSearchItemManifest {
+  id: string
+  name: string
+  aliases?: readonly string[]
+  sourceTag?: ReferenceSourceTag
+  target: ReferenceTargetManifest
 }
 
 export interface ReferenceIndexSectionManifest {
@@ -133,6 +141,7 @@ export interface ReferenceIndexManifest {
   appliesTo: string
   verifiedAt: string
   groups: ReferenceIndexGroupManifest[]
+  searchItems?: ReferenceSearchItemManifest[]
 }
 
 export interface ReferenceOverviewItem extends ReferenceIndexItemManifest {

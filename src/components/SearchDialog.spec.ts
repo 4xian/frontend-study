@@ -106,4 +106,49 @@ describe('SearchDialog', () => {
     expect(router.currentRoute.value.path).toBe('/third')
     wrapper.unmount()
   })
+
+  it('只在搜索输入框中消费 Enter，按钮保留原生激活行为', async () => {
+    const router = createRouter({
+      history: createMemoryHistory(),
+      routes: [
+        { path: '/', component: { template: '<div />' } },
+        { path: '/first', component: { template: '<div />' } },
+        { path: '/second', component: { template: '<div />' } },
+      ],
+    })
+    await router.push('/')
+    await router.isReady()
+    const wrapper = mount(SearchDialog, {
+      attachTo: document.body,
+      props: {
+        open: true,
+        provider: () => hits,
+        globalProvider: () => hits,
+      },
+      global: { plugins: [router] },
+    })
+    await nextTick()
+
+    const input = document.body.querySelector<HTMLInputElement>('.input')!
+    const scopeButton = document.body.querySelector<HTMLButtonElement>('.scope-button')!
+    const resultButtons = document.body.querySelectorAll<HTMLButtonElement>('.result')
+
+    input.focus()
+    const inputEnter = new KeyboardEvent('keydown', { key: 'Enter', cancelable: true })
+    window.dispatchEvent(inputEnter)
+    expect(inputEnter.defaultPrevented).toBe(true)
+    await router.push('/')
+
+    scopeButton.focus()
+    const scopeEnter = new KeyboardEvent('keydown', { key: 'Enter', cancelable: true })
+    window.dispatchEvent(scopeEnter)
+    expect(scopeEnter.defaultPrevented).toBe(false)
+
+    resultButtons[1]!.focus()
+    const resultEnter = new KeyboardEvent('keydown', { key: 'Enter', cancelable: true })
+    window.dispatchEvent(resultEnter)
+    expect(resultEnter.defaultPrevented).toBe(false)
+
+    wrapper.unmount()
+  })
 })
