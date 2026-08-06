@@ -1,27 +1,28 @@
 # IT 学习站前端路线计划
 
-> 版本：v1.0  
-> 日期：2026-08-05  
-> 状态：TypeScript T0 待开始  
+> 版本：v1.2
+> 日期：2026-08-05
+> 状态：TypeScript T2-2 已完成；内容架构迁移已完成，下一内容批次为 T3-1
 > 权威规范：[`IT学习站前端规范.md`](./IT学习站前端规范.md)
 
 ## 1. 计划目标
 
-本计划只管理 IT 学习站的前端内容域。已完成的 Vue 生态保持维护状态；新内容严格按照 TypeScript → Vite →
-React Core → React Router → 状态管理 → 数据管理 → 测试与交付 → 项目实战的依赖顺序推进。
-Next.js 和 Nuxt 不进入本计划。
+本计划只管理 IT 学习站的前端内容域。已完成的 Vue 生态保持维护状态；新内容严格
+按照 TypeScript → Vite → React Core → React Router → 状态管理 → 数据管理 → 测试与交付的依赖
+顺序推进。Next.js 和 Nuxt 不进入本计划。
 
 ## 2. 执行规则
 
 1. 每个模块从只读 R0 开始，冻结官方范围、版本、课程顺序、Reference 索引、Demo seam 和批次。
-2. 一批完成调研、实现、focused tests、浏览器验证、复审和状态登记后，才能开始下一批。
+2. 一批完成调研、实现、临时反馈环、浏览器验证、复审和状态登记后，才能开始下一批。
 3. 课程和 Reference 使用独立模板；Reference 不机械地为每个官方名称创建长文。
 4. 新模块先建立总览、manifest 和最小垂直切片，再按冻结批次扩展。
 5. 外部事实使用 Tavily 查找并回到官方来源；源码固定 tag 或 commit。
 6. 不修改已完成 Vue 内容，除非新工作暴露真实回归或官方维护任务。
-7. 不修改 `docs/backend/`、后端内容或后端审计资产。
+7. 普通前端内容批次不修改 `docs/backend/`、后端内容或后端审计资产。
 8. 不主动提交、推送或创建 PR。
 9. Gate 关闭后提取长期事实并删除该模块的调研和实施计划。
+10. 当前架构已经切换完成，后续批次不得恢复旧目录、旧 URL 或 TypeScript 正文模式。
 
 ## 3. 当前基线
 
@@ -30,18 +31,18 @@ Next.js 和 Nuxt 不进入本计划。
 | Vue Core | 31 | 官网索引 206/206 | 完成，进入维护 |
 | Vue Router | 15 | 稳定 118/118；Experimental 86 项观察清单 | 完成，进入维护 |
 | Pinia | 14 | 稳定 41/41；restricted 26/26 已说明 | 完成，进入维护 |
-| TypeScript | 0 | 0 | 下一模块，尚未冻结 |
+| TypeScript | 16/24 | 0/200 planned | T2-2 已完成，下一批为 T3-1 |
 | Vite | 0 | 0 | 等待 TypeScript Gate |
 | React 生态 | 0 | 0 | 等待 Vite Gate |
 
-已有 Vue 内容、目录、搜索、进度、课程/Reference layout 和交互 registry 是后续模块复用的宿主能力，
-但不能据此跳过新生态的 Adapter、按需加载和卸载验证。
+已有 Vue 内容、目录、搜索、进度、课程/Reference layout 和交互 registry 是后续模块复用的宿主能力。
+目录、Markdown、Catalog 和 URL 以全站架构为准；不能据此跳过新生态的 adapter、按需加载和卸载
+验证。
 
 ## 4. 总体顺序
 
 ```text
-T0 TypeScript 调研冻结
-  -> T1-T3 TypeScript 基础/中级/高级课程
+T3 TypeScript 高级课程
   -> TA TypeScript Reference
   -> Gate T
     -> V0 Vite 调研冻结
@@ -55,7 +56,6 @@ T0 TypeScript 调研冻结
       -> RD React 数据管理课程与 Reference
       -> Gate R
         -> Q 测试、交付、性能与质量
-        -> P 项目实战
         -> UI 前端入口与前端路径验收
 ```
 
@@ -65,7 +65,14 @@ T0 TypeScript 调研冻结
 
 先核对当前 TypeScript 稳定版、Handbook、Reference、TSConfig Reference、发布说明、标准库声明和
 固定源码。建立官方主题到站内课程/Reference 的覆盖矩阵，冻结课程 ID、前置关系、难度、唯一 Demo
-或编译 fixture、批次数量和 Gate。R0 结束前不发布正文。
+或临时编译 fixture、批次数量和 Gate。R0 结束前不发布正文。
+
+T0 已于 2026-08-05 冻结：官方稳定版为 TypeScript `7.0.2`，课程为 24 课，稳定 Reference 为 200 个
+映射键。权威交付物为
+[`T0-官方调研与实施冻结.md`](./plans/typescript/T0-官方调研与实施冻结.md) 与
+[`TypeScript官方覆盖矩阵.md`](./coverage-matrices/TypeScript官方覆盖矩阵.md)。T1 与 T2 已按冻结范围
+开放十六课；T2-2 已通过独立双轴复审。T3-1 尚未开始，是迁移关闭后的下一内容批次，仍须按本计划
+单独执行完整 Gate。
 
 TypeScript 的“API”按 Reference 理解，至少区分：语言语法、类型操作符、Utility Types、模块与
 声明文件、TSConfig、编译器行为。Compiler API 和语言服务属于高级/低频范围，由 T0 决定采用
@@ -75,7 +82,7 @@ TypeScript 的“API”按 Reference 理解，至少区分：语言语法、类�
 
 按“类型推导 → 基本类型 → 对象与函数 → 数组与元组 → 联合与字面量 → 类型收窄 → type/interface
 → 模块”递进。示例使用普通 TypeScript，不要求先学 Vue 或 React；需要运行差异时使用最小编译
-fixture，不用浏览器输出冒充类型检查。
+临时 fixture，不用浏览器输出冒充类型检查。
 
 ### T2：中级课程
 
@@ -97,16 +104,16 @@ fixture，不用浏览器输出冒充类型检查。
 
 - 基础、中级、高级路线均有明确起点、终点、前置和练习。
 - 官方冻结索引全部有结构化状态，不存在无说明遗漏或伪链接。
-- 编译期示例由真实 `tsc`/fixture 验证；交互 Demo 只承担运行期可观察行为。
+- 编译期示例由真实 `tsc` 和临时 fixture 验证；交互 Demo 只承担运行期可观察行为。
 - 搜索、总览、深链、390px、键盘和 200% 文本通过代表路径验证。
-- 最少测试、type-check、范围内 lint/format 和受影响构建通过。
+- 最少临时反馈环、type-check、范围内 lint/format 和受影响构建通过。
 
 ## 6. Vite 阶段
 
 ### V0：官方调研与实施冻结
 
 核对 Vite 当前稳定版、Guide、Config Reference、Plugin API、JavaScript API、HMR API、环境变量、
-SSR 和构建文档，并固定源码。冻结浏览器内 Demo 与必须使用独立 fixture/build 的验证边界。
+SSR 和构建文档，并固定源码。冻结浏览器内 Demo 与必须使用独立临时 fixture/build 的验证边界。
 
 ### V1：基础课程
 
@@ -121,7 +128,7 @@ SSR 和构建文档，并固定源码。冻结浏览器内 Demo 与必须使用�
 ### V3：高级课程
 
 覆盖生产构建、chunk 策略、库模式、SSR 接口、后端集成、性能诊断、安全边界和迁移。无法在当前 SPA
-真实执行的 SSR、代理或部署能力使用独立 fixture，不以静态说明冒充运行验证。
+真实执行的 SSR、代理或部署能力使用独立临时 fixture，不以静态说明冒充运行验证。
 
 ### VA：Reference 覆盖
 
@@ -131,7 +138,7 @@ JavaScript API 分类建立索引。核心配置详解，相关选项主题合�
 ### Gate V
 
 - Vite 课程与 Reference 均从总览可达，官方冻结范围全部登记。
-- 开发服务器、插件和生产构建的结论由对应阶段的真实 fixture 验证。
+- 开发服务器、插件和生产构建的结论由对应阶段的真实临时 fixture 验证。
 - 现有 Vue 应用构建、懒加载、Demo 源码和 chunk 行为无回归。
 - TypeScript 课程可作为 Vite 配置与插件课程的真实前置关联。
 
@@ -209,17 +216,14 @@ JavaScript API 分类建立索引。核心配置详解，相关选项主题合�
 
 课程必须围绕已有 Vue/React 项目验证，不建立与实际宿主脱节的命令百科。
 
-## 12. 项目实战与前端体验
+## 12. 前端入口与体验验收
 
-在前述模块关闭 Gate 后，再编写 TypeScript 工具、Vite 插件/构建和 React SPA 三类项目。项目使用
-独立 `ProjectEntry` 模板，具有 brief、里程碑、交付物和验收标准，不复用课程完成按钮冒充验收。
-
-最后再升级 IT 学习站中的前端入口和前端内容动效，复验前端范围内的三个 purpose、已开放生态、
-搜索、进度、深链、构建 chunks、390px、键盘和降级模式。该阶段不决定后端入口、后端课程结构或
-其他 IT 内容域的信息架构；视觉工作也不能反向改变内容 ID、课程顺序或 Reference 覆盖。
+前述模块关闭 Gate 后，再统一复验技术中心中的前端入口、Module 总览、课程与 Reference
+详情、Demo 视图、搜索、进度、深链、构建 chunks、390px、键盘和降级模式。视觉工作不能反向改变
+内容 ID、课程顺序、Reference 覆盖或全站信息架构。
 
 ## 13. 下一任务
 
-下一批固定为 **TypeScript T0：官方调研与实施冻结**。交付物应包含当前官方基线、课程路线、
-Reference 覆盖矩阵、批次计划、Demo/编译 fixture 决策、最少测试与 Gate T；完成并复审前不得开始
-TypeScript 正文。
+下一内容批次固定为 TypeScript T3-1，高级范围和 T0 冻结结论不变。开始前仍需按执行规则冻结本批
+范围、反馈环和停止边界；本次架构迁移不自动授权创建 T3-1 调研、条目、Demo、持久化 fixture 或
+测试文件。

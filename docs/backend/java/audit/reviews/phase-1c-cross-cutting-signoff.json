@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "batchId": "phase-1c-cross-cutting",
+  "status": "approved",
+  "reviewedBy": "Codex",
+  "reviewerType": "agent-assisted-manual-review",
+  "reviewedAt": "2026-08-04T02:57:50.000Z",
+  "reviewMethod": "逐文件复核 40 个横切能力文件，并核对结构、职责、使用边、风险行号和角色纠正。",
+  "approvalContract": "只有人工确认的分片 SHA-256 才能把候选记录转为 reviewed。",
+  "summary": {
+    "approvedFileCount": 40,
+    "approvedLoc": 1773,
+    "approvedShardCount": 1
+  },
+  "shards": [
+    {
+      "fileName": "records-0001-0040.jsonl",
+      "fileCount": 40,
+      "sha256": "64984878f6d5551c15106848eeec048df49717b09e75eab1f4177d76c8b1f0fb",
+      "decision": "approved"
+    }
+  ]
+}

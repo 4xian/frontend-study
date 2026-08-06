@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "batchId": "phase-1c-infrastructure",
+  "status": "approved",
+  "reviewedBy": "Codex",
+  "reviewerType": "agent-assisted-manual-review",
+  "reviewedAt": "2026-08-04T05:45:32.000Z",
+  "reviewMethod": "逐文件复核 53 个基础设施物理范围文件，并核对职责、资源信号、使用边、风险行号和角色纠正。",
+  "approvalContract": "只有人工确认的 reviewing 候选分片 SHA-256 才能把记录转为 reviewed。",
+  "summary": {
+    "approvedFileCount": 53,
+    "approvedLoc": 6175,
+    "approvedShardCount": 2
+  },
+  "shards": [
+    {
+      "fileName": "records-0001-0050.jsonl",
+      "fileCount": 50,
+      "sha256": "e8a8fdba7c3377b372ed25f04959807288c92af0286c672d7baba48124849a77",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-0051-0053.jsonl",
+      "fileCount": 3,
+      "sha256": "3aca3c9729e0051b1b28b24298704f136ecf47118b7efb86b96d8ad52703ba02",
+      "decision": "approved"
+    }
+  ]
+}

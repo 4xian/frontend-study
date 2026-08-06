@@ -1,0 +1,257 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.basics.development-environment-and-runtime",
+  "batchId": "phase-4-development-environment-and-runtime",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-05T13:44:26Z",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "89378a4fcd620c433f879c7a492104721cde7d6f07fa51936b78b2cb6dadfb7b",
+  "courseRepository": {
+    "head": "e78ef5c3925b4004fb496d2fc479486c977805b5",
+    "dirtyWorkspaceProtected": true,
+    "stagedLessonChanges": false
+  },
+  "sourceRepository": {
+    "path": "/Users/jian/Desktop/work/TDH/dzzz/dzzz-app",
+    "head": "167ca8aa91ca3a6b101246964ef4fddec3d21da0",
+    "statusShort": "",
+    "readOnly": true
+  },
+  "phase2Freeze": {
+    "courseCoverageMatrixSha256": "04d858896d07e975d3ab50796494873f09bd0ddf4b1a8b1ea87bd75cdd101d38",
+    "researchStatus": "not-started",
+    "exampleStatus": "not-started",
+    "courseStatus": "planned",
+    "phase4StateRecordedOnlyInThisSignoff": true
+  },
+  "versions": {
+    "verifiedAt": "2026-08-05",
+    "modern": {
+      "java": "25",
+      "runtime": "Eclipse Temurin 25.0.3+9 LTS"
+    },
+    "legacy": {
+      "java": "8",
+      "runtime": "Eclipse Temurin 8u492-b09",
+      "springBootBackground": "2.3.12.RELEASE"
+    }
+  },
+  "sourceDiscovery": {
+    "method": "Tavily 仅用于发现直接页面，随后打开官方正文逐项核对",
+    "communitySourcesUsedAsEvidence": false,
+    "directUrls": [
+      "https://www.oracle.com/java/technologies/java-se-support-roadmap.html",
+      "https://dev.java/learn/getting-started",
+      "https://docs.oracle.com/javase/8/docs/technotes/guides/index.html",
+      "https://docs.oracle.com/javase/specs/jls/se25/html/jls-12.html",
+      "https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-4.html",
+      "https://docs.oracle.com/javase/specs/jvms/se25/html/jvms-5.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/specs/man/java.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/specs/man/javac.html",
+      "https://docs.oracle.com/javase/specs/jls/se8/html/jls-12.html",
+      "https://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html",
+      "https://docs.oracle.com/javase/8/docs/technotes/tools/unix/javac.html",
+      "https://openjdk.org/jeps/512"
+    ]
+  },
+  "docker": {
+    "engine": "Docker 29.6.1",
+    "sourceMount": "read-only bind mount",
+    "classOutput": "temporary Docker volume removed on exit",
+    "images": [
+      {
+        "role": "modern",
+        "requestedTag": "eclipse-temurin:25-jdk",
+        "digest": "sha256:12e44624adee6808a36d962717e1656e0afeeeff5a100f9cb00e0136513558f0"
+      },
+      {
+        "role": "legacy",
+        "requestedTag": "eclipse-temurin:8-jdk",
+        "digest": "sha256:c8b86f2c0a9bd6cc1b7fabc5d1a097501a166eea7cad3b2764e90e96178bea9b"
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/basics/development-environment-and-runtime.md",
+      "sha256": "d103742399f505c4b747fda6d8b0f6ab7fab1cbda99510cb5e09aba3d71670f0"
+    },
+    {
+      "path": "src/content/entries/learn/backend/java/basics/development-environment-and-runtime.md",
+      "sha256": "2ef08e8f1680dfe6d74f58020b465b959347ac566fec359e29d667f0faff6979"
+    },
+    {
+      "path": "tests/fixtures/backend/java/development-environment-and-runtime/HelloBackend.java",
+      "sha256": "8f63c9f7d7f9ac5e27e72cd1048be827bc1558732238c23640b2a26118f51c11"
+    },
+    {
+      "path": "tests/fixtures/backend/java/development-environment-and-runtime/verify.sh",
+      "sha256": "2877f4d2400f80e6065513088ab78ba1452c4b8a7f0f4ea9f988131724037c3d"
+    },
+    {
+      "path": "src/content/catalog/manifests/backend-java-track.ts",
+      "sha256": "7bd7e241266e1faec522201a398c34024dbd785e45ec0210dedfc1bd5e3b13f4"
+    },
+    {
+      "path": "src/content/catalog/backend-java-track.spec.ts",
+      "sha256": "ecec0b426bf84acf871b85f01111002b018769630f83ec569f205b6ef9090bbd"
+    },
+    {
+      "path": "tests/e2e/backend-java-platform.spec.ts",
+      "sha256": "497f42da94ea8a6a552ca9262b2537ce0547afa3b472cd71316f7062d300a55c"
+    },
+    {
+      "path": "docs/backend/java/dzzz-app-course-plan.md",
+      "sha256": "c5a058994e7b29d2b34b91d838f79ec8b42a90bc5f1893a17024e857ea04a7f4"
+    }
+  ],
+  "selfHashPolicy": "signoff 文件不记录自身哈希，避免递归自引用；artifacts 中其余最终文件逐一绑定 SHA-256",
+  "changedFiles": [
+    "docs/research/backend/java/basics/development-environment-and-runtime.md",
+    "src/content/entries/learn/backend/java/basics/development-environment-and-runtime.md",
+    "tests/fixtures/backend/java/development-environment-and-runtime/HelloBackend.java",
+    "tests/fixtures/backend/java/development-environment-and-runtime/verify.sh",
+    "src/content/catalog/manifests/backend-java-track.ts",
+    "src/content/catalog/backend-java-track.spec.ts",
+    "tests/e2e/backend-java-platform.spec.ts",
+    "docs/backend/java/audit/reviews/phase-4-development-environment-and-runtime-signoff.json",
+    "docs/backend/java/dzzz-app-course-plan.md"
+  ],
+  "catalog": {
+    "learnNodeCount": 51,
+    "collectionCounts": {
+      "basics": 18,
+      "intermediate": 17,
+      "advanced": 16
+    },
+    "availableIds": ["backend.java.learn.basics.development-environment-and-runtime"],
+    "plannedCount": 50,
+    "searchTerm": "JDK",
+    "path": "/learn/backend/java/basics/development-environment-and-runtime",
+    "lazyLoadPassed": true,
+    "progressPassed": true
+  },
+  "baselineVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "Phase 2 builder check and independent validator PASS"
+    },
+    { "command": "npm run type-check", "exitCode": 0, "summary": "passed" },
+    { "command": "npm run lint", "exitCode": 0, "summary": "passed" },
+    { "command": "npm run format:check", "exitCode": 0, "summary": "passed" },
+    {
+      "command": "npm run test",
+      "exitCode": 0,
+      "summary": "56 files, 274 tests passed"
+    },
+    {
+      "command": "npx playwright test tests/e2e/backend-java-platform.spec.ts",
+      "exitCode": 0,
+      "summary": "2 tests passed"
+    }
+  ],
+  "javaVerification": {
+    "command": "tests/fixtures/backend/java/development-environment-and-runtime/verify.sh",
+    "exitCode": 0,
+    "cases": [
+      {
+        "name": "Java 25 compile and run",
+        "javaVersionExit": 0,
+        "javacVersionExit": 0,
+        "compileExit": 0,
+        "runExit": 0,
+        "stdout": "后端课程运行成功"
+      },
+      {
+        "name": "Java 8 compile and run",
+        "javaVersionExit": 0,
+        "javacVersionExit": 0,
+        "compileExit": 0,
+        "runExit": 0,
+        "stdout": "后端课程运行成功"
+      },
+      {
+        "name": "Java 8 source-file launch is unavailable",
+        "expectedFailureExit": 1,
+        "matched": "Could not find or load main class HelloBackend.java"
+      },
+      {
+        "name": "Java 8 rejects Java 25 class file",
+        "expectedFailureExit": 1,
+        "matched": "UnsupportedClassVersionError; class file 69.0; maximum 52.0"
+      }
+    ]
+  },
+  "postImplementationVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "Phase 2 frozen state and manifest hash PASS"
+    },
+    {
+      "command": "npx vitest run src/content/markdown/backend-adapter.spec.ts src/content/catalog/backend-markdown.spec.ts src/content/catalog/backend-java-track.spec.ts",
+      "exitCode": 0,
+      "summary": "3 files, 24 tests passed"
+    },
+    { "command": "npm run type-check", "exitCode": 0, "summary": "passed" },
+    { "command": "npm run lint", "exitCode": 0, "summary": "passed" },
+    { "command": "npm run format:check", "exitCode": 0, "summary": "passed" },
+    {
+      "command": "npm run test",
+      "exitCode": 0,
+      "summary": "57 files, 281 tests passed after parallel T2-1 manifest completed"
+    },
+    { "command": "npm run build", "exitCode": 0, "summary": "type-check and Vite build passed" },
+    {
+      "command": "npx playwright test tests/e2e/backend-java-platform.spec.ts",
+      "exitCode": 0,
+      "summary": "2 tests passed; desktop and 390px paths passed"
+    },
+    {
+      "command": "npm run test:e2e",
+      "attempt": 1,
+      "exitCode": 1,
+      "summary": "2 unrelated Vue tests failed non-deterministically; target Java tests passed"
+    },
+    {
+      "command": "npx playwright test tests/e2e/progress.spec.ts:9 tests/e2e/navigation.spec.ts:52 --workers=1",
+      "exitCode": 0,
+      "summary": "the 2 first-attempt failures both passed in focused rerun"
+    },
+    {
+      "command": "npm run test:e2e",
+      "attempt": 2,
+      "exitCode": 0,
+      "summary": "56 tests passed with the default 5 workers"
+    },
+    { "command": "git diff --check", "exitCode": 0, "summary": "passed" },
+    { "command": "git diff --cached --check", "exitCode": 0, "summary": "passed" },
+    {
+      "command": "git -C /Users/jian/Desktop/work/TDH/dzzz status --short -- dzzz-app",
+      "exitCode": 0,
+      "summary": "empty"
+    }
+  ],
+  "parallelWorkAttribution": {
+    "protectedFilesModifiedByThisLesson": false,
+    "observedChange": "src/content/catalog/typescript-t2-1.spec.ts appeared during implementation and initially expected four available intermediate TypeScript lessons before the parallel manifest was updated",
+    "initialFailure": "npm run test: 57 files, 56 passed and 1 failed; 276 tests, 275 passed and 1 failed at src/content/catalog/typescript-t2-1.spec.ts:32",
+    "recoveryEvidence": "the parallel engineering-typescript-track manifest changed at 2026-08-05T21:32:59+0800; the focused T2-1 test then passed and the final root suite passed 57 files / 281 tests",
+    "typescriptFilesEditedByThisLesson": []
+  },
+  "reviews": {
+    "method": "主进程依据仓库规范、Fowler smell baseline 与本课执行提示词分别审查 Standards 和 Spec；用户明确禁止子代理，因此不是独立代理审查",
+    "preFinalCorrection": "将课程易错点中的占位 java-8 命令改为真实 java 命令，并按 adapter 严格合同把环境说明并入字段",
+    "standards": { "status": "PASS", "findingCount": 0 },
+    "spec": { "status": "PASS", "findingCount": 0 }
+  },
+  "knownExternalBaseline": {
+    "status": "green-with-recorded-intermittent-e2e-retry",
+    "details": "全量 E2E 首轮有两个非本课 Vue 用例失败；两项 focused 复跑和随后完整 56 项复跑均通过。未修改对应 Vue 测试或实现。"
+  },
+  "stopBoundary": "第一课完成并关闭；等待用户确认下一批；不开始第二课，不进入 Phase 5"
+}

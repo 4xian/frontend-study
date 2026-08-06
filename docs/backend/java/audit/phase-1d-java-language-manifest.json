@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "batchId": "phase-1d-java-language",
+  "status": "completed",
+  "reviewedAt": "2026-08-04T09:02:48.000Z",
+  "gateStatus": "not-passed",
+  "sourceInventory": {
+    "path": "capability-normalization-source-inventory.jsonl",
+    "sha256": "7a5a9d5745820f7ac8e9874419e8a45c9cc7b60723ee9f886e3a4336d7454815",
+    "itemCount": 906,
+    "observedFileAssignments": 27731,
+    "sourceKindCounts": {
+      "review-capability": 550,
+      "language-feature": 16,
+      "framework-usage": 21,
+      "review-risk": 319
+    },
+    "sourceKindFileAssignments": {
+      "review-capability": 14257,
+      "language-feature": 5022,
+      "framework-usage": 5300,
+      "review-risk": 3152
+    }
+  },
+  "matrix": {
+    "jsonPath": "java-language-capability-matrix.json",
+    "jsonSha256": "b42122285a7e4680c9d5148b44effaa5838a8d2bfa62e1cb2c4f0175d727c076",
+    "markdownPath": "java-language-capability-matrix.md",
+    "markdownSha256": "95d1e401009d7c5afea88c885218c30138fb45d9dd2069821d73d6be540e5e20",
+    "rawSourceItemCount": 906,
+    "normalizedSourceItemCount": 40,
+    "pendingSourceItemCount": 866,
+    "capabilityCount": 15,
+    "normalizedObservedFileCount": 3414,
+    "representativeSymbolCount": 74
+  },
+  "manualReviewSignoff": {
+    "path": "reviews/phase-1d-java-language-signoff.json",
+    "sha256": "2fcbf7d129063335605f270ee203546346261f300de7c7b49862b504409a78a5",
+    "reviewedBy": "Codex",
+    "reviewerType": "agent-assisted-manual-review"
+  },
+  "coverageBoundary": {
+    "normalizedKinds": [
+      "java-language"
+    ],
+    "pendingKinds": [
+      "standard-library",
+      "framework",
+      "engineering-pattern",
+      "review-risk"
+    ],
+    "nextBatch": "standard-library",
+    "courseAuthoringStarted": false
+  }
+}

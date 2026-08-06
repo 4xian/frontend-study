@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "batchId": "phase-1d-framework",
+  "status": "completed",
+  "reviewedAt": "2026-08-04T11:36:20.000Z",
+  "gateStatus": "not-passed",
+  "previousBatch": {
+    "previousBatchId": "phase-1d-standard-library",
+    "previousManifestSha256": "24b0c25cb19b4c765bdd36f04599391960251606a539a9c9c6a0de0235bf8784",
+    "previousSourceInventorySha256": "a9f55eb514c827e4cbf1316f79f031e677e03ea0fb6afe0aae7ffc075ba4aebe",
+    "previousPendingSourceItemCount": 754
+  },
+  "sourceInventory": {
+    "path": "framework-capability-source-inventory.jsonl",
+    "sha256": "c253c494c4858d366568c5579bd69e4e2141191c5116c895d616d1b4490c1947",
+    "itemCount": 754,
+    "observedFileAssignments": 19471,
+    "sourceKindCounts": {
+      "review-capability": 414,
+      "language-feature": 0,
+      "framework-usage": 21,
+      "review-risk": 319
+    },
+    "sourceKindFileAssignments": {
+      "review-capability": 11019,
+      "language-feature": 0,
+      "framework-usage": 5300,
+      "review-risk": 3152
+    }
+  },
+  "matrix": {
+    "jsonPath": "java-framework-capability-matrix.json",
+    "jsonSha256": "033362651a4b1a25abf3b16d6bd01449a6888464a949f92f5bc9b96893d7612a",
+    "markdownPath": "java-framework-capability-matrix.md",
+    "markdownSha256": "b5a5b3cabc206d30b8585cd213d5afdeb9ddf960c98d9f389bd56f4f9c61650d",
+    "rawSourceItemCount": 754,
+    "normalizedSourceItemCount": 235,
+    "pendingSourceItemCount": 519,
+    "pendingBySourceKind": {
+      "review-capability": 200,
+      "language-feature": 0,
+      "framework-usage": 0,
+      "review-risk": 319
+    },
+    "capabilityCount": 34,
+    "normalizedObservedFileCount": 3085,
+    "representativeSymbolCount": 137
+  },
+  "manualReviewSignoff": {
+    "path": "reviews/phase-1d-framework-signoff.json",
+    "sha256": "2b30e540a6074dc5fd036e33c1b6c8c56e57ce4d95d7fe240617babdce67abec",
+    "reviewedBy": "Codex",
+    "reviewerType": "agent-assisted-manual-review"
+  },
+  "coverageBoundary": {
+    "normalizedKinds": [
+      "framework-library"
+    ],
+    "pendingKinds": [
+      "engineering-pattern",
+      "review-risk",
+      "residual-or-invalid"
+    ],
+    "nextBatch": "engineering-pattern",
+    "courseAuthoringStarted": false
+  }
+}

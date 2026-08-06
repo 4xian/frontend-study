@@ -1,0 +1,775 @@
+{
+  "schemaVersion": 1,
+  "batchId": "phase-1c-startup-config",
+  "batchName": "Phase 1C 第 1 批：启动与配置",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "reviewedAt": "2026-08-03",
+  "status": "completed",
+  "scope": {
+    "included": [
+      "dzzz-app/src/main/java/com/tdh/DzzzAreaApplication.java",
+      "dzzz-app/src/main/java/com/tdh/bdzz/config/**/*.java"
+    ],
+    "excluded": [
+      "目录外的配置注解类留给其主要职责批次",
+      "资源文件只用于确认配置键，不计入 Java 文件复核分母"
+    ]
+  },
+  "summary": {
+    "batchFileCount": 34,
+    "batchLoc": 3949,
+    "machineRoleCandidateCounts": {
+      "async-integration": 14,
+      "startup-config": 20
+    },
+    "finalRoleCounts": {
+      "async-integration": 12,
+      "cross-cutting": 2,
+      "data-access": 1,
+      "data-model": 2,
+      "infrastructure": 1,
+      "startup-config": 15,
+      "web-entry": 1
+    },
+    "roleCorrectionCount": 9,
+    "riskCandidateCount": 86,
+    "currentAuditStatusCounts": {
+      "unreviewed": 3402,
+      "reviewing": 0,
+      "reviewed": 34,
+      "blocked": 0
+    }
+  },
+  "records": [
+    {
+      "inventoryIndex": 1,
+      "path": "dzzz-app/src/main/java/com/tdh/DzzzAreaApplication.java",
+      "sourceSha256": "33f6a4536d7a5d3f027ae1a1dbf7903d9ab79719936b067313d9d52bd93db280",
+      "loc": 43,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "startup-config",
+      "finalRole": "startup-config",
+      "roleDetail": "Spring Boot 与 WAR 双入口",
+      "responsibility": "启动应用、声明组件扫描范围，并启用异步、重试和旧 Swagger 能力。",
+      "lifecycle": "可执行 JAR 由 main 启动；外部 Servlet 容器通过 SpringBootServletInitializer.configure 启动。",
+      "dependencies": ["Spring Boot", "Spring Retry", "Spring Async", "Springfox Swagger 2"],
+      "capabilityCandidates": ["应用启动", "WAR 部署", "自动配置排除", "组件扫描", "异步与重试启用"],
+      "riskCandidates": [
+        {"id": "SC-001", "lines": [28, 29], "summary": "SpringBootApplication 已包含自动配置能力，重复声明 EnableAutoConfiguration 增加理解成本。"},
+        {"id": "SC-002", "lines": [30], "summary": "旧 Swagger 在应用入口全局启用，不能把额外 Controller 返回 404 当作关闭文档生成。"}
+      ],
+      "sourceEvidence": [
+        {"lines": [27, 28, 29, 30, 31, 32, 33, 35, 39], "summary": "注解、main 方法和 WAR configure 方法共同确定启动职责。"}
+      ]
+    },
+    {
+      "inventoryIndex": 84,
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/AmazonConfig.java",
+      "sourceSha256": "d19be0404def7896968ee55724efb4d2834cc7656dcd3fe4e1dbf894a0c3f964",
+      "loc": 35,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "startup-config",
+      "finalRole": "data-model",
+      "roleDetail": "对象存储连接配置数据对象",
+      "responsibility": "承载对象存储地址、凭据、超时、法院代码、桶名和根路径。",
+      "lifecycle": "由调用方构造并传递，不是 Spring 配置类或配置绑定 Bean。",
+      "dependencies": ["Lombok"],
+      "capabilityCandidates": ["配置数据建模", "Builder", "连接与读取超时"],
+      "riskCandidates": [
+        {"id": "SC-003", "lines": [12, 19, 21], "summary": "Data 生成的 toString 可能把访问凭据和密钥写入日志，敏感配置对象应显式排除秘密字段。"}
+      ],
+      "sourceEvidence": [
+        {"lines": [11, 12, 13, 14, 15, 17, 23, 25, 29, 34], "summary": "Lombok 注解与字段集合证明该文件是配置数据模型而非启动配置。"}
+      ]
+    },
+    {
+      "inventoryIndex": 85,
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/AppStarter.java",
+      "sourceSha256": "9e0147da7946cf71b41e535bbf3d113b23a5b41328ee42637557ad2016f48a4e",
+      "loc": 67,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "startup-config",
+      "finalRole": "startup-config",
+      "roleDetail": "Servlet 上下文启动初始化器",
+      "responsibility": "读取环境配置、初始化全局常量和第三方文档组件，并设置进程级 Locale 与 XML 解析器属性。",
+      "lifecycle": "Spring 创建配置 Bean 后，由 ServletContextAware 回调触发初始化。",
+      "dependencies": ["Spring Environment", "Servlet API", "Aspose", "SysConfig"],
+      "capabilityCandidates": ["启动生命周期", "环境配置读取", "全局状态", "Locale", "系统属性"],
+      "riskCandidates": [
+        {"id": "SC-004", "lines": [35, 38], "summary": "字段注入隐藏必需依赖，现代示例应使用构造器注入。"},
+        {"id": "SC-005", "lines": [44, 45, 47], "summary": "启动回调修改进程级 Locale 和 JAXP 实现，影响整个 JVM，且引用 JDK 内部实现类。"},
+        {"id": "SC-006", "lines": [55, 58], "summary": "启动日志直接输出配置值，后续课程必须强调配置日志去敏。"},
+        {"id": "SC-007", "lines": [60, 61, 63], "summary": "缺少配置时直接 System.exit，不利于测试和容器化生命周期，应改为可诊断的启动失败。"}
+      ],
+      "sourceEvidence": [
+        {"lines": [30, 32, 33, 41, 42, 43, 46, 48, 52, 53, 54, 60], "summary": "配置注解、Servlet 回调和初始化步骤确定其启动职责。"}
+      ]
+    },
+    {
+      "inventoryIndex": 86,
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/ApplicationContextProvider.java",
+      "sourceSha256": "827f742fb0c6409b2199edfe84dc826fa2625db82ab092d075abd6f9fb0c7360",
+      "loc": 40,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "startup-config",
+      "finalRole": "cross-cutting",
+      "roleDetail": "静态 Spring Bean 服务定位器",
+      "responsibility": "把 ApplicationContext 保存为静态字段，供非托管调用点按名称或类型获取 Bean。",
+      "lifecycle": "Spring 通过 ApplicationContextAware 回调写入全局静态引用。",
+      "dependencies": ["Spring ApplicationContext"],
+      "capabilityCandidates": ["Bean 生命周期", "ApplicationContextAware", "服务定位器反例"],
+      "riskCandidates": [
+        {"id": "SC-008", "lines": [21, 24, 28, 32, 36], "summary": "静态服务定位器隐藏依赖、扩大全局状态并降低可测试性，课程只应作为旧项目识别项。"}
+      ],
+      "sourceEvidence": [
+        {"lines": [19, 20, 21, 23, 24, 28, 32, 36], "summary": "组件、Aware 回调、静态字段和两个 getBean 方法构成服务定位器。"}
+      ]
+    },
+    {
+      "inventoryIndex": 87,
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/CorsConfig.java",
+      "sourceSha256": "2d49acf679c969c96ce255176369bd57c2f6b3969cc44cfbde77edbbdcc6be33",
+      "loc": 32,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "startup-config",
+      "finalRole": "startup-config",
+      "roleDetail": "未启用的全局 CORS Filter 草稿",
+      "responsibility": "构造全开放 CORS 规则并预留 CorsFilter 创建方法。",
+      "lifecycle": "类会被扫描，但 corsFilter 的 Bean 注解已注释，因此该方法不会注册过滤器。",
+      "dependencies": ["Spring Web CORS"],
+      "capabilityCandidates": ["CORS", "Filter Bean", "凭据跨域规则"],
+      "riskCandidates": [
+        {"id": "SC-009", "lines": [26, 28], "summary": "过滤器工厂没有 Bean 注解，不能把方法内容误判为运行时已生效配置。"},
+        {"id": "SC-010", "lines": [17, 22], "summary": "任意源与凭据组合不是推荐配置，应明确允许的源并按版本使用 origin pattern。"}
+      ],
+      "sourceEvidence": [
+        {"lines": [12, 14, 17, 19, 21, 22, 26, 28, 30], "summary": "规则构造与被注释的 Bean 标记共同证明配置存在但未激活。"}
+      ]
+    },
+    {
+      "inventoryIndex": 88,
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/CxfConfig.java",
+      "sourceSha256": "beeb5a80428ea6ca95f789195bea77fa597b9ba8bc22331d0bd1cea286a73867",
+      "loc": 38,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "startup-config",
+      "finalRole": "startup-config",
+      "roleDetail": "Apache CXF SOAP 端点配置",
+      "responsibility": "注册 CXF Servlet、默认 Bus、服务实现和 retransmission SOAP 端点。",
+      "lifecycle": "Spring 配置处理阶段创建四个 Bean，Endpoint Bean 创建时发布相对地址。",
+      "dependencies": ["Apache CXF", "Servlet API", "ReTransmissionService"],
+      "capabilityCandidates": ["Bean 方法", "ServletRegistrationBean", "SOAP/JAX-WS", "CXF Bus"],
+      "riskCandidates": [],
+      "sourceEvidence": [
+        {"lines": [14, 17, 18, 22, 23, 27, 28, 32, 33, 34, 35], "summary": "四个 Bean 方法完整描述 Servlet、Bus、服务和 Endpoint 的装配链。"}
+      ]
+    },
+    {
+      "inventoryIndex": 89,
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/DataSourceConfig.java",
+      "sourceSha256": "80453042daeeb0a7d964611d4b22cf56356372ae10ab6373248d79d262aa0e8e",
+      "loc": 177,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "startup-config",
+      "finalRole": "startup-config",
+      "roleDetail": "主数据源与 DBCP 连接池配置",
+      "responsibility": "从 Spring Environment 或运维平台读取数据库配置、按法院分区选择数据库并创建 dzzzDataSource。",
+      "lifecycle": "Spring 创建配置 Bean 后调用 dzzzDataSource 工厂方法，初始化连接池参数并暴露 Bean。",
+      "dependencies": ["Apache Commons DBCP", "Spring Environment", "运维平台配置 SDK", "SysConfig"],
+      "capabilityCandidates": ["数据源 Bean", "外部化配置", "连接池", "多数据库选择", "凭据解密"],
+      "riskCandidates": [
+        {"id": "SC-011", "lines": [41, 54], "summary": "字段注入隐藏数据源初始化的必需依赖。"},
+        {"id": "SC-012", "lines": [138, 139], "summary": "Boolean 配置可能为 null，自动拆箱会在启动时触发空指针。"},
+        {"id": "SC-013", "lines": [152, 153, 154, 156], "summary": "通过 URL 字符串判断驱动并拼接旧时区参数，属于版本绑定的兼容逻辑。"},
+        {"id": "SC-014", "lines": [103, 173, 174], "summary": "定义了 validationQuery 却未设置，同时启用借出检测，连接校验意图与实现不一致。"}
+      ],
+      "sourceEvidence": [
+        {"lines": [36, 38, 60, 65, 75, 80, 87, 94, 100, 103, 106, 109, 114, 116, 120, 125, 135, 149, 160, 164, 172, 175], "summary": "注解、配置项、双来源读取、分区选择和连接池 setter 构成数据源生命周期。"}
+      ]
+    },
+    {
+      "inventoryIndex": 90,
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/DbcpSqlCheckConfig.java",
+      "sourceSha256": "b531c53917f997cc07d9c77d176c847feb839dc47bc5694b65171565e3b4aaba",
+      "loc": 33,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "startup-config",
+      "finalRole": "startup-config",
+      "roleDetail": "DBCP SQL 检查白名单初始化",
+      "responsibility": "在 ServletContext 初始化时向数据库拦截工具登记允许访问的表。",
+      "lifecycle": "Spring 创建 ServletContextInitializer Bean，Web 容器启动时执行 Lambda。",
+      "dependencies": ["Spring Boot ServletContextInitializer", "DBCP InterceptSqlUtils"],
+      "capabilityCandidates": ["Servlet 初始化", "Lambda", "SQL 白名单"],
+      "riskCandidates": [
+        {"id": "SC-015", "lines": [15, 16, 30], "summary": "通过全局静态调用登记硬编码表名，配置来源和测试隔离能力有限。"}
+      ],
+      "sourceEvidence": [
+        {"lines": [11, 13, 14, 15, 16, 31], "summary": "Bean 返回 ServletContextInitializer，并在回调中批量登记白名单。"}
+      ]
+    },
+    {
+      "inventoryIndex": 91,
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/EasySqlInjector.java",
+      "sourceSha256": "7b88a73f1a9ff25b1f004d87bb1b4cb2e66811896fb6e55f0d487c972863161d",
+      "loc": 21,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "startup-config",
+      "finalRole": "data-access",
+      "roleDetail": "MyBatis-Plus SQL 方法扩展",
+      "responsibility": "在默认 SQL 注入器的方法集合中追加批量插入方法。",
+      "lifecycle": "由 MybatisPlusConfig 创建并装入 GlobalConfig，Mapper 初始化时使用。",
+      "dependencies": ["MyBatis-Plus DefaultSqlInjector", "InsertBatchSomeColumn"],
+      "capabilityCandidates": ["继承与覆写", "MyBatis-Plus SQL 注入器", "批量插入"],
+      "riskCandidates": [],
+      "sourceEvidence": [
+        {"lines": [14, 15, 16, 17, 18], "summary": "继承默认注入器并覆写方法列表，证明其属于数据访问扩展而非启动配置。"}
+      ]
+    },
+    {
+      "inventoryIndex": 92,
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/HeaderRequestInterceptor.java",
+      "sourceSha256": "c196b496017b54c8ebe172492bfbbb15505babb1cf1520a16f039167f392d86c",
+      "loc": 62,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "startup-config",
+      "finalRole": "cross-cutting",
+      "roleDetail": "出站 HTTP HMAC 签名拦截器",
+      "responsibility": "规范化请求路径、计算正文摘要和 HMAC 签名，并添加 WPS 日期与授权请求头。",
+      "lifecycle": "调用方用访问凭据构造实例；每次 RestTemplate 请求执行 intercept。",
+      "dependencies": ["Spring ClientHttpRequestInterceptor", "HMacUtils", "Java 日期格式化"],
+      "capabilityCandidates": ["HTTP 客户端拦截器", "HMAC", "摘要", "请求签名", "GMT 时间"],
+      "riskCandidates": [
+        {"id": "SC-016", "lines": [35], "summary": "请求没有 Content-Type 时直接 toString 会触发空指针。"},
+        {"id": "SC-017", "lines": [41, 42], "summary": "startsWith 检查后使用 replace 会删除路径中所有同名片段，签名规范化应只处理明确前缀。"},
+        {"id": "SC-018", "lines": [52, 55, 58, 59], "summary": "签名失败后仍发送包含 null 签名的授权头，应让请求明确失败。"}
+      ],
+      "sourceEvidence": [
+        {"lines": [18, 19, 20, 22, 28, 30, 35, 37, 39, 44, 46, 47, 54, 58, 59, 60], "summary": "构造参数与 intercept 中的规范化、摘要、签名和请求头操作确定其横切职责。"}
+      ]
+    },
+    {
+      "inventoryIndex": 93,
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/MybatisPlusConfig.java",
+      "sourceSha256": "af928e578ee0749115bc12ca2d67605bd639635de6fd3fcb7b498e7695671252",
+      "loc": 125,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "startup-config",
+      "finalRole": "startup-config",
+      "roleDetail": "MyBatis-Plus 会话、Mapper 和事务配置",
+      "responsibility": "装配 SQL 注入器、GlobalConfig、SqlSessionFactory、Mapper 扫描器、事务管理器、分页和分表插件。",
+      "lifecycle": "Spring 配置处理阶段创建数据访问基础 Bean，并把 dzzzDataSource 连接到 MyBatis-Plus。",
+      "dependencies": ["MyBatis-Plus 3.4.2", "MyBatis", "dzzzDataSource", "TableShardInterceptor", "Spring JDBC"],
+      "capabilityCandidates": ["Bean 限定符", "Primary", "SqlSessionFactory", "Mapper 扫描", "事务管理器", "插件链"],
+      "riskCandidates": [
+        {"id": "SC-019", "lines": [109, 111], "summary": "把 DataSource 强制转换为 BasicDataSource 并通过 URL 字符串判断数据库，耦合具体连接池和厂商字符串。"},
+        {"id": "SC-020", "lines": [110, 112, 113], "summary": "旧 PaginationInterceptor 属于 MyBatis-Plus 3.x 兼容知识，现代课程应使用当前插件 API。"}
+      ],
+      "sourceEvidence": [
+        {"lines": [38, 47, 48, 57, 58, 71, 72, 73, 80, 81, 85, 90, 91, 92, 96, 102, 104, 105, 108, 117, 119, 121], "summary": "Bean 方法和私有工厂串起全局配置、会话、扫描、事务及插件。"}
+      ]
+    },
+    {
+      "inventoryIndex": 94,
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/Pdf2ImageComparablePriorityTaskPoolExecutor.java",
+      "sourceSha256": "d0e4192de8a26e059745e358a6d888f7f8bdf39130c30b58cca7dc0ecfbddc73",
+      "loc": 246,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "startup-config",
+      "finalRole": "async-integration",
+      "roleDetail": "PDF 转图片优先级任务执行器",
+      "responsibility": "懒加载自定义优先级线程池，按材料类型分配优先级、去重锁、分表上下文和处理回调。",
+      "lifecycle": "Spring 创建组件；首次 submitTask 时双重检查初始化线程池，此后由自定义 Executor 运行任务。",
+      "dependencies": ["ComparableThreadPoolExecutor", "PriorityBlockingQueue", "Pdf2ImageService", "TableShardContext", "LockStringUtil"],
+      "capabilityCandidates": ["volatile", "双重检查锁", "优先级队列", "Future", "Callable", "拒绝策略", "ThreadLocal 清理"],
+      "riskCandidates": [
+        {"id": "SC-021", "lines": [43, 51, 53, 54], "summary": "在 Spring 单例内部再次手写懒加载单例增加生命周期复杂度。"},
+        {"id": "SC-022", "lines": [56, 63, 67, 81, 84], "summary": "原始类型和拒绝处理中的强制类型转换依赖内部任务形状，错误任务会导致转换异常。"},
+        {"id": "SC-023", "lines": [74, 80, 88], "summary": "自建线程池没有与 Spring 销毁生命周期绑定，文件中未见 shutdown。"},
+        {"id": "SC-024", "lines": [100, 192, 199, 200], "summary": "submitTask、Callable 和 Future 使用原始类型，丢失编译期类型约束。"}
+      ],
+      "sourceEvidence": [
+        {"lines": [30, 31, 37, 43, 45, 51, 56, 64, 74, 81, 100, 107, 117, 123, 125, 144, 146, 148, 152, 157, 163, 165, 183, 185, 187, 199, 206, 236, 242], "summary": "组件、懒加载、队列、拒绝处理、两类任务分支和 Comparable Callable 展示完整异步链。"}
+      ]
+    },
+    {
+      "inventoryIndex": 95,
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/RedisConfig.java",
+      "sourceSha256": "00a97a83d7d44bb0223ba57d763bed0e8941496d8da76bb24982ce86360022d4",
+      "loc": 30,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "startup-config",
+      "finalRole": "startup-config",
+      "roleDetail": "RedisTemplate 序列化配置",
+      "responsibility": "以字符串序列化键，并以 Fastjson 序列化 Redis 值和 Hash 值。",
+      "lifecycle": "Spring 创建 RedisTemplate Bean，注入连接工厂后初始化序列化器。",
+      "dependencies": ["Spring Data Redis", "Fastjson Redis Serializer"],
+      "capabilityCandidates": ["RedisTemplate", "键值序列化", "泛型 Bean"],
+      "riskCandidates": [
+        {"id": "SC-025", "lines": [20, 24, 25], "summary": "Object 级 Fastjson 序列化绑定旧库与类型策略，现代示例必须明确可信类型、兼容性和反序列化安全边界。"}
+      ],
+      "sourceEvidence": [
+        {"lines": [14, 16, 17, 18, 19, 20, 21, 22, 24, 25, 26, 27], "summary": "Bean 方法完整配置连接工厂以及键、值、Hash 序列化器。"}
+      ]
+    },
+    {
+      "inventoryIndex": 96,
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/RestConfig.java",
+      "sourceSha256": "7adb4c67231beb53797d10d77e3b0c5532867d6e5fce09e56aedf5feec1032a8",
+      "loc": 129,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "startup-config",
+      "finalRole": "startup-config",
+      "roleDetail": "多用途 RestTemplate 与请求工厂配置",
+      "responsibility": "创建默认、快速失败、长读取和 SSL RestTemplate，并兼容 octet-stream JSON。",
+      "lifecycle": "Spring 在配置阶段创建请求工厂和四个 HTTP 客户端 Bean。",
+      "dependencies": ["Spring RestTemplate", "Apache HttpClient", "SSLClient", "Jackson"],
+      "capabilityCandidates": ["HTTP 客户端 Bean", "连接超时", "读取超时", "消息转换器", "SSL"],
+      "riskCandidates": [
+        {"id": "SC-026", "lines": [54, 56, 57, 58], "summary": "快速失败客户端只设置连接超时，没有设置读取超时，名称不能代表完整超时策略。"},
+        {"id": "SC-027", "lines": [87, 89, 90, 92, 97], "summary": "SSL 客户端初始化失败后直接退出进程，且控制流仍保留 nullable HttpClient。"},
+        {"id": "SC-028", "lines": [42, 54, 69, 85], "summary": "同类型 Bean 较多，调用方需要稳定限定符或构造器参数名，不能依赖模糊注入。"}
+      ],
+      "sourceEvidence": [
+        {"lines": [22, 29, 31, 33, 42, 43, 45, 54, 55, 56, 69, 70, 71, 73, 85, 86, 89, 94, 95, 96, 109, 110, 111, 113, 122, 123, 125, 126], "summary": "配置值、四类客户端、请求工厂和转换器构成出站 HTTP 配置。"}
+      ]
+    },
+    {
+      "inventoryIndex": 97,
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/SpringMvcConfig.java",
+      "sourceSha256": "3379def0eb5979a0c9b83dff72c089397798803abed8ba62b902bc215a55d98d",
+      "loc": 210,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "startup-config",
+      "finalRole": "startup-config",
+      "roleDetail": "Spring MVC 拦截器、静态资源、CORS 与视图路由配置",
+      "responsibility": "注册登录、堆栈和线程拦截器，维护登录排除路径、静态资源、临时路径 CORS 与固定页面路由。",
+      "lifecycle": "Spring MVC 初始化时调用 WebMvcConfigurer 的相关回调。",
+      "dependencies": ["Spring MVC", "LoginHandler", "StackHandler", "ThreadHandler"],
+      "capabilityCandidates": ["WebMvcConfigurer", "拦截器", "路径匹配", "静态资源", "CORS", "视图控制器"],
+      "riskCandidates": [
+        {"id": "SC-029", "lines": [35, 36], "summary": "SysConfig 字段在文件中未使用，且采用字段注入。"},
+        {"id": "SC-030", "lines": [65, 132, 134], "summary": "认证排除列表巨大且与路由安全强耦合，新增路由容易发生配置漂移。"},
+        {"id": "SC-031", "lines": [134, 135, 136], "summary": "直接 new 拦截器会绕过 Spring 依赖注入和生命周期管理。"},
+        {"id": "SC-032", "lines": [148, 149, 152], "summary": "任意源与凭据组合不是推荐 CORS 配置，应列出可信源。"}
+      ],
+      "sourceEvidence": [
+        {"lines": [32, 33, 64, 65, 134, 135, 136, 139, 142, 147, 148, 150, 152, 155, 157, 163], "summary": "有效覆写集中在拦截器、资源、CORS 和视图控制器四类 MVC 扩展点。"}
+      ]
+    },
+    {
+      "inventoryIndex": 98,
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/SwaggerAccessBlockController.java",
+      "sourceSha256": "1345be6fc864c7f0e5b6e399027ed6fe53fcba131007e0c25f835b766aa1e843",
+      "loc": 27,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "startup-config",
+      "finalRole": "web-entry",
+      "roleDetail": "Swagger 路径阻断 Controller",
+      "responsibility": "把一组 Swagger UI 和 OpenAPI 2 路径映射为 404 响应。",
+      "lifecycle": "Spring MVC 扫描 Controller 后，对匹配 HTTP 请求调用 blockSwaggerAccess。",
+      "dependencies": ["Spring MVC", "ResponseEntity"],
+      "capabilityCandidates": ["Controller", "多路径映射", "404 响应", "文档端点访问控制"],
+      "riskCandidates": [
+        {"id": "SC-033", "lines": [14, 23, 24, 25], "summary": "用 Controller 覆盖路径只处理访问表象，不等同于禁用 Swagger Bean、扫描和文档生成。"}
+      ],
+      "sourceEvidence": [
+        {"lines": [11, 12, 14, 22, 23, 24, 25], "summary": "Controller 注解、路径数组和 404 返回值证明它属于 Web 入口。"}
+      ]
+    },
+    {
+      "inventoryIndex": 99,
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/SwaggerConfig.java",
+      "sourceSha256": "d6f2a144dfbcb8e449e79f5ade182f531615fdfc8aba0587a7a529a6efd1f621",
+      "loc": 40,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "startup-config",
+      "finalRole": "startup-config",
+      "roleDetail": "Springfox Swagger 2 文档配置",
+      "responsibility": "创建 Docket，仅选择带 ApiOperation 的方法并设置旧接口文档元数据。",
+      "lifecycle": "Spring 配置阶段启用 Swagger 2 并创建 Docket Bean。",
+      "dependencies": ["Springfox 2.5.0", "Swagger 2 annotations"],
+      "capabilityCandidates": ["API 文档配置", "Docket", "方法注解筛选", "Bean"],
+      "riskCandidates": [
+        {"id": "SC-034", "lines": [18, 21, 23, 27], "summary": "文档能力仍被显式启用；若生产不允许访问，应按环境禁用配置而非仅覆盖 URL。"},
+        {"id": "SC-035", "lines": [18, 23], "summary": "Springfox Swagger 2 是旧项目兼容内容，现代课程应介绍当前 OpenAPI 方案。"}
+      ],
+      "sourceEvidence": [
+        {"lines": [17, 18, 21, 22, 23, 24, 27, 28, 31, 32, 33, 36], "summary": "配置注解、Docket 选择器和 ApiInfo 构成旧 Swagger 文档配置。"}
+      ]
+    },
+    {
+      "inventoryIndex": 100,
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/SysConfig.java",
+      "sourceSha256": "9d92ea45faf6c7425d5422b7ea32c09e2c54e60c3e6aecae178311b66d00cc6d",
+      "loc": 324,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "startup-config",
+      "finalRole": "startup-config",
+      "roleDetail": "系统路径与法院参数配置属性 Bean",
+      "responsibility": "绑定 tdhsysconfig 前缀，校验本地根路径，并派生临时目录、存储目录和模板路径。",
+      "lifecycle": "Spring Boot 配置绑定阶段调用 setter；运行期由业务代码查询派生路径。",
+      "dependencies": ["Spring Boot ConfigurationProperties", "Hutool", "Java File/Paths"],
+      "capabilityCandidates": ["配置属性绑定", "路径校验", "派生配置", "文件系统路径", "Assert"],
+      "riskCandidates": [
+        {"id": "SC-036", "lines": [87, 108, 112, 113], "summary": "Java 属性名以大写字母开头，依赖宽松绑定兼容，命名不符合常规 JavaBean 风格。"},
+        {"id": "SC-037", "lines": [120, 121, 123, 125, 128], "summary": "setter 同时校验和修改分隔符，错误使用通用 RuntimeException，配置模型承担较多运行逻辑。"},
+        {"id": "SC-038", "lines": [134, 136, 137, 144, 145], "summary": "两个 setter 忽略传入配置值并改用运行路径，名称与真实行为不一致。"},
+        {"id": "SC-039", "lines": [175, 177, 178, 179, 208, 211], "summary": "把业务标识直接拼接到文件路径，调用边界必须先验证路径片段，防止目录穿越。"}
+      ],
+      "sourceEvidence": [
+        {"lines": [17, 18, 26, 31, 36, 41, 46, 51, 56, 61, 66, 71, 76, 82, 87, 92, 98, 120, 134, 144, 151, 165, 175, 188, 197, 208, 220, 241, 252, 268, 272, 276, 285, 298, 312, 317], "summary": "绑定注解、属性 setter 和多组路径派生方法证明其配置与路径服务双重职责。"}
+      ]
+    },
+    {
+      "inventoryIndex": 101,
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/ThreadPoolConfig.java",
+      "sourceSha256": "370f9cb0cb138593c434b4e7d6f986f076be2f0ed3e8ca416b9e8f28a0ce0f74",
+      "loc": 182,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "startup-config",
+      "finalRole": "startup-config",
+      "roleDetail": "六个业务 TaskExecutor Bean 配置",
+      "responsibility": "按通用参数创建数据同步、基础任务、AI、短信上报、数据上报和文件处理线程池。",
+      "lifecycle": "Spring 配置阶段创建并管理六个 ThreadPoolTaskExecutor；调用方通过 Bean 名或 Async 名称选择。",
+      "dependencies": ["Spring ThreadPoolTaskExecutor", "Java ThreadPoolExecutor"],
+      "capabilityCandidates": ["线程池参数", "队列容量", "线程命名", "拒绝策略", "优雅关闭", "Bean 命名"],
+      "riskCandidates": [
+        {"id": "SC-040", "lines": [36, 37, 39, 40, 66, 67, 69, 70], "summary": "前两个 Bean 工厂会修改共享配置字段，Bean 创建顺序会影响后续方法读取到的值。"},
+        {"id": "SC-041", "lines": [33, 63, 95, 115, 131, 159], "summary": "存在多个 TaskExecutor 且没有名为 taskExecutor 的默认 Bean，未指定执行器的 Async 调用需要单独核验选择规则。"},
+        {"id": "SC-042", "lines": [53, 83, 106, 149, 177], "summary": "CallerRunsPolicy 会把被拒绝任务转移到提交线程执行，必须理解其对 Web 请求线程和吞吐的反压影响。"}
+      ],
+      "sourceEvidence": [
+        {"lines": [11, 14, 17, 20, 23, 33, 35, 43, 45, 47, 49, 51, 53, 55, 63, 81, 83, 85, 95, 101, 105, 106, 107, 115, 121, 125, 126, 127, 131, 139, 147, 149, 151, 159, 167, 175, 177, 179], "summary": "六个 Bean 的核心线程、最大线程、队列、命名、拒绝策略和关闭行为均已人工核对。"}
+      ]
+    },
+    {
+      "inventoryIndex": 102,
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/ThymeleafConfig.java",
+      "sourceSha256": "85214a63f1893177db7b54d26b9459554e5da7267a72e11fb094bdaea27cd727",
+      "loc": 14,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "startup-config",
+      "finalRole": "startup-config",
+      "roleDetail": "资源 URL 编码过滤器配置",
+      "responsibility": "注册 ResourceUrlEncodingFilter，使视图渲染可编码带版本的静态资源 URL。",
+      "lifecycle": "Spring 创建 Filter Bean，Servlet 过滤器注册机制在请求链中使用。",
+      "dependencies": ["Spring MVC ResourceUrlEncodingFilter"],
+      "capabilityCandidates": ["Filter Bean", "静态资源 URL 编码"],
+      "riskCandidates": [],
+      "sourceEvidence": [
+        {"lines": [7, 9, 10, 11], "summary": "配置类只暴露一个 ResourceUrlEncodingFilter Bean。"}
+      ]
+    },
+    {
+      "inventoryIndex": 103,
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/DzzzEndpointConfigure.java",
+      "sourceSha256": "1ed32800b9741a265caba4662310a850363ada27647a3d0e46489bda6e55d0fd",
+      "loc": 26,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "async-integration",
+      "finalRole": "async-integration",
+      "roleDetail": "JSR-356 Endpoint 与 Spring BeanFactory 桥接器",
+      "responsibility": "保存 Spring BeanFactory，并让 WebSocket 容器从 Spring 获取 Endpoint 实例。",
+      "lifecycle": "只有该 Configurator 先成为 Spring Bean 并收到上下文回调，getEndpointInstance 才能工作。",
+      "dependencies": ["JSR-356 ServerEndpointConfig", "Spring ApplicationContextAware"],
+      "capabilityCandidates": ["WebSocket Endpoint 创建", "容器桥接", "ApplicationContextAware", "泛型方法"],
+      "riskCandidates": [
+        {"id": "SC-043", "lines": [15, 18, 19, 23, 24], "summary": "实现依赖静态 BeanFactory 先被回调；当前 WebSocketConfig 中对应 Bean 已注释，文件内也没有组件注解。"}
+      ],
+      "sourceEvidence": [
+        {"lines": [13, 15, 17, 18, 19, 22, 23, 24], "summary": "Configurator 继承、静态上下文和 Aware 回调构成 Endpoint-Spring 桥接。"}
+      ]
+    },
+    {
+      "inventoryIndex": 104,
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/WebSocketConfig.java",
+      "sourceSha256": "25ff413815527e0721f094c2adc4ded3b219bca69a82b4f6511b6b3a62250924",
+      "loc": 45,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "async-integration",
+      "finalRole": "startup-config",
+      "roleDetail": "JSR-356 WebSocket 注册与容器参数配置",
+      "responsibility": "注册 ServerEndpointExporter，设置消息缓冲区和会话空闲超时，并提供心跳常量。",
+      "lifecycle": "Spring 配置阶段创建 WebSocket 端点导出器和 Servlet 容器工厂 Bean。",
+      "dependencies": ["Spring WebSocket", "JSR-356 Servlet container"],
+      "capabilityCandidates": ["ServerEndpointExporter", "消息缓冲区", "会话超时", "WebSocket 心跳"],
+      "riskCandidates": [
+        {"id": "SC-044", "lines": [20, 21, 23, 24], "summary": "代码注释已说明外部容器无需导出器，但 WAR 项目仍无条件创建该 Bean，应按部署方式条件化。"},
+        {"id": "SC-045", "lines": [12, 13, 23], "summary": "Spring WebSocket EnableWebSocket 与 JSR-356 ServerEndpointExporter 同时出现，课程需区分两套编程模型。"},
+        {"id": "SC-046", "lines": [41, 42, 43], "summary": "Endpoint-Spring 桥接 Bean 已注释，不能把 DzzzEndpointConfigure 当作当前生效能力。"}
+      ],
+      "sourceEvidence": [
+        {"lines": [12, 13, 14, 16, 17, 23, 24, 25, 28, 29, 31, 32, 33, 34], "summary": "配置 Bean 和容器参数证明该文件应归启动配置，而非消息处理端点。"}
+      ]
+    },
+    {
+      "inventoryIndex": 105,
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/AppFrontYyzxWsServer.java",
+      "sourceSha256": "2da7814828dee755a868da35e972042c404490bdffa7bfeba55c091eea79b58e",
+      "loc": 90,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "async-integration",
+      "finalRole": "async-integration",
+      "roleDetail": "语音转写 WebSocket 转发端点",
+      "responsibility": "按排期保存 ASR 与页面会话，响应心跳，并把 ASR 文本广播给页面客户端。",
+      "lifecycle": "JSR-356 为连接触发 open/message/close/error 回调；静态 Map 跨端点实例保存会话。",
+      "dependencies": ["JSR-356 WebSocket", "ConcurrentHashMap", "WebSocketConfig"],
+      "capabilityCandidates": ["WebSocket 生命周期", "路径参数", "会话分组", "心跳", "并发 Map", "广播"],
+      "riskCandidates": [
+        {"id": "SC-047", "lines": [30, 31, 33], "summary": "containsKey 后 put 不是原子建组，竞争连接可能覆盖刚建立的会话组，应使用 computeIfAbsent。"},
+        {"id": "SC-048", "lines": [21, 27, 60, 75], "summary": "客户端类型和排期来自 URL，文件中未见身份校验；不能把路径参数当作授权依据。"},
+        {"id": "SC-049", "lines": [81, 87], "summary": "同步 BasicRemote 广播会被慢客户端阻塞，异步发送和失败隔离需后续归一化。"}
+      ],
+      "sourceEvidence": [
+        {"lines": [19, 20, 21, 24, 26, 27, 29, 33, 37, 41, 43, 49, 56, 57, 60, 64, 67, 75, 76, 81, 83, 84, 87], "summary": "端点路径、四类生命周期回调、会话状态与转发条件构成完整消息链。"}
+      ]
+    },
+    {
+      "inventoryIndex": 106,
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/BlOperationWsServer.java",
+      "sourceSha256": "a682fb47c3ef8c3efb557a80155f9837d3e5341ccf0a1f490fc90a197a4d2db7",
+      "loc": 202,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "async-integration",
+      "finalRole": "async-integration",
+      "roleDetail": "笔录操作分组广播端点",
+      "responsibility": "维护用户与排期会话组，将笔录消息按身份定点或群发，并处理心跳。",
+      "lifecycle": "连接打开时登记会话和计数，消息时解析 JSON 并广播，关闭时移除映射并递减计数。",
+      "dependencies": ["JSR-356 WebSocket", "Fastjson", "ConcurrentHashMap", "AtomicInteger"],
+      "capabilityCandidates": ["静态初始化块", "原子计数", "分组广播", "JSON 路由", "WebSocket 心跳"],
+      "riskCandidates": [
+        {"id": "SC-050", "lines": [25, 26, 27, 50], "summary": "公开可变 HashMap 作为全局身份映射，既非不可变也非线程安全。"},
+        {"id": "SC-051", "lines": [91, 92, 95], "summary": "会话组仍使用 containsKey 后 put，且同一用户新连接会覆盖旧 Session。"},
+        {"id": "SC-052", "lines": [120, 195, 199], "summary": "在线计数与连接状态没有幂等保护，重复 close/error 路径可能导致计数漂移。"},
+        {"id": "SC-053", "lines": [166, 190], "summary": "直接记录完整消息可能泄露业务数据，日志应按字段和敏感等级控制。"}
+      ],
+      "sourceEvidence": [
+        {"lines": [21, 22, 23, 25, 26, 74, 78, 82, 87, 88, 90, 95, 103, 105, 107, 120, 128, 129, 138, 145, 150, 151, 164, 168, 172, 179, 188, 191, 195, 199], "summary": "静态映射、open/close/message/error、定点筛选和原子计数描述端点状态机。"}
+      ]
+    },
+    {
+      "inventoryIndex": 107,
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/ClientChatWsServer.java",
+      "sourceSha256": "73ea51927d7ae36903a4918c64061e34dce89b1534e51f246dce92304381368c",
+      "loc": 420,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "async-integration",
+      "finalRole": "async-integration",
+      "roleDetail": "客户端聊天室与庭审状态编排端点",
+      "responsibility": "维护角色会话和短时状态，广播聊天与发布盒消息，并直接查询数据、生成开闭庭 URL 和保存交流记录。",
+      "lifecycle": "连接回调维护静态状态；消息回调按业务类型执行状态更新、数据库查询、服务调用或广播。",
+      "dependencies": ["JSR-356 WebSocket", "Fastjson", "MyBatis-Plus Mapper", "ExpiringMap", "ApplicationContextProvider", "多个业务 Service"],
+      "capabilityCandidates": ["WebSocket 状态机", "过期 Map", "Stream/Collectors", "服务定位器", "URL 编码", "端点业务编排"],
+      "riskCandidates": [
+        {"id": "SC-054", "lines": [88, 89, 92, 97], "summary": "两个会话/状态 Map 均使用非原子检查后创建，竞争连接可能覆盖状态。"},
+        {"id": "SC-055", "lines": [93, 94, 95], "summary": "代码实际过期时间为 20 秒，但注释写 5 小时，文档与行为明显不一致。"},
+        {"id": "SC-056", "lines": [238, 275, 276, 409], "summary": "Endpoint 通过静态服务定位器访问 Service 和 Mapper，混合传输、业务与数据访问职责。"},
+        {"id": "SC-057", "lines": [56, 83, 158, 177], "summary": "角色和排期来自连接或消息，文件中未见认证授权校验。"}
+      ],
+      "sourceEvidence": [
+        {"lines": [55, 56, 57, 63, 69, 75, 76, 82, 83, 88, 92, 99, 105, 119, 126, 139, 157, 166, 172, 177, 180, 187, 203, 217, 230, 235, 238, 245, 258, 269, 275, 279, 286, 288, 319, 326, 329, 332, 354, 383, 394, 407, 409, 413], "summary": "生命周期回调、状态分支、广播、服务定位和 URL 生成均已逐段检查。"}
+      ]
+    },
+    {
+      "inventoryIndex": 108,
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/ClientZzWsServer.java",
+      "sourceSha256": "51dd33ac610adb892fb16b1301d7678b8be8fbb94c485180f282cbae49cac4ba",
+      "loc": 208,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "async-integration",
+      "finalRole": "async-integration",
+      "roleDetail": "客户端质证消息分组端点",
+      "responsibility": "先登记连接，再按客户端 onOpen 消息分配排期组，处理法警呼叫和质证广播。",
+      "lifecycle": "连接打开只进全局 Map；首条协议消息决定分组；关闭时遍历所有组移除 Session。",
+      "dependencies": ["JSR-356 WebSocket", "Fastjson", "ConcurrentHashMap"],
+      "capabilityCandidates": ["两阶段 WebSocket 握手", "synchronized", "String.intern", "分组广播", "会话清理"],
+      "riskCandidates": [
+        {"id": "SC-058", "lines": [117, 118, 119, 121], "summary": "客户端消息提供的 pqid 可能为空，却直接调用 intern；同时全局 intern 锁会长期占用字符串池。"},
+        {"id": "SC-059", "lines": [62, 63, 101, 117, 127], "summary": "服务端根据未认证的连接角色和客户端协议消息建立授权分组，文件中未见身份绑定。"},
+        {"id": "SC-060", "lines": [85, 86, 88, 173, 174], "summary": "关闭连接遍历所有组，且调试日志输出完整会话 Map，存在性能和信息暴露风险。"},
+        {"id": "SC-061", "lines": [179, 202, 204], "summary": "日志记录完整广播消息，可能包含业务或个人数据。"}
+      ],
+      "sourceEvidence": [
+        {"lines": [24, 25, 26, 52, 57, 62, 63, 66, 75, 80, 85, 101, 109, 115, 117, 121, 127, 132, 136, 138, 151, 153, 156, 166, 171, 178, 180, 184, 190, 202, 205], "summary": "连接、协议分组、消息路由、广播和关闭清理构成两阶段端点状态机。"}
+      ]
+    },
+    {
+      "inventoryIndex": 109,
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/LoggingFileTailReader.java",
+      "sourceSha256": "30ba45d30d77f1e0306aefb17c403eaba8018688c1b0f707443e0f3f0451da7b",
+      "loc": 135,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "async-integration",
+      "finalRole": "infrastructure",
+      "roleDetail": "UTF-8 日志文件尾部增量读取器",
+      "responsibility": "反向定位最后 N 行，并按完整换行边界增量读取日志和推进字节偏移。",
+      "lifecycle": "无状态静态工具；LoggingWSServer 每轮按当前文件和偏移调用。",
+      "dependencies": ["RandomAccessFile", "StandardCharsets.UTF_8", "LoggingTailReadResult"],
+      "capabilityCandidates": ["RandomAccessFile", "try-with-resources", "字节偏移", "UTF-8 解码", "完整行边界"],
+      "riskCandidates": [
+        {"id": "SC-062", "lines": [61, 62, 103, 104], "summary": "把剩余文件长度转换为 int 并一次性分配数组，大文件或长时间未消费时可能溢出或耗尽内存。"}
+      ],
+      "sourceEvidence": [
+        {"lines": [16, 18, 30, 34, 35, 36, 37, 50, 54, 55, 56, 60, 61, 63, 64, 67, 68, 69, 77, 82, 84, 86, 91, 98, 102, 103, 105, 112, 113, 125, 129, 133], "summary": "首屏反向定位、增量完整行和统一拆行三个路径均已检查。"}
+      ]
+    },
+    {
+      "inventoryIndex": 110,
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/LoggingTailReadResult.java",
+      "sourceSha256": "f5e53950f7b4ddc44fa91589d873a8335c05e1de017ea2b5b5b20b41ff2e08c3",
+      "loc": 25,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "async-integration",
+      "finalRole": "data-model",
+      "roleDetail": "日志增量读取结果值对象",
+      "responsibility": "同时返回完整日志行和下一轮读取的字节偏移。",
+      "lifecycle": "LoggingFileTailReader 每次增量读取创建，LoggingWSServer 随即消费。",
+      "dependencies": ["Lombok Getter/AllArgsConstructor", "Java List"],
+      "capabilityCandidates": ["不可重新赋值字段", "结果对象", "集合边界"],
+      "riskCandidates": [
+        {"id": "SC-063", "lines": [19], "summary": "final 只保护 List 引用，列表内容仍可变；现代值对象应明确不可变集合边界。"}
+      ],
+      "sourceEvidence": [
+        {"lines": [12, 13, 14, 19, 24], "summary": "构造器、getter 与两个 final 字段证明其为读取结果数据模型。"}
+      ]
+    },
+    {
+      "inventoryIndex": 111,
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/LoggingWSServer.java",
+      "sourceSha256": "9cb0735059110ef1b74339ec984de1255047e53ebd600e5581b4d311818505d2",
+      "loc": 208,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "async-integration",
+      "finalRole": "async-integration",
+      "roleDetail": "实时日志 WebSocket 推送端点",
+      "responsibility": "按连接维护日志类型和偏移，在后台线程轮询日志文件、转义并着色后推送页面。",
+      "lifecycle": "连接打开时从 baseTaskExecutor 启动循环；消息切换日志类型；关闭时移除状态使循环退出。",
+      "dependencies": ["JSR-356 WebSocket", "baseTaskExecutor", "LoggingFileTailReader", "Fastjson", "文件系统"],
+      "capabilityCandidates": ["后台轮询", "线程池", "文件 tail", "HTML 转义", "WebSocket 推送", "连接状态"],
+      "riskCandidates": [
+        {"id": "SC-064", "lines": [83, 185, 186, 187, 189], "summary": "客户端可控制 logKey 并参与文件路径拼接，必须使用允许列表防止读取任意日志路径。"},
+        {"id": "SC-065", "lines": [29, 63, 64], "summary": "端点直接暴露服务器日志，文件中未见认证或授权检查，属于高敏感运维能力。"},
+        {"id": "SC-066", "lines": [72, 74, 100, 144, 145, 147], "summary": "长循环占用共享任务执行器，捕获异常后继续且未恢复中断状态，关闭和资源隔离需专门设计。"},
+        {"id": "SC-067", "lines": [197, 202, 204], "summary": "发送异常被静默吞掉，运行故障无法观测。"}
+      ],
+      "sourceEvidence": [
+        {"lines": [27, 28, 29, 34, 36, 38, 42, 56, 63, 66, 67, 69, 72, 74, 77, 83, 88, 90, 92, 95, 99, 104, 106, 112, 119, 125, 134, 137, 142, 144, 145, 150, 157, 160, 161, 167, 176, 181, 185, 186, 187, 189, 197, 199, 200], "summary": "连接循环、文件读取、页面格式化、状态切换和退出条件均已检查。"}
+      ]
+    },
+    {
+      "inventoryIndex": 112,
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/OnlyOfficeWsServer.java",
+      "sourceSha256": "628ec0bfb3798156aecca8b19b6656d939be958810e0a1abe674b2d3c9ac7986",
+      "loc": 116,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "async-integration",
+      "finalRole": "async-integration",
+      "roleDetail": "OnlyOffice 房间广播端点",
+      "responsibility": "按排期维护 CopyOnWriteArraySet 会话房间，处理心跳并广播客户端消息。",
+      "lifecycle": "open 加入房间并计数，message 广播，close 移除 Session 并递减计数。",
+      "dependencies": ["JSR-356 WebSocket", "Fastjson", "ConcurrentHashMap", "CopyOnWriteArraySet", "AtomicInteger"],
+      "capabilityCandidates": ["房间广播", "写时复制集合", "原子计数", "WebSocket 心跳"],
+      "riskCandidates": [
+        {"id": "SC-068", "lines": [35, 36, 38], "summary": "房间创建使用 containsKey 后 put，竞争连接可能覆盖集合。"},
+        {"id": "SC-069", "lines": [49, 50, 51, 54], "summary": "最后一个会话关闭后不移除空房间，静态 Map 会持续保留排期键。"},
+        {"id": "SC-070", "lines": [21, 33, 59, 81, 89], "summary": "路径身份和客户端消息直接驱动广播，文件中未见授权或消息边界验证。"},
+        {"id": "SC-071", "lines": [83, 104], "summary": "日志输出完整消息，可能泄露协作文档内容。"}
+      ],
+      "sourceEvidence": [
+        {"lines": [20, 21, 22, 25, 27, 32, 33, 35, 38, 40, 47, 48, 49, 51, 54, 59, 60, 63, 65, 67, 81, 85, 86, 89, 96, 102, 105, 109, 113], "summary": "房间状态、四类端点回调、广播和计数逻辑均已核对。"}
+      ]
+    },
+    {
+      "inventoryIndex": 113,
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/Voice2TextWsServer.java",
+      "sourceSha256": "21381d35f24c15bf1806297240ac94bbf6b853a53dce453ab85d8a7e88e4556d",
+      "loc": 167,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "async-integration",
+      "finalRole": "async-integration",
+      "roleDetail": "语音转写与 OnlyOffice 消息桥接端点",
+      "responsibility": "按排期和角色保存会话，支持服务端定点推送、心跳、笔录保存和 onlyOffice 角色转发。",
+      "lifecycle": "静态方法可向现有会话推送；连接回调维护会话组；消息回调可触发业务 Service。",
+      "dependencies": ["JSR-356 WebSocket", "Fastjson", "ApplicationContextProvider", "NoteService", "ConcurrentHashMap"],
+      "capabilityCandidates": ["服务端推送", "角色路由", "心跳", "服务定位器", "会话清理"],
+      "riskCandidates": [
+        {"id": "SC-072", "lines": [76, 77, 80, 81], "summary": "会话组创建不是原子操作，同角色新连接还会覆盖旧连接。"},
+        {"id": "SC-073", "lines": [29, 42, 48, 71, 81], "summary": "角色与排期来自 URL，静态推送按字符串角色选会话，文件中未见身份授权绑定。"},
+        {"id": "SC-074", "lines": [135, 136, 143, 144], "summary": "传输端点直接构造业务 VO 并通过静态服务定位器保存笔录，职责边界过深。"},
+        {"id": "SC-075", "lines": [95, 97, 103, 107], "summary": "关闭时不移除空会话组，静态 Map 会保留排期键。"}
+      ],
+      "sourceEvidence": [
+        {"lines": [27, 28, 29, 35, 40, 42, 43, 48, 53, 55, 58, 59, 70, 71, 74, 76, 80, 81, 88, 89, 93, 95, 97, 103, 116, 124, 126, 130, 135, 136, 143, 144, 150, 151, 155, 162], "summary": "静态定点推送、连接状态、消息分支、业务保存和角色广播均已检查。"}
+      ]
+    },
+    {
+      "inventoryIndex": 114,
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/fyb/FybChatRoomWsServer.java",
+      "sourceSha256": "a88d1288eff02a0d991fdc60a01aa2aab20a185d2720022b68118815f19e3d41",
+      "loc": 161,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "async-integration",
+      "finalRole": "async-integration",
+      "roleDetail": "法院宝聊天室与质证状态端点",
+      "responsibility": "按会议维护聊天室会话和最近质证状态，广播消息并在最后连接关闭时触发业务处理。",
+      "lifecycle": "open 建组并恢复状态；message 广播并更新质证状态；close 清理并调用 Fyb4WindowsService。",
+      "dependencies": ["JSR-356 WebSocket", "Fastjson", "ApplicationContextProvider", "Fyb4WindowsService", "ConcurrentHashMap"],
+      "capabilityCandidates": ["会话状态恢复", "广播", "最后连接回调", "服务定位器", "JSON 状态"],
+      "riskCandidates": [
+        {"id": "SC-076", "lines": [58, 59, 62, 63, 87, 90], "summary": "ConcurrentHashMap 的值是普通 ArrayList，open、close 和 message 并发访问仍不安全。"},
+        {"id": "SC-077", "lines": [58, 59], "summary": "检查后创建会话列表不是原子操作，竞争连接可能丢失。"},
+        {"id": "SC-078", "lines": [99, 101, 104], "summary": "Endpoint 关闭回调通过静态服务定位器执行业务逻辑，传输生命周期与业务事务耦合。"},
+        {"id": "SC-079", "lines": [31, 54, 115, 137], "summary": "会议标识和消息由客户端提供，文件中未见认证、授权或消息大小校验。"}
+      ],
+      "sourceEvidence": [
+        {"lines": [30, 31, 32, 38, 43, 48, 54, 55, 57, 58, 62, 65, 67, 69, 83, 84, 86, 87, 90, 99, 101, 104, 115, 116, 118, 123, 128, 133, 135, 137, 140, 142, 144, 156], "summary": "状态恢复、会话列表、广播、质证状态更新和关闭业务回调均已核对。"}
+      ]
+    },
+    {
+      "inventoryIndex": 115,
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/fyb/FybWsServer.java",
+      "sourceSha256": "755214e26ffa10bff8a414a6ab9f44ec37270bb39c07fc1c0040ad50d971baa3",
+      "loc": 156,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "async-integration",
+      "finalRole": "async-integration",
+      "roleDetail": "法院宝 OnlyOffice 在线与消息端点",
+      "responsibility": "按会议维护 OnlyOffice 在线会话，处理心跳、组内广播和记录权限变更推送。",
+      "lifecycle": "open/close 只在指定业务类型维护列表；最后连接关闭触发业务 Service。",
+      "dependencies": ["JSR-356 WebSocket", "Fastjson", "ApplicationContextProvider", "Fyb4WindowsService", "ConcurrentHashMap"],
+      "capabilityCandidates": ["多路径参数", "按业务类型建组", "WebSocket 心跳", "广播", "服务定位器"],
+      "riskCandidates": [
+        {"id": "SC-080", "lines": [51, 52, 55, 56, 70, 73], "summary": "ConcurrentHashMap 中保存普通 ArrayList，且建组不是原子操作，并发连接和关闭不安全。"},
+        {"id": "SC-081", "lines": [82, 84, 87], "summary": "关闭回调通过静态服务定位器执行业务逻辑，职责和错误边界混合。"},
+        {"id": "SC-082", "lines": [144, 145, 146], "summary": "broadcast 未检查会话列表是否为 null，未知会议会触发空指针。"},
+        {"id": "SC-083", "lines": [28, 46, 98, 138], "summary": "路径参数和消息控制业务分组与广播，文件中未见身份授权校验。"}
+      ],
+      "sourceEvidence": [
+        {"lines": [27, 28, 29, 35, 40, 45, 46, 50, 51, 55, 64, 65, 69, 70, 73, 82, 84, 87, 98, 99, 101, 106, 112, 113, 118, 120, 128, 138, 139, 140, 143, 144, 146, 148], "summary": "按业务类型建立、清理、广播会话及服务回调的完整路径已检查。"}
+      ]
+    },
+    {
+      "inventoryIndex": 116,
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/fyb/jdyh/NoteSignWsServer.java",
+      "sourceSha256": "34a02597c46ffdf102b380a0fa8a299ee780bcbc1aa7db9db1de1949be896370",
+      "loc": 115,
+      "auditStatus": "reviewed",
+      "machineRoleCandidate": "async-integration",
+      "finalRole": "async-integration",
+      "roleDetail": "鉴定摇号笔录签名通知端点",
+      "responsibility": "按会议维护会话列表，响应心跳并把签名消息转发给组内全部连接。",
+      "lifecycle": "open 建组，message 广播，close 从列表移除 Session，error 记录异常。",
+      "dependencies": ["JSR-356 WebSocket", "ConcurrentHashMap", "ArrayList", "WebSocketConfig"],
+      "capabilityCandidates": ["WebSocket 生命周期", "会话分组", "心跳", "迭代器删除", "广播"],
+      "riskCandidates": [
+        {"id": "SC-084", "lines": [44, 45, 48, 49, 62, 66], "summary": "ConcurrentHashMap 的值为普通 ArrayList，且建组不是原子操作，并发访问不安全。"},
+        {"id": "SC-085", "lines": [62, 64, 70, 75], "summary": "最后一个连接关闭后不移除空列表，静态 Map 会持续保留会议键。"},
+        {"id": "SC-086", "lines": [22, 39, 83, 97], "summary": "会议标识和消息来自客户端，文件中未见认证、授权或消息边界验证。"}
+      ],
+      "sourceEvidence": [
+        {"lines": [21, 22, 23, 29, 34, 39, 40, 42, 44, 48, 56, 57, 60, 62, 66, 69, 70, 75, 83, 84, 86, 91, 93, 97, 102, 104, 111], "summary": "建组、关闭清理、心跳、广播和异常回调均已逐段检查。"}
+      ]
+    }
+  ]
+}

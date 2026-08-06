@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "batchId": "phase-2-knowledge-path",
+  "status": "completed",
+  "gateStatus": "passed",
+  "reviewedAt": "2026-08-04T15:10:48.000Z",
+  "reviewedBy": "Codex",
+  "reviewerType": "agent-assisted-manual-course-design",
+  "reviewMethod": "逐项确认 167 个 Phase 1 规范目录项的唯一处置、64 个课程节点、必要前置、依赖图、风险边界和八条代表性静态调用链。",
+  "approvalBoundary": "用户已通过 Phase 3 执行请求明确确认冻结目录；本签核仅授权 Phase 3 平台能力，不授权进入 Phase 4。",
+  "phase1Inputs": [
+    {
+      "manifestPath": "phase-1d-java-language-manifest.json",
+      "manifestSha256": "985410a0589be896ddcb7e793e8782c506fafeb2fdfdeb19ae5f69612152ca94",
+      "matrixPath": "java-language-capability-matrix.json",
+      "matrixSha256": "b42122285a7e4680c9d5148b44effaa5838a8d2bfa62e1cb2c4f0175d727c076",
+      "itemCount": 15
+    },
+    {
+      "manifestPath": "phase-1d-standard-library-manifest.json",
+      "manifestSha256": "24b0c25cb19b4c765bdd36f04599391960251606a539a9c9c6a0de0235bf8784",
+      "matrixPath": "java-standard-library-capability-matrix.json",
+      "matrixSha256": "3ee20550ba22602c462dcfdc619bccaa5e844ab2b8224ec657b194bc0136853d",
+      "itemCount": 33
+    },
+    {
+      "manifestPath": "phase-1d-framework-manifest.json",
+      "manifestSha256": "e17a2ce40b18e7f375d79027f12f631f60a3b1a890996340cd7be77677095588",
+      "matrixPath": "java-framework-capability-matrix.json",
+      "matrixSha256": "033362651a4b1a25abf3b16d6bd01449a6888464a949f92f5bc9b96893d7612a",
+      "itemCount": 34
+    },
+    {
+      "manifestPath": "phase-1d-engineering-pattern-manifest.json",
+      "manifestSha256": "2ea5eea9d4fd4ce5242daaf7daba0d21c901c2a5c949bcac4d178f43ffea2324",
+      "matrixPath": "java-engineering-pattern-capability-matrix.json",
+      "matrixSha256": "8cd1619084b8b0f9dadb9ea8a3915eb8dcaa8064e2e2ea90d5d700020373dc3b",
+      "itemCount": 38
+    },
+    {
+      "manifestPath": "phase-1d-review-risk-manifest.json",
+      "manifestSha256": "84022f0de7aed87245f8d0c01e80d63f1e7862f9dd751857100cba6e7b4aff46",
+      "matrixPath": "java-review-risk-matrix.json",
+      "matrixSha256": "0e1e484197fbaa55f806f385bc1f6a32d1783e8920bb64d1f88a3fe4f8dc4288",
+      "itemCount": 47
+    }
+  ],
+  "summary": {
+    "sourceItemCount": 167,
+    "dispositionCounts": { "lesson": 43, "merged": 108, "reference": 6, "project-only": 10 },
+    "courseNodeCount": 64,
+    "purposeCounts": { "learn": 51, "reference": 5, "projects": 8 },
+    "collectionCounts": {
+      "basics": 18,
+      "intermediate": 17,
+      "advanced": 16,
+      "catalog": 5,
+      "dzzz-app": 8
+    },
+    "necessaryPrerequisiteCount": 7,
+    "dependencyEdgeCount": 114,
+    "representativeProjectCallPathCount": 8,
+    "gateStatus": "passed"
+  },
+  "artifacts": [
+    {
+      "path": "course-knowledge-path-source-inventory.jsonl",
+      "sha256": "96f9ca64ef65b6e6cd6f52fd46b0b1f2021c68eb04d8cfcea28fd2a42cf1272a"
+    },
+    {
+      "path": "course-coverage-matrix.json",
+      "sha256": "04d858896d07e975d3ab50796494873f09bd0ddf4b1a8b1ea87bd75cdd101d38"
+    },
+    {
+      "path": "course-coverage-matrix.md",
+      "sha256": "c4283551b4f37081097551957d3b4e1ea44922e0a1bb5865be2c5cc18faa6021"
+    },
+    {
+      "path": "architecture-and-call-paths.md",
+      "sha256": "4966dace121738a537a8f39be1377005ded45a3bf4cf1425ee067bbf44c4cab7"
+    },
+    {
+      "path": "project-example-register.md",
+      "sha256": "1b1189c4fef177cc302f61799fa7e54d7e9dcd2d61c1d2a86179eaa0d1f23e24"
+    },
+    {
+      "path": "rejected-pattern-register.md",
+      "sha256": "a11f2147c7c8a70da9d7c285aac09b7e94bc5966516b15ea72ee478ff549c921"
+    }
+  ]
+}

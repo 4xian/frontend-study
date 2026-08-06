@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "batchId": "phase-1c-test",
+  "status": "completed",
+  "reviewedAt": "2026-08-04T08:25:57.000Z",
+  "manualReviewSignoff": {
+    "path": "reviews/phase-1c-test-signoff.json",
+    "sha256": "a5f62dc8cf63811eb23274485a3a678de5347f2c2b2112b6d0726c63a222ccc5",
+    "reviewedBy": "Codex",
+    "reviewerType": "agent-assisted-manual-review",
+    "approvedShardCount": 1
+  },
+  "batchScope": {
+    "sourceSet": "test",
+    "javaInventoryIndexRanges": [
+      [
+        3430,
+        3436
+      ]
+    ],
+    "excludedReviewedPaths": 3429
+  },
+  "recordContract": {
+    "format": "JSON Lines; one manually reviewed test file record per line",
+    "feedbackLoopBoundary": "test framework, fixture, assertion, production target and resource ownership are separate evidence",
+    "riskStatus": "candidate for later capability or rejected-pattern normalization; not a defect verdict",
+    "coverageBoundary": "46 tests prove only their recorded contracts; they do not establish application-wide sufficiency",
+    "signoffBoundary": "manual signoff binds the reviewing candidate shard before records become reviewed"
+  },
+  "summary": {
+    "batchFileCount": 7,
+    "batchLoc": 1840,
+    "declaredTypeCount": 7,
+    "fieldCount": 7,
+    "publicMethodCount": 48,
+    "testMethodCount": 46,
+    "assertionCount": 148,
+    "sourceRootCounts": {
+      "service": 5,
+      "util": 2
+    },
+    "machineRoleCandidateCounts": {
+      "test": 7
+    },
+    "finalRoleCounts": {
+      "test": 7
+    },
+    "testShapeCounts": {
+      "configuration-mapping-contract-test": 1,
+      "pdf-image-composition-regression-test": 1,
+      "pdf-keyword-position-regression-test": 1,
+      "runtime-prompt-contract-test": 1,
+      "service-state-persistence-collaboration-regression": 1,
+      "structured-result-parser-contract-test": 1,
+      "text-diff-contract-test": 1
+    },
+    "frameworkFileCounts": {
+      "junit4": 7,
+      "mockito": 1,
+      "reflectionTestAccess": 3,
+      "temporaryFolder": 3
+    },
+    "productionTargetCount": 19,
+    "riskCandidateCount": 20,
+    "riskCategoryCounts": {
+      "broad-expected-exception": 1,
+      "coarse-artifact-assertion": 1,
+      "legacy-junit4": 7,
+      "manual-mock-injection": 1,
+      "manual-resource-lifecycle": 3,
+      "mutable-global-test-state": 1,
+      "optional-external-output-directory": 1,
+      "oversized-test-fixture": 2,
+      "private-reflection-coupling": 3
+    },
+    "currentAuditStatusCounts": {
+      "unreviewed": 0,
+      "reviewing": 0,
+      "reviewed": 3436,
+      "blocked": 0
+    }
+  },
+  "shards": [
+    {
+      "fileName": "records-0001-0007.jsonl",
+      "fileCount": 7,
+      "firstInventoryIndex": 3430,
+      "lastInventoryIndex": 3436,
+      "firstPath": "dzzz-app/src/test/java/com/tdh/bdzz/service/impl/TsFileSignNewDragServiceImplTest.java",
+      "lastPath": "dzzz-app/src/test/java/com/tdh/bdzz/util/PdfKeywordPositionUtilTest.java",
+      "sha256": "19c00528b2ba9a9092048ba0900f2490e8f127479ec3a5335aa16d6637270f19"
+    }
+  ]
+}

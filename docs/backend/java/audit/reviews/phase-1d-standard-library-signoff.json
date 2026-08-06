@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "batchId": "phase-1d-standard-library",
+  "status": "approved",
+  "reviewedBy": "Codex",
+  "reviewerType": "agent-assisted-manual-review",
+  "reviewedAt": "2026-08-04T10:31:59.000Z",
+  "reviewMethod": "逐项核对上一批 866 个 pending 输入，只把具有明确 JDK 类型或 API 证据的 112 个输入归一化为 33 个标准库能力。",
+  "approvalContract": "人工签核必须同时绑定本批输入清单、结构化矩阵和 Markdown 摘要的 SHA-256；框架、风险、工程模式和无实际 API 证据的候选继续保持 pending。",
+  "summary": {
+    "rawSourceItemCount": 866,
+    "normalizedSourceItemCount": 112,
+    "pendingSourceItemCount": 754,
+    "capabilityCount": 33,
+    "normalizedObservedFileCount": 580,
+    "representativeSymbolCount": 123
+  },
+  "artifacts": [
+    {
+      "path": "standard-library-capability-source-inventory.jsonl",
+      "sha256": "a9f55eb514c827e4cbf1316f79f031e677e03ea0fb6afe0aae7ffc075ba4aebe"
+    },
+    {
+      "path": "java-standard-library-capability-matrix.json",
+      "sha256": "3ee20550ba22602c462dcfdc619bccaa5e844ab2b8224ec657b194bc0136853d"
+    },
+    {
+      "path": "java-standard-library-capability-matrix.md",
+      "sha256": "7378f9fee958d7ca9586953b659e59163e9bee5344285bf1db30c4f254e38cfb"
+    }
+  ]
+}

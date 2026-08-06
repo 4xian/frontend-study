@@ -1,0 +1,3123 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "batchId": "phase-1d-standard-library",
+  "reviewedAt": "2026-08-04T10:31:59.000Z",
+  "matrixKind": "java-standard-library",
+  "inputLineage": {
+    "previousBatchId": "phase-1d-java-language",
+    "previousManifestSha256": "985410a0589be896ddcb7e793e8782c506fafeb2fdfdeb19ae5f69612152ca94",
+    "previousSourceInventorySha256": "7a5a9d5745820f7ac8e9874419e8a45c9cc7b60723ee9f886e3a4336d7454815",
+    "previousPendingSourceItemCount": 866
+  },
+  "summary": {
+    "rawSourceItemCount": 866,
+    "normalizedSourceItemCount": 112,
+    "pendingSourceItemCount": 754,
+    "pendingBySourceKind": {
+      "review-capability": 414,
+      "language-feature": 0,
+      "framework-usage": 21,
+      "review-risk": 319
+    },
+    "capabilityCount": 33,
+    "normalizedObservedFileCount": 580,
+    "representativeSymbolCount": 123
+  },
+  "capabilities": [
+    {
+      "capabilityId": "JAVA-STDLIB-001",
+      "name": "java.base 核心标准库概览",
+      "kind": "standard-library",
+      "observedFileCount": 1,
+      "observedFiles": [
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/CommonUtil.java"
+      ],
+      "representativeSymbols": [
+        {
+          "symbol": "com.tdh.bdzz.util.CommonUtil",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/CommonUtil.java"
+        }
+      ],
+      "normalizedFrom": [
+        {
+          "sourceId": "CAP-0415",
+          "sourceKind": "review-capability",
+          "key": "Java 标准库",
+          "label": "Java 标准库",
+          "observedFileCount": 1
+        }
+      ],
+      "modernBaseline": {
+        "java": "25 LTS"
+      },
+      "legacyBaseline": {
+        "java": "8"
+      },
+      "prerequisites": [
+        "JAVA-LANG-001"
+      ],
+      "recommendedStage": "basic",
+      "exampleStatus": "not-started",
+      "researchStatus": "not-started",
+      "courseStatus": "candidate"
+    },
+    {
+      "capabilityId": "JAVA-STDLIB-002",
+      "name": "String、字符串池与格式化",
+      "kind": "standard-library",
+      "observedFileCount": 5,
+      "observedFiles": [
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/ClientZzWsServer.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/constant/TsblTextCacheKeyBuilder.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/Num2CN.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/StringUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/StringUtils.java"
+      ],
+      "representativeSymbols": [
+        {
+          "symbol": "com.tdh.bdzz.constant.TsblTextCacheKeyBuilder",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/constant/TsblTextCacheKeyBuilder.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.Num2CN",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/Num2CN.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.config.websocket.server.ClientZzWsServer",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/ClientZzWsServer.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.StringUtil",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/StringUtil.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.StringUtils",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/StringUtils.java"
+        }
+      ],
+      "normalizedFrom": [
+        {
+          "sourceId": "CAP-0332",
+          "sourceKind": "review-capability",
+          "key": "字符串格式化",
+          "label": "字符串格式化",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0520",
+          "sourceKind": "review-capability",
+          "key": "String",
+          "label": "String",
+          "observedFileCount": 3
+        },
+        {
+          "sourceId": "CAP-0521",
+          "sourceKind": "review-capability",
+          "key": "String.intern",
+          "label": "String.intern",
+          "observedFileCount": 1
+        }
+      ],
+      "modernBaseline": {
+        "java": "25 LTS"
+      },
+      "legacyBaseline": {
+        "java": "8"
+      },
+      "prerequisites": [],
+      "recommendedStage": "basic",
+      "exampleStatus": "not-started",
+      "researchStatus": "not-started",
+      "courseStatus": "candidate"
+    },
+    {
+      "capabilityId": "JAVA-STDLIB-003",
+      "name": "Charset、StandardCharsets 与字符编码",
+      "kind": "standard-library",
+      "observedFileCount": 11,
+      "observedFiles": [
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/LoggingFileTailReader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/HMacUtils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/HtAsrUtils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/Num2CN.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/SignatureUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/Sm3Utils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/StringUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/StringUtils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/TokenUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/TwoDimensionCode.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/TwoDimensionCodeImage.java"
+      ],
+      "representativeSymbols": [
+        {
+          "symbol": "com.tdh.bdzz.util.HMacUtils",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/HMacUtils.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.config.websocket.server.LoggingFileTailReader",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/LoggingFileTailReader.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.HtAsrUtils",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/HtAsrUtils.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.Num2CN",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/Num2CN.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.SignatureUtil",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/SignatureUtil.java"
+        }
+      ],
+      "normalizedFrom": [
+        {
+          "sourceId": "CAP-0329",
+          "sourceKind": "review-capability",
+          "key": "字符编码",
+          "label": "字符编码",
+          "observedFileCount": 10
+        },
+        {
+          "sourceId": "CAP-0532",
+          "sourceKind": "review-capability",
+          "key": "UTF-8 解码",
+          "label": "UTF-8 解码",
+          "observedFileCount": 1
+        }
+      ],
+      "modernBaseline": {
+        "java": "25 LTS"
+      },
+      "legacyBaseline": {
+        "java": "8"
+      },
+      "prerequisites": [
+        "JAVA-STDLIB-002"
+      ],
+      "recommendedStage": "basic",
+      "exampleStatus": "not-started",
+      "researchStatus": "not-started",
+      "courseStatus": "candidate"
+    },
+    {
+      "capabilityId": "JAVA-STDLIB-004",
+      "name": "正则表达式 Pattern 与 Matcher",
+      "kind": "standard-library",
+      "observedFileCount": 8,
+      "observedFiles": [
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/Num2CN.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/StringUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/StringUtils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/TsjdStageUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/TstgUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/ValidatorUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/Wslb09To15Util.java",
+        "dzzz-app/src/main/java/tdh/commons/security/web/utils/SqlFilterUtil.java"
+      ],
+      "representativeSymbols": [
+        {
+          "symbol": "com.tdh.bdzz.util.Num2CN",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/Num2CN.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.ValidatorUtil",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/ValidatorUtil.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.StringUtil",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/StringUtil.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.StringUtils",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/StringUtils.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.TsjdStageUtil",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/TsjdStageUtil.java"
+        }
+      ],
+      "normalizedFrom": [
+        {
+          "sourceId": "CAP-0315",
+          "sourceKind": "review-capability",
+          "key": "正则表达式",
+          "label": "正则表达式",
+          "observedFileCount": 7
+        },
+        {
+          "sourceId": "CAP-0316",
+          "sourceKind": "review-capability",
+          "key": "正则校验",
+          "label": "正则校验",
+          "observedFileCount": 1
+        }
+      ],
+      "modernBaseline": {
+        "java": "25 LTS"
+      },
+      "legacyBaseline": {
+        "java": "8"
+      },
+      "prerequisites": [
+        "JAVA-STDLIB-002"
+      ],
+      "recommendedStage": "basic",
+      "exampleStatus": "not-started",
+      "researchStatus": "not-started",
+      "courseStatus": "candidate"
+    },
+    {
+      "capabilityId": "JAVA-STDLIB-005",
+      "name": "Collection、List、Set 与 Map",
+      "kind": "standard-library",
+      "observedFileCount": 30,
+      "observedFiles": [
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/DzzzDxpzCacheLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/DzzzTsmCacheLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/DzzzUserCacheLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/TDepartCacheLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/TDepartYzwCacheLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/TUserCacheLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/TUserYzwCacheLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/TsAjcxbm2015CacheLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/TsBzDmCacheLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/TsBzDmConverCacheLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/TsDmCacheLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/TsFymcCacheLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/TsSsdwCacheLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/TsXzdqCacheLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/TuDmKzCacheLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/TuFtpzCacheLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/TuStorageBucketCacheLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/WrongWordDictionaryLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/LoggingTailReadResult.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/constant/TuDmKzCategoryConstant.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/BeanUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/CacheUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/FileProcessRequestUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/JzTabUtils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/PdfTextChar.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/PdfTextLine.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/SignKeywordRuleUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/aixntj/AiXntjCourtTreeHelper.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/aixntj/AiXntjCourtTreeNode.java",
+        "dzzz-app/src/main/java/tdh/uim/client/vo/LoginData.java"
+      ],
+      "representativeSymbols": [
+        {
+          "symbol": "com.tdh.bdzz.util.JzTabUtils",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/JzTabUtils.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.config.websocket.server.LoggingTailReadResult",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/LoggingTailReadResult.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.CacheUtil",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/CacheUtil.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.cache.DzzzDxpzCacheLoader",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/cache/DzzzDxpzCacheLoader.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.aixntj.AiXntjCourtTreeHelper",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/aixntj/AiXntjCourtTreeHelper.java"
+        }
+      ],
+      "normalizedFrom": [
+        {
+          "sourceId": "CAP-0105",
+          "sourceKind": "review-capability",
+          "key": "集合",
+          "label": "集合",
+          "observedFileCount": 5
+        },
+        {
+          "sourceId": "CAP-0106",
+          "sourceKind": "review-capability",
+          "key": "集合边界",
+          "label": "集合边界",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0107",
+          "sourceKind": "review-capability",
+          "key": "集合查询",
+          "label": "集合查询",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0109",
+          "sourceKind": "review-capability",
+          "key": "集合可见性",
+          "label": "集合可见性",
+          "observedFileCount": 18
+        },
+        {
+          "sourceId": "CAP-0110",
+          "sourceKind": "review-capability",
+          "key": "集合算法",
+          "label": "集合算法",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0448",
+          "sourceKind": "review-capability",
+          "key": "Map",
+          "label": "Map",
+          "observedFileCount": 4
+        }
+      ],
+      "modernBaseline": {
+        "java": "25 LTS"
+      },
+      "legacyBaseline": {
+        "java": "8"
+      },
+      "prerequisites": [
+        "JAVA-LANG-006"
+      ],
+      "recommendedStage": "basic",
+      "exampleStatus": "not-started",
+      "researchStatus": "not-started",
+      "courseStatus": "candidate"
+    },
+    {
+      "capabilityId": "JAVA-STDLIB-006",
+      "name": "Iterator 删除与只读集合视图",
+      "kind": "standard-library",
+      "observedFileCount": 3,
+      "observedFiles": [
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/fyb/jdyh/NoteSignWsServer.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/constant/TuDmKzCategoryConstant.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/SignKeywordRuleUtil.java"
+      ],
+      "representativeSymbols": [
+        {
+          "symbol": "com.tdh.bdzz.config.websocket.server.fyb.jdyh.NoteSignWsServer",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/fyb/jdyh/NoteSignWsServer.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.constant.TuDmKzCategoryConstant",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/constant/TuDmKzCategoryConstant.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.SignKeywordRuleUtil",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/SignKeywordRuleUtil.java"
+        }
+      ],
+      "normalizedFrom": [
+        {
+          "sourceId": "CAP-0045",
+          "sourceKind": "review-capability",
+          "key": "迭代器删除",
+          "label": "迭代器删除",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0318",
+          "sourceKind": "review-capability",
+          "key": "只读集合",
+          "label": "只读集合",
+          "observedFileCount": 2
+        }
+      ],
+      "modernBaseline": {
+        "java": "25 LTS"
+      },
+      "legacyBaseline": {
+        "java": "8"
+      },
+      "prerequisites": [
+        "JAVA-STDLIB-005"
+      ],
+      "recommendedStage": "intermediate",
+      "exampleStatus": "not-started",
+      "researchStatus": "not-started",
+      "courseStatus": "candidate"
+    },
+    {
+      "capabilityId": "JAVA-STDLIB-007",
+      "name": "Comparable 与自然顺序",
+      "kind": "standard-library",
+      "observedFileCount": 1,
+      "observedFiles": [
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/ComparableFutureTask.java"
+      ],
+      "representativeSymbols": [
+        {
+          "symbol": "com.tdh.bdzz.util.ComparableFutureTask",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/ComparableFutureTask.java"
+        }
+      ],
+      "normalizedFrom": [
+        {
+          "sourceId": "CAP-0373",
+          "sourceKind": "review-capability",
+          "key": "Comparable",
+          "label": "Comparable",
+          "observedFileCount": 1
+        }
+      ],
+      "modernBaseline": {
+        "java": "25 LTS"
+      },
+      "legacyBaseline": {
+        "java": "8"
+      },
+      "prerequisites": [
+        "JAVA-LANG-003",
+        "JAVA-LANG-006"
+      ],
+      "recommendedStage": "intermediate",
+      "exampleStatus": "not-started",
+      "researchStatus": "not-started",
+      "courseStatus": "candidate"
+    },
+    {
+      "capabilityId": "JAVA-STDLIB-008",
+      "name": "Stream 与 Collectors",
+      "kind": "standard-library",
+      "observedFileCount": 175,
+      "observedFiles": [
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/DzzzDxpzCacheLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/DzzzTsmCacheLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/DzzzUserCacheLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/TDepartCacheLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/TUserCacheLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/TsAjcxbm2015CacheLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/TsBzDmCacheLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/TsBzDmConverCacheLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/TsDmCacheLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/TsFymcCacheLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/TsSsdwCacheLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/TsXzdqCacheLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/TuDmKzCacheLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/TuFtpzCacheLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/ClientChatWsServer.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/LoggingWSServer.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/enums/TscwhDockingTypeEnum.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/enums/TscwhTypeEnum.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/enums/tsaiassistant/TsAiDynamicAnalyzeActionEnum.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/enums/tsaiassistant/TsHearingStageEnum.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/enums/znfzxt/ZnfzYwlx.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/filter/AccessFilter.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/filter/DesFilter.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/datareport/HkDataReportHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/datareport/HxDataReportHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/datareport/HxHttpDataReportHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/voice2text/BjhyVoice2TextHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/voice2text/HcVoice2TextHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/voice2text/HykjVoice2TextHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/voice2text/JtVoice2TextHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/voice2text/LgVoice2TextHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/voice2text/TdhDtbVoice2TextHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/voice2text/TdhVoice2TextHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/voice2text/TdhYycjVoice2TextHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/voice2text/XfVoice2TextHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/voice2text/YjVoice2TextHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/listener/DealExpireDataListener.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/CourtService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/JzApiService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/AiXntjServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/BlmbServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/CacheServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/CameraServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/CaseServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/CatalogServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/ClientZzServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/CommonAbilityServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/CommonServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/CxwsServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/CzrzServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/DxlbServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/DxmbServieImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/FgdServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/FgdYjbjServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/FtjlServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/FtszServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/Fyb4ThirdServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/Fyb4WindowsImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/Fyb4WindowsTjServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/FybConferenceSyncServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/FybJdyhServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/FybJftjServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/FybServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/FybWindowsYyzxServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/FybXntjServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/HchmszServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/HjfjServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/HkConferenceServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/HwServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/HyglServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/InitHyServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/LogServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/LoginServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/LspqServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/MessageServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/MkfglServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/NbjlServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/NoteServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/Pdf2ImageServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/PdfjsDocService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/RhtsTestServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/SjfcServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/SjydHomeServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/SjydServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TblbServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/ThirdOperateServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/Ts4GgpServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TsAiAssistantServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TsFileSignNewDragServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TsFileSignNewOnlineSqtServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TsFileSignNewServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TsFileSignServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TsblSjyServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TscwhServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TslxServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TstgCommServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TsxqServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TsxxSearchServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TszjglServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TxsszServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/VidyoCloudServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/Voice2TextServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/WeChatServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/Wechat4HyServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/WftZdglServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/XinkeServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/XxfbzdServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/YbtsServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/YyxntjServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/ZdddServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/ZnfzOperationServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/ZxqServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/ZyglServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/ZzPluginServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/appFront/FrontCatalogServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/appFront/FrontFgdServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/appFront/FrontFileSignServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/appFront/FrontHyServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/appFront/FrontLoginServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/appFront/FrontNoteServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/appFront/FrontSjyServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/appFront/FrontTdhConferenceServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/appFront/FrontTslbServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/dc/DcConferenceServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/dc/DcOperationServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/hxHttp/HxHttpFeedBackServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/sqt/SqtServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/swtpad/meeting/SwtPadMeetingServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/swtpad/trial/SwtAvServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/swtpad/trial/SwtSignServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/swtpad/trial/SwtSjydServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/swtpad/trial/SwtTrialFileServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/tdh/TdhConferenceServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/trialInspect/TrialInspectServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/vidyo/VidyoConferenceServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/vidyo/VidyoOperationServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/vidyo/h5/meet/H5MeetingServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/tscwh/TscwhLargeModelInvokeService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/yspcs/TdhxxtBusinessHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/yzw/impl/YzwOperateServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/ClearExpiredDataTask.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/HxDataReportTask.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/JzDataSyncTask.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/ZjqdFileOperateTask.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/TdhTsglptJzDataSyncHandlerChain.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/clearExpireData/DealBusinessDataHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/clearExpireData/HkAuthorizeMessageAlarmDataHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/commonJzDataSync/CommonJzDataSyncHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/hyJzDataSync/HyJzDataSyncHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/jzDataSync/JzGetXnmlHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/jzDataSync/JzGetYxjmlwjHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/jzDataSync/JzGetwbListHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/jzDataSync/JzGetwjListHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/yzwJzDataSync/YzwJzDataSyncHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/service/ClearExpiredDataService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/service/FileProcessService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/service/JzDataSyncService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/service/KtpqDataSyncService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/service/TslxDataSyncService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/service/YyxntjtsService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/service/ktpq/HyAndTdhKtpqDataSyncService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/service/ktpq/HyKtpqDataSyncService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/service/ktpq/TdhTsglptKtpqDataSyncService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/service/ktpq/ThKtpqDataSyncService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/trialInspect/CheckCameraTask.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/yzw/FtxxDatsSyncTask.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/yzw/TxsDatsSyncTask.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/yzw/YzwUserDepartDatsSyncTask.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/CommonUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/ConvertPdf.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/SpirePdfUtils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/aixntj/AiXntjCourtTreeHelper.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/aixntj/AiXntjMetricsCalculator.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/ws/ReTransmissionService.java",
+        "dzzz-app/src/test/java/com/tdh/bdzz/service/impl/TsFileSignNewDragServiceImplTest.java"
+      ],
+      "representativeSymbols": [
+        {
+          "symbol": "com.tdh.bdzz.util.aixntj.AiXntjMetricsCalculator",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/aixntj/AiXntjMetricsCalculator.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.service.CourtService",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/service/CourtService.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.config.websocket.server.ClientChatWsServer",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/ClientChatWsServer.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.cache.DzzzDxpzCacheLoader",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/cache/DzzzDxpzCacheLoader.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.cache.DzzzTsmCacheLoader",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/cache/DzzzTsmCacheLoader.java"
+        }
+      ],
+      "normalizedFrom": [
+        {
+          "sourceId": "CAP-0108",
+          "sourceKind": "review-capability",
+          "key": "集合聚合",
+          "label": "集合聚合",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0190",
+          "sourceKind": "review-capability",
+          "key": "去重",
+          "label": "去重",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0518",
+          "sourceKind": "review-capability",
+          "key": "Stream API",
+          "label": "Stream API",
+          "observedFileCount": 103
+        },
+        {
+          "sourceId": "CAP-0519",
+          "sourceKind": "review-capability",
+          "key": "Stream/Collectors",
+          "label": "Stream/Collectors",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "LANG-0012",
+          "sourceKind": "language-feature",
+          "key": "stream-api",
+          "label": "stream-api",
+          "observedFileCount": 174
+        }
+      ],
+      "modernBaseline": {
+        "java": "25 LTS"
+      },
+      "legacyBaseline": {
+        "java": "8"
+      },
+      "prerequisites": [
+        "JAVA-LANG-008",
+        "JAVA-STDLIB-005"
+      ],
+      "recommendedStage": "intermediate",
+      "exampleStatus": "not-started",
+      "researchStatus": "not-started",
+      "courseStatus": "candidate"
+    },
+    {
+      "capabilityId": "JAVA-STDLIB-009",
+      "name": "Optional",
+      "kind": "standard-library",
+      "observedFileCount": 4,
+      "observedFiles": [
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/voice2text/TdhDtbVoice2TextHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TsFileSignNewOfflineSqtServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/clearExpireData/HyUimSyncDataHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/ConvertPdf.java"
+      ],
+      "representativeSymbols": [
+        {
+          "symbol": "com.tdh.bdzz.handler.voice2text.TdhDtbVoice2TextHandler",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/handler/voice2text/TdhDtbVoice2TextHandler.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.service.impl.TsFileSignNewOfflineSqtServiceImpl",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TsFileSignNewOfflineSqtServiceImpl.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.timer.handler.clearExpireData.HyUimSyncDataHandler",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/clearExpireData/HyUimSyncDataHandler.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.ConvertPdf",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/ConvertPdf.java"
+        }
+      ],
+      "normalizedFrom": [
+        {
+          "sourceId": "LANG-0010",
+          "sourceKind": "language-feature",
+          "key": "optional",
+          "label": "optional",
+          "observedFileCount": 4
+        }
+      ],
+      "modernBaseline": {
+        "java": "25 LTS"
+      },
+      "legacyBaseline": {
+        "java": "8"
+      },
+      "prerequisites": [
+        "JAVA-LANG-006"
+      ],
+      "recommendedStage": "intermediate",
+      "exampleStatus": "not-started",
+      "researchStatus": "not-started",
+      "courseStatus": "candidate"
+    },
+    {
+      "capabilityId": "JAVA-STDLIB-010",
+      "name": "Date、Calendar 与传统日期格式化",
+      "kind": "standard-library",
+      "observedFileCount": 5,
+      "observedFiles": [
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/CompareDateUtils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/DateUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/GenAuthorization.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/WpsUtil.java",
+        "dzzz-app/src/main/java/tdh/platform/component/license/lic/License.java"
+      ],
+      "representativeSymbols": [
+        {
+          "symbol": "com.tdh.bdzz.util.GenAuthorization",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/GenAuthorization.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.CompareDateUtils",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/CompareDateUtils.java"
+        },
+        {
+          "symbol": "tdh.platform.component.license.lic.License",
+          "path": "dzzz-app/src/main/java/tdh/platform/component/license/lic/License.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.DateUtil",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/DateUtil.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.WpsUtil",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/WpsUtil.java"
+        }
+      ],
+      "normalizedFrom": [
+        {
+          "sourceId": "CAP-0204",
+          "sourceKind": "review-capability",
+          "key": "日期格式",
+          "label": "日期格式",
+          "observedFileCount": 2
+        },
+        {
+          "sourceId": "CAP-0205",
+          "sourceKind": "review-capability",
+          "key": "日期格式化",
+          "label": "日期格式化",
+          "observedFileCount": 2
+        },
+        {
+          "sourceId": "CAP-0206",
+          "sourceKind": "review-capability",
+          "key": "日期校验",
+          "label": "日期校验",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0382",
+          "sourceKind": "review-capability",
+          "key": "Date/Calendar",
+          "label": "Date/Calendar",
+          "observedFileCount": 2
+        }
+      ],
+      "modernBaseline": {
+        "java": "25 LTS"
+      },
+      "legacyBaseline": {
+        "java": "8"
+      },
+      "prerequisites": [
+        "JAVA-STDLIB-002"
+      ],
+      "recommendedStage": "basic",
+      "exampleStatus": "not-started",
+      "researchStatus": "not-started",
+      "courseStatus": "candidate"
+    },
+    {
+      "capabilityId": "JAVA-STDLIB-011",
+      "name": "java.time 日期时间 API",
+      "kind": "standard-library",
+      "observedFileCount": 2,
+      "observedFiles": [
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/CompareDateUtils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/DateUtil.java"
+      ],
+      "representativeSymbols": [
+        {
+          "symbol": "com.tdh.bdzz.util.CompareDateUtils",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/CompareDateUtils.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.DateUtil",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/DateUtil.java"
+        }
+      ],
+      "normalizedFrom": [
+        {
+          "sourceId": "CAP-0425",
+          "sourceKind": "review-capability",
+          "key": "java.time",
+          "label": "java.time",
+          "observedFileCount": 2
+        }
+      ],
+      "modernBaseline": {
+        "java": "25 LTS"
+      },
+      "legacyBaseline": {
+        "java": "8"
+      },
+      "prerequisites": [
+        "JAVA-STDLIB-010"
+      ],
+      "recommendedStage": "intermediate",
+      "exampleStatus": "not-started",
+      "researchStatus": "not-started",
+      "courseStatus": "candidate"
+    },
+    {
+      "capabilityId": "JAVA-STDLIB-012",
+      "name": "Locale、GMT 与时区",
+      "kind": "standard-library",
+      "observedFileCount": 2,
+      "observedFiles": [
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/AppStarter.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/HeaderRequestInterceptor.java"
+      ],
+      "representativeSymbols": [
+        {
+          "symbol": "com.tdh.bdzz.config.HeaderRequestInterceptor",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/HeaderRequestInterceptor.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.config.AppStarter",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/AppStarter.java"
+        }
+      ],
+      "normalizedFrom": [
+        {
+          "sourceId": "CAP-0398",
+          "sourceKind": "review-capability",
+          "key": "GMT 时间",
+          "label": "GMT 时间",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0443",
+          "sourceKind": "review-capability",
+          "key": "Locale",
+          "label": "Locale",
+          "observedFileCount": 1
+        }
+      ],
+      "modernBaseline": {
+        "java": "25 LTS"
+      },
+      "legacyBaseline": {
+        "java": "8"
+      },
+      "prerequisites": [
+        "JAVA-STDLIB-010"
+      ],
+      "recommendedStage": "intermediate",
+      "exampleStatus": "not-started",
+      "researchStatus": "not-started",
+      "courseStatus": "candidate"
+    },
+    {
+      "capabilityId": "JAVA-STDLIB-013",
+      "name": "I/O 流、Reader 与 Writer",
+      "kind": "standard-library",
+      "observedFileCount": 327,
+      "observedFiles": [
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/WrongWordDictionaryLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/HeaderRequestInterceptor.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/SysConfig.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/BlOperationWsServer.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/ClientChatWsServer.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/ClientZzWsServer.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/LoggingFileTailReader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/LoggingWSServer.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/OnlyOfficeWsServer.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/fyb/FybChatRoomWsServer.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/controller/BaseOuterController.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/controller/FileController.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/controller/Fyb4WindowsController.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/controller/KgOfficeController.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/controller/LogController.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/controller/NoteController.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/controller/PdfjsStampController.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/controller/SjydController.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/controller/TempController.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/controller/WftFzxcController.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/controller/YbtsController.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/controller/YbtsWeChatController.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/controller/appFront/FrontNoteController.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/download/MossDownloader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/download/S3Downloader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/AuthorizeDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/HkConfAddDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/HkConfDelDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/HkConfStartDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/HkPublishDeviceDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/HkPublishVideoDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/HkTerminalDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/entity/BaseEntity.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/entity/CaseEntity.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/entity/CourtInfoEntity.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/entity/FtpConfigurationEntity.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/entity/JzMultipartFile.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/entity/PartyEntity.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/entity/PublicServiceAddressEntity.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/entity/SpxtTsCodeEntity.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/entity/StandardCodeEntity.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/filter/BaseFilterDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/filter/CaseFilterDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/filter/CatalogFilterDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/filter/CatalogTreeFilterDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/filter/VirtualCatalogFilterDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/sfjd/ZxjgDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/tscwh/TscwhDetailDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/tscwh/TscwhListDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/tscwh/TscwhSaveDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/tscwh/TscwhTestDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/yyzx/xf/XfUpdateMic.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/enums/AbstractJson.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/enums/IEnum.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/CaseSearchDataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/CaseSearchEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/CaseSearchEajEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/CaseSearchResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/DataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/EajFtsyEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/FtxxDataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/FtxxEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/FtxxFtsyEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/FtxxResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/HkConfStartEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/HkPublishDeviceEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/HkResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/HkTsxcResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/HxHttpTsxcResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/Info4WindowsFybEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/InitialInfoEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/JtResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/LgResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/QueryZjjhEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/TslxUploadResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/XfResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/YjResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/as/AsResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/as/Param.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/as/Result.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/as/VideoChannel.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/dc/DcResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/hytsglpt/HytsglptResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/hytsglpt/ReportTsztResultVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/smc/HwSmcConfAddEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/tiandy/TiandyResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/tsglpt/TsglptResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/tsglpt/TsglptYzwResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/factories/flv/Converter.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/factories/flv/ConverterFactories.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/factories/flv/ConverterTranFactories.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/filter/AccessFilter.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/filter/BodyRequestWrapper.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/filter/DesFilter.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/filter/ParameterRequestWrapper.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/filter/TokenLoginFilter.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/filter/XssFilter.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/filter/XssHttpServletRequestWrapper.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/LoginHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/burn/HmBurnPrintHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/po/DzzzTsbl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/po/DzzzTswjqm.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/po/zhp/DzzzFybJftjJl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/rolling/InnerProjectRollingFileAppender.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/rolling/InnerProjectSizeAndTimeBasedRollingPolicy.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/CustomRequestCallback.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/DxptService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/FileService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/Fyb4ThirdService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/Fyb4WindowsService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/FybXntjService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/HmBurnService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/HyglService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/JzApiService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/LocalWpsService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/NoteService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/QmglService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/SjydService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/Ts4GgpService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/TsblSjyService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/TsglptApiService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/WeChatService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/WpsService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/YbtsService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/ZnfzxtApiService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/ZxYtApiService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/ZzPluginService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/appFront/FrontNoteService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/AiXntjServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/BlmbServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/BlockChainServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/CameraServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/ClientZzServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/CommonServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/CxwsServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/CzCourtSpecialServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/DownloadFileServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/DownloadServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/DxlbServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/FgdServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/FileServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/FtjlServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/FtszServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/Fyb4ThirdServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/Fyb4WindowsImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/FybExpandServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/FybJdyhServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/FybJftjServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/FybServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/FybWindowsYyzxServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/FybXntjServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/HyglServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/KllbServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/LocalDiscBurnServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/LocalWpsServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/LogServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/NTKOServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/NoteServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/OcrServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/OnlyOfficeServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/Pdf2ImageServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/PdfjsStampService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/QmglServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/RhtsTestInsertJzServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/SjydServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/SsoServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/ThirdOperateServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/Ts4GgpServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TsFileSignNewDragServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TsFileSignNewOfflineSqtServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TsFileSignNewOnlineSqtServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TsFileSignNewServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TsFileSignServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TsblSjyServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TsxqServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TsxxSearchServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/Voice2TextServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/WeChatServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/Wechat4HyServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/WftFzxcServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/WpsServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/XinkeServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/YbtsServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/YbtsWeChatServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/YyxntjServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/ZnfzOperationServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/ZxYtApiServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/appFront/FrontFileSignServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/appFront/FrontNoteServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/sqt/SqtServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/swtpad/meeting/SwtPadMeetingServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/swtpad/trial/SwtNoteServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/swtpad/trial/SwtSignServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/swtpad/trial/SwtTrialFileServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/vidyo/h5/meet/H5MeetingServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/kingSign/iMsgServer2015.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/yspcs/TiandyBusinessHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/storage/FtpWork.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/storage/MossClientUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/storage/NioUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/storage/S3Utils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/DxReportTask.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/ZjqdFileOperateTask.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/bo/JzDataSyncBO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/AjxxDataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/AjxxEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/AjxxEajEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/AjxxEajSlEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/AjxxEajSpcyDataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/AjxxEajSpcyEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/AjxxEajYaxxDataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/AjxxEajYaxxEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/DsrxxDataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/DsrxxEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/DsrxxEdsrEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/DsrxxEdsrQtEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/DsrxxQtDataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/PqxxDataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/PqxxEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/PqxxFtsyEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/PqxxResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/PqxxYctxsDataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/PqxxYctxsEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/PqxxZrsDataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/PqxxZrsEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/QueryHbAjEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/QueryJzInfoEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/QueryJzmlEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/QueryYjbjEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/QueryYxjmlwjEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/commonJz/TreeInfoEntity.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/hy/HyDeptEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/hy/HyDossierNodeEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/hy/HyResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/hy/HyUserEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/ktpq/th/ThResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/zx/ZxAjxxDataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/zx/ZxAjxxEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/zx/ZxAjxxEajEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/zx/ZxPqxxDataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/zx/ZxPqxxEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/zx/ZxPqxxFtsyEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/zx/ZxPqxxResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/TdhTsglptJzDataSyncHandlerChain.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/clearExpireData/ClearLocalLogHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/clearExpireData/HyUimSyncDataHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/commonJzDataSync/CommonJzDataSyncHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/fileProcess/EajJzFileProcessHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/fileProcess/EajSsjcyxFileProcessHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/fileProcess/TsszclFileProcessHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/hyJzDataSync/HyJzDataSyncHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/jzDataSync/JzGetYxjmlwjHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/jzDataSync/JzGetwjListHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/yjJzDataSync/YjJzDataSyncHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/yzwJzDataSync/YzwJzDataSyncHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/service/ClearExpiredDataService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/service/JzDataSyncService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/service/TslxDataSyncService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/upload/LocalUploader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/upload/MossUploader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/upload/S3Uploader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/upload/SftpUploader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/upload/StorageInfo.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/AESUtils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/AsposePdfUtils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/AsposeUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/CommonUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/ConvertPdf.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/CustomMultipartFile.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/DateImageGenerator.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/HandwritingClassifier.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/HttpClientUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/HttpUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/HttpsUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/ImageMergerUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/ImageRotation.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/ImageSizeUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/ImageUtils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/JzRSAUtils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/PdfKeywordPositionUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/PdfKeywordTextStripper.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/PdfOperateUtils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/PdfUtils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/PptUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/Sm3Utils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/SpirePdfUtils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/StringUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/StzxUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/SystemMonitorUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/TokenUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/TwoDimensionCode.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/TwoDimensionCodeImage.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/UrlDownLoadUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/WangEditorUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/WordOperateUtils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/WordToPdfUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/WordUtils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/BurnRecordVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/CodeControlVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/EajJzQwjs.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/LiceneseData.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/PublicServiceAddressVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/SpxtTsCodeVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/StandardCodeVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/UserBean.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/clientZz/InitialInfoVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/clientZz/NoticeInternetInfoVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/hk/HkHcHmCloseVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/hk/HkHcHmStartVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/hk/HkHcYlVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/hk/HkSearchLxStatusVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/item/SaveScanFilesItem.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/item/ScanFile2DbItem.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/weChat/WeChatVo.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/yspg/AuthorizeVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/yzw/UploadStzxInfo.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/znfzxt/ZncpTsSyxxVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/znfzxt/ZncpTsYmSyxxVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/znfzxt/ZncpYszyVO.java",
+        "dzzz-app/src/main/java/com/tdh/util/FileTypeUtils.java",
+        "dzzz-app/src/main/java/tdh/commons/security/web/utils/SqlFilterUtil.java",
+        "dzzz-app/src/main/java/tdh/platform/component/license/lic/License.java",
+        "dzzz-app/src/main/java/tdh/platform/component/license/lic/impl/LicFactoryImpl.java",
+        "dzzz-app/src/main/java/tdh/uim/client/vo/LoginData.java",
+        "dzzz-app/src/test/java/com/tdh/bdzz/service/impl/TsFileSignNewDragServiceImplTest.java",
+        "dzzz-app/src/test/java/com/tdh/bdzz/util/KeywordSignatureMergeTest.java",
+        "dzzz-app/src/test/java/com/tdh/bdzz/util/PdfKeywordPositionUtilTest.java"
+      ],
+      "representativeSymbols": [
+        {
+          "symbol": "com.tdh.bdzz.factories.flv.ConverterFactories",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/factories/flv/ConverterFactories.java"
+        },
+        {
+          "symbol": "com.tdh.util.FileTypeUtils",
+          "path": "dzzz-app/src/main/java/com/tdh/util/FileTypeUtils.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.CustomMultipartFile",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/CustomMultipartFile.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.service.CustomRequestCallback",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/service/CustomRequestCallback.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.cache.WrongWordDictionaryLoader",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/cache/WrongWordDictionaryLoader.java"
+        }
+      ],
+      "normalizedFrom": [
+        {
+          "sourceId": "CAP-0145",
+          "sourceKind": "review-capability",
+          "key": "流式 I/O",
+          "label": "流式 I/O",
+          "observedFileCount": 6
+        },
+        {
+          "sourceId": "CAP-0224",
+          "sourceKind": "review-capability",
+          "key": "输入流",
+          "label": "输入流",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0257",
+          "sourceKind": "review-capability",
+          "key": "文件流",
+          "label": "文件流",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0423",
+          "sourceKind": "review-capability",
+          "key": "Java I/O",
+          "label": "Java I/O",
+          "observedFileCount": 92
+        },
+        {
+          "sourceId": "LANG-0007",
+          "sourceKind": "language-feature",
+          "key": "io",
+          "label": "io",
+          "observedFileCount": 326
+        }
+      ],
+      "modernBaseline": {
+        "java": "25 LTS"
+      },
+      "legacyBaseline": {
+        "java": "8"
+      },
+      "prerequisites": [
+        "JAVA-LANG-009"
+      ],
+      "recommendedStage": "basic",
+      "exampleStatus": "not-started",
+      "researchStatus": "not-started",
+      "courseStatus": "candidate"
+    },
+    {
+      "capabilityId": "JAVA-STDLIB-014",
+      "name": "AutoCloseable 与资源关闭合同",
+      "kind": "standard-library",
+      "observedFileCount": 44,
+      "observedFiles": [
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/LoggingFileTailReader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/entity/JzMultipartFile.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/clientZz/Step.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/voice2text/BjhyVoice2TextHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/voice2text/HcVoice2TextHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/voice2text/HykjVoice2TextHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/voice2text/JtVoice2TextHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/voice2text/LgVoice2TextHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/voice2text/TdhDtbVoice2TextHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/voice2text/TdhVoice2TextHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/voice2text/TdhYycjVoice2TextHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/voice2text/XfVoice2TextHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/voice2text/YjVoice2TextHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/HmBurnService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/ZnfzxtApiService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/AiXntjServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/BlmbServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/BlockChainServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/CxwsServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/FileServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/LocalWpsServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/NTKOServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/NoteServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/Ts4GgpServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TsFileSignNewServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TsFileSignServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/WeChatServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/Wechat4HyServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/YbtsServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/ZnfzOperationServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/appFront/FrontNoteServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/swtpad/trial/SwtTrialFileServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/storage/FtpWork.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/storage/NioUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/fileProcess/EajJzFileProcessHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/fileProcess/EajSsjcyxFileProcessHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/fileProcess/TsszclFileProcessHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/HandwritingClassifier.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/BurnRecordVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/UploadFileVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/UploadLocalFileVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/sjyd/sign_new/SubmitWeChatSignContentVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/swtpad/trial/SwtImportNoteVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/yzw/UploadStzxInfo.java"
+      ],
+      "representativeSymbols": [
+        {
+          "symbol": "com.tdh.bdzz.dto.entity.JzMultipartFile",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/dto/entity/JzMultipartFile.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.handler.voice2text.BjhyVoice2TextHandler",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/handler/voice2text/BjhyVoice2TextHandler.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.config.websocket.server.LoggingFileTailReader",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/LoggingFileTailReader.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.eo.clientZz.Step",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/eo/clientZz/Step.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.handler.voice2text.HcVoice2TextHandler",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/handler/voice2text/HcVoice2TextHandler.java"
+        }
+      ],
+      "normalizedFrom": [
+        {
+          "sourceId": "CAP-0412",
+          "sourceKind": "review-capability",
+          "key": "I/O 资源所有权",
+          "label": "I/O 资源所有权",
+          "observedFileCount": 8
+        },
+        {
+          "sourceId": "CAP-0325",
+          "sourceKind": "review-capability",
+          "key": "资源关闭",
+          "label": "资源关闭",
+          "observedFileCount": 15
+        },
+        {
+          "sourceId": "CAP-0529",
+          "sourceKind": "review-capability",
+          "key": "try-with-resources",
+          "label": "try-with-resources",
+          "observedFileCount": 21
+        }
+      ],
+      "modernBaseline": {
+        "java": "25 LTS"
+      },
+      "legacyBaseline": {
+        "java": "8"
+      },
+      "prerequisites": [
+        "JAVA-LANG-014",
+        "JAVA-STDLIB-013"
+      ],
+      "recommendedStage": "intermediate",
+      "exampleStatus": "not-started",
+      "researchStatus": "not-started",
+      "courseStatus": "candidate"
+    },
+    {
+      "capabilityId": "JAVA-STDLIB-015",
+      "name": "File、Path、Files 与 NIO 文件系统",
+      "kind": "standard-library",
+      "observedFileCount": 20,
+      "observedFiles": [
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/SysConfig.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/rolling/InnerProjectRollingFileAppender.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/rolling/InnerProjectSizeAndTimeBasedRollingPolicy.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/storage/NioUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/fileProcess/EajJzFileProcessHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/fileProcess/EajSsjcyxFileProcessHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/fileProcess/TsszclFileProcessHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/AsposePdfUtils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/AsposeUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/CommonUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/PdfOperateUtils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/PdfUtils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/SpirePdfUtils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/WangEditorUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/WordHtmlExportUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/WordOperateUtils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/WordUtils.java",
+        "dzzz-app/src/test/java/com/tdh/bdzz/service/impl/TsFileSignNewDragServiceImplTest.java",
+        "dzzz-app/src/test/java/com/tdh/bdzz/util/KeywordSignatureMergeTest.java",
+        "dzzz-app/src/test/java/com/tdh/bdzz/util/PdfKeywordPositionUtilTest.java"
+      ],
+      "representativeSymbols": [
+        {
+          "symbol": "com.tdh.bdzz.service.impl.TsFileSignNewDragServiceImplTest",
+          "path": "dzzz-app/src/test/java/com/tdh/bdzz/service/impl/TsFileSignNewDragServiceImplTest.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.config.SysConfig",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/SysConfig.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.timer.handler.fileProcess.EajJzFileProcessHandler",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/fileProcess/EajJzFileProcessHandler.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.rolling.InnerProjectRollingFileAppender",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/rolling/InnerProjectRollingFileAppender.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.storage.NioUtil",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/storage/NioUtil.java"
+        }
+      ],
+      "normalizedFrom": [
+        {
+          "sourceId": "CAP-0142",
+          "sourceKind": "review-capability",
+          "key": "临时文件",
+          "label": "临时文件",
+          "observedFileCount": 3
+        },
+        {
+          "sourceId": "CAP-0150",
+          "sourceKind": "review-capability",
+          "key": "路径校验",
+          "label": "路径校验",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0254",
+          "sourceKind": "review-capability",
+          "key": "文件 I/O",
+          "label": "文件 I/O",
+          "observedFileCount": 13
+        },
+        {
+          "sourceId": "CAP-0258",
+          "sourceKind": "review-capability",
+          "key": "文件路径",
+          "label": "文件路径",
+          "observedFileCount": 2
+        },
+        {
+          "sourceId": "CAP-0261",
+          "sourceKind": "review-capability",
+          "key": "文件系统路径",
+          "label": "文件系统路径",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0424",
+          "sourceKind": "review-capability",
+          "key": "java.nio",
+          "label": "java.nio",
+          "observedFileCount": 1
+        }
+      ],
+      "modernBaseline": {
+        "java": "25 LTS"
+      },
+      "legacyBaseline": {
+        "java": "8"
+      },
+      "prerequisites": [
+        "JAVA-STDLIB-013"
+      ],
+      "recommendedStage": "intermediate",
+      "exampleStatus": "not-started",
+      "researchStatus": "not-started",
+      "courseStatus": "candidate"
+    },
+    {
+      "capabilityId": "JAVA-STDLIB-016",
+      "name": "RandomAccessFile、Channel 与字节偏移",
+      "kind": "standard-library",
+      "observedFileCount": 3,
+      "observedFiles": [
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/LoggingFileTailReader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/LoggingWSServer.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/storage/NioUtil.java"
+      ],
+      "representativeSymbols": [
+        {
+          "symbol": "com.tdh.bdzz.config.websocket.server.LoggingWSServer",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/LoggingWSServer.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.config.websocket.server.LoggingFileTailReader",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/LoggingFileTailReader.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.storage.NioUtil",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/storage/NioUtil.java"
+        }
+      ],
+      "normalizedFrom": [
+        {
+          "sourceId": "CAP-0255",
+          "sourceKind": "review-capability",
+          "key": "文件 tail",
+          "label": "文件 tail",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0333",
+          "sourceKind": "review-capability",
+          "key": "字节偏移",
+          "label": "字节偏移",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0371",
+          "sourceKind": "review-capability",
+          "key": "Channel",
+          "label": "Channel",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0476",
+          "sourceKind": "review-capability",
+          "key": "RandomAccessFile",
+          "label": "RandomAccessFile",
+          "observedFileCount": 1
+        }
+      ],
+      "modernBaseline": {
+        "java": "25 LTS"
+      },
+      "legacyBaseline": {
+        "java": "8"
+      },
+      "prerequisites": [
+        "JAVA-STDLIB-013",
+        "JAVA-STDLIB-015"
+      ],
+      "recommendedStage": "advanced",
+      "exampleStatus": "not-started",
+      "researchStatus": "not-started",
+      "courseStatus": "candidate"
+    },
+    {
+      "capabilityId": "JAVA-STDLIB-017",
+      "name": "ZIP 压缩流",
+      "kind": "standard-library",
+      "observedFileCount": 1,
+      "observedFiles": [
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/CommonUtil.java"
+      ],
+      "representativeSymbols": [
+        {
+          "symbol": "com.tdh.bdzz.util.CommonUtil",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/CommonUtil.java"
+        }
+      ],
+      "normalizedFrom": [
+        {
+          "sourceId": "CAP-0288",
+          "sourceKind": "review-capability",
+          "key": "压缩",
+          "label": "压缩",
+          "observedFileCount": 1
+        }
+      ],
+      "modernBaseline": {
+        "java": "25 LTS"
+      },
+      "legacyBaseline": {
+        "java": "8"
+      },
+      "prerequisites": [
+        "JAVA-STDLIB-013",
+        "JAVA-STDLIB-014"
+      ],
+      "recommendedStage": "intermediate",
+      "exampleStatus": "not-started",
+      "researchStatus": "not-started",
+      "courseStatus": "candidate"
+    },
+    {
+      "capabilityId": "JAVA-STDLIB-018",
+      "name": "Process、ProcessBuilder 与 Runtime.exec",
+      "kind": "standard-library",
+      "observedFileCount": 3,
+      "observedFiles": [
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/ConvertPdf.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/PptUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/SystemMonitorUtil.java"
+      ],
+      "representativeSymbols": [
+        {
+          "symbol": "com.tdh.bdzz.util.SystemMonitorUtil",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/SystemMonitorUtil.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.ConvertPdf",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/ConvertPdf.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.PptUtil",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/PptUtil.java"
+        }
+      ],
+      "normalizedFrom": [
+        {
+          "sourceId": "CAP-0122",
+          "sourceKind": "review-capability",
+          "key": "进程 I/O",
+          "label": "进程 I/O",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0123",
+          "sourceKind": "review-capability",
+          "key": "进程调用",
+          "label": "进程调用",
+          "observedFileCount": 2
+        },
+        {
+          "sourceId": "CAP-0482",
+          "sourceKind": "review-capability",
+          "key": "Runtime.exec",
+          "label": "Runtime.exec",
+          "observedFileCount": 1
+        }
+      ],
+      "modernBaseline": {
+        "java": "25 LTS"
+      },
+      "legacyBaseline": {
+        "java": "8"
+      },
+      "prerequisites": [
+        "JAVA-STDLIB-013",
+        "JAVA-STDLIB-014"
+      ],
+      "recommendedStage": "advanced",
+      "exampleStatus": "not-started",
+      "researchStatus": "not-started",
+      "courseStatus": "candidate"
+    },
+    {
+      "capabilityId": "JAVA-STDLIB-019",
+      "name": "URL 编解码",
+      "kind": "standard-library",
+      "observedFileCount": 1,
+      "observedFiles": [
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/ClientChatWsServer.java"
+      ],
+      "representativeSymbols": [
+        {
+          "symbol": "com.tdh.bdzz.config.websocket.server.ClientChatWsServer",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/ClientChatWsServer.java"
+        }
+      ],
+      "normalizedFrom": [
+        {
+          "sourceId": "CAP-0530",
+          "sourceKind": "review-capability",
+          "key": "URL 编码",
+          "label": "URL 编码",
+          "observedFileCount": 1
+        }
+      ],
+      "modernBaseline": {
+        "java": "25 LTS"
+      },
+      "legacyBaseline": {
+        "java": "8"
+      },
+      "prerequisites": [
+        "JAVA-STDLIB-002",
+        "JAVA-STDLIB-003"
+      ],
+      "recommendedStage": "basic",
+      "exampleStatus": "not-started",
+      "researchStatus": "not-started",
+      "courseStatus": "candidate"
+    },
+    {
+      "capabilityId": "JAVA-STDLIB-020",
+      "name": "反射、动态实例化与注解读取",
+      "kind": "standard-library",
+      "observedFileCount": 15,
+      "observedFiles": [
+        "dzzz-app/src/main/java/com/tdh/bdzz/aop/AppAspect.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/aop/DzzzAspect.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/filter/AccessFilter.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/shard/DefaultAutowiredShardData.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/BeanUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/CommonUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/ConvertPdf.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/CxfClientUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/DynamicInvoker.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/FileProcessRequestUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/ReflectionCacheUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/StringUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/ValidatorUtil.java",
+        "dzzz-app/src/test/java/com/tdh/bdzz/service/tscwh/TscwhModelConfigTest.java",
+        "dzzz-app/src/test/java/com/tdh/bdzz/util/KeywordSignatureMergeTest.java"
+      ],
+      "representativeSymbols": [
+        {
+          "symbol": "com.tdh.bdzz.util.ReflectionCacheUtil",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/ReflectionCacheUtil.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.shard.DefaultAutowiredShardData",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/shard/DefaultAutowiredShardData.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.CxfClientUtil",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/CxfClientUtil.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.aop.AppAspect",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/aop/AppAspect.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.aop.DzzzAspect",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/aop/DzzzAspect.java"
+        }
+      ],
+      "normalizedFrom": [
+        {
+          "sourceId": "CAP-0046",
+          "sourceKind": "review-capability",
+          "key": "动态实例化",
+          "label": "动态实例化",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0063",
+          "sourceKind": "review-capability",
+          "key": "反射",
+          "label": "反射",
+          "observedFileCount": 7
+        },
+        {
+          "sourceId": "CAP-0064",
+          "sourceKind": "review-capability",
+          "key": "反射式调用",
+          "label": "反射式调用",
+          "observedFileCount": 2
+        },
+        {
+          "sourceId": "CAP-0065",
+          "sourceKind": "review-capability",
+          "key": "反射与注解读取",
+          "label": "反射与注解读取",
+          "observedFileCount": 2
+        },
+        {
+          "sourceId": "LANG-0011",
+          "sourceKind": "language-feature",
+          "key": "reflection",
+          "label": "reflection",
+          "observedFileCount": 11
+        }
+      ],
+      "modernBaseline": {
+        "java": "25 LTS"
+      },
+      "legacyBaseline": {
+        "java": "8"
+      },
+      "prerequisites": [
+        "JAVA-LANG-007",
+        "JAVA-LANG-009"
+      ],
+      "recommendedStage": "advanced",
+      "exampleStatus": "not-started",
+      "researchStatus": "not-started",
+      "courseStatus": "candidate"
+    },
+    {
+      "capabilityId": "JAVA-STDLIB-021",
+      "name": "Serializable 与原生对象序列化",
+      "kind": "standard-library",
+      "observedFileCount": 181,
+      "observedFiles": [
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/AuthorizeDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/HkConfAddDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/HkConfDelDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/HkConfStartDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/HkPublishDeviceDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/HkPublishVideoDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/HkTerminalDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/entity/BaseEntity.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/entity/CaseEntity.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/entity/CourtInfoEntity.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/entity/FtpConfigurationEntity.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/entity/JzMultipartFile.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/entity/PartyEntity.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/entity/PublicServiceAddressEntity.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/entity/SpxtTsCodeEntity.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/entity/StandardCodeEntity.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/filter/BaseFilterDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/filter/CaseFilterDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/filter/CatalogFilterDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/filter/CatalogTreeFilterDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/filter/VirtualCatalogFilterDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/tscwh/TscwhDetailDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/tscwh/TscwhListDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/tscwh/TscwhSaveDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/tscwh/TscwhTestDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/dto/yyzx/xf/XfUpdateMic.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/enums/AbstractJson.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/enums/IEnum.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/CaseSearchDataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/CaseSearchEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/CaseSearchEajEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/CaseSearchResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/DataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/EajFtsyEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/FtxxDataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/FtxxEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/FtxxFtsyEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/FtxxResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/HkConfStartEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/HkPublishDeviceEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/HkResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/HkTsxcResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/HxHttpTsxcResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/Info4WindowsFybEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/InitialInfoEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/JtResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/LgResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/QueryZjjhEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/TslxUploadResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/XfResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/YjResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/as/AsResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/as/Param.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/as/Result.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/as/VideoChannel.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/dc/DcResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/hytsglpt/HytsglptResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/hytsglpt/ReportTsztResultVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/tiandy/TiandyResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/tsglpt/TsglptResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/eo/tsglpt/TsglptYzwResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/DoSearchCameraDto.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/GetCaseInfoDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/GetFtXxDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/GetJzInfoListDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/GetJzmlDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/GetJzwbDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/GetPlktDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/GetQxpqXxDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/GetXnmlDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/GetYxjmlwjDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/PrepareDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/QueryPqxxDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/QueryZxPqxxDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/SendKtXxDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/SyncBatchCaseAndScheduleVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/SyncPqxxDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/SyncZxPqxxDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/WsscDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/WsysDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/commonJz/BaseDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/commonJz/CatalogQueryDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/commonJz/GenerateDossierFileUrlDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/ktpq/hy/HyCallbackHeaderDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/ktpq/hy/HyCallbackParamsDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/ktpq/hy/HyDossierFileDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/ktpq/hy/HyDossierTreeDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/ktpq/hy/HyGetAjxxDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/ktpq/hy/HyGetScheduleDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/ktpq/hy/HyGetYdftDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/ktpq/hy/HyMaterialDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/ktpq/hy/HyRjclDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/ktpq/hy/HyrjCallbackDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/ktpq/hy/HyrjResultDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/ktpq/th/ThGetAjxxDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/ktpq/th/ThGetScheduleDTO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/AjxxDataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/AjxxEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/AjxxEajEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/AjxxEajSlEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/AjxxEajSpcyDataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/AjxxEajSpcyEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/AjxxEajYaxxDataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/AjxxEajYaxxEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/DsrxxDataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/DsrxxEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/DsrxxEdsrEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/DsrxxEdsrQtEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/DsrxxQtDataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/PqxxDataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/PqxxEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/PqxxFtsyEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/PqxxResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/PqxxYctxsDataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/PqxxYctxsEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/PqxxZrsDataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/PqxxZrsEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/PublishDataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/QueryHbAjEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/QueryJzInfoEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/QueryJzmlEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/QueryJzwbEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/QueryXnmlEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/QueryYjbjEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/QueryYxjmlwjEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/commonJz/AttachmentEntity.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/commonJz/DossierEntity.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/commonJz/PageEntity.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/commonJz/TreeInfoEntity.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/hy/HyDeptEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/hy/HyDossierNodeEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/hy/HyGetYdftDataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/hy/HyGetYdftEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/hy/HyResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/hy/HyUserEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/hy/YdftEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/ktpq/hy/HyDlrxxEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/ktpq/hy/HyDsrxxEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/ktpq/hy/HyJcxxEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/ktpq/hy/HyLxfsxxEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/ktpq/hy/HyScheduleEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/ktpq/hy/HySpcyxxEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/ktpq/th/ThAjxxEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/ktpq/th/ThDsrxxEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/ktpq/th/ThResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/ktpq/th/ThScheduleEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/zx/ZxAjxxAllDataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/zx/ZxAjxxDataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/zx/ZxAjxxEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/zx/ZxAjxxEajEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/zx/ZxEajDataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/zx/ZxEajSpcyDataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/zx/ZxEajYaxxDataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/zx/ZxEdsrDataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/zx/ZxPqxxDataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/zx/ZxPqxxEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/zx/ZxPqxxFtsyEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/zx/ZxPqxxResultEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/zx/ZxSpcyDataEO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/CommonUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/CodeControlVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/EajJzQwjs.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/LiceneseData.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/PublicServiceAddressVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/SpxtTsCodeVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/StandardCodeVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/UserBean.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/clientZz/InitialInfoVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/clientZz/NoticeInternetInfoVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/hk/HkHcHmCloseVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/hk/HkHcHmStartVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/hk/HkHcYlVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/hk/HkSearchLxStatusVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/item/SaveScanFilesItem.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/item/ScanFile2DbItem.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/weChat/WeChatVo.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/yspg/AuthorizeVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/znfzxt/ZncpTsSyxxVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/znfzxt/ZncpTsYmSyxxVO.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/vo/znfzxt/ZncpYszyVO.java",
+        "dzzz-app/src/main/java/tdh/uim/client/vo/LoginData.java"
+      ],
+      "representativeSymbols": [
+        {
+          "symbol": "com.tdh.bdzz.util.CommonUtil",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/CommonUtil.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.timer.dto.DoSearchCameraDto",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/DoSearchCameraDto.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.timer.eo.AjxxDataEO",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/AjxxDataEO.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.dto.AuthorizeDTO",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/dto/AuthorizeDTO.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.dto.HkConfAddDTO",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/dto/HkConfAddDTO.java"
+        }
+      ],
+      "normalizedFrom": [
+        {
+          "sourceId": "CAP-0066",
+          "sourceKind": "review-capability",
+          "key": "反序列化",
+          "label": "反序列化",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0285",
+          "sourceKind": "review-capability",
+          "key": "序列化",
+          "label": "序列化",
+          "observedFileCount": 35
+        },
+        {
+          "sourceId": "CAP-0286",
+          "sourceKind": "review-capability",
+          "key": "序列化边界",
+          "label": "序列化边界",
+          "observedFileCount": 63
+        },
+        {
+          "sourceId": "CAP-0483",
+          "sourceKind": "review-capability",
+          "key": "Serializable",
+          "label": "Serializable",
+          "observedFileCount": 82
+        }
+      ],
+      "modernBaseline": {
+        "java": "25 LTS"
+      },
+      "legacyBaseline": {
+        "java": "8"
+      },
+      "prerequisites": [
+        "JAVA-LANG-003",
+        "JAVA-LANG-009",
+        "JAVA-STDLIB-013"
+      ],
+      "recommendedStage": "advanced",
+      "exampleStatus": "not-started",
+      "researchStatus": "not-started",
+      "courseStatus": "candidate"
+    },
+    {
+      "capabilityId": "JAVA-STDLIB-022",
+      "name": "Base64 编解码",
+      "kind": "standard-library",
+      "observedFileCount": 8,
+      "observedFiles": [
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/AESUtils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/DateImageGenerator.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/DesCbcUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/FingerprintMergeLayoutUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/ImageMergerUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/ImageRotation.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/ImageSizeUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/ImageUtils.java"
+      ],
+      "representativeSymbols": [
+        {
+          "symbol": "com.tdh.bdzz.util.AESUtils",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/AESUtils.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.DateImageGenerator",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/DateImageGenerator.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.DesCbcUtil",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/DesCbcUtil.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.FingerprintMergeLayoutUtil",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/FingerprintMergeLayoutUtil.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.ImageMergerUtil",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/ImageMergerUtil.java"
+        }
+      ],
+      "normalizedFrom": [
+        {
+          "sourceId": "CAP-0355",
+          "sourceKind": "review-capability",
+          "key": "Base64",
+          "label": "Base64",
+          "observedFileCount": 8
+        }
+      ],
+      "modernBaseline": {
+        "java": "25 LTS"
+      },
+      "legacyBaseline": {
+        "java": "8"
+      },
+      "prerequisites": [
+        "JAVA-STDLIB-003"
+      ],
+      "recommendedStage": "basic",
+      "exampleStatus": "not-started",
+      "researchStatus": "not-started",
+      "courseStatus": "candidate"
+    },
+    {
+      "capabilityId": "JAVA-STDLIB-023",
+      "name": "Executor、Future、Callable 与 CompletableFuture",
+      "kind": "standard-library",
+      "observedFileCount": 77,
+      "observedFiles": [
+        "dzzz-app/src/main/java/com/tdh/bdzz/aop/AppAspect.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/cache/DzzzTsmCacheLoader.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/Pdf2ImageComparablePriorityTaskPoolExecutor.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/ThreadPoolConfig.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/AppFrontYyzxWsServer.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/BlOperationWsServer.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/ClientChatWsServer.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/ClientZzWsServer.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/LoggingWSServer.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/OnlyOfficeWsServer.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/Voice2TextWsServer.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/fyb/FybChatRoomWsServer.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/fyb/FybWsServer.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/fyb/jdyh/NoteSignWsServer.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/constant/JzglConstant.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/constant/TsAiRuntimeCache.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/controller/TokenController.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/factories/flv/ConverterFactories.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/factories/flv/ConverterTranFactories.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/burn/BurnPrintHandlerFactory.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/burn/HmBurnPrintHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/datareport/DataReportHandlerFactory.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/datareport/HxDataReportHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/voice2text/Voice2TextHandlerFactory.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/listener/DataReportListener.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/listener/ZnfzNoticeListener.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/CameraServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/ClientZzServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/CommonServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/FtjlServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/Fyb4WindowsImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/InitHyServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/MessageServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/NoteServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/OcrServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/PdfjsAnnotationService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/PdfjsDocService.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/SjydServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/Ts4GgpServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TsAiAssistantServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TsFileSignServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TsblSjyServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TsxqServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TsxxSearchServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TszjglServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/Voice2TextServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/XinkeServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/XxfbzdServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/YxjCatalogServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/ZnfzFtzhServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/ZnfzOperationServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/appFront/FrontCatalogServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/hxHttp/HxHttpFeedBackServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/swtpad/meeting/SwtPadMeetingServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/vidyo/VidyoConferenceServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/vidyo/VidyoOperationServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/yzw/impl/YzwOperateServiceImpl.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/JzDataSyncHandlerChain.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/clearExpireData/ClearLocalCacheHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/clearExpireData/ClearLocalLogHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/clearExpireData/CloseTdhHjptStreamForXxtHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/clearExpireData/DealBusinessDataHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/clearExpireData/DelSystemLogDataHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/clearExpireData/HkAuthorizeMessageAlarmDataHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/clearExpireData/HyRtpSyncTslxHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/clearExpireData/HyUimSyncDataHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/clearExpireData/YzwYhbmSyncDataHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/fileProcess/FileProcessHandlerFactory.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/CacheUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/ComparableFutureTask.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/ComparableThreadPoolExecutor.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/HttpsUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/LockStringUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/SpirePdfUtils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/SystemLogUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/UniqueIDGeneratorUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/ws/ReTransmissionService.java"
+      ],
+      "representativeSymbols": [
+        {
+          "symbol": "com.tdh.bdzz.service.impl.CameraServiceImpl",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/CameraServiceImpl.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.config.ThreadPoolConfig",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/ThreadPoolConfig.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.config.Pdf2ImageComparablePriorityTaskPoolExecutor",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/Pdf2ImageComparablePriorityTaskPoolExecutor.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.ws.ReTransmissionService",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/ws/ReTransmissionService.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.config.websocket.server.LoggingWSServer",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/LoggingWSServer.java"
+        }
+      ],
+      "normalizedFrom": [
+        {
+          "sourceId": "CAP-0020",
+          "sourceKind": "review-capability",
+          "key": "并发与执行器",
+          "label": "并发与执行器",
+          "observedFileCount": 31
+        },
+        {
+          "sourceId": "CAP-0049",
+          "sourceKind": "review-capability",
+          "key": "队列容量",
+          "label": "队列容量",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0131",
+          "sourceKind": "review-capability",
+          "key": "拒绝策略",
+          "label": "拒绝策略",
+          "observedFileCount": 2
+        },
+        {
+          "sourceId": "CAP-0265",
+          "sourceKind": "review-capability",
+          "key": "显式 Executor",
+          "label": "显式 Executor",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0268",
+          "sourceKind": "review-capability",
+          "key": "线程池",
+          "label": "线程池",
+          "observedFileCount": 10
+        },
+        {
+          "sourceId": "CAP-0269",
+          "sourceKind": "review-capability",
+          "key": "线程池参数",
+          "label": "线程池参数",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0270",
+          "sourceKind": "review-capability",
+          "key": "线程命名",
+          "label": "线程命名",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0273",
+          "sourceKind": "review-capability",
+          "key": "线程生命周期",
+          "label": "线程生命周期",
+          "observedFileCount": 3
+        },
+        {
+          "sourceId": "CAP-0369",
+          "sourceKind": "review-capability",
+          "key": "Callable",
+          "label": "Callable",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0374",
+          "sourceKind": "review-capability",
+          "key": "CompletableFuture",
+          "label": "CompletableFuture",
+          "observedFileCount": 2
+        },
+        {
+          "sourceId": "CAP-0388",
+          "sourceKind": "review-capability",
+          "key": "ExecutorService",
+          "label": "ExecutorService",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0396",
+          "sourceKind": "review-capability",
+          "key": "Future",
+          "label": "Future",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0397",
+          "sourceKind": "review-capability",
+          "key": "FutureTask",
+          "label": "FutureTask",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0528",
+          "sourceKind": "review-capability",
+          "key": "ThreadPoolExecutor",
+          "label": "ThreadPoolExecutor",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "LANG-0004",
+          "sourceKind": "language-feature",
+          "key": "concurrency",
+          "label": "concurrency",
+          "observedFileCount": 66
+        }
+      ],
+      "modernBaseline": {
+        "java": "25 LTS"
+      },
+      "legacyBaseline": {
+        "java": "8"
+      },
+      "prerequisites": [
+        "JAVA-LANG-008",
+        "JAVA-LANG-009"
+      ],
+      "recommendedStage": "advanced",
+      "exampleStatus": "not-started",
+      "researchStatus": "not-started",
+      "courseStatus": "candidate"
+    },
+    {
+      "capabilityId": "JAVA-STDLIB-024",
+      "name": "并发集合与阻塞队列",
+      "kind": "standard-library",
+      "observedFileCount": 12,
+      "observedFiles": [
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/Pdf2ImageComparablePriorityTaskPoolExecutor.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/AppFrontYyzxWsServer.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/OnlyOfficeWsServer.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/constant/JzglConstant.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/constant/TsAiRuntimeCache.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/burn/BurnPrintHandlerFactory.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/burn/HmBurnPrintHandler.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/datareport/DataReportHandlerFactory.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/handler/voice2text/Voice2TextHandlerFactory.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/fileProcess/FileProcessHandlerFactory.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/ComparableThreadPoolExecutor.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/LockStringUtil.java"
+      ],
+      "representativeSymbols": [
+        {
+          "symbol": "com.tdh.bdzz.config.websocket.server.AppFrontYyzxWsServer",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/AppFrontYyzxWsServer.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.constant.JzglConstant",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/constant/JzglConstant.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.LockStringUtil",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/LockStringUtil.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.handler.burn.HmBurnPrintHandler",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/handler/burn/HmBurnPrintHandler.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.config.websocket.server.OnlyOfficeWsServer",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/OnlyOfficeWsServer.java"
+        }
+      ],
+      "normalizedFrom": [
+        {
+          "sourceId": "CAP-0016",
+          "sourceKind": "review-capability",
+          "key": "并发 Map",
+          "label": "并发 Map",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0017",
+          "sourceKind": "review-capability",
+          "key": "并发集合",
+          "label": "并发集合",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0018",
+          "sourceKind": "review-capability",
+          "key": "并发控制",
+          "label": "并发控制",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0019",
+          "sourceKind": "review-capability",
+          "key": "并发映射",
+          "label": "并发映射",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0281",
+          "sourceKind": "review-capability",
+          "key": "写时复制集合",
+          "label": "写时复制集合",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0305",
+          "sourceKind": "review-capability",
+          "key": "优先级队列",
+          "label": "优先级队列",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0375",
+          "sourceKind": "review-capability",
+          "key": "ConcurrentHashMap",
+          "label": "ConcurrentHashMap",
+          "observedFileCount": 6
+        },
+        {
+          "sourceId": "CAP-0474",
+          "sourceKind": "review-capability",
+          "key": "PriorityBlockingQueue",
+          "label": "PriorityBlockingQueue",
+          "observedFileCount": 1
+        }
+      ],
+      "modernBaseline": {
+        "java": "25 LTS"
+      },
+      "legacyBaseline": {
+        "java": "8"
+      },
+      "prerequisites": [
+        "JAVA-STDLIB-005"
+      ],
+      "recommendedStage": "advanced",
+      "exampleStatus": "not-started",
+      "researchStatus": "not-started",
+      "courseStatus": "candidate"
+    },
+    {
+      "capabilityId": "JAVA-STDLIB-025",
+      "name": "原子类型与原子计数",
+      "kind": "standard-library",
+      "observedFileCount": 5,
+      "observedFiles": [
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/BlOperationWsServer.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/OnlyOfficeWsServer.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/CodeGenerator.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/UniqueIDGeneratorUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/UniqueIdUtils.java"
+      ],
+      "representativeSymbols": [
+        {
+          "symbol": "com.tdh.bdzz.config.websocket.server.BlOperationWsServer",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/BlOperationWsServer.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.CodeGenerator",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/CodeGenerator.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.config.websocket.server.OnlyOfficeWsServer",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/OnlyOfficeWsServer.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.UniqueIDGeneratorUtil",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/UniqueIDGeneratorUtil.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.UniqueIdUtils",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/UniqueIdUtils.java"
+        }
+      ],
+      "normalizedFrom": [
+        {
+          "sourceId": "CAP-0311",
+          "sourceKind": "review-capability",
+          "key": "原子计数",
+          "label": "原子计数",
+          "observedFileCount": 2
+        },
+        {
+          "sourceId": "CAP-0353",
+          "sourceKind": "review-capability",
+          "key": "AtomicInteger",
+          "label": "AtomicInteger",
+          "observedFileCount": 3
+        }
+      ],
+      "modernBaseline": {
+        "java": "25 LTS"
+      },
+      "legacyBaseline": {
+        "java": "8"
+      },
+      "prerequisites": [],
+      "recommendedStage": "advanced",
+      "exampleStatus": "not-started",
+      "researchStatus": "not-started",
+      "courseStatus": "candidate"
+    },
+    {
+      "capabilityId": "JAVA-STDLIB-026",
+      "name": "ThreadLocal 上下文与清理",
+      "kind": "standard-library",
+      "observedFileCount": 4,
+      "observedFiles": [
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/Pdf2ImageComparablePriorityTaskPoolExecutor.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/context/TableShardContext.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/service/tsaiassistant/TsAiTraceContextHolder.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/shard/DefaultAutowiredShardData.java"
+      ],
+      "representativeSymbols": [
+        {
+          "symbol": "com.tdh.bdzz.context.TableShardContext",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/context/TableShardContext.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.config.Pdf2ImageComparablePriorityTaskPoolExecutor",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/Pdf2ImageComparablePriorityTaskPoolExecutor.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.service.tsaiassistant.TsAiTraceContextHolder",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/service/tsaiassistant/TsAiTraceContextHolder.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.shard.DefaultAutowiredShardData",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/shard/DefaultAutowiredShardData.java"
+        }
+      ],
+      "normalizedFrom": [
+        {
+          "sourceId": "CAP-0525",
+          "sourceKind": "review-capability",
+          "key": "ThreadLocal",
+          "label": "ThreadLocal",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0526",
+          "sourceKind": "review-capability",
+          "key": "ThreadLocal 清理",
+          "label": "ThreadLocal 清理",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0527",
+          "sourceKind": "review-capability",
+          "key": "ThreadLocal 上下文",
+          "label": "ThreadLocal 上下文",
+          "observedFileCount": 2
+        }
+      ],
+      "modernBaseline": {
+        "java": "25 LTS"
+      },
+      "legacyBaseline": {
+        "java": "8"
+      },
+      "prerequisites": [
+        "JAVA-STDLIB-023"
+      ],
+      "recommendedStage": "advanced",
+      "exampleStatus": "not-started",
+      "researchStatus": "not-started",
+      "courseStatus": "candidate"
+    },
+    {
+      "capabilityId": "JAVA-STDLIB-027",
+      "name": "JCA/JCE、Cipher 与密钥 API",
+      "kind": "standard-library",
+      "observedFileCount": 7,
+      "observedFiles": [
+        "dzzz-app/src/main/java/com/tdh/bdzz/constant/EncryptConstant.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/AESUtils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/DesCbcUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/JzRSAUtils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/RSASignUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/SM2Util.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/Sm2EncryptUtils.java"
+      ],
+      "representativeSymbols": [
+        {
+          "symbol": "com.tdh.bdzz.util.AESUtils",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/AESUtils.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.constant.EncryptConstant",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/constant/EncryptConstant.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.DesCbcUtil",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/DesCbcUtil.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.JzRSAUtils",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/JzRSAUtils.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.RSASignUtil",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/RSASignUtil.java"
+        }
+      ],
+      "normalizedFrom": [
+        {
+          "sourceId": "CAP-0009",
+          "sourceKind": "review-capability",
+          "key": "3DES",
+          "label": "3DES",
+          "observedFileCount": 2
+        },
+        {
+          "sourceId": "CAP-0153",
+          "sourceKind": "review-capability",
+          "key": "密码学兼容",
+          "label": "密码学兼容",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0154",
+          "sourceKind": "review-capability",
+          "key": "密钥材料",
+          "label": "密钥材料",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0342",
+          "sourceKind": "review-capability",
+          "key": "AES",
+          "label": "AES",
+          "observedFileCount": 2
+        },
+        {
+          "sourceId": "CAP-0430",
+          "sourceKind": "review-capability",
+          "key": "JCA/JCE",
+          "label": "JCA/JCE",
+          "observedFileCount": 6
+        },
+        {
+          "sourceId": "CAP-0481",
+          "sourceKind": "review-capability",
+          "key": "RSA",
+          "label": "RSA",
+          "observedFileCount": 4
+        }
+      ],
+      "modernBaseline": {
+        "java": "25 LTS"
+      },
+      "legacyBaseline": {
+        "java": "8"
+      },
+      "prerequisites": [
+        "JAVA-STDLIB-003",
+        "JAVA-STDLIB-013"
+      ],
+      "recommendedStage": "advanced",
+      "exampleStatus": "not-started",
+      "researchStatus": "not-started",
+      "courseStatus": "candidate"
+    },
+    {
+      "capabilityId": "JAVA-STDLIB-028",
+      "name": "MessageDigest、Mac 与 Signature",
+      "kind": "standard-library",
+      "observedFileCount": 12,
+      "observedFiles": [
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/HeaderRequestInterceptor.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/HMacUtils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/HtAsrUtils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/JzRSAUtils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/RSASignUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/SM2Util.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/SignatureUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/Sm2EncryptUtils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/Sm3Utils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/TokenUtil.java",
+        "dzzz-app/src/main/java/tdh/platform/component/license/lic/License.java",
+        "dzzz-app/src/main/java/tdh/platform/component/license/lic/impl/LicFactoryImpl.java"
+      ],
+      "representativeSymbols": [
+        {
+          "symbol": "com.tdh.bdzz.util.JzRSAUtils",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/JzRSAUtils.java"
+        },
+        {
+          "symbol": "tdh.platform.component.license.lic.License",
+          "path": "dzzz-app/src/main/java/tdh/platform/component/license/lic/License.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.config.HeaderRequestInterceptor",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/HeaderRequestInterceptor.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.HMacUtils",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/HMacUtils.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.HtAsrUtils",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/HtAsrUtils.java"
+        }
+      ],
+      "normalizedFrom": [
+        {
+          "sourceId": "CAP-0178",
+          "sourceKind": "review-capability",
+          "key": "签名",
+          "label": "签名",
+          "observedFileCount": 4
+        },
+        {
+          "sourceId": "CAP-0179",
+          "sourceKind": "review-capability",
+          "key": "签名兼容",
+          "label": "签名兼容",
+          "observedFileCount": 2
+        },
+        {
+          "sourceId": "CAP-0314",
+          "sourceKind": "review-capability",
+          "key": "摘要",
+          "label": "摘要",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0400",
+          "sourceKind": "review-capability",
+          "key": "HMAC",
+          "label": "HMAC",
+          "observedFileCount": 6
+        },
+        {
+          "sourceId": "CAP-0452",
+          "sourceKind": "review-capability",
+          "key": "MessageDigest",
+          "label": "MessageDigest",
+          "observedFileCount": 5
+        }
+      ],
+      "modernBaseline": {
+        "java": "25 LTS"
+      },
+      "legacyBaseline": {
+        "java": "8"
+      },
+      "prerequisites": [
+        "JAVA-STDLIB-003",
+        "JAVA-STDLIB-027"
+      ],
+      "recommendedStage": "advanced",
+      "exampleStatus": "not-started",
+      "researchStatus": "not-started",
+      "courseStatus": "candidate"
+    },
+    {
+      "capabilityId": "JAVA-STDLIB-029",
+      "name": "ImageIO、BufferedImage 与 Java2D",
+      "kind": "standard-library",
+      "observedFileCount": 11,
+      "observedFiles": [
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/ConvertPdf.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/DateImageGenerator.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/FingerprintMergeLayoutUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/ImageMergerUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/ImageRotation.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/ImageSizeUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/ImageUtils.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/PptUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/TwoDimensionCode.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/TwoDimensionCodeImage.java",
+        "dzzz-app/src/test/java/com/tdh/bdzz/util/KeywordSignatureMergeTest.java"
+      ],
+      "representativeSymbols": [
+        {
+          "symbol": "com.tdh.bdzz.util.KeywordSignatureMergeTest",
+          "path": "dzzz-app/src/test/java/com/tdh/bdzz/util/KeywordSignatureMergeTest.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.ConvertPdf",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/ConvertPdf.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.DateImageGenerator",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/DateImageGenerator.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.FingerprintMergeLayoutUtil",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/FingerprintMergeLayoutUtil.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.ImageMergerUtil",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/ImageMergerUtil.java"
+        }
+      ],
+      "normalizedFrom": [
+        {
+          "sourceId": "CAP-0236",
+          "sourceKind": "review-capability",
+          "key": "图片 fixture",
+          "label": "图片 fixture",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0237",
+          "sourceKind": "review-capability",
+          "key": "图片合成",
+          "label": "图片合成",
+          "observedFileCount": 2
+        },
+        {
+          "sourceId": "CAP-0366",
+          "sourceKind": "review-capability",
+          "key": "BufferedImage",
+          "label": "BufferedImage",
+          "observedFileCount": 6
+        },
+        {
+          "sourceId": "CAP-0413",
+          "sourceKind": "review-capability",
+          "key": "ImageIO",
+          "label": "ImageIO",
+          "observedFileCount": 8
+        }
+      ],
+      "modernBaseline": {
+        "java": "25 LTS"
+      },
+      "legacyBaseline": {
+        "java": "8"
+      },
+      "prerequisites": [
+        "JAVA-STDLIB-013",
+        "JAVA-STDLIB-014"
+      ],
+      "recommendedStage": "intermediate",
+      "exampleStatus": "not-started",
+      "researchStatus": "not-started",
+      "courseStatus": "candidate"
+    },
+    {
+      "capabilityId": "JAVA-STDLIB-030",
+      "name": "System properties 与运行环境信息",
+      "kind": "standard-library",
+      "observedFileCount": 1,
+      "observedFiles": [
+        "dzzz-app/src/main/java/com/tdh/bdzz/config/AppStarter.java"
+      ],
+      "representativeSymbols": [
+        {
+          "symbol": "com.tdh.bdzz.config.AppStarter",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/AppStarter.java"
+        }
+      ],
+      "normalizedFrom": [
+        {
+          "sourceId": "CAP-0263",
+          "sourceKind": "review-capability",
+          "key": "系统属性",
+          "label": "系统属性",
+          "observedFileCount": 1
+        }
+      ],
+      "modernBaseline": {
+        "java": "25 LTS"
+      },
+      "legacyBaseline": {
+        "java": "8"
+      },
+      "prerequisites": [],
+      "recommendedStage": "intermediate",
+      "exampleStatus": "not-started",
+      "researchStatus": "not-started",
+      "courseStatus": "candidate"
+    },
+    {
+      "capabilityId": "JAVA-STDLIB-031",
+      "name": "JMX 与 JVM 指标读取",
+      "kind": "standard-library",
+      "observedFileCount": 1,
+      "observedFiles": [
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/SystemMonitorUtil.java"
+      ],
+      "representativeSymbols": [
+        {
+          "symbol": "com.tdh.bdzz.util.SystemMonitorUtil",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/SystemMonitorUtil.java"
+        }
+      ],
+      "normalizedFrom": [
+        {
+          "sourceId": "CAP-0264",
+          "sourceKind": "review-capability",
+          "key": "系统指标",
+          "label": "系统指标",
+          "observedFileCount": 1
+        },
+        {
+          "sourceId": "CAP-0432",
+          "sourceKind": "review-capability",
+          "key": "JMX",
+          "label": "JMX",
+          "observedFileCount": 1
+        }
+      ],
+      "modernBaseline": {
+        "java": "25 LTS"
+      },
+      "legacyBaseline": {
+        "java": "8"
+      },
+      "prerequisites": [
+        "JAVA-STDLIB-030"
+      ],
+      "recommendedStage": "advanced",
+      "exampleStatus": "not-started",
+      "researchStatus": "not-started",
+      "courseStatus": "candidate"
+    },
+    {
+      "capabilityId": "JAVA-STDLIB-032",
+      "name": "UUID 与伪随机数",
+      "kind": "standard-library",
+      "observedFileCount": 3,
+      "observedFiles": [
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/CodeGenerator.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/UniqueIDGeneratorUtil.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/util/UniqueIdUtils.java"
+      ],
+      "representativeSymbols": [
+        {
+          "symbol": "com.tdh.bdzz.util.CodeGenerator",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/CodeGenerator.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.UniqueIDGeneratorUtil",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/UniqueIDGeneratorUtil.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.util.UniqueIdUtils",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/UniqueIdUtils.java"
+        }
+      ],
+      "normalizedFrom": [
+        {
+          "sourceId": "CAP-0475",
+          "sourceKind": "review-capability",
+          "key": "Random",
+          "label": "Random",
+          "observedFileCount": 3
+        },
+        {
+          "sourceId": "CAP-0533",
+          "sourceKind": "review-capability",
+          "key": "UUID",
+          "label": "UUID",
+          "observedFileCount": 3
+        }
+      ],
+      "modernBaseline": {
+        "java": "25 LTS"
+      },
+      "legacyBaseline": {
+        "java": "8"
+      },
+      "prerequisites": [],
+      "recommendedStage": "basic",
+      "exampleStatus": "not-started",
+      "researchStatus": "not-started",
+      "courseStatus": "candidate"
+    },
+    {
+      "capabilityId": "JAVA-STDLIB-033",
+      "name": "Throwable cause 异常链",
+      "kind": "standard-library",
+      "observedFileCount": 3,
+      "observedFiles": [
+        "dzzz-app/src/main/java/com/tdh/bdzz/exception/ArgumentNotValidException.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/exception/BpException.java",
+        "dzzz-app/src/main/java/com/tdh/bdzz/exception/RateLimitException.java"
+      ],
+      "representativeSymbols": [
+        {
+          "symbol": "com.tdh.bdzz.exception.ArgumentNotValidException",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/exception/ArgumentNotValidException.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.exception.BpException",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/exception/BpException.java"
+        },
+        {
+          "symbol": "com.tdh.bdzz.exception.RateLimitException",
+          "path": "dzzz-app/src/main/java/com/tdh/bdzz/exception/RateLimitException.java"
+        }
+      ],
+      "normalizedFrom": [
+        {
+          "sourceId": "CAP-0370",
+          "sourceKind": "review-capability",
+          "key": "cause 保留",
+          "label": "cause 保留",
+          "observedFileCount": 3
+        }
+      ],
+      "modernBaseline": {
+        "java": "25 LTS"
+      },
+      "legacyBaseline": {
+        "java": "8"
+      },
+      "prerequisites": [
+        "JAVA-LANG-009"
+      ],
+      "recommendedStage": "basic",
+      "exampleStatus": "not-started",
+      "researchStatus": "not-started",
+      "courseStatus": "candidate"
+    }
+  ]
+}

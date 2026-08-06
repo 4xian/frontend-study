@@ -1,0 +1,53 @@
+{
+  "name": "dzzz-app-java-audit-tooling",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "extract": "node --disable-warning=ExperimentalWarning extract-dzzz-app.mjs",
+    "check:extraction": "node --disable-warning=ExperimentalWarning extract-dzzz-app.mjs --check",
+    "build:review:web-entry": "node build-web-entry-review.mjs",
+    "check:review:web-entry": "node build-web-entry-review.mjs --check && node web-entry-review-ledger-validator.mjs",
+    "build:review:business-layer": "node build-business-layer-review.mjs",
+    "check:review:business-layer": "node build-business-layer-review.mjs --check && node business-layer-review-ledger-validator.mjs",
+    "build:review:data-access": "node build-data-access-review.mjs",
+    "check:review:data-access": "node build-data-access-review.mjs --check && node data-access-review-ledger-validator.mjs",
+    "build:review:data-model": "node build-data-model-review.mjs",
+    "check:review:data-model": "node build-data-model-review.mjs --check && node data-model-review-ledger-validator.mjs",
+    "build:review:cross-cutting": "node build-cross-cutting-review.mjs",
+    "check:review:cross-cutting": "node build-cross-cutting-review.mjs --check && node cross-cutting-review-ledger-validator.mjs",
+    "build:review:async-integration": "node build-async-integration-review.mjs",
+    "check:review:async-integration": "node build-async-integration-review.mjs --check && node async-integration-review-ledger-validator.mjs",
+    "build:review:infrastructure": "node build-infrastructure-review.mjs",
+    "check:review:infrastructure": "node build-infrastructure-review.mjs --check && node infrastructure-review-ledger-validator.mjs",
+    "build:review:common-code": "node build-common-code-review.mjs",
+    "check:review:common-code": "node build-common-code-review.mjs --check && node common-code-review-ledger-validator.mjs",
+    "build:review:test": "node build-test-review.mjs",
+    "check:review:test": "node build-test-review.mjs --check && node test-review-ledger-validator.mjs",
+    "build:capabilities:java-language": "node build-java-language-capability-matrix.mjs",
+    "check:capabilities:java-language": "node build-java-language-capability-matrix.mjs --check && node java-language-capability-matrix-validator.mjs",
+    "build:capabilities:standard-library": "node build-standard-library-capability-matrix.mjs",
+    "check:capabilities:standard-library": "node build-standard-library-capability-matrix.mjs --check && node standard-library-capability-matrix-validator.mjs",
+    "build:capabilities:framework": "node build-framework-capability-matrix.mjs",
+    "check:capabilities:framework": "node build-framework-capability-matrix.mjs --check && node framework-capability-matrix-validator.mjs",
+    "build:capabilities:engineering-pattern": "node build-engineering-pattern-capability-matrix.mjs",
+    "check:capabilities:engineering-pattern": "node build-engineering-pattern-capability-matrix.mjs --check && node engineering-pattern-capability-matrix-validator.mjs",
+    "build:capabilities:review-risk": "node build-review-risk-matrix.mjs",
+    "check:capabilities:review-risk": "node build-review-risk-matrix.mjs --check && node review-risk-matrix-validator.mjs",
+    "build:course:knowledge-path": "node build-course-coverage-matrix.mjs",
+    "check:course:knowledge-path": "node build-course-coverage-matrix.mjs --check && node course-coverage-matrix-validator.mjs",
+    "check:reviews": "node review-ledger-validator.mjs && npm run check:review:web-entry && npm run check:review:business-layer && npm run check:review:data-access && npm run check:review:data-model && npm run check:review:cross-cutting && npm run check:review:async-integration && npm run check:review:infrastructure && npm run check:review:common-code && npm run check:review:test",
+    "check": "npm run check:extraction && npm run check:reviews && npm run check:capabilities:java-language && npm run check:capabilities:standard-library && npm run check:capabilities:framework && npm run check:capabilities:engineering-pattern && npm run check:capabilities:review-risk && npm run check:course:knowledge-path"
+  },
+  "dependencies": {
+    "fast-xml-parser": "5.10.1",
+    "java-parser": "3.0.1"
+  },
+  "overrides": {
+    "lodash": "4.18.1",
+    "lodash-es": "4.18.1"
+  }
+}

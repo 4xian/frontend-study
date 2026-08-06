@@ -21,14 +21,18 @@
 长期事实以代码 manifest 和条目元数据为准：
 
 ```text
-src/content/catalog/manifests/vue-core-track.ts
-src/content/catalog/manifests/vue-core-reference-index.ts
-src/content/catalog/manifests/vue-router-track.ts
-src/content/catalog/manifests/vue-router-reference-index.ts
-src/content/catalog/manifests/vue-pinia-track.ts
-src/content/catalog/manifests/vue-pinia-reference-index.ts
-src/content/entries/learn/vue/
-src/content/entries/reference/vue/
+src/categories/frontend/vue/core/vue-core-track.ts
+src/categories/frontend/vue/core/vue-core-reference-index.ts
+src/categories/frontend/vue/router/vue-router-track.ts
+src/categories/frontend/vue/router/vue-router-reference-index.ts
+src/categories/frontend/vue/pinia/vue-pinia-track.ts
+src/categories/frontend/vue/pinia/vue-pinia-reference-index.ts
+src/categories/frontend/vue/core/learn/
+src/categories/frontend/vue/core/reference/
+src/categories/frontend/vue/router/learn/
+src/categories/frontend/vue/router/reference/
+src/categories/frontend/vue/pinia/learn/
+src/categories/frontend/vue/pinia/reference/
 ```
 
 对应 catalog 测试负责校验课程数量、顺序、索引总数、available/planned 状态、目标条目和 heading

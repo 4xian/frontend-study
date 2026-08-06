@@ -3,4 +3,6 @@ node_modules
 docs
 .omc
 .playwright-mcp
-test-results
+.playwright-cli
+output/playwright
+src/categories/**/*.md

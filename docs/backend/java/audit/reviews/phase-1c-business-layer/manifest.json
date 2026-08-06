@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "batchId": "phase-1c-business-layer",
+  "status": "completed",
+  "reviewedAt": "2026-08-03T22:52:01.000Z",
+  "recordContract": {
+    "format": "JSON Lines; one manually reviewed file record per line",
+    "riskStatus": "candidate for later capability or rejected-pattern normalization; not a defect verdict",
+    "serviceShape": "contract | managed-service | plain-support"
+  },
+  "summary": {
+    "batchFileCount": 338,
+    "batchLoc": 154161,
+    "machineRoleCandidateCounts": {
+      "business": 338
+    },
+    "finalRoleCounts": {
+      "business": 338
+    },
+    "serviceShapeCounts": {
+      "contract": 148,
+      "managed-service": 182,
+      "plain-support": 8
+    },
+    "roleCorrectionCount": 0,
+    "riskCandidateCount": 715,
+    "riskCategoryCounts": {
+      "broad-catch": 85,
+      "closeable-resource-boundary": 11,
+      "field-injection": 155,
+      "general-exception-contract": 137,
+      "hard-coded-secret": 1,
+      "http-client-lifecycle": 1,
+      "interned-string-lock": 5,
+      "manual-thread": 15,
+      "null-return-contract": 29,
+      "oversized-service": 36,
+      "service-locator": 8,
+      "static-request-context": 81,
+      "synchronization-boundary": 9,
+      "thread-local-lifecycle": 1,
+      "transaction-side-effect-mix": 63,
+      "transport-coupling": 74,
+      "unmanaged-executor": 4
+    },
+    "currentAuditStatusCounts": {
+      "unreviewed": 2914,
+      "reviewing": 0,
+      "reviewed": 522,
+      "blocked": 0
+    }
+  },
+  "shards": [
+    {
+      "fileName": "records-0001-0050.jsonl",
+      "fileCount": 50,
+      "firstInventoryIndex": 1754,
+      "lastInventoryIndex": 1803,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/service/AiXntjService.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/service/HkConferenceService.java",
+      "sha256": "101c438f61092773717d3c3834cb84b7f1071079199385c40c773fd6f666ba7a"
+    },
+    {
+      "fileName": "records-0051-0100.jsonl",
+      "fileCount": 50,
+      "firstInventoryIndex": 1804,
+      "lastInventoryIndex": 1853,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/service/HkYspStorageApiService.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/service/TsFileSignService.java",
+      "sha256": "71191e3006629078b0ab4cb6ec74ef5dd76794fd1a1e4556f86f2b5cde74ede7"
+    },
+    {
+      "fileName": "records-0101-0150.jsonl",
+      "fileCount": 50,
+      "firstInventoryIndex": 1854,
+      "lastInventoryIndex": 1903,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/service/TsblSjyService.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/service/appFront/FrontTdhConferenceService.java",
+      "sha256": "79d338e3e478e4fb482b001310cb969a5356edb01d0ff66d4666a38f6291f11d"
+    },
+    {
+      "fileName": "records-0151-0200.jsonl",
+      "fileCount": 50,
+      "firstInventoryIndex": 1904,
+      "lastInventoryIndex": 1953,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/service/appFront/FrontTslbService.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/HwServiceImpl.java",
+      "sha256": "27389b017a5431e81c63515824618c2e69a692600eac972e6fcbc28e93edfa59"
+    },
+    {
+      "fileName": "records-0201-0250.jsonl",
+      "fileCount": 50,
+      "firstInventoryIndex": 1954,
+      "lastInventoryIndex": 2003,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/HyglServiceImpl.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TxsszServiceImpl.java",
+      "sha256": "63662570447b7f3470788e743727c652ca885469cad4c39de4d50f3aa91e6ff5"
+    },
+    {
+      "fileName": "records-0251-0300.jsonl",
+      "fileCount": 50,
+      "firstInventoryIndex": 2004,
+      "lastInventoryIndex": 2053,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/VidyoCloudServiceImpl.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/swtpad/trial/SwtSjydServiceImpl.java",
+      "sha256": "29bf500b03768a14208aa6017d9302e9d8f8859ebd4a90803994619cdc2b729a"
+    },
+    {
+      "fileName": "records-0301-0338.jsonl",
+      "fileCount": 38,
+      "firstInventoryIndex": 2054,
+      "lastInventoryIndex": 2091,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/swtpad/trial/SwtTrialFileServiceImpl.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/service/yzw/impl/YzwOperateServiceImpl.java",
+      "sha256": "1e27cc2e0dc86c0ee69486e9e8ae2ed82cb013a2056de04956df49edaea069f2"
+    }
+  ]
+}

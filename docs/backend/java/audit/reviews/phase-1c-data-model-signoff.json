@@ -1,0 +1,230 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "batchId": "phase-1c-data-model",
+  "status": "approved",
+  "reviewedBy": "Codex",
+  "reviewerType": "agent-assisted-manual-review",
+  "reviewedAt": "2026-08-04T02:18:46.000Z",
+  "approvalContract": "Each approved shard SHA-256 binds every ordered per-file review record in that shard.",
+  "reviewMethod": [
+    "逐条核对 1654 个记录的冻结身份、类型与字段结构、注解概况、模型形态、对象边界和源码证据。",
+    "逐分片检查公开方法、继承、多类型、资源包装、序列化混用、持久化注解和敏感字段等异常集合。",
+    "重新读取 Controller 参数与 import，确认 601 个直接校验触发位置及 7 个查询条件角色纠正。",
+    "针对首轮复审反例补查普通 token、tokenId、项目密码缩写和显式或 Lombok toString 风险。",
+    "解析嵌套字段的真实 import 与目标约束，删除没有带约束目标的 19 条伪级联校验缺口。",
+    "扩展核对授权码、口令缩写、会议房间访问 key、讯飞 SK 和内嵌秘钥的模型配置；明确排除普通业务键、文档标识与状态字段。"
+  ],
+  "summary": {
+    "approvedFileCount": 1654,
+    "approvedLoc": 58427,
+    "approvedShardCount": 34
+  },
+  "shards": [
+    {
+      "fileName": "records-0001-0050.jsonl",
+      "fileCount": 50,
+      "sha256": "9d79d4b271a74a557bd9a649c03d2edcfe09053abba031b1d80a29d36e23cda6",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-0051-0100.jsonl",
+      "fileCount": 50,
+      "sha256": "b1b42fa0ad4ce2b9c1cc058c441dd1227a08821fd3bc5614a5776206b458748f",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-0101-0150.jsonl",
+      "fileCount": 50,
+      "sha256": "2024413142b9796608f0d709c287f94569cf1b3dd2d9428ed7e3f2db8cddf24d",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-0151-0200.jsonl",
+      "fileCount": 50,
+      "sha256": "027e7d48144ec7f3f5ecd10139b2816db3c00868d2653d0a628b16704eecd040",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-0201-0250.jsonl",
+      "fileCount": 50,
+      "sha256": "7366e663dae967e09242f98df63f8acc30d2f291b2f24829926a5096ff081471",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-0251-0300.jsonl",
+      "fileCount": 50,
+      "sha256": "5b3f176381f6273e493a5f126eb91b3c69018c1d16a9491ea7784fe7eb22d653",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-0301-0350.jsonl",
+      "fileCount": 50,
+      "sha256": "d2611a66f2d32ac083b47543d5f2869aea0ebb3f1ada2b5f33fe201714cb14d6",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-0351-0400.jsonl",
+      "fileCount": 50,
+      "sha256": "191056476cd91ae5070009b282f94fa40d4d35122e91b94812dc0f31670e8b18",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-0401-0450.jsonl",
+      "fileCount": 50,
+      "sha256": "eb9792290fb0784f2360f8854705829c43ca72d563938060df3686239e04a851",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-0451-0500.jsonl",
+      "fileCount": 50,
+      "sha256": "343a637869d81cfb179f90141172ca6106d560fc4a9ae3189dee1b52ce485505",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-0501-0550.jsonl",
+      "fileCount": 50,
+      "sha256": "0f3c664f5bd55bcfe846bd9d15598f8a3713c9fcbf2bf4e6916b532dd6a5e860",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-0551-0600.jsonl",
+      "fileCount": 50,
+      "sha256": "8f61913a3e70366436a9e66eaaa78d0a8ddfb142de8509d52d10020cea7cbf0b",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-0601-0650.jsonl",
+      "fileCount": 50,
+      "sha256": "9aebe03760bae97466041fba09b43f7638de4519356c948734add21327c78f8f",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-0651-0700.jsonl",
+      "fileCount": 50,
+      "sha256": "138191557c07ff3e0366051794446b84cb2c3c464c01f0ca51ce97e6be3b77df",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-0701-0750.jsonl",
+      "fileCount": 50,
+      "sha256": "b6cbfb763dcfc19d5d6ffc8e93ac5aa781e72e12fd843c69419aeeffc47b364e",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-0751-0800.jsonl",
+      "fileCount": 50,
+      "sha256": "fc47007ff731fc1c3d5ff38f5509fd3ec6067b38f15303a27fef027d245cb442",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-0801-0850.jsonl",
+      "fileCount": 50,
+      "sha256": "dff3b147cf4a9785b755a6d44f6713dbfdfe77e333155aa6305c3535fe4100d6",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-0851-0900.jsonl",
+      "fileCount": 50,
+      "sha256": "fa01d4779ed1ab11e22d0ab917c73522fe6c016bc438fb8a52eaaf6166ce727e",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-0901-0950.jsonl",
+      "fileCount": 50,
+      "sha256": "49fdf16a7c03738b14bc863b2a12009e03fd81810db320676c5318da384a7651",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-0951-1000.jsonl",
+      "fileCount": 50,
+      "sha256": "6d6befe27cb02343f5fcd8d9aa076d1568741ff43cc8ad4985ce4c81d3d86275",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-1001-1050.jsonl",
+      "fileCount": 50,
+      "sha256": "ac413f658016103b2c3d81b43efbc7522db529ba30c0567a07be688e70c39b51",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-1051-1100.jsonl",
+      "fileCount": 50,
+      "sha256": "ccdf65103e9707c584e97e34d3e5a1790011021bd2431cdd0fff5a221600ade8",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-1101-1150.jsonl",
+      "fileCount": 50,
+      "sha256": "88d541f8c219786c93dd41ebde3e14150f030fee7524584120506c9df357ac96",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-1151-1200.jsonl",
+      "fileCount": 50,
+      "sha256": "5e97a9bc36c72f639f0b14dc9d7fc4b696b17e3ee027efbf5cdab633b774053b",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-1201-1250.jsonl",
+      "fileCount": 50,
+      "sha256": "37acd04d85b1648c5536a98eac8e5fbe1a621c52156ed0a32310005dacda7cda",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-1251-1300.jsonl",
+      "fileCount": 50,
+      "sha256": "fb91cf5f33aa6964770237c1bcc0dc691fd647b079a7e800640e4fb14ee2370d",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-1301-1350.jsonl",
+      "fileCount": 50,
+      "sha256": "3ad1d5f6cc3dccf9dbbc81776032d5e0010721e3c1a53c44bb308793c23b527c",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-1351-1400.jsonl",
+      "fileCount": 50,
+      "sha256": "0843bb50a6eb47bf8d4bb25bafa941c0de5e8f23b30f901ec2bcb7572604a485",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-1401-1450.jsonl",
+      "fileCount": 50,
+      "sha256": "6ca2904145c63118c3da70b1590f241deb61eaeb12179f16ee0c619b1c00b91a",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-1451-1500.jsonl",
+      "fileCount": 50,
+      "sha256": "8797c743ae95668f85f8e8e1bdef880d23f31a828b8d0ee9bf617d7aefba67ea",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-1501-1550.jsonl",
+      "fileCount": 50,
+      "sha256": "0a08129820acd186a27f82567c02e17d77fafaf44a375b4c5d8a9d341080c76b",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-1551-1600.jsonl",
+      "fileCount": 50,
+      "sha256": "0d05e1c42117befd015dd191e6ceef674657adae8ecf2e8e7b1cc81ef2940f49",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-1601-1650.jsonl",
+      "fileCount": 50,
+      "sha256": "1f740b885641a4fee40c7efc61784a9c6c5820e8fdd517374bec786cabecb482",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-1651-1654.jsonl",
+      "fileCount": 4,
+      "sha256": "4dcad0fdd3842eb6824a8f73591d65c377ef36552af85c3392bb643bc993069f",
+      "decision": "approved"
+    }
+  ]
+}

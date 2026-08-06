@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "batchId": "phase-1c-async-integration",
+  "status": "completed",
+  "reviewedAt": "2026-08-04T03:46:40.000Z",
+  "manualReviewSignoff": {
+    "path": "reviews/phase-1c-async-integration-signoff.json",
+    "sha256": "626fa86c7c90900b9def9ebeaad0b533c2c9a879a0f404ee436c903d4613c82c",
+    "reviewedBy": "Codex",
+    "reviewerType": "agent-assisted-manual-review",
+    "approvedShardCount": 4
+  },
+  "batchScope": {
+    "roots": [
+      "handler",
+      "listener",
+      "timer",
+      "ws"
+    ],
+    "javaInventoryIndexRanges": [
+      [
+        1141,
+        1143
+      ],
+      [
+        1147,
+        1173
+      ],
+      [
+        2102,
+        2114
+      ],
+      [
+        2124,
+        2270
+      ],
+      [
+        3423,
+        3423
+      ]
+    ],
+    "excludedReviewedPaths": 2928
+  },
+  "recordContract": {
+    "format": "JSON Lines; one manually reviewed file record per line",
+    "riskStatus": "candidate for later capability or rejected-pattern normalization; not a defect verdict",
+    "roleBoundary": "physical batch scope and final semantic role are recorded separately",
+    "schedulingBoundary": "package name, ApplicationListener, task naming, and event publication do not independently prove asynchronous execution",
+    "signoffBoundary": "manual signoff binds reviewing candidate shard hashes before completed output promotes records to reviewed"
+  },
+  "summary": {
+    "batchFileCount": 191,
+    "batchLoc": 29485,
+    "declaredTypeCount": 198,
+    "fieldCount": 1758,
+    "publicMethodCount": 412,
+    "rootCounts": {
+      "handler": 24,
+      "listener": 6,
+      "timer": 160,
+      "ws": 1
+    },
+    "machineRoleCandidateCounts": {
+      "async-integration": 190,
+      "unclassified": 1
+    },
+    "finalRoleCounts": {
+      "async-integration": 79,
+      "common": 4,
+      "data-access": 3,
+      "data-model": 102,
+      "infrastructure": 3
+    },
+    "asyncShapeCounts": {
+      "application-listener": 6,
+      "burn-handler-contract": 1,
+      "burn-print-adapter": 1,
+      "cleanup-contract": 1,
+      "cleanup-handler": 9,
+      "data-report-adapter": 4,
+      "data-report-contract": 1,
+      "data-sync-chain": 2,
+      "data-sync-handler": 9,
+      "data-sync-handler-contract": 1,
+      "file-process-contract": 2,
+      "file-process-handler": 3,
+      "handler-factory": 4,
+      "mybatis-type-handler": 3,
+      "retransmission-endpoint": 1,
+      "scheduled-task": 1,
+      "task-business-model": 4,
+      "task-enum": 4,
+      "task-exchange-model": 63,
+      "task-service": 13,
+      "task-transfer-model": 35,
+      "task-trigger": 12,
+      "voice-to-text-adapter": 10,
+      "voice-to-text-contract": 1
+    },
+    "roleCorrectionCount": 113,
+    "signalFileCounts": {
+      "scheduledLines": 2,
+      "asyncLines": 8,
+      "postConstructLines": 2,
+      "applicationListenerLines": 6,
+      "completableFutureLines": 3,
+      "rawThreadLines": 3,
+      "blockingSleepLines": 6,
+      "concurrentMapLines": 5
+    },
+    "inboundUsageOccurrenceCount": 2823,
+    "outboundUsageOccurrenceCount": 7953,
+    "riskCandidateCount": 264,
+    "riskCategoryCounts": {
+      "async-transaction-boundary": 3,
+      "blocking-sleep": 6,
+      "broad-catch": 42,
+      "field-injection": 67,
+      "legacy-fastjson-persistence": 1,
+      "legacy-misspelled-contract": 4,
+      "local-scheduling-enable": 2,
+      "mutable-handler-registry": 4,
+      "mutable-static-state": 4,
+      "mutable-task-model": 101,
+      "raw-thread": 3,
+      "sensitive-model-field": 19,
+      "shared-session-state": 1,
+      "startup-external-work": 2,
+      "synchronous-event-listener": 4,
+      "unobserved-future-failure": 1
+    },
+    "currentAuditStatusCounts": {
+      "unreviewed": 317,
+      "reviewing": 0,
+      "reviewed": 3119,
+      "blocked": 0
+    }
+  },
+  "shards": [
+    {
+      "fileName": "records-0001-0050.jsonl",
+      "fileCount": 50,
+      "firstInventoryIndex": 1141,
+      "lastInventoryIndex": 2130,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/handler/AbstractJsonTypeHandler.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/GetPlktDTO.java",
+      "sha256": "68c8ebbad5c28956e8dc36c852a72e01a9782717690b24741e87fda0ded019c7"
+    },
+    {
+      "fileName": "records-0051-0100.jsonl",
+      "fileCount": 50,
+      "firstInventoryIndex": 2131,
+      "lastInventoryIndex": 2180,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/timer/dto/GetQxpqXxDTO.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/PqxxYctxsDataEO.java",
+      "sha256": "bb0da1f574108b15a0fc4884ef69864eb8629abc8c32368ba32e58552bbd35c9"
+    },
+    {
+      "fileName": "records-0101-0150.jsonl",
+      "fileCount": 50,
+      "firstInventoryIndex": 2181,
+      "lastInventoryIndex": 2230,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/timer/eo/PqxxYctxsEO.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/clearExpireData/ClearLocalLogHandler.java",
+      "sha256": "b21f661c0a43813b5dbed1b14f4fd2fd581d12d6f12e79cadcc360050956ce87"
+    },
+    {
+      "fileName": "records-0151-0191.jsonl",
+      "fileCount": 41,
+      "firstInventoryIndex": 2231,
+      "lastInventoryIndex": 3423,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/clearExpireData/CloseTdhHjptStreamForXxtHandler.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/ws/ReTransmissionService.java",
+      "sha256": "f7fa02f751b9416781c0a898809c04bf32dafcd021f8e96d004df3074081d0b0"
+    }
+  ]
+}

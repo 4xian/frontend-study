@@ -1,0 +1,695 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "batchId": "phase-1c-data-access",
+  "status": "completed",
+  "reviewedAt": "2026-08-03T23:22:47.000Z",
+  "recordContract": {
+    "format": "JSON Lines; one manually reviewed Java file record per line",
+    "riskStatus": "candidate for later capability or rejected-pattern normalization; not a defect verdict",
+    "dataAccessShape": "mapper-contract | managed-persistence-service | persistence-model | support-data-model | generated-xml-model",
+    "mapperXml": "Mapper XML is supporting evidence outside the 3436 Java-file denominator; each file is hashed and bound by namespace"
+  },
+  "batchScope": {
+    "javaInventoryIndexRanges": [
+      [
+        261,
+        394
+      ],
+      [
+        1174,
+        1751
+      ]
+    ],
+    "mapperXmlRoot": "dzzz-app/src/main/java/com/tdh/bdzz/dao"
+  },
+  "mapperXmlSummary": {
+    "fileCount": 14,
+    "loc": 373,
+    "statementCount": 38,
+    "resultMapCount": 0,
+    "dynamicElementCounts": {
+      "foreach": 3,
+      "if": 22,
+      "set": 2,
+      "where": 2
+    },
+    "files": [
+      {
+        "path": "dzzz-app/src/main/java/com/tdh/bdzz/dao/AnnotationsMapper.xml",
+        "sourceSha256": "de51dc97e0a75aa2ee33ddb94f07c2d1eebc923f6e4bf8456fec7ffa57909a06",
+        "loc": 43,
+        "namespace": "com.tdh.bdzz.dao.AnnotationsMapper",
+        "mapperLine": 4,
+        "statements": [
+          {
+            "id": "selectByDocIdAndCreatedBy",
+            "kind": "select",
+            "line": 5,
+            "parameterType": null,
+            "resultType": "java.util.Map"
+          },
+          {
+            "id": "selectById",
+            "kind": "select",
+            "line": 10,
+            "parameterType": null,
+            "resultType": "java.util.Map"
+          },
+          {
+            "id": "insertAnnotation",
+            "kind": "insert",
+            "line": 16,
+            "parameterType": null,
+            "resultType": null
+          },
+          {
+            "id": "updateAnnotation",
+            "kind": "update",
+            "line": 31,
+            "parameterType": null,
+            "resultType": null
+          }
+        ],
+        "resultMaps": [],
+        "dynamicElementCounts": {},
+        "rawSubstitutionLines": [],
+        "selectStarLines": []
+      },
+      {
+        "path": "dzzz-app/src/main/java/com/tdh/bdzz/dao/BookmarksMapper.xml",
+        "sourceSha256": "9f6fd5fe111ea9f339c4af20445a81b29bddbe625981df1156fa54e7ff66debf",
+        "loc": 11,
+        "namespace": "com.tdh.bdzz.dao.BookmarksMapper",
+        "mapperLine": 4,
+        "statements": [
+          {
+            "id": "selectByDocId",
+            "kind": "select",
+            "line": 6,
+            "parameterType": null,
+            "resultType": "java.util.Map"
+          }
+        ],
+        "resultMaps": [],
+        "dynamicElementCounts": {},
+        "rawSubstitutionLines": [],
+        "selectStarLines": []
+      },
+      {
+        "path": "dzzz-app/src/main/java/com/tdh/bdzz/dao/CommentsMapper.xml",
+        "sourceSha256": "c2c24966a3ab6723ad4c04f1f81da7a41f6cb1f6ddc5a73f3cb531d5f58071f1",
+        "loc": 39,
+        "namespace": "com.tdh.bdzz.dao.CommentsMapper",
+        "mapperLine": 4,
+        "statements": [
+          {
+            "id": "insertComment",
+            "kind": "insert",
+            "line": 20,
+            "parameterType": null,
+            "resultType": null
+          },
+          {
+            "id": "updateComment",
+            "kind": "update",
+            "line": 34,
+            "parameterType": null,
+            "resultType": null
+          },
+          {
+            "id": "deleteComment",
+            "kind": "delete",
+            "line": 27,
+            "parameterType": null,
+            "resultType": null
+          },
+          {
+            "id": "deleteByAnnotationId",
+            "kind": "delete",
+            "line": 30,
+            "parameterType": null,
+            "resultType": null
+          }
+        ],
+        "resultMaps": [],
+        "dynamicElementCounts": {},
+        "rawSubstitutionLines": [],
+        "selectStarLines": []
+      },
+      {
+        "path": "dzzz-app/src/main/java/com/tdh/bdzz/dao/CommentsReviewHistoryMapper.xml",
+        "sourceSha256": "7231285580b171c71d68e6be3e405a9ad093d8f39202acd50dc0ff6c439f63c9",
+        "loc": 19,
+        "namespace": "com.tdh.bdzz.dao.CommentsReviewHistoryMapper",
+        "mapperLine": 4,
+        "statements": [
+          {
+            "id": "selectByCommentId",
+            "kind": "select",
+            "line": 9,
+            "parameterType": null,
+            "resultType": "java.util.Map"
+          },
+          {
+            "id": "insertCommentsReviewHistory",
+            "kind": "insert",
+            "line": 13,
+            "parameterType": null,
+            "resultType": null
+          },
+          {
+            "id": "deleteByCommentId",
+            "kind": "delete",
+            "line": 5,
+            "parameterType": null,
+            "resultType": null
+          }
+        ],
+        "resultMaps": [],
+        "dynamicElementCounts": {},
+        "rawSubstitutionLines": [],
+        "selectStarLines": []
+      },
+      {
+        "path": "dzzz-app/src/main/java/com/tdh/bdzz/dao/DigitalSignaturesMapper.xml",
+        "sourceSha256": "31f9f85dd8720129ee2ece49ca9a7a5a31a5f402693e90a8c93fc67dc16c2241",
+        "loc": 16,
+        "namespace": "com.tdh.bdzz.dao.DigitalSignaturesMapper",
+        "mapperLine": 4,
+        "statements": [
+          {
+            "id": "selectByUsername",
+            "kind": "select",
+            "line": 13,
+            "parameterType": null,
+            "resultType": "java.util.Map"
+          },
+          {
+            "id": "insertSignature",
+            "kind": "insert",
+            "line": 5,
+            "parameterType": null,
+            "resultType": null
+          },
+          {
+            "id": "deleteSignature",
+            "kind": "delete",
+            "line": 9,
+            "parameterType": null,
+            "resultType": null
+          }
+        ],
+        "resultMaps": [],
+        "dynamicElementCounts": {},
+        "rawSubstitutionLines": [],
+        "selectStarLines": []
+      },
+      {
+        "path": "dzzz-app/src/main/java/com/tdh/bdzz/dao/DrawingPositionsMapper.xml",
+        "sourceSha256": "cc4f0a8d1a7bdbd8573711e67b381992cd9d3f4334da3d7f973ce621636d811d",
+        "loc": 21,
+        "namespace": "com.tdh.bdzz.dao.DrawingPositionsMapper",
+        "mapperLine": 4,
+        "statements": [
+          {
+            "id": "selectByAnnotationId",
+            "kind": "select",
+            "line": 8,
+            "parameterType": null,
+            "resultType": "java.util.Map"
+          },
+          {
+            "id": "insertDrawingPosition",
+            "kind": "insert",
+            "line": 12,
+            "parameterType": null,
+            "resultType": null
+          },
+          {
+            "id": "updateDrawingPosition",
+            "kind": "update",
+            "line": 17,
+            "parameterType": null,
+            "resultType": null
+          },
+          {
+            "id": "deleteByAnnotationId",
+            "kind": "delete",
+            "line": 5,
+            "parameterType": null,
+            "resultType": null
+          }
+        ],
+        "resultMaps": [],
+        "dynamicElementCounts": {},
+        "rawSubstitutionLines": [],
+        "selectStarLines": []
+      },
+      {
+        "path": "dzzz-app/src/main/java/com/tdh/bdzz/dao/DzzzFybChryMapper.xml",
+        "sourceSha256": "1b86f0808c6d5787ef91daa2eecf0cd4018616ee7361c854f0e4c33d2b98737d",
+        "loc": 73,
+        "namespace": "com.tdh.bdzz.dao.DzzzFybChryMapper",
+        "mapperLine": 3,
+        "statements": [
+          {
+            "id": "queryHyListByPage",
+            "kind": "select",
+            "line": 4,
+            "parameterType": null,
+            "resultType": "java.util.Map"
+          },
+          {
+            "id": "queryHyList",
+            "kind": "select",
+            "line": 27,
+            "parameterType": null,
+            "resultType": "java.util.Map"
+          },
+          {
+            "id": "querySwtHyListByPage",
+            "kind": "select",
+            "line": 44,
+            "parameterType": null,
+            "resultType": "java.util.Map"
+          }
+        ],
+        "resultMaps": [],
+        "dynamicElementCounts": {
+          "foreach": 1,
+          "if": 14
+        },
+        "rawSubstitutionLines": [],
+        "selectStarLines": []
+      },
+      {
+        "path": "dzzz-app/src/main/java/com/tdh/bdzz/dao/DzzzFybHyXqMapper.xml",
+        "sourceSha256": "48c51d0b9b097376e4c5f0dad60036f5934719a082610cfdc40d012f0083dc7f",
+        "loc": 52,
+        "namespace": "com.tdh.bdzz.dao.DzzzFybHyXqMapper",
+        "mapperLine": 3,
+        "statements": [
+          {
+            "id": "queryPersonalTodoList",
+            "kind": "select",
+            "line": 4,
+            "parameterType": null,
+            "resultType": "java.util.Map"
+          },
+          {
+            "id": "queryHistoryHyListByPage",
+            "kind": "select",
+            "line": 10,
+            "parameterType": null,
+            "resultType": "java.util.Map"
+          },
+          {
+            "id": "queryHistoryHyList",
+            "kind": "select",
+            "line": 31,
+            "parameterType": null,
+            "resultType": "java.util.Map"
+          }
+        ],
+        "resultMaps": [],
+        "dynamicElementCounts": {
+          "if": 8
+        },
+        "rawSubstitutionLines": [],
+        "selectStarLines": []
+      },
+      {
+        "path": "dzzz-app/src/main/java/com/tdh/bdzz/dao/DzzzSqlMapper.xml",
+        "sourceSha256": "2f253b1bb891329bcc1e6c5496cd7749a37ab6ce694f9d879c8d4c6fe3231a2d",
+        "loc": 19,
+        "namespace": "com.tdh.bdzz.dao.DzzzSqlMapper",
+        "mapperLine": 3,
+        "statements": [
+          {
+            "id": "queryAjflByFydmAndAjbm",
+            "kind": "select",
+            "line": 6,
+            "parameterType": null,
+            "resultType": "java.util.Map"
+          },
+          {
+            "id": "queryAjflByFydm",
+            "kind": "select",
+            "line": 10,
+            "parameterType": null,
+            "resultType": "java.util.Map"
+          },
+          {
+            "id": "queryPqxxByPqid",
+            "kind": "select",
+            "line": 14,
+            "parameterType": null,
+            "resultType": "java.util.Map"
+          }
+        ],
+        "resultMaps": [],
+        "dynamicElementCounts": {},
+        "rawSubstitutionLines": [],
+        "selectStarLines": []
+      },
+      {
+        "path": "dzzz-app/src/main/java/com/tdh/bdzz/dao/HighlightTextRectsMapper.xml",
+        "sourceSha256": "7b2520a2d8c0b3fb1566cd4971165a744a72dea094c99955a38d76f5ce6a6350",
+        "loc": 21,
+        "namespace": "com.tdh.bdzz.dao.HighlightTextRectsMapper",
+        "mapperLine": 4,
+        "statements": [
+          {
+            "id": "selectByAnnotationId",
+            "kind": "select",
+            "line": 8,
+            "parameterType": null,
+            "resultType": "java.util.Map"
+          },
+          {
+            "id": "insertHighlightTextRect",
+            "kind": "insert",
+            "line": 12,
+            "parameterType": null,
+            "resultType": null
+          },
+          {
+            "id": "updateHighlightTextRects",
+            "kind": "update",
+            "line": 17,
+            "parameterType": null,
+            "resultType": null
+          },
+          {
+            "id": "deleteByAnnotationId",
+            "kind": "delete",
+            "line": 5,
+            "parameterType": null,
+            "resultType": null
+          }
+        ],
+        "resultMaps": [],
+        "dynamicElementCounts": {},
+        "rawSubstitutionLines": [],
+        "selectStarLines": []
+      },
+      {
+        "path": "dzzz-app/src/main/java/com/tdh/bdzz/dao/SettingsMapper.xml",
+        "sourceSha256": "380c6fed7a8c8aaf5a1e67c0908c42e140af685999df8a270f8da463357e538b",
+        "loc": 9,
+        "namespace": "com.tdh.bdzz.dao.SettingsMapper",
+        "mapperLine": 4,
+        "statements": [
+          {
+            "id": "selectAllMaps",
+            "kind": "select",
+            "line": 6,
+            "parameterType": null,
+            "resultType": "java.util.Map"
+          }
+        ],
+        "resultMaps": [],
+        "dynamicElementCounts": {},
+        "rawSubstitutionLines": [],
+        "selectStarLines": []
+      },
+      {
+        "path": "dzzz-app/src/main/java/com/tdh/bdzz/dao/StampsMapper.xml",
+        "sourceSha256": "be20d709711a65f29f2a7e7586efeea392430ba5acc8773f225b8c90ba8cd1bf",
+        "loc": 18,
+        "namespace": "com.tdh.bdzz.dao.StampsMapper",
+        "mapperLine": 4,
+        "statements": [
+          {
+            "id": "selectByUsername",
+            "kind": "select",
+            "line": 5,
+            "parameterType": null,
+            "resultType": "java.util.Map"
+          },
+          {
+            "id": "insertStamp",
+            "kind": "insert",
+            "line": 9,
+            "parameterType": null,
+            "resultType": null
+          },
+          {
+            "id": "deleteStamp",
+            "kind": "delete",
+            "line": 14,
+            "parameterType": null,
+            "resultType": null
+          }
+        ],
+        "resultMaps": [],
+        "dynamicElementCounts": {},
+        "rawSubstitutionLines": [],
+        "selectStarLines": []
+      },
+      {
+        "path": "dzzz-app/src/main/java/com/tdh/bdzz/dao/TuDmKzMapper.xml",
+        "sourceSha256": "bbaeeaab68361881aecf13ce65d7d3156d69457f5e393f6bfda3b2380c180ce3",
+        "loc": 16,
+        "namespace": "com.tdh.bdzz.dao.TuDmKzMapper",
+        "mapperLine": 4,
+        "statements": [
+          {
+            "id": "updateBatch",
+            "kind": "update",
+            "line": 5,
+            "parameterType": "java.util.List",
+            "resultType": null
+          }
+        ],
+        "resultMaps": [],
+        "dynamicElementCounts": {
+          "foreach": 1,
+          "set": 1,
+          "where": 1
+        },
+        "rawSubstitutionLines": [],
+        "selectStarLines": []
+      },
+      {
+        "path": "dzzz-app/src/main/java/com/tdh/bdzz/dao/TuFtpzMapper.xml",
+        "sourceSha256": "f0a6607163669c457da4720f5c9d22a632747a3e7255a19356bca0be4a396de9",
+        "loc": 16,
+        "namespace": "com.tdh.bdzz.dao.TuFtpzMapper",
+        "mapperLine": 4,
+        "statements": [
+          {
+            "id": "editFtList",
+            "kind": "update",
+            "line": 5,
+            "parameterType": "java.util.List",
+            "resultType": null
+          }
+        ],
+        "resultMaps": [],
+        "dynamicElementCounts": {
+          "foreach": 1,
+          "set": 1,
+          "where": 1
+        },
+        "rawSubstitutionLines": [],
+        "selectStarLines": []
+      }
+    ]
+  },
+  "summary": {
+    "batchFileCount": 712,
+    "batchLoc": 38330,
+    "machineRoleCandidateCounts": {
+      "data-access": 134,
+      "persistence-model": 578
+    },
+    "finalRoleCounts": {
+      "data-access": 134,
+      "data-model": 450,
+      "persistence-model": 128
+    },
+    "dataAccessShapeCounts": {
+      "generated-xml-model": 447,
+      "managed-persistence-service": 2,
+      "mapper-contract": 132,
+      "persistence-model": 128,
+      "support-data-model": 3
+    },
+    "mappingModeCounts": {
+      "custom-sql-injector-contract": 1,
+      "java-annotation-and-mapper-xml": 5,
+      "java-annotation-sql": 26,
+      "jaxb-generated-model": 447,
+      "mapper-xml": 9,
+      "mybatis-plus-base-mapper": 91,
+      "mybatis-plus-entity": 128,
+      "mybatis-plus-service-impl": 2,
+      "plain-data-object": 3
+    },
+    "roleCorrectionCount": 450,
+    "statementBindingCounts": {
+      "declaredMethodCount": 160,
+      "annotationMappedMethodCount": 123,
+      "xmlMappedMethodCount": 36,
+      "customInjectorMethodCount": 1
+    },
+    "unresolvedMethodCount": 0,
+    "xmlStatementWithoutDeclaredMethodCount": 2,
+    "riskCandidateCount": 70,
+    "riskCategoryCounts": {
+      "credential-in-generated-to-string": 7,
+      "mapper-xml-under-java-sources": 14,
+      "oversized-mapper-contract": 4,
+      "raw-page-type": 15,
+      "raw-sql-substitution": 4,
+      "untyped-map-result": 24,
+      "xml-statement-without-declared-method": 2
+    },
+    "currentAuditStatusCounts": {
+      "unreviewed": 2202,
+      "reviewing": 0,
+      "reviewed": 1234,
+      "blocked": 0
+    }
+  },
+  "shards": [
+    {
+      "fileName": "records-0001-0050.jsonl",
+      "fileCount": 50,
+      "firstInventoryIndex": 261,
+      "lastInventoryIndex": 310,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/dao/AnnotationTypesMapper.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/dao/DzzzSystemKljlMapper.java",
+      "sha256": "a438548386e7b1537e72112e69b8860230c215429fff2bf5c0ab9aab0c1baebe"
+    },
+    {
+      "fileName": "records-0051-0100.jsonl",
+      "fileCount": 50,
+      "firstInventoryIndex": 311,
+      "lastInventoryIndex": 360,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/dao/DzzzSystemLogMapper.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/dao/EasyBaseMapper.java",
+      "sha256": "8b24dc300af663e172066da936803c5616602327a0e32a8c60f8535b05d3b167"
+    },
+    {
+      "fileName": "records-0101-0150.jsonl",
+      "fileCount": 50,
+      "firstInventoryIndex": 361,
+      "lastInventoryIndex": 1189,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/dao/EdsrMapper.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/po/DzzzFtsyExt.java",
+      "sha256": "bad5ed60bc3723e4366d6165cc8476194853fbdd76e050eac9c4a9fb401d8493"
+    },
+    {
+      "fileName": "records-0151-0200.jsonl",
+      "fileCount": 50,
+      "firstInventoryIndex": 1190,
+      "lastInventoryIndex": 1239,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/po/DzzzFybBlqx.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/po/DzzzTsxq.java",
+      "sha256": "d0c3ea475cc1dda5c7e39bc50930b502787b6277c05121be4352e1680344d1fc"
+    },
+    {
+      "fileName": "records-0201-0250.jsonl",
+      "fileCount": 50,
+      "firstInventoryIndex": 1240,
+      "lastInventoryIndex": 1289,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/po/DzzzUser.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/po/TsBzdmConver.java",
+      "sha256": "eda4b55eda4f9814f1782e77db1e1d6e3f8034a8784299cb03f9d33e8eea57cd"
+    },
+    {
+      "fileName": "records-0251-0300.jsonl",
+      "fileCount": 50,
+      "firstInventoryIndex": 1290,
+      "lastInventoryIndex": 1339,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/po/TsDm.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/po/vidyo/admin/EnableScheduledRoomRequest.java",
+      "sha256": "c8de0ab63eb32c2b30cee59695c05b5c9db0470a9002193d2a0cfc2aa903b5cf"
+    },
+    {
+      "fileName": "records-0301-0350.jsonl",
+      "fileCount": 50,
+      "firstInventoryIndex": 1340,
+      "lastInventoryIndex": 1389,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/po/vidyo/admin/EnableScheduledRoomResponse.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/po/vidyo/admin/LeaveConferenceRequest.java",
+      "sha256": "4e8546f8df1ed8ed7eef04f92051b3dd8a47120ab1e722d745f00051c2a15e99"
+    },
+    {
+      "fileName": "records-0351-0400.jsonl",
+      "fileCount": 50,
+      "firstInventoryIndex": 1390,
+      "lastInventoryIndex": 1439,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/po/vidyo/admin/LeaveConferenceResponse.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/po/vidyo/admin/ScheduledRoomCreationFault.java",
+      "sha256": "7225b0bc7ae39cc25d5ce490f77df8f8b0f8341f92e03d78a6e9c5adad94080c"
+    },
+    {
+      "fileName": "records-0401-0450.jsonl",
+      "fileCount": 50,
+      "firstInventoryIndex": 1440,
+      "lastInventoryIndex": 1489,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/po/vidyo/admin/ScheduledRoomCreationFault_Exception.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/po/vidyo/client/AddToMyContactsRequest.java",
+      "sha256": "632d5f38f216b1d9470d17c1c21babd3db019d5723438d5e5c9427516f19a19f"
+    },
+    {
+      "fileName": "records-0451-0500.jsonl",
+      "fileCount": 50,
+      "firstInventoryIndex": 1490,
+      "lastInventoryIndex": 1539,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/po/vidyo/client/AddToMyContactsResponse.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/po/vidyo/client/GenerateAuthTokenRequest.java",
+      "sha256": "5c0341c29068b26987ba0c3a60c003dd2faf5653e90ddc2e2a5ae5770adb8ce1"
+    },
+    {
+      "fileName": "records-0501-0550.jsonl",
+      "fileCount": 50,
+      "firstInventoryIndex": 1540,
+      "lastInventoryIndex": 1589,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/po/vidyo/client/GenerateAuthTokenResponse.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/po/vidyo/client/InviteToConferenceResponse.java",
+      "sha256": "6d11b6951abfc642f8e7cca864419205e52fda72c67f69c28a4aab6334b35845"
+    },
+    {
+      "fileName": "records-0551-0600.jsonl",
+      "fileCount": 50,
+      "firstInventoryIndex": 1590,
+      "lastInventoryIndex": 1639,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/po/vidyo/client/JoinConferenceRequest.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/po/vidyo/client/PublicRoomDescUpdationFault.java",
+      "sha256": "352518fc1b53fc1d0dcc1f446f79e0a70c45c1d804bd0221a184a43f84037cbc"
+    },
+    {
+      "fileName": "records-0601-0650.jsonl",
+      "fileCount": 50,
+      "firstInventoryIndex": 1640,
+      "lastInventoryIndex": 1689,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/po/vidyo/client/PublicRoomDescUpdationFault_Exception.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/po/vidyo/client/SetEndpointDetailsRequest.java",
+      "sha256": "c2f00e7d1eda1eac1670cec6aa938cb80736aac00c9a2afdc87dd2c4b7ff4e0e"
+    },
+    {
+      "fileName": "records-0651-0700.jsonl",
+      "fileCount": 50,
+      "firstInventoryIndex": 1690,
+      "lastInventoryIndex": 1739,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/po/vidyo/client/SetEndpointDetailsResponse.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/po/vidyo/replay/RecordsResponse.java",
+      "sha256": "ee90e2f3e0cf886d8df4c599a681c4eeb35f835fa860e70625bbbd2fc6ac1ccd"
+    },
+    {
+      "fileName": "records-0701-0712.jsonl",
+      "fileCount": 12,
+      "firstInventoryIndex": 1740,
+      "lastInventoryIndex": 1751,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/po/vidyo/replay/RecordsSearchRequest.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/po/zhp/DzzzFybSxsq.java",
+      "sha256": "cca7ebc66f68b9da0482850b2fc4d3a1534debd144c8a26c00ca1703666ecb28"
+    }
+  ]
+}

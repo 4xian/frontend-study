@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "batchId": "phase-1c-web-entry",
+  "status": "completed",
+  "reviewedAt": "2026-08-03T15:16:20.716Z",
+  "recordContract": {
+    "format": "JSON Lines; one manually reviewed file record per line",
+    "riskStatus": "candidate for later capability or rejected-pattern normalization; not a defect verdict"
+  },
+  "summary": {
+    "batchFileCount": 150,
+    "batchLoc": 29713,
+    "machineRoleCandidateCounts": {
+      "async-integration": 12,
+      "web-entry": 138
+    },
+    "finalRoleCounts": {
+      "async-integration": 9,
+      "cross-cutting": 3,
+      "startup-config": 5,
+      "web-entry": 133
+    },
+    "roleCorrectionCount": 8,
+    "riskCandidateCount": 490,
+    "riskCategoryCounts": {
+      "anonymous-access": 18,
+      "anonymous-token-endpoint": 1,
+      "async-context-gap": 1,
+      "authentication-bypass": 1,
+      "broad-catch": 111,
+      "client-controlled-decryption": 1,
+      "disabled-upload-route": 1,
+      "duplicate-filter-chain": 1,
+      "dynamic-view-name": 1,
+      "empty-web-entry": 1,
+      "exception-detail-response": 16,
+      "field-injection": 130,
+      "file-upload-boundary": 23,
+      "finally-side-effect": 1,
+      "general-exception-contract": 37,
+      "hard-coded-path": 1,
+      "hard-coded-secret": 2,
+      "inactive-configuration": 1,
+      "inactive-security-control": 1,
+      "input-mutation-xss": 1,
+      "legacy-crypto": 1,
+      "missing-request-validation": 83,
+      "null-task-result": 1,
+      "oversized-controller": 11,
+      "path-authentication-bypass": 1,
+      "request-body-read": 1,
+      "resource-lifecycle": 1,
+      "sensitive-log": 6,
+      "servlet-input-contract": 2,
+      "swallowed-exception": 1,
+      "token-in-view-model": 1,
+      "trusted-identity-header": 2,
+      "unrestricted-method-mapping": 27,
+      "unused-expiry-check": 1,
+      "weak-token-checksum": 1
+    },
+    "currentAuditStatusCounts": {
+      "unreviewed": 3252,
+      "reviewing": 0,
+      "reviewed": 184,
+      "blocked": 0
+    }
+  },
+  "shards": [
+    {
+      "fileName": "records-0001-0050.jsonl",
+      "fileCount": 50,
+      "firstInventoryIndex": 135,
+      "lastInventoryIndex": 184,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/controller/BaseOuterController.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/controller/OcrController.java",
+      "sha256": "e24d2f80a0e49ad5912dafca01f8a7ed0bb554996f5288910d3a404b93f433b1"
+    },
+    {
+      "fileName": "records-0051-0100.jsonl",
+      "fileCount": 50,
+      "firstInventoryIndex": 185,
+      "lastInventoryIndex": 234,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/controller/PdfjsAnnotationController.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/controller/ZyglController.java",
+      "sha256": "2fe2556d6c305861530a1516c4708a1e86453685edb4b56e65c2e9a1704a2933"
+    },
+    {
+      "fileName": "records-0101-0150.jsonl",
+      "fileCount": 50,
+      "firstInventoryIndex": 235,
+      "lastInventoryIndex": 2123,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/controller/appFront/FrontCatalogController.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/timer/controller/yzw/YzwUserDepartDataSyncController.java",
+      "sha256": "5844ca7d99cc69384f080c96d24fabc053a40cabfd64554bc371ae11bbe25780"
+    }
+  ]
+}

@@ -1,0 +1,254 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "batchId": "phase-1c-common-code",
+  "status": "completed",
+  "reviewedAt": "2026-08-04T08:08:37.000Z",
+  "manualReviewSignoff": {
+    "path": "reviews/phase-1c-common-code-signoff.json",
+    "sha256": "63e5f984a538ce794cd7140ef016b483305d315205cd1571752fc86a3353e66c",
+    "reviewedBy": "Codex",
+    "reviewerType": "agent-assisted-manual-review",
+    "approvedShardCount": 6
+  },
+  "batchScope": {
+    "roots": [
+      "constant",
+      "enums",
+      "util",
+      "compatibility"
+    ],
+    "javaInventoryIndexRanges": [
+      [
+        117,
+        123
+      ],
+      [
+        685,
+        846
+      ],
+      [
+        2282,
+        2365
+      ],
+      [
+        3424,
+        3425
+      ],
+      [
+        3428,
+        3429
+      ]
+    ],
+    "excludedReviewedPaths": 3172
+  },
+  "recordContract": {
+    "format": "JSON Lines; one manually reviewed file record per line",
+    "riskStatus": "candidate for later capability or rejected-pattern normalization; not a defect verdict",
+    "roleBoundary": "physical common-code scope and final semantic role are recorded separately",
+    "lifecycleBoundary": "enum, static state, secret, thread, client, file, document, process, reflection and model lifecycles require source evidence",
+    "signoffBoundary": "manual signoff binds reviewing candidate shard hashes before completed output promotes records to reviewed"
+  },
+  "summary": {
+    "batchFileCount": 257,
+    "batchLoc": 33715,
+    "declaredTypeCount": 271,
+    "fieldCount": 708,
+    "publicMethodCount": 1586,
+    "rootCounts": {
+      "compatibility": 4,
+      "constant": 7,
+      "enums": 162,
+      "util": 84
+    },
+    "machineRoleCandidateCounts": {
+      "common": 255,
+      "data-model": 2
+    },
+    "finalRoleCounts": {
+      "async-integration": 3,
+      "business-layer": 5,
+      "common": 178,
+      "cross-cutting": 1,
+      "data-model": 10,
+      "infrastructure": 60
+    },
+    "commonCodeShapeCounts": {
+      "asymmetric-crypto-helper": 4,
+      "async-audit-helper": 1,
+      "authorization-header-helper": 2,
+      "bean-mapping-helper": 2,
+      "cache-facade": 1,
+      "cache-key-builder": 1,
+      "code-label-enum": 156,
+      "concurrent-runtime-cache": 1,
+      "configuration-facade": 1,
+      "court-tree-helper": 1,
+      "court-tree-model": 1,
+      "date-time-helper": 2,
+      "digest-signature-helper": 5,
+      "document-conversion-model": 1,
+      "document-conversion-orchestrator": 1,
+      "domain-rule-helper": 3,
+      "drag-position-model": 1,
+      "embedded-crypto-material": 1,
+      "enum-contract": 1,
+      "error-model": 1,
+      "external-service-adapter": 3,
+      "file-type-inspector": 1,
+      "general-purpose-helper": 1,
+      "global-runtime-registry": 1,
+      "handwriting-classifier": 1,
+      "http-client-helper": 5,
+      "identifier-generator": 3,
+      "image-processing-helper": 6,
+      "immutable-category-registry": 1,
+      "json-marker-base": 1,
+      "json-value-model": 1,
+      "jwt-helper": 1,
+      "legacy-video-config-singleton": 1,
+      "lock-registry": 1,
+      "login-data-model": 1,
+      "login-request-model": 1,
+      "metrics-calculator": 1,
+      "multipart-file-adapter": 1,
+      "office-conversion-helper": 2,
+      "pdf-document-helper": 4,
+      "pdf-keyword-helper": 1,
+      "pdf-text-model": 2,
+      "pdf-text-stripper": 1,
+      "priority-executor": 1,
+      "priority-future-task": 1,
+      "qr-code-helper": 2,
+      "reflection-cache-helper": 1,
+      "region-rule-helper": 1,
+      "simple-constant-holder": 4,
+      "soap-client-helper": 2,
+      "sql-blacklist-filter": 1,
+      "static-rule-map": 1,
+      "string-value-helper": 3,
+      "symmetric-crypto-helper": 2,
+      "system-monitor-helper": 1,
+      "table-pagination-helper": 1,
+      "validation-helper": 1,
+      "word-document-helper": 5,
+      "xml-mapping-helper": 2
+    },
+    "roleCorrectionCount": 77,
+    "signalFileCounts": {
+      "mutableEnumFieldLines": 126,
+      "enumSetterLines": 6,
+      "nullReturnLines": 98,
+      "mutableStaticStateLines": 27,
+      "broadCatchLines": 39,
+      "emptyCatchLines": 9,
+      "hardcodedSecretLines": 8,
+      "credentialLoggingLines": 1,
+      "weakCryptoLines": 9,
+      "insecureTlsLines": 1,
+      "legacyFileApiLines": 22,
+      "objectDeserializationLines": 1,
+      "reflectionLines": 9,
+      "rawConcurrencyLines": 3,
+      "processExecutionLines": 1,
+      "networkClientLines": 5,
+      "wholeBufferLines": 8,
+      "defaultCharsetLines": 11
+    },
+    "inboundUsageOccurrenceCount": 23796,
+    "outboundUsageOccurrenceCount": 2436,
+    "riskCandidateCount": 378,
+    "riskCategoryCounts": {
+      "broad-catch": 39,
+      "credential-bearing-model": 2,
+      "credential-logging": 1,
+      "decompiled-compatibility-code": 4,
+      "default-charset": 11,
+      "empty-catch": 9,
+      "enum-public-setter": 6,
+      "external-client-lifecycle": 3,
+      "hardcoded-secret": 8,
+      "insecure-tls-validation": 1,
+      "legacy-file-api": 22,
+      "mutable-enum-state": 126,
+      "mutable-static-state": 7,
+      "network-client-lifecycle": 7,
+      "non-cryptographic-random": 1,
+      "nullable-enum-lookup": 76,
+      "nullable-helper-contract": 22,
+      "oversized-utility-surface": 3,
+      "process-execution-boundary": 1,
+      "raw-concurrency-lifecycle": 3,
+      "reflection-contract": 9,
+      "security-blacklist-filter": 1,
+      "sensitive-configuration-facade": 1,
+      "unbounded-archive-expansion": 1,
+      "unsafe-object-deserialization": 1,
+      "weak-crypto-compatibility": 9,
+      "whole-payload-buffer": 4
+    },
+    "currentAuditStatusCounts": {
+      "unreviewed": 7,
+      "reviewing": 0,
+      "reviewed": 3429,
+      "blocked": 0
+    }
+  },
+  "shards": [
+    {
+      "fileName": "records-0001-0050.jsonl",
+      "fileCount": 50,
+      "firstInventoryIndex": 117,
+      "lastInventoryIndex": 727,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/constant/BlockChainConstant.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/enums/HyDxywlx.java",
+      "sha256": "a9075bb1981154ae5441cf9a65e782b3e9a303360e868272a659d6fe0c195d54"
+    },
+    {
+      "fileName": "records-0051-0100.jsonl",
+      "fileCount": 50,
+      "firstInventoryIndex": 728,
+      "lastInventoryIndex": 777,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/enums/HyRtpOperateType.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/enums/SpcyJs.java",
+      "sha256": "ac57a10f744536b7bb85798bc011ad91b5336b3f57d224a93eee280ca623c624"
+    },
+    {
+      "fileName": "records-0101-0150.jsonl",
+      "fileCount": 50,
+      "firstInventoryIndex": 778,
+      "lastInventoryIndex": 827,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/enums/Spread.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/enums/fyb4third/ThirdChrlx.java",
+      "sha256": "ed3d4d689df72a788d64ac2cf589c91efae9a5e0bb66253efed0ff0a1768a051"
+    },
+    {
+      "fileName": "records-0151-0200.jsonl",
+      "fileCount": 50,
+      "firstInventoryIndex": 828,
+      "lastInventoryIndex": 2312,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/enums/fyb4third/ThirdYwlx.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/util/ImageRotation.java",
+      "sha256": "dca1bd1c1d4000b8371d6a661b6067cecd3efd257b9c11f42315f8e3d0d70e9f"
+    },
+    {
+      "fileName": "records-0201-0250.jsonl",
+      "fileCount": 50,
+      "firstInventoryIndex": 2313,
+      "lastInventoryIndex": 2362,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/util/ImageSizeUtil.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/util/ZnbaUtil.java",
+      "sha256": "a4e291fcaa0008bc8fa5cc4f664442b893c9a4f99fceaede3e30e9b1c075f531"
+    },
+    {
+      "fileName": "records-0251-0257.jsonl",
+      "fileCount": 7,
+      "firstInventoryIndex": 2363,
+      "lastInventoryIndex": 3429,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/util/aixntj/AiXntjCourtTreeHelper.java",
+      "lastPath": "dzzz-app/src/main/java/tdh/uim/client/vo/LoginRequest.java",
+      "sha256": "d043f01b48160fce6bb0bbae9d4a3427813fbe10fa146fb30ac794c4a2ee41f5"
+    }
+  ]
+}

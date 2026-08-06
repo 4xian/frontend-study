@@ -1,0 +1,377 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "89378a4fcd620c433f879c7a492104721cde7d6f07fa51936b78b2cb6dadfb7b",
+  "batchId": "phase-3-markdown-capability",
+  "status": "implementation-complete",
+  "gateStatus": "passed",
+  "finalStatus": "implementation-complete / gate3-passed",
+  "recordedAt": "2026-08-05T11:50:32Z",
+  "courseRepository": {
+    "head": "e78ef5c3925b4004fb496d2fc479486c977805b5",
+    "stagedPhase3Changes": false
+  },
+  "sourceRepository": {
+    "path": "/Users/jian/Desktop/work/TDH/dzzz/dzzz-app",
+    "head": "167ca8aa91ca3a6b101246964ef4fddec3d21da0",
+    "statusShort": "",
+    "readOnly": true
+  },
+  "phase2Summary": {
+    "sourceItemCount": 167,
+    "courseNodeCount": 64,
+    "learnNodeCount": 51,
+    "collectionCounts": { "basics": 18, "intermediate": 17, "advanced": 16 },
+    "dependencyEdgeCount": 114,
+    "representativeProjectCallPathCount": 8,
+    "gateStatus": "passed"
+  },
+  "dependencies": {
+    "unified": "11.0.5",
+    "remark-parse": "11.0.0",
+    "remark-frontmatter": "5.0.0",
+    "remark-gfm": "4.0.1",
+    "remark-directive": "4.0.0",
+    "yaml": "2.9.0",
+    "zod": "4.4.3",
+    "shiki": "4.3.1",
+    "@shikijs/langs": "4.3.1",
+    "@shikijs/themes": "4.3.1"
+  },
+  "gate2TransitionFiles": [
+    {
+      "path": "docs/backend/java/audit/tooling/build-course-coverage-matrix.mjs",
+      "sha256": "6e61372906609837a927a8da49698ae8344f78dc8751abfd1eab9d5f103fc4fd"
+    },
+    {
+      "path": "docs/backend/java/audit/tooling/course-coverage-matrix-validator.mjs",
+      "sha256": "c9dd13a35191376d56d3a25134d71c2efd42bb1cb4f33f92afef66b5ba487e8e"
+    },
+    {
+      "path": "docs/backend/java/audit/course-coverage-matrix.json",
+      "sha256": "04d858896d07e975d3ab50796494873f09bd0ddf4b1a8b1ea87bd75cdd101d38"
+    },
+    {
+      "path": "docs/backend/java/audit/course-coverage-matrix.md",
+      "sha256": "c4283551b4f37081097551957d3b4e1ea44922e0a1bb5865be2c5cc18faa6021"
+    },
+    {
+      "path": "docs/backend/java/audit/phase-2-knowledge-path-manifest.json",
+      "sha256": "89378a4fcd620c433f879c7a492104721cde7d6f07fa51936b78b2cb6dadfb7b"
+    },
+    {
+      "path": "docs/backend/java/audit/reviews/phase-2-knowledge-path-signoff.json",
+      "sha256": "9d6c0af01c030f3e92bf2f3fd6b762d3ac89f18eaff072f1d6eae5fb15ee65ac"
+    },
+    {
+      "path": "docs/backend/java/audit/dzzz-app-file-inventory.md",
+      "sha256": "3c0d2a52a13d52495ed2c893282c4d6c8504df3dd0f76ea620a003cecadfd8b4"
+    },
+    {
+      "path": "docs/backend/java/audit/dzzz-app-source-analysis.md",
+      "sha256": "a4bcf17cf432f149b0bb0116869158c6517907406bd0f95bdbb7152d08ee954f"
+    },
+    {
+      "path": "docs/backend/java/dzzz-app-course-plan.md",
+      "sha256": "33cbeffdeeca22c010afe8705fa113171adc992fdd128d6a7e63e62a7b3512ef"
+    }
+  ],
+  "implementationFiles": [
+    {
+      "path": ".prettierignore",
+      "sha256": "8c73e44bcdf041b6df79bd7aedcbbde570234a9f53c06a88c1c1e0ba3e930af5"
+    },
+    {
+      "path": "env.d.ts",
+      "sha256": "0a8db5e4e800cd384f7f019e6eff3fe66f5255046d4092a644d9f4278b645556"
+    },
+    {
+      "path": "package.json",
+      "sha256": "64947b15c7715492b0c241314a1ae9a197bf8c298eb33c924989625e5933d902"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "76c60ac1e707e8b639bc068464e6cf3fc4e3911ae511df39bdb5d5ca660656c3"
+    },
+    {
+      "path": "tsconfig.node.json",
+      "sha256": "eef7659a5522f6bc1750a29950e6e24d30e3284729d631f0917ebb8b2353d4d9"
+    },
+    {
+      "path": "vite.config.ts",
+      "sha256": "b827a854e8afe6c22ee759eef19766d40253ab18d6a1d16d8b31368c9a74bec3"
+    },
+    {
+      "path": "vitest.config.ts",
+      "sha256": "9d44cba6e4f2681fde3c32723fde77e3f90af6f3ba5dc3c3a048e1a3f452b3d5"
+    },
+    {
+      "path": "playwright.config.ts",
+      "sha256": "b4d5b118fdf8312efef4e907abe05eba8087a3e3d0b14d6afea7001617c906f3"
+    },
+    {
+      "path": "build/backend-markdown-plugin.ts",
+      "sha256": "695ba4e1aa0bd63b03777a7d89177d65f738a95a4180abc329c23f3e463476b6"
+    },
+    {
+      "path": "docs/backend/java/audit/tooling/codegraph-extractor.mjs",
+      "sha256": "34aee6c6b6426e22112cdc82e1797f1e685d8a21db0762dd162834a731f70415"
+    },
+    {
+      "path": "src/components/blocks/PitfallsBlock.vue",
+      "sha256": "07ce923902f99dbad0402a0018d462d0947b02d535fa227121bdffa869aa8c94"
+    },
+    {
+      "path": "src/components/content/BackendMetaDetails.vue",
+      "sha256": "7dcd5afc129c831e30ea9644582a846d08027e5e3129b9af41f3279530a0c5fe"
+    },
+    {
+      "path": "src/components/content/BackendMetaDetails.spec.ts",
+      "sha256": "16db0ba99125197a35b2072d02fbf438a9227e96fff647303ae8a347a2e9b28b"
+    },
+    {
+      "path": "src/components/content/ContentRenderer.vue",
+      "sha256": "e2a395638513c8e170f7ff0ac6db671f45f9135f9368a9c357d0704042a06625"
+    },
+    {
+      "path": "src/components/content/ContentRenderer.spec.ts",
+      "sha256": "9ecd06026bc10027f08266e78ea163c3db70791a8d676907f6b6aa2d9911b188"
+    },
+    {
+      "path": "src/components/content/ExerciseBlock.vue",
+      "sha256": "31819c5c3a93e7fc8767d2d25a4d9811d9407d00a008ffba3c566ab02971fe00"
+    },
+    {
+      "path": "src/components/highlighter.ts",
+      "sha256": "b42740370369489d14d50e1d17d5f6c9466ad84922bddfe066882a949195a1d9"
+    },
+    {
+      "path": "src/components/highlighter.spec.ts",
+      "sha256": "891d4524cff55c94938ce58b0d8f2e5f717d1a0c1a08b269ddd8470f0504df41"
+    },
+    {
+      "path": "src/content/catalog/LearningCatalog.ts",
+      "sha256": "ca03dcdea7c867f470bba5090ac14c57529a32b83504c3512a3a793b49b7ec35"
+    },
+    {
+      "path": "src/content/catalog/LearningCatalog.spec.ts",
+      "sha256": "1f6f2491d0decf6e82cd844ce585b6c1f094c82daeafbbbb2ec35b1afc60e729"
+    },
+    {
+      "path": "src/content/catalog/index.ts",
+      "sha256": "34fc2c5dfa8b2187f3de6e654fe11ec3e66da0f23962a6e3d3910b5ed102a426"
+    },
+    {
+      "path": "src/content/catalog/backend-java-track.spec.ts",
+      "sha256": "97c82fc3cc66543f7f5668ac109d77b74905b8a4edd14e2527efc08bc6ff4790"
+    },
+    {
+      "path": "src/content/catalog/backend-markdown.spec.ts",
+      "sha256": "6a8f80c8a0b0791d1195f4e6624545477ee327ab676cf7389307aab29e692c85"
+    },
+    {
+      "path": "src/content/catalog/manifests/backend-java-track.ts",
+      "sha256": "6ce8b3ad9fedeb1b045405c63f2f6912b5f235ca809ba9bd92fd19f96ca17c12"
+    },
+    {
+      "path": "src/content/catalog/manifests/ecosystems.ts",
+      "sha256": "ccf44e08a0e3160f7ae37ae81a4ae6abcc04a9fb9f9f74ceadd8964e5b83c9fd"
+    },
+    {
+      "path": "src/content/catalog/manifests/tracks.ts",
+      "sha256": "fbd281af574d2bec88915b179a49a91c38c5ede90c720dd27d4d38227293e021"
+    },
+    {
+      "path": "src/content/schema/blocks.ts",
+      "sha256": "33537dc5b621d4c12b5ffb926ec524c668702a443184417972870c4c47d2b1f1"
+    },
+    {
+      "path": "src/content/schema/meta.ts",
+      "sha256": "926180e7349691fb85294e50c0c1e7fb5805691699ff5bbc4abc923c760fafeb"
+    },
+    {
+      "path": "src/content/markdown/backend-frontmatter.ts",
+      "sha256": "46fdeece4f83d650aa088f2bfeaa3f1a42f4bb54222472cc2b3bd5524a1ab4b9"
+    },
+    {
+      "path": "src/content/markdown/backend-blocks.ts",
+      "sha256": "9082a3d0726cadfb04c31bd0135d78730881994d3dab4d3618ca4320095ddad2"
+    },
+    {
+      "path": "src/content/markdown/backend-adapter.ts",
+      "sha256": "2a4cdd580006bcba62d928fc67cb641f00c63ca1c5b715e9863e3bd30d33c53e"
+    },
+    {
+      "path": "src/content/markdown/backend-adapter.spec.ts",
+      "sha256": "1ae2c36a863128b73494a2bfff1c1c806162a6691f19316e553d47c48b33059f"
+    },
+    {
+      "path": "src/content/markdown/__fixtures__/entries/learn/backend/java/basics/platform-fixture.md",
+      "sha256": "9bd260066ac11f4d21f1611cb42a63c97c16a55fd8fbb6d88f8b9a57c32fe0f9"
+    },
+    {
+      "path": "src/content/markdown/__fixtures__/entries/reference/backend/java/catalog/platform-reference.md",
+      "sha256": "2e308ddcde1b701200a09f53c9a4874d74a3342b38a79a91de675e0af964d127"
+    },
+    {
+      "path": "src/content/markdown/__fixtures__/entries/reference/backend/java/catalog/typescript-platform-reference.ts",
+      "sha256": "d1021e17c4e06b2de6332899531a88ee83d7ec9af2f64d3354c5faed44a0574b"
+    },
+    {
+      "path": "src/content/markdown/__fixtures__/entries/projects/backend/java/dzzz-app/platform-project.md",
+      "sha256": "431369978690f65508f02756b213b0f9c003af1dc6de45794e1d450480feddc8"
+    },
+    {
+      "path": "src/pages/ContentEntryPage.vue",
+      "sha256": "cd1b0e54040fe5ca42b4f6e826e1f0c411298f2a11d32a831b36d2041137b2d6"
+    },
+    {
+      "path": "src/pages/PurposePage.vue",
+      "sha256": "af844dcaf6c7f2165fda3320610de118d2e9239d9d7ebd0cb4c068b96921ea6c"
+    },
+    {
+      "path": "src/stores/progress.spec.ts",
+      "sha256": "9c101f36da8b6191580d8591791d8e09e2eeb98a4c6ccf51df161d6bb0bb6f53"
+    },
+    {
+      "path": "tests/e2e/backend-java-platform.spec.ts",
+      "sha256": "ff1a8774bf416efd11fc9e7397475ea23c13c6a7e32caa60eaa1546ab89e4fcf"
+    },
+    {
+      "path": "docs/backend/java/audit/reviews/phase-3-platform-research.md",
+      "sha256": "7f293bf3222e5c65085d63aca4fed40433fc4b5fb79ead068ab291c5acb9b45f"
+    }
+  ],
+  "verification": {
+    "focused": [
+      {
+        "command": "npx vitest run src/content/markdown/backend-adapter.spec.ts src/content/catalog/LearningCatalog.spec.ts src/content/catalog/backend-markdown.spec.ts src/content/catalog/backend-java-track.spec.ts src/components/highlighter.spec.ts src/components/content/BackendMetaDetails.spec.ts src/components/content/ContentRenderer.spec.ts src/stores/progress.spec.ts",
+        "status": "passed",
+        "summary": "8 files, 48 tests passed"
+      },
+      {
+        "command": "npx playwright test tests/e2e/backend-java-platform.spec.ts",
+        "status": "passed",
+        "summary": "2 tests passed"
+      },
+      {
+        "command": "npx vitest run src/components/highlighter.spec.ts src/content/markdown/backend-adapter.spec.ts src/content/catalog/backend-markdown.spec.ts",
+        "status": "passed",
+        "summary": "3 files, 22 tests passed after reviewer fixes"
+      }
+    ],
+    "full": [
+      {
+        "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+        "status": "passed",
+        "summary": "167 sources, 64 nodes, 114 dependency edges, 8 call paths, Gate 2 passed"
+      },
+      { "command": "npm run type-check", "status": "passed" },
+      {
+        "command": "npm run lint",
+        "status": "passed",
+        "summary": "0 errors after removing the unnecessary character-class escape"
+      },
+      {
+        "command": "npm run format:check",
+        "status": "passed",
+        "summary": "All matched files use Prettier; Playwright outputs and the generated route fixture are explicitly ignored"
+      },
+      {
+        "command": "npm run test",
+        "status": "passed",
+        "summary": "53 files, 262 tests passed"
+      },
+      { "command": "npm run build", "status": "passed", "summary": "961 modules transformed" },
+      {
+        "command": "npm run test:e2e",
+        "status": "flaky-existing",
+        "exitCode": 1,
+        "summary": "55 tests passed; the unrelated Teleport target-size assertion read 43.999969px instead of 44px in two parallel runs, while its isolated retry passed"
+      },
+      {
+        "command": "npx playwright test --workers=1",
+        "status": "passed",
+        "summary": "56 tests passed on the post-repair final serial full run"
+      },
+      {
+        "command": "npm audit --audit-level=low",
+        "status": "passed",
+        "summary": "0 vulnerabilities after updating transitive brace-expansion to 2.1.4"
+      },
+      {
+        "command": "npm --prefix docs/backend/java/audit/tooling audit --audit-level=low",
+        "status": "passed",
+        "summary": "0 vulnerabilities"
+      },
+      { "command": "git diff --check", "status": "passed" },
+      { "command": "git diff --cached --check", "status": "passed" },
+      {
+        "command": "git -C /Users/jian/Desktop/work/TDH/dzzz status --short -- dzzz-app",
+        "status": "passed",
+        "summary": "empty output"
+      }
+    ]
+  },
+  "browserEvidence": {
+    "spec": "tests/e2e/backend-java-platform.spec.ts",
+    "status": "passed",
+    "routes": [
+      "/learn",
+      "/learn/backend/java",
+      "/reference/backend/java/catalog/platform-reference",
+      "/reference/backend/java/catalog/typescript-platform-reference",
+      "/learn/vue/core/basics/template-syntax",
+      "/learn/vue/core/basics/conditional-list-rendering"
+    ],
+    "viewports": [
+      { "width": 1440, "height": 1000 },
+      { "width": 390, "height": 844 }
+    ],
+    "assertions": [
+      "backend/Java recommendation opens the 18/17/16 planned roadmap",
+      "the E2E-only Markdown fixture traverses plugin, catalog, search, route, renderer, reference directory and both neighbor directions",
+      "the fixture is enabled only by VITE_E2E_BACKEND_FIXTURE=true; the default catalog and production dist exclude its IDs and titles",
+      "existing Vue detail, catalog, search, neighbors and progress remain functional",
+      "no horizontal overflow",
+      "no console warning/error or pageerror in the target regression"
+    ]
+  },
+  "closedSpecFindings": [
+    "prerequisites and related now reject missing target IDs during catalog initialization",
+    "the target Playwright spec covers the real Markdown production chain through route rendering, directory, search and neighbor navigation",
+    "Markdown content modules use ?content-entry while the plugin returns null for bare .md requests",
+    "Shiki core, language and theme packages are all fixed at 4.3.1 while Java is the only added grammar",
+    "the plugin load method and backend block flush helpers have normative Chinese comments"
+  ],
+  "resolvedGateFindings": [
+    {
+      "id": "root-lint-no-useless-escape",
+      "phase3Introduced": false,
+      "evidence": "The unnecessary escape was removed; root lint passes."
+    },
+    {
+      "id": "root-format-generated-user-files",
+      "phase3Introduced": false,
+      "evidence": "The Playwright outputs and generated route fixture are explicitly excluded in .prettierignore; root format passes without rewriting them."
+    },
+    {
+      "id": "root-audit-brace-expansion",
+      "phase3Introduced": false,
+      "evidence": "The transitive dependency is updated from 2.1.2 to 2.1.4; root audit reports 0 vulnerabilities."
+    }
+  ],
+  "knownBaselines": [
+    {
+      "id": "parallel-e2e-teleport-subpixel-flake",
+      "phase3Introduced": false,
+      "evidence": "The unrelated Teleport test measured one 44px button as 43.999969px in parallel runs; its isolated retry and the final 56-test single-worker run passed."
+    }
+  ],
+  "reviews": {
+    "standards": { "status": "passed", "findingCount": 0 },
+    "spec": { "status": "passed", "findingCount": 0 }
+  },
+  "stopBoundary": "Phase 3 implementation is complete and Gate 3 has passed. Do not enter Phase 4 or author Java course content until the user explicitly confirms the next phase."
+}

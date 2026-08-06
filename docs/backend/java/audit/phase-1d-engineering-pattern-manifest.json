@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "batchId": "phase-1d-engineering-pattern",
+  "status": "completed",
+  "reviewedAt": "2026-08-04T12:44:02.000Z",
+  "gateStatus": "not-passed",
+  "previousBatch": {
+    "previousBatchId": "phase-1d-framework",
+    "previousManifestSha256": "e17a2ce40b18e7f375d79027f12f631f60a3b1a890996340cd7be77677095588",
+    "previousSourceInventorySha256": "c253c494c4858d366568c5579bd69e4e2141191c5116c895d616d1b4490c1947",
+    "previousPendingSourceItemCount": 519
+  },
+  "sourceInventory": {
+    "path": "engineering-pattern-capability-source-inventory.jsonl",
+    "sha256": "7ade12db21b935a1655f5f70544f486afa5a823074264144f89550103096e25b",
+    "itemCount": 519,
+    "observedFileAssignments": 6665,
+    "sourceKindCounts": {
+      "review-capability": 200,
+      "language-feature": 0,
+      "framework-usage": 0,
+      "review-risk": 319
+    },
+    "sourceKindFileAssignments": {
+      "review-capability": 3513,
+      "language-feature": 0,
+      "framework-usage": 0,
+      "review-risk": 3152
+    }
+  },
+  "matrix": {
+    "jsonPath": "java-engineering-pattern-capability-matrix.json",
+    "jsonSha256": "8cd1619084b8b0f9dadb9ea8a3915eb8dcaa8064e2e2ea90d5d700020373dc3b",
+    "markdownPath": "java-engineering-pattern-capability-matrix.md",
+    "markdownSha256": "92d3bcf5ad6ef3ad43e70b9e1576fc75198eaa173df79f6cf8838c0080b628a7",
+    "rawSourceItemCount": 519,
+    "normalizedSourceItemCount": 200,
+    "pendingSourceItemCount": 319,
+    "pendingBySourceKind": {
+      "review-capability": 0,
+      "language-feature": 0,
+      "framework-usage": 0,
+      "review-risk": 319
+    },
+    "capabilityCount": 38,
+    "normalizedObservedFileCount": 2742,
+    "representativeSymbolCount": 179
+  },
+  "manualReviewSignoff": {
+    "path": "reviews/phase-1d-engineering-pattern-signoff.json",
+    "sha256": "0e6b8c2a1616765370d30c4bf1ec8be57444c1f2ad92c76984ce8e12b57de93d",
+    "reviewedBy": "Codex",
+    "reviewerType": "agent-assisted-manual-review"
+  },
+  "coverageBoundary": {
+    "normalizedKinds": [
+      "engineering-pattern"
+    ],
+    "pendingKinds": [
+      "review-risk"
+    ],
+    "nextBatch": "review-risk",
+    "courseAuthoringStarted": false
+  }
+}

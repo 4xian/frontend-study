@@ -1,0 +1,188 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "batchId": "phase-1c-infrastructure",
+  "status": "completed",
+  "reviewedAt": "2026-08-04T05:45:32.000Z",
+  "manualReviewSignoff": {
+    "path": "reviews/phase-1c-infrastructure-signoff.json",
+    "sha256": "df8d9d28a0a4b89f6f2c96cb5ff2b299e3ddb31b244c11a493f984cc479bab45",
+    "reviewedBy": "Codex",
+    "reviewerType": "agent-assisted-manual-review",
+    "approvedShardCount": 2
+  },
+  "batchScope": {
+    "roots": [
+      "cache",
+      "download",
+      "media",
+      "logging",
+      "shard",
+      "storage",
+      "upload",
+      "license"
+    ],
+    "javaInventoryIndexRanges": [
+      [
+        66,
+        83
+      ],
+      [
+        395,
+        401
+      ],
+      [
+        1126,
+        1128
+      ],
+      [
+        1752,
+        1753
+      ],
+      [
+        2092,
+        2101
+      ],
+      [
+        2271,
+        2281
+      ],
+      [
+        3426,
+        3427
+      ]
+    ],
+    "excludedReviewedPaths": 3119
+  },
+  "recordContract": {
+    "format": "JSON Lines; one manually reviewed file record per line",
+    "riskStatus": "candidate for later capability or rejected-pattern normalization; not a defect verdict",
+    "roleBoundary": "physical infrastructure scope and final semantic role are recorded separately",
+    "resourceBoundary": "file, client, stream, cache, thread, SQL rewrite, and credential lifecycles require source evidence",
+    "signoffBoundary": "manual signoff binds reviewing candidate shard hashes before completed output promotes records to reviewed"
+  },
+  "summary": {
+    "batchFileCount": 53,
+    "batchLoc": 6175,
+    "declaredTypeCount": 55,
+    "fieldCount": 165,
+    "publicMethodCount": 272,
+    "rootCounts": {
+      "cache": 18,
+      "download": 7,
+      "license": 2,
+      "logging": 2,
+      "media": 3,
+      "shard": 5,
+      "storage": 5,
+      "upload": 11
+    },
+    "machineRoleCandidateCounts": {
+      "infrastructure": 39,
+      "unclassified": 14
+    },
+    "finalRoleCounts": {
+      "async-integration": 3,
+      "data-access": 5,
+      "data-model": 7,
+      "infrastructure": 38
+    },
+    "infrastructureShapeCounts": {
+      "download-adapter": 4,
+      "download-contract": 1,
+      "download-orchestrator": 1,
+      "download-result-model": 1,
+      "ftp-transfer-client": 1,
+      "license-adapter": 1,
+      "license-model": 1,
+      "logback-file-appender": 1,
+      "logback-rolling-policy": 1,
+      "media-converter-contract": 1,
+      "media-converter-worker": 2,
+      "moss-object-storage-client": 1,
+      "mybatis-table-shard-interceptor": 1,
+      "nio-file-helper": 1,
+      "s3-object-storage-client": 1,
+      "shard-data-contract": 1,
+      "shard-data-reflection-adapter": 1,
+      "startup-cache-loader": 18,
+      "storage-transfer-model": 5,
+      "table-shard-strategy": 1,
+      "table-shard-strategy-contract": 1,
+      "transfer-progress-callback": 1,
+      "upload-adapter": 4,
+      "upload-contract": 1,
+      "upload-orchestrator": 1
+    },
+    "roleCorrectionCount": 24,
+    "signalFileCounts": {
+      "commandLineRunnerLines": 18,
+      "staticCollectionLines": 19,
+      "rawThreadLines": 2,
+      "blockingSleepLines": 2,
+      "reflectionLines": 1,
+      "sqlRewriteLines": 1,
+      "externalClientLines": 7,
+      "pathBoundaryLines": 11,
+      "legacyFileApiLines": 8
+    },
+    "inboundUsageOccurrenceCount": 2696,
+    "outboundUsageOccurrenceCount": 959,
+    "riskCandidateCount": 126,
+    "riskCategoryCounts": {
+      "blocking-sleep": 2,
+      "broad-catch": 12,
+      "empty-catch": 2,
+      "external-client-lifecycle": 3,
+      "field-injection": 18,
+      "file-path-boundary": 11,
+      "in-memory-file-payload": 7,
+      "in-memory-media-buffer": 2,
+      "legacy-file-api": 8,
+      "legacy-license-compatibility": 2,
+      "legacy-misspelled-contract": 2,
+      "license-missing-fail-open": 1,
+      "license-validation-state": 1,
+      "mutable-static-cache": 18,
+      "raw-thread": 2,
+      "reflection-based-shard-injection": 1,
+      "sensitive-configuration-model": 1,
+      "sensitive-integration-log": 4,
+      "service-locator": 3,
+      "shared-stream-subscriber-state": 2,
+      "sneaky-throws-log-config": 2,
+      "sql-rewrite-interceptor": 1,
+      "startup-cache-load": 18,
+      "stateful-ftp-client": 1,
+      "success-state-overwrite": 1,
+      "unimplemented-adapter-null-result": 1
+    },
+    "currentAuditStatusCounts": {
+      "unreviewed": 264,
+      "reviewing": 0,
+      "reviewed": 3172,
+      "blocked": 0
+    }
+  },
+  "shards": [
+    {
+      "fileName": "records-0001-0050.jsonl",
+      "fileCount": 50,
+      "firstInventoryIndex": 66,
+      "lastInventoryIndex": 2280,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/cache/DzzzDxpzCacheLoader.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/upload/UploadUtil.java",
+      "sha256": "681ed06fdea6ae43d20d8a36fdd261b68bc07ee994bb4b1f2d8a5ebf54e335b8"
+    },
+    {
+      "fileName": "records-0051-0053.jsonl",
+      "fileCount": 3,
+      "firstInventoryIndex": 2281,
+      "lastInventoryIndex": 3427,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/upload/Uploader.java",
+      "lastPath": "dzzz-app/src/main/java/tdh/platform/component/license/lic/impl/LicFactoryImpl.java",
+      "sha256": "81ae9deceed7499ff417f6e3a820cdfa365999a72d4c2aefb63cd55bd0a3d69f"
+    }
+  ]
+}

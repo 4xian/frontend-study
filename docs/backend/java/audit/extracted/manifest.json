@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 1,
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "sourceManifestSha256": "179e722831ab66d55208618ba1db959c431505ec6b32ab492fb9232916ba60e1",
+  "generatedAt": "2026-08-03T19:49:18+08:00",
+  "generator": {
+    "path": "docs/backend/java/audit/tooling/extract-dzzz-app.mjs",
+    "javaParser": "3.0.1",
+    "minimumNode": "24",
+    "shardSize": 500
+  },
+  "recordContract": {
+    "format": "JSON Lines; one file record per line",
+    "status": "automatic extraction only; every record and CodeGraph edge is a review candidate",
+    "sensitiveValues": "method bodies, field initializers, literals, and annotation arguments are excluded"
+  },
+  "summary": {
+    "files": {
+      "main": 3429,
+      "test": 7,
+      "total": 3436
+    },
+    "extractionStatusCounts": {
+      "parsed-needs-review": 3436
+    },
+    "declarations": {
+      "types": 3489,
+      "fields": 17821,
+      "constructors": 510,
+      "publicMethods": 11859,
+      "annotations": 21483
+    },
+    "typeKinds": {
+      "class": 3007,
+      "annotation": 13,
+      "interface": 298,
+      "enum": 171
+    },
+    "roleCandidates": {
+      "startup-config": 20,
+      "cross-cutting": 40,
+      "data-model": 1649,
+      "infrastructure": 39,
+      "async-integration": 216,
+      "common": 255,
+      "web-entry": 145,
+      "data-access": 134,
+      "unclassified": 15,
+      "persistence-model": 578,
+      "business": 338,
+      "test": 7
+    },
+    "languageFeatureFiles": {
+      "annotation-use": 3099,
+      "catch-clause": 318,
+      "concurrency": 66,
+      "reflection": 11,
+      "switch": 30,
+      "synchronized-block": 12,
+      "throw": 124,
+      "lambda": 178,
+      "stream-api": 174,
+      "enhanced-for": 380,
+      "method-reference": 170,
+      "io": 326,
+      "try-with-resources": 28,
+      "generic-declaration": 67,
+      "anonymous-class-body": 35,
+      "optional": 4
+    },
+    "languageFeatureOccurrences": {
+      "annotation-use": 21483,
+      "catch-clause": 1797,
+      "concurrency": 66,
+      "reflection": 11,
+      "switch": 51,
+      "synchronized-block": 13,
+      "throw": 372,
+      "lambda": 1229,
+      "stream-api": 174,
+      "enhanced-for": 2210,
+      "method-reference": 3628,
+      "io": 326,
+      "try-with-resources": 34,
+      "generic-declaration": 76,
+      "anonymous-class-body": 47,
+      "optional": 4
+    },
+    "frameworkUsageFiles": {
+      "spring-boot": 31,
+      "spring-core": 432,
+      "spring-retry": 2,
+      "spring-scheduling-async": 20,
+      "swagger-2": 194,
+      "bean-validation": 562,
+      "lombok": 2328,
+      "spring-aop": 6,
+      "junit": 8,
+      "mybatis-plus": 488,
+      "servlet": 133,
+      "xml-jaxb": 454,
+      "mybatis": 58,
+      "spring-transaction": 114,
+      "fastjson": 209,
+      "spring-data-redis": 1,
+      "http-client": 73,
+      "spring-mvc": 160,
+      "spring-websocket": 12,
+      "jackson": 14,
+      "mockito": 1
+    },
+    "codeGraph": {
+      "database": ".codegraph/codegraph.db",
+      "indexedWithVersion": "1.4.1",
+      "extractionVersion": "24",
+      "verifiedFileCount": 3436,
+      "internalCandidateOccurrences": 80110,
+      "unresolvedCandidateOccurrences": 77759,
+      "unsafeUnresolvedCandidateOccurrencesExcluded": 31101,
+      "nonInventoryCandidateOccurrencesExcluded": 7322,
+      "relationshipKinds": [
+        "calls",
+        "decorates",
+        "extends",
+        "function_ref",
+        "implements",
+        "instantiates"
+      ]
+    },
+    "auditStatusCounts": {
+      "unreviewed": 3436,
+      "reviewing": 0,
+      "reviewed": 0,
+      "blocked": 0
+    }
+  },
+  "analysisContentSha256": "958d37cf1be19e43bd5ef4c088d4f3c2c9fad18b3188b3df8aa38a4438c736f6",
+  "shards": [
+    {
+      "fileName": "dzzz-app-files-0001-0500.jsonl",
+      "fileCount": 500,
+      "firstIndex": 1,
+      "lastIndex": 500,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/DzzzAreaApplication.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/dto/dc/GetUserIdDataDTO.java",
+      "sha256": "af05c40cc1fde6a9ad9564e1b8bef24b5fb9bab597f61f0c3a0f7244c7d68e5c"
+    },
+    {
+      "fileName": "dzzz-app-files-0501-1000.jsonl",
+      "fileCount": 500,
+      "firstIndex": 501,
+      "lastIndex": 1000,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/dto/dc/MeetingInfoDTO.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/eo/hygl/HypxEO.java",
+      "sha256": "2571375d42cb2c2383de050b0991bc9b83cf93d3315f40f0fd57d797ec358a6f"
+    },
+    {
+      "fileName": "dzzz-app-files-1001-1500.jsonl",
+      "fileCount": 500,
+      "firstIndex": 1001,
+      "lastIndex": 1500,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/eo/hygl/InitHyglDataEO.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/po/vidyo/client/CreateModeratorURLResponse.java",
+      "sha256": "5d6e587d6c39c929e9a2c28d2c67af7a349787dbe79c39c9265105f1ac54f43b"
+    },
+    {
+      "fileName": "dzzz-app-files-1501-2000.jsonl",
+      "fileCount": 500,
+      "firstIndex": 1501,
+      "lastIndex": 2000,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/po/vidyo/client/CreatePublicRoomRequest.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TsxxSearchServiceImpl.java",
+      "sha256": "e737a3334eba7b08099cc35cb876251df1d885c2c676170816a1474c4a95148f"
+    },
+    {
+      "fileName": "dzzz-app-files-2001-2500.jsonl",
+      "fileCount": 500,
+      "firstIndex": 2001,
+      "lastIndex": 2500,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TszjglServiceImpl.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/vo/JftjSjfcVO.java",
+      "sha256": "419729fa0319532a41f578ab1578cbdb661ba29225585b020526b8979403d8f1"
+    },
+    {
+      "fileName": "dzzz-app-files-2501-3000.jsonl",
+      "fileCount": 500,
+      "firstIndex": 2501,
+      "lastIndex": 3000,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/vo/JftjTjVO.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/vo/sjyd/sign_new/SaveSignDataWithOfflineSqtVO.java",
+      "sha256": "c69e016b2d351eaf781931b3acdcb6dc7eb570344a0f9ef5011c033879a8c149"
+    },
+    {
+      "fileName": "dzzz-app-files-3001-3436.jsonl",
+      "fileCount": 436,
+      "firstIndex": 3001,
+      "lastIndex": 3436,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/vo/sjyd/sign_new/SaveSignDragResultByPageNumVO.java",
+      "lastPath": "dzzz-app/src/test/java/com/tdh/bdzz/util/PdfKeywordPositionUtilTest.java",
+      "sha256": "4cdc16d30a0354512ed8746d04b9468f4a2965c3752959d848e81eed62711f19"
+    }
+  ]
+}

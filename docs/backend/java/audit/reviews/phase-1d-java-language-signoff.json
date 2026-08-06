@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "batchId": "phase-1d-java-language",
+  "status": "approved",
+  "reviewedBy": "Codex",
+  "reviewerType": "agent-assisted-manual-review",
+  "reviewedAt": "2026-08-04T09:02:48.000Z",
+  "reviewMethod": "核对 906 个原始输入分母、27731 条文件关联，并逐项确认 40 个语言输入只映射到 15 个规范 Java 语言能力一次。",
+  "approvalContract": "人工签核必须同时绑定原始输入清单、结构化矩阵和 Markdown 摘要的 SHA-256；未映射输入保持 pending。",
+  "summary": {
+    "rawSourceItemCount": 906,
+    "normalizedSourceItemCount": 40,
+    "pendingSourceItemCount": 866,
+    "capabilityCount": 15
+  },
+  "artifacts": [
+    {
+      "path": "capability-normalization-source-inventory.jsonl",
+      "sha256": "7a5a9d5745820f7ac8e9874419e8a45c9cc7b60723ee9f886e3a4336d7454815"
+    },
+    {
+      "path": "java-language-capability-matrix.json",
+      "sha256": "b42122285a7e4680c9d5148b44effaa5838a8d2bfa62e1cb2c4f0175d727c076"
+    },
+    {
+      "path": "java-language-capability-matrix.md",
+      "sha256": "95d1e401009d7c5afea88c885218c30138fb45d9dd2069821d73d6be540e5e20"
+    }
+  ]
+}

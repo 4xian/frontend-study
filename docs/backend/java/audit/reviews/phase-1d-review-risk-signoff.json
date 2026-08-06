@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "batchId": "phase-1d-review-risk",
+  "status": "approved",
+  "reviewedBy": "Codex",
+  "reviewerType": "agent-assisted-manual-review",
+  "reviewedAt": "2026-08-04T13:33:17.000Z",
+  "reviewMethod": "逐项核对上一批 319 个 review-risk 输入，将 86 个未分类输入和 1 个多类别输入显式归入唯一规范风险模式，并复算 Phase 1D 五批的 906 个 sourceId 全局集合。",
+  "approvalContract": "人工签核只认可风险归属和证据边界，必须同时绑定本批输入清单、结构化矩阵和 Markdown 摘要的 SHA-256；项目旧写法不得作为推荐实践，线上研究、示例改写和课程正文尚未开始。",
+  "summary": {
+    "rawSourceItemCount": 319,
+    "normalizedSourceItemCount": 319,
+    "pendingSourceItemCount": 0,
+    "pendingBySourceKind": {
+      "review-capability": 0,
+      "language-feature": 0,
+      "framework-usage": 0,
+      "review-risk": 0
+    },
+    "riskPatternCount": 47,
+    "normalizedObservedFileCount": 1568,
+    "representativeSymbolCount": 225
+  },
+  "artifacts": [
+    {
+      "path": "review-risk-source-inventory.jsonl",
+      "sha256": "8db78db07fa0c1df3212b8ef26700c2a16370b2cd7d80cc3885cca0db0d8cb32"
+    },
+    {
+      "path": "java-review-risk-matrix.json",
+      "sha256": "0e1e484197fbaa55f806f385bc1f6a32d1783e8920bb64d1f88a3fe4f8dc4288"
+    },
+    {
+      "path": "java-review-risk-matrix.md",
+      "sha256": "933eeb555efda9c3f1da75481509e757300639ea810594f33df9fe96c18995d3"
+    }
+  ]
+}

@@ -1,7 +1,8 @@
 # Demo 与交互规范
 
-> 版本：v1.0  
+> 版本：v2.0
 > 状态：生效
+> 适用范围：`src/categories/<domain>/<technology>/<module>/demos/`
 
 ## 1. 创建条件
 
@@ -10,7 +11,7 @@ Demo 只用于展示可观察行为，例如状态变化、更新时序、生命
 或测量 fixture，不能用静态浏览器卡片冒充验证。
 
 每课通常只有一个聚焦 Demo。Reference 仅在交互明显提升理解时增加 Demo，不追求条目数量与 Demo
-一一对应。
+一一对应。需要多个文件的本地 Demo 放入 `demos/<slug>/`；该源码包不是新的菜单或 URL 层级。
 
 ## 2. 身份与同源
 
@@ -22,8 +23,11 @@ engineering.vite.learn.intermediate.hmr.state-preservation-demo
 react.core.learn.basics.state.counter-demo
 ```
 
-registry 按完整 ID 解析运行模块和 `?raw` 源码，禁止按 basename 查找。运行组件和代码展示必须来自
-同一个源文件；复制一份“好看的展示代码”会破坏真实性。
+Module manifest 按完整 ID 解析运行模块和 raw 源码，禁止按 basename 查找。运行组件和代码展示必须
+来自同一个源文件；复制一份“好看的展示代码”会破坏真实性。
+
+外部 Demo 只允许显式 HTTPS URL，使用新标签页和安全的 opener 隔离，不使用 iframe。外部 Demo
+没有本地源码时必须标记为外部资源，不能伪装成站内可运行源码。
 
 ## 3. 行为设计
 
@@ -53,3 +57,4 @@ Demo 使用 flex、正常文档流和 margin，禁止 CSS Grid 与 `gap`。固�
 - reduced motion 下功能与信息完整。
 - Vue/React 同 basename Demo 切换不串组件或源码。
 - React Adapter 重复进入和离开不产生重复 root warning，并在 Vue 页面不提前加载 runtime。
+- Module 迁移后新 Demo 路径可刷新，旧路径未命中且不重定向。

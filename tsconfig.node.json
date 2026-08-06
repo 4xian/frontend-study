@@ -2,9 +2,9 @@
 {
   "extends": "@tsconfig/node24/tsconfig.json",
   "include": [
+    "build/**/*.ts",
     "vite.config.*",
     "vitest.config.*",
-    "cypress.config.*",
     "playwright.config.*",
     "eslint.config.*"
   ],

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "batchId": "phase-1c-test",
+  "status": "approved",
+  "reviewedBy": "Codex",
+  "reviewerType": "agent-assisted-manual-review",
+  "reviewedAt": "2026-08-04T08:25:57.000Z",
+  "reviewMethod": "逐文件复核 7 个测试文件，核对 46 个测试方法、148 次断言、fixture、真实生产入口、反射和 mock 边界、资源生命周期、全局状态及风险证据。",
+  "approvalContract": "只有人工确认的 reviewing 候选分片 SHA-256 才能把记录转为 reviewed。",
+  "summary": {
+    "approvedFileCount": 7,
+    "approvedLoc": 1840,
+    "approvedShardCount": 1
+  },
+  "shards": [
+    {
+      "fileName": "records-0001-0007.jsonl",
+      "fileCount": 7,
+      "sha256": "485f923c5548272f47d8c00a1fcbc0f8e2c2875a5ef0f0744a6e7c91d5cc88ea",
+      "decision": "approved"
+    }
+  ]
+}

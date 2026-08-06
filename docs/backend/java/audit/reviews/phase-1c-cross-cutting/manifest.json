@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "batchId": "phase-1c-cross-cutting",
+  "status": "completed",
+  "reviewedAt": "2026-08-04T02:57:50.000Z",
+  "manualReviewSignoff": {
+    "path": "reviews/phase-1c-cross-cutting-signoff.json",
+    "sha256": "55d3aa6b88803fb10d0303dbf6ab742c1d5fc5df57016dccedb5b6582a5390d4",
+    "reviewedBy": "Codex",
+    "reviewerType": "agent-assisted-manual-review",
+    "approvedShardCount": 1
+  },
+  "batchScope": {
+    "roots": [
+      "annoation",
+      "aop",
+      "context",
+      "exception",
+      "validator"
+    ],
+    "javaInventoryIndexRanges": [
+      [
+        2,
+        18
+      ],
+      [
+        124,
+        134
+      ],
+      [
+        1122,
+        1125
+      ],
+      [
+        2366,
+        2373
+      ]
+    ]
+  },
+  "recordContract": {
+    "format": "JSON Lines; one manually reviewed file record per line",
+    "riskStatus": "candidate for later capability or rejected-pattern normalization; not a defect verdict",
+    "roleBoundary": "physical batch scope and final semantic role are recorded separately",
+    "eventBoundary": "Spring event publication is not called asynchronous without multicaster evidence"
+  },
+  "summary": {
+    "batchFileCount": 40,
+    "batchLoc": 1773,
+    "declaredTypeCount": 40,
+    "fieldCount": 18,
+    "publicMethodCount": 78,
+    "rootCounts": {
+      "annoation": 14,
+      "aop": 3,
+      "context": 11,
+      "exception": 4,
+      "validator": 8
+    },
+    "machineRoleCandidateCounts": {
+      "cross-cutting": 40
+    },
+    "finalRoleCounts": {
+      "async-integration": 7,
+      "cross-cutting": 33
+    },
+    "crossCuttingShapeCounts": {
+      "annotation-contract": 13,
+      "annotation-validator": 6,
+      "application-context-bridge": 1,
+      "application-event": 6,
+      "application-event-publisher": 1,
+      "aspect": 2,
+      "exception-type": 3,
+      "global-exception-handler": 1,
+      "pointcut-declaration": 1,
+      "request-context-accessor": 1,
+      "startup-hook": 1,
+      "thread-context-holder": 1,
+      "validation-contract": 1,
+      "validation-result-model": 2
+    },
+    "roleCorrectionCount": 7,
+    "annotationTypeCount": 13,
+    "inboundUsageOccurrenceCount": 2258,
+    "outboundUsageOccurrenceCount": 38,
+    "riskCandidateCount": 75,
+    "riskCategoryCounts": {
+      "ambient-request-session-context": 1,
+      "anonymous-user-fallback-object": 1,
+      "aspect-alters-exception-flow": 2,
+      "aspect-logs-arguments-or-results": 1,
+      "broad-global-exception-handler": 1,
+      "broad-service-pointcut": 1,
+      "commented-context-cleanup": 1,
+      "custom-validation-name-collision": 6,
+      "custom-validator-contract": 6,
+      "event-publication-mode-not-local": 1,
+      "exception-message-in-response": 1,
+      "exception-response-without-http-status": 1,
+      "ineffective-inherited-annotation": 10,
+      "legacy-misspelled-contract": 25,
+      "mutable-application-event": 4,
+      "mutable-static-context": 2,
+      "raw-thread-local-type": 1,
+      "reflection-driven-parameter-contract": 1,
+      "startup-external-initialization": 1,
+      "static-service-locator": 1,
+      "string-intern-monitor": 1,
+      "thread-local-cleanup-obligation": 1,
+      "unbounded-rate-limiter-cache": 1,
+      "unsupported-validator-type-passes": 2,
+      "validation-error-prints-raw-value": 1,
+      "validator-array-assumption": 1
+    },
+    "currentAuditStatusCounts": {
+      "unreviewed": 508,
+      "reviewing": 0,
+      "reviewed": 2928,
+      "blocked": 0
+    }
+  },
+  "shards": [
+    {
+      "fileName": "records-0001-0040.jsonl",
+      "fileCount": 40,
+      "firstInventoryIndex": 2,
+      "lastInventoryIndex": 2373,
+      "firstPath": "dzzz-app/src/main/java/com/tdh/bdzz/annoation/AutoValid.java",
+      "lastPath": "dzzz-app/src/main/java/com/tdh/bdzz/validator/SizeValidator.java",
+      "sha256": "64984878f6d5551c15106848eeec048df49717b09e75eab1f4177d76c8b1f0fb"
+    }
+  ]
+}

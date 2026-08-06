@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "batchId": "phase-1d-review-risk",
+  "status": "completed",
+  "reviewedAt": "2026-08-04T13:33:17.000Z",
+  "gateStatus": "passed",
+  "previousBatch": {
+    "previousBatchId": "phase-1d-engineering-pattern",
+    "previousManifestSha256": "2ea5eea9d4fd4ce5242daaf7daba0d21c901c2a5c949bcac4d178f43ffea2324",
+    "previousSourceInventorySha256": "7ade12db21b935a1655f5f70544f486afa5a823074264144f89550103096e25b",
+    "previousPendingSourceItemCount": 319
+  },
+  "sourceInventory": {
+    "path": "review-risk-source-inventory.jsonl",
+    "sha256": "8db78db07fa0c1df3212b8ef26700c2a16370b2cd7d80cc3885cca0db0d8cb32",
+    "itemCount": 319,
+    "observedFileAssignments": 3152,
+    "sourceKindCounts": {
+      "review-capability": 0,
+      "language-feature": 0,
+      "framework-usage": 0,
+      "review-risk": 319
+    },
+    "sourceKindFileAssignments": {
+      "review-capability": 0,
+      "language-feature": 0,
+      "framework-usage": 0,
+      "review-risk": 3152
+    }
+  },
+  "matrix": {
+    "jsonPath": "java-review-risk-matrix.json",
+    "jsonSha256": "0e1e484197fbaa55f806f385bc1f6a32d1783e8920bb64d1f88a3fe4f8dc4288",
+    "markdownPath": "java-review-risk-matrix.md",
+    "markdownSha256": "933eeb555efda9c3f1da75481509e757300639ea810594f33df9fe96c18995d3",
+    "rawSourceItemCount": 319,
+    "normalizedSourceItemCount": 319,
+    "pendingSourceItemCount": 0,
+    "pendingBySourceKind": {
+      "review-capability": 0,
+      "language-feature": 0,
+      "framework-usage": 0,
+      "review-risk": 0
+    },
+    "riskPatternCount": 47,
+    "normalizedObservedFileCount": 1568,
+    "representativeSymbolCount": 225
+  },
+  "globalNormalization": {
+    "canonicalSourceItemCount": 906,
+    "normalizedSourceItemCount": 906,
+    "pendingSourceItemCount": 0,
+    "batchNormalizedSourceItemCounts": [
+      40,
+      112,
+      235,
+      200,
+      319
+    ],
+    "normalizedCatalogItemCount": 167,
+    "duplicateSourceAssignmentCount": 0,
+    "missingSourceItemCount": 0,
+    "extraSourceItemCount": 0
+  },
+  "manualReviewSignoff": {
+    "path": "reviews/phase-1d-review-risk-signoff.json",
+    "sha256": "24d1ca1fa02bbcc54a3807c4c88deb85341cc9fec7c715235105b724f7f27a5c",
+    "reviewedBy": "Codex",
+    "reviewerType": "agent-assisted-manual-review"
+  },
+  "coverageBoundary": {
+    "normalizedKinds": [
+      "review-risk-pattern"
+    ],
+    "pendingKinds": [],
+    "nextPhase": "phase-2-knowledge-path",
+    "courseAuthoringStarted": false
+  }
+}

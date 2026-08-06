@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "batchId": "phase-1c-common-code",
+  "status": "approved",
+  "reviewedBy": "Codex",
+  "reviewerType": "agent-assisted-manual-review",
+  "reviewedAt": "2026-08-04T08:08:37.000Z",
+  "reviewMethod": "逐文件复核 257 个通用代码物理范围文件，完整核对 101 个显式职责文件和 6 个枚举目录特殊文件，并复核硬编码秘密、凭据日志、职责、生命周期、使用边、风险行号和角色纠正。",
+  "approvalContract": "只有人工确认的 reviewing 候选分片 SHA-256 才能把记录转为 reviewed。",
+  "summary": {
+    "approvedFileCount": 257,
+    "approvedLoc": 33715,
+    "approvedShardCount": 6
+  },
+  "shards": [
+    {
+      "fileName": "records-0001-0050.jsonl",
+      "fileCount": 50,
+      "sha256": "cf2ad648b49123418d7c431f57b3419ef10c592f02297964a5d20472e5d2684a",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-0051-0100.jsonl",
+      "fileCount": 50,
+      "sha256": "9f1c92f0377f72178078185c304b2a0cafadd610bdc482cb505534b2e9faf90a",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-0101-0150.jsonl",
+      "fileCount": 50,
+      "sha256": "4fb254b0865097b738707fee576f0ba254cabc2bac1f2a37cffbd76a32e14d45",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-0151-0200.jsonl",
+      "fileCount": 50,
+      "sha256": "671b1f231e06ce35a6706de9888865319c2904240b75f81950afa436b8f4ebd4",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-0201-0250.jsonl",
+      "fileCount": 50,
+      "sha256": "fd40ba7442da8dbc42db4ee4edeb52c52533e845035c6f5a81b69882788c71be",
+      "decision": "approved"
+    },
+    {
+      "fileName": "records-0251-0257.jsonl",
+      "fileCount": 7,
+      "sha256": "be69dc8d0ea606549ae2cfd49cf893ad905073ad7ff7179b73e7d2166295c938",
+      "decision": "approved"
+    }
+  ]
+}

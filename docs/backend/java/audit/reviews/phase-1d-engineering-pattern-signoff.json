@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "batchId": "phase-1d-engineering-pattern",
+  "status": "approved",
+  "reviewedBy": "Codex",
+  "reviewerType": "agent-assisted-manual-review",
+  "reviewedAt": "2026-08-04T12:44:02.000Z",
+  "reviewMethod": "逐项核对上一批 519 个 pending 输入，将 200 个经人工复核的文件级工程候选归一化为 38 个工程模式能力；319 个风险说明全部继续保持 pending。",
+  "approvalContract": "人工签核必须同时绑定本批输入清单、结构化矩阵和 Markdown 摘要的 SHA-256；风险反例、线上研究、项目示例和课程正文不得提前开始。",
+  "summary": {
+    "rawSourceItemCount": 519,
+    "normalizedSourceItemCount": 200,
+    "pendingSourceItemCount": 319,
+    "capabilityCount": 38,
+    "normalizedObservedFileCount": 2742,
+    "representativeSymbolCount": 179
+  },
+  "artifacts": [
+    {
+      "path": "engineering-pattern-capability-source-inventory.jsonl",
+      "sha256": "7ade12db21b935a1655f5f70544f486afa5a823074264144f89550103096e25b"
+    },
+    {
+      "path": "java-engineering-pattern-capability-matrix.json",
+      "sha256": "8cd1619084b8b0f9dadb9ea8a3915eb8dcaa8064e2e2ea90d5d700020373dc3b"
+    },
+    {
+      "path": "java-engineering-pattern-capability-matrix.md",
+      "sha256": "92d3bcf5ad6ef3ad43e70b9e1576fc75198eaa173df79f6cf8838c0080b628a7"
+    }
+  ]
+}
