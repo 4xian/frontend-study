@@ -1,0 +1,482 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.basics.strings-encoding-and-text-matching",
+  "batchId": "phase-4-strings-encoding-and-text-matching",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "phase": "Phase B",
+  "phaseBProgress": "14/21",
+  "phaseBReverification": {
+    "recordedAt": "2026-08-14T23:18:22Z",
+    "contract": {
+      "title": "字符串、字符编码、正则与 Base64",
+      "url": "/backend/java/core/learn/strings-encoding-and-text-matching",
+      "durationMinutes": 90,
+      "prerequisites": ["backend.java.learn.basics.annotations-and-metadata"],
+      "requiredTopics": [
+        "String、UTF-16 code unit、Unicode code point 与用户感知字符",
+        "显式 Charset、UTF-8 往返与严格解码错误策略",
+        "Pattern、Matcher、匹配范围与两层转义",
+        "Basic、URL、MIME Base64 与 padding 合同",
+        "Java 25/8 兼容反馈环"
+      ]
+    },
+    "phaseAFrozenPlan": {
+      "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+      "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81",
+      "previousCourse": "backend.java.learn.basics.annotations-and-metadata",
+      "nextCourse": "backend.java.learn.basics.collections-and-iteration-contracts",
+      "nextCourseStarted": false,
+      "phaseBStopBoundary": "B-14 关闭后才允许读取 B-15；B-21 基础 Gate 关闭后立即停止，不进入 Phase C。"
+    },
+    "sourceReverification": {
+      "method": "Tavily 调研结果回到 Java SE 25 RI、Oracle、JLS 25/8、Java SE API 与 RFC 4648 官方正文核验",
+      "communitySourcesUsedAsEvidence": false,
+      "verifiedAt": "2026-08-15",
+      "uniqueCurrentUrls": 24,
+      "httpStatus": "全部返回 200",
+      "repair": "将返回 403 的 JEP 400 正文链接替换为 Java SE 25 Charset API 对默认 UTF-8 合同的直接说明"
+    },
+    "artifacts": [
+      {
+        "path": "docs/research/backend/java/basics/strings-encoding-and-text-matching.md",
+        "sha256": "dc9e1397c561d4359b391726b8e6418560a84d21ea3e9a4ce4a231bd0f6389d8"
+      },
+      {
+        "path": "src/categories/backend/java/core/learn/strings-encoding-and-text-matching.md",
+        "sha256": "73b818a7740d45e92b44e8917fd9e56eb4418b942318552dae10f9129188fe1c"
+      },
+      {
+        "path": "src/categories/backend/java/core/backend-java-track.ts",
+        "sha256": "dcb7a04baa824bd0d1106bea799715b042fde27812d21f31678160f28c8efd42"
+      },
+      {
+        "path": "src/categories/backend/java/core/entry-manifest.ts",
+        "sha256": "4385da9b31d862fdc4184d6fae0130eaf43d2b3e9c7f08d4d55a7818dd05eb76"
+      },
+      {
+        "path": "docs/backend/java/audit/phase-2-knowledge-path-manifest.json",
+        "sha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407"
+      }
+    ],
+    "routeIdentity": {
+      "stableIdPreserved": true,
+      "stableUrlPreserved": true,
+      "trackPosition": 14,
+      "trackStatus": "available",
+      "loaderSlug": "strings-encoding-and-text-matching",
+      "trackChangedInThisBatch": false,
+      "loaderChangedInThisBatch": false
+    },
+    "baselineVerification": [
+      {
+        "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+        "exitCode": 0,
+        "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+      },
+      { "command": "npm run type-check", "exitCode": 0, "summary": "passed" },
+      { "command": "npm run lint", "exitCode": 0, "summary": "passed" },
+      { "command": "npm run format:check", "exitCode": 0, "summary": "passed" },
+      {
+        "command": "npm run test:unit",
+        "exitCode": 0,
+        "summary": "empty configured unit directory is valid"
+      },
+      {
+        "command": "npm run test:e2e",
+        "exitCode": 0,
+        "summary": "empty configured E2E directory is valid"
+      },
+      {
+        "command": "npm run build",
+        "exitCode": 0,
+        "summary": "passed; 1725 modules transformed; existing catalog chunk warning only"
+      }
+    ],
+    "javaVerification": {
+      "command": "extract the 如何验证 bash block from the final lesson and execute it with zsh -f",
+      "exitCode": 0,
+      "sharedStableOutput": "text|units=3|points=2|utf8=5|roundtrip=true|match=42|quoted=true|url=QfCfmIA|mime=true|errors=true,true,true",
+      "negativeCases": [
+        "strict malformed UTF-8 rejected",
+        "invalid regular expression rejected",
+        "invalid Basic Base64 rejected"
+      ],
+      "versions": ["Eclipse Temurin 25.0.3+9 LTS", "Eclipse Temurin 8u492-b09"],
+      "temporaryAssets": {
+        "location": "host and container /tmp",
+        "cleanupMethod": "shell trap with find -depth -delete",
+        "cleanupStatus": "complete"
+      }
+    },
+    "browserVerification": {
+      "tool": "Playwright CLI",
+      "session": "b14-current",
+      "baseUrl": "http://127.0.0.1:4173/",
+      "targetPath": "/backend/java/core/learn/strings-encoding-and-text-matching",
+      "desktop": {
+        "viewport": "1440x900",
+        "documentClientWidth": 1440,
+        "documentScrollWidth": 1440,
+        "horizontalOverflow": false,
+        "title": "字符串、字符编码、正则与 Base64",
+        "codeBlockCount": 24,
+        "durationText": "约 90 分钟",
+        "previousPath": "/backend/java/core/learn/annotations-and-metadata",
+        "nextPath": "/backend/java/core/learn/collections-and-iteration-contracts",
+        "searchTerm": "字符串、字符编码、正则与 Base64",
+        "searchResultCount": 1
+      },
+      "mobile": {
+        "viewport": "390x844",
+        "documentClientWidth": 390,
+        "documentScrollWidth": 390,
+        "horizontalOverflow": false,
+        "completionButtonTextAfterReload": "取消完成",
+        "progressPersistedAfterReload": true
+      },
+      "console": { "errors": 0, "warnings": 0 },
+      "productionRequests": { "count": 70, "allStatus200": true }
+    },
+    "review": {
+      "riskClassification": "复用课程的路线元数据、衔接说明和官方来源卡修正",
+      "independentReviewRequired": false,
+      "priorFullReview": "PASS / 0 finding",
+      "currentVerification": "Java 25/8 反馈、完整工程 Gate、官方链接和生产浏览器验证通过"
+    },
+    "workspaceProtection": {
+      "dirtyWorkspaceProtected": true,
+      "unrelatedChangesPreserved": true,
+      "scopedStagedAndUnstagedDiffCheck": "PASS"
+    },
+    "changedFiles": [
+      "docs/research/backend/java/basics/strings-encoding-and-text-matching.md",
+      "src/categories/backend/java/core/learn/strings-encoding-and-text-matching.md",
+      "docs/backend/java/audit/reviews/phase-4-strings-encoding-and-text-matching-signoff.json"
+    ]
+  },
+  "recordedAt": "2026-08-06T23:45:39Z",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "stagedBatchSpecificChanges": false,
+    "sharedManifestStagingPreserved": true
+  },
+  "sourceRepository": {
+    "path": "/Users/jian/Desktop/work/TDH/dzzz/dzzz-app",
+    "head": "167ca8aa91ca3a6b101246964ef4fddec3d21da0",
+    "statusShort": "",
+    "readOnly": true
+  },
+  "phase2Freeze": {
+    "courseCoverageMatrixJsonSha256": "04d858896d07e975d3ab50796494873f09bd0ddf4b1a8b1ea87bd75cdd101d38",
+    "courseCoverageMatrixSha256": "b7fd50ffabbcf8a198802e907cef769ac969a71e4e14c40038f4aaaed09d91ad",
+    "researchStatus": "not-started",
+    "exampleStatus": "not-started",
+    "courseStatus": "planned",
+    "phase4StateRecordedOnlyInThisSignoff": true,
+    "admissionGate": "PASS",
+    "counts": {
+      "sourceItems": 167,
+      "courseNodes": 64,
+      "dependencyEdges": 114
+    }
+  },
+  "versions": {
+    "verifiedAt": "2026-08-07",
+    "modern": {
+      "java": "25",
+      "runtime": "Eclipse Temurin 25.0.3+9 LTS"
+    },
+    "legacy": {
+      "java": "8",
+      "runtime": "Eclipse Temurin 8u492-b09",
+      "springBootBackground": "2.3.12.RELEASE"
+    }
+  },
+  "sourceDiscovery": {
+    "method": "Tavily 仅用于发现直接页面，随后逐页核对 Oracle、JLS、OpenJDK 和 Dev.java 正文",
+    "communitySourcesUsedAsEvidence": false,
+    "projectEvidenceBoundary": "项目文本、编码、正则和 Base64 实现只作为 observed/corrected 证据；不把 Base64 写成加密，不把 code point 写成用户感知字素簇，不把项目私有校验语义提升为 Java 合同。",
+    "directUrls": [
+      "https://openjdk.org/projects/jdk/25/",
+      "https://www.oracle.com/java/technologies/java-se-support-roadmap.html",
+      "https://docs.oracle.com/javase/specs/jls/se25/html/jls-3.html",
+      "https://docs.oracle.com/javase/specs/jls/se8/html/jls-3.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/String.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Character.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/charset/Charset.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/charset/StandardCharsets.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/charset/CharsetDecoder.html",
+      "https://openjdk.org/jeps/400",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/regex/Pattern.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/regex/Matcher.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Base64.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/lang/String.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/nio/charset/Charset.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/nio/charset/StandardCharsets.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/util/regex/Matcher.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/util/Base64.html"
+    ]
+  },
+  "projectEvidence": [
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/constant/TsblTextCacheKeyBuilder.java",
+      "symbol": "com.tdh.bdzz.constant.TsblTextCacheKeyBuilder",
+      "usage": "observed",
+      "sha256": "4f9ed57001765f26788227842d74ac30d949ffd8f9454b857aca918a19fcf73a",
+      "inventoryMatched": true
+    },
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/HMacUtils.java",
+      "symbol": "com.tdh.bdzz.util.HMacUtils",
+      "usage": "observed",
+      "sha256": "31b38d415b7c6840507d29ecc49db732d957d20d0450b56dca5fe53ab9355031",
+      "inventoryMatched": true
+    },
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/ValidatorUtil.java",
+      "symbol": "com.tdh.bdzz.util.ValidatorUtil",
+      "usage": "observed",
+      "sha256": "cfa8e9ed4432ba28db4780eb6374ca4ec4d69acb69d79a76dec51703848e012b",
+      "inventoryMatched": true
+    },
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/DateImageGenerator.java",
+      "symbol": "com.tdh.bdzz.util.DateImageGenerator",
+      "usage": "observed",
+      "sha256": "a4353a807cec77c9c02aeef830b4c5064f4adc94e8565e66b9214b593de61dd3",
+      "inventoryMatched": true
+    },
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/AESUtils.java",
+      "symbol": "com.tdh.bdzz.util.AESUtils",
+      "usage": "corrected",
+      "sha256": "8e5aeabb5f9034b211fa02937c1a6907fc02f41355fb1baca1d2e581e26cae0b",
+      "inventoryMatched": true
+    }
+  ],
+  "docker": {
+    "engine": "Docker 29.6.1",
+    "feedbackSource": "从课程 Markdown 的 如何验证 代码块提取同一 bash 反馈环，经 stdin 交给固定 RepoDigest 容器执行",
+    "classOutput": "容器内 /tmp 的 mktemp 目录，shell trap 使用 find -depth -delete 清理",
+    "images": [
+      {
+        "role": "modern",
+        "requestedTag": "eclipse-temurin:25-jdk",
+        "digest": "sha256:12e44624adee6808a36d962717e1656e0afeeeff5a100f9cb00e0136513558f0"
+      },
+      {
+        "role": "legacy",
+        "requestedTag": "eclipse-temurin:8-jdk",
+        "digest": "sha256:c8b86f2c0a9bd6cc1b7fabc5d1a097501a166eea7cad3b2764e90e96178bea9b"
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/basics/strings-encoding-and-text-matching.md",
+      "sha256": "f108e936868826f34047c045db9e2fbaab1ff22db610130d25b94231ecefbb6d"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/strings-encoding-and-text-matching.md",
+      "sha256": "41f3ae5d7d9218456673dc0bb5fd901808ea3128a43f7d7fb1bba47083f39510"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "373c2a8c3f5875032f407dbb531fa06ab0ad7f399f7426d0e6574b57da9bd384"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "f05c27e9690a75b014ff8afb269b36a965d59a835f04616cfbe04ab316f15a7b"
+    },
+    {
+      "path": "docs/backend/java/dzzz-app-course-plan.md",
+      "sha256": "56bc0777de0254054331cb319008717928a934c2aec392350a4bda414098810f"
+    }
+  ],
+  "selfHashPolicy": "signoff 文件不记录自身 SHA-256；artifacts 只绑定 signoff 外可稳定计算的本批课程产物。",
+  "baselineVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run format:check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run test:unit",
+      "exitCode": 0,
+      "summary": "No test files found; configured empty test directory is valid"
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "summary": "No persistent E2E test files; command passed with --pass-with-no-tests"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "passed; 1204 modules transformed; existing >500 kB catalog chunk warning only"
+    },
+    {
+      "command": "git diff --check && git diff --cached --check",
+      "exitCode": 0,
+      "summary": "passed; no new staging performed"
+    },
+    {
+      "command": "git -C /Users/jian/Desktop/work/TDH/dzzz status --short -- dzzz-app",
+      "exitCode": 0,
+      "summary": "empty; source repository remained read-only"
+    }
+  ],
+  "javaVerification": {
+    "command": "extract 如何验证 bash block from src/categories/backend/java/core/learn/strings-encoding-and-text-matching.md and pipe to zsh -f",
+    "exitCode": 0,
+    "sharedOutput": "text|units=3|points=2|utf8=5|roundtrip=true|match=42|quoted=true|url=QfCfmIA|mime=true|errors=true,true,true",
+    "cases": [
+      {
+        "name": "Java 25 positive compile/run",
+        "exitCode": 0,
+        "stdout": "text|units=3|points=2|utf8=5|roundtrip=true|match=42|quoted=true|url=QfCfmIA|mime=true|errors=true,true,true"
+      },
+      {
+        "name": "Java 8 positive compile/run",
+        "exitCode": 0,
+        "stdout": "text|units=3|points=2|utf8=5|roundtrip=true|match=42|quoted=true|url=QfCfmIA|mime=true|errors=true,true,true"
+      },
+      {
+        "name": "strict malformed UTF-8 rejection",
+        "java25Rejected": true,
+        "java8Rejected": true
+      },
+      {
+        "name": "invalid regex rejection",
+        "java25Rejected": true,
+        "java8Rejected": true
+      },
+      {
+        "name": "invalid Basic Base64 rejection",
+        "java25Rejected": true,
+        "java8Rejected": true
+      }
+    ],
+    "temporaryAssetsCleaned": true
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "adapter": "PASS",
+    "blockCount": 70,
+    "exerciseContract": "要求、验收、参考答案三字段完整",
+    "javaMethodComments": "PASS"
+  },
+  "catalogVerification": {
+    "method": "fresh Vite middleware SSR 加载真实 entry-manifest、track 和目标 content-entry",
+    "exitCode": 0,
+    "registeredEntries": 13,
+    "availableEntries": 13,
+    "targetId": "backend.java.learn.basics.strings-encoding-and-text-matching",
+    "projectEvidenceCount": 5,
+    "blockCount": 70
+  },
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "baseUrl": "http://127.0.0.1:4173/",
+    "targetPath": "/backend/java/core/learn/strings-encoding-and-text-matching",
+    "initialObstruction": {
+      "symptom": "旧 4173 会话累计 60 条 duplicate Demo ID HMR 错误",
+      "cause": "并行前端文件 HMR 使全局 Demo registry 在同一旧进程中重复注册；当前源码中该 Demo ID 只有一个 manifest 定义",
+      "repair": "仅重启本任务的 4173 开发服务并创建 fresh Playwright 会话",
+      "frontendFilesChanged": false
+    },
+    "desktop": {
+      "viewport": "1440x900",
+      "documentClientWidth": 1440,
+      "documentScrollWidth": 1440,
+      "horizontalOverflow": false,
+      "title": "字符串、字符编码、正则与 Base64",
+      "codeBlockCount": 19,
+      "searchTerm": "Base64",
+      "searchResultCount": 1,
+      "previousEntryId": "backend.java.learn.basics.generics-and-type-safety",
+      "nextLink": false
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "documentClientWidth": 390,
+      "documentScrollWidth": 390,
+      "horizontalOverflow": false,
+      "codeBlockCount": 19,
+      "completionButtonPressed": true,
+      "completionButtonText": "取消完成"
+    },
+    "console": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "progressPersistedAfterReload": true,
+    "lazyLoadedTarget": true,
+    "targetContentEntryRequestStatus": 200,
+    "repositoryBrowserOutputAbsent": true
+  },
+  "changedFiles": [
+    "docs/research/backend/java/basics/strings-encoding-and-text-matching.md",
+    "src/categories/backend/java/core/learn/strings-encoding-and-text-matching.md",
+    "src/categories/backend/java/core/entry-manifest.ts",
+    "src/categories/backend/java/core/backend-java-track.ts",
+    "docs/backend/java/audit/reviews/phase-4-strings-encoding-and-text-matching-signoff.json",
+    "docs/backend/java/dzzz-app-course-plan.md"
+  ],
+  "priorClosedJavaAssets": {
+    "protected": true,
+    "summary": "第一至第十二批研究、课程与 signoff 保持原样，不归入第十三批课程产物。"
+  },
+  "concurrentWorkspaceAssets": {
+    "protected": true,
+    "attribution": "frontend TypeScript、Vite、Vue、frontend 文档、HeadingBlock 与 ContentEntryPage 资产由并行工作产生，不属于本批 changedFiles；根级校验在包含这些资产的当前工作区上执行。",
+    "preSignoffStatusSnapshotSha256": "e5d6d8ccad8942aa42eecf283d0fb61acda12eef18ae6f76d8213b68db24fdeb",
+    "paths": [
+      "docs/frontend/",
+      "src/app/pages/ContentEntryPage.vue",
+      "src/categories/frontend/engineering/",
+      "src/categories/frontend/vue/",
+      "src/common/ui/blocks/HeadingBlock.vue"
+    ]
+  },
+  "review": {
+    "standards": "PASS",
+    "standardsFindings": 0,
+    "spec": "PASS",
+    "specFindings": 0
+  },
+  "beginnerContentReverification": {
+    "verifiedAt": "2026-08-07",
+    "courseArtifact": {
+      "path": "src/categories/backend/java/core/learn/strings-encoding-and-text-matching.md",
+      "sha256": "e50a866bdb6a5bd5106b7bb451e150dde373c5a0e6767ea3d0609af8b34ecbdc"
+    },
+    "content": "PASS; exactly one 从零跟着做, usage, pitfalls, verification, one exercise and runnable code",
+    "sources": "PASS; source type, appliesTo and claims shown only in the official-source regions; 正文无来源详情",
+    "browser": "PASS; 1440px and 390px routes, 36/36 HTTP 200, no horizontal overflow or browser errors",
+    "root": "PASS; knowledge-path, type-check, lint, format and diff checks"
+  },
+  "stopBoundary": "Phase B 的 B-14 已关闭；下一批只允许 B-15 collections-and-iteration-contracts，不得跳到 B-16，不得进入 Phase C、D、E。B-21 基础 Gate 关闭后立即停止。"
+}

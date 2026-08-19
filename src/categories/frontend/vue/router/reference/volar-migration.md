@@ -54,7 +54,7 @@ anchors:
 
 # Volar 与 Vue Router 5 迁移
 
-## 概述
+## 一、概述
 
 Vue Router 5 把原 `unplugin-vue-router` 的文件路由能力并入 `vue-router`。构建插件负责扫描和生成，两个 Volar 入口负责编辑器/SFC 语言服务；它们协作但不能互相替代。迁移应同时更新依赖、构建入口、虚拟模块、生成声明位置与 Volar plugin 路径。
 
@@ -62,7 +62,7 @@ Vue Router 5 把原 `unplugin-vue-router` 的文件路由能力并入 `vue-route
 `vue-router/auto` 的 5.2.0 声明首行已标记 DEPRECATED。它只是迁移兼容入口，不应作为新项目的 runtime 或类型主入口。
 :::
 
-## Volar 插件职责
+## 二、Volar 插件职责
 
 | 插件 | 输入 | 语言服务结果 | 不会负责 |
 | --- | --- | --- | --- |
@@ -85,7 +85,7 @@ Vue Router 5 把原 `unplugin-vue-router` 的文件路由能力并入 `vue-route
 
 `sfc-typed-router` 根据文件路径查询 `vue-router/auto-routes` 中生成的 `_RouteNamesForFilePath`，再把泛型补到该页面的 `useRoute()`。因此 rootDir、实际文件路径和生成声明必须属于同一 TypeScript project；仅安装 Volar 插件不会产生这些映射。
 
-## 迁移到 Vue Router 5
+## 三、迁移到 Vue Router 5
 
 :::steps
 ### 1. 合并依赖所有权
@@ -125,7 +125,7 @@ import { routes } from 'vue-router/auto-routes'
 ~~~~
 :::
 
-## Deprecated Auto 入口
+## 四、Deprecated Auto 入口
 
 `./auto` 的运行时条件仍指向根 Router 构建，但其独立声明明确写着“DEPRECATED: will be removed in future versions”。这会让旧导入暂时可工作，却模糊稳定根 API 与 plugin virtual module 的阶段边界。新代码应把公共 API、routes、resolver 分别放回 `vue-router`、`vue-router/auto-routes`、`vue-router/auto-resolver`。
 
@@ -136,7 +136,7 @@ import { routes } from 'vue-router/auto-routes'
 | 插件生成的 resolver | vue-router/auto-resolver | 把 resolver 当稳定 runtime 根 API |
 | Vite 构建插件 | vue-router/vite | unplugin-vue-router/vite |
 
-## Package Exports
+## 五、Package Exports
 
 本页登记迁移、编辑器和稳定性边界相关的 package export key。Experimental 两个入口只作为边界台账出现，不计入稳定 118 项，也不在 RA5 展开其 86 项 surface。
 
@@ -151,7 +151,7 @@ import { routes } from 'vue-router/auto-routes'
 | ./volar/sfc-route-blocks | types + CJS | SFC route block language plugin |
 | ./volar/sfc-typed-router | types + CJS | 按页面文件推导 useRoute 类型的 language plugin |
 
-## 易错使用提示
+## 六、易错使用提示
 
 :::pitfalls
 ### 只升级依赖，不更新旧 import path
@@ -340,7 +340,7 @@ Vue Router 稳定 API = 根入口 118 项 + experimental 86 项
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 七、源码推导与适用场景
 
 :::steps
 ### 1. 两个 Volar 入口承担不同转换

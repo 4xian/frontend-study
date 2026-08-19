@@ -75,7 +75,7 @@ anchors:
 
 # 定义 Store
 
-## Define Store
+## 一、Define Store
 
 `defineStore()` 的两个 overload 共用一个稳定 store id：第二参数是对象时定义 Options Store，是函数时定义 Setup Store。调用只创建可复用的 definition；首次执行返回的 `useStore()` 才根据正确的 Pinia context 创建或取得实例。id 是 registry identity，必须在应用内稳定且唯一。
 
@@ -96,7 +96,7 @@ export const useCounterStore = defineStore('counter', {
 })
 ~~~~
 
-## Define Store Options
+## 二、Define Store Options
 
 | 成员 | 类型角色 | 契约 |
 | --- | --- | --- |
@@ -107,7 +107,7 @@ export const useCounterStore = defineStore('counter', {
 
 Options overload 的第二参数是去掉 `id` 的 `DefineStoreOptions`，因为 id 已作为第一个参数传入。`state/getters/actions` 是易读的定义输入，运行时最终仍收敛到统一 Store surface；`hydrate()` 这里只登记成员签名，不提前扩展 SSR/hydration Reference。
 
-## Define Setup Store Options
+## 三、Define Setup Store Options
 
 Setup overload 接收 setup function。返回的 ref/reactive 归入 state，computed 归入 getters，function 归入 actions；因此所有希望 Pinia 管理并用于 SSR、Devtools 或 plugin 的 state 都必须返回。第三参数是扩展选项，`actions?` 是实例化后提取给 plugin 的结果，用户定义 Setup Store 时不手写。
 
@@ -128,11 +128,11 @@ export const useCounterStore = defineStore('counter', () => {
 })
 ~~~~
 
-## Define Store Options Base
+## 四、Define Store Options Base
 
 `DefineStoreOptionsBase&lt;S, Store&gt;` 在 4.0.2 中是空 interface，但它不是无意义占位：Options 与 Setup 的 options 都继承它，插件作者可通过 TypeScript declaration merging 添加共享选项。应用应扩展 public seam，不能用 internal `_Extract*` 类型拼接私有实现。`DefineStoreOptionsInPlugin` 属于 PRA3，不在本批上线。
 
-## Store Definition
+## 五、Store Definition
 
 ~~~~ts
 interface StoreDefinition<Id extends string, S extends StateTree, G, A> {
@@ -145,11 +145,11 @@ interface StoreDefinition<Id extends string, S extends StateTree, G, A> {
 
 `StoreDefinition` 是 `defineStore()` 返回的 callable。公开 surface 只有调用签名与 `$id`：调用时先解析显式 Pinia、injection 或 active context，再用 `$id` 查询 registry；没有实例时才创建。`hot` 参数与 `_pinia` 是 HMR internal，应用不得传入或读取。
 
-## Setup Store Definition
+## 六、Setup Store Definition
 
 `SetupStoreDefinition&lt;Id, SS&gt;` 继承 `StoreDefinition`，只把 setup 返回面映射成 state、getter 与 action 类型，不增加 runtime wrapper 或新成员。公共 `StoreActions`、`StoreGetters`、`StoreState` 可用于提取结果；不要直接 import 未作为稳定根入口导出的 `_Extract*` 家族。
 
-## 易错使用提示
+## 七、易错使用提示
 
 :::pitfalls
 ### 复用同一个 Store id
@@ -337,7 +337,7 @@ const store = useStore(pinia)
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 八、源码推导与适用场景
 
 :::steps
 ### 1. 第二参数决定定义分支

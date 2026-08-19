@@ -11,7 +11,7 @@ export const vueRouterNavigationReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.navigation.guards',
-        'navigation-guard',
+        '三navigation-guard',
       ],
       [
         'interfaces.navigationguardnext',
@@ -19,7 +19,7 @@ export const vueRouterNavigationReferenceSections = [
         'deprecated',
         'quick',
         'vue.router.reference.navigation.guards',
-        'navigation-guard-next',
+        '四navigation-guard-next',
       ],
       [
         'interfaces.navigationguardwiththis',
@@ -27,7 +27,7 @@ export const vueRouterNavigationReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.navigation.guards',
-        'navigation-guard-with-this',
+        '五navigation-guard-with-this',
       ],
       [
         'interfaces.navigationhookafter',
@@ -35,7 +35,7 @@ export const vueRouterNavigationReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.navigation.guards',
-        'navigation-hook-after',
+        '六navigation-hook-after',
       ],
       [
         'type-aliases.awaitable',
@@ -43,7 +43,7 @@ export const vueRouterNavigationReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.navigation.guards',
-        'internal-awaitable',
+        '七internal-awaitable',
       ],
       [
         'type-aliases.navigationguardnextcallback',
@@ -51,7 +51,7 @@ export const vueRouterNavigationReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.navigation.guards',
-        'navigation-guard-next-callback',
+        '八navigation-guard-next-callback',
       ],
       [
         'type-aliases.navigationguardreturn',
@@ -59,7 +59,7 @@ export const vueRouterNavigationReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.navigation.guards',
-        'navigation-guard-return',
+        '九navigation-guard-return',
       ],
       [
         'functions.onbeforerouteleave',
@@ -67,7 +67,7 @@ export const vueRouterNavigationReferenceSections = [
         'public',
         'detail',
         'vue.router.reference.navigation.guards',
-        'on-before-route-leave',
+        '十on-before-route-leave',
       ],
       [
         'functions.onbeforerouteupdate',
@@ -75,7 +75,7 @@ export const vueRouterNavigationReferenceSections = [
         'public',
         'detail',
         'vue.router.reference.navigation.guards',
-        'on-before-route-update',
+        '十一on-before-route-update',
       ],
     ],
   },
@@ -89,7 +89,7 @@ export const vueRouterNavigationReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.navigation.failures',
-        'error-types',
+        '三error-types',
       ],
       [
         'enumerations.navigationfailuretype',
@@ -97,7 +97,7 @@ export const vueRouterNavigationReferenceSections = [
         'public',
         'detail',
         'vue.router.reference.navigation.failures',
-        'navigation-failure-type',
+        '四navigation-failure-type',
       ],
       [
         'interfaces.navigationfailure',
@@ -105,7 +105,7 @@ export const vueRouterNavigationReferenceSections = [
         'public',
         'detail',
         'vue.router.reference.navigation.failures',
-        'navigation-failure',
+        '五navigation-failure',
       ],
       [
         'interfaces.navigationredirecterror',
@@ -113,7 +113,7 @@ export const vueRouterNavigationReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.navigation.failures',
-        'navigation-redirect-error',
+        '六navigation-redirect-error',
       ],
       [
         'functions.isnavigationfailure',
@@ -121,7 +121,7 @@ export const vueRouterNavigationReferenceSections = [
         'public',
         'detail',
         'vue.router.reference.navigation.failures',
-        'is-navigation-failure',
+        '七is-navigation-failure',
       ],
     ],
   },

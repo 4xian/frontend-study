@@ -1,21 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { ContentMeta, ContentSourceType, ProjectEvidenceUsage } from '@/common/content'
+import type { ContentMeta, ProjectEvidenceUsage } from '@/common/content'
 
 const props = defineProps<{ meta: ContentMeta }>()
-
-const sourceTypeLabels: Record<ContentSourceType, string> = {
-  specification: '规范',
-  'api-doc': 'API 文档',
-  'official-reference': '官方参考',
-  'release-note': '发布说明',
-  'source-code': '官方源码',
-  'official-test': '官方测试',
-  'security-standard': '安全标准',
-  'static-analysis': '静态分析',
-  'engineering-reference': '工程参考',
-  'project-source': '项目源码',
-}
 
 const evidenceUsageLabels: Record<ProjectEvidenceUsage, string> = {
   observed: '项目已使用',
@@ -32,7 +19,6 @@ const visible = computed(
     props.meta.module === 'core' &&
     (Boolean(props.meta.modernBaseline) ||
       Boolean(props.meta.legacyBaseline) ||
-      props.meta.sources.length > 0 ||
       Boolean(props.meta.projectEvidence?.length)),
 )
 
@@ -82,22 +68,6 @@ function formatBaselineKey(key: string): string {
       </dl>
     </section>
 
-    <section v-if="meta.sources.length" class="backend-sources">
-      <h3>来源详情</h3>
-      <ol>
-        <li v-for="source in meta.sources" :key="source.id ?? source.url">
-          <a :href="source.url" target="_blank" rel="noreferrer">{{ source.title }}</a>
-          <p v-if="source.sourceType || source.appliesTo" class="source-context">
-            <span v-if="source.sourceType">{{ sourceTypeLabels[source.sourceType] }}</span>
-            <span v-if="source.appliesTo">适用于 {{ source.appliesTo }}</span>
-          </p>
-          <ul v-if="source.claims?.length">
-            <li v-for="claim in source.claims" :key="claim">{{ claim }}</li>
-          </ul>
-        </li>
-      </ol>
-    </section>
-
     <section v-if="projectEvidence.length" class="backend-project-evidence">
       <h3>项目证据</h3>
       <ul>
@@ -135,13 +105,11 @@ function formatBaselineKey(key: string): string {
 }
 
 .baseline-section,
-.backend-sources,
 .backend-project-evidence {
   margin-top: var(--space-5);
 }
 
 .baseline-section dl,
-.backend-sources ol,
 .backend-project-evidence ul {
   padding: 0;
   margin: var(--space-3) 0 0;
@@ -168,41 +136,18 @@ function formatBaselineKey(key: string): string {
   color: var(--color-text-secondary);
 }
 
-.backend-sources > ol,
 .backend-project-evidence > ul {
   list-style: none;
 }
 
-.backend-sources > ol > li,
 .backend-project-evidence > ul > li {
   padding: var(--space-4) 0;
   border-top: 1px solid var(--color-border);
 }
 
-.backend-sources a,
 .backend-project-evidence code {
   overflow-wrap: anywhere;
   font-weight: 600;
-}
-
-.source-context {
-  margin-top: var(--space-1);
-  color: var(--color-text-secondary);
-  font-size: var(--font-size-sm);
-}
-
-.source-context span + span {
-  margin-left: var(--space-3);
-}
-
-.backend-sources li ul {
-  padding-left: var(--space-5);
-  margin-top: var(--space-2);
-  color: var(--color-text-secondary);
-}
-
-.backend-sources li li + li {
-  margin-top: var(--space-1);
 }
 
 .backend-project-evidence p {

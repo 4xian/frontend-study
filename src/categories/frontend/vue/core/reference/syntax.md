@@ -59,13 +59,13 @@ anchors:
 
 # 单文件组件语法
 
-## 总览
+## 一、总览
 
 Vue 单文件组件通常使用 `.vue` 扩展名，是语法兼容 HTML 的自定义组件文件格式。文件由顶层 `<template>`、`<script>`、`<style>` 和可选自定义块组成；SFC 工具链先解析这些块，再交给相应编译器处理，不是让浏览器把整个文件当作普通 HTML 直接运行。
 
 模板内容会预编译为 JavaScript render 函数。顶层 `<template>` 是 SFC 语言块容器；组件模板内部带结构指令的 `<template>` 才是无包装分组，两者不能互换。
 
-## 相应语言块
+## 二、相应语言块
 
 | 顶层块 | 数量 | 公开边界 |
 | --- | --- | --- |
@@ -93,13 +93,13 @@ import ProfileCard from './ProfileCard.vue'
 普通 `<script>` 与 `<script setup>` 合法并存，但本页只记录顶层块数量和外部源禁令；宏、顶层绑定、普通 script 协作、顶层 await、泛型与其他限制属于下一批。
 :::
 
-## 自动名称推导
+## 三、自动名称推导
 
 SFC 会根据文件名推导组件名，用于开发警告、DevTools 展示和递归自引用。例如 `FooBar.vue` 可以在自己的模板中写 `<FooBar />`。同名的显式导入或注册组件优先于自引用推导。
 
 文件名推导不是全局注册。其他 SFC 仍须正常导入或注册 `FooBar.vue`，也不能依靠推导名替代显式业务身份或公开注册表。
 
-## 预处理器
+## 四、预处理器
 
 任意语言块都可以用 `lang` 声明语言处理器，例如 `<script lang="ts">`、`<style lang="scss">` 或 `<template lang="pug">`。`lang` 只声明语言，不会安装、加载或实现处理器；Vite、vue-loader 等工具链必须有对应集成，项目也必须自行安装 Sass、Pug 等依赖。
 
@@ -107,19 +107,19 @@ SFC 会根据文件名推导组件名，用于开发警告、DevTools 展示和�
 一篇语法参考不会验证仓库未安装的预处理语言。只有项目真实安装并由构建工具接入后，才可以声称对应 `lang` 可编译。
 :::
 
-## src 导入
+## 五、src 导入
 
 语言块可以通过 `src` 引入外部内容，例如 `<template src="./template.html">`、`<style src="./style.css">` 或 `<script src="./script.js">`。路径按 JavaScript 模块导入规则解析：相对路径必须以 `./` 开头，也可以从已安装的 npm 依赖解析；自定义块同样可以声明 `src`。
 
 `<script setup>` 禁止使用 `src`，因为移出组件后其编译上下文不明确。一个 SFC 同时存在普通 `<script>` 与 `<script setup>` 时，普通 script 也不能再使用 `src`；两类 script 必须由 SFC 编译器一起处理。
 
-## 注释
+## 六、注释
 
 每个语言块使用自身语言的注释语法：template 使用 HTML 注释，script 使用 JavaScript 或 TypeScript 注释，style 使用 CSS 注释，Pug 等预处理块遵循对应语言。SFC 根级、所有语言块之外只能使用 `<!-- ... -->` HTML 注释。
 
 解析器会按 source range 保留 block 原始内容，供后续对应编译器处理；这不保证所有注释都会进入最终生产输出，是否删除仍取决于模板、脚本、样式或预处理器的后续编译配置。
 
-## 易错使用提示
+## 七、易错使用提示
 
 :::pitfalls
 ### 重复声明只能出现一次的 SFC 顶层块
@@ -220,7 +220,7 @@ import FooBar from './FooBar.vue'
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 八、源码推导与适用场景
 
 以下结论来自 `vuejs/core@fa2885d8` 的固定源码与官方测试，只解释 Vue 3.5.40 的可观察结果；descriptor 字段和 compiler-sfc 内部处理顺序不是 public API。
 

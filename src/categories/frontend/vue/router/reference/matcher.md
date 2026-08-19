@@ -112,7 +112,7 @@ anchors:
 
 # Matcher 与路径解析
 
-## 概述
+## 一、概述
 
 Vue Router 的 matcher 把 route records 编译为可排序的路径解析器，再把按名称、按路径或相对 params 表达的位置解析成 `MatcherLocation`。稳定应用通常通过 `createRouter()`、`router.resolve()` 和 Router 的动态路由方法间接使用它；`RouterMatcher` 与工厂函数属于 Router 内部组装层。
 
@@ -129,7 +129,7 @@ Vue Router 的 matcher 把 route records 编译为可排序的路径解析器，
 API 页面能列出一个导出名称，不代表它适合应用层依赖。5.2.0 固定声明中的 `@internal` 是本页判断边界的依据；下划线只能作为辅助信号，不能替代源码标签。
 :::
 
-## Internal Path Parser Options
+## 二、Internal Path Parser Options
 
 `_PathParserOptions` 是完整路径正则生成选项，包含 `sensitive`、`strict`、`start` 和 `end`。整个接口在固定声明中标记为 `@internal`，其中 `start` 还单独标记 internal；它解释 matcher 怎样控制正则两端，但不是应用配置类型。
 
@@ -144,7 +144,7 @@ API 页面能列出一个导出名称，不代表它适合应用层依赖。5.2.
 `_PathParserOptions` 是 internal。应用不要导入它、扩展它或通过类型断言设置 `start`；需要前缀与层级匹配时，用嵌套路由、可选参数或明确的 catch-all record 表达。
 :::
 
-## Matcher Location
+## 三、Matcher Location
 
 `MatcherLocation` 是 matcher 解析后的公开核心位置：它只描述 pathname 匹配结果，不负责 query、hash、history href 或重定向来源。`path` 是百分号编码后的 pathname，`params` 是从路径提取并解码的参数，`matched` 按父到子的顺序保存命中的 record 链。
 
@@ -177,7 +177,7 @@ console.info({
 应用通过 `router.resolve()` 得到 `RouteLocationResolved`，它保留上述 matcher 字段并补上 `fullPath`、`query`、`hash`、`href` 与 `redirectedFrom`。只有编写 Router 生态工具时，才需要把 `MatcherLocation` 作为较窄的类型契约单独讨论。
 :::
 
-## Matcher Location As Path
+## 四、Matcher Location As Path
 
 `MatcherLocationAsPath` 只有一个必填 `path: string`。它是 matcher 内部 raw-location 联合的一支：上层 Router 会先拆分 URL 与 query/hash，再把 pathname 交给 matcher，所以该 `path` 不是完整 URL，也没有公开导航选项。
 
@@ -196,7 +196,7 @@ const target = router.resolve({
 console.info(target.fullPath, target.href)
 ~~~~
 
-## Router Matcher
+## 五、Router Matcher
 
 `RouterMatcher` 是 `createRouter()` 内部持有的 route-record 索引与解析器集合。它既暴露 record matcher 对象，也接受一个 public Router 不会暴露的 parent matcher，因此固定声明把整个接口标记为 `@internal`。
 
@@ -213,7 +213,7 @@ console.info(target.fullPath, target.href)
 `RouterMatcher` 是 internal。不要从 Router 对象探测 matcher、缓存 `RouteRecordMatcher`，也不要在测试中伪造这套结构；这些对象的排序分值、parent/alias 关系与移除语义都不是稳定应用契约。
 :::
 
-## Path Parser Options
+## 六、Path Parser Options
 
 `PathParserOptions` 是公开的 `Pick&lt;_PathParserOptions, "end" | "sensitive" | "strict"&gt;`。它刻意排除 internal `start`，并由 Router 全局选项和单条 route record 共同复用。单条 record 的值会覆盖全局默认。
 
@@ -241,7 +241,7 @@ const router = createRouter({
 `strict` 和 `sensitive` 改变的是哪些 URL 能命中，不会自动重定向到规范地址。若产品只允许一种大小写或尾斜杠形式，还需由应用或服务器明确执行 canonical redirect。
 :::
 
-## Create Router Matcher
+## 七、Create Router Matcher
 
 `createRouterMatcher(routes, globalOptions)` 用初始 `RouteRecordRaw[]` 与全局 `PathParserOptions` 创建 `RouterMatcher`。固定源码先合并默认 parser 选项，再逐条加入 routes；返回对象只供 Router 实现组织 record 与解析 location。
 
@@ -255,7 +255,7 @@ const router = createRouter({
 `createRouterMatcher` 在固定声明和官方 API 中都标记为 `Internal`。应用不要直接调用它，也不要把它当成无 history 的轻量 Router；这会绕过 URL 编解码、query/hash、导航守卫、history 与 Vue 插件集成。
 :::
 
-## 应用层替代路径
+## 八、应用层替代路径
 
 | 目标 | 稳定入口 | 原因 |
 | --- | --- | --- |
@@ -280,7 +280,7 @@ console.info(target.href)
 removeReports()
 ~~~~
 
-## 易错使用提示
+## 九、易错使用提示
 
 :::pitfalls
 ### 在应用代码中直接创建并保存 internal matcher
@@ -552,7 +552,7 @@ const routes = [
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 十、源码推导与适用场景
 
 :::steps
 ### 1. 公开 parser 选项是内部全集的刻意子集

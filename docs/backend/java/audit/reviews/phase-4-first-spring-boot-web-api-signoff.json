@@ -1,0 +1,220 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.intermediate.first-spring-boot-web-api",
+  "batchId": "phase-c-i05-first-spring-boot-web-api",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-15T15:41:18+08:00",
+  "phase": "Phase C",
+  "phaseCProgress": "5/20",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "newStagingPerformedThisBatch": false,
+    "existingIndexPreserved": true,
+    "unrelatedWorkspaceChangesPreserved": true
+  },
+  "phaseAFreeze": {
+    "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+    "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81",
+    "designation": "I-05 / 必修、桥接、新增",
+    "title": "第一个 Spring Boot Web API",
+    "estimatedMinutes": 120,
+    "prerequisite": "backend.java.learn.intermediate.http-uri-and-request-response-basics",
+    "stableIdAdded": "backend.java.learn.intermediate.first-spring-boot-web-api",
+    "slugAdded": "first-spring-boot-web-api",
+    "urlAdded": "/backend/java/core/learn/first-spring-boot-web-api",
+    "frozenSuccessor": "backend.java.learn.intermediate.dependency-injection-and-bean-lifecycle"
+  },
+  "phaseCAdmission": {
+    "status": "PASS",
+    "predecessorCourseId": "backend.java.learn.intermediate.http-uri-and-request-response-basics",
+    "predecessorSignoffPath": "docs/backend/java/audit/reviews/phase-4-http-uri-and-request-response-basics-signoff.json",
+    "predecessorSignoffSha256": "400b77828292f6e13b07d9b3c649fb25e7cbbb62609548ddd23b650028648a02",
+    "phaseCProgressBeforeBatch": "4/20",
+    "trackChangeRequired": true,
+    "loaderChangeRequired": true
+  },
+  "versions": {
+    "verifiedAt": "2026-08-15",
+    "modern": {
+      "java": "25",
+      "runtime": "Eclipse Temurin 25.0.3+9 LTS",
+      "maven": "3.9.12",
+      "springBoot": "4.1.0",
+      "springFramework": "7.0.8",
+      "webStarter": "spring-boot-starter-webmvc"
+    },
+    "legacy": {
+      "java": "8",
+      "runtime": "Eclipse Temurin 8u492-b09",
+      "maven": "3.9.12",
+      "springBoot": "2.3.12.RELEASE",
+      "springFramework": "5.2.15.RELEASE",
+      "webStarter": "spring-boot-starter-web"
+    }
+  },
+  "sourceDiscovery": {
+    "method": "Tavily candidates were verified against exact-version Oracle, Spring, Maven Central, Spring Initializr, and GitHub primary sources",
+    "researchDirectSourceCount": 22,
+    "lessonOfficialSourceCardCount": 22,
+    "finalHttp200Count": 22,
+    "finalHttpFailureCount": 0,
+    "communitySourcesUsedAsEvidence": false,
+    "projectEvidenceCount": 0
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/intermediate/first-spring-boot-web-api.md",
+      "sha256": "9cf76f79f9276728dd1c7809caa2537ea45b15b0005a8b00bce902e9dd677f13"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/first-spring-boot-web-api.md",
+      "sha256": "bbe4cea2b495970c98c095649c6f2cbc7b37d4c5af08be929544c83e9e6d9790"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "c2a4e2aec4171467aebe7f6ef455ffe2bc7e680fb94fe20007ce6da858f31367"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "e89e15d2335d8ddfd659e833633b0114edbfecb172c835dd07867b6221cfca72"
+    },
+    {
+      "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+      "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81"
+    },
+    {
+      "path": "docs/backend/java/audit/phase-2-knowledge-path-manifest.json",
+      "sha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407"
+    }
+  ],
+  "engineeringVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run format:check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run test:unit",
+      "exitCode": 0,
+      "summary": "No persistent test files; configured empty directory passed"
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "summary": "No persistent E2E files; configured empty directory passed"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "passed after final content corrections; 1764 modules transformed; existing Markdown timing and chunk-size warnings only"
+    },
+    {
+      "command": "git diff --check -- <I-05 paths>",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npx prettier --check <I-05 paths>",
+      "exitCode": 0,
+      "summary": "passed"
+    }
+  ],
+  "javaVerification": {
+    "fixturePath": "/tmp/java-i05-phase-c.fDDNi7",
+    "fixtureSha256": {
+      "verify.sh": "abfd0516d0c467401e2b8da212a1a8212dac1dc08cc005374baa96f954b2fbb4",
+      "modern/pom.xml": "63d06436c1a12ab7ea8eb5e43450fcab9a46d2784807c93754f1a36838d41f27",
+      "modern/CourseController.java": "94b476d08048d96f15c972f303605ab1f6744c5f53b98259edfcfede7f2e92fc",
+      "modern/FirstWebApiApplication.java": "2d084db170a92c4c13380bc050b40005e97977049575e69daca9ae7cf3d804de",
+      "legacy/pom.xml": "7b35fd7ed0e5cf111b4507874b40710b96804e25ae44940930ce3b059f062d11",
+      "legacy/CourseController.java": "082939a10146545347729526d4759f6953bcce2cc86655084b33c9e186814ef8",
+      "legacy/FirstWebApiApplication.java": "bc05d9d0e2c6f4bf9e5cc77d798f38155416612960591d4612d6afeb5240bb5c"
+    },
+    "modernOutput": "modern PASS GET=200 POST=200 malformed=400 media=415 missing=404 method=405 conflict=nonzero stop=released",
+    "legacyOutput": "legacy PASS GET=200 POST=200 malformed=400 media=415 missing=404 method=405 conflict=nonzero stop=released",
+    "finalOutput": "I05_DUAL_RUNTIME_PASS",
+    "temporaryAssetsCleaned": true,
+    "cleanupCommand": "find /tmp/java-i05-phase-c.fDDNi7 -depth -delete",
+    "cleanupCheck": "PASS; exact path no longer exists"
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "adapter": "PASS",
+    "researchLineCount": 364,
+    "lessonLineCount": 871,
+    "independentKnowledgePointHeadings": 10,
+    "codeBlockFenceCount": 52,
+    "exerciseCount": 1,
+    "officialSourceCount": 22,
+    "followAlongOrderedListDirectItemCount": 8,
+    "pitfallVersionAndSourceFields": "PASS",
+    "javaMethodComments": "PASS",
+    "sourceHeadingAbsent": true
+  },
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "baseUrl": "http://127.0.0.1:4194/",
+    "targetPath": "/backend/java/core/learn/first-spring-boot-web-api",
+    "sessionsClosed": true,
+    "devServerStopped": true,
+    "desktop": {
+      "viewport": "1440x900",
+      "documentClientWidth": 1440,
+      "documentScrollWidth": 1440,
+      "horizontalOverflow": false
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "windowInnerWidth": 390,
+      "documentClientWidth": 375,
+      "documentScrollWidth": 375,
+      "horizontalOverflow": false
+    },
+    "title": "第一个 Spring Boot Web API",
+    "officialSourceCount": 22,
+    "followAlongOrderedListDirectItemCount": 8,
+    "previousEntryId": "backend.java.learn.intermediate.http-uri-and-request-response-basics",
+    "liveNextEntryIdBeforeI06Reorder": "backend.java.learn.intermediate.relational-data-and-sql-foundations",
+    "frozenSuccessorNotYetReordered": "backend.java.learn.intermediate.dependency-injection-and-bean-lifecycle",
+    "completionButtonTextAfterReload": "取消完成",
+    "progressPersistedAfterReload": true,
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "desktopFailedRequests": 0,
+    "desktopNonSuccessfulResponses": 0,
+    "mobileNonStaticRequests": 0
+  },
+  "review": {
+    "riskClassification": "新增 Spring Boot Web 桥接课程并同步 track/loader，改变课程发布面和顺序，必须独立复审",
+    "independentReviewRequired": true,
+    "reviewedCurrentLessonSha256": "bbe4cea2b495970c98c095649c6f2cbc7b37d4c5af08be929544c83e9e6d9790",
+    "standards": "PASS / 0 findings",
+    "spec": "PASS / 0 findings",
+    "highestSeverity": "none",
+    "initialStandardsFindingsClosed": 3,
+    "reviewWorkspaceModified": false
+  },
+  "stopBoundary": "Phase C 的 I-05 已关闭，进度为 5/20；下一批只允许 I-06（backend.java.learn.intermediate.dependency-injection-and-bean-lifecycle）。I-06 关闭前不得读取 I-07 或后续课程；Phase C 总 Gate 关闭前不得进入 Phase D。",
+  "selfHashPolicy": "signoff 文件不记录自身 SHA-256；artifacts 只绑定 signoff 外可稳定计算的本批产物"
+}

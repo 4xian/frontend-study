@@ -1,0 +1,231 @@
+.lazy-split-demo {
+  width: 100%;
+  max-width: 840px;
+  padding: 24px;
+  border: 1px solid #ccd6d2;
+  border-radius: 8px;
+  background: #fbfcfc;
+  color: #25312f;
+}
+
+.lazy-split-demo-heading p,
+.lazy-split-demo-heading h2,
+.lazy-split-demo-heading span,
+.lazy-split-demo-placeholder,
+.lazy-split-demo-fallback,
+.lazy-split-demo-panel p {
+  margin: 0;
+}
+
+.lazy-split-demo-heading p {
+  color: #9b4d22;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.lazy-split-demo-heading h2 {
+  margin-top: 6px;
+  font-size: 1.35rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.lazy-split-demo-heading > span {
+  display: block;
+  margin-top: 6px;
+  color: #5a6865;
+  line-height: 1.6;
+}
+
+.lazy-split-demo-heading output,
+.lazy-split-demo-status output,
+.lazy-split-demo-panel output {
+  color: #23675b;
+  font-weight: 700;
+}
+
+.lazy-split-demo-controls {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 18px -5px 0;
+}
+
+.lazy-split-demo-controls button,
+.lazy-split-demo-panel button,
+.lazy-split-demo-failure button {
+  min-height: 42px;
+  max-width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #286d61;
+  border-radius: 5px;
+  background: #286d61;
+  color: #ffffff;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  white-space: normal;
+}
+
+.lazy-split-demo-controls button {
+  margin: 0 5px 10px;
+}
+
+.lazy-split-demo-controls button.is-secondary {
+  background: #ffffff;
+  color: #245f55;
+}
+
+.lazy-split-demo-controls button:hover,
+.lazy-split-demo-panel button:hover,
+.lazy-split-demo-failure button:hover {
+  filter: brightness(0.95);
+}
+
+.lazy-split-demo-controls button:focus-visible,
+.lazy-split-demo-panel button:focus-visible,
+.lazy-split-demo-failure button:focus-visible {
+  outline: 3px solid #e19a56;
+  outline-offset: 2px;
+}
+
+.lazy-split-demo-status {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 4px -5px 0;
+}
+
+.lazy-split-demo-status > div {
+  flex: 1 1 180px;
+  min-width: 0;
+  padding: 11px 12px;
+  margin: 0 5px 10px;
+  border-left: 4px solid #3e756c;
+  background: #edf5f3;
+}
+
+.lazy-split-demo-status span,
+.lazy-split-demo-panel > span {
+  display: block;
+  color: #65736f;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.lazy-split-demo-status strong,
+.lazy-split-demo-panel > strong {
+  display: block;
+  margin-top: 5px;
+  color: #285f56;
+  font-size: 1.05rem;
+  overflow-wrap: anywhere;
+}
+
+.lazy-split-demo-placeholder,
+.lazy-split-demo-fallback,
+.lazy-split-demo-panel,
+.lazy-split-demo-failure {
+  min-width: 0;
+  padding: 18px;
+  margin-top: 6px;
+  border: 1px solid #d4ddda;
+  border-radius: 6px;
+  background: #ffffff;
+}
+
+.lazy-split-demo-placeholder,
+.lazy-split-demo-fallback {
+  color: #56635f;
+  line-height: 1.6;
+}
+
+.lazy-split-demo-fallback {
+  border-left: 5px solid #b86538;
+  background: #fff8f3;
+}
+
+.lazy-split-demo-failure {
+  border-left: 5px solid #9b4d22;
+}
+
+.lazy-split-demo-failure > span,
+.lazy-split-demo-failure > strong,
+.lazy-split-demo-failure > p {
+  display: block;
+}
+
+.lazy-split-demo-failure > span {
+  color: #9b4d22;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.lazy-split-demo-failure > strong {
+  margin-top: 5px;
+  color: #285f56;
+  font-size: 1.05rem;
+}
+
+.lazy-split-demo-failure > p {
+  margin-top: 8px;
+  color: #56635f;
+  line-height: 1.6;
+}
+
+.lazy-split-demo-failure button {
+  margin-top: 10px;
+}
+
+.lazy-split-demo-panel {
+  border-left: 5px solid #33776c;
+}
+
+.lazy-split-demo-panel dl {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 14px -5px 4px;
+}
+
+.lazy-split-demo-panel dl > div {
+  flex: 1 1 150px;
+  min-width: 0;
+  padding: 10px 12px;
+  margin: 0 5px 10px;
+  background: #f0f6f4;
+}
+
+.lazy-split-demo-panel dt {
+  color: #65736f;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.lazy-split-demo-panel dd {
+  margin: 5px 0 0;
+  color: #285f56;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+@media (max-width: 560px) {
+  .lazy-split-demo {
+    padding: 16px;
+  }
+
+  .lazy-split-demo-controls,
+  .lazy-split-demo-status,
+  .lazy-split-demo-panel dl {
+    display: block;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .lazy-split-demo-controls button,
+  .lazy-split-demo-status > div,
+  .lazy-split-demo-panel dl > div {
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+  }
+}

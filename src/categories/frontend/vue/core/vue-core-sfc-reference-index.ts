@@ -16,7 +16,7 @@ export const vueCoreSfcReferenceGroup: ReferenceIndexGroupManifest = {
   title: '单文件组件',
   sections: [
     referenceSection('sfc-spec', '语法定义', [
-      ['overview', '总览', 'overview', 'merged', 'available', entryIds.sfcSyntax, '总览'],
+      ['overview', '总览', 'overview', 'merged', 'available', entryIds.sfcSyntax, '一总览'],
       [
         'language-blocks',
         '相应语言块',
@@ -24,7 +24,7 @@ export const vueCoreSfcReferenceGroup: ReferenceIndexGroupManifest = {
         'merged',
         'available',
         entryIds.sfcSyntax,
-        '相应语言块',
+        '二相应语言块',
       ],
       [
         'automatic-name-inference',
@@ -33,7 +33,7 @@ export const vueCoreSfcReferenceGroup: ReferenceIndexGroupManifest = {
         'merged',
         'available',
         entryIds.sfcSyntax,
-        '自动名称推导',
+        '三自动名称推导',
       ],
       [
         'pre-processors',
@@ -42,7 +42,7 @@ export const vueCoreSfcReferenceGroup: ReferenceIndexGroupManifest = {
         'merged',
         'available',
         entryIds.sfcSyntax,
-        '预处理器',
+        '四预处理器',
       ],
       [
         'src-imports',
@@ -51,9 +51,9 @@ export const vueCoreSfcReferenceGroup: ReferenceIndexGroupManifest = {
         'merged',
         'available',
         entryIds.sfcSyntax,
-        'src-导入',
+        '五src-导入',
       ],
-      ['comments', '注释', 'comments', 'merged', 'available', entryIds.sfcSyntax, '注释'],
+      ['comments', '注释', 'comments', 'merged', 'available', entryIds.sfcSyntax, '六注释'],
     ]),
     referenceSection('sfc-script-setup', '<script setup>', [
       [
@@ -63,9 +63,9 @@ export const vueCoreSfcReferenceGroup: ReferenceIndexGroupManifest = {
         'merged',
         'available',
         entryIds.scriptSetup,
-        '基本语法',
+        '一基本语法',
       ],
-      ['reactivity', '响应式', 'reactivity', 'merged', 'available', entryIds.scriptSetup, '响应式'],
+      ['reactivity', '响应式', 'reactivity', 'merged', 'available', entryIds.scriptSetup, '二响应式'],
       [
         'using-components',
         '使用组件',
@@ -73,7 +73,7 @@ export const vueCoreSfcReferenceGroup: ReferenceIndexGroupManifest = {
         'merged',
         'available',
         entryIds.scriptSetup,
-        '使用组件',
+        '三使用组件',
       ],
       [
         'using-custom-directives',
@@ -82,7 +82,7 @@ export const vueCoreSfcReferenceGroup: ReferenceIndexGroupManifest = {
         'merged',
         'available',
         entryIds.scriptSetup,
-        '使用自定义指令',
+        '四使用自定义指令',
       ],
       [
         'define-props-and-emits',
@@ -91,7 +91,7 @@ export const vueCoreSfcReferenceGroup: ReferenceIndexGroupManifest = {
         'merged',
         'available',
         entryIds.scriptSetup,
-        'defineprops-和-defineemits',
+        '五defineprops-和-defineemits',
       ],
       [
         'with-defaults',
@@ -100,7 +100,7 @@ export const vueCoreSfcReferenceGroup: ReferenceIndexGroupManifest = {
         'merged',
         'available',
         entryIds.props,
-        '声明形式与默认值',
+        '二声明形式与默认值',
       ],
       ['define-model', 'defineModel()', 'definemodel', 'detail', 'available', entryIds.defineModel],
       [
@@ -110,7 +110,7 @@ export const vueCoreSfcReferenceGroup: ReferenceIndexGroupManifest = {
         'merged',
         'available',
         entryIds.templateRefs,
-        '组件引用与-defineexpose',
+        '六组件引用与-defineexpose',
       ],
       [
         'define-options',
@@ -119,7 +119,7 @@ export const vueCoreSfcReferenceGroup: ReferenceIndexGroupManifest = {
         'merged',
         'available',
         entryIds.scriptSetup,
-        'defineoptions',
+        '六defineoptions',
       ],
       [
         'define-slots',
@@ -128,7 +128,7 @@ export const vueCoreSfcReferenceGroup: ReferenceIndexGroupManifest = {
         'merged',
         'available',
         entryIds.slots,
-        'useslots-与-defineslots',
+        '五useslots-与-defineslots',
       ],
       [
         'use-slots-and-use-attrs',
@@ -137,7 +137,7 @@ export const vueCoreSfcReferenceGroup: ReferenceIndexGroupManifest = {
         'merged',
         'available',
         entryIds.scriptSetup,
-        'useslots-和-useattrs',
+        '七useslots-和-useattrs',
       ],
       [
         'normal-script',
@@ -146,7 +146,7 @@ export const vueCoreSfcReferenceGroup: ReferenceIndexGroupManifest = {
         'merged',
         'available',
         entryIds.scriptSetup,
-        '与普通的-script-一起使用',
+        '八与普通的-script-一起使用',
       ],
       [
         'top-level-await',
@@ -155,7 +155,7 @@ export const vueCoreSfcReferenceGroup: ReferenceIndexGroupManifest = {
         'merged',
         'available',
         entryIds.scriptSetup,
-        '顶层-await',
+        '九顶层-await',
       ],
       [
         'import-statements',
@@ -164,10 +164,10 @@ export const vueCoreSfcReferenceGroup: ReferenceIndexGroupManifest = {
         'merged',
         'available',
         entryIds.scriptSetup,
-        '导入语句',
+        '十导入语句',
       ],
-      ['generics', '泛型', 'generics', 'merged', 'available', entryIds.scriptSetup, '泛型'],
-      ['restrictions', '限制', 'restrictions', 'merged', 'available', entryIds.scriptSetup, '限制'],
+      ['generics', '泛型', 'generics', 'merged', 'available', entryIds.scriptSetup, '十一泛型'],
+      ['restrictions', '限制', 'restrictions', 'merged', 'available', entryIds.scriptSetup, '十二限制'],
     ]),
     referenceSection('sfc-css-features', 'CSS 功能', [
       [
@@ -177,7 +177,7 @@ export const vueCoreSfcReferenceGroup: ReferenceIndexGroupManifest = {
         'merged',
         'available',
         entryIds.sfcCss,
-        '组件作用域-css',
+        '一组件作用域-css',
       ],
       [
         'css-modules',
@@ -186,7 +186,7 @@ export const vueCoreSfcReferenceGroup: ReferenceIndexGroupManifest = {
         'merged',
         'available',
         entryIds.sfcCss,
-        'css-modules',
+        '二css-modules',
       ],
       [
         'v-bind-in-css',
@@ -195,7 +195,7 @@ export const vueCoreSfcReferenceGroup: ReferenceIndexGroupManifest = {
         'merged',
         'available',
         entryIds.sfcCss,
-        'css-中的-v-bind',
+        '三css-中的-v-bind',
       ],
     ]),
   ],

@@ -45,7 +45,7 @@ anchors:
 
 # &lt;Teleport&gt;
 
-## 概述
+## 一、概述
 
 `<Teleport>` 让内容在逻辑上继续属于当前组件，在 DOM 中却挂到 `to` 指定的目标。模态框、通知和浮层因此可以绕开祖先的 `overflow: hidden`、transform 或局部层叠上下文，而 props、事件、provide/inject 和 Vue Devtools 中的父子关系保持不变。
 
@@ -64,7 +64,7 @@ anchors:
 对比原地弹层与 Teleport 到 body 后是否受到祖先 overflow 裁剪
 :::
 
-## Props 与延迟目标
+## 二、Props 与延迟目标
 
 `to` 接受 CSS 选择器或实际 DOM 元素；默认挂载时目标必须已经存在。`disabled` 为 true 时内容留在声明位置，并可在运行时切换。Vue 3.5 新增 `defer`，把目标解析延迟到同一次挂载或更新周期的其他部分完成后，因此目标可以写在同一模板更靠后的位置，但它不会跨后续异步 tick 持续等待。
 
@@ -77,15 +77,15 @@ anchors:
 <div id="late-target"></div>
 ~~~~
 
-## 逻辑树与 DOM 位置
+## 三、逻辑树与 DOM 位置
 
 Teleport 只移动渲染结果，不会把子组件重新挂到目标 DOM 所属组件之下。子组件仍从声明 Teleport 的逻辑祖先注入依赖，事件也仍向逻辑父组件报告。`scoped` 样式依靠编译期生成的属性选择器，传送后仍可匹配；但依赖普通 DOM 祖先选择器的全局样式需要按实际目标结构重新检查。
 
-## 多个 Teleport
+## 四、多个 Teleport
 
 多个 Teleport 可以使用同一目标，Vue 会按挂载顺序把各自内容追加进去，不会自动替换、排序或管理焦点。需要弹层栈、互斥规则、z-index 和焦点恢复时，应在业务层统一维护有序列表，再由一个 Teleport 渲染。
 
-## 易错使用提示
+## 五、易错使用提示
 
 :::pitfalls
 ### 在目标节点存在之前挂载 Teleport
@@ -212,7 +212,7 @@ Teleport 只移动渲染结果，不会把子组件重新挂到目标 DOM 所属
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 最小源码实现
+## 六、最小源码实现
 
 Teleport 是渲染器识别的特殊 vnode 类型。首次处理时，它在声明位置和目标容器分别放置锚点，解析 `to`，再根据 disabled 决定把 children 挂到原容器还是目标；目标或 disabled 改变时，渲染器移动已有 DOM，组件实例和 vnode 树不需要重建。
 

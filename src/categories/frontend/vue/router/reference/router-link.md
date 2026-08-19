@@ -139,7 +139,7 @@ anchors:
 
 # RouterLink 与 useLink()
 
-## 概述
+## 一、概述
 
 `RouterLink` 是应用层首选的站内导航组件：它先把 `to` 交给 Router 解析为标准 `href`，再用受控点击调用 `router.push()` 或 `router.replace()`。默认渲染保留原生 `&lt;a&gt;` 的地址、修饰键和新标签页语义；需要控制实际标记时，使用 `custom` slot；只有在封装自己的链接组件时，才直接使用 `useLink()`。
 
@@ -147,7 +147,7 @@ anchors:
 本页以本地安装的 `vue-router@5.2.0` 声明和固定 commit `6e5f8d253b9444a76eb58f176ebe08d686c937cb` 为最终事实。官网页面可能继续随主线版本更新。
 :::
 
-## Internal Router Link I
+## 二、Internal Router Link I
 
 `_RouterLinkI` 是 `RouterLink` 常量的 internal 构造接口，用来让模板、TSX/JSX 和类型化路由推断 `custom` 分支的 props、默认 slot 参数及组件上的 `useLink` 属性。它描述库自身的组件类型拼装，不是应用层稳定扩展点。
 
@@ -161,7 +161,7 @@ anchors:
 不要在业务组件、公共组件库 API 或持久类型声明中直接引用 `_RouterLinkI`。需要组件值类型时使用 `typeof RouterLink`，需要 props 时使用公开的 `RouterLinkProps`。
 :::
 
-## Router Link Props
+## 三、Router Link Props
 
 `RouterLinkProps` 扩展内部 `RouterLinkOptions`。`to` 是唯一必填项；其余属性分别控制 history 写入方式、渲染所有权、激活 class、无障碍当前项和值与浏览器 View Transition。组件 props 是普通值形状，响应式模板绑定由 Vue 负责；`MaybeRef` 是 `UseLinkOptions` 的额外能力。
 
@@ -187,7 +187,7 @@ anchors:
 </RouterLink>
 ~~~~
 
-## Use Link Options
+## 四、Use Link Options
 
 `UseLinkOptions&lt;Name&gt;` 是 `useLink()` 的 public 输入接口。`to` 与 `replace` 都是 `MaybeRef`：可传普通值，也可传 `ref`、`computed` 或 Vue 响应式 props 上的属性；固定实现每次求值都用 `unref()` 读取它们。`viewTransition` 在 5.2.0 中仍是普通可选 boolean，不是 `MaybeRef&lt;boolean&gt;`。
 
@@ -219,7 +219,7 @@ const stateClass = computed(() => ({
 }))
 ~~~~
 
-## Use Link Return
+## 五、Use Link Return
 
 `UseLinkReturn&lt;Name&gt;` 精确描述 `useLink()` 的五个返回成员，但该接口在 5.2.0 声明中带 `@internal`。应用可以使用这些运行时返回值，却不应把接口名称固化到自己的公开 contract；优先让 TypeScript 从 `useLink()` 推断，确需别名时使用 `ReturnType&lt;typeof useLink&gt;`。
 
@@ -243,7 +243,7 @@ const href = link.href
 const isCurrent = link.isExactActive
 ~~~~
 
-## Router Link
+## 六、Router Link
 
 `RouterLink` 是类型为 `_RouterLinkI` 的 public 组件常量。默认分支创建 `&lt;a&gt;`，写入 resolved `href`、active class、exact-active class、受控 click handler，并仅在 exact active 时写入 `aria-current`。Vue 的 attrs 合并仍允许 `target`、`rel` 等 anchor 属性落到默认根节点。
 
@@ -259,7 +259,7 @@ const isCurrent = link.isExactActive
 </RouterLink>
 ~~~~
 
-## Use Link
+## 七、Use Link
 
 `useLink(props)` 是 public 组合式函数，它抽出 RouterLink 的解析、href、激活判定和导航行为，但不渲染 DOM。它通过应用注入取得 Router 与当前 route，所以必须在已安装 Router 的组件 `setup()` 上下文中调用。常规页面链接继续用 RouterLink；需要封装设计系统链接、把 active 状态放在外层结构或整合自定义组件时才使用 useLink。
 
@@ -288,7 +288,7 @@ const { href, isActive, isExactActive, navigate } = useLink(props)
 `navigate()` 只是导航行为，不会替你补齐自定义根节点的 href、键盘可达性、链接角色、active class 或 aria-current。用 custom slot/useLink 时，这些 DOM 责任由封装组件承担。
 :::
 
-## Custom Slot 与链接语义
+## 八、Custom Slot 与链接语义
 
 `&lt;RouterLink custom v-slot&gt;` 与 `useLink()` 暴露相同的五个值，不过 slot 中的 computed refs 已被 Vue 解包为普通读取值。`custom` 只取消 RouterLink 自动创建的 anchor，不代表内容自动变成链接；最稳妥的站内导航仍是单个 `&lt;a&gt;` 根节点，同时绑定 `href` 和 `navigate`。
 
@@ -311,7 +311,7 @@ const { href, isActive, isExactActive, navigate } = useLink(props)
 
 官方 issue #2375 记录了 custom 模式返回 slot 数组时，组件级指令无法可靠落到实际元素的问题。5.2.0 源码会把“恰好一个 VNode”的 slot 结果解包，但多个根节点仍没有唯一的 attrs/指令承载者。把行为直接写在单个交互根节点上，边界最明确。
 
-## Active 与 Exact Active
+## 九、Active 与 Exact Active
 
 active 判定以 matcher record 和 params 为核心，而不是比较完整 URL。目标最后一个 matched record（alias 会追溯到原 record）只要出现在当前 matched 链中，且目标 params 被当前 params 包含，就会 active；因此嵌套路由中的祖先链接也可 active。exact active 还要求该 record 正好是当前 matched 链最后一项，并要求 params 完全相等。
 
@@ -327,7 +327,7 @@ active 判定以 matcher record 和 params 为核心，而不是比较完整 URL
 如果产品需要把 query、hash 或其他业务状态纳入“当前链接”判断，应使用 custom slot/useLink 取得 resolved `route`，再显式计算业务状态；不要把默认 exact-active 理解为完整 URL 严格相等。
 :::
 
-## 易错使用提示
+## 十、易错使用提示
 
 :::pitfalls
 ### 把外部 URL 直接交给 RouterLink
@@ -559,7 +559,7 @@ type LinkState = ReturnType<typeof useLink>
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 十一、源码推导与适用场景
 
 :::steps
 ### 1. 响应式解析目标地址

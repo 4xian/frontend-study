@@ -1,0 +1,7 @@
+#resource-hints-style-target {
+  --resource-hints-style-state: applied;
+
+  color: #0d4d40;
+  background: #def1e9;
+  border-left-color: #16816a;
+}

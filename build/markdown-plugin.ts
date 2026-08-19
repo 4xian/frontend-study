@@ -1,6 +1,6 @@
 import { existsSync } from 'node:fs'
 import { readFile, readdir } from 'node:fs/promises'
-import { join, relative, resolve, sep } from 'node:path'
+import { basename, join, relative, resolve, sep } from 'node:path'
 import {
   createSourceFile,
   forEachChild,
@@ -122,6 +122,12 @@ export function markdownPlugin(options: MarkdownPluginOptions = {}): Plugin {
   return {
     name: 'content-markdown',
     enforce: 'pre',
+    /** 资产 manifest 变化后丢弃旧白名单，避免开发服务器继续拒绝新 ID。 */
+    handleHotUpdate({ file }) {
+      if (['demo-manifest.ts', 'principle-manifest.ts'].includes(basename(file))) {
+        assets = undefined
+      }
+    },
     /** 读取并编译统一 Markdown 正文的模块请求。 */
     async load(id) {
       const request = parseModuleRequest(id)

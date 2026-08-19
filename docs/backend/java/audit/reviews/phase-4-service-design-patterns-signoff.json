@@ -1,0 +1,257 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.intermediate.service-design-patterns",
+  "batchId": "phase-c-i18-service-design-patterns",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-16T08:05:22+08:00",
+  "phase": "Phase C",
+  "phaseCAdmission": {
+    "status": "PASS",
+    "predecessorCourseId": "backend.java.learn.intermediate.lombok-and-generated-contracts",
+    "predecessorSignoffPath": "docs/backend/java/audit/reviews/phase-4-lombok-and-generated-contracts-signoff.json",
+    "predecessorSignoffSha256": "0ba4de07e2b45864153ddc365e9ef95ecd88f54d4fe53262b110b225bc4e97e7",
+    "phaseCProgressBeforeBatch": "17/20"
+  },
+  "phaseCProgress": "18/20",
+  "phaseAFreeze": {
+    "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+    "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81",
+    "designation": "I-18 / 必修 / 复用",
+    "title": "策略、模板方法、适配器与回调",
+    "estimatedMinutes": 150,
+    "prerequisite": "backend.java.learn.intermediate.lombok-and-generated-contracts",
+    "stableIdPreserved": "backend.java.learn.intermediate.service-design-patterns",
+    "slugPreserved": "service-design-patterns",
+    "urlPreserved": "/backend/java/core/learn/service-design-patterns"
+  },
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "newStagingPerformedThisBatch": false,
+    "existingIndexPreserved": true,
+    "unrelatedWorkspaceChangesPreserved": true
+  },
+  "versions": {
+    "verifiedAt": "2026-08-16",
+    "modern": {
+      "java": "25",
+      "springBoot": "4.1.0",
+      "springFramework": "7.0.8",
+      "classMajor": 69
+    },
+    "legacy": {
+      "java": "8",
+      "springBoot": "2.3.12.RELEASE",
+      "springFramework": "5.2.15.RELEASE",
+      "classMajor": 52
+    }
+  },
+  "sourceDiscovery": {
+    "method": "Tavily reached its plan limit; Exa was used only to discover official entries, then every claim was checked against Oracle, Spring or Fowler source pages",
+    "researchCardCount": 36,
+    "researchUniqueUrlCount": 36,
+    "researchUrlStatus": "PASS; 36/36 returned HTTP 200",
+    "lessonOfficialSourceCardCount": 15,
+    "lessonUniqueSourceIdCount": 15,
+    "lessonUniqueSourceUrlCount": 15,
+    "lessonUrlStatus": "PASS; 15/15 returned HTTP 200",
+    "projectEvidenceCount": 5,
+    "projectEvidenceBoundary": "只复用冻结审计证据；未读取、运行或修改 dzzz-app",
+    "researchBoundaryDisclosure": {
+      "status": "DEVIATION_RECORDED",
+      "detail": "研究代理的子任务曾由一次 rg -C 输出意外带出 I-19 的一行 Phase A 元数据",
+      "impact": "未打开 I-19 课程或研究稿，未修改 I-19 或任何后续课程；I-18 证据链不依赖该行元数据"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/intermediate/service-design-patterns.md",
+      "sha256": "ab1cf7abc34c0c1a9571de071d7f115719d011ce9c297b3f5d300d7a510c6daa"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/service-design-patterns.md",
+      "sha256": "c2e8e7d86ee9f3428eee68692510cad6dc1d89519f4843fbc7410e0d58c9d885"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "f798160ce17c1b6a7dd5a137cbd5c9fec217bfd99c94520efeb9fc5f3274c0ed"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "14d0f304d3e08cb4a8b7bb45891d2cd29d40ea9c35d7833bc995a9b432216138"
+    },
+    {
+      "path": "docs/backend/java/audit/phase-2-knowledge-path-manifest.json",
+      "sha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407"
+    }
+  ],
+  "scope": {
+    "lessonBodyChanged": false,
+    "lessonMetadataChanges": [
+      "estimatedMinutes aligned to the Phase A frozen value of 150",
+      "the sole prerequisite was aligned to I-17",
+      "verifiedAt was refreshed to 2026-08-16"
+    ],
+    "researchNoteUpdated": true,
+    "trackChangedThisBatch": false,
+    "loaderChangedThisBatch": false
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "researchLineCount": 333,
+    "lessonLineCount": 985,
+    "rootH2Count": 17,
+    "independentKnowledgePointHeadings": 16,
+    "knowledgePointSevenPartCoverage": "16/16",
+    "pitfallCount": 5,
+    "pitfallNinePartCoverage": "5/5",
+    "orderedListItemsRenderAsSeparateBlocks": "PASS",
+    "completeModernSourceVisible": true,
+    "completeJava8SourceVisible": true,
+    "officialSourceCount": 15,
+    "uniqueOfficialSourceUrlCount": 15,
+    "projectEvidenceCount": 5,
+    "javaMethodComments": "PASS; lesson Java methods use Chinese documentation comments",
+    "securitySection": "PASS"
+  },
+  "javaVerification": {
+    "temporaryRoot": "/tmp/java-i18-phase-c.5Od6EJ",
+    "modernBuildImage": "eclipse-temurin@sha256:12e44624adee6808a36d962717e1656e0afeeeff5a100f9cb00e0136513558f0",
+    "legacyBuildImage": "eclipse-temurin@sha256:c8b86f2c0a9bd6cc1b7fabc5d1a097501a166eea7cad3b2764e90e96178bea9b",
+    "modern": {
+      "compileRuns": 2,
+      "allCompilesPassed": true,
+      "feedbackRuns": 2,
+      "feedback": "SERVICE_PATTERNS_PASS strategy=2 template=1 adapter=1 callback=3",
+      "classMajor": 69
+    },
+    "legacy": {
+      "compileRuns": 2,
+      "allCompilesPassed": true,
+      "feedbackRuns": 2,
+      "feedback": "SERVICE_PATTERNS_LEGACY_PASS strategy=2 template=1 adapter=1 callback=3",
+      "classMajor": 52
+    },
+    "negative": {
+      "commandArgument": "UNKNOWN",
+      "expectedExitCode": 1,
+      "observedExitCode": 1,
+      "summary": "PASS; IllegalArgumentException: unsupported channel: UNKNOWN"
+    }
+  },
+  "catalogVerification": {
+    "trackStatus": "available",
+    "loaderStatus": "pre-existing and loadable",
+    "stableIdPreserved": true,
+    "stableUrlPreserved": true,
+    "productionBuild": "PASS; 1791 modules transformed",
+    "directPageLoad": "PASS; lesson route loaded from the source development server"
+  },
+  "engineeringVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes and 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check",
+      "exitCode": 0,
+      "summary": "passed directly and again as part of the production build"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run test:unit",
+      "exitCode": 0,
+      "summary": "No persistent unit files; configured empty directory passed"
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "summary": "No persistent E2E files; configured empty directory passed"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "PASS; 1791 modules transformed and the production bundle was emitted"
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0,
+      "summary": "passed before signoff writeback"
+    }
+  ],
+  "repositoryFormatBoundary": {
+    "command": "npm run format:check",
+    "exitCode": 1,
+    "i18ScopedGate": "PASS",
+    "unrelatedBlockingFiles": [
+      "src/categories/frontend/engineering/vite/vite-reference-index.ts",
+      "src/categories/frontend/vue/core/vue-core-options-reference-index.ts",
+      "src/categories/frontend/vue/core/vue-core-reference-index.ts",
+      "src/categories/frontend/vue/core/vue-core-sfc-reference-index.ts"
+    ],
+    "unrelatedFilesModified": false
+  },
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "session": "java-i18-final",
+    "baseUrl": "http://127.0.0.1:4199/",
+    "targetPath": "/backend/java/core/learn/service-design-patterns",
+    "sourceDevServerUsed": true,
+    "productionBuildSeparatelyPassed": true,
+    "desktop": {
+      "viewport": "1440x900",
+      "documentClientWidth": 1440,
+      "documentScrollWidth": 1440,
+      "horizontalOverflow": false
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "documentClientWidth": 390,
+      "documentScrollWidth": 390,
+      "horizontalOverflow": false
+    },
+    "title": "策略、模板方法、适配器与回调",
+    "outlineKnowledgePointCount": 16,
+    "pitfallCount": 5,
+    "officialSourceCount": 15,
+    "completeModernSourceVisible": true,
+    "completeJava8SourceVisible": true,
+    "predecessorLinkVisible": true,
+    "requestCount": 528,
+    "failedRequests": 0,
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "visualInspection": "PASS; desktop and mobile showed no overlap, clipping or horizontal overflow"
+  },
+  "review": {
+    "riskClassification": "This Phase C batch changed only lesson metadata and the research note; the previously reviewed teaching body and runnable examples remained byte-for-byte unchanged",
+    "independentReviewRequired": false,
+    "reusedContentReview": "PASS / 0 finding",
+    "reusedContentReviewSource": "the existing two-round Standards/Spec review recorded by the prior service-design-patterns signoff",
+    "currentOfficialSourceAudit": "PASS; research claims and selected lesson sources were independently rechecked against current primary pages",
+    "standards": "PASS / 0 finding",
+    "spec": "PASS / 0 finding",
+    "highestSeverity": "none",
+    "reviewedLessonSha256": "c2e8e7d86ee9f3428eee68692510cad6dc1d89519f4843fbc7410e0d58c9d885",
+    "reviewedResearchSha256": "ab1cf7abc34c0c1a9571de071d7f115719d011ce9c297b3f5d300d7a510c6daa"
+  },
+  "cleanup": {
+    "status": "PASS",
+    "temporaryJavaAssetsAbsent": true,
+    "browserScreenshotsAbsent": true,
+    "currentBatchBrowserSnapshotsAbsent": true,
+    "browserSessionClosed": true,
+    "runtimeContainersStopped": true,
+    "devServerStopped": true,
+    "unrelatedBrowserSessionsPreserved": true
+  },
+  "selfHashPolicy": "signoff file does not record its own SHA-256; artifacts bind only stable external batch outputs",
+  "stopBoundary": "Phase C I-18 is closed at 18/20 after cleanup evidence is finalized. The only next authorized batch is I-19; no I-19 lesson or research file was opened or modified before this signoff. Phase D remains unauthorized until the Phase C aggregate Gate closes."
+}

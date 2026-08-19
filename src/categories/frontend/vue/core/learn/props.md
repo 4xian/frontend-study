@@ -58,7 +58,7 @@ recap:
 
 # Props
 
-## 把 Props 看成组件的公开输入
+## 一、把 Props 看成组件的公开输入
 
 上一课已经会组合父组件与子组件，但包含关系不会让子组件自动读取父级局部变量。父组件拥有课程状态，子组件若要展示标题、时长或推荐状态，必须声明这些命名输入；父组件也要在使用子组件时显式传入。Props 就是这条父到子边界上的公开输入契约。
 
@@ -80,7 +80,7 @@ CoursePreviewCard 声明并只读展示
 判断所有权时先问“哪个组件负责决定这个值”。负责决定值的一方保存状态，另一方只通过公开输入消费。
 :::
 
-## 用类型式 defineProps 声明输入
+## 二、用类型式 defineProps 声明输入
 
 `defineProps()` 是 `<script setup>` 的编译器宏，无需导入。本课用 TypeScript 接口作为唯一主声明：没有问号的字段必须传入，带问号的字段可以缺席；模板通过 `props.xxx` 显式读取，便于新手始终看见数据来自组件输入。
 
@@ -113,7 +113,7 @@ const props = defineProps<Props>()
 
 Vue 也支持运行时对象声明，用来直接配置 `type`、`required`、`default` 或 `validator`。它与类型式声明是两种入口，同一次 `defineProps()` 不能既传运行时对象又传类型参数；基础课程保持一套主线，避免把两套语法拼在一起。
 
-## 静态 attribute 只传字符串
+## 三、静态 attribute 只传字符串
 
 父模板中没有 `v-bind` 的 attribute 是静态字符串。需要读取 JavaScript 变量、字面量或表达式时使用 `v-bind`，简写为冒号。脚本声明保持 camelCase，模板传参按官方约定使用 kebab-case。
 
@@ -150,7 +150,7 @@ const isFeatured = ref(false)
 `duration-minutes="45"` 传的是字符串，`featured="false"` 也传字符串。冒号表达的是“按 JavaScript 求值”，不是装饰性写法。
 :::
 
-## 用 withDefaults 提供稳定默认值
+## 四、用 withDefaults 提供稳定默认值
 
 可选普通 prop 缺席时通常是 `undefined`。界面需要稳定文案或空集合时，可以用 `withDefaults()` 为类型式声明提供默认值。字符串可以直接给值；对象和数组应使用工厂，让每个组件实例得到自己的可变引用。
 
@@ -183,7 +183,7 @@ const props = withDefaults(defineProps<Props>(), {
 Vue 3.5 也支持响应式 Props 解构的原生默认值，但本课继续使用 `props.xxx` 与 `withDefaults()`，避免在默认值之外再引入一套读取方式。
 :::
 
-## 单独理解 Boolean 转换
+## 五、单独理解 Boolean 转换
 
 Boolean prop 模仿原生 `disabled`、`checked` 这类 boolean attribute：缺席通常是 `false`，只写名称或传空字符串通常是 `true`。它不是把任意字符串解析为布尔值的通用转换器。
 
@@ -215,7 +215,7 @@ const props = defineProps({
 ~~~~
 :::
 
-## 父级更新，子级被动刷新
+## 六、父级更新，子级被动刷新
 
 Props 是单向向下绑定。父组件修改自己拥有的状态后重新渲染，子组件的 props 会收到最新输入并更新视图。子级没有隐式写回通道，也不能把 `props.title` 重新赋值当成自己的状态更新。
 
@@ -249,7 +249,7 @@ const durationMinutes = ref(30)
 子级直接给顶层 prop 赋值会收到只读警告，而且父级下次更新仍会用自己的值刷新它。所有权没有因为子级暂时看见这个值而转移。
 :::
 
-## 在 Props 输入流实验台观察方向
+## 七、在 Props 输入流实验台观察方向
 
 下面的唯一 Demo 把课程状态全部保留在父组件。依次切换课程、推荐状态、主题、说明和难度，观察子卡片只通过已声明输入被动刷新；子级没有修改父状态的按钮。
 
@@ -257,7 +257,7 @@ const durationMinutes = ref(30)
 由父级更新多种输入，观察子组件按已声明 Props 被动刷新
 :::
 
-## 区分一次性本地初值与持续派生
+## 八、区分一次性本地初值与持续派生
 
 想“修改 prop”时，先分清真实需求。若输入只用于创建组件自己的初始状态，就明确复制到本地 `ref`，并接受它与父级后续更新断开；若只想规范化或计算展示值，就用 `computed` 持续从最新 prop 派生。
 
@@ -295,7 +295,7 @@ const normalizedTitle = computed(() => props.title.trim())
 不要为了让复制值继续同步而立即增加 watcher。若本地值始终应等于 prop 的变换结果，它本来就是 computed；若它应独立变化，就应接受两者分离。
 :::
 
-## 对象和数组只受浅层只读约束
+## 九、对象和数组只受浅层只读约束
 
 “Props 只读”准确地说是顶层绑定只读。对象和数组仍是父子共享的 JavaScript 引用，所以 `props.topics.push()` 或 `props.courseMeta.level = ...` 技术上可能改到父级数据。能够修改不代表应该修改：这种变化绕过所有权边界，很难追踪来源。
 
@@ -327,7 +327,7 @@ const sortedTopics = computed(() => [...props.topics].sort())
 | props.topics.sort() | 是 | 不要在子级原地排序 |
 | props.courseMeta.level = ... | 是 | 由父级所有者修改 |
 
-## 运行时校验只提供开发反馈
+## 十、运行时校验只提供开发反馈
 
 运行时对象声明可以检查 `type`、`required` 和 `validator`。失败时 Vue 在开发构建中给出控制台警告，但不会把字符串自动清洗成数字，也不会因为 validator 返回 false 就拒绝创建组件。外部数据仍应在进入组件前完成真实解析与校验。
 
@@ -345,7 +345,7 @@ const props = defineProps({
 这里的 validator 适合提醒组件调用者“时长应大于零”，不负责接口响应解析、表单规则、安全判断或生产环境数据清洗。
 :::
 
-## Vue 3.5 响应式解构是进阶能力
+## 十一、Vue 3.5 响应式解构是进阶能力
 
 Vue 3.5 会在同一 `<script setup>` 内把解构 prop 的读取改写为 prop 访问，因此父级更新后，直接读取的变量仍能得到新值。但该变量不是 `ref`，没有 `.value`；交给 `watch` 或组合函数时，要传 getter 才能保留追踪。基础代码继续写 `props.count` 最直观。
 
@@ -371,7 +371,7 @@ watch(() => count, () => {
 ~~~~
 :::
 
-## 易错使用提示
+## 十二、易错使用提示
 
 :::pitfalls
 ### 把静态 attribute 当成 number 或 boolean
@@ -567,7 +567,7 @@ watch(() => count, () => console.log(count))
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 从源码推导适用场景
+## 十三、从源码推导适用场景
 
 :::steps
 ### 类型式与运行时声明保持二选一
@@ -685,6 +685,6 @@ const courseMeta = ref({ level: 'beginner' })
 - [ ] 子级不重新赋值顶层 prop，也不修改共享对象或数组
 - [ ] 运行时校验只用于开发反馈，外部数据在边界处解析
 
-## 下一课预告
+## 十四、下一课预告
 
 Props 已经建立父到子的输入方向。下一课将学习 Emits，让子组件用显式事件向父组件表达操作意图，同时继续由父级决定是否更新状态。

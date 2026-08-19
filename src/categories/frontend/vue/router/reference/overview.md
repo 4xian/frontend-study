@@ -69,7 +69,7 @@ anchors:
 
 # 文件路由约定与生成管线
 
-## 概述
+## 一、概述
 
 文件路由不是运行时遍历文件系统。`vue-router/vite` 或 `vue-router/unplugin` 在构建进程扫描页面文件，把目录语义编译为 route tree，再从同一棵树生成运行时 routes 与 TypeScript 映射。浏览器收到的是普通 route records；稳定 `createRouter()` 只把这些 records 交给 matcher，不知道原始 pages 目录。
 
@@ -84,7 +84,7 @@ anchors:
 排查问题时先判断它属于哪个阶段：文件没有进入 tree、虚拟模块没有生成、d.ts 没被 TypeScript 纳入，或 records 已生成但运行时没有匹配。四类问题的证据和修复点不同。
 :::
 
-## Pages 约定
+## 二、Pages 约定
 
 默认配置扫描 `src/pages` 下的 `.vue` 文件。文件名和目录层级提供路由路径，页面组件提供 record 的 component；`index.vue` 表示当前目录的默认路径，方括号表示动态参数，三点参数表示 catch-all，圆括号目录用于只组织文件而不增加 URL segment。
 
@@ -103,7 +103,7 @@ anchors:
 `routesFolder` 对象的 `path` 是 URL 前缀，按原样使用且不能以 `/` 开头；`src` 才是文件系统目录。把两者互换会同时破坏扫描范围和生成 URL。
 :::
 
-## 目录到路由树
+## 三、目录到路由树
 
 构建开始时，插件按 `routesFolder`、`filePatterns`、`extensions` 与 `exclude` 执行 glob。每个命中文件先转换为 route path，再插入 `PrefixTree`；随后插件读取 SFC route block 与 `definePage()` 的静态信息，把 name、path、alias、props 和 meta 等覆盖合并到相应节点。开发模式 watcher 对 add/change/unlink 重复同一套节点更新。
 
@@ -127,7 +127,7 @@ export default defineConfig({
 官方 setup 要求 Vue Router 插件位于 Vue 插件之前。这个顺序让页面宏与 route block 的构建期转换先于普通 SFC 编译，并让后续虚拟模块从已扫描的 tree 生成。
 :::
 
-## 构建插件与生成产物
+## 四、构建插件与生成产物
 
 route tree 是生成阶段的单一结构来源。`generateRouteRecords()` 把节点写成异步 component imports、path、name、children、props、alias 与 meta；`generateDTS()` 则生成 `RouteNamedMap`、文件到 route 的映射，并增强根入口 `TypesConfig`。两者来自同一 tree，但一个是构建器提供的运行时代码，一个是交给 TypeScript 的声明文件。
 
@@ -152,7 +152,7 @@ export const router = createRouter({
 运行时再用普通数组方法修改 `routes`，不会反向更新已生成的 route-map.d.ts。需要类型同步的改写应放在 `extendRoute` 或 `beforeWriteFiles` 等构建期 hook。
 :::
 
-## 运行时 Matcher 交接
+## 五、运行时 Matcher 交接
 
 稳定链路在 `createRouter({ routes })` 处完成阶段交接。固定源码中 `createRouter()` 立即调用 `createRouterMatcher(options.routes, options)`；matcher 规范化、排序并索引普通 records，之后按 name、path 或相对 params 解析导航。它不读取 `src/pages`、不运行 glob，也不生成类型。
 
@@ -163,7 +163,7 @@ export const router = createRouter({
 | record 存在但 URL 不匹配 | 生成 path 与 matcher 配置 | 文件 watcher |
 | 刷新深层 URL 得到服务器 404 | 部署 fallback/history | pages 命名规则 |
 
-## 阶段边界
+## 六、阶段边界
 
 | 边界 | 可以依赖 | 不要假设 |
 | --- | --- | --- |
@@ -176,7 +176,7 @@ export const router = createRouter({
 文件路由是可选的构建期生产者；稳定 Router 仍可接收手写 `RouteRecordRaw[]`。反过来，使用文件约定也不会改变 Router matcher 的公共运行时职责。
 :::
 
-## Package Exports
+## 七、Package Exports
 
 下表只冻结本页负责的三个 package export key。稳定 118 项只来自根入口 `.`；两个 experimental 子路径仅登记为 watchlist，本页不展开其成员。文件路由、tooling 与其他附加页都不增加 118 项分母。
 
@@ -186,7 +186,7 @@ export const router = createRouter({
 | ./experimental | types + ESM | 仅 watchlist；不计 118，不在本页展开 |
 | ./experimental/pinia-colada | types + ESM | 仅 watchlist；不计 118，不在本页展开 |
 
-## 易错使用提示
+## 八、易错使用提示
 
 :::pitfalls
 ### 只导入 auto-routes，却没有安装构建插件
@@ -349,7 +349,7 @@ routes.push({
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 九、源码推导与适用场景
 
 :::steps
 ### 1. 从默认配置确定扫描入口

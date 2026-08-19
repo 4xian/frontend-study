@@ -1,0 +1,244 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.advanced.events-async-scheduling-and-retry",
+  "batchId": "phase-4-events-async-scheduling-and-retry",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-10T19:06:48+08:00",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "stagingPerformedThisBatch": false,
+    "existingStagedAndUnstagedStatePreserved": true
+  },
+  "sourceRepository": {
+    "path": "/Users/jian/Desktop/work/TDH/dzzz/dzzz-app",
+    "readOnly": true,
+    "projectExecuted": false,
+    "projectModified": false,
+    "accessBoundary": "Frozen Phase 2 evidence only; no batch-specific project access"
+  },
+  "phase2Freeze": {
+    "researchStatus": "not-started",
+    "exampleStatus": "not-started",
+    "courseStatus": "planned",
+    "phase4StateRecordedOnlyInThisSignoff": true,
+    "knowledgePath": {
+      "sourceItems": 167,
+      "courseNodes": 64,
+      "dependencyEdges": 114,
+      "gateStatus": "passed"
+    }
+  },
+  "versions": {
+    "verifiedAt": "2026-08-10",
+    "modern": {
+      "java": "25",
+      "springFramework": "7.0.8",
+      "maven": "3.9.12"
+    },
+    "legacy": {
+      "java": "8",
+      "springBoot": "2.3.12.RELEASE",
+      "springFramework": "5.2.15.RELEASE",
+      "maven": "3.9.12"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/advanced/events-async-scheduling-and-retry.md",
+      "sha256": "576ecb5d34938f8ffa449c3a3abe14e07d0974734f3f9f834f5edc74c4f5d479"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/events-async-scheduling-and-retry.md",
+      "sha256": "b21160136c2dd88e99e56d78a54aa4b886e2174b07d281237a751fbc6ea505d6"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "2debe6fdf0a14f9f2439c4424483ac64f6bdc19229b4cacb611a72359b26c317"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "a6c23c55c4bec594c825a05436baa19bd64b155fcfec9425e89bd0eb9ec46a48"
+    }
+  ],
+  "sourceVerification": {
+    "researchCardCount": 39,
+    "researchUniqueUrlCount": 39,
+    "frontmatterOfficialSourceCount": 39,
+    "frontmatterUniqueUrlCount": 39,
+    "researchFrontmatterSetDifference": 0,
+    "communitySourcesUsedAsEvidence": false,
+    "directUrlCheck": "PASS; all 39 official targets returned HTTP 200 and research/frontmatter IDs and URL order matched"
+  },
+  "projectEvidence": {
+    "itemCount": 8,
+    "observedCount": 5,
+    "correctedCount": 3,
+    "rejectedCount": 0,
+    "projectEvidenceSetDifference": 0,
+    "currentDefectClaimedFromFrozenEvidence": false,
+    "boundary": "Representative paths and symbols came only from the frozen Phase 2 matrix; corrected risks are teaching boundaries, not claims that the current project is defective"
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "lineCount": 1234,
+    "lineBudget": "PASS; single-course exception reviewed because the frozen topic intentionally joins event, async, scheduling and retry boundaries",
+    "independentKnowledgePointHeadings": 16,
+    "knowledgePointSevenPartCoverage": "16/16",
+    "pitfallCount": 10,
+    "pitfallNinePartCoverage": "10/10",
+    "orderedListLineBreaks": "PASS; rendered ordered-list items occupy distinct rows",
+    "officialSourceCount": 39,
+    "projectEvidenceCount": 8,
+    "javaCodeBlockCount": 37,
+    "javaMethodComments": "PASS",
+    "sourceHeadingAbsent": true,
+    "securitySection": "PASS",
+    "contentCheck": "PASS; knowledge=16 fields=16/16 pitfalls=10 sources=39 projectEvidence=8 javaBlocks=37",
+    "voidAsyncFailureTeaching": "PASS; AsyncConfigurer and AsyncUncaughtExceptionHandler example plus handler assertion added"
+  },
+  "javaVerification": {
+    "temporaryFixtureRoot": "/tmp/java-advanced-04-feedback.72FZVk",
+    "temporaryAssetsCleaned": true,
+    "cleanupVerifiedWithFinalAbsenceChecks": true,
+    "rerunBoundary": "The current shell no longer exposes a Java runtime or Maven executable after the original two-run fixture evidence; this content-only correction does not alter the fixture sources",
+    "cases": [
+      {
+        "name": "Modern Spring events/async/scheduling/retry feedback loop",
+        "runtime": "Spring Framework 7.0.8 / Java 25 / Maven 3.9.12",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "EVENTS_ASYNC_SCHEDULE_RETRY_PASS version=modern attempts=3"
+      },
+      {
+        "name": "Legacy Spring events/async/scheduling/retry feedback loop",
+        "runtime": "Spring Framework 5.2.15.RELEASE + Spring Retry 1.2.5.RELEASE / Java 8 / Maven 3.9.12",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "EVENTS_ASYNC_SCHEDULE_RETRY_PASS version=legacy attempts=3"
+      }
+    ],
+    "negativeControls": [
+      "Future failure cause observation",
+      "bounded executor rejection",
+      "thread-context isolation",
+      "scheduled cancellation and shutdown"
+    ]
+  },
+  "verification": [
+    {
+      "command": "node /tmp/java-advanced-04-feedback.72FZVk/content-check.mjs",
+      "exitCode": 0,
+      "summary": "CONTENT_PASS knowledge=16 fields=16/16 pitfalls=10 sources=39 projectEvidence=8 javaBlocks=37"
+    },
+    {
+      "command": "scoped Catalog cold start check (three consecutive runs)",
+      "exitCode": 0,
+      "summary": "CATALOG_COLD_PASS on all runs; basics=18 intermediate=17 advancedAvailable=4 advancedPlanned=12 currentLoadable=true nextLoader=false"
+    },
+    {
+      "command": "Phase 2 knowledge-path check",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check && npm run lint && npm run format:check && npm run test:unit && npm run test:e2e",
+      "exitCode": 0,
+      "summary": "PASS on the current repository quality gates"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "PASS; 1473 modules transformed and events-async-scheduling-and-retry chunk emitted"
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0,
+      "summary": "PASS"
+    }
+  ],
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "session": "default",
+    "baseUrl": "http://127.0.0.1:4224/",
+    "targetPath": "/backend/java/core/learn/events-async-scheduling-and-retry",
+    "temporaryScreenshots": [
+      "/tmp/java-advanced-04-feedback.Xe8kcN/desktop-1440x900-top-final.png",
+      "/tmp/java-advanced-04-feedback.Xe8kcN/desktop-1440x900-bottom-final.png",
+      "/tmp/java-advanced-04-feedback.Xe8kcN/mobile-390x844-top-final.png",
+      "/tmp/java-advanced-04-feedback.Xe8kcN/mobile-390x844-bottom-final.png"
+    ],
+    "desktop": {
+      "viewport": "1440x900",
+      "targetPageStatus": 200,
+      "documentClientWidth": 1440,
+      "documentScrollWidth": 1440,
+      "knowledgePointCount": 16,
+      "pitfallCount": 10,
+      "officialSourceCount": 39,
+      "projectEvidenceCount": 8,
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "failedRequests": 0,
+      "non200Requests": 0,
+      "requestCount": 471,
+      "scrollContainersChecked": "article, lesson-path sidebar, lesson-context sidebar"
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "targetPageStatus": 200,
+      "documentClientWidth": 390,
+      "documentScrollWidth": 390,
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "failedRequests": 0,
+      "non200Requests": 0,
+      "requestCount": 471,
+      "atBottom": true,
+      "compareLayout": "single-column responsive reading layout"
+    },
+    "manualScreenshotReview": "PASS; no incoherent overlap, code overflow remains inside its own scroll container, and no horizontal overflow"
+  },
+  "manifestRegression": {
+    "basicsAvailable": 18,
+    "intermediateAvailable": 17,
+    "advancedAvailable": 4,
+    "advancedPlanned": 12,
+    "currentEntryLoadable": true,
+    "futurePlannedEntriesHaveNoLoader": true,
+    "nextCourseId": "backend.java.learn.advanced.cache-and-consistency",
+    "nextCourseStatus": "planned",
+    "nextCourseLoader": false,
+    "finalColdStartRuns": 3,
+    "finalColdStartErrors": 0,
+    "finalColdStartPending": false
+  },
+  "review": {
+    "standards": "PASS / 0 finding",
+    "spec": "PASS / 0 finding",
+    "findingCount": 0,
+    "independentReviewRounds": 2,
+    "finalIndependentConfirmationPending": false,
+    "finalIndependentConfirmedAt": "2026-08-10T19:06:48+08:00",
+    "confirmation": "Independent Standards/Spec review first identified the missing void async failure observation; the focused correction was re-reviewed and the final snapshot passed with 0 findings. Current user authorization supersedes the historical stop before course 4; the next course remains planned and unloaded."
+  },
+  "temporaryAssetCleanup": {
+    "pending": false,
+    "verifiedAt": "2026-08-10T19:07:30+08:00",
+    "temporaryRoots": [
+      "/tmp/java-advanced-04-feedback.72FZVk",
+      "/tmp/java-advanced-04-feedback.Xe8kcN"
+    ],
+    "playwrightSessions": ["default"],
+    "playwrightSessionsClosed": true,
+    "previewPort": 4224,
+    "previewStopped": true,
+    "remainingPathCount": 0
+  },
+  "stopBoundary": "Close advanced course 4 only; do not research, draft, register or load advanced course 5 cache-and-consistency, Reference, project practice or other stages"
+}

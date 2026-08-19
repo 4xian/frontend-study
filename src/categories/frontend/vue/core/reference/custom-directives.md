@@ -50,7 +50,7 @@ anchors:
 
 # 自定义指令
 
-## 概述
+## 一、概述
 
 自定义指令用于复用必须直接操作真实元素的行为，例如聚焦、元素观察或对接 DOM 插件。能用 props、class、style 或组件表达的功能应继续使用声明式方案。`<script setup>` 中以 `v` 开头的驼峰变量可直接作为局部指令，也可通过 `app.directive()` 全局注册。
 
@@ -58,7 +58,7 @@ anchors:
 观察 mounted 与 updated，并只在绑定颜色真正变化时更新元素
 :::
 
-## 生命周期与 binding
+## 二、生命周期与 binding
 
 对象指令提供与宿主元素 patch 流程对应的七个客户端钩子。`binding.value` 是当前值，`oldValue` 在更新钩子中保存上一次值，`arg` 和 `modifiers` 分别表示参数与修饰符。除 `el` 外应把传入参数视为只读；跨钩子的第三方实例或清理句柄应以元素为键保存在 `WeakMap` 中。
 
@@ -80,7 +80,7 @@ const vObserve = {
 }
 ~~~~
 
-## 注册与函数简写
+## 三、注册与函数简写
 
 函数形式只会被归一化为 `mounted` 和 `updated`，适合无资源清理且两个阶段逻辑相同的简单行为。需要 `unmounted`、`getSSRProps()` 或其他钩子时必须使用对象形式。SSR 不执行浏览器端 DOM 钩子；需要输出 attribute 时由 `getSSRProps()` 返回服务端 props。
 
@@ -97,7 +97,7 @@ const vId = {
 }
 ~~~~
 
-## 易错使用提示
+## 四、易错使用提示
 
 :::pitfalls
 ### 假定 updated 只在绑定值变化时调用
@@ -262,7 +262,7 @@ const vId = {
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 最小源码实现
+## 五、最小源码实现
 
 `withDirectives()` 在渲染期间把归一化后的 binding 挂到 vnode；`deep` 指令会遍历当前值以收集嵌套依赖，不负责保存 oldValue。渲染器调用 `invokeDirectiveHook()` 时，才从前一个 vnode 的对应 binding 复制 oldValue，并在暂停依赖追踪和错误处理边界内执行 hook。
 

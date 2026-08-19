@@ -54,7 +54,7 @@ anchors:
 
 # defineAsyncComponent()
 
-## 概述
+## 一、概述
 
 `defineAsyncComponent()` 接收 loader 函数或选项对象，返回一个异步组件外壳。只有外壳真正被渲染时，Vue 才调用 loader；与动态 `import()` 配合时，打包器可以把真实组件拆成按需加载的独立 chunk。加载结果会缓存在该外壳定义上，多次挂载同一个定义不会重复请求。
 
@@ -62,7 +62,7 @@ anchors:
 const AsyncReport = defineAsyncComponent(() => import('./ReportPanel.vue'))
 ~~~~
 
-## 加载与错误状态
+## 二、加载与错误状态
 
 `loadingComponent` 默认延迟 200ms 显示，避免快速请求造成闪烁；`timeout` 默认未设置，不会自动超时。loader reject 或 timeout 后，配置的 `errorComponent` 会收到 `error` prop。错误仍进入 Vue 的应用错误处理流程，因此用户可见错误界面与日志上报应分别安排。
 
@@ -80,7 +80,7 @@ const AsyncReport = defineAsyncComponent({
 })
 ~~~~
 
-## 重试与 Suspense
+## 三、重试与 Suspense
 
 `onError` 必须调用 `retry()` 或 `fail()`，返回布尔值不会结束等待。`suspensible` 默认 true；位于 Suspense 内时，边界接管 `loadingComponent`、`delay` 和 `timeout`，但 Vue 3.5.40 在 loader reject 后仍可渲染异步组件自己的 `errorComponent`。需要完整使用本地加载状态时设置 `suspensible: false`。
 
@@ -95,11 +95,11 @@ const AsyncReport = defineAsyncComponent({
 })
 ~~~~
 
-## Vue 3.5 版本能力
+## 四、Vue 3.5 版本能力
 
 Vue 3.5+ 的 `hydrate` 选项只用于服务端渲染后的懒水合策略，例如 `hydrateOnVisible()`。它决定服务器 HTML 何时开始接管交互，不等同于客户端组件何时下载，也不影响普通 CSR 项目的 loader 懒加载语义。
 
-## 易错使用提示
+## 五、易错使用提示
 
 :::pitfalls
 ### 把 import() Promise 直接传入
@@ -242,7 +242,7 @@ defineAsyncComponent({
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 最小源码实现
+## 六、最小源码实现
 
 外壳维护共享的 pending 请求和已解析组件。普通客户端分支用 loaded、error、delayed 三个 ref 驱动渲染；Suspense 分支直接返回 loader Promise。retry 会清空 pending 请求并重新调用 loader，成功结果则缓存到外壳定义。
 

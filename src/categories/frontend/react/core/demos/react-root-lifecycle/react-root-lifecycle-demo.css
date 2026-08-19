@@ -1,0 +1,127 @@
+.root-lifecycle-demo {
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+}
+
+.root-lifecycle-demo > header p {
+  margin: 0 0 var(--space-1);
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.root-lifecycle-demo > header h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.root-lifecycle-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  margin: var(--space-3) -5px 0;
+}
+
+.root-lifecycle-toolbar button {
+  min-height: 2.5rem;
+  padding: 0.55rem 0.8rem;
+  margin: 0 5px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.root-lifecycle-toolbar button:hover:not(:disabled),
+.root-lifecycle-toolbar button:focus-visible {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.root-lifecycle-toolbar button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+.root-lifecycle-facts {
+  margin: var(--space-2) 0 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.root-lifecycle-facts > div {
+  display: flex;
+  align-items: flex-start;
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.root-lifecycle-facts dt {
+  flex: 0 0 42%;
+  font-weight: 700;
+}
+
+.root-lifecycle-facts dd {
+  min-width: 0;
+  margin: 0 0 0 var(--space-3);
+  color: var(--color-text-secondary);
+  overflow-wrap: anywhere;
+}
+
+.root-lifecycle-container {
+  min-height: 6rem;
+  padding: var(--space-3);
+  margin-top: var(--space-3);
+  border: 1px dashed var(--color-border);
+  background: var(--color-bg);
+}
+
+.root-lifecycle-container:empty::before {
+  color: var(--color-text-secondary);
+  content: '容器当前没有由 Root 渲染的内容';
+}
+
+.root-lifecycle-output {
+  padding-left: var(--space-3);
+  border-left: 4px solid var(--color-accent);
+}
+
+.root-lifecycle-output strong,
+.root-lifecycle-output span {
+  display: block;
+}
+
+.root-lifecycle-output span {
+  margin-top: var(--space-1);
+  color: var(--color-text-secondary);
+}
+
+.root-lifecycle-message {
+  min-height: 2.8rem;
+  padding: var(--space-2) var(--space-3);
+  margin: var(--space-3) 0 0;
+  border-left: 3px solid var(--color-accent);
+  background: var(--color-bg);
+  color: var(--color-text-secondary);
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 520px) {
+  .root-lifecycle-toolbar button {
+    flex: 1 1 100%;
+  }
+
+  .root-lifecycle-facts > div {
+    display: block;
+  }
+
+  .root-lifecycle-facts dd {
+    margin: var(--space-1) 0 0;
+  }
+}

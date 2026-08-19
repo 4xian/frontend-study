@@ -140,7 +140,7 @@ anchors:
 
 # Params 与 Query
 
-## 概述
+## 一、概述
 
 `params` 来自 route record 的动态路径片段，决定 pathname；`query` 表示 `?` 后的键值集合，不参与 record 的路径匹配。两者都区分导航输入的 raw 形状与解析完成后的 normalized 形状：raw 允许便于调用的数字和空值，normalized 则贴近 URL 解码后的字符串、数组与必要的 `null`。
 
@@ -161,7 +161,7 @@ router.resolve({
 // normalized query: { tab: 'summary', page: '2' }
 ~~~~
 
-## Raw 与 Normalized
+## 二、Raw 与 Normalized
 
 | 维度 | Raw 导航输入 | Normalized 路由结果 |
 | --- | --- | --- |
@@ -174,7 +174,7 @@ router.resolve({
 
 这里的 normalized 是 Router 对稳定内置 query 策略的结果。若通过公开的 `RouterOptions.parseQuery` 与 `stringifyQuery` 换用第三方格式，固定源码会保留自定义实现产生的对象；嵌套对象等扩展值域必须由应用同步维护运行时约定和 TypeScript 类型，不能继续把默认 `LocationQuery` 当作完整描述。
 
-## Route Query And Hash
+## 三、Route Query And Hash
 
 `RouteQueryAndHash` 是命名位置和 path 位置共用的内部组合接口，只把可选 `query?: LocationQueryRaw` 与 `hash?: string` 聚合到导航位置类型。它解释了为何 query/hash 可与 path 共存，但不是应用层应直接声明或扩展的接口。
 
@@ -182,7 +182,7 @@ router.resolve({
 `RouteQueryAndHash` 在 5.2.0 固定源码中标记为 internal。应用应使用公开的 `RouteLocationRaw`、Router 导航方法或组件 `to` 属性，不直接依赖该内部拼装接口。
 :::
 
-## Location Query
+## 四、Location Query
 
 `LocationQuery` 是 normalized query：每个字符串键对应一个 `string | null`，重复键对应该值域的数组。它出现在 normalized route location 的 `query` 中；`null` 表示 URL 中存在键但没有等号，例如 `?draft`，空字符串则对应 `?draft=`。
 
@@ -202,7 +202,7 @@ const query: LocationQuery = {
 | ?draft | { draft: null } | 键存在但没有等号 |
 | ?draft= | { draft: '' } | 键存在且值为空字符串 |
 
-## Location Query Raw
+## 五、Location Query Raw
 
 `LocationQueryRaw` 是传给 `router.push()`、`router.replace()`、`router.resolve()` 或 RouterLink 的宽松 query 输入。键可为字符串或数字；值额外允许 `number` 与 `undefined`。内置策略会把数字转成字符串、删除值为 `undefined` 的顶层键，并保留重复值数组。
 
@@ -220,7 +220,7 @@ router.push({
 // 内置策略生成：?page=2&tag=vue&tag=router&draft
 ~~~~
 
-## Location Query Value
+## 六、Location Query Value
 
 `LocationQueryValue = string | null` 是 normalized query 的内部叶子类型。它准确区分普通/空字符串值与“有键无等号”的 `null`，但应用应从公开 `LocationQuery` 取得这个值域，不单独依赖内部别名。
 
@@ -228,7 +228,7 @@ router.push({
 `LocationQueryValue` 标记为 internal。公开替代面是 `LocationQuery`；需要缩窄某一键时，在应用自己的解析函数中处理 `string | null | (string | null)[] | undefined`。
 :::
 
-## Location Query Value Raw
+## 七、Location Query Value Raw
 
 `LocationQueryValueRaw = string | null | number | undefined` 是 raw query 的内部叶子类型。`number` 是序列化前的便捷输入，`undefined` 表示省略，`null` 在默认字符串化时保留键但不写 `=`。
 
@@ -236,7 +236,7 @@ router.push({
 `LocationQueryValueRaw` 标记为 internal。应用应把公开 `LocationQueryRaw` 作为导航输入契约，不把该内部叶子别名用作跨模块领域类型。
 :::
 
-## Param Value
+## 八、Param Value
 
 `ParamValue&lt;isRaw&gt;` 用布尔泛型表达单段动态参数的双态值域：raw 为 `string | number`，normalized 为 `string`。它是 typed routes 生成类型的基础，不表示 Router 会把 URL 中的数字自动解析为 JavaScript number。
 
@@ -245,7 +245,7 @@ type RawId = ParamValue<true> // string | number
 type NormalizedId = ParamValue<false> // string
 ~~~~
 
-## Param Value One Or More
+## 九、Param Value One Or More
 
 `ParamValueOneOrMore&lt;isRaw&gt;` 对应 `\:segment+`。它是非空 tuple `[first, ...rest]`，所以 raw 和 normalized 两侧都至少有一个值；官方 Guide 明确说明命名导航必须传数组，空数组会因无法满足 `+` 而抛错。
 
@@ -257,7 +257,7 @@ router.resolve({
 }) // /docs/guide/routing
 ~~~~
 
-## Param Value Zero Or More
+## 十、Param Value Zero Or More
 
 `ParamValueZeroOrMore&lt;isRaw&gt;` 对应 `\:segment*`。raw 允许数组、`undefined` 或 `null`，normalized 为数组或 `undefined`；它可以表示零段。命名导航使用空数组可生成省略该参数的路径，这是它与 `+` 的关键差别。
 
@@ -268,7 +268,7 @@ router.resolve({ name: 'docs', params: { chapters: ['api', 'types'] } })
 // /docs/api/types
 ~~~~
 
-## Param Value Zero Or One
+## 十一、Param Value Zero Or One
 
 `ParamValueZeroOrOne&lt;isRaw&gt;` 对应 `\:segment?`。raw 接受字符串、数字、`null` 或 `undefined`，后两者用于省略可选段；normalized 在该工具类型中为字符串。是否缺失及最终属性形状仍以具体生成的 `RouteMap` 为准。
 
@@ -278,7 +278,7 @@ router.resolve({ name: 'users', params: { id: null } }) // /users
 router.resolve({ name: 'users', params: { id: 42 } }) // /users/42
 ~~~~
 
-## Route Params
+## 十二、Route Params
 
 `RouteParams&lt;Name&gt;` 从 `RouteMap[Name]["params"]` 取得某个命名路由的 normalized params。它保留由 typed routes 生成或模块增强得到的具体键、必填性与 repeatable 数组形状；不传 `Name` 时默认覆盖 `keyof RouteMap`。
 
@@ -289,7 +289,7 @@ type ReportParams = RouteParams<'report'>
 // { year: string; sections: string[] }
 ~~~~
 
-## Route Params Generic
+## 十三、Route Params Generic
 
 `RouteParamsGeneric = Record&lt;string, string | string[]&gt;` 是不知道具体 route name 时的 normalized 通用形状。它保留标量与 repeatable 数组差异，但不包含某条 route 的键名、必填性和参数修饰符信息；有可用 `RouteMap` 时优先使用 `RouteParams&lt;Name&gt;`。
 
@@ -300,7 +300,7 @@ const params: RouteParamsGeneric = {
 }
 ~~~~
 
-## Route Params Raw
+## 十四、Route Params Raw
 
 `RouteParamsRaw&lt;Name&gt;` 从 `RouteMap[Name]["paramsRaw"]` 取得命名导航接受的 params。与 `RouteParams&lt;Name&gt;` 相比，它允许数字输入，并让 optional 或 zero-or-more 参数表达省略；具体 tuple、数组和可选性由生成的 route map 保留。
 
@@ -311,7 +311,7 @@ const target: RouteParamsRaw<'report'> = {
 }
 ~~~~
 
-## Route Params Raw Generic
+## 十五、Route Params Raw Generic
 
 `RouteParamsRawGeneric` 是未绑定 route name 的宽松 params 字典。标量可为 `string | number | null | undefined`；数组项刻意排除 `null | undefined`，因此 repeatable 参数数组只能装字符串或数字。它不如 `RouteParamsRaw&lt;Name&gt;` 精确。
 
@@ -323,7 +323,7 @@ const rawParams: RouteParamsRawGeneric = {
 }
 ~~~~
 
-## Route Param Value
+## 十六、Route Param Value
 
 `RouteParamValue = string` 是非 typed、normalized params 字典的内部叶子别名。它反映固定 Router 在匹配后会解码参数并以字符串保存；repeatable 参数则是这个值的数组。
 
@@ -331,7 +331,7 @@ const rawParams: RouteParamsRawGeneric = {
 `RouteParamValue` 标记为 internal。应用应读取公开 route location 的 `params`，并使用 `RouteParams&lt;Name&gt;` 或 `RouteParamsGeneric` 描述类型。
 :::
 
-## Route Param Value Raw
+## 十七、Route Param Value Raw
 
 `RouteParamValueRaw = string | number | null | undefined` 是通用 raw params 的内部叶子别名。固定 Router 会在命名导航解析前删除值为 `null` 或 `undefined` 的参数，再对剩余字符串/数字编码。
 
@@ -339,7 +339,7 @@ const rawParams: RouteParamsRawGeneric = {
 `RouteParamValueRaw` 标记为 internal。应用应通过公开的 `RouteParamsRaw&lt;Name&gt;` 或 `RouteParamsRawGeneric` 表达导航输入，不直接依赖该别名。
 :::
 
-## Parse Query
+## 十八、Parse Query
 
 `parseQuery(search)` 接受带或不带前导 `?` 的查询字符串并返回 `LocationQuery`。5.2.0 内置实现先把 `+` 当空格，按首个 `=` 分隔键值，解码百分号；无 `=` 的值为 `null`，重复键按出现顺序累积为数组。空串和单独 `?` 返回空对象。
 
@@ -353,7 +353,7 @@ const rawParams: RouteParamsRawGeneric = {
 | ?tag=a&tag=b | { tag: ['a', 'b'] } |
 | ?flag&empty= | { flag: null, empty: '' } |
 
-## Stringify Query
+## 十九、Stringify Query
 
 `stringifyQuery(query)` 把 `LocationQueryRaw | undefined` 转成不含前导 `?` 的字符串。内置实现编码键和值，重复数组生成重复键；`null` 只输出键，`undefined` 跳过，空字符串保留等号。Router 会在组装完整 URL 时自行添加 `?`。
 
@@ -368,7 +368,7 @@ const rawParams: RouteParamsRawGeneric = {
 | { flag: null, skip: undefined } | flag |
 | { empty: '' } | empty= |
 
-## 易错使用提示
+## 二十、易错使用提示
 
 :::pitfalls
 ### 同时传 path 与 params，期待 Router 插值参数
@@ -600,7 +600,7 @@ const router = createRouter({
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 二十一、源码推导与适用场景
 
 :::steps
 ### 1. 从 route 语法确定参数形状

@@ -99,7 +99,7 @@ anchors:
 
 # Pinia 插件与类型扩展契约
 
-## 概述
+## 一、概述
 
 Pinia plugin 在 Store 创建时扩展实例。公开契约由 PiniaPlugin、PiniaPluginContext、plugin-facing options 与两个 declaration merging 接口组成；下划线 helper 只还原发布签名的约束关系，不是应用层推荐 import。
 
@@ -107,7 +107,7 @@ Pinia plugin 在 Store 创建时扩展实例。公开契约由 PiniaPlugin、Pin
 先完成 pinia.use(plugin) 与 app.use(pinia)，再创建 Store。插件不会事后补扩展已经存在的 Store。
 :::
 
-## Pinia Plugin
+## 二、Pinia Plugin
 
 PiniaPlugin 是接收 PiniaPluginContext 的函数。它可以返回 PiniaCustomProperties 与 PiniaCustomStateProperties 的 partial 扩展，也可以返回 void。返回对象会被合并到当前 Store，而不是创建另一个 Store identity。
 
@@ -119,7 +119,7 @@ const installAudit: PiniaPlugin = ({ store }) => {
 }
 ~~~~
 
-## Pinia Plugin Context
+## 三、Pinia Plugin Context
 
 | 字段 | identity | 公开含义 |
 | --- | --- | --- |
@@ -130,7 +130,7 @@ const installAudit: PiniaPlugin = ({ store }) => {
 
 四个字段都属于当前创建操作。pinia、app、store 保持对象 identity；options 是归一化后的读取面。插件可以按 app 或 store 分支，但不能把它们当作跨应用全局对象。
 
-## Define Store Options In Plugin
+## 四、Define Store Options In Plugin
 
 DefineStoreOptionsInPlugin 保留定义选项并保证 actions 存在。Options Store 的 actions 来自定义对象；Setup Store 的函数在 useStore() 建立期间被提取为 action map。自定义 defineStore() 选项应通过 DefineStoreOptionsBase&lt;S, Store&gt; declaration merging 声明，再从 context.options 读取。
 
@@ -138,15 +138,15 @@ DefineStoreOptionsInPlugin 保留定义选项并保证 actions 存在。Options 
 不要把 DefineStoreOptionsInPlugin 当成应用传入的第二份配置，也不要要求 Setup Store 作者手写 actions 字段。
 :::
 
-## Pinia Custom Properties
+## 五、Pinia Custom Properties
 
 PiniaCustomProperties 描述直接添加到每个 Store 的属性，保留 Id、S、G、A 四个泛型。它适合 router、service 或派生 metadata 等非 state 扩展，但 runtime 仍必须由 plugin 返回或赋值。
 
-## Pinia Custom State Properties
+## 六、Pinia Custom State Properties
 
 PiniaCustomStateProperties 只描述每个 store.$state 中新增的 state，并只接收 S 泛型。声明该接口不会创建字段；runtime plugin 必须初始化共享 state 并暴露同一响应式来源。
 
-## 安装时序与 Context Identity
+## 七、安装时序与 Context Identity
 
 ~~~~ts
 const pinia = createPinia()
@@ -158,7 +158,7 @@ const store = useAccountStore(pinia)
 
 app 安装前调用 pinia.use(plugin) 会先排队，install 时再登记；稳定契约仍是 app.use(pinia) 后创建 Store。安装前创建的 Store不会因队列稍后刷新而补装，已有 Store 也不会因后来 use() 而 retroactive 扩展。
 
-## 返回扩展与 Devtools 可见性
+## 八、返回扩展与 Devtools 可见性
 
 返回对象是公开的扩展路径，Pinia 会把 key 合并到 Store；开发构建也会据此跟踪自定义属性。直接写 store.foo 时，只有确实需要 Devtools custom key 的专用开发路径才登记该 key；不要读取或修改内部 plugin registry。
 
@@ -166,7 +166,7 @@ app 安装前调用 pinia.use(plugin) 会先排队，install 时再登记；稳�
 返回属性可被 Devtools 跟踪是上游 contract 条件，不等于本页运行过真实 Vue Devtools client。本页的 Devtools 证据保持 Deferred/not-run。
 :::
 
-## State 双写、SSR 与 Hydration
+## 九、State 双写、SSR 与 Hydration
 
 ~~~~ts
 if (!Object.prototype.hasOwnProperty.call(store.$state, 'pluginState')) {
@@ -179,7 +179,7 @@ store.pluginState = toRef(store.$state, 'pluginState')
 
 plugin 建立期间的 state change 发生在 Store active 前，不能写成必然触发 $subscribe() 的业务 mutation。本页没有运行宿主 SSR、HTML escaping、Vue hydration 或真实 Devtools，相关 runtime 证据均为 Deferred/not-run。
 
-## TypeScript Declaration Merging
+## 十、TypeScript Declaration Merging
 
 ~~~~ts
 import 'pinia'
@@ -198,13 +198,13 @@ declare module 'pinia' {
 
 augmentation 的泛型名与顺序必须匹配官方声明，尤其保留 Id、S、G、A。declaration merging 只建立 compile-time contract，不会自动创建 runtime property；plugin 的 runtime 返回值也不会自动补齐 TypeScript 类型，两侧必须成对。
 
-## 清理责任与 Evidence 边界
+## 十一、清理责任与 Evidence 边界
 
 Pinia 管理 Store 自身 scope，但不会自动清理 plugin 创建的 storage listener、timer 或 network observer。plugin 应包装 store.$dispose() 或保存 owner-level stop，并在宿主 teardown 时幂等调用。不要把内部 plugin 列表提升为清理 API。
 
 固定官方源码与 storePlugins.spec.ts 支撑安装时序、context identity 和 options shape；本站 focused seam 只证明 catalog、正文与 anchors。本页未执行真实 plugin、SSR、Devtools 或 owner teardown，均为 Deferred/not-run。
 
-## 易错使用提示
+## 十二、易错使用提示
 
 :::pitfalls
 ### 在安装与登记前创建 Store
@@ -447,7 +447,7 @@ store.$dispose = wrapDispose(store.$dispose, stopListener)
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 十三、源码推导与适用场景
 
 :::steps
 ### 1. 安装前登记进入队列

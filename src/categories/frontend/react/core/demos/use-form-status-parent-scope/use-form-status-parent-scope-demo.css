@@ -1,0 +1,271 @@
+.use-form-status-parent-scope-demo {
+  color: #17212d;
+  background: #f7f8f5;
+  border: 1px solid #d5ddd5;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.form-status-heading {
+  padding: 24px;
+  color: #ffffff;
+  background: #25364d;
+}
+
+.form-status-heading p,
+.form-status-heading h2,
+.form-status-heading span {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.form-status-heading p {
+  color: #bfe1ce;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.form-status-heading h2 {
+  margin-top: 8px;
+  font-size: 24px;
+  line-height: 1.35;
+}
+
+.form-status-heading span {
+  display: block;
+  margin-top: 8px;
+  color: #dce7ec;
+  line-height: 1.6;
+}
+
+.form-scope-experiment {
+  padding: 20px;
+}
+
+.sibling-forms {
+  display: flex;
+  margin: 16px -6px 0;
+}
+
+.scoped-form-card {
+  width: calc(50% - 12px);
+  min-width: 0;
+  padding: 14px;
+  margin: 0 6px;
+  background: #ffffff;
+  border: 1px solid #cfd8d2;
+  border-radius: 6px;
+}
+
+.scoped-form-fields {
+  padding-top: 14px;
+  margin-top: 14px;
+  border-top: 1px solid #dce3de;
+}
+
+.scoped-form-card label {
+  display: block;
+  color: #34495a;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.scoped-form-card input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 42px;
+  padding: 8px 10px;
+  margin-top: 8px;
+  border: 1px solid #9eafa4;
+  border-radius: 5px;
+  color: inherit;
+  background: #ffffff;
+  font: inherit;
+}
+
+.scoped-form-card button,
+.form-command-actions button {
+  min-height: 42px;
+  padding: 8px 14px;
+  border: 1px solid #2d6952;
+  border-radius: 5px;
+  color: #ffffff;
+  background: #2d6952;
+  font: inherit;
+  font-weight: 700;
+  line-height: 1.35;
+  white-space: normal;
+}
+
+.scoped-form-card button {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.scoped-form-card button:disabled,
+.form-command-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.form-status-readout {
+  min-width: 0;
+  padding: 12px;
+  background: #edf3ef;
+  border: 1px solid #c9d8cf;
+  border-radius: 5px;
+}
+
+.scoped-form-card [data-testid$='-descendant-status'] {
+  margin-top: 12px;
+  background: #f5f8f6;
+}
+
+.form-status-readout h4 {
+  margin: 0;
+  color: #274638;
+  font-size: 14px;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.form-status-readout dl {
+  margin: 9px 0 0;
+}
+
+.form-status-readout dl div {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 5px 0;
+  border-top: 1px solid #d4dfd8;
+}
+
+.form-status-readout dt,
+.form-status-readout dd {
+  min-width: 0;
+  margin: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.form-status-readout dt {
+  color: #52665c;
+}
+
+.form-status-readout dd {
+  max-width: 58%;
+  margin-left: 12px;
+  color: #17212d;
+  font-weight: 700;
+  text-align: right;
+}
+
+.form-command-bar {
+  padding: 14px;
+  margin-top: 16px;
+  color: #ffffff;
+  background: #25364d;
+  border-radius: 6px;
+}
+
+.form-command-bar > div:not(.form-command-actions) {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 5px 0;
+}
+
+.form-command-bar span,
+.form-command-bar strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.form-command-bar span {
+  color: #c8d7de;
+}
+
+.form-command-bar strong {
+  max-width: 64%;
+  margin-left: 12px;
+  text-align: right;
+}
+
+.form-command-actions {
+  display: flex;
+  margin: 10px -5px -5px;
+}
+
+.form-command-actions button {
+  flex: 1 1 0;
+  margin: 5px;
+}
+
+.form-command-actions button.is-quiet {
+  color: #25364d;
+  background: #ffffff;
+  border-color: #ffffff;
+}
+
+.scoped-form-card input:focus-visible,
+.scoped-form-card button:focus-visible,
+.form-command-actions button:focus-visible {
+  outline: 3px solid #f0b95a;
+  outline-offset: 2px;
+}
+
+@media (max-width: 680px) {
+  .form-status-heading,
+  .form-scope-experiment {
+    padding: 16px;
+  }
+
+  .form-status-heading h2 {
+    font-size: 21px;
+  }
+
+  .sibling-forms {
+    display: block;
+    margin: 14px 0 0;
+  }
+
+  .scoped-form-card {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+  }
+
+  .scoped-form-card + .scoped-form-card {
+    margin-top: 14px;
+  }
+
+  .form-command-actions {
+    display: block;
+    margin: 10px 0 0;
+  }
+
+  .form-command-actions button {
+    width: 100%;
+    margin: 5px 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .form-status-readout dl div,
+  .form-command-bar > div:not(.form-command-actions) {
+    display: block;
+  }
+
+  .form-status-readout dd,
+  .form-command-bar strong {
+    display: block;
+    max-width: none;
+    margin-top: 3px;
+    margin-left: 0;
+    text-align: left;
+  }
+}

@@ -1,0 +1,218 @@
+.effect-events-demo {
+  padding: 24px;
+  border: 1px solid #d2d8d5;
+  border-radius: 8px;
+  background: #fbfcfa;
+  color: #24312c;
+}
+
+.effect-events-demo-heading p,
+.effect-events-demo-heading span,
+.effect-events-demo-controls span,
+.effect-events-demo-flow span,
+.effect-events-demo-flow small,
+.effect-events-demo-notification span {
+  display: block;
+  margin: 0;
+}
+
+.effect-events-demo-heading p {
+  color: #9b4a12;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.effect-events-demo-heading h2 {
+  max-width: 38rem;
+  margin: 8px 0;
+  color: #1f2925;
+  font-size: 1.35rem;
+  line-height: 1.3;
+}
+
+.effect-events-demo-heading span {
+  color: #58645f;
+  line-height: 1.55;
+}
+
+.effect-events-demo-controls {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  margin: 20px -7px 8px;
+}
+
+.effect-events-demo-controls label,
+.effect-events-demo-controls fieldset {
+  flex: 1 1 240px;
+  min-width: 0;
+  margin: 0 7px 12px;
+}
+
+.effect-events-demo-controls label > span,
+.effect-events-demo-controls legend {
+  margin-bottom: 6px;
+  color: #47534e;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.effect-events-demo-controls select {
+  width: 100%;
+  min-height: 42px;
+  padding: 8px 10px;
+  border: 1px solid #7a8882;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #24312c;
+  font: inherit;
+}
+
+.effect-events-demo-controls fieldset {
+  padding: 0;
+  border: 0;
+}
+
+.effect-events-demo-controls fieldset button {
+  min-height: 42px;
+  margin-right: 8px;
+  padding: 8px 14px;
+  border: 1px solid #7a8882;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #24312c;
+  cursor: pointer;
+  font: inherit;
+}
+
+.effect-events-demo-controls fieldset button[aria-pressed='true'] {
+  border-color: #17624c;
+  background: #e4f2ec;
+  color: #124b3b;
+  font-weight: 700;
+}
+
+.effect-events-demo-flow {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  margin: 0 -6px 12px;
+}
+
+.effect-events-demo-flow > section {
+  flex: 1 1 180px;
+  min-width: 0;
+  margin: 0 6px 12px;
+  padding: 15px;
+  border: 1px solid #d9dedb;
+  border-radius: 6px;
+  background: #ffffff;
+}
+
+.effect-events-demo-flow > span {
+  align-self: center;
+  margin: 0 2px 12px;
+  color: #9b4a12;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.effect-events-demo-flow section > span,
+.effect-events-demo-notification span {
+  color: #5b6762;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.effect-events-demo-flow strong {
+  display: block;
+  min-height: 30px;
+  margin-top: 7px;
+  color: #175f4a;
+  font-size: 1.2rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.effect-events-demo-flow small {
+  margin-top: 6px;
+  color: #58645f;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.effect-events-demo-notification {
+  padding: 15px;
+  border: 1px solid #c9ded6;
+  border-radius: 6px;
+  background: #eef8f4;
+}
+
+.effect-events-demo-notification.is-dark {
+  border-color: #4c5c56;
+  background: #28332f;
+}
+
+.effect-events-demo-notification strong {
+  display: block;
+  margin-top: 5px;
+  color: #175f4a;
+  font-size: 1.3rem;
+  overflow-wrap: anywhere;
+}
+
+.effect-events-demo-notification.is-dark span,
+.effect-events-demo-notification.is-dark strong {
+  color: #eef8f4;
+}
+
+.effect-events-demo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 14px -5px -10px;
+}
+
+.effect-events-demo-actions button {
+  min-height: 42px;
+  margin: 0 5px 10px;
+  padding: 9px 14px;
+  border: 1px solid #52615b;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #24312c;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.effect-events-demo-actions button:first-child {
+  border-color: #17624c;
+  background: #17624c;
+  color: #ffffff;
+}
+
+.effect-events-demo-actions button:hover,
+.effect-events-demo-controls fieldset button:hover {
+  filter: brightness(0.96);
+}
+
+.effect-events-demo-actions button:focus-visible,
+.effect-events-demo-controls button:focus-visible,
+.effect-events-demo-controls select:focus-visible {
+  outline: 3px solid #f0a365;
+  outline-offset: 2px;
+}
+
+@media (max-width: 560px) {
+  .effect-events-demo {
+    padding: 18px;
+  }
+
+  .effect-events-demo-flow > span {
+    flex-basis: 100%;
+    margin: -2px 0 8px;
+    text-align: center;
+    transform: rotate(90deg);
+  }
+}

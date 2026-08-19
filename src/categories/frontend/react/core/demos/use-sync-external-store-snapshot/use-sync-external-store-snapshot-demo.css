@@ -1,0 +1,312 @@
+.use-sync-external-store-demo {
+  color: #17212d;
+  background: #f6f8f6;
+  border: 1px solid #d3dcd5;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.external-store-heading {
+  padding: 24px;
+  color: #ffffff;
+  background: #233e46;
+}
+
+.external-store-heading p,
+.external-store-heading h2,
+.external-store-heading span {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.external-store-heading p {
+  color: #bde5d4;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.external-store-heading h2 {
+  margin-top: 8px;
+  font-size: 24px;
+  line-height: 1.35;
+}
+
+.external-store-heading span {
+  display: block;
+  margin-top: 8px;
+  color: #d8e7e4;
+  line-height: 1.65;
+}
+
+.external-store-experiment {
+  padding: 20px;
+}
+
+.external-store-controls,
+.external-store-reader-area,
+.external-store-diagnostics {
+  padding: 18px;
+  background: #ffffff;
+  border: 1px solid #d8e0da;
+  border-radius: 8px;
+}
+
+.external-store-reader-area,
+.external-store-diagnostics {
+  margin-top: 16px;
+}
+
+.external-store-section-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.external-store-section-heading > div {
+  min-width: 0;
+  margin-right: 16px;
+}
+
+.external-store-section-heading span,
+.external-store-section-heading h3,
+.external-store-section-heading strong {
+  overflow-wrap: anywhere;
+}
+
+.external-store-section-heading span {
+  color: #426b61;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.external-store-section-heading h3 {
+  margin: 5px 0 0;
+  font-size: 17px;
+  line-height: 1.45;
+}
+
+.external-store-section-heading > strong {
+  flex: 0 1 240px;
+  padding: 7px 10px;
+  color: #244e45;
+  background: #e4f1eb;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.external-store-section-heading button {
+  flex: 0 1 220px;
+}
+
+.external-store-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px -5px -10px;
+}
+
+.external-store-buttons button {
+  flex: 1 1 190px;
+  margin: 0 5px 10px;
+}
+
+.external-store-buttons button,
+.external-store-section-heading button {
+  min-height: 42px;
+  padding: 9px 14px;
+  color: #ffffff;
+  background: #146b58;
+  border: 1px solid #146b58;
+  border-radius: 6px;
+  font: inherit;
+  font-weight: 700;
+  line-height: 1.35;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+.external-store-buttons button:hover,
+.external-store-section-heading button:hover {
+  background: #0f5546;
+  border-color: #0f5546;
+}
+
+.external-store-buttons button:focus-visible,
+.external-store-section-heading button:focus-visible {
+  outline: 3px solid #efb84c;
+  outline-offset: 2px;
+}
+
+.external-store-buttons button.is-quiet {
+  color: #24413a;
+  background: #ffffff;
+  border-color: #9eb7ac;
+}
+
+.external-store-buttons button.is-quiet:hover {
+  background: #edf4f0;
+}
+
+.external-store-readers {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 14px -6px -12px;
+}
+
+.external-store-reader {
+  flex: 1 1 260px;
+  min-width: 0;
+  padding: 16px;
+  margin: 0 6px 12px;
+  background: #f4f8f6;
+  border-left: 4px solid #2f8974;
+  border-radius: 6px;
+}
+
+.external-store-reader > span,
+.external-store-reader > strong {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.external-store-reader > span {
+  color: #557269;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.external-store-reader > strong {
+  min-height: 48px;
+  margin-top: 8px;
+  color: #163f36;
+  font-size: 18px;
+  line-height: 1.45;
+}
+
+.external-store-reader dl {
+  margin: 14px 0 0;
+}
+
+.external-store-reader dl > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-top: 1px solid #d9e5df;
+}
+
+.external-store-reader dt,
+.external-store-reader dd {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.external-store-reader dt {
+  margin-right: 12px;
+  color: #5b6d68;
+  font-size: 13px;
+}
+
+.external-store-reader dd {
+  color: #183c34;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-weight: 700;
+  text-align: right;
+}
+
+.external-store-empty {
+  min-height: 88px;
+  padding: 20px;
+  margin: 14px 0 0;
+  color: #4f625d;
+  background: #f3f5f3;
+  border: 1px dashed #aebbb3;
+  border-radius: 6px;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+.external-store-diagnostic-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 12px -6px -10px;
+}
+
+.external-store-diagnostic-list > div {
+  flex: 1 1 220px;
+  min-width: 0;
+  padding: 12px;
+  margin: 0 6px 10px;
+  background: #f7f8f6;
+  border: 1px solid #e0e5e0;
+  border-radius: 6px;
+}
+
+.external-store-diagnostic-list dt,
+.external-store-diagnostic-list dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.external-store-diagnostic-list dt {
+  color: #62716d;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.external-store-diagnostic-list dd {
+  margin-top: 5px;
+  color: #203d36;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+@media (max-width: 640px) {
+  .external-store-heading,
+  .external-store-experiment {
+    padding: 16px;
+  }
+
+  .external-store-heading h2 {
+    font-size: 21px;
+  }
+
+  .external-store-controls,
+  .external-store-reader-area,
+  .external-store-diagnostics {
+    padding: 14px;
+  }
+
+  .external-store-section-heading {
+    display: block;
+  }
+
+  .external-store-section-heading > div {
+    margin-right: 0;
+  }
+
+  .external-store-section-heading > strong,
+  .external-store-section-heading button {
+    display: block;
+    width: 100%;
+    margin-top: 12px;
+  }
+
+  .external-store-buttons button,
+  .external-store-reader,
+  .external-store-diagnostic-list > div {
+    flex-basis: 100%;
+  }
+
+  .external-store-reader > strong {
+    min-height: 0;
+  }
+}

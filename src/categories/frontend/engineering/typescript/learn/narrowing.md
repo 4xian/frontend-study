@@ -14,7 +14,7 @@ tags:
   - in
   - instanceof
   - type predicate
-appliesTo: TypeScript 7.0.2（宿主 fixture：6.0.3）
+appliesTo: TypeScript 7.0.2
 verifiedAt: 2026-08-05
 sources:
   - title: "TypeScript Handbook: Narrowing"
@@ -47,11 +47,11 @@ recap:
 
 # 类型收窄
 
-## 为什么需要
+## 一、为什么需要
 
 联合和 unknown 只说明值可能来自哪些集合，不能直接证明当前值是哪一个。收窄把 JavaScript 的真实检查交给控制流分析，使每个分支只使用已经获得证据的属性和方法。
 
-## 核心概念和最小模型
+## 二、核心概念和最小模型
 
 ~~~~ts
 type CourseInput = string | { title: string; minutes: number }
@@ -68,35 +68,112 @@ formatCourse({ title: '类型收窄', minutes: 60 })
 
 检查 `typeof input === "string"` 同时具有运行语义和类型意义。编译器沿着 return、if、switch 等可达路径分析变量，在不同分支中移除不可能成员。
 
-## 选择与值匹配的收窄方式
+## 三、知识点详解
 
-:::steps
-### primitive 使用 typeof 与等值比较
+### 1. typeof 与等值收窄
 
-typeof 适合 string、number、boolean 等运行标签；与 literal 比较可继续缩小有限集合。
+**它是什么：** `typeof` 检查 JavaScript 运行时标签，等值比较则把值缩小到某个具体字面量。
 
-### 属性能力使用 in
+**它有什么用：** 它适合区分 `string`、`number`、`boolean` 等 primitive，以及有限状态中的具体成员。
 
-`"run" in value` 检查属性是否存在；可选属性可能同时保留在两个分支，不能假设互斥。
+**怎么使用：** 在 `if` 分支中比较 `typeof value` 或直接比较字面量，分支内就能使用对应类型的操作。
 
-### 真实实例使用 instanceof
+~~~~ts
+/** 把字符串或数字值转换为显示文本。 */
+function formatValue(value: string | number): string {
+  if (typeof value === 'number') return value.toFixed(0)
+  return value.toUpperCase()
+}
+~~~~
 
-instanceof 沿原型链判断 class 实例，不能用于已经被擦除的 interface 或 type alias。
+### 2. in 操作符收窄
 
-### 复用复杂检查时封装 predicate
+**它是什么：** `"property" in value` 在运行时检查对象或原型链上是否存在指定属性。
 
-返回 `value is Course` 的函数让调用处复用证据，但函数体必须真的验证所承诺的形状。
-:::
+**它有什么用：** 当联合成员拥有不同能力字段时，可以根据属性存在性选择正确分支。
+
+**怎么使用：** 先确认值是非空对象，再用 `in` 检查字段；可选属性可能同时出现在两个分支中，不能当作
+绝对互斥标记。
+
+~~~~ts
+type Content = { title: string } | { run: () => void }
+
+/** 使用内容值当前具备的能力。 */
+function useContent(content: Content): void {
+  if ('run' in content) content.run()
+  else console.log(content.title)
+}
+~~~~
+
+### 3. instanceof 收窄
+
+**它是什么：** `instanceof` 沿真实原型链判断一个值是否由某个 class 构造。
+
+**它有什么用：** 它适合 `Date`、`Error` 和自定义 class 等具有运行时身份的对象，分支内能访问实例成员。
+
+**怎么使用：** 右侧必须是运行时存在的构造函数；`interface` 和 `type` 编译后会消失，不能用于
+`instanceof`。
+
+~~~~ts
+/** 统一读取未知异常的消息。 */
+function getErrorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : String(error)
+}
+~~~~
+
+### 4. 自定义类型谓词
+
+**它是什么：** 返回类型 `value is Course` 声明函数在返回 `true` 时已经证明参数满足 `Course`。
+
+**它有什么用：** 复杂运行时检查可以封装并复用，`filter`、接口边界和表单解析都能获得准确结果类型。
+
+**怎么使用：** 函数体必须逐项验证它承诺的结构，不能只通过断言返回 `true`。
+
+~~~~ts
+interface Course {
+  id: string
+  title: string
+}
+
+/** 判断未知值是否为课程对象。 */
+function isCourse(value: unknown): value is Course {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    'id' in value &&
+    'title' in value &&
+    typeof value.id === 'string' &&
+    typeof value.title === 'string'
+  )
+}
+~~~~
 
 :::demo{id="engineering.typescript.learn.basics.narrowing.control-flow-demo"}
 切换不同运行值，观察同一个分类函数如何进入对应分支。
 :::
 
-## 配套编译 fixture
+## 四、动手实践：从未知响应收窄到判别联合
 
-临时编译正例覆盖 typeof、in、instanceof、判别字段和 type predicate；负例在未检查前读取联合专属字段，固定 TS2339。验证资产只在 `/tmp` 使用并在结束后删除。Demo 只展示运行分支，不替代编译证据。
+下面先判断外层对象，再用判别字段处理成功和失败两种响应。
 
-## 易错使用提示
+~~~~ts
+type CourseResponse =
+  | { ok: true; data: { id: string; title: string } }
+  | { ok: false; message: string }
+
+function isCourseResponse(value: unknown): value is CourseResponse {
+  if (typeof value !== 'object' || value === null || !('ok' in value)) return false
+  return typeof value.ok === 'boolean'
+}
+
+function renderResponse(value: unknown): string {
+  if (!isCourseResponse(value)) return '响应格式错误'
+  return value.ok ? value.data.title : value.message
+}
+~~~~
+
+先传入两种合法分支，再传入 null、数组和缺少 ok 的对象。随后在收窄前直接读取 data，观察为什么编译器拒绝访问联合专属字段。
+## 五、易错使用提示
 
 :::pitfalls
 ### 用 truthiness 丢弃合法空字符串
@@ -203,20 +280,20 @@ function isCourse(value: unknown): value is Course {
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 原理与适用场景
+## 六、工作原理与适用边界
 
 :::steps
 ### 控制流携带证据
 
-官方事实：编译器根据检查和可达性收窄变量。课程推导：让 guard 靠近使用点，分支越短越容易确认。边界：异步变化或外部数据仍需各自的运行保证。
+**工作原理：** 编译器根据检查和可达性收窄变量。**实践建议：** 让 guard 靠近使用点，分支越短越容易确认。**使用边界：** 异步变化或外部数据仍需各自的运行保证。
 
 ### 检查方式必须匹配运行值
 
-官方事实：typeof、in 与 instanceof 各自遵循 JavaScript 语义。课程推导：primitive、能力属性和实例身份使用不同 guard。边界：interface 在运行时不存在，不能交给 instanceof。
+**工作原理：** typeof、in 与 instanceof 各自遵循 JavaScript 语义。**实践建议：** primitive、能力属性和实例身份使用不同 guard。**使用边界：** interface 在运行时不存在，不能交给 instanceof。
 
 ### predicate 是可复用合同
 
-官方事实：`parameter is Type` 会影响调用处的控制流分析。课程推导：只为重复且真实的检查封装 predicate。边界：返回注解不会替函数体生成校验。
+**工作原理：** `parameter is Type` 会影响调用处的控制流分析。**实践建议：** 只为重复且真实的检查封装 predicate。**使用边界：** 返回注解不会替函数体生成校验。
 :::
 
 :::exercise
@@ -224,9 +301,44 @@ function isCourse(value: unknown): value is Course {
 
 **要求：** 从 unknown 开始，验证值是非空对象、包含 title 且 title 为 string；再用判别字段区分 video 与 article，并为每个分支返回不同说明。
 
-**验收：** 正例没有 any 或强制断言，未收窄的属性访问保留为 TS2339 负例，运行分支结果可解释。
+**完成标准：** 正例没有 any 或强制断言，未收窄的属性访问保留为 TS2339 负例，运行分支结果可解释。
 :::
 
-## 总结与下一课
+## 七、本节小结
 
 收窄来自可执行检查而不是愿望式断言。选择与运行值匹配的 guard，并让 predicate 忠实验证合同。下一课“type 与 interface”会比较这些对象合同的命名、组合和扩展方式。
+
+:::code-details{title="查看本节完整示例"}
+~~~~ts
+class VideoLesson {
+  constructor(public duration: number) {}
+}
+
+type CourseInput =
+  | string
+  | { kind: 'article'; content: string }
+  | { kind: 'quiz'; questions: number }
+  | VideoLesson
+
+/** 忠实判断对象是否为文章课程。 */
+function isArticle(value: CourseInput): value is { kind: 'article'; content: string } {
+  return typeof value === 'object' && value !== null && 'kind' in value && value.kind === 'article'
+}
+
+/** 根据运行时证据处理每一种输入。 */
+function describe(input: CourseInput): string {
+  if (typeof input === 'string') return input === '' ? '空标题' : `标题：${input}`
+  if (input instanceof VideoLesson) return `视频：${input.duration} 分钟`
+  if (isArticle(input)) return `文章：${input.content.length} 字`
+  if ('questions' in input) return `测验：${input.questions} 题`
+  return '未知课程'
+}
+
+console.log(
+  describe('类型收窄'),
+  describe(new VideoLesson(20)),
+  describe({ kind: 'article', content: '控制流证据' }),
+  describe({ kind: 'quiz', questions: 5 }),
+)
+~~~~
+:::

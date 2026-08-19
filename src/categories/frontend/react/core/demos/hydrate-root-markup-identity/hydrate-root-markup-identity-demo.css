@@ -1,0 +1,362 @@
+.hydrate-root-demo {
+  color: #172033;
+  background: #f4f6fa;
+  border: 1px solid #d5dae7;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.hydrate-root-demo-heading {
+  padding: 24px;
+  color: #ffffff;
+  background: #26375f;
+}
+
+.hydrate-root-demo-heading p,
+.hydrate-root-demo-heading h2,
+.hydrate-root-demo-heading span {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.hydrate-root-demo-heading p {
+  color: #c5d4ff;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.hydrate-root-demo-heading h2 {
+  margin-top: 8px;
+  font-size: 24px;
+  line-height: 1.35;
+}
+
+.hydrate-root-demo-heading span {
+  display: block;
+  margin-top: 8px;
+  color: #e1e7f8;
+  line-height: 1.65;
+}
+
+.hydrate-root-demo-body {
+  padding: 20px;
+}
+
+.hydrate-root-scenarios,
+.hydrate-root-stage,
+.hydrate-root-observations,
+.hydrate-root-errors,
+.hydrate-root-unmount-evidence {
+  min-width: 0;
+  padding: 18px;
+  background: #ffffff;
+  border: 1px solid #d7dce8;
+  border-radius: 8px;
+}
+
+.hydrate-root-stage,
+.hydrate-root-observations,
+.hydrate-root-errors,
+.hydrate-root-unmount-evidence {
+  margin-top: 16px;
+}
+
+.hydrate-root-section-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.hydrate-root-section-heading > div {
+  min-width: 0;
+  margin-right: 16px;
+}
+
+.hydrate-root-section-heading span,
+.hydrate-root-section-heading h3,
+.hydrate-root-section-heading strong {
+  overflow-wrap: anywhere;
+}
+
+.hydrate-root-section-heading span {
+  color: #5c6780;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.hydrate-root-section-heading h3 {
+  margin: 5px 0 0;
+  font-size: 17px;
+  line-height: 1.45;
+}
+
+.hydrate-root-section-heading > strong {
+  flex: 0 1 230px;
+  padding: 7px 10px;
+  color: #284477;
+  background: #e9eef8;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.hydrate-root-scenario-buttons,
+.hydrate-root-primary-actions {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 14px -5px -10px;
+}
+
+.hydrate-root-scenario-buttons button,
+.hydrate-root-primary-actions button {
+  flex: 1 1 170px;
+  min-height: 42px;
+  padding: 9px 12px;
+  margin: 0 5px 10px;
+  color: #31405f;
+  background: #ffffff;
+  border: 1px solid #9ca8c1;
+  border-radius: 6px;
+  font: inherit;
+  font-weight: 700;
+  line-height: 1.35;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+.hydrate-root-scenario-buttons button:hover,
+.hydrate-root-primary-actions button:hover {
+  background: #edf1f7;
+}
+
+.hydrate-root-scenario-buttons button:focus-visible,
+.hydrate-root-primary-actions button:focus-visible {
+  outline: 3px solid #e9ae3b;
+  outline-offset: 2px;
+}
+
+.hydrate-root-scenario-buttons button.is-active {
+  color: #ffffff;
+  background: #315d9a;
+  border-color: #315d9a;
+}
+
+.hydrate-root-primary-actions {
+  padding-top: 4px;
+  margin-top: 12px;
+  border-top: 1px solid #e0e4ed;
+}
+
+.hydrate-root-primary-actions button {
+  color: #ffffff;
+  background: #2f765f;
+  border-color: #2f765f;
+}
+
+.hydrate-root-primary-actions button:hover {
+  background: #245c4b;
+}
+
+.hydrate-root-primary-actions button.is-quiet {
+  color: #31405f;
+  background: #ffffff;
+  border-color: #9ca8c1;
+}
+
+.hydrate-root-primary-actions button.is-danger {
+  color: #ffffff;
+  background: #a33f4d;
+  border-color: #a33f4d;
+}
+
+.hydrate-root-primary-actions button:disabled {
+  color: #798196;
+  background: #e5e8ef;
+  border-color: #d2d6df;
+  cursor: not-allowed;
+}
+
+.hydrate-root-fixture-note {
+  margin: 14px 0 0;
+  color: #59647b;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+.hydrate-root-frame {
+  display: block;
+  width: 100%;
+  height: 390px;
+  margin-top: 14px;
+  background: #f5f7fb;
+  border: 1px solid #bbc4d6;
+  border-radius: 6px;
+}
+
+.hydrate-root-facts {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 14px -6px -12px;
+}
+
+.hydrate-root-facts > div {
+  flex: 1 1 220px;
+  min-width: 0;
+  padding: 12px;
+  margin: 0 6px 12px;
+  background: #f3f5f9;
+  border-left: 4px solid #6684bc;
+  border-radius: 6px;
+}
+
+.hydrate-root-facts dt,
+.hydrate-root-facts dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.hydrate-root-facts dt {
+  color: #606a7f;
+  font-size: 13px;
+}
+
+.hydrate-root-facts dd {
+  margin-top: 7px;
+  color: #243d70;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-weight: 700;
+}
+
+.hydrate-root-error-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 14px -6px -12px;
+}
+
+.hydrate-root-error-row article {
+  flex: 1 1 210px;
+  min-width: 0;
+  padding: 14px;
+  margin: 0 6px 12px;
+  color: #ffffff;
+  background: #34445f;
+  border-radius: 7px;
+}
+
+.hydrate-root-error-row article.is-recoverable {
+  background: #87651d;
+}
+
+.hydrate-root-error-row article.is-caught {
+  background: #2e705b;
+}
+
+.hydrate-root-error-row article.is-uncaught {
+  background: #8e3946;
+}
+
+.hydrate-root-error-row span,
+.hydrate-root-error-row strong,
+.hydrate-root-error-row small {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.hydrate-root-error-row span {
+  color: #eef1f7;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.hydrate-root-error-row strong {
+  margin-top: 8px;
+  font-size: 25px;
+}
+
+.hydrate-root-error-row small {
+  margin-top: 7px;
+  color: #f1f3f7;
+  line-height: 1.5;
+}
+
+.hydrate-root-latest-error {
+  padding: 14px;
+  margin-top: 16px;
+  background: #222b3d;
+  border-radius: 7px;
+}
+
+.hydrate-root-latest-error span,
+.hydrate-root-latest-error strong,
+.hydrate-root-latest-error small {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.hydrate-root-latest-error span {
+  color: #bfc8da;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.hydrate-root-latest-error strong {
+  margin-top: 7px;
+  color: #ffffff;
+  line-height: 1.55;
+}
+
+.hydrate-root-latest-error small {
+  margin-top: 7px;
+  color: #d9deea;
+  line-height: 1.55;
+}
+
+.hydrate-root-retired-error {
+  padding: 12px 14px;
+  margin: 14px 0 0;
+  color: #6d2832;
+  background: #fff1f2;
+  border-left: 4px solid #b94c5a;
+  border-radius: 6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 680px) {
+  .hydrate-root-demo-heading,
+  .hydrate-root-demo-body {
+    padding: 16px;
+  }
+
+  .hydrate-root-scenarios,
+  .hydrate-root-stage,
+  .hydrate-root-observations,
+  .hydrate-root-errors,
+  .hydrate-root-unmount-evidence {
+    padding: 14px;
+  }
+
+  .hydrate-root-section-heading {
+    display: block;
+  }
+
+  .hydrate-root-section-heading > div {
+    margin-right: 0;
+  }
+
+  .hydrate-root-section-heading > strong {
+    display: block;
+    margin-top: 10px;
+  }
+
+  .hydrate-root-frame {
+    height: 450px;
+  }
+}

@@ -1,0 +1,475 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.basics.null-optional-and-failure-semantics",
+  "batchId": "phase-4-null-optional-and-failure-semantics",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "phase": "Phase B",
+  "phaseBProgress": "16/21",
+  "phaseBReverification": {
+    "recordedAt": "2026-08-14T23:46:53Z",
+    "contract": {
+      "title": "null、Optional、缺失与失败语义",
+      "url": "/backend/java/core/learn/null-optional-and-failure-semantics",
+      "durationMinutes": 75,
+      "prerequisites": ["backend.java.learn.basics.collections-and-iteration-contracts"],
+      "requiredTopics": [
+        "null、合法缺失、合法空结果与执行失败的四分法",
+        "Optional.of、ofNullable、empty、map 与 flatMap",
+        "orElse、orElseGet、orElseThrow 的求值时机与失败合同",
+        "Java 25 增量 API 与 Java 8 共同边界",
+        "Java 25/8 兼容反馈环"
+      ]
+    },
+    "phaseAFrozenPlan": {
+      "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+      "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81",
+      "previousCourse": "backend.java.learn.basics.collections-and-iteration-contracts",
+      "nextCourse": "backend.java.learn.basics.date-time-and-time-zones",
+      "nextCourseStarted": false,
+      "phaseBStopBoundary": "B-16 关闭后才允许读取 B-17；B-21 基础 Gate 关闭后立即停止，不进入 Phase C。"
+    },
+    "sourceReverification": {
+      "method": "Tavily 调研结果回到 Java SE 25/8 Optional、Objects、Collections API、JLS 25/8 与 NullPointerException 官方正文核验",
+      "communitySourcesUsedAsEvidence": false,
+      "verifiedAt": "2026-08-15",
+      "researchUniqueUrls": 11,
+      "lessonOfficialLinks": 9,
+      "httpStatus": "全部返回 200",
+      "repair": "移除返回 403 的 JEP 358 链接，改用 Java SE 25 NullPointerException#getMessage() 官方 API 直接说明详细诊断边界"
+    },
+    "artifacts": [
+      {
+        "path": "docs/research/backend/java/basics/null-optional-and-failure-semantics.md",
+        "sha256": "c0529a2d4c09e70c5548cb5894f07d22c14689a536e762e21a46d5f5d0bdce6b"
+      },
+      {
+        "path": "src/categories/backend/java/core/learn/null-optional-and-failure-semantics.md",
+        "sha256": "a1e1d733c5691081dd65a8cbc8c071d49fdf22bbc721ef8134bd95fdea493095"
+      },
+      {
+        "path": "src/categories/backend/java/core/backend-java-track.ts",
+        "sha256": "dcb7a04baa824bd0d1106bea799715b042fde27812d21f31678160f28c8efd42"
+      },
+      {
+        "path": "src/categories/backend/java/core/entry-manifest.ts",
+        "sha256": "4385da9b31d862fdc4184d6fae0130eaf43d2b3e9c7f08d4d55a7818dd05eb76"
+      },
+      {
+        "path": "docs/backend/java/audit/phase-2-knowledge-path-manifest.json",
+        "sha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407"
+      }
+    ],
+    "routeIdentity": {
+      "stableIdPreserved": true,
+      "stableUrlPreserved": true,
+      "trackPosition": 16,
+      "trackStatus": "available",
+      "loaderSlug": "null-optional-and-failure-semantics",
+      "trackChangedInThisBatch": false,
+      "loaderChangedInThisBatch": false
+    },
+    "baselineVerification": [
+      {
+        "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+        "exitCode": 0,
+        "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+      },
+      { "command": "npm run type-check", "exitCode": 0, "summary": "passed" },
+      { "command": "npm run lint", "exitCode": 0, "summary": "passed" },
+      { "command": "npm run format:check", "exitCode": 0, "summary": "passed" },
+      {
+        "command": "npm run test:unit",
+        "exitCode": 0,
+        "summary": "empty configured unit directory is valid"
+      },
+      {
+        "command": "npm run test:e2e",
+        "exitCode": 0,
+        "summary": "empty configured E2E directory is valid"
+      },
+      {
+        "command": "npm run build",
+        "exitCode": 0,
+        "summary": "passed; 1729 modules transformed; existing catalog chunk warning only"
+      },
+      {
+        "command": "git diff --check -- <B-16 paths> && git diff --cached --check -- <B-16 paths>",
+        "exitCode": 0,
+        "summary": "passed"
+      }
+    ],
+    "javaVerification": {
+      "command": "extract the 如何验证 bash block from the final lesson and execute it with zsh -f",
+      "exitCode": 0,
+      "sharedStableOutput": "optional|present=Java:Java|absent=fallback:fallback|length=4|nullable=false|calls=1,0,1,1|errors=true,true",
+      "modernOutput": "modern-optional|values=java,fallback|calls=0,1|empty=true|stream=1|branches=1",
+      "java8BoundaryOutput": "java8-boundary|modern-optional-rejected=true",
+      "versions": ["Eclipse Temurin 25.0.3+9 LTS", "Eclipse Temurin 8u492-b09"],
+      "temporaryAssets": {
+        "location": "host and container /tmp",
+        "cleanupMethod": "shell trap with find -depth -delete",
+        "cleanupStatus": "complete"
+      }
+    },
+    "browserVerification": {
+      "tool": "Playwright CLI",
+      "session": "b16",
+      "baseUrl": "http://127.0.0.1:4173/",
+      "targetPath": "/backend/java/core/learn/null-optional-and-failure-semantics",
+      "desktop": {
+        "viewport": "1440x900",
+        "documentClientWidth": 1440,
+        "documentScrollWidth": 1440,
+        "horizontalOverflow": false,
+        "title": "null、Optional、缺失与失败语义",
+        "codeBlockCount": 23,
+        "officialSourceCount": 9,
+        "durationText": "约 75 分钟",
+        "previousPath": "/backend/java/core/learn/collections-and-iteration-contracts",
+        "nextPath": "/backend/java/core/learn/date-time-and-time-zones",
+        "searchTerm": "null、Optional、缺失与失败语义",
+        "searchResultCount": 1
+      },
+      "mobile": {
+        "viewport": "390x844",
+        "documentClientWidth": 390,
+        "documentScrollWidth": 390,
+        "horizontalOverflow": false,
+        "codeBlockCount": 23,
+        "completionButtonTextAfterReload": "取消完成",
+        "progressPersistedAfterReload": true
+      },
+      "console": { "errors": 0, "warnings": 0 },
+      "productionRequests": { "count": 70, "allStatus200": true }
+    },
+    "review": {
+      "riskClassification": "复用课程的路线元数据、返回合同衔接和官方来源卡修正",
+      "independentReviewRequired": false,
+      "priorFullReview": "PASS / 0 finding",
+      "currentVerification": "Java 25/8 反馈、完整工程 Gate、官方链接和生产浏览器验证通过"
+    },
+    "workspaceProtection": {
+      "dirtyWorkspaceProtected": true,
+      "unrelatedChangesPreserved": true,
+      "statusSnapshotSha256": "f95c12bb11f063c24189b6aabb1a48a6db025790a28889c534ea5452feb51215",
+      "scopedStagedAndUnstagedDiffCheck": "PASS"
+    },
+    "changedFiles": [
+      "docs/research/backend/java/basics/null-optional-and-failure-semantics.md",
+      "src/categories/backend/java/core/learn/null-optional-and-failure-semantics.md",
+      "docs/backend/java/audit/reviews/phase-4-null-optional-and-failure-semantics-signoff.json"
+    ]
+  },
+  "recordedAt": "2026-08-07T00:30:57Z",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "stagedBatchSpecificChanges": false,
+    "sharedManifestStagingPreserved": true
+  },
+  "sourceRepository": {
+    "path": "/Users/jian/Desktop/work/TDH/dzzz/dzzz-app",
+    "head": "167ca8aa91ca3a6b101246964ef4fddec3d21da0",
+    "statusShort": "",
+    "readOnly": true
+  },
+  "phase2Freeze": {
+    "courseCoverageMatrixJsonSha256": "04d858896d07e975d3ab50796494873f09bd0ddf4b1a8b1ea87bd75cdd101d38",
+    "courseCoverageMatrixSha256": "b7fd50ffabbcf8a198802e907cef769ac969a71e4e14c40038f4aaaed09d91ad",
+    "researchStatus": "not-started",
+    "exampleStatus": "not-started",
+    "courseStatus": "planned",
+    "phase4StateRecordedOnlyInThisSignoff": true,
+    "admissionGate": "PASS",
+    "counts": {
+      "sourceItems": 167,
+      "courseNodes": 64,
+      "dependencyEdges": 114
+    }
+  },
+  "versions": {
+    "verifiedAt": "2026-08-07",
+    "modern": {
+      "java": "25",
+      "runtime": "Eclipse Temurin 25.0.3+9 LTS"
+    },
+    "legacy": {
+      "java": "8",
+      "runtime": "Eclipse Temurin 8u492-b09",
+      "springBootBackground": "2.3.12.RELEASE"
+    }
+  },
+  "sourceDiscovery": {
+    "method": "Tavily 仅用于发现和提取直接页面，随后按 Oracle、JLS 与 OpenJDK 正文逐项核对",
+    "communitySourcesUsedAsEvidence": false,
+    "projectEvidenceBoundary": "四项 Optional 能力只作为 observed；一项 null 风险只作为 corrected。132 项风险分母不被机械解释为都应改成 Optional。",
+    "directUrls": [
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Optional.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Objects.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/util/Objects.html",
+      "https://docs.oracle.com/javase/specs/jls/se25/html/jls-4.html",
+      "https://docs.oracle.com/javase/specs/jls/se25/html/jls-15.html",
+      "https://docs.oracle.com/javase/specs/jls/se8/html/jls-4.html",
+      "https://docs.oracle.com/javase/specs/jls/se8/html/jls-15.html",
+      "https://openjdk.org/jeps/358"
+    ]
+  },
+  "projectEvidence": [
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/handler/voice2text/TdhDtbVoice2TextHandler.java",
+      "symbol": "com.tdh.bdzz.handler.voice2text.TdhDtbVoice2TextHandler",
+      "usage": "observed",
+      "sha256": "28cf772df4ae8ca999be517a8c03529b1f3a7892d4e59aa1a67cd7e7ffe9abcc",
+      "inventoryMatched": true
+    },
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/service/impl/TsFileSignNewOfflineSqtServiceImpl.java",
+      "symbol": "com.tdh.bdzz.service.impl.TsFileSignNewOfflineSqtServiceImpl",
+      "usage": "observed",
+      "sha256": "8296c0af432d691b7f28bb92cfba7cbb1eed6a4fb187eb38f3ab09af5afcd286",
+      "inventoryMatched": true
+    },
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/clearExpireData/HyUimSyncDataHandler.java",
+      "symbol": "com.tdh.bdzz.timer.handler.clearExpireData.HyUimSyncDataHandler",
+      "usage": "observed",
+      "sha256": "e16c9e81f908df18536d768f74aedf141db1f7cf69c1b02723df08bb25bcda9b",
+      "inventoryMatched": true
+    },
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/ConvertPdf.java",
+      "symbol": "com.tdh.bdzz.util.ConvertPdf",
+      "usage": "observed",
+      "sha256": "f002857b190f1436f73286486cfb7dcb8dd1cf5d66ac6c526890884cb3f81db8",
+      "inventoryMatched": true
+    },
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/AESUtils.java",
+      "symbol": "com.tdh.bdzz.util.AESUtils",
+      "usage": "corrected",
+      "sha256": "8e5aeabb5f9034b211fa02937c1a6907fc02f41355fb1baca1d2e581e26cae0b",
+      "inventoryMatched": true
+    }
+  ],
+  "docker": {
+    "engine": "Docker 29.6.1",
+    "feedbackSource": "从课程 Markdown 的如何验证 bash 代码块提取同一反馈环，经 stdin 交给固定 RepoDigest 容器执行",
+    "classOutput": "容器内 /tmp 的 mktemp 目录，shell trap 使用 find -depth -delete 清理",
+    "images": [
+      {
+        "role": "modern",
+        "requestedTag": "eclipse-temurin:25-jdk",
+        "digest": "sha256:12e44624adee6808a36d962717e1656e0afeeeff5a100f9cb00e0136513558f0"
+      },
+      {
+        "role": "legacy",
+        "requestedTag": "eclipse-temurin:8-jdk",
+        "digest": "sha256:c8b86f2c0a9bd6cc1b7fabc5d1a097501a166eea7cad3b2764e90e96178bea9b"
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/basics/null-optional-and-failure-semantics.md",
+      "sha256": "2c73709d8a9b047607816e1348d5024390602bd840e4e1f0729bf54041fbc51e"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/null-optional-and-failure-semantics.md",
+      "sha256": "c5669a2aa185ddb7e9c2a3f8df68fc6bf54c7f0b0082374b3bd938196e13d343"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "98d59a4d17856afa60fb3e02a681fa8866311432d53d907285eacb6f105f7936"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "86cd3684208bbf4d2b32d737f08853a232e8cace5acf16b6084cc9b3fa8425b9"
+    },
+    {
+      "path": "docs/backend/java/dzzz-app-course-plan.md",
+      "sha256": "4b55d24b5a3911c081f25ed25e99dd634cb3c600ffa6a5317a1e1584710eb3d6"
+    }
+  ],
+  "selfHashPolicy": "signoff 文件不记录自身 SHA-256；artifacts 只绑定 signoff 外可稳定计算的本批课程产物。",
+  "baselineVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run format:check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run test:unit",
+      "exitCode": 0,
+      "summary": "No test files found; configured empty test directory is valid"
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "summary": "No persistent E2E test files; command passed with --pass-with-no-tests"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "passed; 1208 modules transformed; existing >500 kB catalog chunk warning only"
+    },
+    {
+      "command": "git diff --check && git diff --cached --check",
+      "exitCode": 0,
+      "summary": "passed; no new staging performed"
+    },
+    {
+      "command": "git -C /Users/jian/Desktop/work/TDH/dzzz status --short -- dzzz-app",
+      "exitCode": 0,
+      "summary": "empty; source repository remained read-only"
+    }
+  ],
+  "javaVerification": {
+    "command": "extract 如何验证 bash block from src/categories/backend/java/core/learn/null-optional-and-failure-semantics.md and pipe to zsh -f",
+    "exitCode": 0,
+    "sharedOutput": "optional|present=Java:Java|absent=fallback:fallback|length=4|nullable=false|calls=1,0,1,1|errors=true,true",
+    "cases": [
+      {
+        "name": "Java 25 shared compile/run",
+        "exitCode": 0
+      },
+      {
+        "name": "Java 8 shared compile/run",
+        "exitCode": 0
+      },
+      {
+        "name": "orElse eager and orElseGet lazy timing",
+        "assertions": "present calls=1,0; absent calls=1,1"
+      },
+      {
+        "name": "of null rejection and supplier orElseThrow",
+        "assertions": "true,true on both runtimes"
+      },
+      {
+        "name": "Java 25 modern Optional APIs",
+        "exitCode": 0,
+        "stdout": "modern-optional|values=java,fallback|calls=0,1|empty=true|stream=1|branches=1"
+      },
+      {
+        "name": "Java 8 modern API boundary",
+        "compileRejected": true,
+        "stdout": "java8-boundary|modern-optional-rejected=true"
+      }
+    ],
+    "temporaryAssetsCleaned": true
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "adapter": "PASS",
+    "blockCount": 65,
+    "exerciseContract": "要求、验收、参考答案三字段完整",
+    "javaMethodComments": "PASS",
+    "initialFailure": "unquoted null in tags was parsed as YAML null and rejected by the strict frontmatter schema",
+    "repair": "quoted the null tag as a string and reran the same SSR feedback to PASS"
+  },
+  "catalogVerification": {
+    "method": "fresh Vite middleware SSR 加载真实 entry-manifest、track 和目标 content-entry",
+    "exitCode": 0,
+    "registeredEntries": 15,
+    "availableEntries": 15,
+    "targetId": "backend.java.learn.basics.null-optional-and-failure-semantics",
+    "projectEvidenceCount": 5,
+    "blockCount": 65
+  },
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "baseUrl": "http://127.0.0.1:4175/",
+    "targetPath": "/backend/java/core/learn/null-optional-and-failure-semantics",
+    "desktop": {
+      "viewport": "1440x900",
+      "documentClientWidth": 1440,
+      "documentScrollWidth": 1440,
+      "horizontalOverflow": false,
+      "title": "null、Optional、缺失与失败语义",
+      "codeBlockCount": 19,
+      "searchTerm": "orElseGet",
+      "targetVisibleInSearch": true,
+      "rawExactTitleMatchesIncludingPageHeading": 2
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "documentClientWidth": 390,
+      "documentScrollWidth": 390,
+      "horizontalOverflow": false,
+      "codeBlockCount": 19
+    },
+    "console": {
+      "errors": 0,
+      "warnings": 0,
+      "pageErrors": 0
+    },
+    "progressPersistedAfterReload": true,
+    "completionButtonTextAfterReload": "取消完成",
+    "targetPageStatus": 200,
+    "targetLazyChunkStatus": 200,
+    "batchSpecificRepositoryBrowserOutputAbsent": true,
+    "preExistingRepositoryBrowserOutputProtected": true
+  },
+  "changedFiles": [
+    "docs/research/backend/java/basics/null-optional-and-failure-semantics.md",
+    "src/categories/backend/java/core/learn/null-optional-and-failure-semantics.md",
+    "src/categories/backend/java/core/entry-manifest.ts",
+    "src/categories/backend/java/core/backend-java-track.ts",
+    "docs/backend/java/audit/reviews/phase-4-null-optional-and-failure-semantics-signoff.json",
+    "docs/backend/java/dzzz-app-course-plan.md"
+  ],
+  "priorClosedJavaAssets": {
+    "protected": true,
+    "summary": "第一至第十四批研究、课程与 signoff 保持原样，不归入第十五批课程产物。"
+  },
+  "concurrentWorkspaceAssets": {
+    "protected": true,
+    "attribution": "frontend TypeScript、Vite、Vue、frontend 文档、HeadingBlock 与 ContentEntryPage 资产由并行工作产生，不属于本批 changedFiles；根级校验在包含这些资产的当前工作区上执行。",
+    "preSignoffStatusSnapshotSha256": "31df8b45ce7672c28f2b407a8888f33a716d6fa521a705dd1f41daa87ae77dd8",
+    "paths": [
+      "docs/frontend/",
+      "src/app/pages/ContentEntryPage.vue",
+      "src/categories/frontend/engineering/",
+      "src/categories/frontend/vue/",
+      "src/common/ui/blocks/HeadingBlock.vue"
+    ]
+  },
+  "review": {
+    "standards": "PASS",
+    "standardsFindings": 0,
+    "spec": "PASS",
+    "specFindings": 0
+  },
+  "beginnerContentReverification": {
+    "verifiedAt": "2026-08-07",
+    "courseArtifact": {
+      "path": "src/categories/backend/java/core/learn/null-optional-and-failure-semantics.md",
+      "sha256": "03b5066a5ade9be062e5392c802dd8a34080d6fee14a29e33221daad24f00cf2"
+    },
+    "content": "PASS; exactly one 从零跟着做, usage, pitfalls, verification, one exercise and runnable code",
+    "sources": "PASS; source type, appliesTo and claims shown only in the official-source regions; 正文无来源详情",
+    "browser": "PASS; 1440px and 390px routes, 36/36 HTTP 200, no horizontal overflow or browser errors",
+    "root": "PASS; knowledge-path, type-check, lint, format and diff checks"
+  },
+  "stopBoundary": "Phase B 的 B-16 已关闭；下一批只允许 B-17 date-time-and-time-zones，不得跳到 B-18，不得进入 Phase C、D、E。B-21 基础 Gate 关闭后立即停止。"
+}

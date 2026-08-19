@@ -57,7 +57,7 @@ anchors:
 
 # Experimental 观察清单
 
-## 概述
+## 一、概述
 
 本页是 Vue Router 5.2.0 的独立 experimental watchlist，只登记两个子路径的发布事实、官方警告与待观察冲突。86 项全部不属于稳定根入口的 118 项分母，不适合形成生产承诺，也不能因为可导入、可运行或仅在类型层出现就升级为稳定 API。
 
@@ -65,7 +65,7 @@ anchors:
 本页不创建 Demo，不从 experimental 入口执行任何导入，也不引入或调用 Pinia Colada 依赖。需要评估实验能力时，只能在锁定 5.2.0 的隔离研究环境中进行，并保留默认关闭的 feature flag、验证清单与可删除适配层。
 :::
 
-## Experimental Router 清单
+## 二、Experimental Router 清单
 
 `vue-router/experimental` 在固定发布物中包含 26 个 runtime 与 50 个 type-only 导出。形态来自声明文件 export clause；type-only 只表示不会产生运行时值，不表示获得稳定性承诺。
 
@@ -148,7 +148,7 @@ anchors:
 | _ParamParsers_Native | type-only | vue-router/experimental | experimental type-only；编译期形态不代表稳定 |
 | _PathParamNamesForFilePath | type-only | vue-router/experimental | experimental type-only；编译期形态不代表稳定 |
 
-## Pinia Colada 清单
+## 三、Pinia Colada 清单
 
 `vue-router/experimental/pinia-colada` 在固定发布物中包含 1 个 runtime 与 9 个 type-only 导出。它是可选实验适配面；下表只做静态盘点，本站页面本身不安装、导入或调用 `@pinia/colada`。
 
@@ -165,7 +165,7 @@ anchors:
 | UseDataLoaderColada_LaxData | type-only | vue-router/experimental/pinia-colada | experimental adapter type-only；本页不引入 Pinia Colada |
 | _DefineDataColadaLoaderOptions_Common | type-only | vue-router/experimental/pinia-colada | experimental adapter type-only；本页不引入 Pinia Colada |
 
-## 实验配置 Flags
+## 四、实验配置 Flags
 
 固定 `src/unplugin/options.ts` 把以下两个键放在 `experimental` 配置对象下，并明确警告它们可能在 patch release 中改变或移除。它们属于构建期插件选项，不是稳定 RouterOptions，也不应静默进入常规项目模板。
 
@@ -178,7 +178,7 @@ anchors:
 `vue-router/auto-resolver` 是由文件路由插件提供的构建期虚拟模块入口；它与 `vue-router/experimental` 中 resolver、matcher 和 router 的运行时实验语义不是同一层。package export 能解析 auto-resolver，只证明构建入口存在，不能把 experimental router 升级为稳定能力。
 :::
 
-## 稳定性与冲突账本
+## 五、稳定性与冲突账本
 
 | 观察域 | 一手信号 | RA6 处理 |
 | --- | --- | --- |
@@ -191,7 +191,7 @@ anchors:
 
 该账本只陈列在 2026-08-04 可复核的一手信号。definePage 的 Guide/发布物 mismatch 与 Typed Routes 的根导出/Guide/源码混合信号均没有找到官方原因说明；后续版本必须重新核对，而不是继承推测。
 
-## 易错使用提示
+## 六、易错使用提示
 
 :::pitfalls
 ### 把 experimental 子路径纳入稳定 118 项
@@ -400,7 +400,7 @@ import type { RouteMap } from 'vue-router'
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 七、源码推导与适用场景
 
 :::steps
 ### 1. Export clause 决定 26+50 与 1+9 的形态

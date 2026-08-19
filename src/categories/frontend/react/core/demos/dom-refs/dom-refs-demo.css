@@ -1,0 +1,213 @@
+.dom-refs-demo {
+  width: 100%;
+  padding: var(--space-4);
+  box-sizing: border-box;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+}
+
+.dom-refs-demo-heading p,
+.dom-refs-demo-heading h2,
+.dom-refs-demo-heading span,
+.dom-refs-demo-scroll-viewport p,
+.dom-refs-demo-measure-target strong,
+.dom-refs-demo-measure-target span {
+  margin: 0;
+}
+
+.dom-refs-demo-heading p {
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.dom-refs-demo-heading h2 {
+  margin-top: var(--space-1);
+  font-size: 1.08rem;
+  line-height: 1.4;
+}
+
+.dom-refs-demo-heading span {
+  display: block;
+  margin-top: var(--space-1);
+  color: var(--color-text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.6;
+}
+
+.dom-refs-demo-toolbar {
+  margin-top: var(--space-4);
+}
+
+.dom-refs-demo-toolbar label {
+  display: block;
+  margin-bottom: var(--space-1);
+  color: var(--color-text-secondary);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.dom-refs-demo-toolbar input {
+  width: 100%;
+  min-height: 42px;
+  padding: var(--space-2) var(--space-3);
+  box-sizing: border-box;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xs);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: inherit;
+}
+
+.dom-refs-demo-toolbar input:focus-visible,
+.dom-refs-demo-actions button:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 32%, transparent);
+  outline-offset: 2px;
+}
+
+.dom-refs-demo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  margin: var(--space-2) -5px -10px;
+}
+
+.dom-refs-demo-actions button {
+  min-height: 40px;
+  padding: var(--space-2) var(--space-3);
+  margin: 0 5px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xs);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.35;
+  cursor: pointer;
+}
+
+.dom-refs-demo-actions button:hover,
+.dom-refs-demo-actions button:focus-visible {
+  border-color: var(--color-accent);
+}
+
+.dom-refs-demo-workspace {
+  display: flex;
+  flex-wrap: wrap;
+  margin: var(--space-4) -5px 0;
+}
+
+.dom-refs-demo-scroll-viewport,
+.dom-refs-demo-measure-target {
+  flex: 1 1 220px;
+  min-width: 0;
+  margin: 0 5px 10px;
+  box-sizing: border-box;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xs);
+  background: var(--color-bg);
+}
+
+.dom-refs-demo-scroll-viewport {
+  height: 152px;
+  padding: var(--space-3);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scroll-behavior: auto;
+}
+
+.dom-refs-demo-scroll-viewport p {
+  min-height: 58px;
+  color: var(--color-text-secondary);
+  font-size: 0.8rem;
+  line-height: 1.55;
+}
+
+.dom-refs-demo-scroll-target {
+  padding: var(--space-3);
+  border-left: 3px solid var(--color-accent);
+  background: var(--color-bg-subtle);
+  font-size: 0.84rem;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.dom-refs-demo-measure-target {
+  min-height: 152px;
+  padding: var(--space-4);
+}
+
+.dom-refs-demo-measure-target strong,
+.dom-refs-demo-measure-target span {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.dom-refs-demo-measure-target strong {
+  font-size: 0.92rem;
+}
+
+.dom-refs-demo-measure-target span {
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+  line-height: 1.65;
+}
+
+.dom-refs-demo-status {
+  display: flex;
+  flex-wrap: wrap;
+  margin: var(--space-2) -5px 0;
+}
+
+.dom-refs-demo-status > div {
+  flex: 1 1 150px;
+  min-width: 0;
+  padding: var(--space-3);
+  margin: 0 5px 10px;
+  box-sizing: border-box;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xs);
+  background: var(--color-bg-subtle);
+}
+
+.dom-refs-demo-status span,
+.dom-refs-demo-status strong {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.dom-refs-demo-status span {
+  color: var(--color-text-secondary);
+  font-size: 0.76rem;
+  line-height: 1.5;
+}
+
+.dom-refs-demo-status strong {
+  margin-top: var(--space-1);
+  font-size: 0.94rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 520px) {
+  .dom-refs-demo-actions,
+  .dom-refs-demo-workspace,
+  .dom-refs-demo-status {
+    display: block;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .dom-refs-demo-actions button,
+  .dom-refs-demo-scroll-viewport,
+  .dom-refs-demo-measure-target,
+  .dom-refs-demo-status > div {
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+  }
+}

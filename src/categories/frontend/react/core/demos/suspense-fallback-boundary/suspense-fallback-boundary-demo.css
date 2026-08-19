@@ -1,0 +1,207 @@
+.suspense-boundary-demo {
+  width: 100%;
+  max-width: 840px;
+  padding: 24px;
+  border: 1px solid #c9d4d0;
+  border-radius: 8px;
+  background: #fbfcfc;
+  color: #25312f;
+}
+
+.suspense-boundary-heading p,
+.suspense-boundary-heading h2,
+.suspense-boundary-heading span,
+.suspense-boundary-status p,
+.suspense-boundary-fallback p,
+.suspense-boundary-summary p,
+.suspense-boundary-placeholder p {
+  margin: 0;
+}
+
+.suspense-boundary-heading > p {
+  color: #9b4d22;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.suspense-boundary-heading h2 {
+  margin-top: 6px;
+  font-size: 1.35rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.suspense-boundary-heading > span {
+  display: block;
+  margin-top: 6px;
+  color: #5a6865;
+  line-height: 1.6;
+}
+
+.suspense-boundary-controls {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 18px -5px 0;
+}
+
+.suspense-boundary-controls button {
+  min-height: 42px;
+  max-width: 100%;
+  padding: 8px 12px;
+  margin: 0 5px 10px;
+  border: 1px solid #286d61;
+  border-radius: 5px;
+  background: #286d61;
+  color: #ffffff;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  white-space: normal;
+}
+
+.suspense-boundary-controls button.is-secondary {
+  background: #ffffff;
+  color: #245f55;
+}
+
+.suspense-boundary-controls button.is-quiet {
+  border-color: #68736f;
+  background: #68736f;
+}
+
+.suspense-boundary-controls button:hover:not(:disabled) {
+  filter: brightness(0.95);
+}
+
+.suspense-boundary-controls button:focus-visible {
+  outline: 3px solid #e19a56;
+  outline-offset: 2px;
+}
+
+.suspense-boundary-controls button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+.suspense-boundary-status,
+.suspense-boundary-placeholder,
+.suspense-boundary-fallback,
+.suspense-boundary-summary,
+.suspense-boundary-inspector {
+  min-width: 0;
+  padding: 16px;
+  border-radius: 6px;
+  overflow-wrap: anywhere;
+}
+
+.suspense-boundary-status {
+  margin-top: 4px;
+  border-left: 5px solid #3e756c;
+  background: #edf5f3;
+}
+
+.suspense-boundary-status > span,
+.suspense-boundary-fallback > span,
+.suspense-boundary-summary > span,
+.suspense-boundary-inspector > span {
+  display: block;
+  color: #65736f;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.suspense-boundary-status strong,
+.suspense-boundary-fallback strong,
+.suspense-boundary-summary strong,
+.suspense-boundary-inspector strong,
+.suspense-boundary-placeholder strong {
+  display: block;
+  margin-top: 5px;
+  color: #285f56;
+  font-size: 1.05rem;
+}
+
+.suspense-boundary-status p,
+.suspense-boundary-fallback p,
+.suspense-boundary-summary p,
+.suspense-boundary-placeholder p {
+  margin-top: 8px;
+  color: #56635f;
+  line-height: 1.6;
+}
+
+.suspense-boundary-status output {
+  color: #23675b;
+  font-weight: 700;
+}
+
+.suspense-boundary-placeholder,
+.suspense-boundary-fallback,
+.suspense-boundary-workspace {
+  margin-top: 12px;
+}
+
+.suspense-boundary-placeholder {
+  border: 1px dashed #a8b5b1;
+  background: #ffffff;
+}
+
+.suspense-boundary-fallback.is-outer {
+  border: 1px solid #e3c5b3;
+  border-left: 5px solid #b86538;
+  background: #fff8f3;
+}
+
+.suspense-boundary-workspace {
+  padding: 16px;
+  border: 1px solid #c8d5d1;
+  border-radius: 6px;
+  background: #ffffff;
+}
+
+.suspense-boundary-summary {
+  border-left: 5px solid #33776c;
+  background: #eef6f4;
+}
+
+.suspense-boundary-fallback.is-inner,
+.suspense-boundary-inspector {
+  margin-top: 12px;
+}
+
+.suspense-boundary-fallback.is-inner {
+  border: 1px solid #d8c9a9;
+  border-left: 5px solid #a67724;
+  background: #fffaf0;
+}
+
+.suspense-boundary-inspector {
+  border-left: 5px solid #456c8b;
+  background: #f1f6fa;
+}
+
+.suspense-boundary-inspector ul {
+  padding-left: 22px;
+  margin: 10px 0 0;
+  color: #455550;
+  line-height: 1.7;
+}
+
+@media (max-width: 560px) {
+  .suspense-boundary-demo {
+    padding: 16px;
+  }
+
+  .suspense-boundary-controls {
+    display: block;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .suspense-boundary-controls button {
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+  }
+}

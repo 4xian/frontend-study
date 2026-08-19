@@ -88,7 +88,7 @@ anchors:
 
 # Options API：生命周期选项
 
-## 概述
+## 一、概述
 
 Options 生命周期选项把组件的一次实例旅程划分为创建、挂载、更新和卸载四个主阶段，并补充后代错误边界、渲染依赖调试、`<KeepAlive>` 缓存切换和 SSR 数据预取。运行时会把这些普通函数的 `this` 绑定到组件公共实例；对应的 Composition API 钩子最终进入相同的实例钩子数组，但 `beforeCreate` 和 `created` 的工作通常直接写在 `setup()` 中。
 
@@ -107,11 +107,11 @@ Options 生命周期选项把组件的一次实例旅程划分为创建、挂载
 不要凭名称猜测 DOM 或子组件是否已经就绪。先确定当前钩子的环境和调度阶段，再选择 Options 钩子；需要可复用的生命周期逻辑时，转到关联的 Composition API 页面并提取 composable。
 :::
 
-## beforeCreate
+## 二、beforeCreate
 
 `beforeCreate` 在实例初始化和 props 解析后立即调用，但 `data`、computed、methods 与 watch 尚未应用。`setup()` 已经在它之前执行，因此不要在这里读取 Options 状态或调用 Options method。它会在 SSR 执行，只适合极少数需要观察 Options 初始化前实例状态的场景。
 
-## created
+## 三、created
 
 `created` 在响应式 data、computed、methods 与 watch 处理完成后调用，可以通过 `this` 读取实例状态和启动不依赖 DOM 的短期工作。挂载尚未开始，因此 `$el` 与模板引用仍不可用。它也会在 SSR 执行；不能在这里建立只能等待 unmounted 清理的跨请求长期副作用。
 
@@ -135,11 +135,11 @@ export default {
 }
 ~~~~
 
-## beforeMount
+## 四、beforeMount
 
 `beforeMount` 在第一次执行 DOM 渲染前调用。此时响应式状态已经就绪，但组件尚未创建 DOM 节点，不能读取 `$el` 或 `$refs`。它适合完成渲染前最后一次纯状态准备，但不会在 SSR 执行。
 
-## mounted
+## 五、mounted
 
 `mounted` 在自身 DOM 树创建并插入父容器、所有同步子组件挂载后调用，适合聚焦元素、测量布局或注册浏览器监听器。它不等待异步组件或 `<Suspense>` 内组件；只有根容器已经在文档中时，才能保证当前节点也位于 `document`。父子同步挂载通常按“父 beforeMount、子 mounted、父 mounted”完成。
 
@@ -160,11 +160,11 @@ export default {
 }
 ~~~~
 
-## beforeUpdate
+## 六、beforeUpdate
 
 `beforeUpdate` 在响应式状态已经变化、组件 DOM patch 尚未执行时调用，因此可以读取更新前 DOM。Vue 允许在这里修改组件状态，但逻辑应保持有界；针对某个字段的副作用通常用 watch 更清晰。它不会在 SSR 执行。
 
-## updated
+## 七、updated
 
 `updated` 在组件 DOM 更新后调用，子组件的 updated 先于父组件。多个状态修改可能合并成一次渲染，所以它不能精确代表某个字段的一次变化；需要等待某次明确修改后的 DOM 时使用 `nextTick()`。禁止在这里无条件改写响应式状态，否则会再次排队更新并形成循环。
 
@@ -186,11 +186,11 @@ export default {
 }
 ~~~~
 
-## beforeUnmount
+## 八、beforeUnmount
 
 `beforeUnmount` 在卸载开始前调用，此时实例、子树和 DOM 仍完整可用。需要依赖当前实例或 DOM 才能解除的订阅，可以在这里停止。它不会在 SSR 执行。
 
-## unmounted
+## 九、unmounted
 
 `unmounted` 在所有子组件卸载，并且组件渲染作用以及 setup 中同步创建的 computed/watch 停止后调用。Vue 不会代替业务代码清除手动创建的计时器、DOM 事件监听器、订阅或服务器连接，仍需显式释放。
 
@@ -207,7 +207,7 @@ export default {
 }
 ~~~~
 
-## errorCaptured
+## 十、errorCaptured
 
 `errorCaptured(error, instance, info)` 捕获后代组件从渲染、事件、生命周期、setup、watch、指令或过渡中传播的错误，不捕获当前边界组件自身的错误。边界从最近祖先向上依次执行，默认仍到达 `app.config.errorHandler`；返回 `false` 表示已经处理并停止后续传播。生产环境的 `info` 是缩短代码。回退状态不能继续渲染同一故障子树，否则会反复抛错。
 
@@ -226,11 +226,11 @@ export default {
 }
 ~~~~
 
-## renderTracked
+## 十一、renderTracked
 
 `renderTracked(event)` 在组件渲染作用读取并追踪响应式依赖时调用。`DebuggerEvent` 会给出 effect、target、操作类型和 key，适合定位“为什么这个字段成为渲染依赖”。它仅在开发环境执行，不会在 SSR 执行。
 
-## renderTriggered
+## 十二、renderTriggered
 
 `renderTriggered(event)` 在已经追踪的依赖发生变化并触发组件重新渲染时调用，还可能提供新旧值。它适合定位“哪次写操作让组件更新”，同样只在开发环境客户端执行，不能承担生产日志、分析或业务状态同步。
 
@@ -247,11 +247,11 @@ export default {
 }
 ~~~~
 
-## activated
+## 十三、activated
 
 `activated` 只用于 `<KeepAlive>` 缓存树，在首次挂载和每次从缓存重新插入 DOM 后调用。缓存根下的后代组件也会收到该钩子。适合恢复只在页面可见时需要的轮询、媒体或观察器；不会在 SSR 执行。
 
-## deactivated
+## 十四、deactivated
 
 `deactivated` 在缓存树移出 DOM 时调用，并在最终卸载时再次调用。停用不会销毁实例，也不会自动停止所有响应式作用，所以它不是 unmounted 的同义词。可见性相关资源应在这里暂停，永久资源仍由 unmounted 兜底释放。
 
@@ -291,7 +291,7 @@ export default {
 }
 ~~~~
 
-## serverPrefetch
+## 十五、serverPrefetch
 
 `serverPrefetch` 只在服务端渲染执行。若返回 Promise，服务端渲染器会在渲染该组件前等待完成，适合获取本次 HTML 必需的数据。客户端直接创建组件不会调用它，因此 mounted 应为缺失数据提供回退；SSR 数据还应进入可序列化的 hydration 状态，避免客户端重复请求。下面的 `initialCourse` 由客户端入口从 SSR payload 恢复并传入，`writeCourseToSsrPayload()` 则把服务端结果写入同一个按请求隔离的 payload。
 
@@ -319,7 +319,7 @@ export default {
 }
 ~~~~
 
-## 易错使用提示
+## 十六、易错使用提示
 
 :::pitfalls
 ### 用箭头函数声明依赖 this 的 Options 钩子
@@ -635,7 +635,7 @@ export default {
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 十七、源码推导与适用场景
 
 :::steps
 ### 1. 创建钩子夹住 Options 状态初始化

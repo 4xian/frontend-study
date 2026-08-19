@@ -1,0 +1,221 @@
+.embedded-status-demo {
+  color: #182230;
+  background: #eef2f4;
+  border: 1px solid #cfd8de;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.embedded-status-demo__heading {
+  padding: 24px;
+  color: #ffffff;
+  background: #25394a;
+}
+
+.embedded-status-demo__heading p,
+.embedded-status-demo__heading h2,
+.embedded-status-demo__heading span {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.embedded-status-demo__heading p {
+  color: #a9d5df;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.embedded-status-demo__heading h2 {
+  margin-top: 8px;
+  font-size: 24px;
+  line-height: 1.35;
+}
+
+.embedded-status-demo__heading span {
+  display: block;
+  margin-top: 8px;
+  color: #dce7ed;
+  line-height: 1.6;
+}
+
+.embedded-status-demo__body {
+  min-width: 0;
+  padding: 20px;
+}
+
+.embedded-status-demo__controls,
+.embedded-status-demo__stage,
+.embedded-status-demo__evidence {
+  min-width: 0;
+  padding: 18px;
+  background: #ffffff;
+  border: 1px solid #d5dde2;
+  border-radius: 8px;
+}
+
+.embedded-status-demo__stage,
+.embedded-status-demo__evidence {
+  margin-top: 16px;
+}
+
+.embedded-status-demo__section-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.embedded-status-demo__section-heading > div {
+  min-width: 0;
+  margin-right: 16px;
+}
+
+.embedded-status-demo__section-heading span,
+.embedded-status-demo__section-heading strong {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.embedded-status-demo__section-heading span {
+  color: #607080;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.embedded-status-demo__section-heading strong {
+  margin-top: 4px;
+  line-height: 1.45;
+}
+
+.embedded-status-demo__rebuild {
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid #aebbc4;
+  border-radius: 6px;
+  color: #29465a;
+  background: #f4f7f8;
+  cursor: pointer;
+}
+
+.embedded-status-demo__rebuild span {
+  color: inherit;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.embedded-status-demo__actions {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.embedded-status-demo__actions button {
+  min-height: 42px;
+  padding: 0 14px;
+  margin: 4px 8px 4px 0;
+  border: 1px solid #276b7e;
+  border-radius: 6px;
+  color: #ffffff;
+  background: #276b7e;
+  cursor: pointer;
+}
+
+.embedded-status-demo__actions button.is-danger {
+  border-color: #9f3f46;
+  background: #9f3f46;
+}
+
+.embedded-status-demo__actions button:disabled {
+  border-color: #c9d1d6;
+  color: #788692;
+  background: #e8edef;
+  cursor: not-allowed;
+}
+
+.embedded-status-demo button:focus-visible {
+  outline: 3px solid #d99b22;
+  outline-offset: 2px;
+}
+
+.embedded-status-demo__stage iframe {
+  display: block;
+  width: 100%;
+  height: 470px;
+  margin-top: 14px;
+  border: 1px solid #bdc8cf;
+  border-radius: 6px;
+  background: #eef2f5;
+}
+
+.embedded-status-demo__facts {
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 0;
+  margin: 10px -6px -6px;
+}
+
+.embedded-status-demo__facts > div {
+  flex: 1 1 220px;
+  min-width: 0;
+  padding: 14px;
+  margin: 6px;
+  background: #f5f7f8;
+  border: 1px solid #d7dfe4;
+  border-radius: 6px;
+}
+
+.embedded-status-demo__facts dt,
+.embedded-status-demo__facts dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.embedded-status-demo__facts dt {
+  color: #63717e;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.embedded-status-demo__facts dd {
+  margin-top: 7px;
+  color: #1b2935;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+@media (max-width: 600px) {
+  .embedded-status-demo__heading,
+  .embedded-status-demo__body {
+    padding: 16px;
+  }
+
+  .embedded-status-demo__controls,
+  .embedded-status-demo__stage,
+  .embedded-status-demo__evidence {
+    padding: 14px;
+  }
+
+  .embedded-status-demo__section-heading {
+    align-items: flex-start;
+  }
+
+  .embedded-status-demo__actions button {
+    flex: 1 1 180px;
+    margin-right: 0;
+  }
+
+  .embedded-status-demo__stage iframe {
+    height: 560px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .embedded-status-demo *,
+  .embedded-status-demo *::before,
+  .embedded-status-demo *::after {
+    scroll-behavior: auto;
+  }
+}

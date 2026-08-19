@@ -13,7 +13,7 @@ tags:
   - 字符串 intrinsic
   - Capitalize
   - 键重映射
-appliesTo: TypeScript 7.0.2（宿主 fixture：6.0.3）
+appliesTo: TypeScript 7.0.2
 verifiedAt: 2026-08-05
 sources:
   - title: "TypeScript Handbook: Template Literal Types"
@@ -44,11 +44,11 @@ recap:
 
 # 模板字面量类型
 
-## 为什么需要
+## 一、为什么需要
 
 事件名、getter 和路由键常由已有字段按固定规则组成。手写第二份字符串联合容易漏项；模板字面量类型可以从源键直接派生有限协议，让字段变化在编译期暴露不一致。
 
-## 核心概念和最小模型
+## 二、核心概念和最小模型
 
 ~~~~ts
 type CourseField = 'title' | 'minutes'
@@ -62,25 +62,46 @@ export { minutesEvent, titleEvent }
 
 插值接收联合时，编译器会展开每个成员并生成结果联合。多个联合同时插值会形成 cross product，因此这项能力适合数量明确、规模有限的命名协议。
 
-## 把对象合同连接到事件协议
+## 三、知识点详解
 
-:::steps
-### 从唯一源合同取得键
+### 1. 模板字面量类型
 
-使用 string & keyof Type 排除不能进入字符串协议的 symbol 或 number 键。
+**它是什么：** 模板字面量类型使用反引号和 `${Type}` 在类型层组合字符串字面量。
 
-### 用模板约束事件名
+**它有什么用：** 路由名、事件名和配置键可以遵守固定格式，不再接受任意字符串。
 
-把 Changed 等稳定后缀写进类型，让调用方只能传入真实字段派生的名字。
+**怎么使用：** 把有限的字面量联合放入模板插值，编译器会生成所有合法组合。
 
-### 从前缀恢复值类型
+~~~~ts
+type Field = 'title' | 'minutes'
+type EventName = `${Field}Changed`
 
-泛型捕获事件名前缀后，以 Type[Key] 为回调提供对应字段的准确类型。
+const event: EventName = 'titleChanged'
+~~~~
 
-### 只在边界统一大小写
+### 2. 联合类型的组合展开
 
-Capitalize 等 intrinsic 服务公开命名规则，不替代运行时字符串标准化。
-:::
+**它是什么：** 当多个插值位置都是联合时，模板字面量会生成各联合成员的笛卡尔组合。
+
+**它有什么用：** 可以从少量维度生成有限协议，例如语言与页面组合成受控路由键。
+
+**怎么使用：** 只组合规模可控的联合；成员数量很大时应在构建阶段生成或改用普通字符串验证。
+
+~~~~ts
+type Locale = 'zh' | 'en'
+type Page = 'home' | 'course'
+type RouteKey = `${Locale}.${Page}`
+
+const route: RouteKey = 'zh.course'
+~~~~
+
+### 3. 从对象键派生事件名
+
+**它是什么：** `string & keyof Type` 取得可进入字符串模板的对象键，再与固定前后缀组合。
+
+**它有什么用：** 数据模型成为唯一来源，新增字段后事件名合同会自动更新。
+
+**怎么使用：** 先用 `keyof` 取得键，再把键与稳定后缀写入模板；泛型回调可继续通过键读取字段值类型。
 
 ~~~~ts
 type Watcher<Type> = {
@@ -101,11 +122,42 @@ watcher.on('minutesChanged', (minutes) => minutes.toFixed(0))
 export type { Getters }
 ~~~~
 
-## 配套编译 fixture
+### 4. intrinsic 字符串类型
 
-临时编译正例验证有限事件联合、模板推导、Capitalize 与 mapped as；负例传入未带 Changed 后缀的字段名，固定 TS2345。验证资产只在 `/tmp` 使用并在结束后删除。字符串协议是编译事实，因此不创建浏览器 Demo。
+**它是什么：** `Uppercase`、`Lowercase`、`Capitalize` 和 `Uncapitalize` 是编译器内建的字符串类型变换。
 
-## 易错使用提示
+**它有什么用：** 它们可以让 getter、事件或常量命名遵守统一大小写规则。
+
+**怎么使用：** 把字符串字面量或联合传给 intrinsic；它只计算静态类型，运行时仍需实际转换字符串。
+
+~~~~ts
+type GetterName = `get${Capitalize<'title' | 'minutes'>}`
+
+const getterName: GetterName = 'getTitle'
+~~~~
+
+## 四、动手实践：让字段名决定事件名和负载
+
+由模型字段派生事件协议，避免字符串事件和回调参数各自维护。
+
+~~~~ts
+interface CourseForm {
+  title: string
+  minutes: number
+}
+
+type ChangeEvents<T> = {
+  [Key in keyof T & string as `${Key}Changed`]: (value: T[Key]) => void
+}
+
+const handlers: ChangeEvents<CourseForm> = {
+  titleChanged: (value) => value.toUpperCase(),
+  minutesChanged: (value) => value.toFixed(0),
+}
+~~~~
+
+交换两个回调的参数操作并新增不存在的事件名，观察模板字面量和 mapped type 如何同时约束名称与负载。开放字符串场景不要生成巨大联合，应回到运行时校验。
+## 五、易错使用提示
 
 :::pitfalls
 ### 退回任意 string
@@ -197,20 +249,20 @@ const label = 'course'.replace(/^./, 'C')
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 原理与适用场景
+## 六、工作原理与适用边界
 
 :::steps
 ### 联合插值生成有限结果
 
-官方事实：模板中的联合按所有组合展开。课程推导：只为有限、稳定的字符串协议派生名字。边界：大型集合应预先生成。
+**工作原理：** 模板中的联合按所有组合展开。**实践建议：** 只为有限、稳定的字符串协议派生名字。**使用边界：** 大型集合应预先生成。
 
 ### 模板前缀可参与推导
 
-官方事实：泛型可从匹配模板中捕获字段名。课程推导：由事件名恢复回调值类型。边界：运行输入仍需真实校验。
+**工作原理：** 泛型可从匹配模板中捕获字段名。**实践建议：** 由事件名恢复回调值类型。**使用边界：** 运行输入仍需真实校验。
 
 ### intrinsic 是编译器内建映射
 
-官方事实：四种大小写工具由编译器直接处理。课程推导：只在公开键边界统一名称。边界：它们不生成运行代码。
+**工作原理：** 四种大小写工具由编译器直接处理。**实践建议：** 只在公开键边界统一名称。**使用边界：** 它们不生成运行代码。
 :::
 
 :::exercise
@@ -218,9 +270,51 @@ const label = 'course'.replace(/^./, 'C')
 
 **要求：** 为 Course 的 title 与 minutes 派生 Changed 事件，编写能把回调参数恢复为字段类型的 on 合同，并保留错误事件名负例。
 
-**验收：** 两个合法事件严格编译通过，裸字段名产生 TS2345，并能解释联合展开边界。
+**完成标准：** 两个合法事件严格编译通过，裸字段名产生 TS2345，并能解释联合展开边界。
 :::
 
-## 总结与下一课
+## 七、本节小结
 
 模板字面量类型把有限字符串联合组合成协议，intrinsic 和 mapped as 可继续统一键名。下一课转向 class，区分静态结构兼容与真实运行时继承。
+
+:::code-details{title="查看本节完整示例"}
+~~~~ts
+interface CourseFields {
+  title: string
+  duration: number
+}
+
+type Locale = 'zh' | 'en'
+type CoursePage = 'list' | 'detail'
+type RouteName = `${Locale}:${CoursePage}`
+type CourseEvent = `${string & keyof CourseFields}Changed`
+type UpperRouteName = Uppercase<RouteName>
+type LowerRouteName = Lowercase<UpperRouteName>
+type CapitalizedField = Capitalize<'title'>
+type UncapitalizedField = Uncapitalize<CapitalizedField>
+type EventHandlers<Model> = {
+  [Key in keyof Model as `on${Capitalize<string & Key>}Changed`]: (value: Model[Key]) => void
+}
+
+/** 监听字段名派生出的事件，并保持负载类型一致。 */
+function watchField<Key extends string & keyof CourseFields>(
+  event: `${Key}Changed`,
+  listener: (value: CourseFields[Key]) => void,
+): void {
+  console.log(`已监听 ${event}`, listener)
+}
+
+const route: RouteName = 'zh:detail'
+const upperRoute: UpperRouteName = 'ZH:DETAIL'
+const lowerRoute: LowerRouteName = 'zh:detail'
+const fieldName: UncapitalizedField = 'title'
+const courseEvent: CourseEvent = 'durationChanged'
+const handlers: EventHandlers<CourseFields> = {
+  onTitleChanged: (value) => console.log(value.toUpperCase()),
+  onDurationChanged: (value) => console.log(value.toFixed(0)),
+}
+
+watchField('titleChanged', handlers.onTitleChanged)
+console.log(route, upperRoute, lowerRoute, fieldName, courseEvent)
+~~~~
+:::

@@ -45,7 +45,7 @@ anchors:
 
 # createSSRApp()
 
-## 概述
+## 一、概述
 
 `createSSRApp()` 从 Vue 3.0 起可用，用于创建 SSR 应用实例。它接收的根组件、根 props 以及挂载前的 `use()`、`provide()` 和 `app.config` 配置方式都与 `createApp()` 相同；关键差别发生在浏览器端的 `mount()`：它会激活服务端已经输出的 HTML，而不是清空容器后重新渲染。
 
@@ -53,7 +53,7 @@ anchors:
 `createSSRApp()` 只是应用入口。服务端仍要使用 `vue/server-renderer` 的渲染 API，客户端仍要加载入口脚本；数据序列化、路由就绪和 hydration mismatch 也需要应用或 SSR 框架单独处理。
 :::
 
-## 服务端渲染与客户端激活
+## 二、服务端渲染与客户端激活
 
 服务端把新建的 app 交给 `renderToString()` 或流式 renderer 生成 HTML；浏览器使用同一个应用工厂重新创建 app，再对包含该 HTML 的容器调用 `mount()`。两端必须产生相同的组件结构与初始状态，客户端才能复用已有 DOM 并绑定响应性和事件。
 
@@ -87,7 +87,7 @@ createMyApp().mount('#app')
 | 传输 | 没有自动序列化能力 | 安全嵌入初始状态与资源链接 |
 | 客户端 | 让 mount() 进入 hydration | 用一致结构和状态创建 app |
 
-## 每个请求创建独立应用
+## 三、每个请求创建独立应用
 
 SSR 服务进程通常会复用同一份模块。如果把 app、router、store 或用户状态放在模块顶层，后续请求可能读到前一位用户留下的数据。应用工厂应在每个请求中创建这些有状态对象；浏览器端同样调用该工厂，但只创建当前页面所需的客户端实例。
 
@@ -106,7 +106,7 @@ export function createMyApp() {
 }
 ~~~~
 
-## 易错使用提示
+## 四、易错使用提示
 
 :::pitfalls
 ### 服务端已有 HTML，客户端却使用 createApp()
@@ -197,7 +197,7 @@ export async function render() {
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 五、源码推导与适用场景
 
 :::steps
 ### 同一公开参数形状

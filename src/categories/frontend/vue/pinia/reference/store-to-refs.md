@@ -45,7 +45,7 @@ anchors:
 
 # storeToRefs() 响应式提取
 
-## Store To Refs
+## 一、Store To Refs
 
 `storeToRefs(store)` 把 Store 中的 state、getters 和响应式插件字段转换为可安全解构的 refs，同时忽略 methods 与非响应式属性。返回 ref 继续连接原 store：写入可写 state ref 会更新 store，getter 则保留 computed 的 lazy/cached 语义。actions 可直接从 store 解构。
 
@@ -64,7 +64,7 @@ increment()
 `StoreToRefs`、`_ToStateRefs` 与 `_ToComputedRefs` 出现在 4.0.2 声明内部，但没有进入 Pinia 根入口 67 项导出矩阵。它们可以解释返回类型，不能获得独立索引项，也不应从应用直接 import。
 :::
 
-## 返回边界
+## 二、返回边界
 
 | Store 属性 | 结果 | 4.0.2 契约 |
 | --- | --- | --- |
@@ -78,7 +78,7 @@ increment()
 
 plugin-added 响应式字段进入返回值，只说明它满足 `ref/reactive/computed` 过滤。是否参与 Devtools、SSR 序列化和 hydration 仍取决于 plugin 是否同时把 state 写入 `store` 与 `store.$state`；`storeToRefs()` 不会补齐这份持久化契约。
 
-## 易错使用提示
+## 三、易错使用提示
 
 :::pitfalls
 ### 直接解构 Store state
@@ -264,7 +264,7 @@ console.log(expensive.value)
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 四、源码推导与适用场景
 
 :::steps
 ### 1. 先读取 raw store 保留分类信息

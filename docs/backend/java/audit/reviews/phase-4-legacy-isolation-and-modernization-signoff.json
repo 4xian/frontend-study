@@ -1,0 +1,258 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.advanced.legacy-isolation-and-modernization",
+  "batchId": "phase-4-legacy-isolation-and-modernization",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-14T08:50:19+08:00",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "stagingPerformedThisBatch": false,
+    "existingStagedAndUnstagedStatePreserved": true
+  },
+  "sourceRepository": {
+    "path": "/Users/jian/Desktop/work/TDH/dzzz/dzzz-app",
+    "readOnly": true,
+    "projectExecuted": false,
+    "projectModified": false,
+    "accessBoundary": "Frozen Phase 2 evidence only; no batch-specific read, search, execution or modification"
+  },
+  "phase2Freeze": {
+    "researchStatus": "not-started",
+    "exampleStatus": "not-started",
+    "courseStatus": "planned",
+    "phase4StateRecordedOnlyInThisSignoff": true,
+    "sequence": 650,
+    "prerequisites": [
+      "backend.java.learn.intermediate.spring-boot-and-configuration",
+      "backend.java.learn.intermediate.lombok-and-generated-contracts"
+    ],
+    "sourceCapabilityIds": ["JAVA-ENGINEERING-034", "JAVA-RISK-041"],
+    "knowledgePath": {
+      "sourceItems": 167,
+      "courseNodes": 64,
+      "dependencyEdges": 114,
+      "representativeProjectCallPaths": 8,
+      "gateStatus": "passed"
+    }
+  },
+  "versions": {
+    "verifiedAt": "2026-08-14",
+    "modern": {
+      "java": "25.0.4",
+      "springBoot": "4.1.0",
+      "springFramework": "7.0.8",
+      "namespace": "jakarta"
+    },
+    "legacy": {
+      "java": "8",
+      "springBoot": "2.3.12.RELEASE",
+      "springFramework": "5.2.15.RELEASE",
+      "namespace": "javax"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/advanced/legacy-isolation-and-modernization.md",
+      "sha256": "11ef144843537496a07efef8f412c1efe6e4cd4ff701ee36320b1fa1e612ca9f"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/legacy-isolation-and-modernization.md",
+      "sha256": "b40c8fd22e6212fd033d6556298fbe237ed627f1411215f52dc148d46502841a"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "9226427b5a9606fe12e9265b5a082f991cbda7b0ba0fdcef756cd58f26ad2dad"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "10f44a4f0582f4236032c39a209302b1f0fd6db1251b86b059db3e51e95fb57a"
+    }
+  ],
+  "sourceVerification": {
+    "researchCardCount": 24,
+    "researchUniqueUrlCount": 24,
+    "frontmatterOfficialSourceCount": 24,
+    "frontmatterUniqueUrlCount": 24,
+    "researchFrontmatterSetDifference": 0,
+    "sourceIdUniqueCount": 24,
+    "communitySourcesUsedAsEvidence": false,
+    "directUrlCheck": "PASS; 19 targets returned HTTP 200 with default curl and five OpenJDK targets returned HTTP 200 with a browser User-Agent after default curl was denied with HTTP 403"
+  },
+  "projectEvidence": {
+    "courseItemCount": 8,
+    "courseObservedCount": 3,
+    "courseRejectedCount": 5,
+    "frozenRiskFileCount": 76,
+    "currentDefectClaimedFromFrozenEvidence": false,
+    "boundary": "Representative paths and symbols came only from the frozen Phase 2 matrix; rejected items explain migration risk and are not recommended implementations"
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "researchLineCount": 278,
+    "lineCount": 1115,
+    "lineBudget": "PASS; the independent review accepted the narrow single-course exception because all sections serve the frozen legacy-isolation and modernization contract",
+    "independentKnowledgePointHeadings": 14,
+    "knowledgePointSevenPartCoverage": "14/14",
+    "pitfallCount": 14,
+    "pitfallNinePartCoverage": "14/14",
+    "officialSourceCount": 24,
+    "projectEvidenceCount": 8,
+    "javaCodeBlockCount": 10,
+    "javaMethodAndConstructorComments": "PASS",
+    "sourceHeadingAbsent": true,
+    "contentCheck": "CATALOG_COLD_PASS advancedAvailable=16 advancedPlanned=0 currentLoaderCount=1 knowledge=14 pitfalls=14 sources=24 projectEvidence=8",
+    "completeExampleContract": "PASS; the final Markdown fixture asserts the canonical key, fixed UTF-8 SHA-256, one-close resource ownership and fail-closed five-axis Gate",
+    "currentBodyShaBinding": "PASS; the post-review course body SHA-256 is bound in artifacts"
+  },
+  "javaVerification": {
+    "temporaryFixtureRoot": "/tmp/java-advanced-16-final.rwEs1e",
+    "temporaryAssetsCleaned": true,
+    "cleanupVerifiedWithFinalAbsenceChecks": true,
+    "modernImage": "eclipse-temurin@sha256:12e44624adee6808a36d962717e1656e0afeeeff5a100f9cb00e0136513558f0",
+    "legacyImage": "eclipse-temurin@sha256:c8b86f2c0a9bd6cc1b7fabc5d1a097501a166eea7cad3b2764e90e96178bea9b",
+    "cases": [
+      {
+        "name": "Documented legacy adapter, UTF-8, resource and compatibility Gate fixture",
+        "runtime": "Java 25.0.4",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "LEGACY_MODERNIZATION_PASS mapping=1 charset=1 close=1 failClosed=1",
+        "classMajor": 69
+      },
+      {
+        "name": "Java 25 --release 8 compile check",
+        "runtime": "Java 25.0.4 compiler",
+        "exitCode": 0,
+        "runs": 1,
+        "summary": "All warnings except the target-version options warning remained errors",
+        "classMajor": 52
+      },
+      {
+        "name": "Documented legacy adapter, UTF-8, resource and compatibility Gate fixture",
+        "runtime": "Temurin Java 8 container",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "LEGACY_MODERNIZATION_PASS mapping=1 charset=1 close=1 failClosed=1",
+        "classMajor": 52
+      }
+    ],
+    "staticAnalysis": {
+      "jdepsJdkInternals": "PASS; no JDK internal API hit",
+      "jdeprscanRelease8": "PASS; exit 0 and no fixture deprecation hit",
+      "jdeprscanToolWarning": "The scanner emitted one javax.jws SOAPBinding metadata warning; it was not a fixture API hit"
+    }
+  },
+  "verification": [
+    {
+      "command": "Java 25 and real Temurin Java 8 documented fixture checks",
+      "exitCode": 0,
+      "summary": "PASS; both runtimes compiled with warnings-as-errors, ran twice and matched the fixed output and class majors"
+    },
+    {
+      "command": "Catalog cold-start check (three consecutive runs)",
+      "exitCode": 0,
+      "summary": "PASS; each run reported advancedAvailable=16 advancedPlanned=0 currentLoaderCount=1"
+    },
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check && npm run lint && npm run format:check && npm run test:unit && npm run test:e2e",
+      "exitCode": 0,
+      "summary": "PASS on the final repository snapshot"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "PASS; 1695 modules transformed and the lesson chunk was emitted"
+    },
+    {
+      "command": "scoped git diff --check and direct official-source checks",
+      "exitCode": 0,
+      "summary": "PASS; no whitespace errors and all 24 final official targets were reachable"
+    }
+  ],
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "session": "java-advanced-16-final",
+    "targetPath": "/backend/java/core/learn/legacy-isolation-and-modernization",
+    "temporaryScreenshotsRemoved": true,
+    "desktop": {
+      "viewport": "1440x900",
+      "targetPageStatus": 200,
+      "documentClientWidth": 1440,
+      "documentScrollWidth": 1440,
+      "articleClientWidth": 900,
+      "articleScrollWidth": 900,
+      "pitfallCount": 14,
+      "officialSourceCount": 24,
+      "completionControlVisible": true,
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "failedRequests": 0,
+      "non200Requests": 0
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "targetPageStatus": 200,
+      "documentClientWidth": 390,
+      "documentScrollWidth": 390,
+      "articleClientWidth": 358,
+      "articleScrollWidth": 358,
+      "pitfallCount": 14,
+      "officialSourceCount": 24,
+      "completionControlVisible": true,
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "failedRequests": 0,
+      "non200Requests": 0
+    },
+    "manualReview": "PASS; desktop and mobile have no page-level horizontal overflow or incoherent overlap"
+  },
+  "manifestRegression": {
+    "basicsAvailable": 18,
+    "intermediateAvailable": 17,
+    "advancedAvailable": 16,
+    "advancedPlanned": 0,
+    "currentEntryLoadable": true,
+    "currentLoaderCount": 1,
+    "futureAdvancedEntryCount": 0,
+    "finalColdStartRuns": 3,
+    "finalColdStartErrors": 0,
+    "finalColdStartPending": false
+  },
+  "review": {
+    "reviewer": "/root/advanced_16_final_review",
+    "initialStandardsFindingCount": 1,
+    "initialSpecFindingCount": 2,
+    "uniqueIssueCount": 2,
+    "remainingFindingCount": 0,
+    "standards": "PASS / 0 unresolved finding after the minimal Javadoc fix",
+    "spec": "PASS / 0 unresolved finding after the fixed SHA-256 assertion and Javadoc fix",
+    "independentReviewRounds": 1,
+    "secondIndependentReviewRequired": false,
+    "secondReviewBoundary": "The user explicitly waived repeated review for simple fixes; both exact findings were closed by scoped code inspection and rerunning the affected feedback loops",
+    "postReviewChangeScope": "Only the complete example Javadocs and the fixed SHA-256 assertion changed",
+    "finalIndependentConfirmationPending": false
+  },
+  "temporaryAssetCleanup": {
+    "pending": false,
+    "verifiedAt": "2026-08-14T08:50:19+08:00",
+    "remainingTargetCount": 0,
+    "finalPlaywrightSession": "java-advanced-16-final",
+    "playwrightSessionClosed": true,
+    "removedPlaywrightArtifactCount": 4,
+    "taskPreviewStopped": true,
+    "taskIpv4Port5173Closed": true,
+    "preExistingIpv6ViteProcessPreserved": true
+  },
+  "stopBoundary": "Java advanced courses are complete at 16/16; stop before Reference, project practice, other technologies or any new course batch"
+}

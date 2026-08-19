@@ -1,0 +1,213 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.intermediate.json-and-data-contracts",
+  "batchId": "phase-c-i03-json-and-data-contracts",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-15T14:29:13+08:00",
+  "phase": "Phase C",
+  "phaseCProgress": "3/20",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "newStagingPerformedThisBatch": false,
+    "existingIndexPreserved": true,
+    "unrelatedWorkspaceChangesPreserved": true
+  },
+  "phaseAFreeze": {
+    "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+    "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81",
+    "designation": "I-03 / 必修、复用",
+    "title": "JSON、对象映射与外部数据合同",
+    "estimatedMinutes": 120,
+    "prerequisite": "backend.java.learn.intermediate.identifiers-equality-and-pagination",
+    "stableIdPreserved": true,
+    "slugPreserved": true,
+    "urlPreserved": "/backend/java/core/learn/json-and-data-contracts"
+  },
+  "phaseCAdmission": {
+    "status": "PASS",
+    "predecessorCourseId": "backend.java.learn.intermediate.identifiers-equality-and-pagination",
+    "predecessorSignoffPath": "docs/backend/java/audit/reviews/phase-4-identifiers-equality-and-pagination-signoff.json",
+    "predecessorSignoffSha256": "006448ea7728790a187f2354348f9dda8e34a4f8ec0a1a7643bf72dcad647869",
+    "phaseCProgressBeforeBatch": "2/20",
+    "trackChangeRequired": true,
+    "loaderChangeRequired": false
+  },
+  "sourceRepository": {
+    "path": "/Users/jian/Desktop/work/TDH/dzzz/dzzz-app",
+    "headAtHistoricalVerification": "167ca8aa91ca3a6b101246964ef4fddec3d21da0",
+    "accessedThisBatch": false,
+    "historicalEvidenceReused": true,
+    "readOnlyBoundaryPreserved": true,
+    "projectExecuted": false,
+    "projectModified": false
+  },
+  "versions": {
+    "verifiedAt": "2026-08-15",
+    "modern": {
+      "java": "25",
+      "runtime": "Eclipse Temurin 25.0.3+9 LTS",
+      "imageDigest": "sha256:12e44624adee6808a36d962717e1656e0afeeeff5a100f9cb00e0136513558f0",
+      "jacksonDatabind": "3.2.1",
+      "jacksonCore": "3.2.1",
+      "jacksonAnnotations": "2.22",
+      "springFramework": "7.0.8 documentation boundary"
+    },
+    "legacy": {
+      "java": "8",
+      "runtime": "Eclipse Temurin 8u492-b09",
+      "imageDigest": "sha256:c8b86f2c0a9bd6cc1b7fabc5d1a097501a166eea7cad3b2764e90e96178bea9b",
+      "springBoot": "2.3.12.RELEASE",
+      "jacksonDatabind": "2.12.7.1",
+      "jacksonCore": "2.12.7",
+      "jacksonDatatypeJsr310": "2.12.7",
+      "fastjsonProjectBackground": "2.0.7"
+    },
+    "releaseBoundary": "Jackson 3.2.2 was current on 2026-08-15; the lesson intentionally remains pinned to reproducible 3.2.1"
+  },
+  "sourceDiscovery": {
+    "method": "Tavily located candidates; conclusions were verified against RFC, Oracle, OpenJDK, Maven metadata, exact FasterXML and Spring tags, Fastjson2, and OWASP primary pages",
+    "researchDirectSourceCount": 21,
+    "lessonOfficialSourceCardCount": 15,
+    "communitySourcesUsedAsEvidence": false,
+    "projectEvidenceBoundary": "Six dzzz-app evidence items reuse the frozen read-only snapshot and are not claimed as rechecked in this batch"
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/intermediate/json-and-data-contracts.md",
+      "sha256": "44798a9175ba9b8dda5d63f09aaf2b0840dece641a3e857a45081b8015be0d63"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/json-and-data-contracts.md",
+      "sha256": "c269b34a1a9adcd22fb0e48095c0bb8a438c7988936d2bb427b497d613dca768"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "23de3ba037d253c8eba2b40ec1cb0c1b5dba4235e93910b35e1936759caf3b0a"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "d8778a4dd7ed5b9027f159f2e959ed113f42839c5106490f98fc3b0554e2e10b"
+    },
+    {
+      "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+      "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81"
+    },
+    {
+      "path": "docs/backend/java/audit/phase-2-knowledge-path-manifest.json",
+      "sha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407"
+    }
+  ],
+  "engineeringVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run format:check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run test:unit",
+      "exitCode": 0,
+      "summary": "No persistent test files; configured empty directory passed"
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "summary": "No persistent E2E files; configured empty directory passed"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "passed after final source-card update; 1760 modules transformed; existing chunk-size and Markdown timing warnings only"
+    },
+    {
+      "command": "git diff --check -- <I-03 paths>",
+      "exitCode": 0,
+      "summary": "passed"
+    }
+  ],
+  "javaVerification": {
+    "fixturePath": "/tmp/java-i03-phase-c.IiXHXs",
+    "fixtureSha256": {
+      "ModernJsonContracts.java": "0ef078f977dca7254f9fe3b44ccf04f4de893696c0b009e9f14c53c01e93bb73",
+      "LegacyJsonContracts.java": "232fecf0699f923f12a1d4cf7a3992a3eaa970115b9905f99035ad8252482f1c"
+    },
+    "modernOutput": "modern|Java|99.90|+08:00|type=CourseItem|missing=true|null=true|rejected=3|responseFields=true",
+    "legacyOutput": "legacy|Java|99.90|+08:00|type=CourseItem|rejected=2",
+    "coverage": "DTO and record mapping, BigDecimal, offset preservation, TypeReference, missing versus JSON null, unknown field, trailing token, read constraints, and response field boundary",
+    "temporaryAssetsCleaned": true,
+    "cleanupCommand": "find /tmp/java-i03-phase-c.IiXHXs -depth -delete",
+    "cleanupCheck": "PASS; exact path no longer exists"
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "adapter": "PASS",
+    "researchLineCount": 270,
+    "lessonLineCount": 1036,
+    "independentKnowledgePointHeadings": 10,
+    "codeBlockCount": 21,
+    "exerciseCount": 1,
+    "javaMethodComments": "PASS",
+    "sourceHeadingAbsent": true
+  },
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "baseUrl": "http://127.0.0.1:4190/",
+    "targetPath": "/backend/java/core/learn/json-and-data-contracts",
+    "sessionsClosed": true,
+    "devServerStopped": true,
+    "desktop": {
+      "viewport": "1440x900",
+      "documentClientWidth": 1440,
+      "documentScrollWidth": 1440,
+      "horizontalOverflow": false
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "documentClientWidth": 390,
+      "documentScrollWidth": 390,
+      "horizontalOverflow": false
+    },
+    "title": "JSON、对象映射与外部数据合同",
+    "officialSourceCount": 15,
+    "requiredSectionCount": 8,
+    "estimatedMinutesVisible": true,
+    "verifiedDateVisible": true,
+    "previousEntryId": "backend.java.learn.intermediate.identifiers-equality-and-pagination",
+    "nextEntryId": "backend.java.learn.intermediate.http-uri-and-request-response-basics",
+    "completionButtonTextAfterReload": "取消完成",
+    "progressPersistedAfterReload": true,
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "pageErrors": 0,
+    "nonSuccessfulResponses": 0
+  },
+  "review": {
+    "riskClassification": "Phase C 复用课程的来源卡、版本核验说明和唯一前置更新；未改变课程核心行为、教学合同或共享架构",
+    "independentReviewRequired": false,
+    "currentSnapshotReviewClaimed": false,
+    "legacyReviewReusedAsCurrent": false,
+    "focusedVerification": "research, lesson, manifests, dual-version Java feedback loop, engineering gates, and desktop/mobile browser gates all passed"
+  },
+  "stopBoundary": "Phase C 的 I-03 已关闭，进度为 3/20；下一批只允许 I-04（backend.java.learn.intermediate.http-uri-and-request-response-basics）。I-04 关闭前不得读取 I-05 或后续课程；Phase C 总 Gate 关闭前不得进入 Phase D。",
+  "selfHashPolicy": "signoff 文件不记录自身 SHA-256；artifacts 只绑定 signoff 外可稳定计算的本批产物"
+}

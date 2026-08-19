@@ -1,0 +1,203 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.intermediate.identifiers-equality-and-pagination",
+  "batchId": "phase-c-i02-identifiers-equality-and-pagination",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-15T14:07:48+08:00",
+  "phase": "Phase C",
+  "phaseCProgress": "2/20",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "newStagingPerformedThisBatch": false,
+    "existingIndexPreserved": true,
+    "unrelatedWorkspaceChangesPreserved": true
+  },
+  "phaseAFreeze": {
+    "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+    "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81",
+    "designation": "I-02 / 必修、拆分、复用",
+    "title": "标识符、相等性与稳定排序",
+    "estimatedMinutes": 120,
+    "prerequisite": "backend.java.learn.intermediate.lambda-stream-and-collectors",
+    "stableIdPreserved": true,
+    "slugPreserved": true,
+    "urlPreserved": "/backend/java/core/learn/identifiers-equality-and-pagination",
+    "splitBoundary": "分页合同迁往 I-09；本课只保留标识符、相等性、哈希与稳定排序",
+    "orderingContract": "分数降序、UUID 升序"
+  },
+  "phaseCAdmission": {
+    "status": "PASS",
+    "predecessorCourseId": "backend.java.learn.intermediate.lambda-stream-and-collectors",
+    "predecessorSignoffPath": "docs/backend/java/audit/reviews/phase-4-lambda-stream-and-collectors-signoff.json",
+    "predecessorSignoffSha256": "f1e78e5b35f33c195621dbf3771ecd0712e78f45abaf8a153df07e8470ff6b43",
+    "phaseCProgressBeforeBatch": "1/20",
+    "trackChangeRequired": true,
+    "loaderChangeRequired": false
+  },
+  "versions": {
+    "verifiedAt": "2026-08-15",
+    "modern": {
+      "java": "25",
+      "runtime": "Eclipse Temurin 25.0.3+9 LTS",
+      "imageDigest": "sha256:12e44624adee6808a36d962717e1656e0afeeeff5a100f9cb00e0136513558f0"
+    },
+    "legacy": {
+      "java": "8",
+      "runtime": "Eclipse Temurin 8u492-b09",
+      "imageDigest": "sha256:c8b86f2c0a9bd6cc1b7fabc5d1a097501a166eea7cad3b2764e90e96178bea9b"
+    }
+  },
+  "sourceDiscovery": {
+    "method": "Tavily 定位候选后回到 Oracle JLS、Java API、OpenJDK 与 OWASP 官方原文核验",
+    "officialUrlCount": 20,
+    "recordDirectSourcePresent": true,
+    "hashSetDirectSourcePresent": true,
+    "communitySourcesUsedAsEvidence": false,
+    "paginationSourcesExcludedFromLesson": true
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/intermediate/identifiers-equality-and-pagination.md",
+      "sha256": "3215a8abb5ca9d1b5fbc6dce5ac44cc076cf91605c6f60059bb5372f565c3c16"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/identifiers-equality-and-pagination.md",
+      "sha256": "e4db4ee5f9a12f0564a69f8344738c5eaadb49181e45c2da7bccf8214e4218b3"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "23de3ba037d253c8eba2b40ec1cb0c1b5dba4235e93910b35e1936759caf3b0a"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "d8778a4dd7ed5b9027f159f2e959ed113f42839c5106490f98fc3b0554e2e10b"
+    },
+    {
+      "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+      "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81"
+    },
+    {
+      "path": "docs/backend/java/audit/phase-2-knowledge-path-manifest.json",
+      "sha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407"
+    }
+  ],
+  "engineeringVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run format:check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run test:unit",
+      "exitCode": 0,
+      "summary": "No persistent test files; configured empty directory passed"
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "summary": "No persistent E2E files; configured empty directory passed"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "passed; 1760 modules transformed; existing chunk-size and Markdown timing warnings only"
+    },
+    {
+      "command": "git diff --check -- <I-02 paths>",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "git diff --cached --check",
+      "exitCode": 2,
+      "summary": "blocked only by pre-existing unrelated staged trailing whitespace; no staged file was changed or cleaned"
+    }
+  ],
+  "javaVerification": {
+    "fixturePath": "/tmp/java-i02-phase-c.LezJdH",
+    "fixtureSha256": {
+      "I02Verification.java": "1967232653741769e22acb8233b6b27162720342e714bae62f829643c50f350d",
+      "ModernRecord.java": "392ccc3d7f6c367ae1b012f8863211c01a6974b6fe75a91eb80e012726448bc2"
+    },
+    "positiveOutput": "I02|PASS|uuidV4=true|canonical=true|nonCanonical=true|refDistinct=true|equals=true|sameHash=true|map=Java 中级|setSize=1|overflow=true|stableAlgorithm=A,B,C|partialOrders=1,2;2,1|totalOrder=1,2,3,4",
+    "modernRecordOutput": "record|equal=true",
+    "java8RecordBoundaryOutput": "record8|rejected=true",
+    "temporaryAssetsCleaned": true,
+    "cleanupCommand": "find /tmp/java-i02-phase-c.LezJdH -depth -delete",
+    "cleanupCheck": "PASS; exact path no longer exists"
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "adapter": "PASS",
+    "lessonLineCount": 1059,
+    "independentKnowledgePointHeadings": 6,
+    "codeBlockCount": 18,
+    "exerciseCount": 1,
+    "javaMethodComments": "PASS",
+    "paginationSpecificHeadings": 0
+  },
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "baseUrl": "http://127.0.0.1:4189/",
+    "targetPath": "/backend/java/core/learn/identifiers-equality-and-pagination",
+    "sessionsClosed": true,
+    "desktop": {
+      "viewport": "1440x900",
+      "documentClientWidth": 1440,
+      "documentScrollWidth": 1440,
+      "horizontalOverflow": false
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "documentClientWidth": 390,
+      "documentScrollWidth": 390,
+      "horizontalOverflow": false
+    },
+    "title": "标识符、相等性与稳定排序",
+    "officialSourceCount": 20,
+    "recordSourceVisible": true,
+    "hashSetSourceVisible": true,
+    "oldTitleAbsent": true,
+    "paginationSpecificHeadingCount": 0,
+    "previousEntryId": "backend.java.learn.intermediate.lambda-stream-and-collectors",
+    "nextEntryId": "backend.java.learn.intermediate.json-and-data-contracts",
+    "completionButtonTextAfterReload": "取消完成",
+    "progressPersistedAfterReload": true,
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "pageErrors": 0
+  },
+  "review": {
+    "reviewer": "/root/i02_combined_review",
+    "riskClassification": "复用课程的实质拆分、排序合同重写、双版本反馈环与 track 前置调整",
+    "independentReviewRequired": true,
+    "resolvedFinding": "补充 Java 25 HashSet 直接来源并绑定实现机制结论",
+    "standards": "PASS",
+    "standardsFindings": 0,
+    "spec": "PASS",
+    "specFindings": 0
+  },
+  "stopBoundary": "Phase C 的 I-02 已关闭，进度为 2/20；下一批只允许 I-03（backend.java.learn.intermediate.json-and-data-contracts）。I-03 关闭前不得读取 I-04 或后续课程；Phase C 总 Gate 关闭前不得进入 Phase D。",
+  "selfHashPolicy": "signoff 文件不记录自身 SHA-256；artifacts 只绑定 signoff 外可稳定计算的本批产物"
+}

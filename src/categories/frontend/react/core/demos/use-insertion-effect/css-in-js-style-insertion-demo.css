@@ -1,0 +1,138 @@
+.css-in-js-style-insertion-demo {
+  width: 100%;
+  max-width: 760px;
+  padding: 24px;
+  border: 1px solid #c9d2d0;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #243330;
+}
+
+.css-in-js-style-insertion-demo-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.css-in-js-style-insertion-demo-header > div {
+  min-width: 0;
+  margin-right: 16px;
+}
+
+.css-in-js-style-insertion-demo-header p,
+.css-in-js-style-insertion-demo-header h3,
+.css-in-js-style-insertion-demo-card p,
+.css-in-js-style-insertion-demo-status p {
+  margin: 0;
+}
+
+.css-in-js-style-insertion-demo-header > div > p {
+  color: #5f6d69;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.css-in-js-style-insertion-demo-header h3 {
+  margin-top: 5px;
+  font-size: 1.2rem;
+  line-height: 1.35;
+}
+
+.css-in-js-style-insertion-demo-header > span {
+  max-width: 100%;
+  padding: 5px 8px;
+  border: 1px solid #a9b5b2;
+  border-radius: 4px;
+  background: #f4f7f6;
+  color: #33433f;
+  font-size: 0.85rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.css-in-js-style-insertion-demo-card {
+  width: 100%;
+  max-width: 100%;
+  border-radius: 6px;
+  transition: none;
+}
+
+.css-in-js-style-insertion-demo-card strong,
+.css-in-js-style-insertion-demo-card p {
+  overflow-wrap: anywhere;
+}
+
+.css-in-js-style-insertion-demo-card p {
+  margin-top: 8px;
+  line-height: 1.6;
+}
+
+.css-in-js-style-insertion-demo-status {
+  margin-top: 16px;
+  padding: 14px;
+  border-left: 4px solid #34746a;
+  background: #edf6f3;
+}
+
+.css-in-js-style-insertion-demo-status span {
+  display: block;
+  color: #53625e;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.css-in-js-style-insertion-demo-status output {
+  display: block;
+  margin-top: 4px;
+  color: #245e56;
+  font-size: 1.7rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.css-in-js-style-insertion-demo-status p {
+  margin-top: 6px;
+  color: #52615d;
+  line-height: 1.5;
+}
+
+.css-in-js-style-insertion-demo-controls {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.css-in-js-style-insertion-demo-controls button {
+  min-height: 44px;
+  max-width: 100%;
+  padding: 10px 16px;
+  border: 1px solid #2f675f;
+  border-radius: 5px;
+  background: #2f675f;
+  color: #ffffff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: normal;
+}
+
+.css-in-js-style-insertion-demo-controls button:hover {
+  background: #24544d;
+}
+
+.css-in-js-style-insertion-demo-controls button:focus-visible {
+  outline: 3px solid #e09a50;
+  outline-offset: 3px;
+}
+
+@media (max-width: 560px) {
+  .css-in-js-style-insertion-demo {
+    padding: 18px;
+  }
+
+  .css-in-js-style-insertion-demo-header > span {
+    margin-top: 12px;
+  }
+}

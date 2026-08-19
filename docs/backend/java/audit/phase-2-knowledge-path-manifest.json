@@ -55,7 +55,7 @@
     },
     {
       "path": "course-coverage-matrix.md",
-      "sha256": "c4283551b4f37081097551957d3b4e1ea44922e0a1bb5865be2c5cc18faa6021"
+      "sha256": "b7fd50ffabbcf8a198802e907cef769ac969a71e4e14c40038f4aaaed09d91ad"
     },
     {
       "path": "architecture-and-call-paths.md",
@@ -71,12 +71,12 @@
     },
     {
       "path": "reviews/phase-2-knowledge-path-signoff.json",
-      "sha256": "9d6c0af01c030f3e92bf2f3fd6b762d3ac89f18eaff072f1d6eae5fb15ee65ac"
+      "sha256": "e59585e460f573cf449396773b6bfefb1ca6c0abae0daa63c2714c7e6201ee0a"
     }
   ],
   "manualDecisionSignoff": {
     "path": "reviews/phase-2-knowledge-path-signoff.json",
-    "sha256": "9d6c0af01c030f3e92bf2f3fd6b762d3ac89f18eaff072f1d6eae5fb15ee65ac",
+    "sha256": "e59585e460f573cf449396773b6bfefb1ca6c0abae0daa63c2714c7e6201ee0a",
     "gateStatus": "passed"
   },
   "stopBoundary": "Gate 2 已通过；仅授权 Phase 3，不得进入 Phase 4 的逐知识点研究、课程正文或项目示例。"

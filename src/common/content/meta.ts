@@ -4,6 +4,8 @@ export type ContentLevel = 'beginner' | 'intermediate' | 'advanced'
 
 export type ContentDomain = 'frontend' | 'backend' | 'network'
 
+export type ContentSourceOrigin = 'official' | 'community'
+
 export type ContentSourceType =
   | 'specification'
   | 'api-doc'
@@ -20,6 +22,7 @@ export interface ContentSource {
   id?: string
   title: string
   url: string
+  sourceOrigin?: ContentSourceOrigin
   sourceType?: ContentSourceType
   appliesTo?: string
   claims?: string[]

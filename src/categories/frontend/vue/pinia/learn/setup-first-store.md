@@ -48,7 +48,7 @@ recap:
 前置：Vue 应用与组件基础。请先理解应用挂载、组件 setup 与事件交互，再开始本课。
 :::
 
-## 三个对象分担三种职责
+## 一、三个对象分担三种职责
 
 `createPinia()` 创建应用级容器，`defineStore()` 创建可复用的 Store 定义函数，调用这个定义函数才取得某个 Pinia 容器里的 Store 实例。定义阶段不创建业务状态，也不会自动把实例注册进任何应用。
 
@@ -58,7 +58,7 @@ recap:
 | Store 定义 | defineStore(id, options) | 保存稳定 ID 与创建 Store 所需的配置 |
 | Store 实例 | 首次 useStore() | 承载当前 Pinia 中的 state、getters 与 actions |
 
-## 先安装 Pinia，再挂载应用
+## 二、先安装 Pinia，再挂载应用
 
 `app.use(pinia)` 会设置当前应用组件可注入的 Pinia。组件 setup 内调用 `useStore()` 时可以从注入上下文取得它；在组件外调用时则应等待插件安装完成，或显式把目标 Pinia 传给 `useStore(pinia)`。
 
@@ -87,7 +87,7 @@ app.mount('#app')
 Store ID 属于同一个 Pinia 容器里的全局身份，不是文件名或变量名。使用可搜索、不会重复的业务名称，并保持发布后稳定。
 :::
 
-## 观察定义与首次使用的边界
+## 三、观察定义与首次使用的边界
 
 下面的 Demo 创建独立 mini-app 和独立 Pinia。重建时先只有 Store 定义；挂载后根组件首次调用 `useStore()`，registry 才从 0 变为 1。按钮修改的状态只属于这份 mini-app，宿主课程 URL 不会变化。
 
@@ -95,7 +95,7 @@ Store ID 属于同一个 Pinia 容器里的全局身份，不是文件名或变�
 重建独立 Pinia，观察 defineStore 与首次 useStore 的创建时机
 :::
 
-## 源码与测试推导
+## 四、源码与测试推导
 
 :::steps
 ### 1. Pinia 是所有权边界
@@ -107,7 +107,7 @@ Store ID 属于同一个 Pinia 容器里的全局身份，不是文件名或变�
 `store.ts` 先按 ID 查询当前 Pinia 的 registry；不存在时创建 Options 或 Setup Store 并注册，所以 defineStore() 本身只是定义工厂。
 :::
 
-## 易错使用提示
+## 五、易错使用提示
 
 :::pitfalls
 ### 把 defineStore() 的返回值当作 Store 实例

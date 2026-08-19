@@ -1,0 +1,258 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.advanced.chains-registries-and-state-machines",
+  "batchId": "phase-4-chains-registries-and-state-machines",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-14T12:00:00+08:00",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "stagingPerformedThisBatch": false,
+    "existingStagedAndUnstagedStatePreserved": true
+  },
+  "sourceRepository": {
+    "path": "/Users/jian/Desktop/work/TDH/dzzz/dzzz-app",
+    "readOnly": true,
+    "projectExecuted": false,
+    "projectModified": false,
+    "accessBoundary": "Frozen Phase 2 evidence only; no batch-specific project access"
+  },
+  "phase2Freeze": {
+    "researchStatus": "not-started",
+    "exampleStatus": "not-started",
+    "courseStatus": "planned",
+    "phase4StateRecordedOnlyInThisSignoff": true,
+    "sequence": 640,
+    "prerequisites": [
+      "backend.java.learn.intermediate.service-design-patterns",
+      "backend.java.learn.advanced.concurrency-locks-and-shared-state"
+    ],
+    "sourceCapabilityIds": [
+      "JAVA-ENGINEERING-009",
+      "JAVA-ENGINEERING-010",
+      "JAVA-ENGINEERING-013"
+    ],
+    "knowledgePath": {
+      "sourceItems": 167,
+      "courseNodes": 64,
+      "dependencyEdges": 114,
+      "representativeProjectCallPaths": 8,
+      "gateStatus": "passed"
+    }
+  },
+  "versions": {
+    "verifiedAt": "2026-08-14",
+    "modern": {
+      "java": "25",
+      "springBoot": "4.1.0",
+      "springFramework": "7.0.8",
+      "springSecurity": "7"
+    },
+    "legacy": {
+      "java": "8",
+      "springBoot": "2.3.12.RELEASE",
+      "springFramework": "5.2.15.RELEASE",
+      "springSecurity": "5.3.9.RELEASE"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/advanced/chains-registries-and-state-machines.md",
+      "sha256": "f8fb7c5d6492637524d2038b2e57a7874cc520d3e025458ad7c0c2cfe53e987d"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/chains-registries-and-state-machines.md",
+      "sha256": "c7e6cdbae052944f8a2c59f6587c1bee5e2c8eadca9e171218dadfa42cec31a8"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "2148960ca15cdf5f8ae51c777be003649cfc0fb16cb3dc0dc34674ce88d6f015"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "a2e0efb879854657badb8a1cabc9c8724397cd72ee23bf5d94a155cef297ad84"
+    }
+  ],
+  "sourceVerification": {
+    "researchCardCount": 26,
+    "researchUniqueUrlCount": 26,
+    "frontmatterOfficialSourceCount": 26,
+    "frontmatterUniqueUrlCount": 26,
+    "researchFrontmatterSetDifference": 0,
+    "communitySourcesUsedAsEvidence": false,
+    "preciseVersionContract": "PASS; Java 25/8 and Spring Boot, Framework and Security version boundaries match the frozen research cards",
+    "directUrlCheck": "PASS; all 26 unique official targets were reachable and research/frontmatter IDs and URL order matched"
+  },
+  "projectEvidence": {
+    "researchItemCount": 10,
+    "researchObservedCount": 10,
+    "researchRejectedCount": 0,
+    "courseItemCount": 10,
+    "courseObservedCount": 10,
+    "courseRejectedCount": 0,
+    "currentDefectClaimedFromFrozenEvidence": false,
+    "boundary": "Representative paths and symbols came only from the frozen Phase 2 matrix; they are teaching observations, not claims about current project correctness"
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "researchLineCount": 160,
+    "lineCount": 1412,
+    "lineBudget": "PASS; single-course exception reviewed because the frozen topic joins chain, registry, factory, state, persistence and Java 8/25 boundaries",
+    "independentKnowledgePointHeadings": 14,
+    "knowledgePointSevenPartCoverage": "14/14",
+    "pitfallCount": 14,
+    "pitfallNinePartCoverage": "14/14",
+    "officialSourceCount": 26,
+    "projectEvidenceCount": 10,
+    "javaCodeBlockCount": 18,
+    "javaMethodComments": "PASS",
+    "sourceHeadingAbsent": true,
+    "securitySection": "PASS; security claims are limited to Spring Security matcher, order and unmatched-request boundaries",
+    "contentCheck": "CONTENT_CATALOG_PASS knowledge=14 pitfalls=14 sources=26 projectEvidence=10",
+    "completeExampleContract": "PASS; the FilterBoundary, Registry, SnapshotRegistry, StateMachine and VersionedStore fixture was re-extracted from the final Markdown",
+    "currentBodyShaBinding": "PASS; final course body SHA-256 is bound in artifacts"
+  },
+  "javaVerification": {
+    "temporaryFixtureRoot": "/tmp/java-advanced-15-final-cleaned",
+    "temporaryAssetsCleaned": true,
+    "cleanupVerifiedWithFinalAbsenceChecks": true,
+    "cases": [
+      {
+        "name": "Documented chain, registry, snapshot, state machine and versioned store fixture",
+        "runtime": "Java 25",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "CHAIN_REGISTRY_STATE_PASS chainOnce=1 unique=1 transition=1 rollback=1",
+        "classMajor": 69
+      },
+      {
+        "name": "Documented chain, registry, snapshot, state machine and versioned store fixture",
+        "runtime": "Java 8",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "CHAIN_REGISTRY_STATE_PASS chainOnce=1 unique=1 transition=1 rollback=1",
+        "classMajor": 52
+      }
+    ],
+    "negativeControls": [
+      "Filter rejection and downstream exception do not re-enter the chain",
+      "duplicate registry keys have one winner under concurrent putIfAbsent",
+      "published snapshots do not expose a half-built map",
+      "illegal state transitions leave state unchanged",
+      "two competing CAS transitions have one winner",
+      "versioned update returns one affected row or zero on conflict"
+    ]
+  },
+  "verification": [
+    {
+      "command": "Java 25 and Java 8 documented fixture checks",
+      "exitCode": 0,
+      "summary": "PASS; both runtimes compiled with -Xlint:all -Werror, ran twice and matched the fixed output and class majors"
+    },
+    {
+      "command": "Catalog cold-start check (three consecutive runs)",
+      "exitCode": 0,
+      "summary": "PASS; knowledge=14 pitfalls=14 sources=26 available=15 planned=1 currentLoaderCount=1 nextStatus=planned nextLoader=false"
+    },
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check && npm run lint && npm run format:check && npm run test:unit && npm run test:e2e",
+      "exitCode": 0,
+      "summary": "PASS on current repository quality gates"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "PASS; lesson chunk emitted"
+    },
+    {
+      "command": "curl final official source URLs",
+      "exitCode": 0,
+      "summary": "PASS; all 26 final official targets returned HTTP 200"
+    }
+  ],
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "session": "java-advanced-15-final3",
+    "targetPath": "/backend/java/core/learn/chains-registries-and-state-machines",
+    "temporaryScreenshotsRemoved": true,
+    "desktop": {
+      "viewport": "1440x900",
+      "targetPageStatus": 200,
+      "documentClientWidth": 1440,
+      "documentScrollWidth": 1440,
+      "articleClientWidth": 900,
+      "articleScrollWidth": 900,
+      "pitfallCount": 14,
+      "officialSourcesPresent": true,
+      "completionControlVisible": true,
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "failedRequests": 0,
+      "non200Requests": 0,
+      "atBottom": true
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "targetPageStatus": 200,
+      "documentClientWidth": 390,
+      "documentScrollWidth": 390,
+      "articleClientWidth": 358,
+      "articleScrollWidth": 358,
+      "pitfallCount": 14,
+      "officialSourcesPresent": true,
+      "completionControlVisible": true,
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "failedRequests": 0,
+      "non200Requests": 0,
+      "atBottom": true
+    },
+    "manualReview": "PASS; desktop and mobile have no page-level horizontal overflow or incoherent overlap"
+  },
+  "manifestRegression": {
+    "basicsAvailable": 18,
+    "intermediateAvailable": 17,
+    "advancedAvailable": 15,
+    "advancedPlanned": 1,
+    "currentEntryLoadable": true,
+    "futurePlannedEntriesHaveNoLoader": true,
+    "nextCourseId": "backend.java.learn.advanced.legacy-isolation-and-modernization",
+    "nextCourseStatus": "planned",
+    "nextCourseLoader": false,
+    "nextCourseResearchAbsent": true,
+    "nextCourseBodyAbsent": true,
+    "finalColdStartRuns": 3,
+    "finalColdStartErrors": 0,
+    "finalColdStartPending": false
+  },
+  "review": {
+    "reviewer": "/root/advanced_15_final_review/chains_review_worker",
+    "standards": "PASS / 0 finding",
+    "spec": "PASS / 0 finding",
+    "initialFindingCount": 5,
+    "remainingFindingCount": 0,
+    "independentReviewRounds": 2,
+    "finalIndependentConfirmationPending": false,
+    "artifactDriftAfterReview": false,
+    "confirmation": "Final frozen-state review confirmed source coverage, Servlet modern/legacy boundaries, security claim scope, Java 25/8 execution, unchanged artifact SHA and the next-course boundary"
+  },
+  "temporaryAssetCleanup": {
+    "pending": false,
+    "verifiedAt": "2026-08-14T12:00:00+08:00",
+    "remainingTargetCount": 0,
+    "finalPlaywrightSession": "java-advanced-15-final3",
+    "playwrightSessionsClosed": true,
+    "previewStopped": true
+  },
+  "stopBoundary": "Close advanced course 15 only; do not research, draft, register or load advanced course 16 legacy-isolation-and-modernization, Reference, project practice or other stages"
+}

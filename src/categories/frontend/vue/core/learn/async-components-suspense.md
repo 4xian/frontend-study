@@ -63,7 +63,7 @@ recap:
 
 # 异步组件与 Suspense
 
-## 正文大纲
+## 一、正文大纲
 
 上一课用 EffectScope 为一组副作用建立了明确的所有权与释放边界。本课处理另一条边界：组件代码或 setup 结果还没有准备好时，谁负责等待体验。异步组件决定何时取得组件定义，Suspense 决定一棵组件子树何时整体展示；它们都不替代业务请求和错误处理。
 
@@ -78,7 +78,7 @@ recap:
 Vue 3.5.40 仍把 Suspense 标记为实验性功能。本课的事件、嵌套和 timeout 结论都绑定到该版本；在业务中应封装边界，不要把当前行为写成永久兼容承诺。
 :::
 
-## 先识别真正的异步依赖
+## 二、先识别真正的异步依赖
 
 Suspense 只登记组件渲染阶段的依赖：返回 Promise 的 async setup（包括 &lt;script setup&gt; 顶层 await），以及默认 suspensible: true 的异步组件。onMounted、点击回调或 store action 中启动的 Promise 不会因为位于边界后代中就自动触发 fallback。
 
@@ -98,7 +98,7 @@ const profile = await loadProfile()
 <template><ProfileCard :profile="profile" /></template>
 ~~~~
 
-## 让异步组件只有一个加载 owner
+## 三、让异步组件只有一个加载 owner
 
 defineAsyncComponent 接受一个返回 Promise 的 loader，只在包装组件实际渲染时调用它，并把 props 与 slots 转交给解析后的组件。父链有 Suspense 时，默认由边界统一展示 fallback；若产品需要这个组件独立显示 loading，显式设置 suspensible: false，再由组件自己的 loadingComponent、delay 和 timeout 管理。
 
@@ -119,7 +119,7 @@ const IndependentHelp = defineAsyncComponent({
 动态 import 是否拆成独立 chunk 由构建工具决定；defineAsyncComponent 负责组件加载时机，不代表数据已预取，也不等于 Vue Router 的路由懒加载。
 :::
 
-## default 在隐藏容器解析，fallback 在真实位置等待
+## 四、default 在隐藏容器解析，fallback 在真实位置等待
 
 :::steps
 ### 先渲染单根 default
@@ -149,7 +149,7 @@ Vue 在隐藏容器构建正式分支，并登记遇到的 async setup 与异步
 </Suspense>
 ~~~~
 
-## 重新 pending 与 timeout 是显示策略
+## 五、重新 pending 与 timeout 是显示策略
 
 边界首次 resolved 后，只有 default 根 VNode 被替换才会重新 pending；深层组件后来出现的依赖不会让外层自动回退。重新 pending 时旧 default 先保留，timeout 决定何时把旧内容换成 fallback。它不会取消 Promise、触发 AbortController 或生成错误。
 
@@ -175,7 +175,7 @@ Vue 在隐藏容器构建正式分支，并登记遇到的 async setup 与异步
 pending 表示新根正在等待，fallback 表示后备分支已经实际显示。正数 timeout 下，新根可能在 fallback 出现前完成，因此不能用一个 loading boolean 混合这两个事实。
 :::
 
-## 嵌套边界先决定谁拥有等待体验
+## 六、嵌套边界先决定谁拥有等待体验
 
 Vue 3.3+ 的内层 Suspense 可用 suspensible 把依赖和事件交给父边界。省略它时，内层独立显示自己的 fallback；添加它时，父边界统一等待。不要随意嵌套后再假设父边界自动拥有所有依赖。
 
@@ -191,7 +191,7 @@ Vue 3.3+ 的内层 Suspense 可用 suspensible 把依赖和事件交给父边界
 </Suspense>
 ~~~~
 
-## 把等待、错误、组合与 SSR 分成不同边界
+## 七、把等待、错误、组合与 SSR 分成不同边界
 
 | 边界 | 本课结论 |
 | --- | --- |
@@ -202,7 +202,7 @@ Vue 3.3+ 的内层 Suspense 可用 suspensible 把依赖和事件交给父边界
 
 错误捕获、重试和上报由下一篇“错误处理”课程展开；服务端输出与客户端水合由后续 SSR / Hydration 课程使用真实反馈环验证。本课只建立职责和传播方向。
 
-## 易错使用提示
+## 八、易错使用提示
 
 :::pitfalls
 ### 期待 onMounted 请求触发 fallback
@@ -402,7 +402,7 @@ onErrorCaptured((error) => {
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 从源码推导可观察边界
+## 九、从源码推导可观察边界
 
 :::steps
 ### 异步组件缓存解析结果
@@ -426,7 +426,7 @@ plain Vue server renderer 不会先流式输出 fallback；客户端 Demo 不能
 deps、pendingId、隐藏容器和注释锚点只帮助理解实现，不是页面或自动化测试契约。验证应只观察 fallback、正式内容、事件顺序和业务 round。
 :::
 
-## 在边界实验台验证两种事件序列
+## 十、在边界实验台验证两种事件序列
 
 唯一 Demo 用两个已解析且 timeout 策略固定的边界分别替换异步根。timeout 0 会立即显示 fallback；timeout 1200 会在约 500ms 的新根解析期间保留旧内容。事件日志只记录公开事件，不暴露内部依赖计数，也不依赖未文档化的 timeout 动态更新行为。
 
@@ -434,7 +434,7 @@ deps、pendingId、隐藏容器和注释锚点只帮助理解实现，不是页�
 比较立即 fallback 与保留旧内容两条重新 pending 路径及其公开事件序列
 :::
 
-## 练习与回顾
+## 十一、练习与回顾
 
 :::exercise
 ### 判断哪些 Promise 属于边界

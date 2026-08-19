@@ -86,7 +86,7 @@ anchors:
 
 # 应用扩展与配置
 
-## 概述
+## 一、概述
 
 这些成员都属于单个 `app`。`mixin()` 与 `runWithContext()` 扩展应用行为，其余属性修改应用配置；它们不会自动影响同一页面中的其他 Vue 应用。配置应在首次 `mount()` 前完成，使所有组件从第一次解析与渲染起就共享同一契约。
 
@@ -97,7 +97,7 @@ anchors:
 | compilerOptions | 浏览器运行时模板编译 | Vite SFC 应配置构建插件 |
 | idPrefix / 生产错误抛出 | 3.5+ 应用边界 | SSR 两端与宿主错误链要明确收口 |
 
-## app.mixin()
+## 二、app.mixin()
 
 `app.mixin(mixin)` 从 Vue 3.0 起可用，它把一个 Options API mixin 应用到当前 app 的每个组件，并返回该 app。全局 mixin 会让选项来源更隐蔽，也让所有组件参与合并；Vue 官方建议新应用优先使用组合式函数，只在兼容旧插件或确需应用级注入时保留它。关闭 `__VUE_OPTIONS_API__` 的构建不能依赖该能力。
 
@@ -118,7 +118,7 @@ app.mount('#app')
 普通业务逻辑不要新增全局 mixin。它适合迁移期或库兼容层；能够显式导入的状态和行为应写成 composable，让依赖关系在组件中可见。
 :::
 
-## app.runWithContext()
+## 三、app.runWithContext()
 
 `app.runWithContext(fn)` 从 Vue 3.3 起可用。它立即执行回调，并在回调的同步执行期间让 `inject()` 读取当前 app 的 `provide()` 值，最后原样返回回调结果。它只提供应用级 injection context，不会伪造组件实例，也不会把上下文延伸到 `await` 之后。
 
@@ -140,7 +140,7 @@ const client = resolveRequestClient()
 回调可以返回 Promise，但 application injection context 仍只覆盖 Promise 创建前的同步部分。异步流程应先同步读取依赖，再把读取到的值显式传给 `await` 之后的逻辑。
 :::
 
-## app.config.warnHandler
+## 四、app.config.warnHandler
 
 `warnHandler` 从 Vue 3.0 起可用，它接收 Vue warning 消息、来源组件公开实例或 `null`，以及组件追踪字符串。它只在开发环境生效，适合临时筛选一类已知调试噪声；它不是异常处理器，不能代替 `app.config.errorHandler`，也不应吞掉所有 warning。
 
@@ -155,7 +155,7 @@ app.config.warnHandler = (message, instance, trace) => {
 }
 ~~~~
 
-## app.config.performance
+## 五、app.config.performance
 
 `performance` 从 Vue 3.0 起可用。把它设为 `true`，可让 Vue 在支持 Performance API 的浏览器开发工具时间线中记录组件初始化、编译、渲染、patch 与 hydration 标记。默认值为 `false`，且官方只保证开发模式可用；它不是生产采样 profiler 或业务性能上报 SDK。
 
@@ -169,7 +169,7 @@ if (import.meta.env.DEV) {
 app.mount('#app')
 ~~~~
 
-## app.config.compilerOptions
+## 六、app.config.compilerOptions
 
 `compilerOptions` 从 Vue 3.1 起可用，只影响浏览器内发生的运行时模板编译。Vue 3.5.40 的公开运行时子集包含 `isCustomElement`、`whitespace`、`comments` 和 `delimiters`；组件自己的 `compilerOptions` 可以覆盖 app 级值。当前 Vite SFC 项目使用 runtime-only 构建，模板已经在构建阶段编译，应把同类配置传给 `@vitejs/plugin-vue`。
 
@@ -195,7 +195,7 @@ export default defineConfig({
 不要用“包含连字符”作为宽泛规则。被 `isCustomElement()` 判定为原生自定义元素的标签不会再按 Vue 组件解析，规则应只匹配项目真实使用的 Web Component 命名空间。
 :::
 
-## app.config.optionMergeStrategies
+## 七、app.config.optionMergeStrategies
 
 `optionMergeStrategies` 从 Vue 3.0 起可用，为 Options API 的自定义组件选项注册合并函数。key 是自定义选项名，函数接收较早来源和较晚来源的值并返回合并结果；最终值可从组件实例的 `this.$options` 读取。它面向库扩展协议，不是普通业务对象的通用 merge 工具。
 
@@ -216,7 +216,7 @@ export default {
 }
 ~~~~
 
-## app.config.idPrefix
+## 八、app.config.idPrefix
 
 `idPrefix` 从 Vue 3.5 起为当前 app 的全部 `useId()` 结果设置前缀。同一 document 中有多个 Vue app 时，应为每个 app 选择不同前缀；SSR 服务端和客户端则必须使用相同前缀与应用结构。公开契约只保证前缀参与生成，不保证完整 ID 的分隔符和内部格式。
 
@@ -234,7 +234,7 @@ storefrontApp.mount('#storefront')
 不要解析或拼接 `useId()` 的完整结果。它适合 DOM 与 ARIA 关联，不是数据库主键；需要跨会话持久化的实体身份应由业务层生成。
 :::
 
-## app.config.throwUnhandledErrorInProduction
+## 九、app.config.throwUnhandledErrorInProduction
 
 `throwUnhandledErrorInProduction` 从 Vue 3.5 起可用，默认 `false`。生产模式下，Vue 默认把到达错误链终点的未处理错误写到 `console.error`；设为 `true` 后会重新抛出，让宿主运行时或错误边界接管。祖先捕获钩子返回 `false` 或 `app.config.errorHandler` 已处理的错误不会再次到达该终点。
 
@@ -251,7 +251,7 @@ await renderToString(app)
 开启抛出只是传播策略，不是完整监控方案。浏览器需要全局错误边界，SSR 需要逐请求捕获 renderer rejection；否则一次可观测错误可能变成白屏或未收口的请求失败。
 :::
 
-## 易错使用提示
+## 十、易错使用提示
 
 :::pitfalls
 ### 用全局 mixin 承载普通业务复用逻辑
@@ -474,7 +474,7 @@ app.config.throwUnhandledErrorInProduction = true
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 十一、源码推导与适用场景
 
 :::steps
 ### app.mixin()：应用级兼容层

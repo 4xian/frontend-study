@@ -1,0 +1,522 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.basics.generics-and-type-safety",
+  "batchId": "phase-4-generics-and-type-safety",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "phase": "Phase B",
+  "phaseBProgress": "12/21",
+  "phaseBReverification": {
+    "recordedAt": "2026-08-14T22:48:12Z",
+    "contract": {
+      "title": "泛型、类型边界与类型安全",
+      "url": "/backend/java/core/learn/generics-and-type-safety",
+      "durationMinutes": 75,
+      "prerequisites": ["backend.java.learn.basics.debugging-stack-traces-and-javadoc"],
+      "requiredTopics": [
+        "泛型类、接口、方法与有界类型参数",
+        "参数化类型不变性与通配符读写边界",
+        "擦除、可具体化类型与运行时限制",
+        "raw type、unchecked warning 与 heap pollution",
+        "Java 25/8 兼容反馈环"
+      ]
+    },
+    "phaseAFrozenPlan": {
+      "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+      "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81",
+      "previousCourse": "backend.java.learn.basics.debugging-stack-traces-and-javadoc",
+      "nextCourse": "backend.java.learn.basics.annotations-and-metadata",
+      "nextCourseStarted": false,
+      "phaseBStopBoundary": "B-12 关闭后才允许读取 B-13；B-21 基础 Gate 关闭后立即停止，不进入 Phase C。"
+    },
+    "sourceReverification": {
+      "method": "Tavily 定位候选后回到 Java SE 25 RI、Oracle、JLS 25/8 与 Dev.java 官方正文核验",
+      "communitySourcesUsedAsEvidence": false,
+      "verifiedAt": "2026-08-15",
+      "researchOfficialLinks": 16,
+      "lessonOfficialLinks": 12,
+      "httpStatus": "全部返回 200",
+      "repairs": [
+        "将两条失效 Dev.java 深链接替换为 Intro 页面有效锚点",
+        "用 Java SE 25 官方参考实现页面替换旧 OpenJDK 项目页证据"
+      ]
+    },
+    "artifacts": [
+      {
+        "path": "docs/research/backend/java/basics/generics-and-type-safety.md",
+        "sha256": "7a49f78b558a9a35ccae5ab323eeccf6adbef2abf76ffa04fcb74f3e831231fb"
+      },
+      {
+        "path": "src/categories/backend/java/core/learn/generics-and-type-safety.md",
+        "sha256": "47adbd57f869e0a4a0f59343b171bc5571e413c82dd77c972c5266b0364be86e"
+      },
+      {
+        "path": "src/categories/backend/java/core/backend-java-track.ts",
+        "sha256": "dcb7a04baa824bd0d1106bea799715b042fde27812d21f31678160f28c8efd42"
+      },
+      {
+        "path": "src/categories/backend/java/core/entry-manifest.ts",
+        "sha256": "4385da9b31d862fdc4184d6fae0130eaf43d2b3e9c7f08d4d55a7818dd05eb76"
+      },
+      {
+        "path": "docs/backend/java/audit/phase-2-knowledge-path-manifest.json",
+        "sha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407"
+      }
+    ],
+    "routeIdentity": {
+      "stableIdPreserved": true,
+      "stableUrlPreserved": true,
+      "trackPosition": 12,
+      "trackStatus": "available",
+      "loaderSlug": "generics-and-type-safety",
+      "trackChangedInThisBatch": false,
+      "loaderChangedInThisBatch": false
+    },
+    "baselineVerification": [
+      {
+        "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+        "exitCode": 0,
+        "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+      },
+      { "command": "npm run type-check", "exitCode": 0, "summary": "passed" },
+      { "command": "npm run lint", "exitCode": 0, "summary": "passed" },
+      { "command": "npm run format:check", "exitCode": 0, "summary": "passed" },
+      {
+        "command": "npm run test:unit",
+        "exitCode": 0,
+        "summary": "empty configured unit directory is valid"
+      },
+      {
+        "command": "npm run test:e2e",
+        "exitCode": 0,
+        "summary": "empty configured E2E directory is valid"
+      },
+      {
+        "command": "npm run build",
+        "exitCode": 0,
+        "summary": "passed; 1725 modules transformed; existing catalog chunk warning only"
+      },
+      {
+        "command": "git diff --check -- <B-12 paths> && git diff --cached --check -- <B-12 paths>",
+        "exitCode": 0,
+        "summary": "passed"
+      }
+    ],
+    "javaVerification": {
+      "command": "extract the 如何验证 bash block from the final lesson and execute it with zsh -f",
+      "images": [
+        {
+          "role": "modern",
+          "requestedTag": "eclipse-temurin:25-jdk",
+          "digest": "sha256:12e44624adee6808a36d962717e1656e0afeeeff5a100f9cb00e0136513558f0"
+        },
+        {
+          "role": "legacy",
+          "requestedTag": "eclipse-temurin:8-jdk",
+          "digest": "sha256:c8b86f2c0a9bd6cc1b7fabc5d1a097501a166eea7cad3b2764e90e96178bea9b"
+        }
+      ],
+      "exitCode": 0,
+      "sharedStableOutput": "box=6|format=n=4|copy=2,4,6|capture=2|sameClass=true",
+      "cases": [
+        "Java 25/8 positive compile and run",
+        "generic invariance compile failure",
+        "non-reifiable type compile failure",
+        "rawtypes and unchecked warnings plus Werror failure",
+        "heap pollution ClassCastException"
+      ],
+      "temporaryAssets": {
+        "location": "container /tmp",
+        "cleanupMethod": "shell trap with find -depth -delete",
+        "cleanupStatus": "complete"
+      }
+    },
+    "browserVerification": {
+      "tool": "Playwright CLI",
+      "sessions": ["b12", "b12final"],
+      "baseUrl": "http://127.0.0.1:4180/",
+      "targetPath": "/backend/java/core/learn/generics-and-type-safety",
+      "previewPort": 4180,
+      "previewStopped": true,
+      "desktop": {
+        "viewport": "1440x900",
+        "documentClientWidth": 1440,
+        "documentScrollWidth": 1440,
+        "horizontalOverflow": false,
+        "title": "泛型、类型边界与类型安全",
+        "durationText": "约 75 分钟",
+        "previousPath": "/backend/java/core/learn/debugging-stack-traces-and-javadoc",
+        "nextPath": "/backend/java/core/learn/annotations-and-metadata",
+        "searchTerm": "泛型、类型边界与类型安全",
+        "searchResultCount": 1,
+        "finalSourceCardsRendered": true
+      },
+      "mobile": {
+        "viewport": "390x844",
+        "documentClientWidth": 390,
+        "documentScrollWidth": 390,
+        "horizontalOverflow": false,
+        "completionButtonTextAfterReload": "取消完成",
+        "progressPersistedAfterReload": true
+      },
+      "console": { "errors": 0, "warnings": 0 }
+    },
+    "review": {
+      "riskClassification": "simple route metadata, ordering narration and official source-card repair",
+      "independentReviewRequired": false,
+      "priorFullReview": "PASS / 0 finding",
+      "currentVerification": "focused Java feedback, complete engineering gates, HTTP link checks and production browser verification passed"
+    },
+    "workspaceProtection": {
+      "dirtyWorkspaceProtected": true,
+      "unrelatedChangesPreserved": true,
+      "statusSnapshotSha256": "a3396e61d13d2bd7945ab1a41bf364a380d2c0661ef58506fc4f7d1d190bfc5f",
+      "scopedStagedAndUnstagedDiffCheck": "PASS",
+      "rootStagedDiffCheck": "not a B-12 blocker; existing staged advanced Java Markdown hard-break whitespace returns exit 2"
+    },
+    "changedFiles": [
+      "docs/research/backend/java/basics/generics-and-type-safety.md",
+      "src/categories/backend/java/core/learn/generics-and-type-safety.md",
+      "docs/backend/java/audit/reviews/phase-4-generics-and-type-safety-signoff.json"
+    ]
+  },
+  "recordedAt": "2026-08-06T23:21:58Z",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "stagedLessonChanges": false
+  },
+  "sourceRepository": {
+    "path": "/Users/jian/Desktop/work/TDH/dzzz/dzzz-app",
+    "head": "167ca8aa91ca3a6b101246964ef4fddec3d21da0",
+    "statusShort": "",
+    "readOnly": true
+  },
+  "phase2Freeze": {
+    "courseCoverageMatrixJsonSha256": "04d858896d07e975d3ab50796494873f09bd0ddf4b1a8b1ea87bd75cdd101d38",
+    "courseCoverageMatrixSha256": "b7fd50ffabbcf8a198802e907cef769ac969a71e4e14c40038f4aaaed09d91ad",
+    "researchStatus": "not-started",
+    "exampleStatus": "not-started",
+    "courseStatus": "planned",
+    "phase4StateRecordedOnlyInThisSignoff": true,
+    "admissionGate": "PASS",
+    "counts": {
+      "sourceItems": 167,
+      "courseNodes": 64,
+      "dependencyEdges": 114
+    }
+  },
+  "versions": {
+    "verifiedAt": "2026-08-07",
+    "modern": {
+      "java": "25",
+      "runtime": "Eclipse Temurin 25.0.3+9 LTS"
+    },
+    "legacy": {
+      "java": "8",
+      "runtime": "Eclipse Temurin 8u492-b09",
+      "springBootBackground": "2.3.12.RELEASE"
+    }
+  },
+  "sourceDiscovery": {
+    "method": "Tavily 仅用于发现直接页面，随后逐页核对 Oracle、JLS、Dev.java 和 OpenJDK 正文",
+    "communitySourcesUsedAsEvidence": false,
+    "projectEvidenceBoundary": "项目泛型实现只作为 observed/corrected 证据；不把 raw type、unchecked cast 或框架映射细节提升为 Java 推荐合同。",
+    "directUrls": [
+      "https://openjdk.org/projects/jdk/25/",
+      "https://www.oracle.com/java/technologies/java-se-support-roadmap.html",
+      "https://docs.oracle.com/javase/specs/jls/se25/html/jls-4.html",
+      "https://docs.oracle.com/javase/specs/jls/se25/html/jls-5.html",
+      "https://docs.oracle.com/javase/specs/jls/se25/html/jls-8.html",
+      "https://docs.oracle.com/javase/specs/jls/se25/html/jls-9.html",
+      "https://docs.oracle.com/javase/specs/jls/se8/html/jls-4.html",
+      "https://docs.oracle.com/javase/specs/jls/se8/html/jls-5.html",
+      "https://docs.oracle.com/javase/specs/jls/se8/html/jls-8.html",
+      "https://docs.oracle.com/javase/specs/jls/se8/html/jls-9.html",
+      "https://dev.java/learn/generics/intro/",
+      "https://dev.java/learn/generics/methods/",
+      "https://dev.java/learn/generics/bounded/",
+      "https://dev.java/learn/generics/wildcards/",
+      "https://dev.java/learn/generics/type-erasure/",
+      "https://dev.java/learn/generics/restrictions/"
+    ]
+  },
+  "projectEvidence": [
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/dto/as/AsComDTO.java",
+      "symbol": "com.tdh.bdzz.dto.as.AsComDTO",
+      "usage": "observed",
+      "sha256": "64d0678af57fd15d3acbcc030fecb73b5f8b0de980a3b8951c7104f3fa56c9c9",
+      "inventoryMatched": true
+    },
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/handler/AbstractJsonTypeHandler.java",
+      "symbol": "com.tdh.bdzz.handler.AbstractJsonTypeHandler",
+      "usage": "observed",
+      "sha256": "ece52e9d645ecf982fce35e0ecd3e4122b086990a9efa6162b00bedf69cbb24d",
+      "inventoryMatched": true
+    },
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/enums/IEnum.java",
+      "symbol": "com.tdh.bdzz.enums.IEnum",
+      "usage": "observed",
+      "sha256": "a396a9a4a41dbd2137d1e01a0e747581e976b0d9c1636db9f18eea9a8f7f9dcb",
+      "inventoryMatched": true
+    },
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/Pdf2ImageComparablePriorityTaskPoolExecutor.java",
+      "symbol": "com.tdh.bdzz.config.Pdf2ImageComparablePriorityTaskPoolExecutor",
+      "usage": "corrected",
+      "sha256": "d0e4192de8a26e059745e358a6d888f7f8bdf39130c30b58cca7dc0ecfbddc73",
+      "inventoryMatched": true
+    },
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/vo/voice2text/CheckBljjVO.java",
+      "symbol": "com.tdh.bdzz.vo.voice2text.CheckBljjVO",
+      "usage": "corrected",
+      "sha256": "6ff7f04addbeb4b4c76a2f0dd8772d4f4b7b866550ddac2539fdc9c3c3f1f7b1",
+      "inventoryMatched": true
+    }
+  ],
+  "docker": {
+    "engine": "Docker 29.6.1",
+    "feedbackSource": "从课程 Markdown 的 如何验证 代码块提取同一 bash 反馈环，经 stdin 交给固定 RepoDigest 容器执行",
+    "classOutput": "容器内 /tmp 的 mktemp 目录，shell trap 使用 find -depth -delete 清理",
+    "images": [
+      {
+        "role": "modern",
+        "requestedTag": "eclipse-temurin:25-jdk",
+        "digest": "sha256:12e44624adee6808a36d962717e1656e0afeeeff5a100f9cb00e0136513558f0"
+      },
+      {
+        "role": "legacy",
+        "requestedTag": "eclipse-temurin:8-jdk",
+        "digest": "sha256:c8b86f2c0a9bd6cc1b7fabc5d1a097501a166eea7cad3b2764e90e96178bea9b"
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/basics/generics-and-type-safety.md",
+      "sha256": "ec7db961f1a437a4d35ac7febe0298b996954e3c61b03f6d127d315ad35f9cbe"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/generics-and-type-safety.md",
+      "sha256": "d0b079d43b8eece28f51469a4d007e9646c562cc8fa7ed809bbc9f1e515c89c3"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "cb4b4fc712fd7f8113e9da66de05f65231995d7cbcf5a8e3d95feed5eb6d958b"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "b4fda9be0413a8898192fb75a51b2b128a33c58674c81e3974e8cf64f3d35348"
+    },
+    {
+      "path": "docs/backend/java/dzzz-app-course-plan.md",
+      "sha256": "fa85700568650d663672ebc7bc1ac8bcce423b30cf3bc9001515727e52f8617b"
+    }
+  ],
+  "selfHashPolicy": "signoff 文件不记录自身 SHA-256；artifacts 只绑定 signoff 外可稳定计算的本批课程产物。",
+  "baselineVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run format:check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run test:unit",
+      "exitCode": 0,
+      "summary": "No test files found; configured empty test directory is valid"
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "summary": "No persistent E2E test files; command passed with --pass-with-no-tests"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "passed; 1202 modules transformed; existing >500 kB catalog chunk warning only"
+    },
+    {
+      "command": "git diff --check && git diff --cached --check",
+      "exitCode": 0,
+      "summary": "passed; no staged lesson changes"
+    },
+    {
+      "command": "git -C /Users/jian/Desktop/work/TDH/dzzz status --short -- dzzz-app",
+      "exitCode": 0,
+      "summary": "empty; source repository remained read-only"
+    }
+  ],
+  "javaVerification": {
+    "command": "extract 如何验证 bash block from src/categories/backend/java/core/learn/generics-and-type-safety.md and pipe to zsh -f",
+    "exitCode": 0,
+    "sharedOutput": "box=6|format=n=4|copy=2,4,6|capture=2|sameClass=true",
+    "cases": [
+      {
+        "name": "Java 25 positive compile/run",
+        "exitCode": 0,
+        "stdout": "box=6|format=n=4|copy=2,4,6|capture=2|sameClass=true"
+      },
+      {
+        "name": "Java 8 positive compile/run",
+        "exitCode": 0,
+        "stdout": "box=6|format=n=4|copy=2,4,6|capture=2|sameClass=true"
+      },
+      {
+        "name": "generic invariance compile failure",
+        "java25CompileExit": 1,
+        "java8CompileExit": 1,
+        "diagnosticTextBound": false
+      },
+      {
+        "name": "non-reifiable type compile failure",
+        "java25CompileExit": 1,
+        "java8CompileExit": 1,
+        "diagnosticTextBound": false
+      },
+      {
+        "name": "raw type warnings and Werror",
+        "java25Warnings": ["rawtypes", "unchecked"],
+        "java8Warnings": ["rawtypes", "unchecked"],
+        "java25WerrorExit": 1,
+        "java8WerrorExit": 1
+      },
+      {
+        "name": "heap pollution runtime failure",
+        "java25RunExit": 1,
+        "java8RunExit": 1,
+        "stderrContains": "ClassCastException"
+      }
+    ],
+    "temporaryAssetsCleaned": true
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "adapter": "PASS",
+    "blockCount": 65,
+    "exerciseContract": "要求、验收、参考答案三字段完整"
+  },
+  "catalogVerification": {
+    "method": "fresh Vite middleware SSR 加载真实 entry-manifest、track 和目标 content-entry",
+    "exitCode": 0,
+    "registeredEntries": 12,
+    "availableEntries": 12,
+    "targetId": "backend.java.learn.basics.generics-and-type-safety",
+    "projectEvidenceCount": 5,
+    "blockCount": 65
+  },
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "baseUrl": "http://127.0.0.1:4173/",
+    "targetPath": "/backend/java/core/learn/generics-and-type-safety",
+    "initialObstruction": {
+      "symptom": "旧 4173 Vite 服务显示 hmr-model-state-preservation 未知 demo ID 的 HMR overlay",
+      "cause": "服务在并行 Vite demo 清单落盘前初始化了全局注册表，HMR 未重建该注册表",
+      "repair": "仅重启 4173 开发服务；fresh middleware SSR 随后 PASS",
+      "frontendFilesChanged": false
+    },
+    "desktop": {
+      "viewport": "1440x900",
+      "documentClientWidth": 1440,
+      "documentScrollWidth": 1440,
+      "horizontalOverflow": false,
+      "title": "泛型、类型边界与类型安全",
+      "codeBlockCount": 18,
+      "searchTerm": "heap pollution",
+      "searchResultCount": 1,
+      "previousEntryId": "backend.java.learn.basics.exceptions-and-cause-chains",
+      "nextLink": false
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "documentClientWidth": 375,
+      "documentScrollWidth": 375,
+      "horizontalOverflow": false,
+      "codeBlockCount": 18,
+      "completionButtonPressed": true,
+      "completionButtonText": "取消完成"
+    },
+    "console": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "progressPersistedAfterReload": true,
+    "lazyLoadedTarget": true,
+    "targetContentEntryRequestStatus": 200,
+    "repositoryBrowserOutputAbsent": true
+  },
+  "changedFiles": [
+    "docs/research/backend/java/basics/generics-and-type-safety.md",
+    "src/categories/backend/java/core/learn/generics-and-type-safety.md",
+    "src/categories/backend/java/core/entry-manifest.ts",
+    "src/categories/backend/java/core/backend-java-track.ts",
+    "docs/backend/java/audit/reviews/phase-4-generics-and-type-safety-signoff.json",
+    "docs/backend/java/dzzz-app-course-plan.md"
+  ],
+  "priorClosedJavaAssets": {
+    "protected": true,
+    "summary": "第一至第十一批研究、课程与 signoff 保持原样，不归入第十二批课程产物。"
+  },
+  "concurrentWorkspaceAssets": {
+    "protected": true,
+    "attribution": "frontend TypeScript、Vite、frontend 文档、HeadingBlock 与 ContentEntryPage 资产由并行工作产生，不属于本批 changedFiles；根级校验在包含这些资产的当前工作区上执行。",
+    "statusSnapshotSha256": "5ac8c60824bdc523b527962bc87fbfa2c554d48ae6d32219345eb2b42c359897",
+    "paths": [
+      "docs/frontend/",
+      "src/app/pages/ContentEntryPage.vue",
+      "src/categories/frontend/engineering/typescript/",
+      "src/categories/frontend/engineering/vite/",
+      "src/common/ui/blocks/HeadingBlock.vue"
+    ]
+  },
+  "review": {
+    "standards": "PASS",
+    "standardsFindings": 0,
+    "spec": "PASS",
+    "specFindings": 0,
+    "postClosureRepair": {
+      "verifiedAt": "2026-08-07T02:51:21Z",
+      "finding": "错误示例 unsafe 方法缺少规范中文注释",
+      "repair": "在方法定义上方补充中文 Javadoc，不改变示例行为",
+      "sameFeedbackLoopExitCode": 0,
+      "sharedOutput": "box=6|format=n=4|copy=2,4,6|capture=2|sameClass=true",
+      "rootGates": "knowledge-path、type-check、lint、format、unit、e2e、build 与 diff check 均通过",
+      "browserReverification": "PASS; 4189 production preview; desktop 1440x900; 18 个代码块；18 个基础课程链接；上一篇与下一篇均存在；无横向溢出；console 0/0",
+      "independentReview": "PASS / 0 finding"
+    }
+  },
+  "beginnerContentReverification": {
+    "verifiedAt": "2026-08-07",
+    "courseArtifact": {
+      "path": "src/categories/backend/java/core/learn/generics-and-type-safety.md",
+      "sha256": "ab877aeb011d40ccfb154101d45ebbe12aee9b151fbc1adc51d870e6eda82567"
+    },
+    "content": "PASS; exactly one 从零跟着做, usage, pitfalls, verification, one exercise and runnable code",
+    "sources": "PASS; source type, appliesTo and claims shown only in the official-source regions; 正文无来源详情",
+    "browser": "PASS; 1440px and 390px routes, 36/36 HTTP 200, no horizontal overflow or browser errors",
+    "root": "PASS; knowledge-path, type-check, lint, format and diff checks"
+  },
+  "stopBoundary": "B-12 已关闭；B-13 注解、元注解与运行时元数据尚未读取、研究或启动。不得进入 B-14、Phase C 或其他课程。"
+}

@@ -50,7 +50,7 @@ anchors:
 
 # &lt;Suspense&gt;
 
-## 概述
+## 一、概述
 
 `<Suspense>` 把默认插槽子树中的异步依赖聚合成一个等待边界。首次挂载时，正式内容先在文档外解析；只要仍有依赖未完成，真实位置就显示 `#fallback`。全部依赖完成后，Vue 再一次性把正式内容移入页面，避免多个局部 loading 依次闪现。
 
@@ -68,7 +68,7 @@ anchors:
 聚合等待两个不同耗时的 async setup 组件，直到最慢依赖完成
 :::
 
-## 异步依赖
+## 二、异步依赖
 
 边界会等待两类依赖：返回 Promise 的 `async setup()`，包括 `<script setup>` 顶层 await；以及默认 `suspensible: true` 的 `defineAsyncComponent()` 组件。普通 `onMounted()` 中启动的请求不在 setup 阶段登记，不会触发 fallback。异步组件被边界接管后，其 loading、delay 和 timeout 选项不再控制加载界面；需要局部控制时设置 `suspensible: false`。
 
@@ -82,7 +82,7 @@ const posts = await loadPosts()
 </template>
 ~~~~
 
-## 加载状态与事件
+## 三、加载状态与事件
 
 Suspense 可触发 `pending`、`fallback` 和 `resolve` 三个事件。已解析边界只有在默认插槽的根节点被替换时才重新进入 pending；`timeout` 决定这次根替换后等待多久再显示 fallback，`0` 表示立即显示。它不是网络超时，不会取消请求或把 Promise 拒绝转换成错误界面。默认和 fallback 插槽都必须只有一个直接根节点。
 
@@ -97,11 +97,11 @@ Suspense 可触发 `pending`、`fallback` 和 `resolve` 三个事件。已解析
 </Suspense>
 ~~~~
 
-## 组合顺序与实验性状态
+## 四、组合顺序与实验性状态
 
 Vue 3.5.40 仍把 Suspense 标记为实验性功能，公开 API 可能变化。与 RouterView、Transition、KeepAlive 组合时，官方建议保持 `RouterView > Transition > KeepAlive > Suspense` 的嵌套顺序。Suspense 没有错误插槽；异步错误仍应通过 `onErrorCaptured()`、`errorCaptured` 或 `app.config.errorHandler` 处理。
 
-## 易错使用提示
+## 五、易错使用提示
 
 :::pitfalls
 ### 期待 onMounted() 中的任意异步请求触发 fallback
@@ -252,7 +252,7 @@ onErrorCaptured((error) => {
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 最小源码实现
+## 六、最小源码实现
 
 SuspenseBoundary 用 `deps` 记录未完成的异步依赖。默认分支先渲染到隐藏容器；遇到 async setup 时 `registerDep()` 增加计数，并在 Promise 完成后恢复组件渲染、减少计数。只要计数大于零，真实位置显示 fallback；归零后 `resolve()` 把完整默认分支移入真实容器并卸载 fallback。
 

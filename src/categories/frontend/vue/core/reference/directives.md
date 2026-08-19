@@ -125,7 +125,7 @@ anchors:
 
 # 内置指令
 
-## 概述与版本边界
+## 一、概述与版本边界
 
 内置指令把模板声明转换为 DOM、组件、事件或渲染缓存行为。本页是公开契约速查：完整的模板、条件列表、事件、表单、插槽与性能学习路径见“相关内容”。指令表达式仍运行在当前组件模板作用域中，不应把编译器内部 AST、缓存索引或 DOM 私有字段当作业务 API。
 
@@ -139,7 +139,7 @@ anchors:
 `v-once` 不是 Vue 3.2 才加入；“3.2+ 可考虑 `v-memo`”只是在说明替代工具的版本。其余指令在本页没有需要额外标出的 3.2 / 3.4 新增边界。
 :::
 
-## v-text
+## 二、v-text
 
 `v-text` 接收字符串并更新元素完整的 `textContent`。内容按普通文本处理，不执行 HTML；由于它会替换所有子内容，只更新一句话中的局部文本时应使用 `{{ message }}` 插值。
 
@@ -148,7 +148,7 @@ anchors:
 <p>状态：{{ message }}</p>
 ~~~~
 
-## v-html
+## 三、v-html
 
 `v-html` 接收字符串并更新元素完整的 `innerHTML`。插入内容不会再次经过 Vue 模板编译，其中的插值、指令和组件标签都只是普通 HTML。它只允许接收可信 HTML；用户输入、URL 参数、评论或第三方富文本必须先经过可信且明确的净化策略。
 
@@ -156,21 +156,21 @@ anchors:
 动态 HTML 没有 SFC 编译期添加的 scope attribute，因此普通 scoped 选择器不会自动匹配其内部节点。Trusted Types 也不等同于业务级 HTML sanitizer。
 :::
 
-## v-show
+## 四、v-show
 
 `v-show` 根据表达式真假切换真实元素的内联 `display`，显示时恢复初始 display。元素、事件监听器和子组件实例始终保留，也能参与 `<Transition>` 的 persisted 过渡；因此适合频繁显隐或必须保留本地 DOM 状态的场景。
 
 它不支持 `<template>`，也不能连接 `v-else`。初始为假时仍会创建子树；低频切换、需要延迟首次创建或隐藏时必须释放资源，应使用 `v-if`。
 
-## v-if
+## 五、v-if
 
 `v-if` 根据表达式真假创建或销毁整个分支，包括其中的指令和组件。初始为假时分支不会创建；放在 `<template>` 上可以控制多个节点而不生成额外 DOM。它与 `v-for` 同元素时优先执行，因而不能读取尚未建立的循环别名。
 
-## v-else
+## 六、v-else
 
 `v-else` 不接表达式，只能作为同一父级内紧邻 `v-if` 或 `v-else-if` 的最后分支。空白和注释可以位于分支之间，普通元素或非空文本会打断条件链；它也可以放在 `<template>` 上控制多节点分支。
 
-## v-else-if
+## 七、v-else-if
 
 `v-else-if` 接收任意条件值，可连续组成条件链；每一项必须紧邻前一个 `v-if` 或 `v-else-if`。`v-else` 已经结束条件链后不能继续追加 `v-else-if`，多节点分支同样可使用 `<template>`。
 
@@ -182,7 +182,7 @@ anchors:
 <LoadingPanel v-else />
 ~~~~
 
-## v-for
+## 八、v-for
 
 `v-for` 接收 `Array | Object | number | string | Iterable`，写作 `alias in source` 或 `alias of source`。数组和 iterable 提供 `(value, index)`；对象提供 `(value, key, index)`；正整数范围从 `1` 开始。循环组件不会自动收到 alias，仍须把数据显式作为 prop 传入。
 
@@ -195,7 +195,7 @@ anchors:
 </template>
 ~~~~
 
-## v-on
+## 九、v-on
 
 `v-on` 带参数时监听对应 DOM 事件或组件自定义事件，值可以是方法路径、内联语句或函数，内联表达式可访问 `$event`。无参数对象语法一次绑定多个事件，但不支持修饰符；组件事件只通知直接调用点，不具有 DOM 冒泡语义。
 
@@ -209,13 +209,13 @@ anchors:
 <section v-on="listeners" />
 ~~~~
 
-## v-bind
+## 十、v-bind
 
 `v-bind` 带参数时绑定 attribute、DOM property 或组件 prop，无参数时合并对象。普通 DOM 绑定会根据 key 是否存在于元素上选择 property 或 attribute；3.2+ 的 `.prop` / `.` 与 `.attr` 可强制写入通道，`.camel` 转换 attribute 名。`class` 和 `style` 额外接受对象与数组。
 
 组件绑定仍受 props 声明约束。对象展开与同名显式绑定按模板出现顺序合并，普通同名值由后出现者决定，class、style 和监听器另有专门合并规则。3.4+ 的 `:src` 等价于 `:src="src"`，不是无值布尔 attribute。
 
-## v-model
+## 十一、v-model
 
 `v-model` 仅用于原生 `<input>`、`<textarea>`、`<select>` 与组件，并要求可写表达式。原生控件按类型选择 value / checked、input / change 和对应运行时指令，JavaScript 状态是初始真值来源。`.lazy` 改为 change 时同步，`.trim` 去首尾空白，`.number` 做宽松数值转换。
 
@@ -225,27 +225,27 @@ anchors:
 `.lazy` 不是防抖，`.trim` 不是通用净化，`.number` 也不保证结果始终为 number；无法解析的输入仍可能保留原字符串。
 :::
 
-## v-slot
+## 十二、v-slot
 
 `v-slot` 的参数是插槽名，省略时为 `default`；值是合法函数参数表达式，可以解构 slot props。它只允许用于 `<template>`，或在组件只有一个默认作用域插槽时直接用于组件。`#name` 是缩写，但单独的 `#` 没有合法含义。
 
 存在具名插槽时，默认插槽也应显式写为 `<template #default>`，不能混用组件自身 `v-slot` 与内部 `<template v-slot>` 两种形式。slot props 属于父级插槽函数的局部参数，不是写回子组件状态的隐式通道。
 
-## v-pre
+## 十三、v-pre
 
 `v-pre` 不接表达式，会跳过当前元素及整棵子树的 Vue 编译。内部插值保留为文字，指令形式的 attribute 变成普通 attribute，组件标签也按普通元素解析。它适合展示原始模板语法或极大的纯静态子树，不能包住仍需响应式或组件解析的区域。
 
-## v-once
+## 十四、v-once
 
 `v-once` 不接表达式，首次渲染后缓存元素或组件的完整子树，后续父组件更新不再更新其中任何动态绑定。它只适合生命周期内确定永不变化的内容；与 `v-for` 同元素时会冻结首次生成的整段列表。
 
-## v-memo
+## 十五、v-memo
 
 `v-memo` 从 3.2 起可用，接收固定形状的依赖数组。依赖长度相同且每项均未变化时，Vue 复用缓存 VNode，跳过子树创建与 diff；空数组等同 `v-once`。比较不是深比较，对象依赖需要稳定引用，漏写依赖会直接得到陈旧 UI。
 
 它只用于已经测量的性能关键边际场景。配合 `v-for` 时必须和 `v-for`、`:key` 放在同一元素；key 已表达 item 身份后，memo 数组只覆盖决定子树是否更新的其他语义。
 
-## v-cloak
+## 十六、v-cloak
 
 `v-cloak` 不接表达式，只处理无构建步骤的 DOM 模板在挂载前短暂显示插值的问题。它必须配合 `[v-cloak] { display: none }` 等 CSS，Vue 完成挂载后会从挂载容器移除该 attribute；SFC 模板通常不需要它，它也不会等待异步数据。
 
@@ -259,7 +259,7 @@ anchors:
 <div id="app" v-cloak>{{ message }}</div>
 ~~~~
 
-## 易错使用提示
+## 十七、易错使用提示
 
 :::pitfalls
 ### 把不可信内容或 Vue 模板字符串交给 v-html
@@ -518,7 +518,7 @@ anchors:
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 十八、源码推导与适用场景
 
 以下结论来自 `vuejs/core@fa2885d8`，用于解释 Vue 3.5.40 的可观察行为；完整固定提交已列在官方来源中，AST 节点、patch flag、缓存槽位和 DOM 私有字段都不是 public API。
 

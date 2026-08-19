@@ -1,0 +1,299 @@
+.use-transition-pending-action-demo {
+  color: #172033;
+  background: #f7f8fb;
+  border: 1px solid #d8deea;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.pending-action-heading {
+  padding: 24px;
+  color: #ffffff;
+  background: #263653;
+}
+
+.pending-action-heading p,
+.pending-action-heading h2,
+.pending-action-heading span {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.pending-action-heading p {
+  color: #b9e6d3;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.pending-action-heading h2 {
+  margin-top: 8px;
+  font-size: 24px;
+  line-height: 1.3;
+}
+
+.pending-action-heading span {
+  display: block;
+  margin-top: 10px;
+  color: #dce4f2;
+  line-height: 1.7;
+}
+
+.pending-action-experiment {
+  padding: 20px;
+}
+
+.pending-action-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  margin: -5px;
+}
+
+.pending-action-controls button {
+  min-height: 42px;
+  margin: 5px;
+  padding: 9px 14px;
+  color: #ffffff;
+  font: inherit;
+  font-weight: 700;
+  line-height: 1.35;
+  background: #245d4c;
+  border: 1px solid #245d4c;
+  border-radius: 6px;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+.pending-action-controls button.is-secondary {
+  color: #203a70;
+  background: #e9eefb;
+  border-color: #aebddd;
+}
+
+.pending-action-controls button.is-marker {
+  color: #5b3a08;
+  background: #fff1c9;
+  border-color: #e1bf68;
+}
+
+.pending-action-controls button.is-continue {
+  color: #ffffff;
+  background: #9b4b24;
+  border-color: #9b4b24;
+}
+
+.pending-action-controls button.is-quiet {
+  color: #465168;
+  background: #ffffff;
+  border-color: #bac2d1;
+}
+
+.pending-action-controls button:focus-visible {
+  outline: 3px solid #57b99a;
+  outline-offset: 2px;
+}
+
+.pending-action-controls button:disabled {
+  color: #737b89;
+  background: #e6e8ed;
+  border-color: #cbd0d8;
+  cursor: not-allowed;
+}
+
+.pending-action-status {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 15px -5px -5px;
+}
+
+.pending-action-status > div {
+  flex: 1 1 190px;
+  min-width: 0;
+  margin: 5px;
+  padding: 14px;
+  background: #ffffff;
+  border: 1px solid #d8deea;
+  border-radius: 6px;
+}
+
+.pending-action-status span,
+.pending-action-status strong {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.pending-action-status span {
+  color: #677086;
+  font-size: 13px;
+}
+
+.pending-action-status strong {
+  margin-top: 6px;
+  color: #172033;
+  line-height: 1.45;
+}
+
+.pending-action-workspace {
+  display: flex;
+  align-items: stretch;
+  margin: 15px -6px -6px;
+}
+
+.pending-action-panel,
+.pending-action-history {
+  min-width: 0;
+  margin: 6px;
+  background: #ffffff;
+  border: 1px solid #ccd4e1;
+  border-radius: 7px;
+}
+
+.pending-action-panel {
+  flex: 1 1 56%;
+  padding: 22px;
+  box-shadow: inset 4px 0 0 #397d69;
+}
+
+.pending-action-panel.is-pending {
+  box-shadow: inset 4px 0 0 #c27335;
+}
+
+.pending-action-panel span,
+.pending-action-panel h3,
+.pending-action-panel p,
+.pending-action-panel small {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.pending-action-panel span {
+  color: #667086;
+  font-size: 13px;
+}
+
+.pending-action-panel h3 {
+  margin-top: 8px;
+  color: #1f4f43;
+  font-size: 22px;
+  line-height: 1.35;
+}
+
+.pending-action-panel p {
+  margin-top: 10px;
+  color: #3f485d;
+  line-height: 1.75;
+}
+
+.pending-action-panel small {
+  display: block;
+  margin-top: 14px;
+  padding: 10px 12px;
+  color: #754018;
+  line-height: 1.55;
+  background: #fff4dc;
+  border-left: 3px solid #c27335;
+}
+
+.pending-action-history {
+  flex: 1 1 44%;
+  padding: 18px;
+}
+
+.pending-action-history header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pending-action-history header > div {
+  min-width: 0;
+  margin-right: 12px;
+}
+
+.pending-action-history header span,
+.pending-action-history header h3 {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.pending-action-history header span {
+  color: #667086;
+  font-size: 13px;
+}
+
+.pending-action-history header h3 {
+  margin-top: 4px;
+  font-size: 18px;
+}
+
+.pending-action-history output {
+  flex: 0 0 auto;
+  padding: 5px 8px;
+  color: #1f4f43;
+  font-weight: 700;
+  background: #e6f4ee;
+  border-radius: 5px;
+}
+
+.pending-action-history ol {
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pending-action-history li {
+  display: flex;
+  align-items: baseline;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #e3e7ee;
+}
+
+.pending-action-history li span {
+  flex: 0 0 auto;
+  margin-right: 10px;
+  color: #7a8395;
+  font-size: 13px;
+}
+
+.pending-action-history li strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 640px) {
+  .pending-action-heading,
+  .pending-action-experiment {
+    padding: 16px;
+  }
+
+  .pending-action-controls {
+    display: block;
+    margin: 0;
+  }
+
+  .pending-action-controls button {
+    width: 100%;
+    margin: 8px 0 0;
+  }
+
+  .pending-action-controls button:first-child {
+    margin-top: 0;
+  }
+
+  .pending-action-status,
+  .pending-action-workspace {
+    display: block;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .pending-action-status > div,
+  .pending-action-panel,
+  .pending-action-history {
+    width: auto;
+    margin-right: 0;
+    margin-left: 0;
+  }
+}

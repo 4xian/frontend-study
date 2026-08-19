@@ -64,11 +64,11 @@ recap:
 
 # 浅层响应式与原始对象边界
 
-## 正文大纲
+## 一、正文大纲
 
 普通 ref 和 reactive 让嵌套对象按需进入深层响应式，这通常是最安全的默认选择。本课处理的是少数需要明确退出深层转换的边界：大型不可变快照、由外部系统管理的对象、不能代理的类实例，以及必须统一 raw / proxy 身份的基础设施。学习顺序是先确定 Vue 观察哪一层，再选择根替换或显式通知协议，最后才使用 toRaw 与 markRaw。
 
-## 先画清观察边界
+## 二、先画清观察边界
 
 | 工具 | Vue 自动观察的边界 | 默认更新协议 |
 | --- | --- | --- |
@@ -83,7 +83,7 @@ recap:
 浅层 API 不是“更快的普通响应式”。它把深层变化的通知责任交给根替换协议或显式触发。没有大型深层结构、外部状态所有权或对象身份约束时，继续使用 ref / reactive 更容易维护。
 :::
 
-## shallowRef：只让根引用成为信号
+## 三、shallowRef：只让根引用成为信号
 
 shallowRef 内部值按原样保存，只有 .value 的读取和赋值参与响应式。深改内部对象会真的改动原对象，但不会因为这次写入自动安排组件、computed 或 watcher 更新。默认做法是把内部数据当作不可变快照，每次提交都创建新根。
 
@@ -120,7 +120,7 @@ document.value = {
 Vue 仍比较 .value 的根身份。先深改再执行 state.value = state.value 只是把同一对象重新赋回去，不会补发更新；创建新根，或在受控原地批量修改后调用 triggerRef。
 :::
 
-## triggerRef：为一次受控提交显式通知
+## 四、triggerRef：为一次受控提交显式通知
 
 triggerRef(shallow) 会强制通知依赖这个 shallow ref 的副作用重新运行。它不会递归代理内部值，也不会判断哪些深层字段变了。适合外部库必须原地更新、一次事务会改很多字段，且所有写入完成后只需要一次 Vue 通知的边界。
 
@@ -145,7 +145,7 @@ function commitScenePatch(): void {
 | 外部库受控原地批量更新 | shallowRef + 一次 triggerRef | 避免每个内部写入都通知 |
 | 只想强制刷新界面 | 先修正状态建模 | triggerRef 不应掩盖丢失的响应式依赖 |
 
-## shallowReactive：根属性响应式，嵌套值原样暴露
+## 五、shallowReactive：根属性响应式，嵌套值原样暴露
 
 shallowReactive 适合由多个根槽位组成、但每个槽位内部由其他协议管理的状态容器。根属性读取会收集依赖，根属性写入会通知；嵌套对象不会被转成 proxy，深层写入本身不会通知。要发布新的嵌套状态，应替换对应根属性。
 
@@ -169,7 +169,7 @@ workspace.mode = 'published' // 写根属性，触发
 官方明确警告：shallowReactive 应只用于状态树根部。把它嵌进深层 reactive 对象，会让同一棵树不同位置拥有不同响应式语义，调试时很难根据路径预测写入是否触发。
 :::
 
-## 根属性中的 Ref 不会自动解包
+## 六、根属性中的 Ref 不会自动解包
 
 深层 reactive 对普通对象属性中的 ref 有自动解包规则；shallow getter 会在解包逻辑前原样返回，所以根属性中的 ref 仍然是 Ref。这个行为适合保留外部信号对象身份，但调用方必须显式使用 .value。
 
@@ -193,7 +193,7 @@ state.source.value++
 ~~~~
 :::
 
-## toRaw：临时穿过代理，不建立第二条写通道
+## 七、toRaw：临时穿过代理，不建立第二条写通道
 
 toRaw(proxy) 返回 Vue 代理背后的原始对象。临时检查身份、交给只读诊断工具或避免一次代理读取开销时可以使用；持久保存并通过 raw 写入会绕过代理的追踪和触发，同时让系统长期面对 raw / proxy 两个身份。
 
@@ -207,7 +207,7 @@ inspectIdentity(toRaw(state) === original) // 临时读取后丢弃 raw
 state.count++ // 业务写入继续经过 proxy
 ~~~~
 
-## markRaw：保护明确的身份根，不递归标记
+## 八、markRaw：保护明确的身份根，不递归标记
 
 markRaw(value) 返回 value 本身，并让这个根对象以后进入 reactive 图时仍不被转为 proxy。典型对象是第三方类实例、组件定义、已有独立订阅协议的引擎或明确不可变的大型记录。它不是整棵树的递归标记器。
 
@@ -227,7 +227,7 @@ isReactive(state.engine) // false
 分别观察 shallowRef、shallowReactive 的原对象当前值、响应式快照与运行次数，并诊断 raw / proxy 身份
 :::
 
-## 易错使用提示
+## 九、易错使用提示
 
 :::pitfalls
 ### 深改 shallowRef 后等待自动更新
@@ -435,7 +435,7 @@ state.engineId === raw.id // 用稳定业务身份比较
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 从 Vue 3.5.40 源码推导高级场景
+## 十、从 Vue 3.5.40 源码推导高级场景
 
 :::steps
 ### 浅层 Ref 仍保留普通 Ref 的根信号
@@ -471,7 +471,7 @@ ref 解包发生在 shallow 提前返回之后，所以容器可保留第三方�
 markRaw 只标记传入根，toRaw 只沿代理链取原对象；类实例或引擎可作为完整 identity root 保留，任意拆出的 nested 则应依赖业务 ID，而不是假定递归 raw。
 :::
 
-## 练习
+## 十一、练习
 
 :::exercise
 ### 预测三次 shallowRef 写入

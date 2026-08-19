@@ -45,7 +45,7 @@ recap:
 
 # Actions 与异步流程
 
-## Action 是有名称的业务命令
+## 一、Action 是有名称的业务命令
 
 Action 可以读取和修改当前 Store，也可以调用其他 action、另一个 Store 或异步服务。与 getter 不同，它适合表达有副作用的业务流程。Action 的参数和返回值保持普通函数语义，调用方应 `await` 并处理失败。
 
@@ -67,7 +67,7 @@ export const useSessionStore = defineStore('session', {
 Options Store action 使用方法语法，不要写箭头函数。箭头函数没有由 Pinia 绑定的 `this`，无法安全访问当前 Store。
 :::
 
-## 订阅一次 action 的完整结算
+## 二、订阅一次 action 的完整结算
 
 `$onAction()` 在 action 开始时收到名称与参数。`after()` 对同步返回值立即运行，对 Promise 则等待 resolve；`onError()` 同时覆盖同步 throw 和 Promise reject。监听不会吞掉错误，调用方仍要 catch 或让错误继续传播。
 
@@ -79,7 +79,7 @@ const unsubscribe = store.$onAction(({ name, args, after, onError }) => {
 })
 ~~~~
 
-## 用手动 Gate 消除网络随机性
+## 三、用手动 Gate 消除网络随机性
 
 下面的 Demo 不请求真实网络。异步 action 先停在手动 deferred gate，界面再明确选择 resolve 或 reject；另一按钮触发同步 throw。时间线展示 start、action 内部步骤、after/onError 与调用方结算的确定顺序。
 
@@ -87,7 +87,7 @@ const unsubscribe = store.$onAction(({ name, args, after, onError }) => {
 手动完成或拒绝异步 action，并对比同步抛错的订阅结算顺序
 :::
 
-## 源码与测试推导
+## 四、源码与测试推导
 
 :::steps
 ### 1. Promise 延迟 after
@@ -99,7 +99,7 @@ Pinia 的 action wrapper 检测返回值是否为 Promise；是 Promise 时在 `
 同步 throw 会先调用 error callbacks 再重新抛出；Promise reject 会在 rejection 分支调用 callbacks 后继续 reject。固定 `onAction.spec.ts` 分别覆盖这两条路径。
 :::
 
-## 易错使用提示
+## 五、易错使用提示
 
 :::pitfalls
 ### 用箭头函数定义 Options action

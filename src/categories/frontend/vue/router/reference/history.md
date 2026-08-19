@@ -121,7 +121,7 @@ anchors:
 
 # History 与滚动行为
 
-## 概述
+## 一、概述
 
 Vue Router 把“匹配哪条 route”与“位置保存在哪里”分开：Router 负责匹配和导航流程，`RouterHistory` 适配器负责 location、state、href 与前进后退。应用通常只需把一个 factory 的返回值交给 `createRouter({ history })`，再按运行环境决定 web、hash 或 memory 模式。
 
@@ -132,7 +132,7 @@ Vue Router 把“匹配哪条 route”与“位置保存在哪里”分开：Rou
 | `RouterScrollBehavior` | public / merged | 导航提交后返回什么滚动目标 |
 | 三个 history factory | public / detail | URL、初始位置和部署责任如何选择 |
 
-## History State
+## 二、History State
 
 `HistoryState` 描述可写入一条 history entry 的附加数据。5.2.0 类型值域是字符串、数字、布尔值、`null`、`undefined`、递归对象和数组；函数、Symbol 与响应式代理不属于该契约。通过 `router.push()` 或 `router.replace()` 的 `state` 传入时，web adapter 会把用户字段与自己的 `back`、`current`、`forward`、`position` 和滚动字段一起保存。
 
@@ -156,7 +156,7 @@ await router.push({
 不要把 `history.state` 当成持久业务仓库。它跟随单条浏览历史记录，页面刷新后是否仍在取决于该记录是否保留；敏感数据、跨设备状态和需要查询的业务数据应放在对应的持久层。
 :::
 
-## Router History
+## 三、Router History
 
 `RouterHistory` 是 `createRouter()` 消费的底层 adapter 接口。它暴露当前 `base`、`location`、`state`，提供 `push()`、`replace()`、`go()`，允许 Router 监听外部 pop 导航、生成 href，并在销毁时清理监听器。三个官方 factory 都返回这个接口。
 
@@ -174,7 +174,7 @@ await router.push({
 `RouterHistory` 在 5.2.0 固定源码中带 `@alpha`。类型可用于接住 factory 返回值，但它不是鼓励普通应用自行实现 adapter 的稳定扩展承诺；常规浏览器、SSR 与测试应优先使用三个官方 factory。
 :::
 
-## Router Scroll Behavior
+## 四、Router Scroll Behavior
 
 `RouterScrollBehavior` 是 `createRouter({ scrollBehavior })` 的回调类型。`to` 是目标标准化位置，`from` 是来源位置，`savedPosition` 在可恢复的 history entry 上提供坐标，否则为 `null`。回调可返回窗口坐标、带 `el` 的元素目标、`false`、`void`，也可返回这些值的 Promise-like 结果。
 
@@ -198,7 +198,7 @@ const router = createRouter({
 
 带 `el` 时可以传元素或选择器；`top`、`left` 表示相对目标元素的偏移。仅在 URL 中写入 `to.hash` 不会自动成为 Router 的滚动策略，应用仍需返回 `{ el: to.hash }`。返回 Promise 适合等待真实的页面过渡完成信号，但导航 Promise 与滚动 Promise 不是同一个完成点。
 
-## Create Memory History
+## 五、Create Memory History
 
 `createMemoryHistory(base?)` 在内存队列中保存位置，不读取也不改写浏览器地址栏。它从特殊空位置开始，调用方必须用当前请求或测试目标主动完成首导航。`base` 仍会影响 `createHref()`，所以 memory 不等于“没有 base”或“没有可遍历队列”。
 
@@ -218,7 +218,7 @@ async function createRequestRouter(requestUrl: string) {
 }
 ~~~~
 
-## Create Web Hash History
+## 六、Create Web Hash History
 
 `createWebHashHistory(base?)` 把 route location 放在第一个 `#` 后。fragment 不会发送给服务器，因此无法配置任意路径 fallback 时可使用它；代价是公开 URL 带 hash、传统页面锚点语义被占用，并且 SEO 表现与普通 pathname 不同。
 
@@ -234,7 +234,7 @@ const href = router.resolve('/guide/start').href
 
 有 host 时，未传 base 默认使用当前 `location.pathname + location.search`；传入的 base 若不含 `#`，5.2.0 会补上。`file://` 没有 host 时传入 base 会被忽略。页面存在 `&lt;base&gt;` 时，其 href 仍会影响底层 `pushState()`，应与显式参数在 `#` 前的部分保持一致。
 
-## Create Web History
+## 七、Create Web History
 
 `createWebHistory(base?)` 使用浏览器 History API，让 route 直接出现在 pathname 中，是普通 SPA 的首选。它读取当前浏览器 URL 作为初始位置；`base` 表示应用部署根路径，并参与当前 location 的剥离以及链接 href 的生成。
 
@@ -250,7 +250,7 @@ const href = router.resolve('/guide/start').href
 
 首次打开或刷新 `/academy/guide/start` 时，请求先到部署服务器，Vue Router 还没有运行。服务器必须保留真实文件和目录，再把 client paths rewrite 到 `/academy/` 下的 SPA 入口；应用内还要用 catch-all route 呈现 NotFound。rewrite 通常返回入口的 HTTP 200，不等于真实 HTTP 404。
 
-## 模式选择
+## 八、模式选择
 
 | factory | 位置来源与 URL | 适用场景 | 必须承担的边界 |
 | --- | --- | --- | --- |
@@ -258,7 +258,7 @@ const href = router.resolve('/guide/start').href
 | `createWebHashHistory()` | 第一个 # 后的 route fragment | 静态宿主、file URL 或不能配置 fallback | 接受 URL、锚点与 SEO 取舍，并校准 # 前的 base |
 | `createMemoryHistory()` | 内部空位置与内存队列；不改地址栏 | SSR、测试、文档或受控嵌入环境 | 每个上下文独立创建实例，并显式完成首导航 |
 
-## 易错使用提示
+## 九、易错使用提示
 
 :::pitfalls
 ### 手工 replaceState() 时覆盖 Router 保存的 state
@@ -417,7 +417,7 @@ location /academy/ {
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 十、源码推导与适用场景
 
 :::steps
 ### 1. 先按稳定性选择依赖层级

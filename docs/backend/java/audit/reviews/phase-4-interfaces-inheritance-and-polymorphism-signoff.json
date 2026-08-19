@@ -1,0 +1,408 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.basics.interfaces-inheritance-and-polymorphism",
+  "batchId": "phase-4-interfaces-inheritance-and-polymorphism",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-06T13:27:02Z",
+  "revalidatedAt": "2026-08-06T13:40:26Z",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "89378a4fcd620c433f879c7a492104721cde7d6f07fa51936b78b2cb6dadfb7b",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "stagedLessonChanges": false
+  },
+  "sourceRepository": {
+    "path": "/Users/jian/Desktop/work/TDH/dzzz/dzzz-app",
+    "head": "167ca8aa91ca3a6b101246964ef4fddec3d21da0",
+    "statusShort": "",
+    "readOnly": true
+  },
+  "phase2Freeze": {
+    "courseCoverageMatrixSha256": "04d858896d07e975d3ab50796494873f09bd0ddf4b1a8b1ea87bd75cdd101d38",
+    "researchStatus": "not-started",
+    "exampleStatus": "not-started",
+    "courseStatus": "planned",
+    "phase4StateRecordedOnlyInThisSignoff": true,
+    "knownFrozenArtifactMismatch": {
+      "artifact": "docs/backend/java/audit/course-coverage-matrix.md",
+      "officialSha256": "b7fd50ffabbcf8a198802e907cef769ac969a71e4e14c40038f4aaaed09d91ad",
+      "recomputedExpectedSha256": "c4283551b4f37081097551957d3b4e1ea44922e0a1bb5865be2c5cc18faa6021",
+      "difference": "仅首部两处：正式文件使用 <br>，生成器预期使用 Markdown 行尾双空格；冻结 JSON、manifest、源码 HEAD 和库存身份未漂移。",
+      "introducedByThisLesson": false,
+      "action": "保留冻结文件并记录；不修改 Phase 2 产物或 tooling。"
+    }
+  },
+  "versions": {
+    "verifiedAt": "2026-08-06",
+    "modern": {
+      "java": "25",
+      "runtime": "Eclipse Temurin 25.0.3+9 LTS"
+    },
+    "legacy": {
+      "java": "8",
+      "runtime": "Eclipse Temurin 8u492-b09",
+      "springBootBackground": "2.3.12.RELEASE"
+    }
+  },
+  "sourceDiscovery": {
+    "method": "Tavily 仅用于发现直接页面，随后逐页核对 Oracle、JLS、Dev.java 和 OpenJDK 正文",
+    "communitySourcesUsedAsEvidence": false,
+    "projectEvidenceBoundary": "Downloader 与 AbstractFileProcessHandler 只作为 observed 项目证据；课程未复制字段注入、下载实现、业务状态码或匿名类候选。",
+    "directUrls": [
+      "https://openjdk.org/projects/jdk/25/",
+      "https://www.oracle.com/java/technologies/java-se-support-roadmap.html",
+      "https://docs.oracle.com/javase/specs/jls/se25/html/jls-5.html",
+      "https://docs.oracle.com/javase/specs/jls/se25/html/jls-8.html",
+      "https://docs.oracle.com/javase/specs/jls/se25/html/jls-9.html",
+      "https://docs.oracle.com/javase/specs/jls/se25/html/jls-15.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Override.html",
+      "https://dev.java/learn/inheritance/what-is-inheritance/",
+      "https://dev.java/learn/inheritance/overriding/",
+      "https://dev.java/learn/inheritance/polymorphism/",
+      "https://docs.oracle.com/javase/specs/jls/se8/html/jls-5.html",
+      "https://docs.oracle.com/javase/specs/jls/se8/html/jls-8.html",
+      "https://docs.oracle.com/javase/specs/jls/se8/html/jls-9.html",
+      "https://docs.oracle.com/javase/specs/jls/se8/html/jls-15.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/lang/Override.html"
+    ]
+  },
+  "projectEvidence": [
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/download/Downloader.java",
+      "symbol": "com.tdh.bdzz.download.Downloader",
+      "usage": "observed",
+      "sha256": "a660b5d288741187eae5a43996d1ffa9dd1d720b5c8b835f393c5351551efe19",
+      "inventoryMatched": true
+    },
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/timer/handler/fileProcess/AbstractFileProcessHandler.java",
+      "symbol": "com.tdh.bdzz.timer.handler.fileProcess.AbstractFileProcessHandler",
+      "usage": "observed",
+      "sha256": "ee5de581ce3a3963c22bc20825d60cf91ff1108432f7a22b5bc6b1c318e6b3ba",
+      "inventoryMatched": true
+    }
+  ],
+  "docker": {
+    "engine": "Docker 29.6.1",
+    "feedbackSource": "从课程 Markdown 的 如何验证 代码块提取同一 bash 反馈环，经 stdin 交给固定 RepoDigest 容器执行",
+    "classOutput": "容器内 /tmp 的 mktemp 目录，shell trap 使用 find -depth -delete 清理",
+    "images": [
+      {
+        "role": "modern",
+        "requestedTag": "eclipse-temurin:25-jdk",
+        "digest": "sha256:12e44624adee6808a36d962717e1656e0afeeeff5a100f9cb00e0136513558f0"
+      },
+      {
+        "role": "legacy",
+        "requestedTag": "eclipse-temurin:8-jdk",
+        "digest": "sha256:c8b86f2c0a9bd6cc1b7fabc5d1a097501a166eea7cad3b2764e90e96178bea9b"
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/basics/interfaces-inheritance-and-polymorphism.md",
+      "sha256": "3535610d37c013a228edc8e7de609f9c3801951db51c00de68c833aa0c68d108"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/interfaces-inheritance-and-polymorphism.md",
+      "sha256": "c4766aff1e304a98593179fb01cc8d5e4cc391ffbac9d7d597e32425c6c02d9c"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "a12ff5084079bb73ba3863f4b94905e22390eec54611b2acabf0b9d74736e3e9"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "1559989c236c00fb2a084b8ab4974dc1d69ce8745ca37fab3f415aa02c2b8bab"
+    },
+    {
+      "path": "docs/backend/java/dzzz-app-course-plan.md",
+      "sha256": "6f4d17b731714c583d2f71acf2893838b2aeacfd3cc2d296bf8b0d746c6c6f18"
+    }
+  ],
+  "selfHashPolicy": "signoff 文件不记录自身哈希，避免递归自引用；artifacts 中其余最终文件逐一绑定 SHA-256",
+  "changedFiles": [
+    "docs/research/backend/java/basics/interfaces-inheritance-and-polymorphism.md",
+    "src/categories/backend/java/core/learn/interfaces-inheritance-and-polymorphism.md",
+    "src/categories/backend/java/core/entry-manifest.ts",
+    "src/categories/backend/java/core/backend-java-track.ts",
+    "docs/backend/java/audit/reviews/phase-4-interfaces-inheritance-and-polymorphism-signoff.json",
+    "docs/backend/java/dzzz-app-course-plan.md"
+  ],
+  "priorClosedJavaAssets": {
+    "protected": true,
+    "summary": "第一至第七批研究、课程与 signoff 保持原样，不归入第八批 changedFiles。"
+  },
+  "concurrentWorkspaceAssets": {
+    "protected": true,
+    "attribution": "frontend TypeScript、frontend 文档、HeadingBlock 与 ContentEntryPage 资产由并行工作产生，不属于本批 changedFiles。前端 untracked 内容在续接前后发生变化，ContentEntryPage 又在第八批复审后变化；每次稳定后均重跑受影响的第八批 Gate。",
+    "frontendTrackedDiffSha256": "3ad21912797752a764d184f20b46995777125b8125bfae2db58b37ae6cfa081c",
+    "previousFrontendUntrackedContentsSha256": "0bf08cddef7455341ddd61cd55946cde3f2618ae73a3eea54ced6071acabcf96",
+    "stableFrontendUntrackedContentsSha256": "6de9a43f3740c4639aa46b8bbcb74d7d6db0932e4dbc7b12d9c8d440aa33c680",
+    "stabilityCheck": "连续 10 秒两次重算一致",
+    "paths": [
+      "docs/frontend/",
+      "src/app/pages/ContentEntryPage.vue",
+      "src/categories/frontend/engineering/typescript/",
+      "src/common/ui/blocks/HeadingBlock.vue"
+    ],
+    "postReviewConcurrentChange": {
+      "path": "src/app/pages/ContentEntryPage.vue",
+      "changeSummary": "并发任务移除课程 ID 变化时预先清空 entry 的赋值；本批未修改该文件。",
+      "stabilityCheck": "变更后连续 10 秒及最终 Gate 后连续 5 秒的工作区指纹一致",
+      "browserRecheck": "从第七课点击下一篇正确加载第八课；桌面和 390x844 均无水平溢出，刷新后标题与上一篇正确，console 0 error / 0 warning。",
+      "fullGateRerun": "type-check、lint、format:check、build、test:unit、test:e2e、diff checks 全部退出码 0；build 为 1087 modules transformed。"
+    }
+  },
+  "baselineVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 1,
+      "summary": "既有冻结 Markdown 确定性字节 mismatch；未修改冻结文件或 tooling。"
+    },
+    {
+      "command": "npm run type-check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run format:check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run test:unit",
+      "exitCode": 0,
+      "summary": "No test files found; configured empty test directory is valid"
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "summary": "No persistent E2E test files; command passed with --pass-with-no-tests"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "1087 modules transformed; existing >500 kB catalog chunk warning only"
+    },
+    {
+      "command": "git diff HEAD --check && git diff --cached --check",
+      "exitCode": 0,
+      "summary": "passed; no staged lesson changes"
+    },
+    {
+      "command": "git -C /Users/jian/Desktop/work/TDH/dzzz status --short -- dzzz-app",
+      "exitCode": 0,
+      "summary": "empty; source repository remained read-only"
+    }
+  ],
+  "markdownVerification": {
+    "requiredFrontmatterFieldCount": 21,
+    "sourceCount": 15,
+    "projectEvidenceCount": 2,
+    "containerDirectives": ["tip", "pitfalls", "exercise"],
+    "headingCount": 17,
+    "methodCommentCheck": "正文和反馈环中的所有 Java 构造器与方法定义上方均有规范中文注释",
+    "adapterBuildPassed": true
+  },
+  "javaVerification": {
+    "command": "sed -n '485,728p' src/categories/backend/java/core/learn/interfaces-inheritance-and-polymorphism.md | docker run --rm -i <fixed RepoDigest> bash -euxo pipefail",
+    "exitCode": 0,
+    "sharedOutput": "email:42|sms:42|audit:42",
+    "cases": [
+      {
+        "name": "Java 25 and Java 8 polymorphic dispatch",
+        "java25ExitCode": 0,
+        "java8ExitCode": 0,
+        "stdout": "email:42|sms:42|audit:42"
+      },
+      {
+        "name": "wrong Override, narrowed visibility and abstract instantiation",
+        "java25CompileExit": 1,
+        "java8CompileExit": 1,
+        "diagnosticTextBound": false
+      },
+      {
+        "name": "invalid downcast",
+        "java25RunExit": 1,
+        "java8RunExit": 1,
+        "exception": "ClassCastException"
+      },
+      {
+        "name": "private interface method version boundary",
+        "java25CompileRunExit": 0,
+        "java25Stdout": "EMAIL",
+        "java8CompileExit": 1
+      }
+    ],
+    "temporaryAssetsCleaned": true
+  },
+  "catalogVerification": {
+    "availableJavaLessonCount": 8,
+    "roadmapNodeCount": 51,
+    "targetId": "backend.java.learn.basics.interfaces-inheritance-and-polymorphism",
+    "targetSlug": "interfaces-inheritance-and-polymorphism",
+    "officialSourceCount": 15,
+    "searchTerm": "多态",
+    "searchResultCount": 1,
+    "previousEntryId": "backend.java.learn.basics.classes-objects-and-immutability",
+    "nextEntryId": null,
+    "detailLoaderPassed": true
+  },
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "baseUrl": "http://127.0.0.1:4173/",
+    "targetPath": "/backend/java/core/learn/interfaces-inheritance-and-polymorphism",
+    "desktop": {
+      "viewport": "1440x900",
+      "documentClientWidth": 1440,
+      "documentScrollWidth": 1440,
+      "title": "接口、继承、抽象类型与多态",
+      "searchTerm": "多态",
+      "searchResultCount": 1,
+      "previousEntryId": "backend.java.learn.basics.classes-objects-and-immutability",
+      "nextLink": false,
+      "initialProgress": "0 / 8",
+      "completedProgress": "1 / 8"
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "documentClientWidth": 390,
+      "documentScrollWidth": 390,
+      "horizontalOverflow": false,
+      "completionButtonAfterReload": "取消完成"
+    },
+    "console": {
+      "historicalErrorsBeforeReload": 10,
+      "historicalErrorAttribution": "既有 Vite HMR 记录均由并发前端重复 Demo ID 触发，不来自本课；刷新后重新采样。",
+      "errorsAfterReload": 0,
+      "warningsAfterReload": 0
+    },
+    "progressPersistedAfterReload": true,
+    "sessionClosed": true,
+    "continuationArtifactsCleaned": true,
+    "preExistingSharedArtifactsPreserved": true,
+    "navigationRecheckAfterConcurrentPageChange": {
+      "fromPath": "/backend/java/core/learn/classes-objects-and-immutability",
+      "viaLink": "下一篇：接口、继承、抽象类型与多态",
+      "loadedTarget": true,
+      "targetContentVisible": true,
+      "desktopHorizontalOverflow": false,
+      "mobileHorizontalOverflow": false,
+      "errors": 0,
+      "warnings": 0
+    }
+  },
+  "review": {
+    "standards": "PASS",
+    "standardsFindings": 0,
+    "spec": "PASS",
+    "specFindings": 0
+  },
+  "beginnerContentReverification": {
+    "verifiedAt": "2026-08-07",
+    "courseArtifact": {
+      "path": "src/categories/backend/java/core/learn/interfaces-inheritance-and-polymorphism.md",
+      "sha256": "2cba0cafb38d7fb1d83f564530e91cbd8c4c85662f46fb43adb14d4abf0e74ea"
+    },
+    "content": "PASS; exactly one 从零跟着做, usage, pitfalls, verification, one exercise and runnable code",
+    "sources": "PASS; source type, appliesTo and claims shown only in the official-source regions; 正文无来源详情",
+    "browser": "PASS; 1440px and 390px routes, 36/36 HTTP 200, no horizontal overflow or browser errors",
+    "root": "PASS; knowledge-path, type-check, lint, format and diff checks"
+  },
+  "phaseBReverification": {
+    "batchId": "B-08",
+    "status": "implementation-complete / lesson-passed",
+    "verifiedAt": "2026-08-14",
+    "historicalEvidencePreserved": true,
+    "courseContract": {
+      "title": "接口、继承、抽象类型与多态",
+      "estimatedMinutes": 75,
+      "prerequisites": ["B-07"],
+      "path": "/backend/java/core/learn/interfaces-inheritance-and-polymorphism"
+    },
+    "currentArtifacts": [
+      {
+        "path": "docs/research/backend/java/basics/interfaces-inheritance-and-polymorphism.md",
+        "sha256": "ed09bf16909f1437b20f6126e91ca6d74521f1fd680c27f6164994262890c68d"
+      },
+      {
+        "path": "src/categories/backend/java/core/learn/interfaces-inheritance-and-polymorphism.md",
+        "sha256": "e60cf66e768501cd7bea909a6004d6daf610f82c675079619b1142abbac0e917"
+      }
+    ],
+    "runtimeProtection": {
+      "trackChanged": false,
+      "trackSha256": "10f44a4f0582f4236032c39a209302b1f0fd6db1251b86b059db3e51e95fb57a",
+      "loaderChanged": false,
+      "loaderSha256": "9226427b5a9606fe12e9265b5a082f991cbda7b0ba0fdcef756cd58f26ad2dad"
+    },
+    "research": {
+      "status": "PASS",
+      "discovery": "Tavily",
+      "finalEvidence": "21 个 JLS、Java SE API、Dev.java、OpenJDK 与 Oracle 官方直接 URL；搜索摘要未作为结论证据",
+      "modernBaseline": "Java 25 LTS",
+      "legacyBaseline": "Java 8",
+      "scopeBoundary": "接口、多接口类型、单类继承、super、抽象类、覆写、重载、抽象类型引用、动态分派、必要的上下转换与接口方法版本差异；不进入枚举、注解展开、异常、泛型、集合、Lambda、sealed、反射、框架或设计模式"
+    },
+    "javaFeedbackLoop": {
+      "environment": "Docker 29.6.1; Eclipse Temurin javac 25.0.3 and 1.8.0_492",
+      "source": "从最终课程 Markdown AST 精确提取唯一 lang: bash、meta: b08-feedback-loop 节点并直接执行",
+      "classOutput": "唯一宿主 /tmp 根目录；两个容器仅使用该根目录映射下的确定性工作子目录，shell trap 使用 find -depth -delete 清理",
+      "status": "PASS; 15 B08 markers",
+      "sharedOutput": "email:42|sms:42|audit:42|overload:email:7",
+      "negativeCompilation": "错误覆写、缩小可见性和实例化抽象类在 Java 25/8 均非零退出；错误 cast 在两个版本均编译成功、运行非零并出现 ClassCastException",
+      "versionBoundary": "Java 25 私有接口方法编译运行输出 EMAIL；Java 8 拒绝同一源码",
+      "finalMarker": "B08_TMP_CLEAN_PASS"
+    },
+    "qualityGates": {
+      "knowledgePath": "PASS; 167 source items, 64 course nodes, 114 dependency edges",
+      "typeCheck": "PASS",
+      "lint": "PASS",
+      "formatCheck": "PASS",
+      "unit": "PASS; no persistent unit tests",
+      "e2e": "PASS; no persistent E2E tests",
+      "build": "PASS; 1717 modules transformed; existing large-chunk and plugin-timing warnings only",
+      "diffCheck": "PASS for B-08 allowed paths; unrelated workspace assets preserved"
+    },
+    "browserVerification": {
+      "server": "production preview",
+      "viewports": ["1440x900", "390x844"],
+      "httpStatus": 200,
+      "knowledgePointCount": 7,
+      "orderedStepCount": 7,
+      "officialSourceCount": 21,
+      "previousEntryId": "backend.java.learn.basics.classes-objects-and-immutability",
+      "nextEntryId": "backend.java.learn.basics.enums-and-finite-values",
+      "courseInfo": "PASS; 75 minutes and 2026-08-14 verification date",
+      "requiredContentAssertions": "PASS; seven frozen topics, seven steps, required syntax and applicability sections, exact shared output and targeted negative cases",
+      "staticRequests": "PASS; 35/35 HTTP 200",
+      "horizontalOverflow": false,
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "pageErrors": 0
+    },
+    "independentReview": {
+      "reviewer": "b08_final_review",
+      "standards": "PASS / 0 finding",
+      "spec": "PASS / 0 finding",
+      "reviewedResearchSha256": "ed09bf16909f1437b20f6126e91ca6d74521f1fd680c27f6164994262890c68d",
+      "reviewedCourseSha256": "e60cf66e768501cd7bea909a6004d6daf610f82c675079619b1142abbac0e917"
+    },
+    "verificationBoundary": {
+      "temporaryAssets": "Playwright 和 preview 已关闭；反馈环唯一临时目录及独立复审 before 快照均已清理",
+      "nextCourse": "B-08 关闭前未读取或研究 B-09 正文"
+    }
+  },
+  "stopBoundary": "第八课 interfaces-inheritance-and-polymorphism 完成并关闭后，只允许开始第九课 enums-and-finite-values；不得开始第十课或进入其他 Java / Go 课程、Reference 或项目实战。"
+}

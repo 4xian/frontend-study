@@ -1,0 +1,223 @@
+.unnecessary-effects-demo {
+  padding: 24px;
+  border: 1px solid #d2d8d5;
+  border-radius: 8px;
+  background: #fbfcfa;
+  color: #24312c;
+}
+
+.unnecessary-effects-demo-heading p,
+.unnecessary-effects-demo-heading span,
+.unnecessary-effects-demo-editor-heading p,
+.unnecessary-effects-demo-editor-heading span,
+.unnecessary-effects-demo-customer-picker span,
+.unnecessary-effects-demo-form span,
+.unnecessary-effects-demo-summary span,
+.unnecessary-effects-demo-result span,
+.unnecessary-effects-demo-result small {
+  display: block;
+  margin: 0;
+}
+
+.unnecessary-effects-demo-heading p,
+.unnecessary-effects-demo-editor-heading p {
+  color: #a14d0f;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.unnecessary-effects-demo-heading h2 {
+  max-width: 36rem;
+  margin: 8px 0;
+  color: #1f2925;
+  font-size: 1.35rem;
+  line-height: 1.3;
+}
+
+.unnecessary-effects-demo-heading span,
+.unnecessary-effects-demo-editor-heading span {
+  color: #58645f;
+  line-height: 1.55;
+}
+
+.unnecessary-effects-demo-customer-picker {
+  display: block;
+  max-width: 22rem;
+  margin: 20px 0 12px;
+}
+
+.unnecessary-effects-demo-customer-picker span,
+.unnecessary-effects-demo-form span {
+  margin-bottom: 6px;
+  color: #47534e;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.unnecessary-effects-demo-customer-picker select,
+.unnecessary-effects-demo-form select,
+.unnecessary-effects-demo-form input {
+  width: 100%;
+  min-height: 42px;
+  padding: 8px 10px;
+  border: 1px solid #7a8882;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #24312c;
+  font: inherit;
+}
+
+.unnecessary-effects-demo-boundary {
+  margin: 0 0 16px;
+  padding: 11px 13px;
+  border-left: 3px solid #a14d0f;
+  background: #fff6ed;
+  color: #684024;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.unnecessary-effects-demo-editor {
+  margin: 0 0 16px;
+  padding: 18px;
+  border: 1px solid #c9ded6;
+  border-radius: 8px;
+  background: #f4faf7;
+}
+
+.unnecessary-effects-demo-editor-heading h3 {
+  margin: 6px 0;
+  color: #154f3f;
+  font-size: 1.2rem;
+  line-height: 1.35;
+}
+
+.unnecessary-effects-demo-form {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 18px -7px 8px;
+}
+
+.unnecessary-effects-demo-form label {
+  flex: 1 1 220px;
+  min-width: 0;
+  margin: 0 7px 12px;
+}
+
+.unnecessary-effects-demo-summary {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -6px 10px;
+}
+
+.unnecessary-effects-demo-summary > div {
+  flex: 1 1 120px;
+  min-width: 0;
+  margin: 0 6px 12px;
+  padding: 14px;
+  border: 1px solid #d9dedb;
+  border-radius: 6px;
+  background: #ffffff;
+}
+
+.unnecessary-effects-demo-summary span,
+.unnecessary-effects-demo-result span {
+  color: #5b6762;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.unnecessary-effects-demo-summary strong {
+  display: block;
+  min-height: 30px;
+  margin-top: 7px;
+  color: #175f4a;
+  font-size: 1.2rem;
+  line-height: 1.35;
+}
+
+.unnecessary-effects-demo-note {
+  margin: 0 0 16px;
+  padding: 11px 13px;
+  border-left: 3px solid #a14d0f;
+  background: #fff6ed;
+  color: #684024;
+  overflow-wrap: anywhere;
+}
+
+.unnecessary-effects-demo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 0 4px;
+}
+
+.unnecessary-effects-demo-actions button,
+.unnecessary-effects-demo-history-reset {
+  min-height: 42px;
+  margin: 0 10px 10px 0;
+  padding: 9px 14px;
+  border: 1px solid #52615b;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #24312c;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.unnecessary-effects-demo-actions button:first-child {
+  border-color: #175f4a;
+  background: #175f4a;
+  color: #ffffff;
+}
+
+.unnecessary-effects-demo-history-reset {
+  margin-top: 12px;
+  border-color: #7e5b43;
+  color: #684024;
+}
+
+.unnecessary-effects-demo-result {
+  padding: 15px;
+  border: 1px solid #c9ded6;
+  border-radius: 6px;
+  background: #eef8f4;
+}
+
+.unnecessary-effects-demo-result strong {
+  display: block;
+  min-height: 30px;
+  margin: 7px 0;
+  color: #154f3f;
+  font-size: 1.15rem;
+  line-height: 1.35;
+}
+
+.unnecessary-effects-demo-result small {
+  color: #4e615a;
+  line-height: 1.5;
+}
+
+@media (max-width: 560px) {
+  .unnecessary-effects-demo {
+    padding: 18px;
+  }
+
+  .unnecessary-effects-demo-editor {
+    padding: 15px;
+  }
+
+  .unnecessary-effects-demo-form,
+  .unnecessary-effects-demo-summary {
+    display: block;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .unnecessary-effects-demo-form label,
+  .unnecessary-effects-demo-summary > div {
+    margin-right: 0;
+    margin-left: 0;
+  }
+}

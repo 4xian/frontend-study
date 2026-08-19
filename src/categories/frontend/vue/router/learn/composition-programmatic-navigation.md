@@ -51,7 +51,7 @@ recap:
 
 # 组合式 API 与编程式导航
 
-## route 描述现在，router 提交下一步
+## 一、route 描述现在，router 提交下一步
 
 useRoute() 返回当前标准化 route 的响应式视图，适合读取 params、query、hash 与 matched。useRouter() 返回已安装的 router 实例，用来 push、replace、go 或注册全局能力。前者是状态入口，后者是命令入口。
 
@@ -69,7 +69,7 @@ async function openUser(id: string) {
 </script>
 ~~~~
 
-## push 与 replace 改变的是历史语义
+## 二、push 与 replace 改变的是历史语义
 
 | 方法 | 对历史的影响 | 常见用途 |
 | --- | --- | --- |
@@ -93,7 +93,7 @@ push() 与 replace() 都走完整导航流程，并返回可等待的 Promise。
 ~~~~
 :::
 
-## 只让真正的依赖驱动副作用
+## 三、只让真正的依赖驱动副作用
 
 route 是响应式对象，但这不意味着要 watch 整个 route。用户数据只依赖 params.id 时，侦听 getter 即可；单纯改变 query 不应重读用户。同一记录的参数变化会复用组件，onBeforeRouteUpdate() 则适合在提交前校验或预取。
 
@@ -112,11 +112,11 @@ onBeforeRouteUpdate((to, from) => {
 })
 ~~~~
 
-## leave guard 保护真正的离开动作
+## 四、leave guard 保护真正的离开动作
 
 onBeforeRouteLeave() 只在当前组件要离开其激活记录时执行。从 /users/1 到 /users/2 复用同一记录，走 update guard；从 /users/2 到 /done 才走 leave guard。未保存时返回 false 会取消本次导航，当前位置和历史指针都应保持不变。
 
-## 在隔离 Demo 中对比命令与守卫
+## 五、在隔离 Demo 中对比命令与守卫
 
 下面的 mini-app 从 /users/1 开始：push 新增用户 2，replace 用用户 3 覆盖当前条目，go(-1) 回到用户 1。它同时展示定向 watch、update/leave guard 计数和导航结果；勾选“有未保存更改”后，离开用户记录会被拒绝。
 
@@ -124,7 +124,7 @@ onBeforeRouteLeave() 只在当前组件要离开其激活记录时执行。从 /
 对比 push、replace、go、定向 watch 与组件内守卫
 :::
 
-## 易错使用提示
+## 六、易错使用提示
 
 :::pitfalls
 ### 侦听整个 route 对象
@@ -312,7 +312,7 @@ router.go(-1)
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 从源码推导适用场景
+## 七、从源码推导适用场景
 
 :::steps
 ### 1. useApi 只暴露当前注入上下文

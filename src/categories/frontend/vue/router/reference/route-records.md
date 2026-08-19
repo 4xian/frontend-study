@@ -200,7 +200,7 @@ anchors:
 
 # Route Records 与 RouteRecordRaw
 
-## 概述
+## 一、概述
 
 `RouteRecordRaw` 是应用传给 `createRouter({ routes })` 或 `router.addRoute()` 的声明联合；matcher 会复制并标准化它，生成 `RouteRecordNormalized`。`RouteRecord` 在 5.2.0 中只是 normalized 类型的别名。输入配置与读取结果看似共享 path、name、meta，却不是可互换的生命周期对象。
 
@@ -208,7 +208,7 @@ anchors:
 写配置时用 `RouteRecordRaw`；读取 `router.getRoutes()`、`route.matched` 或 matcher 结果时按对应 normalized 类型处理。不要把 normalized record 当成再次声明 routes 的模板。
 :::
 
-## Route Record Base
+## 二、Route Record Base
 
 `_RouteRecordBase` 汇总五种 raw record 共享的 path parser、name、alias、guard、meta、children 与 props 字段。固定源码注释称它为 common internal shape，但 5.2.0 根入口实际导出且未标 `@internal`，本页按 manifest 的 public/quick 记录；应用通常仍应声明最终的 `RouteRecordRaw`，让联合类型检查互斥字段。
 
@@ -221,7 +221,7 @@ anchors:
 | children / props | RouteRecordRaw[]；布尔、对象或函数模式 | 最终值域由五个联合分支收窄 |
 | sensitive / strict / end | 继承 PathParserOptions | record 级值覆盖 Router 全局默认；end 已 deprecated |
 
-## Route Meta
+## 三、Route Meta
 
 `RouteMeta` 是可通过模块增强收窄的开放接口。稳定应用字段应在一个会被 TypeScript 纳入编译的模块中声明；`route.meta` 是 matched records 从父到子的非递归合并结果。5.2.0 还声明 experimental Data Loaders 使用的 `loaders`，以及两个 internal symbol 字段；未启用 experimental plugin 时不要围绕这些字段设计稳定业务契约。
 
@@ -245,7 +245,7 @@ const reportRoute: RouteRecordRaw = {
 }
 ~~~~
 
-## Route Record Multiple Views
+## 四、Route Record Multiple Views
 
 `RouteRecordMultipleViews` 用必填 `components: Record&lt;string, RawRouteComponent&gt;` 同时填充多个命名 RouterView，并禁止 singular `component`、children 与 redirect。`default` 对应未命名 RouterView；`props` 可以是布尔值，或按与 components 相同的 view name 分别配置。
 
@@ -263,7 +263,7 @@ const dashboardRoute: RouteRecordRaw = {
 }
 ~~~~
 
-## Route Record Multiple Views With Children
+## 五、Route Record Multiple Views With Children
 
 `RouteRecordMultipleViewsWithChildren` 要求 `children`，允许 components 缺省、为 null 或为命名组件表，也允许 redirect。没有 components 的 parent 可作为路径分组，让顶层 RouterView 直接使用匹配 child；需要布局时再提供与命名 RouterView 对齐的 components。
 
@@ -281,7 +281,7 @@ const adminRoutes: RouteRecordRaw = {
 }
 ~~~~
 
-## Route Record Normalized
+## 六、Route Record Normalized
 
 `RouteRecordNormalized` 是 matcher 的读取形状：所有 component 都归一到 `components`，所有 props 都归一到按 view name 索引的对象，meta 与 children 总是存在。`mods`、三组 guard 容器属于 internal runtime 状态；`instances` 供 RouterView 与组件守卫协调。业务代码读取公开信息即可，不要写这些容器。
 
@@ -293,7 +293,7 @@ const adminRoutes: RouteRecordRaw = {
 | aliasOf | 原记录为 undefined，alias 指向原 normalized record | 区分原路径与 alias 副本 |
 | mods / guard sets / callbacks | matcher 与导航期间创建 | internal；禁止应用读写 |
 
-## Route Record Redirect
+## 七、Route Record Redirect
 
 `RouteRecordRedirect` 是纯 redirect 分支：redirect 必填，component、components 与 props 为 never，因为该 record 不会直接渲染。redirect 可给 path/name 地址或返回地址的函数；导航守卫运行在最终目标上，不运行在 redirect record 上。带 children 的 redirect 应选对应 WithChildren 分支并提供布局 component。
 
@@ -307,7 +307,7 @@ const legacyReportRoute: RouteRecordRaw = {
 }
 ~~~~
 
-## Route Record Single View
+## 八、Route Record Single View
 
 `RouteRecordSingleView` 是叶子页面的最窄形状：component 必填，components、children 与 redirect 被排除，props 只描述 default view。component 既可为普通 Vue 组件，也可为返回组件 Promise 的 lazy factory。
 
@@ -320,7 +320,7 @@ const profileRoute: RouteRecordRaw = {
 }
 ~~~~
 
-## Route Record Single View With Children
+## 九、Route Record Single View With Children
 
 `RouteRecordSingleViewWithChildren` 要求 children，但 component 可以缺省或为 null。提供 component 时，它通常是包含嵌套 RouterView 的布局；省略时 parent 只组织路径，匹配 child 可直接进入上一级 RouterView。与叶子分支不同，它允许 redirect。
 
@@ -335,7 +335,7 @@ const userRoutes: RouteRecordRaw = {
 }
 ~~~~
 
-## Internal Route Record Props
+## 十、Internal Route Record Props
 
 :::warning
 `_RouteRecordProps` 在 5.2.0 固定源码明确标记 `@internal`。不要从根入口导入它、做条件类型推导或把它发布在应用公共接口中；直接用 `RouteRecordRaw` 声明 route，再通过公开的 `props` 配置选择 boolean、静态对象或无状态函数模式。
@@ -348,19 +348,19 @@ const userRoutes: RouteRecordRaw = {
 | 函数 | route 变化时计算 props | 转换 params/query；函数保持无状态 |
 | named 对象 | 按 components 的 view name 选择上述模式 | 每个命名视图独立声明 |
 
-## Route Record
+## 十一、Route Record
 
 `RouteRecord` 在 5.2.0 精确等于 `RouteRecordNormalized`，用于说明已经进入 matcher 的 record，而不是旧版本意义上的 raw 配置。新代码若要表达输入，请明确使用 `RouteRecordRaw`；若要表达输出，优先使用 API 直接返回的具体 normalized 类型。
 
-## Route Record Name
+## 十二、Route Record Name
 
 `RouteRecordName` 是条件类型：没有生成 `RouteNamedMap` 时退化为 generic name；存在 typed route map 时收窄为 `keyof RouteMap`。固定声明提示它可能过早求值；需要稳定表达已生成的全部 route names 时，直接使用 `keyof RouteMap` 更清楚。
 
-## Route Record Name Generic
+## 十三、Route Record Name Generic
 
 `RouteRecordNameGeneric = string | symbol | undefined` 是无 typed route map 时的通用值域。raw record 的 name 可缺省，所以包含 undefined；实际传给 `hasRoute()`、`removeRoute()` 或按名导航时必须是已定义的 string 或 symbol。Symbol 适合避免第三方功能模块的字符串冲突，但不能从 URL 持久化还原。
 
-## Route Record Raw
+## 十四、Route Record Raw
 
 `RouteRecordRaw` 是五分支可辨识联合，也是本页 detail 主入口。互斥字段把常见配置错误前移到 TypeScript：叶子用 component 或 components，嵌套分支必须有 children，纯 redirect 不渲染。共享的 path、alias、name、beforeEnter、meta 和 parser options 由 base 提供。
 
@@ -372,13 +372,13 @@ const userRoutes: RouteRecordRaw = {
 | RouteRecordMultipleViewsWithChildren | children；components 可选 | component |
 | RouteRecordRedirect | redirect | component、components、props |
 
-## Route Record Redirect Option
+## 十五、Route Record Redirect Option
 
 :::warning
 `RouteRecordRedirectOption` 虽从 5.2.0 根入口可见，但固定源码明确标记 `@internal`。不要显式导入、重导出或在应用 API 中锁定该别名；把 redirect 值内联到公开的 `RouteRecordRaw`，由联合类型推断。函数形态接收 to/from 并返回 `RouteLocationRaw`，其参数细节也不应成为应用自建抽象的兼容承诺。
 :::
 
-## 选型速查
+## 十六、选型速查
 
 | 当前任务 | 使用类型或字段 | 不要使用 |
 | --- | --- | --- |
@@ -389,7 +389,7 @@ const userRoutes: RouteRecordRaw = {
 | 声明命名视图 | components 与同名 props map | 把 view name 当 route name |
 | 声明 redirect | RouteRecordRaw 内联 redirect | 显式依赖 RouteRecordRedirectOption |
 
-## 易错使用提示
+## 十七、易错使用提示
 
 :::pitfalls
 ### 给两条 route record 使用同一个 name
@@ -639,7 +639,7 @@ createRouter({ history, routes })
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 十八、源码推导与适用场景
 
 :::steps
 ### 1. 先以 raw 联合约束配置组合

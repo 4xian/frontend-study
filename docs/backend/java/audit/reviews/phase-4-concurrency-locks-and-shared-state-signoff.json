@@ -1,0 +1,274 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.advanced.concurrency-locks-and-shared-state",
+  "batchId": "phase-4-concurrency-locks-and-shared-state",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-10T11:39:31+08:00",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "stagingPerformedThisBatch": false,
+    "existingStagedAndUnstagedStatePreserved": true
+  },
+  "sourceRepository": {
+    "path": "/Users/jian/Desktop/work/TDH/dzzz/dzzz-app",
+    "readOnly": true,
+    "projectExecuted": false,
+    "projectModified": false,
+    "accessBoundary": "Frozen Phase 2 evidence only; no batch-specific project access"
+  },
+  "phase2Freeze": {
+    "researchStatus": "not-started",
+    "exampleStatus": "not-started",
+    "courseStatus": "planned",
+    "phase4StateRecordedOnlyInThisSignoff": true,
+    "knowledgePath": {
+      "sourceItems": 167,
+      "courseNodes": 64,
+      "dependencyEdges": 114,
+      "gateStatus": "passed"
+    }
+  },
+  "versions": {
+    "verifiedAt": "2026-08-10",
+    "modern": {
+      "java": "25",
+      "springFramework": "7.0.8",
+      "maven": "3.9.12"
+    },
+    "legacy": {
+      "java": "8",
+      "springBoot": "2.3.12.RELEASE",
+      "springFramework": "5.2.15.RELEASE",
+      "maven": "3.9.12"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/advanced/concurrency-locks-and-shared-state.md",
+      "sha256": "566b4000cfee8ee03c2d76e326be1c6fdbdf0b29c7994bcf05ac21bd70e742d5"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/concurrency-locks-and-shared-state.md",
+      "sha256": "faa4e7f43d75f284db7e84cb78f4ffe908f9218a7757ce0cf5b69a73677fccbd"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "eebe5b53f0b48f7bb924daa5bc4cae1165eb2f65306cd5c94c875349226ea5ed"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "1edd3e791c01f1d150c331e65123e4a878a9c982298a9f5da12d2ce86b6765ff"
+    }
+  ],
+  "sourceVerification": {
+    "researchCardCount": 27,
+    "researchUniqueUrlCount": 27,
+    "frontmatterOfficialSourceCount": 27,
+    "frontmatterUniqueUrlCount": 27,
+    "researchFrontmatterSetDifference": 0,
+    "communitySourcesUsedAsEvidence": false,
+    "directUrlCheck": "PASS; official targets were checked during research and the final research/frontmatter URL sets were recomputed as identical"
+  },
+  "projectEvidence": {
+    "itemCount": 16,
+    "observedCount": 7,
+    "correctedCount": 8,
+    "rejectedCount": 1,
+    "projectEvidenceSetDifference": 0,
+    "currentDefectClaimedFromFrozenEvidence": false,
+    "boundary": "Representative paths and symbols came only from the frozen Phase 2 matrix"
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "lineCount": 1069,
+    "lineBudget": "PASS; about 1000 lines and no line-count exception",
+    "independentKnowledgePointHeadings": 15,
+    "knowledgePointSevenPartCoverage": "15/15",
+    "pitfallCount": 10,
+    "pitfallNinePartCoverage": "10/10",
+    "officialSourceCount": 27,
+    "projectEvidenceCount": 16,
+    "javaCodeBlockCount": 36,
+    "javaMethodComments": "PASS",
+    "sourceHeadingAbsent": true,
+    "securitySection": "PASS",
+    "contentCheck": "PASS; knowledge=15 pitfalls=10 sources=27 javaBlocks=36"
+  },
+  "javaVerification": {
+    "temporaryFixtureRoot": "/tmp/java-advanced-02-feedback.n5vs4M",
+    "temporaryAssetsCleaned": true,
+    "cleanupVerifiedWithFinalAbsenceChecks": true,
+    "focusedSnippets": [
+      {
+        "name": "monitor happens-before publication",
+        "runtime": "Java 25",
+        "exitCode": 0,
+        "summary": "输出 42"
+      },
+      {
+        "name": "bounded ThreadPoolExecutor rejection",
+        "runtime": "Java 25",
+        "exitCode": 0,
+        "summary": "第四项任务确定性输出 rejected"
+      }
+    ],
+    "cases": [
+      {
+        "name": "Modern concurrency feedback loop repeated",
+        "runtime": "Java 25 / Maven 3.9.12",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "共享状态、Future、CompletableFuture、ConcurrentHashMap、BlockingQueue、AtomicInteger、锁与拒绝边界通过"
+      },
+      {
+        "name": "Legacy concurrency feedback loop repeated",
+        "runtime": "Java 8 / Maven 3.9.12",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "Java 8 兼容的执行器、Future、并发集合、原子类型和显式锁边界通过"
+      },
+      {
+        "name": "Virtual thread feedback loop",
+        "runtime": "Java 25",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "virtual-thread-per-task 与 Semaphore 外部资源限流通过"
+      },
+      {
+        "name": "Spring managed executor feedback loop",
+        "runtime": "Spring Framework 7.0.8 / Java 25 and Spring Framework 5.2.15.RELEASE / Java 8",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "ThreadPoolTaskExecutor 有界配置、容器托管和关闭边界通过，未手工 initialize"
+      }
+    ],
+    "negativeControls": [
+      "静默丢弃拒绝策略",
+      "volatile 复合计数丢更新",
+      "缺少 finally 解锁",
+      "忽略 shutdownNow 中断"
+    ],
+    "negativeControlExitCode": 1
+  },
+  "verification": [
+    {
+      "command": "content-check.mjs",
+      "exitCode": 0,
+      "summary": "CONTENT_PASS knowledge=15 pitfalls=10 sources=27 javaBlocks=36"
+    },
+    {
+      "command": "Catalog cold start check (three consecutive runs)",
+      "exitCode": 0,
+      "summary": "CATALOG_COLD_PASS on all runs; available=37 planned=14"
+    },
+    {
+      "command": "scoped Java manifest, loader and markdown checks",
+      "exitCode": 0,
+      "summary": "frontmatter, 15 knowledge points, 10 pitfalls, 27 official sources and 16 project evidence items passed"
+    },
+    {
+      "command": "npm run type-check && npm run lint && npm run format:check && npm run test:unit && npm run test:e2e && npm run build",
+      "exitCode": 0,
+      "summary": "all repository quality gates passed; 1444 modules transformed and concurrency chunk emitted"
+    },
+    {
+      "command": "Playwright at 1440x900 and 390x844 on /backend/java/core/learn/concurrency-locks-and-shared-state",
+      "exitCode": 0,
+      "summary": "200 responses; no horizontal overflow; 0 console errors and warnings; desktop and mobile screenshots manually reviewed"
+    }
+  ],
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "baseUrl": "http://127.0.0.1:4211/",
+    "targetPath": "/backend/java/core/learn/concurrency-locks-and-shared-state",
+    "temporaryScreenshots": [
+      "/tmp/java-advanced-02-scoped-browser.oFiitR/.playwright-cli/page-2026-08-10T03-34-18-539Z.png",
+      "/tmp/java-advanced-02-scoped-browser.oFiitR/.playwright-cli/page-2026-08-10T03-34-24-883Z.png"
+    ],
+    "desktop": {
+      "viewport": "1440x900",
+      "targetPageStatus": 200,
+      "documentClientWidth": 1440,
+      "documentScrollWidth": 1440,
+      "knowledgePointCount": 15,
+      "pitfallCount": 10,
+      "officialSourceCount": 27,
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "failedRequests": 0
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "targetPageStatus": 200,
+      "documentClientWidth": 390,
+      "documentScrollWidth": 390,
+      "knowledgePointCount": 15,
+      "pitfallCount": 10,
+      "officialSourceCount": 27,
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "failedRequests": 0
+    },
+    "manualScreenshotReview": "PASS; no incoherent overlap and code overflow remains inside its own scroll container"
+  },
+  "manifestRegression": {
+    "basicsAvailable": 18,
+    "intermediateAvailable": 17,
+    "advancedAvailable": 2,
+    "advancedPlanned": 14,
+    "currentEntryLoadable": true,
+    "futurePlannedEntriesHaveNoLoader": true,
+    "finalColdStartRuns": 3,
+    "finalColdStartErrors": 0,
+    "finalColdStartPending": false
+  },
+  "review": {
+    "standards": "PASS / 0 finding",
+    "spec": "PASS / 0 finding",
+    "findingCount": 0,
+    "independentReviewRounds": 2,
+    "rounds": [
+      {
+        "round": 1,
+        "standards": "FAIL / 1 finding",
+        "spec": "FAIL / 1 finding",
+        "resolution": "补齐 3 个冻结项目证据登记，并增加静默丢弃拒绝策略负例"
+      },
+      {
+        "round": 2,
+        "standards": "PASS / 0 finding",
+        "spec": "PASS / 0 finding",
+        "resolution": "独立复审确认 happens-before、确定性拒绝、CHM 快照、Spring 生命周期和严格 stop boundary"
+      }
+    ],
+    "finalIndependentConfirmationPending": false
+  },
+  "temporaryAssetCleanup": {
+    "pending": false,
+    "verifiedAt": "2026-08-10T11:45:21+08:00",
+    "temporaryRoots": [
+      "/tmp/java-advanced-02-browser.MIObeG",
+      "/tmp/java-advanced-02-curl.err",
+      "/tmp/java-advanced-02-feedback.n5vs4M",
+      "/tmp/java-advanced-02-lesson-diff-check.out",
+      "/tmp/java-advanced-02-pre-catalog.XqE2kH",
+      "/tmp/java-advanced-02-research-diff-check.out",
+      "/tmp/java-advanced-02-scoped-browser.oFiitR",
+      "/tmp/java-advanced-02-scoped-preview.eY6c0r",
+      "/tmp/java-advanced-02-snippets.Ysxg3k"
+    ],
+    "playwrightSessions": ["java-advanced-02", "java-advanced-02-scoped"],
+    "playwrightSessionsClosed": true,
+    "previewPort": 4211,
+    "previewStopped": true,
+    "remainingPathCount": 0
+  },
+  "temporaryAssetsCleaned": true,
+  "stopBoundary": "Close advanced course 2 only; do not research, draft, register or load advanced course 3, Reference or project practice"
+}

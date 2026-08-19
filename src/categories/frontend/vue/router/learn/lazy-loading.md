@@ -52,7 +52,7 @@ recap:
 
 # 路由懒加载
 
-## 让 import 发生在首次进入路由时
+## 一、让 import 发生在首次进入路由时
 
 路由懒加载的公开契约是把 route record 的 component 写成返回 Promise 的函数。外层函数保留了调用时机；Router 只在进入该 record 时调用 loader，并等到组件解析后才继续确认导航。
 
@@ -71,7 +71,7 @@ const routes = [
 | import resolved | 已获得 route component | 导航未必已提交 |
 | navigation commit | currentRoute 与 RouterView 已切换 | 不能推断网络缓存 |
 
-## 路由组件不要再包 defineAsyncComponent
+## 二、路由组件不要再包 defineAsyncComponent
 
 `() =&gt; import()` 的所有者是 Router：它在导航确认前解析页面并提取 component guard。`defineAsyncComponent()` 的所有者是 Vue renderer：它在组件真正渲染时加载，适合页面内部的昂贵子组件。两者解决的不是同一层问题。
 
@@ -83,7 +83,7 @@ component: () => import('./ReportsRoute.vue')
 const LazyChart = defineAsyncComponent(() => import('./ReportChart.vue'))
 ~~~~
 
-## 观察首次等待与再次进入复用
+## 三、观察首次等待与再次进入复用
 
 下面的 mini-app 用独立 memory router 运行。手动 gate 只把“Router 已调用 loader，动态 import 尚未执行”稳定展示出来；放行后执行真实字面量 import。离开再进入时，loader、import 和 resolved 计数都应保持为 1。
 
@@ -91,7 +91,7 @@ const LazyChart = defineAsyncComponent(() => import('./ReportChart.vue'))
 用受控 gate 观察真实动态 import 与 Router 解析结果复用
 :::
 
-## 易错使用提示
+## 四、易错使用提示
 
 :::pitfalls
 ### 在建立 routes 时就调用 import
@@ -294,7 +294,7 @@ build: { rollupOptions: { output: { manualChunks: {} } } }
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 从源码推导适用场景
+## 五、从源码推导适用场景
 
 :::steps
 ### 1. loader 位于进入组件 guard extraction

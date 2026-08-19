@@ -66,7 +66,7 @@ anchors:
 
 # TypeScript 工具类型速查
 
-## PropType&lt;T&gt;
+## 一、PropType&lt;T&gt;
 
 `PropType<T>` 为运行时 props 声明补充精确的 TypeScript 类型，常用于 `Object`、`Array` 和 `Function` 构造器。它只改变静态推导：运行时仍按原构造器检查，不会验证对象字段或业务值域。本页覆盖的是官网列出的 9 个常用工具类型，不是 `vue` 的全部类型导出清单。
 
@@ -93,7 +93,7 @@ const BookCard = defineComponent({
 来自网络、存储或用户输入的对象仍需在系统边界解析，或通过 prop 的 `validator` 做运行时校验；类型断言不会生成验证代码。
 :::
 
-## MaybeRef&lt;T&gt;
+## 二、MaybeRef&lt;T&gt;
 
 Vue 3.3+ 的 `MaybeRef<T>` 表示普通值或可解包的 ref。官网可用 `T | Ref<T>` 建立心智模型；Vue 3.5.40 的固定声明还显式包含 `ShallowRef<T>` 与 `WritableComputedRef<T>`。消费方应通过 `unref()` 统一读取，而不是假设参数一定有 `.value`。
 
@@ -107,7 +107,7 @@ function readPageSize(source: MaybeRef<number>) {
 }
 ~~~~
 
-## MaybeRefOrGetter&lt;T&gt;
+## 三、MaybeRefOrGetter&lt;T&gt;
 
 Vue 3.3+ 的 `MaybeRefOrGetter<T>` 在普通值与 ref 之外，还接受只读 computed 和 `() => T` getter。它适合需要在调用时读取最新结果的 source 参数；应使用 `toValue()` 统一取值，因为 `unref()` 不会调用普通函数。
 
@@ -121,7 +121,7 @@ function readQuery(source: MaybeRefOrGetter<string>) {
 }
 ~~~~
 
-## ExtractPropTypes&lt;T&gt;
+## 四、ExtractPropTypes&lt;T&gt;
 
 `ExtractPropTypes<T>` 从运行时 props 选项提取组件内部收到的已解析类型。Boolean prop 与带默认值的 prop 在内部始终有值，显式 `required: true` 的 prop 也必填。选项对象通常以 `as const` 保留 `required` 等字面量信息。
 
@@ -138,7 +138,7 @@ type InternalProps = ExtractPropTypes<typeof options>
 // { active: boolean; label: string; count: number }
 ~~~~
 
-## ExtractPublicPropTypes&lt;T&gt;
+## 五、ExtractPublicPropTypes&lt;T&gt;
 
 Vue 3.3+ 的 `ExtractPublicPropTypes<T>` 描述父组件允许传入的 props。只有显式 `required: true` 才形成必填输入；Boolean prop 与带默认值的 prop 对父组件仍可省略。组件库发布输入契约时应使用 public 视角，不能复用内部已解析类型。
 
@@ -155,7 +155,7 @@ type PublicProps = ExtractPublicPropTypes<typeof options>
 // { active?: boolean; label?: string; count: number }
 ~~~~
 
-## ComponentCustomProperties
+## 六、ComponentCustomProperties
 
 通过 `declare module 'vue'` 增强 `ComponentCustomProperties`，可让 Options API 的 `this` 与组件公共实例识别 `app.config.globalProperties` 上的全局属性。增强文件必须是模块，且声明不会创建运行时值；插件或应用仍要执行实际安装。
 
@@ -177,7 +177,7 @@ const app = createApp(App)
 app.config.globalProperties.$service = { endpoint: '/api' }
 ~~~~
 
-## ComponentCustomOptions
+## 七、ComponentCustomOptions
 
 增强 `ComponentCustomOptions` 可让 `defineComponent()` 识别插件提供的自定义组件选项。该接口只提供类型入口；若选项要参与 mixin 或 `extends` 合并，应用还需在 `app.config.optionMergeStrategies` 中实现对应的运行时合并规则。
 
@@ -198,7 +198,7 @@ const AuditedPanel = defineComponent({
 })
 ~~~~
 
-## ComponentCustomProps
+## 八、ComponentCustomProps
 
 增强 `ComponentCustomProps` 会为所有组件的 TSX 调用加入允许的公共 prop，适合确实由框架层统一支持的全局属性。它不会把属性加入组件运行时 props，也不会替代具体组件的 `props` 声明。
 
@@ -214,7 +214,7 @@ declare module 'vue' {
 const action = <ActionButton traceId="checkout" />
 ~~~~
 
-## CSSProperties
+## 九、CSSProperties
 
 `CSSProperties` 是 Vue runtime-dom 为 JSX 与 style 对象提供的封闭类型，继承 `csstype` 的 camelCase 与 hyphen-case 属性。Vue 3.5.40 已允许 `--${string}` 自定义属性，值为 `string | number | undefined`；其他未知键仍会触发拼写检查。它只约束类型，不会生成 CSS 或触发 SFC CSS 编译。
 
@@ -228,7 +228,7 @@ const panelStyle: CSSProperties = {
 }
 ~~~~
 
-## 易错使用提示
+## 十、易错使用提示
 
 :::pitfalls
 ### 把 PropType&lt;T&gt; 当成深层运行时验证
@@ -394,7 +394,7 @@ const style: CSSProperties = {
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 十一、源码推导与适用场景
 
 :::steps
 ### 1. PropType&lt;T&gt; 最终仍映射到运行时构造器

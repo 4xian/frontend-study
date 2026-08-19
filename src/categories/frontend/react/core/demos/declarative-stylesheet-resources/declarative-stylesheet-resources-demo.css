@@ -1,0 +1,359 @@
+.stylesheet-demo {
+  color: #18252b;
+  background: #f5f7f6;
+  border: 1px solid #cfd8d4;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.stylesheet-demo-heading {
+  padding: 24px;
+  color: #ffffff;
+  background: #263a37;
+}
+
+.stylesheet-demo-heading p,
+.stylesheet-demo-heading h2,
+.stylesheet-demo-heading span {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.stylesheet-demo-heading p {
+  color: #b8ddd1;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.stylesheet-demo-heading h2 {
+  margin-top: 8px;
+  font-size: 24px;
+  line-height: 1.35;
+}
+
+.stylesheet-demo-heading span {
+  display: block;
+  margin-top: 8px;
+  color: #e3ece9;
+  line-height: 1.65;
+}
+
+.stylesheet-demo-body {
+  padding: 20px;
+}
+
+.stylesheet-controls,
+.stylesheet-observation,
+.stylesheet-boundaries {
+  min-width: 0;
+  padding: 18px;
+  background: #ffffff;
+  border: 1px solid #d6ddda;
+  border-radius: 8px;
+}
+
+.stylesheet-observation,
+.stylesheet-boundaries {
+  margin-top: 16px;
+}
+
+.stylesheet-control-heading,
+.stylesheet-observation-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.stylesheet-control-heading > div,
+.stylesheet-observation-heading > div {
+  min-width: 0;
+  margin-right: 16px;
+}
+
+.stylesheet-control-heading span,
+.stylesheet-control-heading strong,
+.stylesheet-observation-heading span,
+.stylesheet-observation-heading h3 {
+  overflow-wrap: anywhere;
+}
+
+.stylesheet-control-heading span,
+.stylesheet-observation-heading span,
+.stylesheet-order > span {
+  color: #65716d;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.stylesheet-control-heading strong {
+  display: block;
+  margin-top: 5px;
+  color: #145c4d;
+}
+
+.stylesheet-actions {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 14px -5px -10px;
+}
+
+.stylesheet-controls button {
+  min-height: 42px;
+  padding: 9px 12px;
+  margin: 0 5px 10px;
+  color: #263d3a;
+  background: #ffffff;
+  border: 1px solid #82948e;
+  border-radius: 6px;
+  font: inherit;
+  font-weight: 700;
+  line-height: 1.35;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+.stylesheet-actions button {
+  flex: 1 1 190px;
+}
+
+.stylesheet-controls button.is-quiet {
+  color: #3e504b;
+  background: #f3f6f5;
+}
+
+.stylesheet-controls button.is-danger {
+  color: #7c302c;
+  background: #fff7f5;
+  border-color: #c99590;
+}
+
+.stylesheet-controls button:hover {
+  filter: brightness(0.96);
+}
+
+.stylesheet-controls button:focus-visible,
+.stylesheet-duplicate-control input:focus-visible {
+  outline: 3px solid #d8a332;
+  outline-offset: 2px;
+}
+
+.stylesheet-controls button:disabled {
+  color: #858c89;
+  background: #e9eceb;
+  border-color: #d2d7d5;
+  cursor: not-allowed;
+  filter: none;
+}
+
+.stylesheet-duplicate-control {
+  display: flex;
+  align-items: center;
+  min-height: 42px;
+  padding: 9px 12px;
+  margin-top: 14px;
+  color: #354641;
+  background: #f4f7f6;
+  border: 1px solid #d6ddda;
+  border-radius: 6px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.stylesheet-duplicate-control input {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  margin: 0 10px 0 0;
+}
+
+.stylesheet-duplicate-control span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.stylesheet-observation-heading h3 {
+  margin: 5px 0 0;
+  font-size: 18px;
+  line-height: 1.45;
+}
+
+.stylesheet-observation-heading > strong {
+  flex: 0 1 190px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.45;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.stylesheet-observation-heading > strong.is-pass {
+  color: #14503f;
+  background: #dcefe8;
+}
+
+.stylesheet-observation-heading > strong.is-fail {
+  color: #7a322e;
+  background: #f7dfdc;
+}
+
+.stylesheet-counts {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 16px -6px -12px;
+}
+
+.stylesheet-counts > div {
+  flex: 1 1 170px;
+  min-width: 0;
+  padding: 14px;
+  margin: 0 6px 12px;
+  background: #f5f7f6;
+  border: 1px solid #dce2df;
+  border-radius: 8px;
+}
+
+.stylesheet-counts span,
+.stylesheet-counts strong {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.stylesheet-counts span {
+  color: #65716d;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.stylesheet-counts strong {
+  margin-top: 7px;
+  color: #264f46;
+  font-size: 23px;
+}
+
+.stylesheet-commit-state {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 16px -6px -12px;
+}
+
+.stylesheet-commit-state > div {
+  flex: 1 1 280px;
+  min-width: 0;
+  padding: 12px;
+  margin: 0 6px 12px;
+  background: #ffffff;
+  border: 1px solid #dce2df;
+  border-radius: 6px;
+}
+
+.stylesheet-commit-state dt,
+.stylesheet-commit-state dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.stylesheet-commit-state dt {
+  color: #65716d;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.stylesheet-commit-state dd {
+  margin-top: 7px;
+  color: #344842;
+  line-height: 1.6;
+}
+
+.stylesheet-order {
+  min-width: 0;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #dce2df;
+}
+
+.stylesheet-order ol,
+.stylesheet-order p {
+  margin: 8px 0 0;
+}
+
+.stylesheet-order ol {
+  padding-left: 22px;
+}
+
+.stylesheet-order li {
+  padding: 5px 0;
+  color: #344842;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.stylesheet-order p {
+  color: #65716d;
+  line-height: 1.6;
+}
+
+.stylesheet-boundaries {
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 6px;
+}
+
+.stylesheet-boundaries > div {
+  flex: 1 1 220px;
+  min-width: 0;
+  padding: 0 12px 12px;
+}
+
+.stylesheet-boundaries strong,
+.stylesheet-boundaries span {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.stylesheet-boundaries strong {
+  color: #23463f;
+}
+
+.stylesheet-boundaries span {
+  margin-top: 5px;
+  color: #596761;
+  line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  .stylesheet-demo-heading,
+  .stylesheet-demo-body {
+    padding: 16px;
+  }
+
+  .stylesheet-demo-heading h2 {
+    font-size: 21px;
+  }
+
+  .stylesheet-control-heading,
+  .stylesheet-observation-heading {
+    display: block;
+  }
+
+  .stylesheet-control-heading > div,
+  .stylesheet-observation-heading > div {
+    margin-right: 0;
+  }
+
+  .stylesheet-control-heading > button,
+  .stylesheet-observation-heading > strong {
+    display: block;
+    width: 100%;
+    margin: 12px 0 0;
+  }
+
+  .stylesheet-commit-state > div,
+  .stylesheet-boundaries > div {
+    flex-basis: 100%;
+  }
+}

@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>hydrateRoot 静态输入快照</title>
+    <style>
+      :root {
+        color: #172033;
+        background: #f5f7fb;
+        font-family:
+          Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-width: 0;
+        margin: 0;
+        padding: 16px;
+      }
+
+      .hydration-fixture-app {
+        max-width: 760px;
+        margin: 0 auto;
+        overflow: hidden;
+        background: #ffffff;
+        border: 1px solid #cfd6e6;
+        border-radius: 8px;
+      }
+
+      .hydration-fixture-heading {
+        padding: 18px;
+        color: #ffffff;
+        background: #26375f;
+      }
+
+      .hydration-fixture-heading span,
+      .hydration-fixture-heading h1,
+      .hydration-fixture-heading p {
+        display: block;
+        margin: 0;
+        overflow-wrap: anywhere;
+      }
+
+      .hydration-fixture-heading span {
+        color: #c4d3ff;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      .hydration-fixture-heading h1 {
+        margin-top: 6px;
+        font-size: 24px;
+        line-height: 1.35;
+      }
+
+      .hydration-fixture-heading p {
+        margin-top: 8px;
+        color: #e0e6f8;
+        line-height: 1.55;
+      }
+
+      .hydration-fixture-panel {
+        padding: 18px;
+      }
+
+      .hydration-fixture-count {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-width: 0;
+        padding: 12px 14px;
+        background: #eef2f8;
+        border-left: 4px solid #3a7b68;
+        border-radius: 6px;
+      }
+
+      .hydration-fixture-root-label {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-width: 0;
+        padding: 10px 14px;
+        margin-top: 10px;
+        background: #f7f1e3;
+        border-left: 4px solid #9a742d;
+        border-radius: 6px;
+      }
+
+      .hydration-fixture-count span,
+      .hydration-fixture-count strong,
+      .hydration-fixture-root-label span,
+      .hydration-fixture-root-label strong {
+        overflow-wrap: anywhere;
+      }
+
+      .hydration-fixture-count span {
+        margin-right: 16px;
+        color: #4b5870;
+        font-weight: 700;
+      }
+
+      .hydration-fixture-count strong {
+        color: #175c4a;
+        font-size: 24px;
+      }
+
+      .hydration-fixture-root-label span {
+        margin-right: 16px;
+        color: #625534;
+        font-weight: 700;
+      }
+
+      .hydration-fixture-root-label strong {
+        color: #735318;
+      }
+
+      .hydration-fixture-actions {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 14px -5px -10px;
+      }
+
+      .hydration-fixture-actions > button,
+      .hydration-fixture-action-group {
+        flex: 1 1 190px;
+        min-width: 0;
+        margin: 0 5px 10px;
+      }
+
+      .hydration-fixture-action-group button,
+      .hydration-fixture-actions > button {
+        width: 100%;
+        min-height: 42px;
+        padding: 9px 12px;
+        color: #ffffff;
+        background: #315d9a;
+        border: 1px solid #315d9a;
+        border-radius: 6px;
+        font: inherit;
+        font-weight: 700;
+        line-height: 1.35;
+        white-space: normal;
+        overflow-wrap: anywhere;
+        cursor: pointer;
+      }
+
+      .hydration-fixture-action-group button:hover,
+      .hydration-fixture-actions > button:hover {
+        background: #244978;
+        border-color: #244978;
+      }
+
+      .hydration-fixture-action-group button:focus-visible,
+      .hydration-fixture-actions > button:focus-visible {
+        outline: 3px solid #e8ad3c;
+        outline-offset: 2px;
+      }
+
+      .hydration-fixture-fallback {
+        min-height: 42px;
+        padding: 10px 12px;
+        margin: 0;
+        color: #8c2732;
+        background: #fff0f1;
+        border: 1px solid #dd8590;
+        border-radius: 6px;
+        line-height: 1.45;
+        overflow-wrap: anywhere;
+      }
+
+      @media (max-width: 520px) {
+        body {
+          padding: 10px;
+        }
+
+        .hydration-fixture-heading,
+        .hydration-fixture-panel {
+          padding: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- prettier-ignore -->
+    <div id="root"><main class="hydration-fixture-app" data-testid="fixture-main"><header class="hydration-fixture-heading"><span>about:srcdoc / static snapshot</span><h1 data-testid="fixture-title">静态快照</h1><p>HTML 先存在；React 接管后，同一按钮才会执行组件中的事件处理。</p></header><section class="hydration-fixture-panel" aria-label="iframe 内的 hydration 操作区"><div class="hydration-fixture-count"><span>React State 计数</span><strong data-testid="fixture-count">0</strong></div><div class="hydration-fixture-root-label"><span>root.render 标签</span><strong data-testid="fixture-root-label">初始树</strong></div><div class="hydration-fixture-actions"><button type="button" data-testid="count-button">计数 +1</button><div class="hydration-fixture-action-group"><button type="button" data-testid="caught-button">触发 Boundary 错误</button></div><button type="button" data-testid="uncaught-button">触发 Root 错误</button></div></section></main></div>
+  </body>
+</html>

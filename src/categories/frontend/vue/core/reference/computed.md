@@ -40,7 +40,7 @@ anchors:
 
 # computed()
 
-## 概述
+## 一、概述
 
 computed() 用于声明"派生状态"：一个值由其他响应式状态计算而来。传入 getter 函数时返回只读的计算属性 ref；传入带 `get` 和 `set` 的对象时返回可写的计算属性 ref。getter 收到的参数是上一次的计算结果（首次为 undefined）。
 
@@ -61,7 +61,7 @@ function computed<T>(
 ): Ref<T>
 ~~~~
 
-## 基础用法
+## 二、基础用法
 
 ~~~~ts
 import { computed, ref } from 'vue'
@@ -73,7 +73,7 @@ console.log(plusOne.value) // 2
 plusOne.value++ // 错误：只读 computed 不可写
 ~~~~
 
-## 缓存机制
+## 三、缓存机制
 
 computed 基于其响应式依赖进行缓存：只有依赖变化时才重新求值；依赖不变时反复读取 `.value` 都直接返回缓存结果，getter 不会执行。相比之下，方法调用在每次组件重渲染时都会重新执行。对开销大的计算，这个差别决定性能。
 
@@ -81,7 +81,7 @@ computed 基于其响应式依赖进行缓存：只有依赖变化时才重新�
 过滤列表只依赖关键字：修改无关状态不会触发 getter 重算
 :::
 
-## 可写 computed
+## 四、可写 computed
 
 绝大多数计算属性应当是只读的。确有需要时，可以通过 `get` + `set` 创建可写的计算属性：写入 `.value` 时执行 `set`，由它反向更新源状态。
 
@@ -89,7 +89,7 @@ computed 基于其响应式依赖进行缓存：只有依赖变化时才重新�
 摄氏 ⇄ 华氏双向换算：写华氏输入框，set 反向更新摄氏
 :::
 
-## 易错使用提示
+## 五、易错使用提示
 
 :::pitfalls
 ### 依赖 `Date.now()` 等非响应式值并期待自动刷新
@@ -201,13 +201,13 @@ function renameSelectedUser(name: string) {
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 缓存原理
+## 六、缓存原理
 
 :::principle{id="vue.core.reference.reactivity-watchers.computed.computed-cache"}
 computed 内部维护缓存与"脏"标记：依赖变化只是标脏，重算延迟到下一次读取时进行（惰性求值）。
 :::
 
-## 最小源码实现
+## 七、最小源码实现
 
 computed 的实现是"双面角色"：它既像 ref 一样有自己的 `dep`（供订阅它的组件/watch 收集依赖），又像副作用一样订阅别的响应式数据。缓存靠 `DIRTY` 脏标记实现——依赖变化时 `notify()` 只置脏并转发通知，不立即重算；直到下一次读 `.value` 才在 `refreshComputed` 里真正执行 getter（惰性求值），且重算后新旧值相同就不递增自己的版本号，下游订阅者也就不会重跑。
 
@@ -271,7 +271,7 @@ export function computed(getterOrOptions: any) {
 3.5 版源码还有一层全局版本号快速通道（globalVersion）：整个应用没有发生任何响应式变化时，读 computed 连"逐个检查依赖是否变化"都跳过，直接返回缓存。
 :::
 
-## 与 watch 如何选择
+## 八、与 watch 如何选择
 
 | 场景 | 用 computed | 用 watch |
 | --- | --- | --- |

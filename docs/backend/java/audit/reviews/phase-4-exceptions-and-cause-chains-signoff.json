@@ -1,0 +1,425 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.basics.exceptions-and-cause-chains",
+  "batchId": "phase-4-exceptions-and-cause-chains",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-06T22:40:32Z",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "stagedLessonChanges": false
+  },
+  "sourceRepository": {
+    "path": "/Users/jian/Desktop/work/TDH/dzzz/dzzz-app",
+    "head": "167ca8aa91ca3a6b101246964ef4fddec3d21da0",
+    "statusShort": "",
+    "readOnly": true
+  },
+  "phase2Freeze": {
+    "courseCoverageMatrixSha256": "b7fd50ffabbcf8a198802e907cef769ac969a71e4e14c40038f4aaaed09d91ad",
+    "researchStatus": "not-started",
+    "exampleStatus": "not-started",
+    "courseStatus": "planned",
+    "phase4StateRecordedOnlyInThisSignoff": true,
+    "admissionGate": "PASS",
+    "admissionGateRepair": {
+      "reason": "生成器、Phase 2 manifest/signoff 与 validator 的 course-coverage-matrix Markdown SHA 绑定不一致",
+      "result": "生成器 check 与独立 validator 在同一当前快照上均 PASS",
+      "artifacts": [
+        {
+          "path": "docs/backend/java/audit/phase-2-knowledge-path-manifest.json",
+          "sha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407"
+        },
+        {
+          "path": "docs/backend/java/audit/reviews/phase-2-knowledge-path-signoff.json",
+          "sha256": "e59585e460f573cf449396773b6bfefb1ca6c0abae0daa63c2714c7e6201ee0a"
+        },
+        {
+          "path": "docs/backend/java/audit/tooling/build-course-coverage-matrix.mjs",
+          "sha256": "5784413813ba3522bc969b201f3b569044652859fcaf78cda7ac0a7170a8fdb6"
+        },
+        {
+          "path": "docs/backend/java/audit/tooling/course-coverage-matrix-validator.mjs",
+          "sha256": "59ceafbfb19859230f51d463243ec1c97a571dabf93c097963f953982018b98f"
+        }
+      ]
+    }
+  },
+  "versions": {
+    "verifiedAt": "2026-08-07",
+    "modern": {
+      "java": "25",
+      "runtime": "Eclipse Temurin 25.0.3+9 LTS"
+    },
+    "legacy": {
+      "java": "8",
+      "runtime": "Eclipse Temurin 8u492-b09",
+      "springBootBackground": "2.3.12.RELEASE"
+    }
+  },
+  "sourceDiscovery": {
+    "method": "Tavily 仅用于发现直接页面，随后逐页核对 Oracle、JLS、Dev.java 和 OpenJDK 正文",
+    "communitySourcesUsedAsEvidence": false,
+    "projectEvidenceBoundary": "项目异常实现只作为 observed/corrected 证据；不把空 catch、宽泛捕获、cause 丢失或框架错误映射提升为 Java 推荐合同。",
+    "directUrls": [
+      "https://openjdk.org/projects/jdk/25/",
+      "https://www.oracle.com/java/technologies/java-se-support-roadmap.html",
+      "https://docs.oracle.com/javase/specs/jls/se25/html/jls-11.html",
+      "https://docs.oracle.com/javase/specs/jls/se25/html/jls-14.html",
+      "https://docs.oracle.com/javase/specs/jls/se8/html/jls-11.html",
+      "https://docs.oracle.com/javase/specs/jls/se8/html/jls-14.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Throwable.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/lang/Throwable.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Exception.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/lang/Exception.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Error.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/lang/Error.html",
+      "https://dev.java/learn/exceptions/",
+      "https://dev.java/learn/exceptions/what-is-an-exception/",
+      "https://dev.java/learn/exceptions/catching-handling/",
+      "https://dev.java/learn/exceptions/throwing/",
+      "https://dev.java/learn/exceptions/unchecked-exception-controversy/",
+      "https://docs.oracle.com/javase/tutorial/essential/exceptions/chained.html"
+    ]
+  },
+  "projectEvidence": [
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/exception/ArgumentNotValidException.java",
+      "symbol": "com.tdh.bdzz.exception.ArgumentNotValidException",
+      "usage": "observed",
+      "sha256": "1c2371696fe2ca21efa939fc30d032f9b09eb74a828c4970cfd837bf03b56457",
+      "inventoryMatched": true
+    },
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/exception/BpException.java",
+      "symbol": "com.tdh.bdzz.exception.BpException",
+      "usage": "observed",
+      "sha256": "bbab82ad2fc763702c75091ea2d1ee6fe139b96dfa43ce8d4ffad5702487b88c",
+      "inventoryMatched": true
+    },
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/exception/RateLimitException.java",
+      "symbol": "com.tdh.bdzz.exception.RateLimitException",
+      "usage": "observed",
+      "sha256": "00a810fade34a0126993695875fa8638bd44d3aa16f6d5db6848f912d46838fb",
+      "inventoryMatched": true
+    },
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/factories/flv/ConverterFactories.java",
+      "symbol": "com.tdh.bdzz.factories.flv.ConverterFactories",
+      "usage": "corrected",
+      "sha256": "4909d0f87731e736e6cadb770adc21bbe776cb05bd68b1bee6ba89e681b657bc",
+      "inventoryMatched": true
+    },
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/controller/BaseOuterController.java",
+      "symbol": "com.tdh.bdzz.controller.BaseOuterController",
+      "usage": "corrected",
+      "sha256": "b05816472db460dc86f1503042d697a310559b870447701fe21c462589075623",
+      "inventoryMatched": true
+    }
+  ],
+  "docker": {
+    "engine": "Docker 29.6.1",
+    "feedbackSource": "从课程 Markdown 的 如何验证 代码块提取同一 bash 反馈环，经 stdin 交给固定 RepoDigest 容器执行",
+    "classOutput": "容器内 /tmp 的 mktemp 目录，shell trap 使用 find -depth -delete 清理",
+    "images": [
+      {
+        "role": "modern",
+        "requestedTag": "eclipse-temurin:25-jdk",
+        "digest": "sha256:12e44624adee6808a36d962717e1656e0afeeeff5a100f9cb00e0136513558f0"
+      },
+      {
+        "role": "legacy",
+        "requestedTag": "eclipse-temurin:8-jdk",
+        "digest": "sha256:c8b86f2c0a9bd6cc1b7fabc5d1a097501a166eea7cad3b2764e90e96178bea9b"
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/basics/exceptions-and-cause-chains.md",
+      "sha256": "b59be6973df9546b8a8828a53096ab136c00b7f137c2794fff410294073c1247"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/exceptions-and-cause-chains.md",
+      "sha256": "0339caa41ff1cddbdbb0cb4a957f5ddf0858b20f644df42c73a25663356ae272"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "b2fa854f9f8b77223b8c28a702253e1a2cb7e24ae6fa73f6a5862ce3f123fde9"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "f90a7f20b1b54950bb40b45e6c79c5923e5fe66943df31494cac3e04664f9540"
+    },
+    {
+      "path": "docs/backend/java/dzzz-app-course-plan.md",
+      "sha256": "f31914afea632db110944a33d19d92d53836e8497b053e2cafab23e25685989e"
+    }
+  ],
+  "selfHashPolicy": "signoff 文件不记录自身 SHA-256；artifacts 只绑定 signoff 外可稳定计算的本批课程产物。",
+  "baselineVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run format:check",
+      "exitCode": 0,
+      "summary": "passed after Prettier normalized the concurrent Vite reference index"
+    },
+    {
+      "command": "npm run test:unit",
+      "exitCode": 0,
+      "summary": "No test files found; configured empty test directory is valid"
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "summary": "No persistent E2E test files; command passed with --pass-with-no-tests"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "passed; existing >500 kB catalog chunk warning only"
+    },
+    {
+      "command": "git diff --check && git diff --cached --check",
+      "exitCode": 0,
+      "summary": "passed; no staged lesson changes"
+    },
+    {
+      "command": "git -C /Users/jian/Desktop/work/TDH/dzzz status --short -- dzzz-app",
+      "exitCode": 0,
+      "summary": "empty; source repository remained read-only"
+    }
+  ],
+  "javaVerification": {
+    "command": "extract 如何验证 bash block from src/categories/backend/java/core/learn/exceptions-and-cause-chains.md and pipe to zsh -f",
+    "exitCode": 0,
+    "sharedOutput": [
+      "EXCEPTION_OK:CourseLoadException|IOException|无法加载课程: basics|来源不可用: basics",
+      "EXCEPTION_RISK:true|true"
+    ],
+    "cases": [
+      {
+        "name": "Java 25 positive compile/run",
+        "exitCode": 0,
+        "stdout": [
+          "EXCEPTION_OK:CourseLoadException|IOException|无法加载课程: basics|来源不可用: basics",
+          "EXCEPTION_RISK:true|true"
+        ]
+      },
+      {
+        "name": "Java 8 positive compile/run",
+        "exitCode": 0,
+        "stdout": [
+          "EXCEPTION_OK:CourseLoadException|IOException|无法加载课程: basics|来源不可用: basics",
+          "EXCEPTION_RISK:true|true"
+        ]
+      },
+      {
+        "name": "checked exception neither caught nor declared",
+        "java25CompileExit": 1,
+        "java8CompileExit": 1,
+        "diagnosticTextBound": false
+      }
+    ],
+    "temporaryAssetsCleaned": true
+  },
+  "markdownVerification": {
+    "initialFailure": "exercise 指令含普通 paragraph，不符合 adapter 要求的要求、验收、参考答案三字段合同",
+    "fix": "把练习改为要求、验收、参考答案三字段结构；未放宽 adapter",
+    "sameFeedbackLoopAfterFix": "PASS"
+  },
+  "catalogVerification": {
+    "method": "Vite middleware SSR 加载真实 entry-manifest、track 和目标 content-entry",
+    "exitCode": 0,
+    "registeredEntries": 11,
+    "availableEntries": 11,
+    "targetId": "backend.java.learn.basics.exceptions-and-cause-chains",
+    "projectEvidenceCount": 5,
+    "blockCount": 67
+  },
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "baseUrl": "http://127.0.0.1:4173/",
+    "targetPath": "/backend/java/core/learn/exceptions-and-cause-chains",
+    "desktop": {
+      "viewport": "1440x900",
+      "documentClientWidth": 1440,
+      "documentScrollWidth": 1440,
+      "title": "异常层级、传播、捕获与 cause 链",
+      "codeBlockCount": 16,
+      "searchTerm": "cause 链",
+      "searchResultCount": 1,
+      "previousEntryId": "backend.java.learn.basics.annotations-and-metadata",
+      "nextLink": false
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "documentClientWidth": 375,
+      "documentScrollWidth": 375,
+      "horizontalOverflow": false,
+      "codeBlockCount": 16,
+      "completionButtonPressed": true,
+      "completionButtonText": "取消完成"
+    },
+    "console": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "progressPersistedAfterReload": true,
+    "lazyLoadedTarget": true,
+    "repositoryBrowserOutputAbsent": true
+  },
+  "changedFiles": [
+    "docs/research/backend/java/basics/exceptions-and-cause-chains.md",
+    "src/categories/backend/java/core/learn/exceptions-and-cause-chains.md",
+    "src/categories/backend/java/core/entry-manifest.ts",
+    "src/categories/backend/java/core/backend-java-track.ts",
+    "docs/backend/java/audit/reviews/phase-4-exceptions-and-cause-chains-signoff.json",
+    "docs/backend/java/dzzz-app-course-plan.md"
+  ],
+  "priorClosedJavaAssets": {
+    "protected": true,
+    "summary": "第一至第十批研究、课程与 signoff 保持原样，不归入第十一批课程产物。"
+  },
+  "concurrentWorkspaceAssets": {
+    "protected": true,
+    "attribution": "frontend TypeScript、Vite、frontend 文档、HeadingBlock 与 ContentEntryPage 资产由并行工作产生，不属于本批 changedFiles；根级校验在包含这些资产的当前工作区上执行。",
+    "statusSnapshotSha256": "2e62707efd1c8551340848c431b74dcda510c82a0edc5c8f1777d470fae95196",
+    "paths": [
+      "docs/frontend/",
+      "src/app/pages/ContentEntryPage.vue",
+      "src/categories/frontend/engineering/typescript/",
+      "src/categories/frontend/engineering/vite/",
+      "src/common/ui/blocks/HeadingBlock.vue"
+    ]
+  },
+  "review": {
+    "standards": "PASS",
+    "standardsFindings": 0,
+    "spec": "PASS",
+    "specFindings": 0
+  },
+  "beginnerContentReverification": {
+    "verifiedAt": "2026-08-07",
+    "courseArtifact": {
+      "path": "src/categories/backend/java/core/learn/exceptions-and-cause-chains.md",
+      "sha256": "f40d784e1a7ce408e93e9bdd340ed56097f858e2eab5e0149bd610e1f0eb06cf"
+    },
+    "content": "PASS; exactly one 从零跟着做, usage, pitfalls, verification, one exercise and runnable code",
+    "sources": "PASS; source type, appliesTo and claims shown only in the official-source regions; 正文无来源详情",
+    "browser": "PASS; 1440px and 390px routes, 36/36 HTTP 200, no horizontal overflow or browser errors",
+    "root": "PASS; knowledge-path, type-check, lint, format and diff checks"
+  },
+  "stopBoundary": "第十一课 exceptions-and-cause-chains 通过完整 Gate；继续第十二至第十八课，18/18 available 后立即停止，不进入中级、高级、Reference、项目实战或其他后端技术。",
+  "phaseBReverification": {
+    "batchId": "B-10",
+    "status": "implementation-complete / lesson-passed",
+    "verifiedAt": "2026-08-15",
+    "historicalEvidencePreserved": true,
+    "courseContract": {
+      "title": "异常层级、传播、捕获与 cause 链",
+      "estimatedMinutes": 75,
+      "prerequisites": ["B-09"],
+      "path": "/backend/java/core/learn/exceptions-and-cause-chains"
+    },
+    "currentArtifacts": [
+      {
+        "path": "docs/research/backend/java/basics/exceptions-and-cause-chains.md",
+        "sha256": "a7c6b27b4a7405e70c5630ba3090e4e424fb0ad3fa6bbb519895a787242b38b0"
+      },
+      {
+        "path": "src/categories/backend/java/core/learn/exceptions-and-cause-chains.md",
+        "sha256": "385456f90c6240c9a0dca64bbe2d04371067118f05d0af3601ba47b63a7c03c4"
+      }
+    ],
+    "runtimeProtection": {
+      "trackChanged": false,
+      "trackSha256": "8c770f2225121d0fd76a02cef06962e4c1f608895c2200beb3fb84c46fb28255",
+      "loaderChanged": false,
+      "loaderSha256": "57c139ca77c73c92bd0acee96b7a022f340e16d9b10060817c6aee3aa3a543ab",
+      "change": "复用课的稳定 ID、URL 与 available loader 已适配 B-10；本批无需改动 track 或 loader。"
+    },
+    "research": {
+      "status": "PASS",
+      "discovery": "Tavily",
+      "finalEvidence": "18 个 JLS、JVMS、Java API、Dev.java、OpenJDK 与 Oracle 官方直接 URL；搜索摘要未作为结论证据",
+      "modernBaseline": "Java 25 LTS",
+      "legacyBaseline": "Java 8",
+      "scopeBoundary": "异常层级、checked/unchecked、throw/throws、传播、具体 catch 顺序、cause 与 finally 风险；try-with-resources、suppressed 与关闭顺序保留给 B-18"
+    },
+    "javaFeedbackLoop": {
+      "environment": "固定 Eclipse Temurin 25 与 8 Docker 镜像；javac 25.0.3 与 1.8.0_492",
+      "source": "从最终课程 Markdown AST 提取唯一 lang: bash、meta: b10-feedback-loop 节点并执行",
+      "classOutput": "源码、class 与日志仅进入容器内 mktemp 临时目录，完成后使用 find -depth -delete 清理",
+      "status": "PASS",
+      "sharedOutput": "B10_EXCEPTION_OK:CourseLoadException|IOException|无法加载课程: basics|来源不可用: basics",
+      "riskOutput": "B10_EXCEPTION_RISK:true|true",
+      "negativeCompilation": "Java 25 与 Java 8 均拒绝未处理 checked 异常和父类 catch 后不可达的子类 catch",
+      "minimumExample": "Java 25 与 Java 8 均编译并输出 true、false、IOException",
+      "finalMarker": "B10_FEEDBACK_PASS"
+    },
+    "qualityGates": {
+      "knowledgePath": "PASS; 167 source items, 64 course nodes, 114 dependency edges",
+      "typeCheck": "PASS",
+      "lint": "PASS",
+      "formatCheck": "PASS",
+      "unit": "PASS; no persistent unit tests",
+      "e2e": "PASS; no persistent E2E tests",
+      "build": "PASS; 1723 modules transformed; existing large-chunk and plugin-timing warnings only",
+      "diffCheck": "PASS; B-10 allowed paths only; unrelated workspace assets preserved"
+    },
+    "browserVerification": {
+      "tool": "Playwright CLI",
+      "server": "production preview",
+      "baseUrl": "http://127.0.0.1:4179/",
+      "targetPath": "/backend/java/core/learn/exceptions-and-cause-chains",
+      "viewports": ["1440x900", "390x844"],
+      "httpStatus": 200,
+      "requiredContentAssertions": "PASS; 5 个独立零基础主题 ID、22 个代码块、11 个唯一官方来源和修复后的可编译 instanceof 示例均可见",
+      "searchTerm": "cause 链",
+      "searchResultCount": 1,
+      "horizontalOverflow": false,
+      "duplicateHeadingIds": 0,
+      "longCodeBlocks": "PASS; 长代码由内部滚动容器承载；桌面 6 个、移动 21 个可滚动代码容器",
+      "progressPersistence": "PASS; 标记完成后刷新保持，再取消并刷新恢复未完成基线",
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "staticRequests": "PASS; 最终构建单次加载 35/35 HTTP 200",
+      "sessionClosed": true,
+      "generatedBrowserArtifactsCleaned": true
+    },
+    "independentReview": {
+      "reviewer": "b10_combined_review",
+      "standards": "PASS / 0 finding",
+      "spec": "PASS / 0 finding",
+      "reviewHistory": "首次复审修复 catch 顺序七要素与负向编译覆盖；第二次复审修复不可编译的 instanceof 示例；最终复审 PASS / 0 finding。",
+      "reviewedResearchSha256": "a7c6b27b4a7405e70c5630ba3090e4e424fb0ad3fa6bbb519895a787242b38b0",
+      "reviewedCourseSha256": "385456f90c6240c9a0dca64bbe2d04371067118f05d0af3601ba47b63a7c03c4"
+    },
+    "verificationBoundary": {
+      "temporaryAssets": "B-10 before 快照、反馈源码、Playwright 会话与 4179 预览已关闭并精确清理；未保留测试文件或浏览器输出",
+      "nextCourse": "B-11 在本记录落盘前未读取、研究或启动"
+    }
+  }
+}

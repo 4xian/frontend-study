@@ -62,7 +62,7 @@ anchors:
 
 # 渲染函数与 h()
 
-## 概述
+## 一、概述
 
 模板最终会编译成渲染函数；`h()` 允许直接用 JavaScript 创建 VNode。它适合需要完整编程能力、动态选择节点类型或封装底层渲染库的场景，但不是模板的性能捷径。模板通常更清晰，并能获得编译器的静态提升和 patch flag 优化。
 
@@ -70,7 +70,7 @@ anchors:
 用递归 h() 根据可变数据生成树，同时保持每次渲染的 VNode 唯一
 :::
 
-## 元素与组件
+## 二、元素与组件
 
 `h()` 的字符串 type 始终表示原生元素。渲染组件时应传入导入的组件定义；只有必须按注册名查找时才在 setup 或 render 上下文中调用 `resolveComponent()`。`setup()` 必须返回渲染函数，而不是一次性创建的 VNode。
 
@@ -87,7 +87,7 @@ export default {
 }
 ~~~~
 
-## 插槽与事件
+## 三、插槽与事件
 
 组件具名插槽需要用 `null` 占住 props 参数，并把每个 slot 写成函数，保持惰性求值。事件使用 `onXxx` props；`once`、`capture`、`passive` 可拼在事件名后，`stop`、`prevent`、`self` 和按键修饰符则使用 `withModifiers()` 或 `withKeys()` 包装处理函数。
 
@@ -100,7 +100,7 @@ h(CardPanel, null, {
 h('form', { onSubmit: withModifiers(submit, ['prevent']) }, children)
 ~~~~
 
-## mergeProps()
+## 四、mergeProps()
 
 `mergeProps(...args)` 专门归一化并合并 `class`、`style` 与 `onXxx` 监听器；多个同名监听器保留为数组，其余 props 由后值覆盖前值。不需要这些合并语义时，对象展开更直观。
 
@@ -113,19 +113,19 @@ const props = mergeProps(
 return h('button', props, '打开')
 ~~~~
 
-## cloneVNode()
+## 五、cloneVNode()
 
 VNode 创建后应视为不可变渲染描述，不能直接修改 `vnode.props`。`cloneVNode(vnode, extraProps)` 会复制 key、ref、scope、patch 等内部字段，并按 VNode 规则合并额外 props；object spread 无法替代这些内部处理。
 
-## isVNode()
+## 六、isVNode()
 
 `isVNode(value)` 判断未知值是否带 Vue VNode 标记，适合渲染工具的输入分支。它只证明值是 VNode，不证明 type 符合业务约束、仍未使用、来源可信或可跨应用复用。
 
-## resolveDirective()
+## 七、resolveDirective()
 
 `resolveDirective(name)` 从当前组件的局部和应用级注册表按名称解析指令，只能在 `setup()` 或 render 期间调用。解析失败返回 `undefined` 并在开发环境警告；能直接 import 时优先显式导入。
 
-## withDirectives()
+## 八、withDirectives()
 
 `withDirectives(vnode, tuples)` 为 VNode 附加指令绑定，元组顺序是 `[directive, value, argument, modifiers]`，后三项可按需省略。它依赖当前渲染实例，必须留在 render 路径；函数指令会归一化为 `mounted` 与 `updated`。
 
@@ -139,7 +139,7 @@ return () => {
 }
 ~~~~
 
-## 易错使用提示
+## 九、易错使用提示
 
 :::pitfalls
 ### 从 setup 直接返回 VNode
@@ -394,7 +394,7 @@ return dir
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 最小源码实现
+## 十、最小源码实现
 
 `h()` 是 `createVNode()` 的参数归一化外壳：两参数调用时区分 props 与 children，单个 VNode child 会包装成数组。`createVNode()` 再按字符串元素、对象组件、函数组件、Teleport 或 Suspense 等合法 type 设置 shape flag；函数组件与状态组件共同进入组件 patch 分支。
 
@@ -424,7 +424,7 @@ function resolveTypeFlag(type: any): number {
 }
 ~~~~
 
-## 源码推导与适用场景
+## 十一、源码推导与适用场景
 
 :::steps
 ### 1. mergeProps 只对三类字段做专门归一化

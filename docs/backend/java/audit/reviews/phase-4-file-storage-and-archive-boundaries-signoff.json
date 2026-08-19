@@ -1,0 +1,261 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.advanced.file-storage-and-archive-boundaries",
+  "batchId": "phase-4-file-storage-and-archive-boundaries",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-13T09:20:38+08:00",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "stagingPerformedThisBatch": false,
+    "existingStagedAndUnstagedStatePreserved": true
+  },
+  "sourceRepository": {
+    "path": "/Users/jian/Desktop/work/TDH/dzzz/dzzz-app",
+    "readOnly": true,
+    "projectExecuted": false,
+    "projectModified": false,
+    "accessBoundary": "Frozen Phase 2 evidence only; no batch-specific project access"
+  },
+  "phase2Freeze": {
+    "researchStatus": "not-started",
+    "exampleStatus": "not-started",
+    "courseStatus": "planned",
+    "phase4StateRecordedOnlyInThisSignoff": true,
+    "knowledgePath": {
+      "sourceItems": 167,
+      "courseNodes": 64,
+      "dependencyEdges": 114,
+      "representativeProjectCallPaths": 8,
+      "gateStatus": "passed"
+    }
+  },
+  "versions": {
+    "verifiedAt": "2026-08-13",
+    "modern": {
+      "java": "25",
+      "springBoot": "4.1.0",
+      "springFramework": "7.0.8",
+      "apacheTika": "3.2.0",
+      "commonsCompress": "1.28.0"
+    },
+    "legacy": {
+      "java": "8",
+      "springBoot": "2.3.12.RELEASE",
+      "springFramework": "5.2.15.RELEASE"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/advanced/file-storage-and-archive-boundaries.md",
+      "sha256": "998737bed2737bead768d86f4ff42f263d7c8f200ea02ba6d9f4956a2ab4228f"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/file-storage-and-archive-boundaries.md",
+      "sha256": "a8a018d9e56e6c0342d38a06eed4574a0f4a8c222a11e2bc0250269a7db7ea34"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "d60e0599f93614d8dde5d5dcfd24ebcdc8332a06db3b666bf0fb90d947faaa84"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "7a6bce223dba701beabcbad8de197d10801a817161a96798294b2de12990cea9"
+    }
+  ],
+  "sourceVerification": {
+    "researchCardCount": 34,
+    "researchUniqueUrlCount": 41,
+    "frontmatterOfficialSourceCount": 41,
+    "frontmatterUniqueUrlCount": 41,
+    "researchFrontmatterSetDifference": 0,
+    "communitySourcesUsedAsEvidence": false,
+    "preciseVersionContract": "PASS; frontmatter appliesTo values match the frozen research cards",
+    "directUrlCheck": "PASS; all 41 unique official targets were reachable and the research/frontmatter URL sets matched"
+  },
+  "projectEvidence": {
+    "itemCount": 10,
+    "observedCount": 5,
+    "adaptedCount": 0,
+    "correctedCount": 0,
+    "rejectedCount": 5,
+    "projectEvidenceSetDifference": 0,
+    "currentDefectClaimedFromFrozenEvidence": false,
+    "boundary": "Representative paths and symbols came only from the frozen Phase 2 matrix; rejected risks remain teaching boundaries, not claims that the current project is defective"
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "researchLineCount": 705,
+    "lineCount": 1356,
+    "lineBudget": "PASS; single-course exception reviewed because this lesson must jointly cover upload, storage, download, object storage and archive safety, including 14 mandatory error/correct code pairs",
+    "independentKnowledgePointHeadings": 10,
+    "knowledgePointSevenPartCoverage": "10/10",
+    "pitfallCount": 14,
+    "pitfallNinePartCoverage": "14/14",
+    "pitfallParserContract": "PASS; each field is a separate paragraph and every error/correct example uses a language-tagged Java fence",
+    "officialSourceCount": 41,
+    "projectEvidenceCount": 10,
+    "javaCodeBlockCount": 29,
+    "javaMethodComments": "PASS",
+    "sourceHeadingAbsent": true,
+    "securitySection": "PASS",
+    "contentCheck": "CONTENT_CHECK_PASS knowledge=10 pitfalls=14 sources=41 researchUrls=41 projectEvidence=10 observed=5 rejected=5 javaBlocks=29",
+    "completeExampleContract": "PASS; FileStorageBoundaryExample was re-extracted from the final Markdown and its SHA-256 was 74822592104b40e6818be37760d87d4f0b9de2c3e25fdb849a6ad96225a02d63",
+    "currentBodyShaBinding": "PASS; final course body SHA-256 is bound in artifacts"
+  },
+  "javaVerification": {
+    "temporaryFixtureRoot": "/private/tmp/java-advanced-09-final-bind.df6p25",
+    "temporaryAssetsCleaned": true,
+    "cleanupVerifiedWithFinalAbsenceChecks": true,
+    "cases": [
+      {
+        "name": "Documented file storage and archive boundary example",
+        "runtime": "Homebrew OpenJDK 25.0.4",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "FILE_STORAGE_PASS stored=1 downloaded=true extracted=2 rejected=true cleaned=true"
+      },
+      {
+        "name": "Documented file storage and archive boundary example",
+        "runtime": "Eclipse Temurin 1.8.0_502-b07",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "FILE_STORAGE_PASS stored=1 downloaded=true extracted=2 rejected=true cleaned=true"
+      }
+    ],
+    "negativeControls": [
+      "upload bytes are counted from the stream and reject above the configured limit",
+      "storage keys accept only server-controlled tenant, file ID and positive version components",
+      "type or scan rejection cannot pass the ACCEPTED-only publication gate and leaves no target",
+      "Zip Slip, absolute paths and normalized duplicate entries reject",
+      "per-entry and total extraction budgets reject and remove the output root",
+      "symbolic-link roots and unsafe entry kinds reject without writing outside the controlled root",
+      "audit values contain no CR/LF",
+      "invalid ranges reject as RANGE_416",
+      "success and failure paths clean temporary storage"
+    ]
+  },
+  "verification": [
+    {
+      "command": "Java 25.0.4 and Java 8u502 current Markdown extraction checks",
+      "exitCode": 0,
+      "summary": "PASS; both runtimes compiled the source re-extracted from body SHA a8a018d9e56e6c0342d38a06eed4574a0f4a8c222a11e2bc0250269a7db7ea34 and ran FileStorageBoundaryExample twice"
+    },
+    {
+      "command": "Content and Catalog cold-start checks",
+      "exitCode": 0,
+      "summary": "PASS; content counts matched and three consecutive Catalog runs reported advancedAvailable=9 advancedPlanned=7 currentLoadable=true nextLoader=false"
+    },
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges and 8 representative project call paths"
+    },
+    {
+      "command": "npm run type-check && npm run lint && npm run format:check && npm run test:unit && npm run test:e2e",
+      "exitCode": 0,
+      "summary": "PASS; unit and E2E suites contained no persistent test files and exited 0"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "PASS; 1563 modules transformed and file-storage-and-archive-boundaries chunk emitted at 65.98 kB; only existing large catalog chunk and plugin timing warnings remained"
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0,
+      "summary": "PASS; unrelated existing workspace changes remain outside this course scope"
+    },
+    {
+      "command": "curl official source URLs",
+      "exitCode": 0,
+      "summary": "PASS; 41/41 unique official targets were reachable"
+    }
+  ],
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "session": "java-advanced-09-final",
+    "baseUrl": "http://127.0.0.1:4190/",
+    "targetPath": "/backend/java/core/learn/file-storage-and-archive-boundaries",
+    "temporaryScreenshotsRemoved": true,
+    "desktop": {
+      "viewport": "1440x900",
+      "targetPageStatus": 200,
+      "documentClientWidth": 1440,
+      "documentScrollWidth": 1440,
+      "articleClientWidth": 900,
+      "articleScrollWidth": 900,
+      "articleClientHeight": 766,
+      "articleScrollHeight": 28941,
+      "articleScrollTopAtBottom": 28175,
+      "officialSourcesPresent": true,
+      "finalSummaryVisible": true,
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "failedRequests": 0,
+      "non200Requests": 0,
+      "atBottom": true
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "targetPageStatus": 200,
+      "documentClientWidth": 390,
+      "documentScrollWidth": 390,
+      "documentScrollHeight": 43560,
+      "documentScrollYAtBottom": 42716,
+      "articleClientWidth": 358,
+      "articleScrollWidth": 358,
+      "articleHeight": 43390,
+      "officialSourcesPresent": true,
+      "finalProgressVisible": true,
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "failedRequests": 0,
+      "non200Requests": 0,
+      "atBottom": true
+    },
+    "manualReview": "PASS; four screenshots showed no incoherent overlap, clipping or page-level horizontal overflow, and both desktop and mobile bottom content remained reachable"
+  },
+  "manifestRegression": {
+    "basicsAvailable": 18,
+    "intermediateAvailable": 17,
+    "advancedAvailable": 9,
+    "advancedPlanned": 7,
+    "currentEntryLoadable": true,
+    "futurePlannedEntriesHaveNoLoader": true,
+    "nextCourseId": "backend.java.learn.advanced.binary-streams-media-and-backpressure",
+    "nextCourseStatus": "planned",
+    "nextCourseLoader": false,
+    "finalColdStartRuns": 3,
+    "finalColdStartErrors": 0,
+    "finalColdStartPending": false
+  },
+  "review": {
+    "reviewer": "/root/advanced_09_review",
+    "standards": "PASS / 0 finding",
+    "spec": "PASS / 0 finding",
+    "initialFindingCount": 2,
+    "remainingFindingCount": 0,
+    "independentReviewRounds": 3,
+    "finalIndependentConfirmationPending": false,
+    "artifactDriftAfterReview": false,
+    "confirmation": "Final frozen-state review confirmed controlled-root validation, ACCEPTED-only publication, type/scan rejection cleanup and unchanged research/body SHA values with zero remaining findings"
+  },
+  "temporaryAssetCleanup": {
+    "pending": false,
+    "verifiedAt": "2026-08-13T09:20:38+08:00",
+    "temporaryPathPattern": "/private/tmp/java-advanced-09-*",
+    "remainingTargetCount": 0,
+    "finalPlaywrightSession": "java-advanced-09-final",
+    "finalPlaywrightSessionClosed": true,
+    "preservedOutOfCleanupScopeSession": "java-advanced-08",
+    "previewPort": 4190,
+    "previewStopped": true
+  },
+  "stopBoundary": "Close advanced course 9 only and stop; do not research, draft, register or load advanced course 10 binary-streams-media-and-backpressure, Reference, project practice or other stages"
+}

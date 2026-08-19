@@ -70,7 +70,7 @@ recap:
 
 # 动态组件与 KeepAlive
 
-## 正文大纲
+## 一、正文大纲
 
 组件基础课程解决了怎样拆分界面，上一课解决了不同 VNode 身份怎样交接。本课继续处理运行时组件类型：同一位置可以显示编辑器、预览或设置面板；默认切换会销毁旧实例，KeepAlive 则把选定实例暂存起来。先确定状态所有权，再选择重建或缓存。
 
@@ -87,7 +87,7 @@ recap:
 本课聚焦普通动态组件和 KeepAlive。完整 props 签名回到关联 Reference；路由视图缓存属于 Vue Router 课程，Teleport 和 Suspense 仍是后续独立知识点。
 :::
 
-## 用 component \:is 表达运行时组件类型
+## 二、用 component \:is 表达运行时组件类型
 
 特殊的 component 元素本身不产生固定业务界面，is 的当前值决定实际 VNode 类型。is 可以接收组件对象、已注册组件名字符串或原生标签名。SFC 中优先建立受控组件对象映射：状态只保存稳定业务 ID，computed 再从映射取出组件对象。这样候选集合清楚，类型也能约束非法值。
 
@@ -117,7 +117,7 @@ const activeComponent = computed(() => panels[activePanel.value])
 不要直接把查询参数、接口字段或用户输入交给 is。未解析为已注册组件的字符串会继续作为字符串类型处理；显式白名单映射同时给出允许集合和可靠的组件对象。
 :::
 
-## 先用 type 与 key 确定实例身份
+## 三、先用 type 与 key 确定实例身份
 
 组件 type 决定当前位置使用哪份组件实现，VNode key 在同一 type 下区分不同业务身份。type 或 key 改变时，Vue 会创建新组件实例，实例内部的局部状态也从初始值开始；两者都稳定时，Vue 才能把前后 VNode 视为同一身份继续更新。
 
@@ -131,7 +131,7 @@ const activeComponent = computed(() => panels[activePanel.value])
 <component :is="activeTab.component" :key="activeTab.id" />
 ~~~~
 
-## 默认切换意味着卸载旧实例
+## 四、默认切换意味着卸载旧实例
 
 activeComponent 从 EditorPanel 变为 PreviewPanel 时，当前位置的 VNode 类型改变。默认流程卸载旧组件并挂载新组件；再次回到 EditorPanel 会创建新实例，因此 input、ref、未提升的表单草稿等局部状态恢复初始值。这通常正是筛选结果、一次性确认面板等界面需要的行为。
 
@@ -158,7 +158,7 @@ activeComponent 从 EditorPanel 变为 PreviewPanel 时，当前位置的 VNode 
 | 刷新、淘汰后仍必须存在 | Pinia、服务端或其他组件外状态 | 缓存不是持久化承诺 |
 | 父子切换都要共享 | 共同祖先或明确状态模块 | 状态所有权不应依赖某个缓存实例 |
 
-## 只缓存确实需要恢复的活动组件
+## 五、只缓存确实需要恢复的活动组件
 
 KeepAlive 在任一时刻接收一个活动组件子节点。切走时，渲染器把已缓存组件的 DOM 子树移动到隐藏容器并把实例标记为停用；切回时再把同一实例移回页面并 patch 新 VNode。局部状态因此保留，但不可见组件仍然存在于组件树中。
 
@@ -172,7 +172,7 @@ KeepAlive 在任一时刻接收一个活动组件子节点。切走时，渲染�
 缓存会延长实例、DOM 子树和闭包的寿命。高成本但可恢复的工作区适合缓存；展示结果、短暂弹层或必须每次刷新数据的页面通常更适合默认重建。
 :::
 
-## 用 include 与 exclude 写清缓存范围
+## 六、用 include 与 exclude 写清缓存范围
 
 include 和 exclude 支持逗号分隔字符串、正则或数组，并按组件自身的 name 决定是否进入缓存，不匹配标签 ID、路由名或 VNode key。正则和数组是 JavaScript 值，必须使用 v-bind；稳定公共名称可以通过 defineOptions 明确声明。
 
@@ -182,7 +182,7 @@ include 和 exclude 支持逗号分隔字符串、正则或数组，并按组件
 </KeepAlive>
 ~~~~
 
-## 用稳定 key 和 max 控制缓存容量
+## 七、用稳定 key 和 max 控制缓存容量
 
 没有显式 key 时，Vue 3.5.40 使用组件 type 作为缓存键；存在 key 时直接使用该 key。max 限制缓存实例总数，新增实例超过上限时会卸载最久未访问项；命中已有实例会刷新访问顺序，所以这是 LRU，而不是固定删除最早创建的组件。
 
@@ -210,7 +210,7 @@ include 和 exclude 支持逗号分隔字符串、正则或数组，并按组件
 新增 SettingsPanel 超过 max=2，PreviewPanel 被卸载并让出缓存位置。
 :::
 
-## 可见时恢复，停用时暂停外部活动
+## 八、可见时恢复，停用时暂停外部活动
 
 缓存组件切走时不执行普通卸载，依赖可见性的轮询、订阅或媒体播放不能只在 onUnmounted 中停止。onActivated 在首次挂载和每次从缓存恢复时调用；onDeactivated 在每次进入缓存以及最终卸载时调用。这两个钩子也会作用到缓存树中的后代组件。
 
@@ -234,7 +234,7 @@ onActivated(startPolling)
 onDeactivated(pausePolling)
 ~~~~
 
-## 让 Transition 负责交接，让 KeepAlive 负责实例
+## 九、让 Transition 负责交接，让 KeepAlive 负责实例
 
 动态组件可以沿用上一课的视觉交接，但两种内置组件职责不同。Transition 放在外层，协调活动面板根节点的进入和离开；KeepAlive 放在内层，只决定非活动实例是否缓存。reduced motion 只取消 opacity 与 transform 动画，不能改变当前组件、局部状态或缓存结果。
 
@@ -246,7 +246,7 @@ onDeactivated(pausePolling)
 </Transition>
 ~~~~
 
-## 易错使用提示
+## 十、易错使用提示
 
 :::pitfalls
 ### 把动态表达式写成静态 is 字符串
@@ -451,7 +451,7 @@ onDeactivated(stopPolling)
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 从源码推导缓存的实际边界
+## 十一、从源码推导缓存的实际边界
 
 Vue 3.5.40 先由 resolveDynamicComponent 处理 is：字符串尝试解析已注册组件，解析不到则保留字符串；空值使用特殊占位类型。KeepAlive 再参与渲染器流程，用 Map 保存 VNode 缓存、用 Set 的插入顺序记录访问次序，并把 activate 与 deactivate 注入渲染上下文。
 
@@ -481,7 +481,7 @@ Set 的首项就是当前 LRU，pruneCacheEntry 会重置缓存标记并执行�
 不要通过隐藏容器 DOM、shapeFlag 或内部 Map 观察缓存。这些是实现细节；稳定测试应操作公开控件，再断言局部状态和可见生命周期结果。
 :::
 
-## 高级使用场景
+## 十二、高级使用场景
 
 | 场景 | 推荐设计 | 必须守住的边界 |
 | --- | --- | --- |
@@ -492,7 +492,7 @@ Set 的首项就是当前 LRU，pruneCacheEntry 会重置缓存标记并执行�
 | 有限缓存工作区 | 按真实容量设置 max 并允许重建 | LRU 淘汰不是异常路径 |
 | 动态面板白名单 | 业务 ID 映射到组件对象 | 外部字符串不能直接决定渲染类型 |
 
-## 在动态缓存实验台验证共同模型
+## 十三、在动态缓存实验台验证共同模型
 
 唯一 Demo 提供编辑、预览和设置三个私有 SFC 面板，KeepAlive 的 max 固定为 2。缓存开关用于直接比较保留与默认重建，重置按钮通过稳定 epoch 明确清空实验状态；访问第三个组件则验证最久未访问实例被淘汰。
 
@@ -500,7 +500,7 @@ Set 的首项就是当前 LRU，pruneCacheEntry 会重置缓存标记并执行�
 验证动态组件切换、缓存开关、声明式重置与 max=2 的 LRU 淘汰
 :::
 
-## 用实例和最终状态验证缓存
+## 十四、用实例和最终状态验证缓存
 
 缓存开启时把编辑局部计数加到 1，切到预览再返回编辑：计数应保持。关闭缓存会重建当前面板，之后每次切走再返回都回到 0。重置后再次把编辑加到 1，再依次访问预览、设置和编辑，使编辑成为最久未访问项并被淘汰；返回后计数回到 0。整个流程可以用键盘完成。
 
@@ -513,7 +513,7 @@ Set 的首项就是当前 LRU，pruneCacheEntry 会重置缓存标记并执行�
 - [ ] 390px 与 200% 文本下无横向滚动，按钮高度至少 44px
 - [ ] reduced motion 下取消位移和时长，全部功能结果保持不变
 
-## 练习
+## 十五、练习
 
 :::exercise
 ### 为动态面板建立类型安全映射
@@ -581,7 +581,7 @@ type 始终是 EditorPanel，key 使用稳定 document.id，name 是 EditorPanel
 ~~~~
 :::
 
-## 完成本课后的判断顺序
+## 十六、完成本课后的判断顺序
 
 先用受控组件映射决定运行时 type，再明确切走后局部状态应该重建、短期缓存还是提升到组件外。只有确需恢复实例时才加入 KeepAlive，并继续确定组件 name、稳定 key、include / exclude 与 max。最后用 activated / deactivated 管理可见性副作用，用真实切换序列验证复用和 LRU 淘汰。
 

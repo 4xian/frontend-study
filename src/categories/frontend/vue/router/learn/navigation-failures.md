@@ -49,7 +49,7 @@ recap:
 
 # 导航失败
 
-## Promise resolve 不等于导航成功
+## 一、Promise resolve 不等于导航成功
 
 `router.push()` 成功时 resolve `undefined`；被守卫阻止、被新导航取消或与当前位置重复时，Promise 仍然 resolve，但值是 `NavigationFailure`。guard 抛错和懒组件加载失败等意外 Error 才进入 reject 通道。
 
@@ -71,7 +71,7 @@ if (!failure) {
 | duplicated | resolve NavigationFailure | 保持当前位置 |
 | unexpected Error | reject Error | 不按预期失败处理 |
 
-## 用公开分类函数读取失败
+## 二、用公开分类函数读取失败
 
 `isNavigationFailure()` 同时确认 Router 的内部身份标记和类型位。不要比较 message、硬编码 4/8/16，也不要手造只有 type 的对象。failure 自带归一化的 `to` 与 `from`，足以生成定向提示和普通埋点记录。
 
@@ -84,7 +84,7 @@ if (isNavigationFailure(failure, interrupted)) {
 }
 ~~~~
 
-## 让 Router 真实产生四种结算结果
+## 三、让 Router 真实产生四种结算结果
 
 下面的独立 memory router 不手造 failure。aborted 来自 guard 返回 false，duplicated 来自 push 当前地址，cancelled 由 deferred guard 冻结旧导航后再提交更新导航；页面同时展示 Promise 结果、类型检查、to/from、currentRoute 与 afterEach 时间线。
 
@@ -92,11 +92,11 @@ if (isNavigationFailure(failure, interrupted)) {
 用真实导航结算结果比较局部 Promise 与全局 afterEach
 :::
 
-## 重定向与意外错误是另外两条边界
+## 四、重定向与意外错误是另外两条边界
 
 guard 返回 location 时，Router 会继续发起重定向；最终到达目标后，原调用仍得到成功结果，可通过最终 route 的 `redirectedFrom` 观察来源。guard 抛错、懒组件 reject 等意外错误会 reject 并触发 `router.onError()`，不应包装成第四种 NavigationFailure。
 
-## 易错使用提示
+## 五、易错使用提示
 
 :::pitfalls
 ### 只要 Promise resolve 就关闭界面
@@ -332,7 +332,7 @@ router.afterEach((to, from, failure) => {
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 从源码推导适用场景
+## 六、从源码推导适用场景
 
 :::steps
 ### 1. 预期失败作为 Promise 值返回

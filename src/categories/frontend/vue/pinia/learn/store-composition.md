@@ -54,7 +54,7 @@ recap:
 前置：请先完成 L01-L06，尤其要理解 Setup Store、computed 和 action。
 :::
 
-## 组合不等于取消边界
+## 一、组合不等于取消边界
 
 Store 可以调用另一个 Store。关键不是禁止依赖，而是让状态仍由明确的 Store 拥有：派生展示放在 getter/computed，跨职责流程放在一个协调 action，被调用 Store 通过自己的 action 修改 state。
 
@@ -64,7 +64,7 @@ Store 可以调用另一个 Store。关键不是禁止依赖，而是让状态�
 | getter / computed | 持续追踪另一个 Store 的响应式值 | 两个 getter 互相求值 |
 | action | 按用户操作协调多个职责 | 无终止条件地互相调用 |
 
-## 循环边界在读取时机
+## 二、循环边界在读取时机
 
 固定 4.0.2 源码会在执行 Setup Store 前先登记 partial store，因此 A、B 可以先互相取得实例；这不代表对方的返回属性已经初始化。双方都在 setup 创建期立即读取对方 state 会依赖不完整顺序，应把真实读取推迟到 computed 或 action。
 
@@ -87,13 +87,13 @@ export const useCartStore = defineStore('cart', () => {
 延迟读取不会自动消除所有递归。两个 computed 互相求值，或两个 action 无终止地互调，仍会形成运行时循环。
 :::
 
-## 组合实验
+## 三、组合实验
 
 :::demo{id="vue.pinia.learn.intermediate.store-composition.pinia-store-composition-lab-demo" playground="true"}
 观察 session/cart 互相取得实例后，computed 与 action 才读取对方 state
 :::
 
-## 练习与观察
+## 四、练习与观察
 
 :::steps
 ### 1. 观察创建阶段
@@ -113,7 +113,7 @@ export const useCartStore = defineStore('cart', () => {
 标明哪个 Store 拥有 state，哪个入口只负责协调。
 :::
 
-## 源码与测试推导
+## 五、源码与测试推导
 
 :::steps
 ### 1. partial store 先进入 registry
@@ -141,7 +141,7 @@ getter 测试证明另一个 Store 更新后派生值会重新求值，而不是
 它证明浏览器 SPA 内的隔离组合，不冒充真实 SSR 请求上下文。
 :::
 
-## 易错使用提示
+## 六、易错使用提示
 
 :::pitfalls
 ### 把互相 useStore 当成绝对禁止

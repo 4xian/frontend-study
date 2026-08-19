@@ -107,7 +107,7 @@ anchors:
 
 # 导航失败与结果判定
 
-## 概述
+## 一、概述
 
 Vue Router 把“导航按预期被阻止”与“导航过程中发生意外异常”放在不同通道。守卫返回 `false`、旧导航被新导航取代、重复前往当前位置，会让 `router.push()` 成功 resolve 一个 `NavigationFailure`；正常完成或成功重定向会 resolve `undefined`；守卫抛出或返回普通 `Error`、异步组件加载失败等意外错误，则调用 `router.onError()` 并让该导航 Promise reject。
 
@@ -119,7 +119,7 @@ Vue Router 把“导航按预期被阻止”与“导航过程中发生意外异
 `ErrorTypes` 与 `NavigationRedirectError` 都是 internal。它们出现在根声明和 API 页面，不代表应用应依赖；业务代码使用公开的 `NavigationFailureType`、`isNavigationFailure()`、`currentRoute.redirectedFrom` 与 `router.onError()`。
 :::
 
-## 结果通道总览
+## 二、结果通道总览
 
 | 情况 | router.push() 结果 | afterEach 第三参数 | 公开判定 |
 | --- | --- | --- | --- |
@@ -132,7 +132,7 @@ Vue Router 把“导航按预期被阻止”与“导航过程中发生意外异
 
 `afterEach(to, from, failure)` 的 `to` 在失败时仍是“尝试前往”的目标，不等于当前页面已经切换。issue #1328 正是因忽略第三参数而把 aborted 导航的 `to` 当成已完成页面；做标题、分析统计或页面状态副作用前应先检查 `failure`。
 
-## Error Types
+## 三、Error Types
 
 `ErrorTypes` 是 Router 内部的 const enum 和位标志集合，服务于 matcher、守卫适配、redirect 控制流与 history 恢复。固定根入口只把它作为 type 导出，运行时没有可供应用导入的 `ErrorTypes` 对象；固定源码也直接标记 internal。
 
@@ -148,7 +148,7 @@ Vue Router 把“导航按预期被阻止”与“导航过程中发生意外异
 不要用数字 `1`、`2` 或伪造的 ErrorTypes 值调用 `isNavigationFailure()`。内部成员、位分配和 redirect error 形状都不是稳定业务协议；公开枚举只承诺 4、8、16 三类可观察 failure。
 :::
 
-## Navigation Failure Type
+## 四、Navigation Failure Type
 
 `NavigationFailureType` 是稳定的运行时 enum，也是 `isNavigationFailure()` 第二参数的公开来源。三个值都是独立 bit flag，因此既能检查单类，也能用按位或组合；redirect 不在这个枚举中，因为返回新位置会创建一轮新导航，而不是公开的“导航被阻止”结果。
 
@@ -176,7 +176,7 @@ if (
 }
 ~~~~
 
-## Navigation Failure
+## 五、Navigation Failure
 
 `NavigationFailure` 扩展原生 `Error`，并增加 `type`、`from` 和 `to`。`from` 是失败导航开始时的当前位置，`to` 是本轮未能提交的目标；两者都是 normalized route location，所以可读取 `name`、`path`、`params`、`query`、`hash`、`matched` 与 `meta`，不应再当作 raw 导航输入。
 
@@ -210,7 +210,7 @@ async function leaveEditor() {
 `NavigationFailure` 是“已结算的预期失败值”，不是所有导航异常的基类。普通 `Error` 即使来自 guard，也没有 Router 的内部 brand、type、from、to；它通过 rejected Promise 与 `onError` 传播。
 :::
 
-## Navigation Redirect Error
+## 六、Navigation Redirect Error
 
 `NavigationRedirectError` 是 Router 为守卫 redirect 创建的内部 Error。它继承 `from` 与 Error 字段，把 `type` 固定为内部值 2，并把 `to` 改为 `RouteLocationRaw`，因为守卫返回的新位置尚需重新解析。`pushWithRedirect()` 会消费该对象并递归启动新导航，正常情况下不会把它作为 `router.push()` 的公开成功值交给调用方。
 
@@ -239,7 +239,7 @@ if (redirectedFrom) {
 成功 redirect 也会让 `router.push()` resolve `undefined`。若 redirect 后的新导航又被 abort、cancel 或判为 duplicate，调用方观察到的是最终公开失败；不要尝试截获中间 `NavigationRedirectError`。
 :::
 
-## Is Navigation Failure
+## 七、Is Navigation Failure
 
 `isNavigationFailure(error, type?)` 同时是运行时判定和 TypeScript type guard。固定实现要求值是 `Error`、携带 Router 私有 Symbol brand，并在提供 type 时通过位运算匹配；仅有相同 `name`、`message`、`type` 字段的普通对象不会通过。
 
@@ -277,7 +277,7 @@ async function navigateSafely(to: RouteLocationRaw) {
 }
 ~~~~
 
-## Promise 与 After Each
+## 八、Promise 与 After Each
 
 5.2.0 的 `router.push()` 与 `router.replace()` 返回 `Promise&lt;NavigationFailure | void | undefined&gt;`。这不是“成功 resolve、失败 reject”的普通二分：三类预期 failure 也会 resolve。只有结果为 falsy 才表示本轮最终完成，其中包含成功 redirect；若业务还要区分 redirect，再检查提交后的 `currentRoute.value.redirectedFrom`。
 
@@ -304,7 +304,7 @@ router.onError((error, to, from) => {
 
 `afterEach` 在正常完成和三类公开 failure 结算后都会运行；第三参数类型仅为 `NavigationFailure | void`。它不能改变导航，也不替代 `onError`。discussion #2101 进一步确认：`onError` 被调用并不吞掉 `router.push()` 的 rejected Promise；`RouterLink` 因调用方无法 catch 而在组件内部附加 catch，手写编程式导航仍应处理意外 reject。
 
-## 易错使用提示
+## 九、易错使用提示
 
 :::pitfalls
 ### 把 truthy 的 push 结果当成导航成功
@@ -554,7 +554,7 @@ if (isNavigationFailure(failure, NavigationFailureType.duplicated)) {
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 十、源码推导与适用场景
 
 :::steps
 ### 1. 从发布声明冻结五项签名与导出形态

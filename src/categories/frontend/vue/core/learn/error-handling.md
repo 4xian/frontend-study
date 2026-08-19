@@ -63,7 +63,7 @@ recap:
 
 # 错误处理
 
-## 正文大纲
+## 一、正文大纲
 
 上一课解决等待状态，本课处理等待结束后的失败状态。Vue 的错误处理是一条从出错组件向祖先传播的链：局部边界决定用户看到什么，应用级处理器负责统一记录仍未处理的错误；业务重试、网络取消和数据回滚仍由对应业务层负责。
 
@@ -78,7 +78,7 @@ recap:
 错误边界不是一个特殊内置组件，而是一种组件设计：祖先注册 onErrorCaptured，记录后代错误，并切换到稳定的后备分支。边界放得越近，恢复范围越小。
 :::
 
-## 先划清 Vue 会接管的错误来源
+## 二、先划清 Vue 会接管的错误来源
 
 官方列出的来源包括组件渲染、事件处理器、生命周期钩子、setup、侦听器、自定义指令钩子和 Transition 钩子。它们的共同点不是“发生在 Vue 项目中”，而是由 Vue 调用。浏览器定时器、未返回的 Promise 和第三方回调若脱离这条调用链，仍需在自己的边界中捕获。
 
@@ -102,7 +102,7 @@ function detachSave() {
 }
 ~~~~
 
-## onErrorCaptured 只捕获后代组件
+## 三、onErrorCaptured 只捕获后代组件
 
 onErrorCaptured 注册在祖先组件上，接收 error、触发错误的后代公开实例和 info。它不会捕获注册它的同一个组件自身在 setup 或 render 中抛出的错误；要保护一个区域，必须把边界放在该区域外层。
 
@@ -129,7 +129,7 @@ onErrorCaptured((error, instance, info) => {
 钩子里可以切换错误状态，但后备分支不能继续渲染刚刚失败的内容。否则下一次更新会再次抛错，形成错误与重渲染循环。
 :::
 
-## 传播顺序由内到外，只有 false 会停止
+## 四、传播顺序由内到外，只有 false 会停止
 
 同一个错误遇到多个 errorCaptured 钩子时，Vue 按组件链从最靠近错误的祖先向根部依次调用。钩子返回 false 表示该错误已经处理：后续祖先钩子和 app.config.errorHandler 都不会再收到它。返回 true、undefined 或不写 return 都会继续传播。
 
@@ -163,7 +163,7 @@ onErrorCaptured((error, instance, info) => {
 如果 errorCaptured 钩子本身再次抛错，原错误和钩子的新错误都会发送给 app.config.errorHandler。错误处理代码应保持短小、同步且不依赖脆弱的界面状态。
 :::
 
-## 后备界面与恢复动作必须显式设计
+## 五、后备界面与恢复动作必须显式设计
 
 捕获错误不会把失败组件恢复到可信状态。常见做法是让边界卸载失败子树，提供重试或返回操作；用户重试时递增 key，重新挂载一个全新子树。若错误来自确定性输入或代码缺陷，盲目原地重试只会再次失败，应先改变输入或离开该功能。
 
@@ -181,7 +181,7 @@ onErrorCaptured((error, instance, info) => {
 | 重试业务请求 | 服务器或网络失败 | 请求层有幂等与取消策略 |
 | 整页刷新 | 应用状态整体不可恢复 | 作为最后手段而非默认方案 |
 
-## 应用级处理器负责统一上报
+## 六、应用级处理器负责统一上报
 
 app.config.errorHandler 在应用实例挂载前配置，用于把未截断的组件错误发送到日志或监控服务。它接收 error、来源组件实例和 info，但不位于页面组件树中，不适合直接控制某个局部区域的后备界面。
 
@@ -202,7 +202,7 @@ app.mount('#app')
 开发环境中的 info 是可读来源字符串，生产环境中会缩短为错误代码和文档链接。监控系统应保留原值并按官方错误码表解析，不能依赖某段英文文案永远不变。
 :::
 
-## 开发、生产与 SSR 的证据边界
+## 七、开发、生产与 SSR 的证据边界
 
 warnHandler 只处理 Vue 运行时警告，且生产构建会忽略它；异常仍应进入错误处理链。Vue 3.5 起可用 throwUnhandledErrorInProduction 决定末端未处理错误是否在生产环境抛出，但局部返回 false 或应用处理器已经消费的错误不会被它重新抛出。
 
@@ -210,7 +210,7 @@ warnHandler 只处理 Vue 运行时警告，且生产构建会忽略它；异常
 onErrorCaptured 也会参与 SSR 的组件错误链，但 HTTP 状态、服务端输出、日志关联和恢复方式属于服务端请求管线。本课的 Vite SPA Demo 只能证明客户端捕获、传播与重新挂载，不能外推 SSR 或 hydration 行为。
 :::
 
-## Suspense fallback 不是错误界面
+## 八、Suspense fallback 不是错误界面
 
 Suspense 只有 default 与 fallback，没有 error 插槽。异步 setup 或可挂起组件拒绝时，错误仍沿组件错误链传播；等待界面由 Suspense 负责，失败界面应由它外层的错误边界负责。
 
@@ -223,7 +223,7 @@ Suspense 只有 default 与 fallback，没有 error 插槽。异步 setup 或可
 </ErrorBoundary>
 ~~~~
 
-## 异步组件加载错误是另一份协议
+## 九、异步组件加载错误是另一份协议
 
 defineAsyncComponent 的 onError 只处理 loader Promise 的失败，并提供 error、retry、fail 和 attempts 来决定是否再次加载组件定义。组件定义加载成功后，组件在 setup、render 或事件中发生的错误仍走 onErrorCaptured 与应用级处理器。
 
@@ -237,7 +237,7 @@ const AsyncReport = defineAsyncComponent({
 })
 ~~~~
 
-## 易错使用提示
+## 十、易错使用提示
 
 :::pitfalls
 ### 在出错组件内部捕获自己的 render 错误
@@ -437,7 +437,7 @@ app.config.throwUnhandledErrorInProduction = true
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 从源码推导适用场景
+## 十一、从源码推导适用场景
 
 :::steps
 ### 边界必须位于 parent 链上
@@ -465,7 +465,7 @@ callWithAsyncErrorHandling 检查 Vue 调用结果是否为 Promise，再为它�
 parent、ec 和内部错误类型编号只用于理解实现，均不是业务代码可依赖的公开接口。生产代码应只使用 onErrorCaptured、app.config.errorHandler、组件 key 和自己的业务状态。
 :::
 
-## 在嵌套错误边界实验台验证传播
+## 十二、在嵌套错误边界实验台验证传播
 
 唯一 Demo 把失败组件放在内外两层边界中。默认由内层返回 false，只显示内层后备界面；关闭“内层停止传播”后，同一个错误按内层、外层顺序记录，外层返回 false，避免污染学习站点的全局错误处理器。重新挂载会创建全新子树。
 
@@ -473,7 +473,7 @@ parent、ec 和内部错误类型编号只用于理解实现，均不是业务�
 比较渲染错误与返回的异步事件错误，并观察内外边界的传播与恢复
 :::
 
-## 练习与回顾
+## 十三、练习与回顾
 
 :::exercise
 ### 为页面划分错误 owner

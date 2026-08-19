@@ -1,0 +1,288 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.advanced.binary-streams-media-and-backpressure",
+  "batchId": "phase-4-binary-streams-media-and-backpressure",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-13T11:15:00+08:00",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "stagingPerformedThisBatch": false,
+    "existingStagedAndUnstagedStatePreserved": true
+  },
+  "sourceRepository": {
+    "path": "/Users/jian/Desktop/work/TDH/dzzz/dzzz-app",
+    "readOnly": true,
+    "projectExecuted": false,
+    "projectModified": false,
+    "accessBoundary": "Frozen Phase 2 evidence only; no batch-specific project access"
+  },
+  "phase2Freeze": {
+    "researchStatus": "not-started",
+    "exampleStatus": "not-started",
+    "courseStatus": "planned",
+    "phase4StateRecordedOnlyInThisSignoff": true,
+    "sequence": 590,
+    "prerequisites": [
+      "backend.java.learn.basics.io-files-and-resource-ownership",
+      "backend.java.learn.advanced.concurrency-locks-and-shared-state"
+    ],
+    "sourceCapabilityIds": [
+      "JAVA-STDLIB-016",
+      "JAVA-STDLIB-017",
+      "JAVA-STDLIB-029",
+      "JAVA-ENGINEERING-024",
+      "JAVA-RISK-026"
+    ],
+    "knowledgePath": {
+      "sourceItems": 167,
+      "courseNodes": 64,
+      "dependencyEdges": 114,
+      "representativeProjectCallPaths": 8,
+      "gateStatus": "passed"
+    }
+  },
+  "versions": {
+    "verifiedAt": "2026-08-13",
+    "modern": {
+      "java": "25",
+      "springBoot": "4.1.0",
+      "springFramework": "7.0.8",
+      "reactorCore": "3.8.6",
+      "reactiveStreams": "1.0.4",
+      "jakartaServlet": "6.1"
+    },
+    "legacy": {
+      "java": "8",
+      "springBoot": "2.3.12.RELEASE",
+      "springFramework": "5.2.15.RELEASE"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/advanced/binary-streams-media-and-backpressure.md",
+      "sha256": "d8af6353f52e1a6f6a728f881c5a7ef72c61beade46b3379a9d04f5a2ab68758"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/binary-streams-media-and-backpressure.md",
+      "sha256": "dba29808087858114b0c13cf16a00fc27516d83be6984bd3b2da6550df67fc08"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "4f22acf6a155017102b06295007f70f4fc529a7bd640fdf295b6c3f77ec2e5ce"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "649a05dee72be6f300cb4cb514f6ce9d0b1b28ac5b9b059ab2a4a32b77cda481"
+    }
+  ],
+  "sourceVerification": {
+    "researchCardCount": 27,
+    "researchUniqueUrlCount": 38,
+    "frontmatterOfficialSourceCount": 38,
+    "frontmatterUniqueUrlCount": 38,
+    "researchFrontmatterSetDifference": 0,
+    "communitySourcesUsedAsEvidence": false,
+    "preciseVersionContract": "PASS; frontmatter appliesTo values match the frozen research cards",
+    "directUrlCheck": "PARTIAL PASS; 37/38 unique official targets returned HTTP 200; the Android Zip Path Traversal target timed out at the TCP connection boundary on this host",
+    "fallbackVerification": "PASS; Exa extracted the official Android page at the exact same URL and its source text confirmed the course claim",
+    "boundary": "The Android fallback is recorded as official-page extraction evidence, not as a direct HTTP success"
+  },
+  "projectEvidence": {
+    "itemCount": 15,
+    "observedCount": 10,
+    "adaptedCount": 0,
+    "correctedCount": 0,
+    "rejectedCount": 5,
+    "projectEvidenceSetDifference": 0,
+    "currentDefectClaimedFromFrozenEvidence": false,
+    "boundary": "Representative paths and symbols came only from the frozen Phase 2 matrix; rejected risks remain teaching boundaries, not claims that the current project is defective"
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "researchLineCount": 488,
+    "lineCount": 1424,
+    "lineBudget": "PASS; independently reviewed single-course exception because the frozen lesson jointly requires random access, ZIP expansion, image pixel budgets, MVC and Servlet streaming, Reactive Streams demand, pooled buffer ownership and Range boundaries; the excess is the complete frontmatter, one runnable example and 12 mandatory pitfalls, not an unrelated course",
+    "independentKnowledgePointHeadings": 10,
+    "knowledgePointSevenPartCoverage": "10/10",
+    "pitfallCount": 12,
+    "pitfallNinePartCoverage": "12/12",
+    "officialSourceCount": 38,
+    "projectEvidenceCount": 15,
+    "javaCodeBlockCount": 25,
+    "javaMethodComments": "PASS",
+    "sourceHeadingAbsent": true,
+    "securitySection": "PASS",
+    "contentCheck": "PASS; knowledge=10 pitfalls=12 sources=38 researchUrls=38 projectEvidence=15 observed=10 rejected=5 javaBlocks=25",
+    "completeExampleContract": "PASS; BinaryMediaBackpressureExample was re-extracted from the final Markdown and its SHA-256 was 3324a6a50a5c7b587863505e3a373fe377b7408c62c5933f0a79c72ddb2d29dd",
+    "currentBodyShaBinding": "PASS; final course body SHA-256 is bound in artifacts"
+  },
+  "javaVerification": {
+    "temporaryFixtureRoot": "/private/tmp/java-advanced-10-remediate.xmPNKW",
+    "temporaryAssetsCleaned": true,
+    "cleanupVerifiedWithFinalAbsenceChecks": true,
+    "cases": [
+      {
+        "name": "Documented random access, ZIP, image and bounded-pipeline example",
+        "runtime": "Homebrew OpenJDK 25.0.4",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "BINARY_MEDIA_PASS random=true zip=2 image=8x6 chunks=32 maxQueued=2 rejected=true"
+      },
+      {
+        "name": "Documented random access, ZIP, image and bounded-pipeline example",
+        "runtime": "Eclipse Temurin 1.8.0_492-b09",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "BINARY_MEDIA_PASS random=true zip=2 image=8x6 chunks=32 maxQueued=2 rejected=true"
+      }
+    ],
+    "negativeControls": [
+      "absolute-position reads and writes preserve the shared FileChannel position and loop until complete",
+      "ZIP entry, per-entry expanded bytes and total expanded bytes use observed output rather than declared metadata",
+      "empty, absolute, parent-traversal, C:\\outside.txt and C:/outside.txt entry names reject",
+      "image side and overflow-safe pixel budgets pass before full decode",
+      "the producer-consumer queue never exceeds the configured capacity of two",
+      "the copied byte sequence is complete and the executor terminates",
+      "streams, channels, readers, executors and temporary paths close or clean on terminal paths"
+    ],
+    "remediation": {
+      "initialFinding": "The documented ZIP name check accepted Windows drive-prefixed paths",
+      "red": "A temporary copy using C:\\outside.txt incorrectly completed with BINARY_MEDIA_PASS",
+      "green": "C:\\outside.txt and C:/outside.txt both terminated with ZIP entry uses drive path after the minimal prefix check",
+      "repositoryTestAssetPersisted": false
+    }
+  },
+  "verification": [
+    {
+      "command": "Java 25.0.4 and Temurin 8u492 current Markdown extraction checks",
+      "exitCode": 0,
+      "summary": "PASS; both runtimes compiled the source re-extracted from final body SHA dba29808087858114b0c13cf16a00fc27516d83be6984bd3b2da6550df67fc08 and ran BinaryMediaBackpressureExample twice"
+    },
+    {
+      "command": "Temporary Windows drive-path red and green controls",
+      "exitCode": 0,
+      "summary": "PASS; the original behavior was reproduced and both slash forms rejected after the minimal repair"
+    },
+    {
+      "command": "Content and Catalog cold-start checks",
+      "exitCode": 0,
+      "summary": "PASS; content counts matched and three independent Catalog processes reported advancedAvailable=10 advancedPlanned=6 currentLoadable=true currentBlocks=130 nextStatus=planned nextLoader=false"
+    },
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges and 8 representative project call paths"
+    },
+    {
+      "command": "npm run type-check && npm run lint && npm run format:check && npm run test:unit && npm run test:e2e",
+      "exitCode": 0,
+      "summary": "PASS on the repaired snapshot; unit and E2E suites contained no persistent test files and exited 0"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "PASS; 1573 modules transformed and binary-streams-media-and-backpressure chunk emitted at 66.97 kB; only the existing large catalog chunk and plugin timing warnings remained"
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0,
+      "summary": "PASS; unrelated existing workspace changes remain outside this course scope"
+    },
+    {
+      "command": "official source URL verification",
+      "exitCode": 0,
+      "summary": "PASS within the recorded boundary; 37 direct HTTP 200 responses plus one Android official-page extraction after a host TCP timeout"
+    }
+  ],
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "session": "java-advanced-10-final",
+    "baseUrl": "http://127.0.0.1:4200/",
+    "targetPath": "/backend/java/core/learn/binary-streams-media-and-backpressure",
+    "temporaryScreenshotsRemoved": true,
+    "desktop": {
+      "viewport": "1440x900",
+      "targetPageStatus": 200,
+      "documentClientWidth": 1440,
+      "documentScrollWidth": 1440,
+      "articleClientWidth": 900,
+      "articleScrollWidth": 900,
+      "articleClientHeight": 766,
+      "articleScrollHeight": 31006,
+      "articleScrollTopAtBottom": 30240,
+      "officialSourcesPresent": true,
+      "finalSummaryVisible": true,
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "failedRequests": 0,
+      "non200Requests": 0,
+      "atBottom": true
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "targetPageStatus": 200,
+      "documentClientWidth": 390,
+      "documentScrollWidth": 390,
+      "documentScrollHeight": 46273,
+      "documentScrollYAtBottom": 45429,
+      "articleClientWidth": 358,
+      "articleScrollWidth": 358,
+      "articleHeight": 46102.65625,
+      "officialSourcesPresent": true,
+      "finalProgressVisible": true,
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "failedRequests": 0,
+      "non200Requests": 0,
+      "atBottom": true
+    },
+    "manualReview": "PASS; desktop and mobile top and bottom views showed no incoherent overlap, clipping or page-level horizontal overflow; after the two-line ZIP repair, fresh geometry and event-listener checks confirmed the bottom remained reachable"
+  },
+  "manifestRegression": {
+    "basicsAvailable": 18,
+    "intermediateAvailable": 17,
+    "advancedAvailable": 10,
+    "advancedPlanned": 6,
+    "currentEntryLoadable": true,
+    "currentEntryBlockCount": 130,
+    "futurePlannedEntriesHaveNoLoader": true,
+    "nextCourseId": "backend.java.learn.advanced.process-jvm-and-observability",
+    "nextCourseStatus": "planned",
+    "nextCourseLoader": false,
+    "nextCourseResearchAbsent": true,
+    "nextCourseBodyAbsent": true,
+    "finalColdStartRuns": 3,
+    "finalColdStartErrors": 0,
+    "finalColdStartPending": false
+  },
+  "review": {
+    "reviewer": "/root/advanced_10_review",
+    "standards": "PASS / 0 finding",
+    "spec": "PASS / 0 finding",
+    "initialFindingCount": 1,
+    "remainingFindingCount": 0,
+    "independentReviewRounds": 2,
+    "finalIndependentConfirmationPending": false,
+    "artifactDriftAfterReview": false,
+    "lineException": "PASS; the final 1424-line body remains one frozen lesson and its excess is attributable to complete metadata, one runnable example and 12 mandatory pitfalls",
+    "confirmation": "Final frozen-state review confirmed both Windows drive-path forms reject, the extracted example SHA matches, the course remains 10/12/38/15, Catalog remains 10 available and 6 planned, and the next course has no loader"
+  },
+  "temporaryAssetCleanup": {
+    "pending": false,
+    "verifiedAt": "2026-08-13T11:15:00+08:00",
+    "temporaryPathPattern": "/private/tmp/java-advanced-10-*",
+    "remainingTargetCount": 0,
+    "finalPlaywrightSession": "java-advanced-10-final",
+    "finalPlaywrightSessionClosed": true,
+    "preservedOutOfCleanupScopeSession": "java-advanced-08",
+    "previewPort": 4200,
+    "previewStopped": true
+  },
+  "stopBoundary": "Close advanced course 10 only and stop; do not research, draft, register or load advanced course 11 process-jvm-and-observability, Reference, project practice or other stages"
+}

@@ -1,0 +1,415 @@
+.course-registration-demo {
+  padding: 24px;
+  border: 1px solid #d6dbe2;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #20242c;
+}
+
+.course-registration-heading p,
+.course-registration-section-heading p {
+  margin: 0;
+  color: #176b5b;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.course-registration-heading h2,
+.course-registration-section-heading h3 {
+  margin: 7px 0 0;
+  line-height: 1.35;
+}
+
+.course-registration-heading h2 {
+  font-size: 1.35rem;
+}
+
+.course-registration-section-heading h3 {
+  font-size: 1.08rem;
+}
+
+.course-registration-heading > span {
+  display: block;
+  margin-top: 8px;
+  color: #5e6572;
+  line-height: 1.65;
+}
+
+.course-registration-filters {
+  padding: 18px;
+  margin-top: 20px;
+  border: 1px solid #dfe3e8;
+  border-radius: 6px;
+  background: #f8fafb;
+}
+
+.course-registration-filter-controls {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin: 10px -7px -8px;
+}
+
+.course-registration-filter-controls .course-registration-field {
+  box-sizing: border-box;
+  flex: 1 1 220px;
+  min-width: 0;
+  padding: 0 7px;
+  margin-bottom: 8px;
+}
+
+.course-registration-field > label,
+.course-registration-list > legend,
+.course-registration-details > legend {
+  display: block;
+  margin-bottom: 6px;
+  overflow-wrap: anywhere;
+  color: #3d4955;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.course-registration-field > input,
+.course-registration-field > select {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 42px;
+  padding: 9px 11px;
+  border: 1px solid #aeb7c2;
+  border-radius: 5px;
+  background: #ffffff;
+  color: #222b34;
+  font: inherit;
+}
+
+.course-registration-field > p {
+  margin: 6px 0 0;
+  color: #626b76;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.course-registration-availability {
+  display: flex;
+  flex: 0 1 190px;
+  align-items: flex-start;
+  min-width: 0;
+  padding: 10px 7px 9px;
+  margin-bottom: 8px;
+}
+
+.course-registration-availability input {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  margin: 2px 9px 0 0;
+}
+
+.course-registration-availability label {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: #34424e;
+  line-height: 1.5;
+}
+
+.course-registration-result-bar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #dfe3e8;
+}
+
+.course-registration-result-bar output {
+  margin-right: 16px;
+  color: #174d42;
+  font-weight: 750;
+}
+
+.course-registration-result-bar span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: #5e6572;
+  text-align: right;
+}
+
+.course-registration-form {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin: 20px -8px 0;
+}
+
+.course-registration-list,
+.course-registration-details {
+  box-sizing: border-box;
+  width: calc(50% - 16px);
+  padding: 18px;
+  margin: 0 8px;
+  border: 1px solid #dfe3e8;
+  border-radius: 6px;
+  min-inline-size: 0;
+}
+
+.course-registration-list ul {
+  padding: 0;
+  margin: 6px 0 0;
+  list-style: none;
+}
+
+.course-registration-option {
+  display: flex;
+  align-items: flex-start;
+  padding: 12px;
+  margin-top: 9px;
+  border: 1px solid #d4dae1;
+  border-radius: 6px;
+  background: #ffffff;
+}
+
+.course-registration-option.is-selected {
+  border-color: #176b5b;
+  box-shadow: inset 3px 0 0 #176b5b;
+}
+
+.course-registration-option.is-unavailable {
+  background: #f1f2f4;
+  color: #68717b;
+}
+
+.course-registration-option > input {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  margin: 3px 10px 0 0;
+}
+
+.course-registration-option > label {
+  display: block;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.course-registration-option.is-unavailable > label {
+  cursor: not-allowed;
+}
+
+.course-registration-option-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.course-registration-option-heading strong {
+  min-width: 0;
+  margin-right: 10px;
+  overflow-wrap: anywhere;
+  color: #26333f;
+}
+
+.course-registration-option-heading > span {
+  flex: 0 0 auto;
+  padding: 2px 6px;
+  border: 1px solid #9bb9b2;
+  border-radius: 4px;
+  color: #176b5b;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.course-registration-option.is-unavailable .course-registration-option-heading > span {
+  border-color: #b9bec5;
+  color: #626a74;
+}
+
+.course-registration-option-meta,
+.course-registration-option-summary {
+  display: block;
+  margin-top: 5px;
+  overflow-wrap: anywhere;
+}
+
+.course-registration-option-meta {
+  color: #176b5b;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.course-registration-option-summary {
+  color: #59636f;
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.course-registration-empty {
+  padding: 18px;
+  margin: 10px 0 0;
+  border: 1px dashed #b9c2cb;
+  border-radius: 6px;
+  color: #5e6572;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.course-registration-details .course-registration-field {
+  margin-top: 14px;
+}
+
+.course-registration-details .course-registration-field:first-of-type {
+  margin-top: 8px;
+}
+
+.course-registration-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: calc(100% - 16px);
+  padding: 14px 0 0;
+  margin: 0 8px;
+}
+
+.course-registration-actions p {
+  min-width: 0;
+  margin: 0 16px 0 0;
+  overflow-wrap: anywhere;
+  color: #5e6572;
+  line-height: 1.5;
+}
+
+.course-registration-actions button {
+  flex: 0 0 auto;
+  min-width: 136px;
+  min-height: 44px;
+  padding: 9px 14px;
+  border: 1px solid #176b5b;
+  border-radius: 6px;
+  background: #176b5b;
+  color: #ffffff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.course-registration-actions button:disabled {
+  border-color: #aeb4bc;
+  background: #e4e7ea;
+  color: #69717a;
+  cursor: not-allowed;
+}
+
+.course-registration-filter-controls input:focus-visible,
+.course-registration-filter-controls select:focus-visible,
+.course-registration-form input:focus-visible,
+.course-registration-form button:focus-visible {
+  outline: 3px solid #80c7ba;
+  outline-offset: 2px;
+}
+
+.course-registration-snapshot {
+  padding: 18px;
+  margin-top: 20px;
+  border: 1px solid #dfe3e8;
+  border-radius: 6px;
+  background: #f8fafb;
+}
+
+.course-registration-snapshot dl {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 12px -6px -6px;
+}
+
+.course-registration-snapshot dl > div {
+  box-sizing: border-box;
+  flex: 1 1 180px;
+  min-width: 0;
+  padding: 10px;
+  margin: 6px;
+  border: 1px solid #d9dfe5;
+  border-radius: 5px;
+  background: #ffffff;
+}
+
+.course-registration-snapshot dt {
+  overflow-wrap: anywhere;
+  color: #176b5b;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.course-registration-snapshot dd {
+  margin: 7px 0 0;
+  overflow-wrap: anywhere;
+  color: #283847;
+  font-weight: 650;
+}
+
+.course-registration-no-snapshot {
+  margin: 12px 0 0;
+  color: #5e6572;
+  line-height: 1.6;
+}
+
+@media (max-width: 760px) {
+  .course-registration-demo {
+    padding: 18px;
+  }
+
+  .course-registration-form {
+    display: block;
+    margin: 20px 0 0;
+  }
+
+  .course-registration-list,
+  .course-registration-details {
+    width: 100%;
+    margin: 0;
+  }
+
+  .course-registration-details {
+    margin-top: 16px;
+  }
+
+  .course-registration-actions {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .course-registration-result-bar,
+  .course-registration-actions {
+    display: block;
+  }
+
+  .course-registration-result-bar span {
+    display: block;
+    margin-top: 7px;
+    text-align: left;
+  }
+
+  .course-registration-actions p {
+    margin-right: 0;
+  }
+
+  .course-registration-actions button {
+    width: 100%;
+    margin-top: 12px;
+  }
+
+  .course-registration-option-heading {
+    display: block;
+  }
+
+  .course-registration-option-heading strong {
+    display: block;
+    margin-right: 0;
+  }
+
+  .course-registration-option-heading > span {
+    display: inline-block;
+    margin-top: 6px;
+  }
+}

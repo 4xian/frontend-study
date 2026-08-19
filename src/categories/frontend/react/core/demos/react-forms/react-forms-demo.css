@@ -1,0 +1,288 @@
+.react-forms-demo {
+  padding: 24px;
+  border: 1px solid #d5dae3;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #20242c;
+}
+
+.react-forms-heading p,
+.react-forms-snapshot section > p {
+  margin: 0;
+  color: #176b5b;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.react-forms-heading h2,
+.react-forms-snapshot h3 {
+  margin: 8px 0 0;
+  line-height: 1.35;
+}
+
+.react-forms-heading h2 {
+  font-size: 1.35rem;
+}
+
+.react-forms-heading span {
+  display: block;
+  margin-top: 8px;
+  color: #5e6572;
+  line-height: 1.65;
+}
+
+.react-forms-columns {
+  display: flex;
+  align-items: flex-start;
+  margin: 20px -8px 0;
+}
+
+.react-forms-fields,
+.react-forms-snapshot {
+  box-sizing: border-box;
+  width: calc(50% - 16px);
+  margin: 0 8px;
+}
+
+.react-forms-field {
+  margin-bottom: 15px;
+}
+
+.react-forms-field > label,
+.react-forms-fields legend {
+  display: block;
+  margin-bottom: 6px;
+  overflow-wrap: anywhere;
+  color: #44515e;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.react-forms-field > input,
+.react-forms-field > select,
+.react-forms-field > textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 42px;
+  padding: 9px 11px;
+  border: 1px solid #aeb7c2;
+  border-radius: 5px;
+  background: #ffffff;
+  color: #222b34;
+  font: inherit;
+}
+
+.react-forms-field > textarea {
+  min-height: 92px;
+  resize: vertical;
+}
+
+.react-forms-field > select[multiple] {
+  min-height: 112px;
+}
+
+.react-forms-field > input:disabled {
+  background: #eef0f3;
+  color: #69717a;
+}
+
+.react-forms-field > p {
+  margin: 7px 0 0;
+  color: #5e6572;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.react-forms-fields fieldset {
+  padding: 12px;
+  margin: 0 0 15px;
+  border: 1px solid #dfe3e8;
+  border-radius: 6px;
+}
+
+.react-forms-choice {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 9px;
+}
+
+.react-forms-field.react-forms-choice {
+  margin-top: 0;
+}
+
+.react-forms-choice input {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  margin: 2px 9px 0 0;
+}
+
+.react-forms-choice label {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: #34424e;
+  line-height: 1.5;
+}
+
+.react-forms-fields input:focus-visible,
+.react-forms-fields select:focus-visible,
+.react-forms-fields textarea:focus-visible,
+.react-forms-fields button:focus-visible {
+  outline: 3px solid #80c7ba;
+  outline-offset: 2px;
+}
+
+.react-forms-actions {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px 0 -4px;
+}
+
+.react-forms-actions button {
+  min-width: 136px;
+  min-height: 44px;
+  padding: 9px 13px;
+  margin: 4px 8px 4px 0;
+  border: 1px solid #74818f;
+  border-radius: 6px;
+  background: #f1f8f6;
+  color: #174d42;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.react-forms-actions button[type='submit'] {
+  border-color: #176b5b;
+  background: #176b5b;
+  color: #ffffff;
+}
+
+.react-forms-actions button:hover {
+  border-color: #126b59;
+}
+
+.react-forms-snapshot {
+  position: sticky;
+  top: 12px;
+}
+
+.react-forms-snapshot section {
+  padding: 18px;
+  border: 1px solid #dfe3e8;
+  border-radius: 6px;
+  background: #fafbfc;
+}
+
+.react-forms-snapshot section + section {
+  margin-top: 16px;
+}
+
+.react-forms-snapshot h3 {
+  font-size: 1.08rem;
+}
+
+.react-forms-snapshot dl {
+  margin: 14px 0 0;
+}
+
+.react-forms-snapshot dl > div {
+  display: flex;
+  align-items: baseline;
+  padding: 9px 0;
+  border-top: 1px solid #e2e6eb;
+}
+
+.react-forms-snapshot dt {
+  flex: 0 0 132px;
+  margin-right: 10px;
+  color: #59636f;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.76rem;
+}
+
+.react-forms-snapshot dd {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+  color: #253b4b;
+  font-weight: 650;
+}
+
+.react-forms-entry-list {
+  padding: 0;
+  margin: 14px 0 0;
+  list-style: none;
+}
+
+.react-forms-entry-list li {
+  display: flex;
+  align-items: baseline;
+  padding: 8px 0;
+  border-top: 1px solid #e2e6eb;
+}
+
+.react-forms-entry-list code {
+  flex: 0 0 132px;
+  margin-right: 10px;
+  overflow-wrap: anywhere;
+  color: #176b5b;
+  font-size: 0.78rem;
+}
+
+.react-forms-entry-list span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.react-forms-empty {
+  margin: 14px 0 0;
+  color: #5e6572;
+  line-height: 1.6;
+}
+
+@media (max-width: 760px) {
+  .react-forms-demo {
+    padding: 18px;
+  }
+
+  .react-forms-columns {
+    display: block;
+    margin: 20px 0 0;
+  }
+
+  .react-forms-fields,
+  .react-forms-snapshot {
+    width: 100%;
+    margin: 0;
+  }
+
+  .react-forms-snapshot {
+    position: static;
+    margin-top: 18px;
+  }
+}
+
+@media (max-width: 430px) {
+  .react-forms-actions button {
+    width: calc(100% - 8px);
+  }
+
+  .react-forms-snapshot dl > div,
+  .react-forms-entry-list li {
+    display: block;
+  }
+
+  .react-forms-snapshot dt,
+  .react-forms-entry-list code {
+    display: block;
+    margin-right: 0;
+  }
+
+  .react-forms-snapshot dd,
+  .react-forms-entry-list span {
+    display: block;
+    margin-top: 4px;
+  }
+}

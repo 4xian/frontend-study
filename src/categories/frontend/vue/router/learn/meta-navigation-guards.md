@@ -52,7 +52,7 @@ recap:
 
 # 路由 Meta 与导航守卫
 
-## Meta 描述记录，守卫执行决策
+## 一、Meta 描述记录，守卫执行决策
 
 meta 是 route record 上的任意结构数据，适合表达需要登录、必须具有某个角色、页面转场名等稳定属性。守卫读取 to.meta 后决定导航结果：不返回值或返回 true 放行，返回 false 取消，返回 route location 触发新的重定向。
 
@@ -67,7 +67,7 @@ router.beforeEach((to) => {
 })
 ~~~~
 
-## 用模块扩展固定 Meta 契约
+## 二、用模块扩展固定 Meta 契约
 
 RouteMeta 默认可索引，但项目内应用模块扩展给常用字段加上可选性和联合类型。扩展文件必须被 tsconfig 包含，且至少有一个 import 或 export，才会被当成模块。
 
@@ -84,7 +84,7 @@ declare module 'vue-router' {
 }
 ~~~~
 
-## route.meta 是父到子的非递归浅合并
+## 三、route.meta 是父到子的非递归浅合并
 
 route.matched 保留所有命中记录，可以逐条查看原始 meta。route.meta 则从父记录到子记录用浅层 assign 合并：同名顶层 key 由子记录覆盖，嵌套对象不会递归合并。权限字段优先设计为独立顶层 key，避免无意丢失父级子字段。
 
@@ -104,7 +104,7 @@ policy.audit 不会被递归保留。
 ~~~~
 :::
 
-## 守卫顺序跟随记录的离开、复用与进入
+## 四、守卫顺序跟随记录的离开、复用与进入
 
 | 阶段 | 运行时机 | 常见职责 |
 | --- | --- | --- |
@@ -118,7 +118,7 @@ policy.audit 不会被递归保留。
 
 afterEach 是后置 hook，可接收 failure 观察已发生的结果，但不能再返回 false 阻止导航。新代码优先使用 return 风格；next 只作为兼容知识，一次守卫的每条可达分支都必须恰好调用一次。
 
-## 用角色矩阵观察三种导航结果
+## 五、用角色矩阵观察三种导航结果
 
 下面的 mini-app 在访客、成员和管理员三个角色下访问同一份嵌套报表。访客被重定向登录，成员被 false 取消，管理员按完整守卫顺序放行。可见区同时展示 matched meta 与浅合并后的 route.meta。
 
@@ -126,7 +126,7 @@ afterEach 是后置 hook，可接收 failure 观察已发生的结果，但不�
 用三种角色对比 redirect、cancel 和 allow 的守卫时间线
 :::
 
-## 易错使用提示
+## 六、易错使用提示
 
 :::pitfalls
 ### 认为嵌套 meta 对象会深合并
@@ -310,7 +310,7 @@ router.beforeEach(async () => (await checkAccess()) || false)
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 从源码推导适用场景
+## 七、从源码推导适用场景
 
 :::steps
 ### 1. meta 合并是顺序浅 assign

@@ -1,0 +1,228 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.intermediate.spring-boot-and-configuration",
+  "batchId": "phase-c-i07-spring-boot-and-configuration",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-15T16:23:39+08:00",
+  "phase": "Phase C",
+  "phaseCProgress": "7/20",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "newStagingPerformedThisBatch": false,
+    "existingIndexPreserved": true,
+    "unrelatedWorkspaceChangesPreserved": true
+  },
+  "phaseAFreeze": {
+    "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+    "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81",
+    "designation": "I-07 / 必修、重排、复用",
+    "title": "Spring Boot 启动、自动配置与配置建模",
+    "estimatedMinutes": 150,
+    "prerequisite": "backend.java.learn.intermediate.dependency-injection-and-bean-lifecycle",
+    "stableIdReused": "backend.java.learn.intermediate.spring-boot-and-configuration",
+    "slugReused": "spring-boot-and-configuration",
+    "urlPreserved": "/backend/java/core/learn/spring-boot-and-configuration",
+    "frozenSuccessor": "backend.java.learn.intermediate.spring-mvc-and-servlet-boundaries"
+  },
+  "phaseCAdmission": {
+    "status": "PASS",
+    "predecessorCourseId": "backend.java.learn.intermediate.dependency-injection-and-bean-lifecycle",
+    "predecessorSignoffPath": "docs/backend/java/audit/reviews/phase-4-dependency-injection-and-bean-lifecycle-signoff.json",
+    "predecessorSignoffSha256": "086306bb68104026c9dac9dea007e8a0977975103b9103860907a228be0db9da",
+    "phaseCProgressBeforeBatch": "6/20",
+    "trackChangeRequired": true,
+    "loaderChangeRequired": false
+  },
+  "versions": {
+    "verifiedAt": "2026-08-15",
+    "modern": {
+      "java": "25",
+      "runtime": "Eclipse Temurin 25.0.3+9 LTS",
+      "maven": "3.9.12",
+      "springBoot": "4.1.0",
+      "springFramework": "7.0.8",
+      "configurationModel": "record + jakarta.validation"
+    },
+    "legacy": {
+      "java": "8",
+      "runtime": "Eclipse Temurin 8u492-b09",
+      "maven": "3.9.12",
+      "springBoot": "2.3.12.RELEASE",
+      "springFramework": "5.2.15.RELEASE",
+      "configurationModel": "JavaBean + javax.validation"
+    }
+  },
+  "sourceDiscovery": {
+    "method": "Tavily located Spring candidates; every retained claim was verified against current or archived Spring reference and API pages",
+    "researchDirectSourceCount": 15,
+    "lessonOfficialSourceCardCount": 15,
+    "finalHttp200Count": 15,
+    "finalHttpFailureCount": 0,
+    "replacedDeadOfficialUrl": "https://docs.spring.io/spring-boot/reference/features/spring-application.html",
+    "communitySourcesUsedAsEvidence": false,
+    "projectEvidenceBoundary": "Five frozen Phase 2 items remain display-only compatibility evidence; project source was not reopened or executed"
+  },
+  "research": {
+    "backgroundAgentUsed": true,
+    "scope": "I-07 only",
+    "phaseAContractAlignment": "PASS",
+    "officialUrlVerification": "15/15 HTTP 200",
+    "stopBoundaryAlignment": "PASS; I-08 was not read",
+    "researchSha256": "04133fab137192d376c7ca6e35b5bc3828097d063b61fa545b5addcea556bb64"
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/intermediate/spring-boot-and-configuration.md",
+      "sha256": "04133fab137192d376c7ca6e35b5bc3828097d063b61fa545b5addcea556bb64"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/spring-boot-and-configuration.md",
+      "sha256": "e50b22a020b043e8a9ef95b37e6102b24b7078f99dec5073cd1d510c6a495074"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "e5580d49ca78e02681124d3ef4707c0331ee1bc1ba4857813c68856b88e47cc4"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "e89e15d2335d8ddfd659e833633b0114edbfecb172c835dd07867b6221cfca72"
+    },
+    {
+      "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+      "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81"
+    },
+    {
+      "path": "docs/backend/java/audit/phase-2-knowledge-path-manifest.json",
+      "sha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407"
+    }
+  ],
+  "engineeringVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check",
+      "exitCode": 0,
+      "summary": "passed on the I-07 Java artifact snapshot"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "summary": "passed on the I-07 Java artifact snapshot"
+    },
+    {
+      "command": "npm run format:check",
+      "exitCode": 0,
+      "summary": "passed before the final official URL replacement; targeted final Prettier check also passed"
+    },
+    {
+      "command": "npm run test:unit",
+      "exitCode": 0,
+      "summary": "No persistent unit files; configured empty directory passed"
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "summary": "No persistent E2E files; configured empty directory passed"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "1764 modules transformed; existing Markdown timing and chunk-size warnings only"
+    },
+    {
+      "command": "npx prettier --check <I-07 files> && git diff --check -- <I-07 paths>",
+      "exitCode": 0,
+      "summary": "final targeted formatting and whitespace checks passed"
+    }
+  ],
+  "concurrentWorkspaceBoundary": {
+    "unrelatedIssue": "The concurrently edited React tsx-expressions-and-attributes lesson temporarily disappeared, then returned with a Markdown adapter error: 普通列表项只能包含一个段落",
+    "javaImpact": "The Java content, track and loader hashes did not change",
+    "browserIsolation": "A /tmp-only Vite pre-plugin replaced that one React catalog-meta import during Java browser verification; the Java manifest, track and lesson loaded from their real workspace files",
+    "temporaryConfigCleaned": true,
+    "rootIssueClaimedFixed": false
+  },
+  "javaVerification": {
+    "fixturePath": "/tmp/java-i07-phase-c.qh8Y96",
+    "fixtureSha256": {
+      "verify.sh": "0b63b58041c06819a3304c336f65e2812a2c3ae7c7fc3e619b4fab6eb8874c07",
+      "modern/pom.xml": "ea5891f4dc6ee1f693a4a08541c1dcda08707d7ba062af4584c305ac1cd45120",
+      "modern/ModernConfigurationTest.java": "f177b75e2eba3f4f7f9ccf8b67feba2398a77573bd6aeba99b2cf8e1af52a2d1",
+      "legacy/pom.xml": "b52a69052a0af93051e7cd0c8a165f6c178d30a37cd5bd6863d3b821b0453d19",
+      "legacy/LegacyConfigurationTest.java": "1bc7f1c1de6a5700b634d86d531c0bf90b4537fffb49b638ea1265dec928addc"
+    },
+    "initialFixtureFailure": "Default configuration was loaded as ordinary user configuration, causing a same-name Bean conflict",
+    "fixtureRepair": "Used AutoConfigurations.of(...) and gave the default Bean an independent method name",
+    "modernOutput": "modern PASS binding=record maxSize=40 condition=on/off backoff=user validation=failed repeated=2",
+    "legacyOutput": "legacy PASS binding=javabean maxSize=30 condition=on/off backoff=user validation=failed repeated=2",
+    "finalOutput": "I07_DUAL_RUNTIME_PASS",
+    "finalRunsPerRuntime": 2,
+    "temporaryAssetsCleaned": true,
+    "cleanupCommand": "find /tmp/java-i07-phase-c.qh8Y96 -depth -delete",
+    "cleanupCheck": "PASS; exact path no longer exists"
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "adapter": "PASS",
+    "researchLineCount": 247,
+    "lessonLineCount": 1164,
+    "independentKnowledgePointHeadings": 22,
+    "codeBlockCount": 22,
+    "exerciseCount": 1,
+    "officialSourceCount": 15,
+    "pitfallCount": 6,
+    "javaMethodComments": "PASS",
+    "sourceHeadingAbsent": true
+  },
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "baseUrl": "http://127.0.0.1:4194/",
+    "targetPath": "/backend/java/core/learn/spring-boot-and-configuration",
+    "sessionsClosed": true,
+    "devServerStopped": true,
+    "desktop": {
+      "viewport": "1440x900",
+      "horizontalOverflow": false,
+      "knowledgePointCount": 22,
+      "officialSourceCount": 15,
+      "estimatedMinutesVisible": true,
+      "verifiedAtVisible": true
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "horizontalOverflow": false,
+      "knowledgePointCount": 22,
+      "officialSourceCount": 15,
+      "estimatedMinutesVisibleAfterContextExpand": true,
+      "verifiedAtVisibleAfterContextExpand": true
+    },
+    "title": "Spring Boot 启动、自动配置与配置建模",
+    "previousEntryId": "backend.java.learn.intermediate.dependency-injection-and-bean-lifecycle",
+    "liveNextEntryBeforeI08Reorder": "backend.java.learn.intermediate.relational-data-and-sql-foundations",
+    "frozenSuccessorNotYetReordered": "backend.java.learn.intermediate.spring-mvc-and-servlet-boundaries",
+    "completionButtonTextAfterReload": "取消完成",
+    "progressPersistedAfterReload": true,
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "desktopFailedRequests": 0,
+    "mobileFailedRequests": 0
+  },
+  "review": {
+    "riskClassification": "复用课程更新冻结前置、时长、核验日期、失效官方链接和 track 顺序；未改变核心教学合同、loader、共享行为或架构",
+    "independentCodeReviewRequired": false,
+    "standards": "targeted verification PASS",
+    "spec": "Phase A I-07 route alignment PASS",
+    "highestSeverity": "none"
+  },
+  "stopBoundary": "Phase C 的 I-07 已关闭，进度为 7/20；下一批只允许 I-08（backend.java.learn.intermediate.spring-mvc-and-servlet-boundaries）。I-08 关闭前不得读取 I-09 或后续课程；Phase C 总 Gate 关闭前不得进入 Phase D。",
+  "selfHashPolicy": "signoff 文件不记录自身 SHA-256；artifacts 只绑定 signoff 外可稳定计算的本批产物"
+}

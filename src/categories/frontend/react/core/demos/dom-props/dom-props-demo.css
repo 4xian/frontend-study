@@ -1,0 +1,233 @@
+.dom-props-demo {
+  padding: 24px;
+  border: 1px solid #d7dce5;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #20242c;
+}
+
+.dom-props-heading p {
+  margin: 0;
+  color: #176b5b;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.dom-props-heading h2 {
+  margin: 8px 0 0;
+  font-size: 1.35rem;
+  line-height: 1.35;
+}
+
+.dom-props-heading span {
+  display: block;
+  margin-top: 8px;
+  color: #5e6572;
+  line-height: 1.65;
+}
+
+.dom-props-card {
+  padding: 18px;
+  margin-top: 20px;
+  border: 1px solid #dfe3e8;
+  border-left-style: solid;
+  border-radius: 6px;
+  background: #fafbfc;
+  transition:
+    border-color 160ms ease,
+    opacity 160ms ease;
+}
+
+.dom-props-card.is-ready {
+  border-left-color: #14725f;
+}
+
+.dom-props-card.is-paused {
+  border-left-color: #8a5a12;
+}
+
+.dom-props-card:focus-visible {
+  outline: 3px solid #80c7ba;
+  outline-offset: 3px;
+}
+
+.dom-props-card-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.dom-props-card-heading > div {
+  min-width: 0;
+  margin-right: 16px;
+}
+
+.dom-props-card-heading span,
+.dom-props-card-heading strong {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.dom-props-card-heading > div > span {
+  color: #67717d;
+  font-size: 0.82rem;
+}
+
+.dom-props-card-heading strong {
+  margin-top: 4px;
+  font-size: 1.05rem;
+}
+
+.dom-props-state {
+  flex: 0 0 auto;
+  padding: 5px 8px;
+  border-radius: 4px;
+  background: #e7f5ee;
+  color: #176448;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.dom-props-state[data-state='paused'] {
+  background: #fff2d8;
+  color: #745018;
+}
+
+.dom-props-output-pair {
+  display: flex;
+  align-items: baseline;
+  margin-top: 16px;
+}
+
+.dom-props-output-pair label {
+  margin-right: 10px;
+  color: #59636f;
+  font-size: 0.88rem;
+  font-weight: 650;
+}
+
+.dom-props-output-pair output {
+  overflow-wrap: anywhere;
+  color: #176448;
+  font-weight: 700;
+}
+
+.dom-props-card > p {
+  margin: 14px 0 0;
+  color: #4d5965;
+  line-height: 1.65;
+}
+
+.dom-props-card > button,
+.dom-props-actions button {
+  min-height: 44px;
+  padding: 9px 14px;
+  border: 1px solid #74818f;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #26313c;
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.dom-props-card > button {
+  margin-top: 16px;
+}
+
+.dom-props-card > button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.dom-props-card > button:focus-visible,
+.dom-props-actions button:focus-visible {
+  outline: 3px solid #80c7ba;
+  outline-offset: 2px;
+}
+
+.dom-props-observer {
+  margin: 18px 0 0;
+}
+
+.dom-props-observer > div {
+  display: flex;
+  align-items: baseline;
+  padding: 10px 0;
+  border-top: 1px solid #e2e6eb;
+}
+
+.dom-props-observer dt {
+  flex: 0 0 152px;
+  margin-right: 12px;
+  color: #59636f;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.82rem;
+}
+
+.dom-props-observer dd {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+  color: #27333e;
+  font-weight: 650;
+}
+
+.dom-props-actions {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.dom-props-actions button {
+  margin: 8px 8px 0 0;
+}
+
+.dom-props-actions button:hover {
+  border-color: #126b59;
+  background: #eef8f5;
+}
+
+.dom-props-rule {
+  padding: 14px 16px;
+  margin: 20px 0 0;
+  border-left: 4px solid #16836e;
+  background: #f1f8f6;
+  color: #40525a;
+  line-height: 1.65;
+}
+
+@media (max-width: 620px) {
+  .dom-props-demo {
+    padding: 18px;
+  }
+
+  .dom-props-card-heading,
+  .dom-props-observer > div {
+    display: block;
+  }
+
+  .dom-props-card-heading > div {
+    margin-right: 0;
+  }
+
+  .dom-props-state {
+    display: inline-block;
+    margin-top: 10px;
+  }
+
+  .dom-props-observer dt {
+    margin-right: 0;
+  }
+
+  .dom-props-observer dd {
+    margin-top: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dom-props-card {
+    transition: none;
+  }
+}

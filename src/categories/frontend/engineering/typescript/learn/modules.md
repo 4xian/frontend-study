@@ -14,7 +14,7 @@ tags:
   - export
   - import type
   - export type
-appliesTo: TypeScript 7.0.2（宿主 fixture：6.0.3）
+appliesTo: TypeScript 7.0.2
 verifiedAt: 2026-08-05
 sources:
   - title: "TypeScript Handbook: Modules"
@@ -45,11 +45,11 @@ recap:
 
 # 模块
 
-## 为什么需要
+## 一、为什么需要
 
 一个文件中的名字不应自动泄露给整个程序。模块把实现留在自己的作用域，只把调用方需要的值和类型显式导出；导入语句则让依赖可以追踪、检查和重构。
 
-## 核心概念和最小模型
+## 二、核心概念和最小模型
 
 ~~~~ts
 // lesson.ts
@@ -73,25 +73,52 @@ export { lessons }
 
 顶层 import 或 export 使文件成为模块，内部声明默认只在文件内可见。值导入需要保留运行时连接；类型专用导入只服务类型检查，可以从 JavaScript 输出中移除。
 
-## 建立清晰文件边界
+## 三、知识点详解
 
-:::steps
-### 先决定公开合同
+### 1. export 与模块公共面
 
-只导出调用方真正需要的函数、常量和类型，未导出成员保持模块私有。
+**它是什么：** 顶层 `export` 把函数、常量、class 或类型加入文件的公共面，未导出成员只在当前模块可见。
 
-### 区分值空间与类型空间
+**它有什么用：** 模块公共面能隐藏实现细节，让调用方只依赖稳定入口，后续重构内部代码不会影响所有文件。
 
-运行时需要的函数或 class 使用普通 import；只作为注解的 interface 或 alias 使用 import type。
+**怎么使用：** 先决定调用方真正需要的名字，再使用具名导出；辅助函数保持未导出。
 
-### 保持说明符与运行环境一致
+~~~~ts
+// course.ts
+const prefix = 'course'
 
-本课使用相对 ES module 路径；扩展名、package exports 和 resolution mode 留到中高级课程。
+/** 创建公开的课程标识。 */
+export function createCourseId(slug: string): string {
+  return `${prefix}-${slug}`
+}
+~~~~
 
-### 识别旧 script 文件
+### 2. import 与重导出
 
-没有顶层 import/export 的文件默认共享全局作用域；若只想隔离声明，可使用空的 `export {}`。
-:::
+**它们是什么：** `import` 从其他模块读取公开成员，`export ... from` 可以把多个模块整理为统一入口。
+
+**它们有什么用：** 调用方通过稳定入口导入，不必了解每个内部文件的位置。
+
+**怎么使用：** 从实现文件使用相对说明符导入，在 `index.ts` 中只重导出希望公开的成员。
+
+~~~~ts
+// index.ts
+export { createCourseId } from './course.js'
+
+// consumer.ts
+import { createCourseId } from './index.js'
+
+const id = createCourseId('modules')
+~~~~
+
+### 3. 值导入与类型导入
+
+**它们是什么：** 普通 `import` 会参与运行时模块关系，`import type` 只用于编译期类型并在输出中移除。
+
+**它们有什么用：** 明确区分两种依赖可以避免把纯类型误当运行值，也能让模块输出和循环依赖更清晰。
+
+**怎么使用：** 函数、常量和 class 的运行使用普通导入；只出现在注解位置的 interface 或 alias 使用
+`import type`。
 
 ~~~~ts
 // types.ts
@@ -107,11 +134,48 @@ const selectedId: CourseId = 'modules'
 export { selectedId }
 ~~~~
 
-## 配套编译 fixture
+### 4. script 与 module 文件
 
-本阶段使用多文件临时编译验证：正例由入口导入同目录类型和值；负例尝试导入存在但未导出的成员，固定 TS2459。临时 runner 关闭 emit，验证结束后随 `/tmp` 目录一并删除；浏览器可达不等于模块解析正确。
+**它们是什么：** 含顶层 `import` 或 `export` 的文件是模块，声明默认局部；没有这些语法的旧式文件可能
+把声明放入共享全局作用域。
 
-## 易错使用提示
+**它们有什么用：** 识别文件身份可以解释重名全局变量和声明污染问题。
+
+**怎么使用：** 正常业务文件使用明确导入导出；只想隔离声明但暂时没有公共成员时，可添加空导出。
+
+~~~~ts
+const internalCourseName = '模块边界'
+
+export {}
+~~~~
+
+## 四、动手实践：拆分值导入与类型导入
+
+建立两个源码文件，让运行时依赖和只用于检查的类型依赖一眼可见。
+
+~~~~ts
+// course.ts
+export interface Course {
+  id: string
+  title: string
+}
+
+export function formatCourse(course: Course): string {
+  return `${course.id}: ${course.title}`
+}
+~~~~
+
+~~~~ts
+// main.ts
+import { formatCourse } from './course.js'
+import type { Course } from './course.js'
+
+const course: Course = { id: 'ts', title: 'Modules' }
+console.log(formatCourse(course))
+~~~~
+
+编译后检查 JavaScript 中只有 formatCourse 的运行时导入。再尝试导入一个未 export 的成员，理解“文件中存在”与“模块公开”是两件不同的事。
+## 五、易错使用提示
 
 :::pitfalls
 ### 把未导出名字当成公共成员
@@ -214,20 +278,20 @@ import { createCourse } from './course.js'
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 原理与适用场景
+## 六、工作原理与适用边界
 
 :::steps
 ### 模块由语法边界确定
 
-官方事实：顶层 import/export 使文件成为模块，否则按 script 处理。课程推导：每个应用文件都应明确自己的作用域。边界：实际加载格式还受运行环境和编译配置控制。
+**工作原理：** 顶层 import/export 使文件成为模块，否则按 script 处理。**实践建议：** 每个应用文件都应明确自己的作用域。**使用边界：** 实际加载格式还受运行环境和编译配置控制。
 
 ### 导出形成公共 surface
 
-官方事实：模块成员只有显式导出后才对外可见。课程推导：让导出列表保持最小，私有实现可自由演进。边界：export 不自动保证 API 稳定或语义版本兼容。
+**工作原理：** 模块成员只有显式导出后才对外可见。**实践建议：** 让导出列表保持最小，私有实现可自由演进。**使用边界：** export 不自动保证 API 稳定或语义版本兼容。
 
 ### 类型依赖不等于运行依赖
 
-官方事实：import type/export type 可在输出中移除。课程推导：显式标记纯类型依赖有助于工具链正确处理。边界：class 同时存在于值与类型空间，运行时使用时不能只做类型导入。
+**工作原理：** import type/export type 可在输出中移除。**实践建议：** 显式标记纯类型依赖有助于工具链正确处理。**使用边界：** class 同时存在于值与类型空间，运行时使用时不能只做类型导入。
 :::
 
 :::exercise
@@ -235,9 +299,42 @@ import { createCourse } from './course.js'
 
 **要求：** 创建 types.ts、lesson.ts 和 index.ts：导出课程类型与创建函数，在入口中分别使用 import type 和普通 import；再尝试导入一个未导出常量。
 
-**验收：** 正例多文件严格编译通过，负例产生 TS2459，并能指出哪些依赖在运行时仍然存在。
+**完成标准：** 正例多文件严格编译通过，负例产生 TS2459，并能指出哪些依赖在运行时仍然存在。
 :::
 
-## 总结与下一课
+## 七、本节小结
 
 模块用显式 import/export 隔离作用域，并区分值依赖与类型依赖。基础阶段至此完成；下一课“泛型与约束”会在这些函数和模块合同中保留输入输出关系。
+
+:::code-details{title="查看本节完整示例"}
+~~~~ts
+// course.ts
+export interface Course {
+  id: string
+  title: string
+}
+
+/** 创建课程值。 */
+export function defineCourse(course: Course): Course {
+  return course
+}
+
+const internalVersion = '7.0.2'
+
+// index.ts：只重导出稳定公共面
+export { defineCourse } from './course.js'
+export type { Course } from './course.js'
+
+// main.ts：类型导入不会形成运行时依赖
+import { defineCourse } from './index.js'
+import type { Course } from './index.js'
+
+const course: Course = defineCourse({ id: 'modules', title: '模块' })
+console.log(course)
+
+// isolated-script.ts：空导出把文件明确变为模块，避免声明进入全局
+export {}
+const pageTitle = '课程页'
+console.log(pageTitle)
+~~~~
+:::

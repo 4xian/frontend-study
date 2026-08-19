@@ -1,7 +1,8 @@
 # 后端课程研究与来源规范
 
-> 版本：v1.0<br>
-> 核验日期：2026-08-03<br>
+> 版本：v1.1<br>
+> 来源核验日期：2026-08-03<br>
+> 规则修订日期：2026-08-07<br>
 > 状态：已确认<br>
 > 适用范围：`backend` 生态下的 Java、Go 及后续后端课程
 > 实施计划：[`dzzz-app-course-plan.md`](./java/dzzz-app-course-plan.md)
@@ -195,13 +196,11 @@ Spring Guides 适合作为教学示例；精确行为仍需回查 Reference、Ja
 
 ## 11. 来源卡合同
 
-每篇后端知识点必须在 frontmatter 中提供来源卡，结构由
-[`knowledge-point-template.md`](./knowledge-point-template.md) 统一定义。最低字段为：
+每篇 Java 学习课程必须在 frontmatter 中提供来源卡，结构由
+[`java-course-authoring-standard.md`](./java/java-course-authoring-standard.md) 统一定义。最低字段为：
 
 ```yaml
 verifiedAt: YYYY-MM-DD
-modernBaseline: {}
-legacyBaseline: {}
 sources:
   - id: stable-source-id
     title: 来源标题
@@ -210,18 +209,18 @@ sources:
     appliesTo: 精确版本
     claims:
       - 本来源支持的结论
-projectEvidence:
-  - file: dzzz-app/相对路径.java
-    symbol: 稳定符号名
-    usage: observed
 ```
 
 来源链接必须指向直接页面；不能只链接搜索页、首页或未使用的整本规范。
 
+来源卡由详情页右侧或移动端的“官方来源”区域统一展示。课程正文禁止重复增加“参考资料”或
+“来源详情”章节；来源需要补充背景时，应完善对应来源卡的 `sourceType`、`appliesTo` 和 `claims`，
+不得在正文复制同一组链接。
+
 ## 12. 发布 Gate
 
-本节只校验研究和来源；正文结构与字段以
-[`knowledge-point-template.md`](./knowledge-point-template.md) 的 Authoring Gate 为准。知识点只有同时
+本节只校验研究和来源；Java 学习课程的正文结构与字段以
+[`java-course-authoring-standard.md`](./java/java-course-authoring-standard.md) 的单课完成条件为准。知识点只有同时
 满足以下研究条件才可发布：
 
 - [ ] 现代版本和项目版本均已明确。
@@ -232,4 +231,5 @@ projectEvidence:
 - [ ] 开发技巧标明适用条件，风格建议没有写成语言规则。
 - [ ] 性能或安全结论达到对应证据门槛。
 - [ ] 所有 URL、版本和 `verifiedAt` 已在当前批次重新核验。
+- [ ] 正文没有重复的“参考资料”或“来源详情”，来源卡只由统一“官方来源”区域展示。
 - [ ] Markdown 通过模板校验、格式检查和课程站最小验证。

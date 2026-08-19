@@ -57,7 +57,7 @@ recap:
 
 # 动态路由与 RouterLink 扩展
 
-## 动态路由改变 matcher，不会改写当前 route 快照
+## 一、动态路由改变 matcher，不会改写当前 route 快照
 
 `addRoute()` 只注册后续解析可用的记录。如果新记录更精确地匹配当前 URL，已经提交的 `currentRoute` 与 RouterView 仍保持旧 matched；组件挂载期间注册后，应显式 replace 当前 fullPath 并等待导航结算。
 
@@ -77,7 +77,7 @@ await router.replace(router.currentRoute.value.fullPath)
 | removeRoute / disposer | 立即移除记录 | 保持已提交快照 |
 | replace current fullPath | 用最新 matcher 解析 | 提交新的 matched 与视图 |
 
-## 在导航守卫内返回位置，不发起嵌套 replace
+## 二、在导航守卫内返回位置，不发起嵌套 replace
 
 ~~~~ts
 router.beforeEach((to) => {
@@ -90,7 +90,7 @@ router.beforeEach((to) => {
 
 guard 返回位置会替换当前进行中的导航。`hasRoute()` 或业务注册表必须在下一轮变为 true，否则会无限重定向。组件挂载后的显式 replace 与守卫内 return location 是两个场景，不应混用。
 
-## 移除记录有三种入口，但都只改变 matcher
+## 三、移除记录有三种入口，但都只改变 matcher
 
 可以调用 `removeRoute(name)`、执行 `addRoute()` 返回的 disposer，或用同名新记录替换旧记录。移除 parent 会递归移除 children 与 aliases。route name 在整个 Router 中唯一；插件化场景可用 Symbol 降低命名冲突。
 
@@ -103,7 +103,7 @@ router.getRoutes().map((record) => record.name)
 dispose() // 只移除本次注册仍存在的 matcher
 ~~~~
 
-## useLink 提供行为，渲染责任仍在组件
+## 四、useLink 提供行为，渲染责任仍在组件
 
 `useLink({ to, replace })` 返回 resolved route、href、isActive、isExactActive 与 navigate。自定义组件仍应输出真实 `&lt;a&gt;`、绑定 href、在 exact active 时设置 `aria-current="page"`，并把 click 交给 navigate；它不是把链接降级成按钮。
 
@@ -123,11 +123,11 @@ const { href, isActive, isExactActive, navigate } = useLink(props)
 </template>
 ~~~~
 
-## 外部链接先旁路 client router
+## 五、外部链接先旁路 client router
 
 RouterLink 的 navigate 会保留修饰键、非左键、已阻止事件和 `_blank` 的浏览器行为；包装组件不应复制一套不完整判断。`https:` 等外部 URL 直接渲染原生 `&lt;a target="_blank" rel="noopener noreferrer"&gt;`，不要交给 `useLink()` 解析。
 
-## 用一个实验观察 matcher、route 与 link 三组状态
+## 六、用一个实验观察 matcher、route 与 link 三组状态
 
 下面的独立 memory router 先让 `/feature/tool?mode=inspect` 命中 fallback。注册动态记录后，hasRoute 与 getRoutes 先改变；只有 replace 当前地址后 matched 与 RouterView 才切到 feature。实验还展示 useLink 的 href/active/exact、标准键盘导航和外链旁路。
 
@@ -135,7 +135,7 @@ RouterLink 的 navigate 会保留修饰键、非左键、已阻止事件和 `_bl
 分步观察 matcher 注册、当前 route 刷新与 useLink 导航语义
 :::
 
-## 易错使用提示
+## 七、易错使用提示
 
 :::pitfalls
 ### 认为 addRoute 会立即刷新当前 RouterView
@@ -375,7 +375,7 @@ router.getRoutes().map(({ name, path, meta }) => ({ name, path, meta }))
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 从源码推导适用场景
+## 八、从源码推导适用场景
 
 :::steps
 ### 1. matcher 与 currentRoute 是两个提交面

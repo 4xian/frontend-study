@@ -47,11 +47,11 @@ anchors:
 
 # 组件 v-model 与 defineModel()
 
-## 概述
+## 一、概述
 
 `defineModel()` 是 Vue 3.4+ 仅用于 `<script setup>` 的编译器宏。它声明一个供父组件 `v-model` 使用的 prop 和对应的 `update:*` 事件，并返回可读写的 ref：读取反映模型 prop，写入会发出更新事件。它没有改变 props 向下、事件向上的数据流，只是收起了重复声明与可写 computed 的样板代码。
 
-## 默认模型与底层协议
+## 二、默认模型与底层协议
 
 不传名称时，模型 prop 是 `modelValue`，事件是 `update:modelValue`。父组件的 `<Child v-model="value" />` 等价于传入 `:model-value="value"` 并监听更新事件后给 value 赋值。`defineModel()` 返回 ref，可直接绑定原生输入或在脚本中写 `.value`；需要消除 `undefined` 类型时，可声明 `required: true`，或提供默认值并同时处理父子初始值一致性。
 
@@ -72,7 +72,7 @@ const model = defineModel<string>({ required: true })
 通过 modelValue 与 update\:modelValue 协议演示父值和自定义输入组件的双向同步
 :::
 
-## 具名模型与多个绑定
+## 三、具名模型与多个绑定
 
 把字面量名称作为第一个参数即可声明具名模型：`defineModel('title')` 对应 `title` prop 与 `update:title` 事件，父组件使用 `v-model:title`。一个组件可以声明多个不同名称的模型，每个模型拥有独立 prop 与更新事件；同名模型不能重复声明。名称是组件公共协议的一部分，应保持稳定并采用与父模板一致的命名。
 
@@ -91,7 +91,7 @@ const lastName = defineModel<string>('lastName', { required: true })
 <UserName v-model:first-name="first" v-model:last-name="last" />
 ~~~~
 
-## 修饰符与转换器
+## 四、修饰符与转换器
 
 解构 defineModel 的可迭代返回值可同时取得模型 ref 与修饰符记录。options 中的 `get` 和 `set` 转换器分别加工读取结果与发给父组件的值，适合实现自定义修饰符。转换器应保持轻量且可预测；它们改变的是模型边界上的值，不应在内部悄悄写入其他状态。TypeScript 可用第二个泛型参数约束允许的修饰符名称。
 
@@ -106,11 +106,11 @@ const [model, modifiers] = defineModel<string, 'capitalize'>({
 })
 ~~~~
 
-## 受控与本地模式
+## 五、受控与本地模式
 
 运行时 `useModel()` 只有在当前 vnode 同时收到模型 prop 和相应的 `onUpdate:*` 监听器时，才把写入视为父组件控制的 v-model：它发出更新事件，并等待新 prop 向下同步。缺少这对绑定时，模型 ref 会先更新本地值，同时仍 emit 更新事件。因此可选 v-model 的组件可以在未绑定时拥有本地状态；若组件必须受父级控制，应将模型声明为 required，并由父组件始终提供可写绑定。
 
-## 易错使用提示
+## 六、易错使用提示
 
 :::pitfalls
 ### 子组件设置默认值但父模型初始为 undefined
@@ -255,7 +255,7 @@ count.value = (count.value ?? 0) + 1
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 最小源码实现
+## 七、最小源码实现
 
 编译器把 defineModel 记录为模型 prop，同时生成修饰符 prop 和 `update:<name>` 事件，并将宏调用改写为 `useModel(__props, name, options)`。`useModel()` 用 customRef 保存当前 prop 镜像，`watchSyncEffect` 在父值变化时同步并触发依赖。setter 先应用 set 转换器，再检查当前 vnode 是否同时存在模型 prop 和更新监听器：未绑定时直接更新本地值；无论哪种模式都会 emit 更新事件。源码还有转换值重复、父更新被去重等强制刷新的细节，这里只保留主路径。
 

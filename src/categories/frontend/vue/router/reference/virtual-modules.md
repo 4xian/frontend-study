@@ -68,7 +68,7 @@ anchors:
 
 # 文件路由虚拟模块
 
-## 概述
+## 一、概述
 
 `vue-router/auto-routes` 与 `vue-router/auto-resolver` 是构建插件识别的虚拟 module id。5.2.0 package exports 为两者各提供一个 types-only 声明 stub，让 TypeScript 知道导出形状；真正的项目级运行时代码由插件扫描当前 pages 后，在 bundler 的 `resolveId/load` 阶段生成。
 
@@ -81,7 +81,7 @@ anchors:
 两个模块共享 pages/route tree，但不是可互换别名。常规项目选 `auto-routes`；只有明确试验 experimental router 时才选择 `auto-resolver`。
 :::
 
-## Auto Routes
+## 二、Auto Routes
 
 `auto-routes` 的 `routes` 是 `RouteRecordRaw[]`。插件把每个 route tree 节点编译为 path、name、component import、children、props、alias 与 meta；应用把数组直接传给稳定 `createRouter()`，后续匹配仍由稳定 matcher 完成。
 
@@ -110,7 +110,7 @@ if (import.meta.hot) {
 stub 中的空 interface 是增强目标，不是“当前项目没有 routes”的运行时结果。具体成员来自插件写出的 d.ts；具体 routes 值来自插件返回的虚拟模块代码。
 :::
 
-## Auto Resolver
+## 三、Auto Resolver
 
 `auto-resolver` 从同一 route tree 生成排序后的固定 resolver，并把类型声明为 `EXPERIMENTAL_RouterOptions['resolver']`。生成代码会使用 `vue-router/experimental` 的 `createFixedResolver`、record normalization 与 matcher patterns；它因此继承 experimental router 的稳定性，而不是因为位于 file-based 子路径就成为稳定 matcher 替代品。
 
@@ -141,7 +141,7 @@ if (import.meta.hot) {
 | 产物 | createFixedResolver([...records]) | 只交给 experimental router |
 | HMR | 调用 Router 的内部 resolver 替换能力 | 只通过生成的 handleHotUpdate 接线 |
 
-## Types Only Stub 与 Plugin 前置
+## 四、Types Only Stub 与 Plugin 前置
 
 固定 package manifest 中，两个 export key 都只有 `types` 条件，目标分别是包根部的 `.d.mts` stub，没有 `import`、`require` 或 `default` runtime 目标。构建插件注册同名常量，把精确 id 解析成带 `\0` 前缀的虚拟 id；load 时才调用 `generateRoutes()` 或 `generateResolver()` 返回代码。
 
@@ -171,7 +171,7 @@ load(virtualId)
 | 项目 route names/params | 空增强接口 | route-map.d.ts 写入具体映射 |
 | 页面 component imports | 不存在 | 按当前 route tree 生成 |
 
-## 声明生成与 TypeScript
+## 五、声明生成与 TypeScript
 
 `generateDTS()` 增强根入口 `TypesConfig`，把 `RouteNamedMap` 与 `_RouteFileInfoMap` 指向 `vue-router/auto-routes`；随后又在该模块声明里写入具体 route records 与文件映射。因此即使应用不直接 import `RouteNamedMap`，Router 的 `push()`、RouterLink 和 `useRoute()` 仍能消费生成类型。
 
@@ -188,7 +188,7 @@ load(virtualId)
 官方 Getting Started 建议启动 dev server 生成首版类型，并把 d.ts 纳入 tsconfig。5.2.0 迁移指南进一步建议放在 `src/route-map.d.ts`，以便常见项目配置自动包含。
 :::
 
-## HMR 边界
+## 六、HMR 边界
 
 两个虚拟模块都生成 `handleHotUpdate()`，但更新策略不同：auto-routes 清空并重新 addRoute，再强制 replace 当前位置；auto-resolver 替换 experimental resolver，再按当前 path/query/hash 导航。应用只注册对应模块的 helper，不直接调用 `clearRoutes()` 循环或 internal resolver 替换方法。
 
@@ -197,7 +197,7 @@ load(virtualId)
 | auto-routes | 稳定 Router route records | 当前 route 去除旧 name/matched 后 replace | HMR 代码按 import.meta.hot 分支 |
 | auto-resolver | experimental resolver | 当前 path/query/hash 后 replace | 仍是 experimental 链路 |
 
-## Package Exports
+## 七、Package Exports
 
 下表是本页负责的两个 package export key，第一列按 5.2.0 manifest 原样登记。它们是稳定 118 项之外的构建期附加入口，不计入根 API 分母；“types-only”只描述 package 静态目标，不会把 plugin 生成的运行时值变成 type-only。
 
@@ -206,7 +206,7 @@ load(virtualId)
 | ./auto-routes | ./vue-router-auto-routes.d.mts（types-only） | routes + handleHotUpdate | 稳定 Router 文件路由桥接；不计 118 |
 | ./auto-resolver | ./vue-router-auto-resolver.d.mts（types-only） | resolver + handleHotUpdate | experimental router 桥接；不计 118 |
 
-## 易错使用提示
+## 八、易错使用提示
 
 :::pitfalls
 ### 把 types-only stub 当成包内 runtime 模块
@@ -369,7 +369,7 @@ import { routes, handleHotUpdate } from 'vue-router/auto-routes'
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 九、源码推导与适用场景
 
 :::steps
 ### 1. 从 package manifest 确定静态边界

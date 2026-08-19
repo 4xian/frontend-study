@@ -183,7 +183,7 @@ anchors:
 
 # Route Locations
 
-## 概述
+## 一、概述
 
 Route location 不是单一对象类型，而是地址在不同阶段的类型家族。应用把 `RouteLocationRaw` 交给 `push()`、`replace()`、`resolve()` 或 RouterLink；matcher 解析出 path、params、records 与 meta；导航再排除 redirect records、加载异步组件，最终把 `RouteLocationNormalizedLoaded` 提交给 `currentRoute`、守卫和 RouterView。
 
@@ -191,7 +191,7 @@ Route location 不是单一对象类型，而是地址在不同阶段的类型�
 未声明 `RouteMap` 时，公开别名回退到本页的 Generic 接口；启用 typed routes 后，同一别名会按 route name 选择 TypedList 中的成员。业务 API 优先暴露公开别名，不要把 Generic 或 internal 基础类型误当成唯一入口。
 :::
 
-## 地址状态与选择入口
+## 二、地址状态与选择入口
 
 | 需求 | 首选类型 | 关键边界 |
 | --- | --- | --- |
@@ -203,7 +203,7 @@ Route location 不是单一对象类型，而是地址在不同阶段的类型�
 | 读取 currentRoute / 渲染目标 | RouteLocationNormalizedLoaded | 懒加载组件已解析 |
 | 生成 href、不发起导航 | RouteLocationResolved | `router.resolve()` 增加 `href` |
 
-## Internal Route Location Base
+## 三、Internal Route Location Base
 
 ~~~~ts
 interface _RouteLocationBase
@@ -219,7 +219,7 @@ interface _RouteLocationBase
 `_RouteLocationBase` 在固定源码中标记 `@internal`，只为已解析地址共享字段。应用层不要导入、扩展或断言它；根据阶段改用 `RouteLocation`、`RouteLocationNormalized` 或 `RouteLocationNormalizedLoaded`。
 :::
 
-## Location As Relative Raw
+## 四、Location As Relative Raw
 
 ~~~~ts
 interface LocationAsRelativeRaw {
@@ -233,7 +233,7 @@ interface LocationAsRelativeRaw {
 `LocationAsRelativeRaw` 是 `@internal` 的组合片段，`path?: undefined` 用来排除 path 分支。应用层使用公开的 `RouteLocationAsRelative` 或总入口 `RouteLocationRaw`，不要围绕这个片段建立公共契约。
 :::
 
-## Route Location As Path Generic
+## 五、Route Location As Path Generic
 
 ~~~~ts
 interface RouteLocationAsPathGeneric
@@ -244,7 +244,7 @@ interface RouteLocationAsPathGeneric
 
 无 `RouteMap` 时的 path 对象形态。`path` 是百分号编码后的 pathname；`query` 与 `hash` 仍按未编码值传入。需要让 Router 根据动态参数编码并生成 path 时，优先使用 name + params 的相对地址。
 
-## Route Location As Relative Generic
+## 六、Route Location As Relative Generic
 
 ~~~~ts
 interface RouteLocationAsRelativeGeneric
@@ -257,7 +257,7 @@ interface RouteLocationAsRelativeGeneric
 
 无 `RouteMap` 时的命名/相对对象。提供 `name` 时 matcher 按名称找 record；省略 name 与 path 时，matcher 以当前位置为基础合并 params。它适合保留当前 record、只改变 params/query/hash，也适合明确 name 让 Router 负责参数编码。
 
-## Route Location Generic
+## 七、Route Location Generic
 
 ~~~~ts
 interface RouteLocationGeneric extends _RouteLocationBase, RouteLocationOptions {
@@ -267,7 +267,7 @@ interface RouteLocationGeneric extends _RouteLocationBase, RouteLocationOptions 
 
 `RouteLocation` 的未类型化回退。它已经有规范化的 path、params、query、hash、fullPath 与合并 meta，但 `matched` 保存加入 matcher 时的 `RouteRecord[]`，仍可能含 redirect records 或懒加载组件，不能直接当作 RouterView 的最终渲染清单。
 
-## Route Location Matched
+## 八、Route Location Matched
 
 ~~~~ts
 interface RouteLocationMatched extends RouteRecordNormalized {
@@ -277,7 +277,7 @@ interface RouteLocationMatched extends RouteRecordNormalized {
 
 表示完成组件加载、可用于渲染的单条 normalized record。它把 `components` 收窄为普通 `RouteComponent`，不再允许 lazy loader；只在 `RouteLocationNormalizedLoaded.matched` 中出现。
 
-## Route Location Named Raw
+## 九、Route Location Named Raw
 
 ~~~~ts
 interface RouteLocationNamedRaw
@@ -288,7 +288,7 @@ interface RouteLocationNamedRaw
 `RouteLocationNamedRaw` 在固定声明中标记 `@internal`。它只是 name/params、query/hash 与导航选项的低层交叉类型；应用代码使用 `RouteLocationAsRelative` 或 `RouteLocationRaw`，不要直接依赖此内部名称。
 :::
 
-## Route Location Normalized Generic
+## 十、Route Location Normalized Generic
 
 ~~~~ts
 interface RouteLocationNormalizedGeneric extends _RouteLocationBase {
@@ -299,7 +299,7 @@ interface RouteLocationNormalizedGeneric extends _RouteLocationBase {
 
 `RouteLocationNormalized` 的未类型化回退。与 `RouteLocationGeneric` 相比，它不携带导航选项，`matched` 已是 `RouteRecordNormalized[]` 且不含 redirect records；但 lazy components 不保证已经加载。
 
-## Route Location Normalized Loaded Generic
+## 十一、Route Location Normalized Loaded Generic
 
 ~~~~ts
 interface RouteLocationNormalizedLoadedGeneric
@@ -310,7 +310,7 @@ interface RouteLocationNormalizedLoadedGeneric
 
 `RouteLocationNormalizedLoaded` 的未类型化回退。`matched` 中异步组件已经解析并替换为普通组件，也不含 redirect records；它是 `router.currentRoute.value`、已完成导航守卫参数与 RouterView 渲染所需的最终形态。
 
-## Route Location Options
+## 十二、Route Location Options
 
 ~~~~ts
 interface RouteLocationOptions {
@@ -326,7 +326,7 @@ interface RouteLocationOptions {
 | force | 相同地址也执行导航 | 除非同时 replace，否则仍新增 history 条目 |
 | state | 写入 History API state | 必须可结构化克隆，不能含响应式值或 Symbol |
 
-## Route Location Path Raw
+## 十三、Route Location Path Raw
 
 ~~~~ts
 interface RouteLocationPathRaw
@@ -337,7 +337,7 @@ interface RouteLocationPathRaw
 `RouteLocationPathRaw` 在固定声明中标记 `@internal`，是 matcher path、query/hash 与导航选项的低层组合。应用层使用公开的 `RouteLocationAsPath` 或 `RouteLocationRaw`，不要以该内部接口作为组件 prop 或库 API。
 :::
 
-## Route Location Resolved Generic
+## 十四、Route Location Resolved Generic
 
 ~~~~ts
 interface RouteLocationResolvedGeneric extends RouteLocationGeneric {
@@ -347,7 +347,7 @@ interface RouteLocationResolvedGeneric extends RouteLocationGeneric {
 
 `RouteLocationResolved` 的未类型化回退。`router.resolve()` 在 matcher 结果上增加考虑 history base 的 `href`，但不会运行守卫、写 history、更新 currentRoute 或加载 matched 中的懒组件。
 
-## Route Location
+## 十五、Route Location
 
 ~~~~ts
 type RouteLocation<Name extends keyof RouteMap = keyof RouteMap> =
@@ -358,7 +358,7 @@ type RouteLocation<Name extends keyof RouteMap = keyof RouteMap> =
 
 raw 地址经过 matcher 解析后的公开别名。未配置 typed routes 时等于 `RouteLocationGeneric`；配置 `RouteMap` 后按 `Name` 联合出精确 name 与 params。需要渲染保证时继续收窄到 NormalizedLoaded。
 
-## Route Location As Path
+## 十六、Route Location As Path
 
 ~~~~ts
 type RouteLocationAsPath<Name extends keyof RouteMap = keyof RouteMap> =
@@ -377,7 +377,7 @@ const reports: RouteLocationAsPath = {
 }
 ~~~~
 
-## Route Location As Relative
+## 十七、Route Location As Relative
 
 ~~~~ts
 type RouteLocationAsRelative<Name extends keyof RouteMap = keyof RouteMap> =
@@ -396,7 +396,7 @@ const user: RouteLocationAsRelative = {
 }
 ~~~~
 
-## Route Location As String
+## 十八、Route Location As String
 
 ~~~~ts
 type RouteLocationAsString<Name extends keyof RouteMap = keyof RouteMap> =
@@ -407,7 +407,7 @@ type RouteLocationAsString<Name extends keyof RouteMap = keyof RouteMap> =
 
 字符串地址可以包含 path、query 与 hash，也能相对当前 path 解析。传入字符串或对象 `path` 时调用方负责 pathname 编码；若动态值来自业务数据，name + params 通常更安全，并能利用 typed routes。
 
-## Route Location Normalized
+## 十九、Route Location Normalized
 
 ~~~~ts
 type RouteLocationNormalized<Name extends keyof RouteMap = keyof RouteMap> =
@@ -418,7 +418,7 @@ type RouteLocationNormalized<Name extends keyof RouteMap = keyof RouteMap> =
 
 公开的规范化地址别名。它适合 matcher 完成、redirect records 已排除，但组件加载尚未承诺完成的导航中间阶段。守卫签名会按具体时序同时使用 Normalized 与 NormalizedLoaded。
 
-## Route Location Normalized Loaded
+## 二十、Route Location Normalized Loaded
 
 ~~~~ts
 type RouteLocationNormalizedLoaded<Name extends keyof RouteMap = keyof RouteMap> =
@@ -429,7 +429,7 @@ type RouteLocationNormalizedLoaded<Name extends keyof RouteMap = keyof RouteMap>
 
 公开的可渲染地址别名。`router.currentRoute` 是 `ShallowRef&lt;RouteLocationNormalizedLoaded&gt;`；等待导航或首次 `isReady()` 后读取它，才能把 matched components 当作已加载组件。
 
-## Route Location Raw
+## 二十一、Route Location Raw
 
 ~~~~ts
 type RouteLocationRaw<Name extends keyof RouteMap = keyof RouteMap> =
@@ -452,7 +452,7 @@ const destinations: RouteLocationRaw[] = [
 ]
 ~~~~
 
-## Route Location Resolved
+## 二十二、Route Location Resolved
 
 ~~~~ts
 type RouteLocationResolved<Name extends keyof RouteMap = keyof RouteMap> =
@@ -472,7 +472,7 @@ console.log(target.fullPath, target.href)
 
 `fullPath` 是应用内已编码地址，`href` 还应用了 history base，可直接用于链接。解析是同步计算，不代表导航已经成功，也不保证懒组件已经加载。
 
-## START LOCATION
+## 二十三、START LOCATION
 
 ~~~~ts
 declare const START_LOCATION: RouteLocationNormalizedLoaded
@@ -480,7 +480,7 @@ declare const START_LOCATION: RouteLocationNormalizedLoaded
 
 `START_LOCATION` 是 Router 创建后的共享“尚未导航”对象，初值为 `/`、空 params/query/matched/meta。官方 API 用 `from === START_LOCATION` 识别首次导航；它不是普通首页，也不应通过字段形状猜测。SSR 或依赖首个真实 route 的初始化要先显式 push 并等待 `router.isReady()`。
 
-## 易错使用提示
+## 二十四、易错使用提示
 
 :::pitfalls
 ### 同时传 path 与 params，期待 Router 把参数插入 path
@@ -708,7 +708,7 @@ router.beforeEach((to, from) => {
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 二十五、源码推导与适用场景
 
 :::steps
 ### 1. 公开别名是 typed routes 的稳定切换点

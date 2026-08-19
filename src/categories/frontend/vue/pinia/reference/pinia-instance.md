@@ -72,11 +72,11 @@ anchors:
 
 # Pinia 实例与应用所有权
 
-## 概述
+## 一、概述
 
 一个 `Pinia` 实例拥有自己的根 state、store registry、effect scope 与插件集合。常规应用先 `createPinia()`，再通过 `app.use(pinia)` 把实例交给 Vue；SSR、多应用和并行测试则必须为各自生命周期持有独立实例。active Pinia 只是解析上下文，不是进程级单例。
 
-## Pinia Interface
+## 二、Pinia Interface
 
 | 成员 | 分类 | 契约与边界 |
 | --- | --- | --- |
@@ -101,15 +101,15 @@ app.use(pinia)
 app.mount('#app')
 ~~~~
 
-## Create Pinia
+## 三、Create Pinia
 
 `createPinia()` 创建 detached effect scope、根 `ref({})` 与插件队列，并返回经 `markRaw()` 处理的实例。创建不等于安装；在 `app.use(pinia)` 之前，插件只进入待安装队列，组件也还没有注入上下文。每个 app、SSR request 或需要隔离的测试 fixture 都应创建自己的实例。
 
-## Get Active Pinia
+## 四、Get Active Pinia
 
 `getActivePinia()` 在 Vue injection context 内优先读取注入的实例，否则回退到当前 active variable，因此返回值可能是 `undefined`。它适合框架集成和边界诊断；普通业务优先直接调用在正确安装时机内的 `useStore()`，组件外则显式传入实例。
 
-## Set Active Pinia
+## 五、Set Active Pinia
 
 `setActivePinia()` 设置或清除 active context，并原样返回参数。Pinia 在安装和 store 创建流程中使用该 seam；测试或 SSR 代码若直接使用它，必须隔离并恢复上下文，不能把一次设置当作永久全局初始化。
 
@@ -127,17 +127,17 @@ try {
 }
 ~~~~
 
-## Dispose Pinia
+## 六、Dispose Pinia
 
 `disposePinia(pinia)` 停止整个 effect scope，清空 store registry、插件列表和 root state，并断开 app。它主要服务测试和多实例生命周期，不等于 state reset；调用后实例不可复用，需要重新 `createPinia()`。该函数本身不会恢复或清除 active context：调用方必须保存并恢复先前实例，不能让已释放的 Pinia 继续被 `getActivePinia()` 或隐式 `useStore()` 解析。单个 `store.$dispose()` 只释放该 store，且默认保留 `pinia.state.value[id]`。
 
-## Internal Pinia Symbol
+## 七、Internal Pinia Symbol
 
 :::warning
 `piniaSymbol` 是已发布但标记 internal 的注入键，固定声明明确警告它可能在 minor 版本破坏。它只作为 testing、Storybook 等边界观察项登记；常规应用使用 `app.use(pinia)`、组件注入上下文或 `useStore(pinia)`，不要直接 import。
 :::
 
-## 易错使用提示
+## 八、易错使用提示
 
 :::pitfalls
 ### 手动调用 install(app)
@@ -328,7 +328,7 @@ const store = useSessionStore(pinia)
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 九、源码推导与适用场景
 
 :::steps
 ### 1. 实例隔离来自独立 scope 与 root state

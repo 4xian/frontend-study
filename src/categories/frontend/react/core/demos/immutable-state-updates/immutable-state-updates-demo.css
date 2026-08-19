@@ -1,0 +1,308 @@
+.immutable-state-demo {
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+}
+
+.immutable-state-heading p,
+.immutable-state-heading h2,
+.immutable-state-heading span,
+.immutable-state-section-heading p,
+.immutable-state-section-heading h3,
+.immutable-state-values,
+.immutable-state-array ol,
+.immutable-state-footer p {
+  margin: 0;
+}
+
+.immutable-state-heading p,
+.immutable-state-section-heading p {
+  color: var(--color-react);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.immutable-state-heading h2 {
+  margin-top: var(--space-1);
+  font-size: 1.08rem;
+  line-height: 1.4;
+}
+
+.immutable-state-heading span {
+  display: block;
+  margin-top: var(--space-1);
+  color: var(--color-text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.6;
+}
+
+.immutable-state-object,
+.immutable-state-array {
+  margin-top: var(--space-4);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+}
+
+.immutable-state-section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.immutable-state-section-heading > div {
+  min-width: 0;
+  margin-right: var(--space-3);
+}
+
+.immutable-state-section-heading h3 {
+  margin-top: var(--space-1);
+  font-size: 0.98rem;
+  line-height: 1.45;
+}
+
+.immutable-state-section-heading > span,
+.immutable-state-section-heading output {
+  flex: 0 0 auto;
+  max-width: 55%;
+  color: var(--color-text-secondary);
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+
+.immutable-state-values {
+  display: flex;
+  flex-wrap: wrap;
+  margin: var(--space-2) -5px -10px;
+}
+
+.immutable-state-values > div {
+  box-sizing: border-box;
+  flex: 1 1 160px;
+  min-width: 0;
+  padding: var(--space-3);
+  margin: 0 5px 10px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.immutable-state-values dt {
+  color: var(--color-text-secondary);
+  font-size: 0.76rem;
+}
+
+.immutable-state-values dd {
+  margin: var(--space-1) 0 0;
+  font-size: 1.05rem;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.immutable-state-actions {
+  display: flex;
+  flex-wrap: wrap;
+  margin: var(--space-2) -5px -10px;
+}
+
+.immutable-state-actions button,
+.immutable-state-footer button {
+  min-height: 42px;
+  padding: 8px var(--space-3);
+  border: 1px solid var(--color-border-strong);
+  border-radius: 6px;
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.immutable-state-actions button {
+  margin: 0 5px 10px;
+}
+
+.immutable-state-actions button:hover:not(:disabled),
+.immutable-state-actions button:focus-visible,
+.immutable-state-footer button:hover,
+.immutable-state-footer button:focus-visible {
+  border-color: var(--color-react);
+  background: color-mix(in srgb, var(--color-react) 10%, var(--color-bg-elevated));
+}
+
+.immutable-state-actions button:focus-visible,
+.immutable-state-footer button:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-react) 32%, transparent);
+  outline-offset: 2px;
+}
+
+.immutable-state-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.immutable-state-array ol {
+  padding: 0;
+  margin-top: var(--space-3);
+  list-style: none;
+}
+
+.immutable-state-array li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+  padding: var(--space-3);
+  margin-top: var(--space-2);
+  border-left: 3px solid var(--color-react);
+  background: var(--color-bg);
+}
+
+.immutable-state-array li:first-child {
+  margin-top: 0;
+}
+
+.immutable-state-array ol.is-compact li {
+  padding-top: var(--space-2);
+  padding-bottom: var(--space-2);
+}
+
+.immutable-state-array li > div:first-child {
+  min-width: 0;
+  margin-right: var(--space-3);
+}
+
+.immutable-state-array strong,
+.immutable-state-array li > div:first-child span {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.immutable-state-array strong {
+  line-height: 1.45;
+}
+
+.immutable-state-array li > div:first-child span {
+  margin-top: var(--space-1);
+  color: var(--color-text-secondary);
+  font-size: 0.76rem;
+}
+
+.immutable-state-badges {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+}
+
+.immutable-state-badges span {
+  padding: 5px 8px;
+  margin-left: 6px;
+  border-radius: 4px;
+  background: var(--color-bg-sunken);
+  color: var(--color-text-secondary);
+  font-size: 0.76rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.immutable-state-badges .is-done {
+  background: color-mix(in srgb, #2f9e6f 16%, var(--color-bg-elevated));
+  color: color-mix(in srgb, #178253 82%, var(--color-text));
+}
+
+.immutable-state-badges .is-pending {
+  background: var(--color-warning-bg);
+  color: var(--color-warning);
+}
+
+.immutable-state-empty {
+  padding: var(--space-4);
+  margin: var(--space-3) 0 0;
+  border: 1px dashed var(--color-border-strong);
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+.immutable-state-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-4);
+  padding: var(--space-3);
+  border-left: 4px solid var(--color-warning);
+  background: var(--color-warning-bg);
+}
+
+.immutable-state-footer p {
+  min-width: 0;
+  margin-right: var(--space-3);
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.immutable-state-footer button {
+  flex: 0 0 auto;
+}
+
+@media (max-width: 620px) {
+  .immutable-state-demo {
+    padding: var(--space-3);
+  }
+
+  .immutable-state-section-heading,
+  .immutable-state-footer {
+    display: block;
+  }
+
+  .immutable-state-section-heading > div,
+  .immutable-state-array li > div:first-child,
+  .immutable-state-footer p {
+    margin-right: 0;
+  }
+
+  .immutable-state-section-heading > span,
+  .immutable-state-section-heading output {
+    display: block;
+    max-width: none;
+    margin-top: var(--space-1);
+    text-align: left;
+  }
+
+  .immutable-state-values,
+  .immutable-state-actions {
+    display: block;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .immutable-state-values > div,
+  .immutable-state-actions button {
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .immutable-state-array li {
+    display: block;
+  }
+
+  .immutable-state-badges {
+    flex-wrap: wrap;
+    margin-top: var(--space-2);
+  }
+
+  .immutable-state-badges span {
+    margin: 6px 6px 0 0;
+  }
+
+  .immutable-state-footer button {
+    width: 100%;
+    margin-top: var(--space-3);
+  }
+}

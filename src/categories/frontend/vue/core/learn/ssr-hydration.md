@@ -73,11 +73,11 @@ recap:
 
 # SSR 与 Hydration
 
-## 正文大纲
+## 一、正文大纲
 
 上一课从性能预算判断何时值得增加运行复杂度，本课把这条判断推进到 SSR。服务端先把组件树变成 HTML，浏览器解析为 DOM，客户端再用同一组件树激活已有节点并绑定响应式更新与事件。首屏更早可见不代表组件已经可交互；真正可靠的契约是两端首次渲染一致，然后把浏览器专属变化推迟到激活之后。
 
-## 先分清三个阶段
+## 二、先分清三个阶段
 
 :::steps
 ### 服务端创建请求级应用
@@ -101,7 +101,7 @@ createSSRApp().mount() 让客户端 VNode 与现有节点对齐，补上事件�
 SSR 只描述生成 HTML 的阶段，hydration 才是浏览器把静态节点接回 Vue 运行时的阶段。HTML 已出现但按钮尚未激活的时间窗口，必须由真实 SSR 环境测量，不能由普通 SPA 首次挂载代替。
 :::
 
-## 共享应用工厂，两端入口各负其责
+## 三、共享应用工厂，两端入口各负其责
 
 通用模块导出应用工厂，服务端入口负责按请求创建并 renderToString，客户端入口负责恢复同一初始状态后 mount。两端必须引用同一根组件和同一路由结果；差异只应来自平台入口，而不是首轮模板分支。
 
@@ -136,7 +136,7 @@ createVueApp(initialState).app.mount('#app')
 示例省略了 HTTP 服务、路由 ready、HTML 模板和安全序列化。生产项目优先使用 Nuxt 等 SSR 框架；若自行实现，状态必须用防止脚本闭合与注入的序列化方案，不能把未经转义的 JSON 直接拼入 script。
 :::
 
-## 首次渲染确定性是核心契约
+## 四、首次渲染确定性是核心契约
 
 同一个 URL、同一份已序列化状态与同一组件版本，应在服务端渲染和客户端第一次 render 中得到等价的节点类型、顺序、关键属性与文本。激活完成后的点击、媒体查询、用户时区和实时钟表可以改变界面；它们不应提前渗入客户端首次 render。
 
@@ -168,7 +168,7 @@ onMounted(showLocalTime)
 <template><time>{{ localTime }}</time></template>
 ~~~~
 
-## 服务端数据要等待，也要交接
+## 五、服务端数据要等待，也要交接
 
 onServerPrefetch 注册的 Promise 会在服务端渲染该组件前被等待，适合填充请求级状态。仅在服务端拿到数据还不够：客户端必须恢复这份结果，否则首次 render 又回到空状态并产生差异。onMounted 不在服务端执行，适合浏览器专属副作用，但不负责 SSR 数据预取。
 
@@ -188,7 +188,7 @@ onServerPrefetch(prepareCatalog)
 </script>
 ~~~~
 
-## 按请求隔离状态，避免用户数据串线
+## 六、按请求隔离状态，避免用户数据串线
 
 浏览器中的模块级 store 通常只服务一个页面会话；SSR 服务器却会在多个请求之间复用模块。若用户数据写入单例响应式对象，后一个请求可能读到前一个请求的内容。应用、router、store 和请求级缓存都应从每次请求调用的工厂创建。
 
@@ -210,7 +210,7 @@ export function createStore(initialState: State) {
 ~~~~
 :::
 
-## 不匹配是分类信号，不是一个笼统警告
+## 七、不匹配是分类信号，不是一个笼统警告
 
 Vue 会按节点类型进入不同激活路径。文本不同可直接改写文本节点；children 多出或缺少时会移除或补挂；节点类型不一致时会移除不匹配节点并重新 patch。Vue 会尽量恢复，但恢复意味着额外 DOM 工作，也可能造成视觉跳变，因此开发期应先找到两端输入差异。
 
@@ -225,7 +225,7 @@ Vue 会按节点类型进入不同激活路径。文本不同可直接改写文�
 不要把“页面最后看起来正常”当作激活成功证据。自动恢复可能已经替换节点；应同时检查开发期 warning、console error、关键节点是否复用、事件是否可用以及首屏是否跳变。
 :::
 
-## data-allow-mismatch 只压制已理解的警告
+## 八、data-allow-mismatch 只压制已理解的警告
 
 Vue 3.5+ 的 data-allow-mismatch 可放在元素上，无值时允许当前元素的全部分类，也可窄化为 text、children、class、style 或 attribute。text 与 children 会向祖先查找允许项；class、style 与 attribute 只检查当前元素。结构允许项放得过高仍会掩盖更大范围。它不让两端结果自动一致，也不消除恢复 DOM 的成本。
 
@@ -236,7 +236,7 @@ Vue 3.5+ 的 data-allow-mismatch 可放在元素上，无值时允许当前元�
 </template>
 ~~~~
 
-## 客户端边界要保留稳定占位
+## 九、客户端边界要保留稳定占位
 
 若内容必须读取 canvas、window、viewport 或用户本地时区，可让服务端与客户端首轮都渲染稳定占位，再在 onMounted 后切换；SSR 框架也可能提供 ClientOnly 一类边界。边界的代价是该区域没有真实 SSR 内容，布局应预留稳定空间，并决定无 JavaScript 时的可用程度。
 
@@ -260,7 +260,7 @@ onMounted(openClientBoundary)
 </template>
 ~~~~
 
-## 易错使用提示
+## 十、易错使用提示
 
 :::pitfalls
 ### 在首轮模板中读取当前时间或随机数
@@ -460,7 +460,7 @@ createSSRApp(App).mount('#app')
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 从 Vue 3.5.40 源码推导边界
+## 十一、从 Vue 3.5.40 源码推导边界
 
 :::steps
 ### createSSRApp 延迟启用 hydration renderer
@@ -496,7 +496,7 @@ renderToString.ts 展开异步 buffer 后调用 resolveTeleports(context)，再�
 vnode.el、handleMismatch、buffer 与 watcher handles 是实现证据，不是业务测试契约。应用测试应观察服务端 HTML、开发期不匹配消息、关键 DOM 是否复用、交互是否接管以及请求状态是否隔离。
 :::
 
-## 在边界实验台观察首次比对
+## 十二、在边界实验台观察首次比对
 
 唯一 Demo 固定展示“服务器快照”和“客户端首次渲染”两份模型数据，可切换确定性输入、文本漂移与结构漂移，并比较直接激活和客户端边界。它运行在当前 Vite SPA 中，不生成服务端 HTML、不调用 Node server-renderer，也不把模型结论伪装成真实 hydration 证据。
 
@@ -504,7 +504,7 @@ vnode.el、handleMismatch、buffer 与 watcher handles 是实现证据，不是�
 比较确定性首轮、两类 mismatch 与客户端边界的可观察结果模型
 :::
 
-## 练习与回顾
+## 十三、练习与回顾
 
 :::exercise
 ### 定位三条不匹配链

@@ -1,0 +1,217 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.basics.first-automated-test-with-junit",
+  "batchId": "phase-4-first-automated-test-with-junit",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "phase": "Phase B",
+  "phaseBProgress": "20/21",
+  "phaseBReverification": {
+    "recordedAt": "2026-08-15T01:20:00Z",
+    "contract": {
+      "title": "第一条自动化测试：JUnit、断言与测试结构",
+      "url": "/backend/java/core/learn/first-automated-test-with-junit",
+      "durationMinutes": 75,
+      "prerequisites": [
+        "backend.java.learn.basics.maven-project-model"
+      ],
+      "requiredTopics": [
+        "被测代码、测试代码、JUnit Jupiter 与 Maven Surefire 的职责",
+        "test scope、@Test、Arrange-Act-Assert 与精确断言",
+        "assertEquals、布尔断言、assertThrows 与测试命名",
+        "测试发现、退出码、测试计数、Surefire XML 报告与重复运行",
+        "Java 25/JUnit 6.1.3 与 Java 8/JUnit 5.14.4 双版本反馈环"
+      ]
+    },
+    "phaseAFrozenPlan": {
+      "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+      "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81",
+      "previousCourse": "backend.java.learn.basics.maven-project-model",
+      "nextCourse": "backend.java.learn.basics.command-line-task-manager-project",
+      "nextCourseStarted": false,
+      "phaseBStopBoundary": "B-20 已关闭；下一批只允许 B-21。B-21 基础 Gate 关闭后立即停止，不进入 Phase C、D、E。"
+    },
+    "sourceReverification": {
+      "method": "按课程来源规范核对 JUnit、Maven Surefire、Java 版本与测试生命周期的官方一手页面",
+      "communitySourcesUsedAsEvidence": false,
+      "verifiedAt": "2026-08-15",
+      "researchUniqueUrls": 21,
+      "researchHttpStatus": "21/21 全部返回 200",
+      "lessonOfficialLinks": 14,
+      "lessonOfficialLinksReachable": true
+    },
+    "routeIdentity": {
+      "stableIdPreserved": true,
+      "stableUrlPreserved": true,
+      "trackPosition": 20,
+      "trackStatus": "available",
+      "loaderSlug": "first-automated-test-with-junit",
+      "trackChangedInThisBatch": true,
+      "loaderChangedInThisBatch": true
+    },
+    "artifacts": [
+      {
+        "path": "docs/research/backend/java/basics/first-automated-test-with-junit.md",
+        "sha256": "d267e5cb94ad5eea9a9d57ffe9f6eca6661384a70f8d9812c613eeb7e3a8953d"
+      },
+      {
+        "path": "src/categories/backend/java/core/learn/first-automated-test-with-junit.md",
+        "sha256": "e86ecf8283194dd52036f1b1982ee596f44fd71c97d5f65a15616867c0f528d0"
+      },
+      {
+        "path": "src/categories/backend/java/core/backend-java-track.ts",
+        "sha256": "8084c93eae7014a70a18e762c00f10a3e231526563be6542ece9db29fd8d1f64"
+      },
+      {
+        "path": "src/categories/backend/java/core/entry-manifest.ts",
+        "sha256": "25319a68560823f17ce56a9de4a26ea5ec9d7bd340f400a6664b2f2ae1bcceb3"
+      },
+      {
+        "path": "docs/backend/java/audit/phase-2-knowledge-path-manifest.json",
+        "sha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407"
+      }
+    ],
+    "baselineVerification": [
+      {
+        "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+        "exitCode": 0,
+        "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+      },
+      {
+        "command": "npm run type-check",
+        "exitCode": 0,
+        "summary": "passed through the final build"
+      },
+      {
+        "command": "npm run lint",
+        "exitCode": 0,
+        "summary": "passed"
+      },
+      {
+        "command": "npm run format:check",
+        "exitCode": 0,
+        "summary": "passed"
+      },
+      {
+        "command": "npm run test:unit",
+        "exitCode": 0,
+        "summary": "empty configured unit directory is valid"
+      },
+      {
+        "command": "npm run test:e2e",
+        "exitCode": 0,
+        "summary": "empty configured E2E directory is valid"
+      },
+      {
+        "command": "npm run build",
+        "exitCode": 0,
+        "summary": "passed; 1743 modules transformed; existing catalog chunk and content-markdown timing warnings only"
+      },
+      {
+        "command": "git diff --check -- <B-20 paths> && git diff --cached --check -- <B-20 paths>",
+        "exitCode": 0,
+        "summary": "passed; no new staging performed"
+      }
+    ],
+    "javaVerification": {
+      "command": "extract the final lesson feedback-loop blocks and execute them in isolated temporary Maven projects",
+      "exitCode": 0,
+      "modern": {
+        "baseline": "Java 25 + JUnit 6.1.3",
+        "directFullNegativeRepeat": "4 tests, 0 failures, 0 errors; deliberate assertion failure was non-zero with expected/actual report; restored run passed"
+      },
+      "legacy": {
+        "baseline": "Java 8 + JUnit 5.14.4",
+        "directFullNegativeRepeat": "4 tests, 0 failures, 0 errors; deliberate assertion failure was non-zero with expected/actual report; restored run passed"
+      },
+      "temporaryAssets": {
+        "location": "/tmp",
+        "cleanupMethod": "find -depth -delete",
+        "cleanupStatus": "complete"
+      }
+    },
+    "markdownVerification": {
+      "frontmatter": "PASS",
+      "adapter": "PASS",
+      "fromZeroFlow": "PASS; exact versions, /tmp start, complete POM, steps 1-8, source paths, success, negative, recovery and cleanup",
+      "javaMethodComments": "PASS"
+    },
+    "catalogVerification": {
+      "registeredEntries": 20,
+      "availableEntries": 20,
+      "targetId": "backend.java.learn.basics.first-automated-test-with-junit",
+      "loaderSlug": "first-automated-test-with-junit"
+    },
+    "browserVerification": {
+      "tool": "Playwright CLI",
+      "session": "vue3-b20-final",
+      "sessionClosed": true,
+      "baseUrl": "http://127.0.0.1:4173/",
+      "targetPath": "/backend/java/core/learn/first-automated-test-with-junit",
+      "desktop": {
+        "viewport": "1440x900",
+        "documentClientWidth": 1440,
+        "documentScrollWidth": 1440,
+        "horizontalOverflow": false,
+        "contentChecks": [
+          "步骤 1～8 可见",
+          "完整 Compiler/Surefire POM 可见",
+          "负例、恢复和 find -depth -delete 清理可见"
+        ],
+        "codeBlockCount": 27,
+        "officialSourceUniqueUrlCount": 14,
+        "previousPath": "/backend/java/core/learn/maven-project-model",
+        "nextPath": "/backend/java/core/learn/lambda-stream-and-collectors",
+        "searchTerm": "第一条自动化测试",
+        "searchResultCount": 1
+      },
+      "mobile": {
+        "viewport": "390x844",
+        "documentClientWidth": 390,
+        "documentScrollWidth": 390,
+        "horizontalOverflow": false
+      },
+      "completionButtonTextAfterReload": "取消完成",
+      "progressPersistedAfterReload": true,
+      "console": {
+        "errors": 0,
+        "warnings": 0,
+        "pageErrors": 0,
+        "failedRequests": 0,
+        "nonSuccessfulResponses": 0
+      }
+    },
+    "review": {
+      "riskClassification": "新增课程正文、研究稿、track/loader 注册和完整浏览器/工程验收",
+      "independentReviewRequired": true,
+      "standards": "PASS",
+      "standardsFindings": 0,
+      "spec": "PASS",
+      "specFindings": 0,
+      "reviewSummary": "正文单一主题；完整跟做流程、B-20 ID/URL、B-19 前置、Phase B allowlist 与排除边界均通过"
+    },
+    "workspaceProtection": {
+      "dirtyWorkspaceProtected": true,
+      "unrelatedChangesPreserved": true,
+      "statusSnapshotSha256": "747ea92d5bda0911edc07fe96afc92131c796c5756c3233eda7bf07f9883bd39",
+      "scopedStagedAndUnstagedDiffCheck": "PASS"
+    },
+    "changedFiles": [
+      "docs/research/backend/java/basics/first-automated-test-with-junit.md",
+      "src/categories/backend/java/core/learn/first-automated-test-with-junit.md",
+      "src/categories/backend/java/core/backend-java-track.ts",
+      "src/categories/backend/java/core/entry-manifest.ts",
+      "docs/backend/java/audit/reviews/phase-4-first-automated-test-with-junit-signoff.json"
+    ]
+  },
+  "recordedAt": "2026-08-15T01:20:00Z",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "review": {
+    "standards": "PASS",
+    "standardsFindings": 0,
+    "spec": "PASS",
+    "specFindings": 0
+  },
+  "stopBoundary": "Phase B 的 B-20 已关闭；下一批只允许 B-21 command-line-task-manager-project，不得进入 Phase C、D、E。B-21 基础 Gate 关闭后立即停止。"
+}

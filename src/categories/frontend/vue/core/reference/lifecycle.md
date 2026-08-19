@@ -64,11 +64,11 @@ anchors:
 
 # 生命周期钩子
 
-## 概述
+## 一、概述
 
 每个组件实例都会经历创建、挂载、更新和卸载。组合式 API 用 `onXxx()` 在对应阶段注册回调：挂载前后使用 `onBeforeMount` / `onMounted`，更新前后使用 `onBeforeUpdate` / `onUpdated`，卸载前后使用 `onBeforeUnmount` / `onUnmounted`。
 
-## 六个核心钩子的签名
+## 二、六个核心钩子的签名
 
 ~~~~ts
 type LifecycleCallback = () => void
@@ -82,7 +82,7 @@ function onBeforeUnmount(callback: LifecycleCallback, target?: LifecycleTarget):
 function onUnmounted(callback: LifecycleCallback, target?: LifecycleTarget): void
 ~~~~
 
-## 六个核心钩子的时机
+## 三、六个核心钩子的时机
 
 | 钩子 | 调用时机 | 典型用途 |
 | --- | --- | --- |
@@ -99,7 +99,7 @@ function onUnmounted(callback: LifecycleCallback, target?: LifecycleTarget): voi
 挂载、更新和卸载一个子组件，观察六个核心钩子的调用顺序
 :::
 
-## 注册时机的约束
+## 四、注册时机的约束
 
 生命周期钩子通常必须在 `setup()` 的同步调用栈中注册，Vue 才能把回调关联到当前组件实例。钩子可以写在外部组合式函数中，只要该函数仍由 setup 同步调用。普通 `async setup()` 在恢复执行时已失去该上下文；`<script setup>` 的顶层 await 是明确例外，编译器会在异步操作后恢复当前实例。
 
@@ -117,7 +117,7 @@ const data = await loadData()
 onMounted(() => useData(data))
 ~~~~
 
-## onRenderTracked()
+## 五、onRenderTracked()
 
 ~~~~ts
 type DebuggerHook = (event: DebuggerEvent) => void
@@ -138,7 +138,7 @@ onRenderTracked((event) => {
 })
 ~~~~
 
-## onRenderTriggered()
+## 六、onRenderTriggered()
 
 ~~~~ts
 type DebuggerHook = (event: DebuggerEvent) => void
@@ -176,7 +176,7 @@ onRenderTriggered((event) => {
 })
 ~~~~
 
-## 易错使用提示
+## 七、易错使用提示
 
 :::pitfalls
 ### 在异步恢复后才注册生命周期钩子
@@ -465,13 +465,13 @@ onRenderTracked((event) => {
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## SSR 与 KeepAlive 边界
+## 八、SSR 与 KeepAlive 边界
 
 服务端渲染不会调用 onBeforeMount、onMounted、onBeforeUpdate、onUpdated、onBeforeUnmount 和 onUnmounted；需要在服务端渲染前等待异步数据时使用 `onServerPrefetch()`。DOM 相关副作用应放进 onMounted，确保只在客户端执行。
 
 `onActivated` / `onDeactivated` 用于 `<KeepAlive>` 缓存树。onActivated 在首次挂载和每次重新插入 DOM 时调用；onDeactivated 在移入缓存和最终卸载时调用。这两个钩子也会作用于缓存根组件的后代。源码会包装失活分支检查，并把钩子登记到祖先 KeepAlive root，因此它们并非六个核心钩子的简单别名。
 
-## 错误捕获
+## 九、错误捕获
 
 `onErrorCaptured` 捕获后代组件在渲染、事件处理、生命周期、setup、侦听器、自定义指令和过渡钩子中抛出的错误。回调收到 `(err, instance, info)`；开发环境的 info 是错误来源字符串，生产环境则是缩短代码。错误默认从下向上经过各级捕获钩子并送达 `app.config.errorHandler`，返回 false 可停止继续传播。若捕获钩子自身抛错，新错误和原错误都会送达应用级处理器。
 
@@ -487,7 +487,7 @@ onErrorCaptured((err, _instance, info) => {
 })
 ~~~~
 
-## 最小源码实现
+## 十、最小源码实现
 
 六个核心钩子由同一个 `createHook(type)` 工厂生成。它在客户端 setup 中把回调交给 `injectHook`，后者暂停依赖追踪、恢复目标实例并统一处理回调错误，再把包装后的函数加入实例对应的钩子数组。SSR setup 中除 SERVER&#95;PREFETCH 外不会登记这些钩子。
 

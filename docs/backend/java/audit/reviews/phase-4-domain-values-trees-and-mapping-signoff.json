@@ -1,0 +1,312 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.intermediate.domain-values-trees-and-mapping",
+  "batchId": "phase-4-domain-values-trees-and-mapping",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-09T12:45:51+08:00",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "stagingPerformedThisBatch": false,
+    "existingStagedAndUnstagedStatePreserved": true
+  },
+  "sourceRepository": {
+    "path": "/Users/jian/Desktop/work/TDH/dzzz/dzzz-app",
+    "readOnly": true,
+    "projectExecuted": false,
+    "projectModified": false,
+    "accessBoundary": "Frozen Phase 2 evidence only; no batch-specific project access"
+  },
+  "versions": {
+    "verifiedAt": "2026-08-09",
+    "modern": {
+      "java": "25",
+      "springBoot": "4.1.0",
+      "springFramework": "7.0.8"
+    },
+    "legacy": {
+      "java": "8",
+      "springBoot": "2.3.12.RELEASE",
+      "springFramework": "5.2.15.RELEASE"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/intermediate/domain-values-trees-and-mapping.md",
+      "sha256": "af685e517aa584fc88b4722f6e08df2b735dcc8457dcc981bee1ba5ad2d0283d"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/domain-values-trees-and-mapping.md",
+      "sha256": "efedd7559bd77d368bdd607285c6242a4a4d5e0b5326cce6a0871fe94181cfbd"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "92ff3b0507689e96f90d7439079a2e348760a39e7d3447cc6960dd6b2d255b53"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "f0ce88083806730d40f345bcf65b58d9ae084120623232f70e28f8c6a859131a"
+    },
+    {
+      "path": "docs/backend/java/dzzz-app-course-plan.md",
+      "sha256": "157b641f13e72341912587c53ef7d10ee55196873905f7a5969a3a8284ef0562"
+    },
+    {
+      "path": "docs/backend/knowledge-point-template.md",
+      "sha256": "bff59682f067fa4c3c50d28ee6efa2b372572b120507e81330c36015ae97f617"
+    },
+    {
+      "path": "docs/backend/research-source-standard.md",
+      "sha256": "b28656e8200c484f0782115077a0215c2c7a2d90327557bfab1e0c139b8fcbca"
+    }
+  ],
+  "sourceVerification": {
+    "researchCardCount": 27,
+    "frontmatterOfficialSourceCount": 17,
+    "directUrlCheck": "PASS; all 17 official source URLs were checked during the batch gate and the later repairs did not change their targets",
+    "projectEvidenceCount": 10,
+    "projectEvidenceExpectedCount": 10,
+    "projectEvidenceSetDifference": 0,
+    "projectEvidenceUsage": "10/10 observed",
+    "projectEvidenceBoundary": "Frozen audit evidence only; dzzz-app was not reopened"
+  },
+  "javaVerification": {
+    "temporaryAssets": [
+      "/tmp/java-domain-values-review.oF8JUI/modern",
+      "/tmp/java-domain-values-review.oF8JUI/legacy",
+      "/tmp/java-tree-builder-regression.UEOMxb"
+    ],
+    "modernContainer": "eclipse-temurin:25-jdk",
+    "legacyContainer": "eclipse-temurin:8-jdk",
+    "cases": [
+      {
+        "command": "javac -Xlint:all -Werror --release 25 DomainValuesFeedback.java TreeNodeSnapshotFeedback.java && java DomainValuesFeedback && java TreeNodeSnapshotFeedback && javap -verbose DomainValuesFeedback.class",
+        "exitCode": 0,
+        "summary": "DOMAIN_VALUES_PASS nodes=4 bfs=4 dfs=4; TREE_SNAPSHOT_PASS children=1; major version 69"
+      },
+      {
+        "command": "javac -Xlint:all -Werror --release 25 FlatNode.java TreeNode.java FlatTreeValidator.java TreeBuilder.java TreeBuilderFeedback.java && java TreeBuilderFeedback",
+        "exitCode": 0,
+        "summary": "TREE_BUILDER_PASS children=1; duplicate, orphan and cycle inputs fail before recursive freeze"
+      },
+      {
+        "command": "java DomainValuesFeedback UNKNOWN|DUPLICATE|ORPHAN|CYCLE",
+        "exitCode": 1,
+        "summary": "All four Java 25 negative modes failed with the expected original code, id, parent or cycle node"
+      },
+      {
+        "command": "javac -Xlint:all -Werror DomainValuesLegacyFeedback.java && java DomainValuesLegacyFeedback && javap -verbose DomainValuesLegacyFeedback.class",
+        "exitCode": 0,
+        "summary": "DOMAIN_VALUES_LEGACY_PASS nodes=4 bfs=4 dfs=4; major version 52"
+      },
+      {
+        "command": "java DomainValuesLegacyFeedback UNKNOWN|DUPLICATE|ORPHAN|CYCLE",
+        "exitCode": 1,
+        "summary": "All four Java 8 negative modes failed with the expected original code, id, parent or cycle node"
+      }
+    ]
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "lineCount": 1309,
+    "lineCountException": "Reviewed and accepted because the frozen course combines JAVA-ENGINEERING-031 and JAVA-ENGINEERING-032 in one cumulative zero-basis feedback loop; no separable graph, ORM, framework configuration or DDD course content is included",
+    "independentKnowledgePointHeadings": 16,
+    "knowledgePointSevenPartCoverage": "16/16",
+    "pitfallCount": 5,
+    "pitfallNinePartCoverage": "5/5",
+    "requiredLessonSections": "17/17",
+    "orderedListItemsRenderAsSeparateBlocks": "PASS",
+    "sourceHeadingAbsent": true,
+    "officialSourceCount": 17,
+    "uniqueSourceUrlCount": 17,
+    "projectEvidenceCount": 10,
+    "javaCodeBlockCount": 19,
+    "javaMethodComments": "PASS",
+    "securitySection": "PASS"
+  },
+  "manifestRegression": {
+    "exactHistoricalSymptoms": [
+      "条目未加入模块 manifest：backend.java.learn.intermediate.relational-data-and-sql-foundations",
+      "条目未加入模块 manifest：backend.java.learn.intermediate.layers-dto-and-service-boundaries"
+    ],
+    "currentBatchChecks": [
+      "第17批 loader 与 available track 状态同批一致",
+      "中级17批均为 available 且都有对应 loader",
+      "高级 reflection-aop-and-cross-cutting-contracts 保持 planned 且没有 loader"
+    ],
+    "repair": "发布前后及最终 Gate 连续三次冷启动；planned 条目不进入 entry-manifest",
+    "finalColdStartRuns": 3,
+    "finalColdStartErrors": 0
+  },
+  "verification": [
+    {
+      "command": "cd /Users/jian/Desktop/tools/vue3-study && node /tmp/course-content-check.mjs /src/categories/backend/java/core/learn/domain-values-trees-and-mapping.md backend.java.learn.intermediate.domain-values-trees-and-mapping",
+      "sourcePath": "/Users/jian/Desktop/tools/vue3-study/src/categories/backend/java/core/learn/domain-values-trees-and-mapping.md",
+      "modulePathNote": "/src/categories/backend/java/core/learn/domain-values-trees-and-mapping.md is the Vite root-relative module ID consumed by the temporary checker, not a filesystem-root path",
+      "exitCode": 0,
+      "summary": "PASS; sourceCount=17, projectEvidenceCount=10, blockCount=179"
+    },
+    {
+      "command": "node /tmp/catalog-cold-check.mjs (three consecutive runs)",
+      "exitCode": 0,
+      "summary": "CATALOG_COLD_PASS on all runs"
+    },
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+    },
+    {
+      "command": "npm exec prettier -- --check <batch files>",
+      "exitCode": 0,
+      "summary": "PASS"
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0,
+      "summary": "PASS"
+    },
+    {
+      "command": "npm run type-check",
+      "exitCode": 0,
+      "summary": "PASS"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "summary": "PASS"
+    },
+    {
+      "command": "npm run format:check",
+      "exitCode": 0,
+      "summary": "PASS"
+    },
+    {
+      "command": "npm run test:unit",
+      "exitCode": 0,
+      "summary": "No test files found; configured empty directory is valid"
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "summary": "No persistent E2E test files; --pass-with-no-tests"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "1410 modules transformed; domain-values-trees-and-mapping-COSx8KJb.js emitted"
+    }
+  ],
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "baseUrl": "http://127.0.0.1:4179/",
+    "targetPath": "/backend/java/core/learn/domain-values-trees-and-mapping",
+    "temporaryScreenshots": [
+      "/tmp/java17-review-desktop.png",
+      "/tmp/java17-review-mobile.png",
+      "/tmp/java17-tree-desktop.png",
+      "/tmp/java17-tree-mobile.png"
+    ],
+    "desktop": {
+      "viewport": "1440x900",
+      "targetPageStatus": 200,
+      "documentClientWidth": 1440,
+      "documentScrollWidth": 1440,
+      "knowledgePointCount": 16,
+      "pitfallCount": 5,
+      "orderedListCount": 10,
+      "orderedItemCount": 88,
+      "visibleOrderedItemsUseDistinctRows": true,
+      "officialSourceCount": 17,
+      "duplicateSourceBodyHeadingCount": 0,
+      "consoleErrors": 0,
+      "failedRequests": 0,
+      "httpErrors": 0
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "targetPageStatus": 200,
+      "documentClientWidth": 390,
+      "documentScrollWidth": 390,
+      "knowledgePointCount": 16,
+      "pitfallCount": 5,
+      "orderedListCount": 10,
+      "orderedItemCount": 88,
+      "visibleOrderedItemsUseDistinctRows": true,
+      "officialSourceCount": 17,
+      "duplicateSourceBodyHeadingCount": 0,
+      "consoleErrors": 0,
+      "failedRequests": 0,
+      "httpErrors": 0
+    },
+    "manualScreenshotReview": "PASS; no incoherent overlap in the first viewport or the repaired tree-building section"
+  },
+  "review": {
+    "standards": "PASS / 0 finding",
+    "spec": "PASS / 0 finding",
+    "findingCount": 0,
+    "independentReviewRounds": 7,
+    "rounds": [
+      {
+        "round": 1,
+        "standards": "FAIL / 2 findings",
+        "spec": "FAIL / 3 findings",
+        "resolution": "Project evidence was corrected to observed, MapStruct was pinned to 1.6, immutable snapshots and Java 8 negative feedback were completed, and the batch count wording was fixed"
+      },
+      {
+        "round": 2,
+        "standards": "FAIL / 2 findings",
+        "spec": "FAIL / 2 findings",
+        "resolution": "The recommended tree builder was made compilable and validation now precedes recursive freeze; three Markdown links and three omitted frozen representative paths were repaired"
+      },
+      {
+        "round": 3,
+        "standards": "PASS / 0 finding",
+        "spec": "FAIL / 1 finding",
+        "resolution": "The only remaining finding was the absence of this final signoff artifact"
+      },
+      {
+        "round": 4,
+        "standards": "FAIL / 1 finding",
+        "spec": "FAIL / 1 finding",
+        "resolution": "All listed Java fixtures, browser screenshots, helper scripts and the Playwright snapshot were deleted; the pending review state now awaits one post-cleanup confirmation"
+      },
+      {
+        "round": 5,
+        "standards": "PASS / 0 finding",
+        "spec": "PASS / 0 finding",
+        "resolution": "Final independent review confirmed cleanup, artifact hashes, frozen evidence, loader and track consistency, and the intermediate 17/17 stop boundary"
+      },
+      {
+        "round": 6,
+        "standards": "FAIL / 1 finding",
+        "spec": "FAIL / 2 findings",
+        "resolution": "The research record now documents the reviewed 1309-line merged-course exception, the stale seven-symbol sentence now says ten, and signoff distinguishes the absolute source path from the Vite root-relative module ID"
+      },
+      {
+        "round": 7,
+        "standards": "PASS / 0 finding",
+        "spec": "PASS / 0 finding",
+        "resolution": "Final combined re-review confirmed the documented line-count exception, ten-symbol wording, reproducible source path, 17-course track-loader-signoff consistency, artifact hashes, cleanup and intermediate stop boundary"
+      }
+    ],
+    "finalIndependentConfirmationPending": false,
+    "finalIndependentConfirmedAt": "2026-08-09T13:10:52+08:00"
+  },
+  "temporaryAssetCleanup": {
+    "verifiedAt": "2026-08-09T12:52:52+08:00",
+    "checkedPathCount": 10,
+    "remainingPathCount": 0,
+    "playwrightSessionClosed": true,
+    "userServer4179Preserved": true,
+    "finalCatalogColdStartRuns": 3,
+    "finalCatalogColdStartErrors": 0
+  },
+  "temporaryAssetsCleaned": true,
+  "stopBoundary": "Close intermediate 17/17; do not enter advanced, Reference or project practice without new explicit authorization"
+}

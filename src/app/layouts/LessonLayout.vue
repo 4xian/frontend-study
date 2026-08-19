@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import ContentNavigationDrawer from '@/common/ui/navigation/ContentNavigationDrawer.vue'
+import OfficialSourceList from '@/common/ui/content/OfficialSourceList.vue'
 import LearningPathList from '@/common/ui/navigation/LearningPathList.vue'
 import PrerequisiteNotice from '@/common/ui/navigation/PrerequisiteNotice.vue'
 import CompletionControl from '@/common/ui/progress/CompletionControl.vue'
@@ -30,6 +31,14 @@ const props = defineProps<{
 }>()
 
 const progress = useProgressStore()
+
+/** 当前条目是否属于本次增强的 Java Core 课程。 */
+const isJavaCoreLesson = computed(
+  () =>
+    props.entry.meta.domain === 'backend' &&
+    props.entry.meta.technology === 'java' &&
+    props.entry.meta.module === 'core',
+)
 
 /** 当前课程所属模块的课程总览地址。 */
 const overviewPath = computed(() =>
@@ -196,16 +205,19 @@ function setEntryCompleted(completed: boolean): void {
         aria-labelledby="mobile-sources-title"
       >
         <p class="entry-kind">延伸阅读</p>
-        <h2 id="mobile-sources-title">官方来源</h2>
-        <a
-          v-for="source in entry.meta.sources"
-          :key="source.url"
-          :href="source.url"
-          target="_blank"
-          rel="noreferrer"
-        >
-          {{ source.title }}
-        </a>
+        <h2 id="mobile-sources-title">资料来源</h2>
+        <OfficialSourceList v-if="isJavaCoreLesson" :sources="entry.meta.sources" />
+        <template v-else>
+          <a
+            v-for="source in entry.meta.sources"
+            :key="source.url"
+            :href="source.url"
+            target="_blank"
+            rel="noreferrer"
+          >
+            {{ source.title }}
+          </a>
+        </template>
       </section>
       <CompletionControl
         :completed="progress.isCompleted(entry.meta.id)"
@@ -239,17 +251,20 @@ function setEntryCompleted(completed: boolean): void {
       aria-label="页面快捷导航"
     >
       <AppOutline :blocks="entry.blocks" />
-      <section v-if="entry.meta.sources.length" class="context-details" aria-label="官方来源">
-        <p class="context-title">官方来源</p>
-        <a
-          v-for="source in entry.meta.sources"
-          :key="source.url"
-          :href="source.url"
-          target="_blank"
-          rel="noreferrer"
-        >
-          {{ source.title }}
-        </a>
+      <section v-if="entry.meta.sources.length" class="context-details" aria-label="资料来源">
+        <p class="context-title">资料来源</p>
+        <OfficialSourceList v-if="isJavaCoreLesson" :sources="entry.meta.sources" />
+        <template v-else>
+          <a
+            v-for="source in entry.meta.sources"
+            :key="source.url"
+            :href="source.url"
+            target="_blank"
+            rel="noreferrer"
+          >
+            {{ source.title }}
+          </a>
+        </template>
       </section>
       <section class="context-details" aria-label="课程信息">
         <p class="context-title">课程信息</p>

@@ -70,11 +70,11 @@ recap:
 
 # EffectScope
 
-## 正文大纲
+## 一、正文大纲
 
 上一课把值提交与更新通知拆开，本课进一步回答“谁拥有这些副作用，何时一起结束”。effectScope() 不改变 ref 的值，也不替代组件；它为同步创建的一组 watch、watchEffect 和清理回调建立所有权。我们先建立最小 scope，再比较普通嵌套与 detached，最后把这套协议连接到组件 setup 和组合式函数。
 
-## 先把 Scope 看成副作用所有者
+## 二、先把 Scope 看成副作用所有者
 
 响应式状态描述“数据是什么”，effect scope 描述“哪些副作用属于同一段生命周期”。scope.run(fn) 在执行 fn 时暂时成为当前所有者；其中创建的响应式副作用会被收集。scope.stop() 停止这些副作用，但原来的 ref 仍可读取和修改。
 
@@ -103,7 +103,7 @@ scope.run 会返回回调的返回值；scope 已停止时不再执行回调并�
 版本边界：官网概括仍把 computed 列为可捕获对象，但 Vue 3.5.40 的 ComputedRefImpl 已不再使用 ReactiveEffect，也不会登记到 scope.effects。scope.stop() 后直接读取该 computed 仍会按最新依赖重新计算；若 watcher 消费它，停止的是 watcher。
 :::
 
-## 收集发生在同步创建的那一刻
+## 三、收集发生在同步创建的那一刻
 
 副作用是否归属某个 scope，取决于它被创建时哪个 scope 正处于活跃状态，而不是变量最后保存在哪里。run 执行完同步函数后立即恢复先前 scope；传入 async 函数时，第一个 await 之后的续体已经离开这次同步收集边界。
 
@@ -136,7 +136,7 @@ scope.run(() => {
 
 这与组件侦听器的官方规则一致：在 setup 或 script setup 中同步创建的 watcher 会绑定组件并在卸载时停止；异步回调中才创建的 watcher 没有这份自动所有权，必须保存并手动停止。优先同步创建 watcher，再让回调根据异步数据是否就绪决定是否工作。
 
-## 普通嵌套形成可级联停止的功能树
+## 四、普通嵌套形成可级联停止的功能树
 
 在父 scope 的 run 中创建默认 effectScope()，子 scope 会归属当前父级。父级停止时，自己的副作用和清理先结束，普通子 scope 也会递归停止。子级可提前 stop，用来关闭功能树中的一个分支，而不影响父级其他工作。
 
@@ -161,7 +161,7 @@ featureScope.stop() // loadLesson 与 renderPreview 都停止
 | 父 scope.stop() | 停止 | 递归停止 | 若同属该父级则停止 |
 | 再次父 scope.stop() | 保持停止 | 保持停止 | cleanup 不重复执行 |
 
-## Detached 把停止责任交给独立所有者
+## 五、Detached 把停止责任交给独立所有者
 
 effectScope(true) 创建 detached scope。即使它在父 scope.run 内创建，也不会挂入父级的普通子 scope 列表；父级 stop 后它仍响应。它不是更安全的默认值，而是一份明确声明：当前父级不拥有我，调用方必须给我安排独立的停止时机。
 
@@ -184,7 +184,7 @@ sharedScope?.stop() // 共享缓存的所有者显式释放
 detached scope 若没有服务对象、引用计数、应用卸载或测试 teardown 等明确 owner，就只是在绕开自动清理。生命周期更长不等于永久存活。
 :::
 
-## onScopeDispose 把外部资源纳入同一所有权
+## 六、onScopeDispose 把外部资源纳入同一所有权
 
 Vue 能停止它收集到的响应式副作用，却不会猜测某段业务代码注册了 DOM 事件、WebSocket、AbortController 或定时器。组合式函数在当前活跃 scope 内调用 onScopeDispose，可以把这些资源的幂等释放函数登记到同一个所有者。
 
@@ -213,7 +213,7 @@ function useViewportWidth() {
 
 onScopeDispose 与 onUnmounted 的差别在所有者抽象：前者依赖当前 effect scope，所以同一个组合式函数既能在组件中使用，也能放进用户创建的临时 scope。Vue 3.5+ 的 failSilently 参数只抑制“没有活跃 scope”的开发警告，不会自动创建 owner。
 
-## 组件 setup 已经提供默认所有者
+## 七、组件 setup 已经提供默认所有者
 
 每个组件 setup 都在组件自己的 effect scope 上下文中执行。普通同步 watcher 会随组件卸载，不需要为了自动清理再包一层 effectScope。显式 scope 的价值是建立组件内部更短的功能生命周期，或建立比单个组件更长的共享生命周期。
 
@@ -235,7 +235,7 @@ onScopeDispose 与 onUnmounted 的差别在所有者抽象：前者依赖当前 
 若共享实验最终仍应随当前组件结束，在组件 scope 同步登记 detachedScope.stop。
 :::
 
-## getCurrentScope 适合检查能力，不适合隐藏所有权
+## 八、getCurrentScope 适合检查能力，不适合隐藏所有权
 
 getCurrentScope() 返回当前活跃 scope 或 undefined。库函数可以用它决定是否能够登记 cleanup，或在缺少 owner 时要求调用方传入显式 dispose 方案。不要静默创建 detached scope 作为兜底，否则调用者看不见一个更长生命周期资源已经产生。
 
@@ -253,7 +253,7 @@ function useCourseChannel() {
 }
 ~~~~
 
-## 按生命周期选择工具
+## 九、按生命周期选择工具
 
 | 需求 | 优先工具 | 原因 |
 | --- | --- | --- |
@@ -263,7 +263,7 @@ function useCourseChannel() {
 | 跨组件共享一份长生命周期订阅 | detached scope + 明确 owner | 不会随任一使用组件提前停止 |
 | 只是计算派生值 | computed | 3.5.40 不登记到 scope，保持惰性派生且无需单独 stop |
 
-## 高级适用场景：从所有权反推结构
+## 十、高级适用场景：从所有权反推结构
 
 :::steps
 ### 临时编辑会话
@@ -283,7 +283,7 @@ function useCourseChannel() {
 每次任务建立独立 scope，完成、失败和取消路径共享同一 dispose；不得把请求私有状态挂进应用级 detached scope。
 :::
 
-## 易错使用提示
+## 十一、易错使用提示
 
 :::pitfalls
 ### 在 run 外创建 watcher，再期待 scope 接管
@@ -522,7 +522,7 @@ onScopeDispose(closeSharedChannel)
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 从 Vue 3.5.40 源码推导边界
+## 十二、从 Vue 3.5.40 源码推导边界
 
 :::steps
 ### 默认构造登记父子关系
@@ -562,13 +562,13 @@ component.ts 为组件实例创建 scope，并在设置当前实例时进入该 
 activeEffectScope、effects、cleanups、scopes、parent、index 和组件 instance.scope 都是 Vue 3.5.40 的实现证据。业务代码只使用公开 API，并通过回调次数、资源释放和界面状态验证所有权。
 :::
 
-## 动手验证：为副作用树建立停止边界
+## 十三、动手验证：为副作用树建立停止边界
 
 :::demo{id="vue.core.learn.advanced.effect-scope.effect-scope-lifecycle-lab-demo" playground="true"}
 父 scope、普通子 scope 与 detached scope 同时观察状态和原生事件；重复停止后比较响应次数、资源清理与组件 scope 桥接
 :::
 
-## 练习与回顾
+## 十四、练习与回顾
 
 :::exercise
 ### 设计可开关预览会话

@@ -187,7 +187,7 @@ anchors:
 
 # Typed Routes 与 RouteMap
 
-## 概述
+## 一、概述
 
 Typed Routes 用一个以 route name 为键的 RouteMap，把每条记录的 path、导航输入 paramsRaw、读取结果 params 与子路由名称联系起来。公开地址类型再按 Name 读取这张表，从而让 router.push()、RouterLink、useRoute() 和 router.resolve() 共享同一组编译期约束。
 
@@ -203,7 +203,7 @@ Typed Routes 用一个以 route name 为键的 RouteMap，把每条记录的 pat
 | 读取结果 | 按 name 收窄 name 与规范化 params | RouteLocation / Normalized / Loaded |
 | 解析结果 | 读取结果再增加 href | RouteLocationResolved |
 
-## 稳定发布事实与源码混合信号
+## 二、稳定发布事实与源码混合信号
 
 | 证据 | 5.2.0 可核验事实 | 本页采用的边界 |
 | --- | --- | --- |
@@ -216,7 +216,7 @@ Typed Routes 用一个以 route name 为键的 RouteMap，把每条记录的 pat
 以上是并列证据，不是稳定性裁决。Vue Router 5.2.0 的发布入口、Guide 位置和固定源码注释存在混合信号；本页只报告可核验事实，并要求升级时重新检查声明、Guide 与固定源码。
 :::
 
-## Route Location As Path Typed
+## 三、Route Location As Path Typed
 
 ~~~~ts
 interface RouteLocationAsPathTyped<
@@ -229,7 +229,7 @@ interface RouteLocationAsPathTyped<
 
 公开的 path 对象类型。它保留 Generic 版本的 query、hash 与导航选项，只把 path 收窄到指定 route name 的路径字面量，同时通过 _LiteralUnion 保留一般字符串的可用性。path 分支不携带 params；拥有业务参数时优先使用 name + params。
 
-## Route Location As Relative Typed
+## 四、Route Location As Relative Typed
 
 ~~~~ts
 interface RouteLocationAsRelativeTyped<
@@ -243,7 +243,7 @@ interface RouteLocationAsRelativeTyped<
 
 公开的命名或相对地址类型。name 选择 RouteMap 成员，params 随之读取该记录的 paramsRaw；省略 name 时可相对当前位置更新 params、query 或 hash。它继承的 path?: undefined 会把本分支与 path 对象分开。
 
-## Route Location Normalized Loaded Typed
+## 五、Route Location Normalized Loaded Typed
 
 ~~~~ts
 interface RouteLocationNormalizedLoadedTyped<
@@ -257,7 +257,7 @@ interface RouteLocationNormalizedLoadedTyped<
 
 公开的已加载地址类型。name 与规范化 params 按记录收窄，matched 则继承为 RouteLocationMatched[]：其中懒组件已加载，也不会包含 redirect record，适合 currentRoute 与 RouterView 就绪后的读取。
 
-## Route Location Normalized Typed
+## 六、Route Location Normalized Typed
 
 ~~~~ts
 interface RouteLocationNormalizedTyped<
@@ -272,7 +272,7 @@ interface RouteLocationNormalizedTyped<
 
 公开的规范化地址类型。它按 name 收窄 params，并明确 matched 为 RouteRecordNormalized[]；这一步已排除 redirect records，但不承诺懒组件完成加载。源码刻意不把 path 收窄到模板字面量，因为实际 path 已代入参数。
 
-## Route Location Resolved Typed
+## 七、Route Location Resolved Typed
 
 ~~~~ts
 interface RouteLocationResolvedTyped<
@@ -285,7 +285,7 @@ interface RouteLocationResolvedTyped<
 
 公开的解析结果类型。在 RouteLocationTyped 的 name、params 与 matcher 信息上只增加 href；它描述 router.resolve() 的返回形态，不表示守卫已运行、导航已提交或懒组件已加载。
 
-## Route Location Typed
+## 八、Route Location Typed
 
 ~~~~ts
 interface RouteLocationTyped<
@@ -299,7 +299,7 @@ interface RouteLocationTyped<
 
 公开的 matcher 结果类型。它从 RouteMap 的指定成员取得规范化 params，并用 Extract 排除 keyof 可能产生的 number；matched 仍沿用 RouteRecord[]，所以不要把它当作已加载渲染结果。常规 API 签名优先使用 RouteLocation&lt;Name&gt; 公开别名。
 
-## Route Record Info
+## 九、Route Record Info
 
 ~~~~ts
 interface RouteRecordInfo<
@@ -327,7 +327,7 @@ interface RouteRecordInfo<
 
 这是手工 RouteNamedMap 的核心公开类型。ParamsRaw 与 Params 分开表达“可以传什么”和“最终读到什么”；ChildrenNames 为嵌套路由的名称关系提供类型信息。默认 ChildrenNames 是 never，不能在存在子记录时照搬。
 
-## Types Config
+## 十、Types Config
 
 ~~~~ts
 /** @internal */
@@ -338,7 +338,7 @@ interface TypesConfig {}
 `TypesConfig` 在 5.2.0 API 与固定 config.ts 中明确写着 ONLY FOR INTERNAL USAGE，并带 `@internal`。不要依赖 Router、$route、RouterLink 等内部替换槽。Typed Routes 的公开支持路径是按官方 Guide 仅声明 RouteNamedMap，或让官方 file-based plugin 生成对应声明；把这条窄用法与任意扩展 internal 配置区分开。
 :::
 
-## Route Location As Path Typed List
+## 十一、Route Location As Path Typed List
 
 ~~~~ts
 /** @internal */
@@ -353,7 +353,7 @@ type RouteLocationAsPathTypedList<
 `RouteLocationAsPathTypedList` 是 internal 映射类型，不是数组。公开替代是 `RouteLocationAsPath&lt;Name&gt;`；通用导航输入则使用 `RouteLocationRaw&lt;Name&gt;`。
 :::
 
-## Route Location As Relative Typed List
+## 十二、Route Location As Relative Typed List
 
 ~~~~ts
 /** @internal */
@@ -368,7 +368,7 @@ type RouteLocationAsRelativeTypedList<
 `RouteLocationAsRelativeTypedList` 是 internal 的按名称索引表。应用公开替代是 `RouteLocationAsRelative&lt;Name&gt;`，它在没有 RouteMap 时还会自动回退到 Generic 形态。
 :::
 
-## Route Location As String Typed
+## 十三、Route Location As String Typed
 
 ~~~~ts
 type RouteLocationAsStringTyped<
@@ -379,7 +379,7 @@ type RouteLocationAsStringTyped<
 
 公开的字符串路径映射，直接读取指定记录的 path 模板。应用 API 通常更适合使用 `RouteLocationAsString&lt;Name&gt;`，因为公开别名负责 Generic 回退并保留一般字符串兼容；本类型适合需要显式传入 RouteMap 的库级工具。
 
-## Route Location As String Typed List
+## 十四、Route Location As String Typed List
 
 ~~~~ts
 /** @internal */
@@ -394,7 +394,7 @@ type RouteLocationAsStringTypedList<
 `RouteLocationAsStringTypedList` 是 internal 索引表。应用公开替代是 `RouteLocationAsString&lt;Name&gt;`；不要把 List 后缀理解为运行时字符串数组。
 :::
 
-## Route Location Normalized Loaded Typed List
+## 十五、Route Location Normalized Loaded Typed List
 
 ~~~~ts
 /** @internal */
@@ -409,7 +409,7 @@ type RouteLocationNormalizedLoadedTypedList<
 `RouteLocationNormalizedLoadedTypedList` 是 internal 映射类型。读取 currentRoute、useRoute() 或已加载导航目标时使用公开 `RouteLocationNormalizedLoaded&lt;Name&gt;`。
 :::
 
-## Route Location Normalized Typed List
+## 十六、Route Location Normalized Typed List
 
 ~~~~ts
 /** @internal */
@@ -424,7 +424,7 @@ type RouteLocationNormalizedTypedList<
 `RouteLocationNormalizedTypedList` 是 internal 索引表。守卫或规范化阶段的公开替代是 `RouteLocationNormalized&lt;Name&gt;`，不要让库接口暴露实现用 TypedList。
 :::
 
-## Route Location Resolved Typed List
+## 十七、Route Location Resolved Typed List
 
 ~~~~ts
 /** @internal */
@@ -439,7 +439,7 @@ type RouteLocationResolvedTypedList<
 `RouteLocationResolvedTypedList` 是 internal 映射类型。router.resolve() 结果和公共工具签名应使用 `RouteLocationResolved&lt;Name&gt;`，由公开别名处理映射选择。
 :::
 
-## Route Location Typed List
+## 十八、Route Location Typed List
 
 ~~~~ts
 /** @internal */
@@ -454,7 +454,7 @@ type RouteLocationTypedList<
 `RouteLocationTypedList` 是 internal 的按 route name 分发表。公共返回值或参数使用 `RouteLocation&lt;Name&gt;`；只有阅读条件类型实现时才需要理解该列表。
 :::
 
-## Route Map
+## 十九、Route Map
 
 ~~~~ts
 type RouteMap = TypesConfig extends Record<'RouteNamedMap', infer RouteNamedMap>
@@ -464,7 +464,7 @@ type RouteMap = TypesConfig extends Record<'RouteNamedMap', infer RouteNamedMap>
 
 公开的全局路由映射选择器。存在 RouteNamedMap 声明时取出它；没有声明时退回 RouteMapGeneric。`keyof RouteMap` 是需要全部已知 route names 时的公开类型表达，避免直接操作 internal TypedList。
 
-## Route Map Generic
+## 二十、Route Map Generic
 
 ~~~~ts
 type RouteMapGeneric = Record<string | symbol, RouteRecordInfoGeneric>
@@ -472,7 +472,7 @@ type RouteMapGeneric = Record<string | symbol, RouteRecordInfoGeneric>
 
 公开的未配置回退映射。它允许任意 string 或 symbol 名称，但会丢失每条 route 的 path、params 与 children 字面量。它适合描述“尚无具体映射”的边界，不适合替代项目自己的 RouteNamedMap。
 
-## Route Record Info Generic
+## 二十一、Route Record Info Generic
 
 ~~~~ts
 type RouteRecordInfoGeneric = RouteRecordInfo<
@@ -486,7 +486,7 @@ type RouteRecordInfoGeneric = RouteRecordInfo<
 
 公开的单条记录回退形态。它把五个维度全部放宽，用于约束“某值至少是合法 RouteRecordInfo”的泛型边界；项目映射若直接把每项都写成此类型，会主动抹掉 typed routes 所需的字面量信息。
 
-## 手工配置与生成配置
+## 二十二、手工配置与生成配置
 
 ~~~~ts
 import type { RouteRecordInfo } from 'vue-router'
@@ -524,7 +524,7 @@ declare module 'vue-router' {
 
 上例遵循官方 Guide 的窄模块增强：RouteNamedMap 的键与每项 Name 保持一致，原始 id 可传 number，读取时则是 URL 解码后的 string。路由数量、嵌套关系或 path 经常变化时，官方 Guide 推荐使用内置 file-based routing plugin 自动生成 route records 与类型，避免手工映射漂移。
 
-## 易错使用提示
+## 二十三、易错使用提示
 
 :::pitfalls
 ### 把 paramsRaw 与 params 写成同一种宽类型
@@ -789,7 +789,7 @@ export type PublicUserRoute = RouteLocation<'user'>
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 二十四、源码推导与适用场景
 
 :::steps
 ### 1. RouteRecordInfo 是五维类型事实表

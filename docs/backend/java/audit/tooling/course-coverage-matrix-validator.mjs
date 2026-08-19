@@ -12,7 +12,7 @@ const gateStatus = 'passed'
 const sourceRepository = path.resolve(
   process.env.DZZZ_SOURCE_REPOSITORY ?? '/Users/jian/Desktop/work/TDH/dzzz',
 )
-const manifestSha256 = '89378a4fcd620c433f879c7a492104721cde7d6f07fa51936b78b2cb6dadfb7b'
+const manifestSha256 = '0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407'
 const expectedCounts = [15, 33, 34, 38, 47]
 const allowedDispositions = new Set(['lesson', 'reference', 'merged', 'project-only', 'rejected'])
 const allowedPurposes = new Set(['learn', 'reference', 'projects'])

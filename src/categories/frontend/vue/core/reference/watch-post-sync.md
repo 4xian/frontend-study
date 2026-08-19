@@ -39,7 +39,7 @@ anchors:
 
 # watchPostEffect() / watchSyncEffect()
 
-## 概述
+## 一、概述
 
 这两个 API 是 watchEffect() 固定 flush 选项的便捷别名：`watchPostEffect` = `watchEffect(fn, { flush: "post" })`，`watchSyncEffect` = `watchEffect(fn, { flush: "sync" })`。理解它们的关键是理解回调的三种触发时机（flush timing）。
 
@@ -51,7 +51,7 @@ watchEffect(callback, { flush: 'post' }) // 等价于 watchPostEffect(callback)
 watchEffect(callback, { flush: 'sync' }) // 等价于 watchSyncEffect(callback)
 ~~~~
 
-## 三种 flush 时机
+## 二、三种 flush 时机
 
 | 时机 | 执行位置 | 批量合并 | 典型用途 |
 | --- | --- | --- | --- |
@@ -59,7 +59,7 @@ watchEffect(callback, { flush: 'sync' }) // 等价于 watchSyncEffect(callback)
 | post | 当前组件 DOM 更新之后 | 是 | 副作用中需要读取更新后的 DOM |
 | sync | 响应式数据一变就同步执行 | 否 | 需要在 Vue 介入前拿到变化的罕见场景 |
 
-## DOM 更新时机差异
+## 三、DOM 更新时机差异
 
 默认（pre）回调执行时，数据已是新值，但组件 DOM 还没重新渲染——读 DOM 拿到的是旧内容；post 回调在 DOM 更新后执行，读写 DOM 都安全。
 
@@ -67,7 +67,7 @@ watchEffect(callback, { flush: 'sync' }) // 等价于 watchSyncEffect(callback)
 同一次 count++：pre 回调读到旧 DOM 文本，post 回调读到新 DOM 文本
 :::
 
-## 最小源码实现
+## 四、最小源码实现
 
 源码证实"别名"二字的字面含义：两个函数各自只有一行——给 watchEffect 补上固定的 flush 选项。三种 flush 的差别则全部体现在调度器（scheduler）上：依赖变化时副作用并不直接重跑，而是把 job 交给不同的队列——post 进"DOM 更新后队列"（queuePostRenderEffect），pre 进组件更新前的任务队列（queueJob，同一 tick 多次变化会去重合并，这就是批量的来源），sync 干脆不设调度器，依赖一变 job 原地执行，因此没有任何合并。
 
@@ -103,11 +103,11 @@ function doWatch(source: any, cb: any, { flush }: WatchOptions = {}) {
 这也解释了 sync 的性能警告：pre/post 的批量来自队列去重（同一个 job 一个 tick 只跑一次），sync 没有队列，改十次就同步跑十次。
 :::
 
-## sync 的代价
+## 五、sync 的代价
 
 sync 侦听器没有批量机制：每一次响应式修改都立即触发一次回调。同一 tick 改十次就执行十次，而 pre/post 只批量执行一次。
 
-## 易错使用提示
+## 六、易错使用提示
 
 :::pitfalls
 ### 用 pre / sync effect 读取组件更新后的 DOM

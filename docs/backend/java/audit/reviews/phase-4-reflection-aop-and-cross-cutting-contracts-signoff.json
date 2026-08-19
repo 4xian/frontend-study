@@ -1,0 +1,270 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.advanced.reflection-aop-and-cross-cutting-contracts",
+  "batchId": "phase-4-reflection-aop-and-cross-cutting-contracts",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-10T09:28:56+08:00",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "stagingPerformedThisBatch": false,
+    "existingStagedAndUnstagedStatePreserved": true
+  },
+  "sourceRepository": {
+    "path": "/Users/jian/Desktop/work/TDH/dzzz/dzzz-app",
+    "readOnly": true,
+    "projectExecuted": false,
+    "projectModified": false,
+    "accessBoundary": "Frozen Phase 2 evidence only; no batch-specific project access"
+  },
+  "phase2Freeze": {
+    "researchStatus": "not-started",
+    "exampleStatus": "not-started",
+    "courseStatus": "planned",
+    "phase4StateRecordedOnlyInThisSignoff": true,
+    "knowledgePath": {
+      "sourceItems": 167,
+      "courseNodes": 64,
+      "dependencyEdges": 114,
+      "gateStatus": "passed"
+    }
+  },
+  "versions": {
+    "verifiedAt": "2026-08-10",
+    "modern": {
+      "java": "25",
+      "springBoot": "4.1.0",
+      "springFramework": "7.0.8",
+      "aspectjWeaver": "1.9.25.1",
+      "aopStarter": "spring-boot-starter-aspectj"
+    },
+    "legacy": {
+      "java": "8",
+      "springBoot": "2.3.12.RELEASE",
+      "springFramework": "5.2.15.RELEASE",
+      "aspectjWeaver": "1.9.6",
+      "aopStarter": "spring-boot-starter-aop"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/advanced/reflection-aop-and-cross-cutting-contracts.md",
+      "sha256": "81b4a8735ad64c522479c2743d09b0efe7d1a968b156628d22428f2fc0a4b088"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/reflection-aop-and-cross-cutting-contracts.md",
+      "sha256": "dc71e426026c5c8a15e2cea1e54b033c7e900b3411b4ac150f611364daa42665"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "dba7c92b63c85913f71fecdd4e546cb548837d99bd0ed0be1a69852ef6060ccd"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "0d3b6dc2c2ae489268913a52ab69de06b55d44cbf552ea3459734d3bd448d5fa"
+    }
+  ],
+  "sourceVerification": {
+    "researchCardCount": 19,
+    "researchUniqueUrlCount": 21,
+    "frontmatterOfficialSourceCount": 21,
+    "frontmatterUniqueUrlCount": 21,
+    "researchFrontmatterSetDifference": 0,
+    "communitySourcesUsedAsEvidence": false,
+    "directUrlCheck": "PASS; official targets were checked during research and the final research/frontmatter URL sets were recomputed as identical"
+  },
+  "projectEvidence": {
+    "itemCount": 5,
+    "observedCount": 2,
+    "correctedCount": 3,
+    "projectEvidenceSetDifference": 0,
+    "currentDefectClaimedFromFrozenEvidence": false,
+    "boundary": "Representative paths and symbols came only from the frozen Phase 2 matrix"
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "lineCount": 1050,
+    "lineBudget": "PASS; about 1000 lines and no line-count exception",
+    "independentKnowledgePointHeadings": 15,
+    "knowledgePointSevenPartCoverage": "15/15",
+    "pitfallCount": 5,
+    "pitfallNinePartCoverage": "5/5",
+    "orderedListCount": 20,
+    "renderedBlockCount": 186,
+    "officialSourceCount": 21,
+    "projectEvidenceCount": 5,
+    "javaCodeBlockCount": 11,
+    "javaMethodComments": "PASS",
+    "sourceHeadingAbsent": true,
+    "securitySection": "PASS"
+  },
+  "javaVerification": {
+    "temporaryFixtureRoot": "/tmp/java-reflection-aop.O2hSwH",
+    "temporaryAssetsCleaned": true,
+    "cleanupVerifiedWithFinalAbsenceChecks": true,
+    "containerDigests": {
+      "java25Maven": "sha256:4f82a03a7d6679281952d628131299b1be88d7030a49c6a2b7d2ba2642e44e3e",
+      "java8Maven": "sha256:5ad4be2ba5946d2513786e6e5374659a28e39ad5f3dfbc8a9109e1d3a1fde655"
+    },
+    "pomXmlValidation": "PASS; modern, legacy and negative complete POM files passed xmllint",
+    "cases": [
+      {
+        "name": "Modern Boot auto-configuration feedback loop",
+        "runtime": "Java 25 / Spring Boot 4.1.0 / Spring Framework 7.0.8 / AspectJ Weaver 1.9.25.1",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "major version 69; REFLECTION_AOP_PASS bootProxies=JDK,CGLIB classAdvice=2 before=3 returning=2 throwing=1 finally=3 around=3 target=4 failure=IllegalStateException"
+      },
+      {
+        "name": "Legacy Boot auto-configuration feedback loop",
+        "runtime": "Java 8 / Spring Boot 2.3.12.RELEASE / Spring Framework 5.2.15.RELEASE / AspectJ Weaver 1.9.6",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "major version 52; REFLECTION_AOP_PASS bootProxies=JDK,CGLIB classAdvice=2 before=3 returning=2 throwing=1 finally=3 around=3 target=4 failure=IllegalStateException"
+      },
+      {
+        "name": "Around advice proceed negative control",
+        "runtime": "Java 25 / Spring Boot 4.1.0",
+        "exitCode": 1,
+        "runs": 1,
+        "summary": "Replacing the single joinPoint.proceed() call with a short-circuit return failed with AssertionError: charge result mismatch"
+      }
+    ]
+  },
+  "verification": [
+    {
+      "command": "node /tmp/java-reflection-aop.O2hSwH/content-check.mjs",
+      "exitCode": 0,
+      "summary": "CONTENT_PASS knowledge=15/15 pitfalls=5/5 sources=21 orderedLists=20 blocks=186"
+    },
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check && npm run lint && npm run format:check",
+      "exitCode": 0,
+      "summary": "PASS"
+    },
+    {
+      "command": "npm run test:unit && npm run test:e2e",
+      "exitCode": 0,
+      "summary": "PASS; configured unit and E2E directories contain no persistent tests"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "1424 modules transformed; reflection-aop-and-cross-cutting-contracts-D40f-Zuh.js emitted"
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0,
+      "summary": "PASS"
+    },
+    {
+      "command": "node /tmp/java-advanced-01-pre-catalog.wbKIAW/catalog-cold-check.mjs (three consecutive runs)",
+      "exitCode": 0,
+      "summary": "CATALOG_COLD_PASS on all runs; available=36 planned=15, including advanced 1 available / 15 planned"
+    }
+  ],
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "baseUrl": "http://127.0.0.1:4202/",
+    "targetPath": "/backend/java/core/learn/reflection-aop-and-cross-cutting-contracts",
+    "temporaryScreenshots": [
+      "/tmp/java-advanced-01-browser.tQtTi1/.playwright-cli/page-2026-08-10T01-22-30-023Z.png",
+      "/tmp/java-advanced-01-browser.tQtTi1/.playwright-cli/page-2026-08-10T01-22-52-829Z.png"
+    ],
+    "desktop": {
+      "viewport": "1440x900",
+      "targetPageStatus": 200,
+      "documentClientWidth": 1440,
+      "documentScrollWidth": 1440,
+      "knowledgePointCount": 15,
+      "pitfallCount": 5,
+      "officialSourceCount": 21,
+      "modernBootStarterVisible": true,
+      "legacyBootStarterVisible": true,
+      "bootProxyMarkerVisible": true,
+      "consoleErrors": 0,
+      "consoleWarnings": 0
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "targetPageStatus": 200,
+      "documentClientWidth": 390,
+      "documentScrollWidth": 390,
+      "knowledgePointCount": 15,
+      "pitfallCount": 5,
+      "officialSourceCount": 21,
+      "modernBootStarterVisible": true,
+      "legacyBootStarterVisible": true,
+      "bootProxyMarkerVisible": true,
+      "consoleErrors": 0,
+      "consoleWarnings": 0
+    },
+    "manualScreenshotReview": "PASS; no incoherent overlap and code overflow remains inside its own scroll container"
+  },
+  "manifestRegression": {
+    "basicsAvailable": 18,
+    "intermediateAvailable": 17,
+    "advancedAvailable": 1,
+    "advancedPlanned": 15,
+    "currentEntryLoadable": true,
+    "futurePlannedEntriesHaveNoLoader": true,
+    "finalColdStartRuns": 3,
+    "finalColdStartErrors": 0,
+    "finalColdStartPending": false
+  },
+  "review": {
+    "standards": "PASS / 0 finding",
+    "spec": "PASS / 0 finding",
+    "findingCount": 0,
+    "independentReviewRounds": 3,
+    "rounds": [
+      {
+        "round": 1,
+        "standards": "FAIL / 1 finding",
+        "spec": "PASS / 0 finding",
+        "resolution": "Added separate Java 8 InvocationHandler and Boot 2.3.12 AopAutoConfiguration source cards so the 21-URL research/frontmatter sets match"
+      },
+      {
+        "round": 2,
+        "standards": "PASS / 0 finding",
+        "spec": "FAIL / 1 finding",
+        "resolution": "Replaced Framework-only fixtures with real Boot 4.1.0 and Boot 2.3.12 auto-configuration feedback loops and asserted both proxy modes"
+      },
+      {
+        "round": 3,
+        "standards": "PASS / 0 finding",
+        "spec": "PASS / 0 finding",
+        "resolution": "Final independent re-review confirmed the current four-asset snapshot, Boot feedback loops and strict stop boundary"
+      }
+    ],
+    "finalIndependentConfirmationPending": false,
+    "finalIndependentConfirmedAt": "2026-08-10T09:25:25+08:00"
+  },
+  "temporaryAssetCleanup": {
+    "pending": false,
+    "verifiedAt": "2026-08-10T09:28:56+08:00",
+    "temporaryRoots": [
+      "/tmp/java-reflection-aop.O2hSwH",
+      "/tmp/java-advanced-01-pre-catalog.wbKIAW",
+      "/tmp/java-advanced-01-browser.tQtTi1"
+    ],
+    "playwrightSessions": ["java-advanced-01", "java-advanced-01-preview"],
+    "playwrightSessionsClosed": true,
+    "previewPidGroup": [22168, 22169, 22184],
+    "previewPidGroupStopped": true,
+    "previewPort": 4202,
+    "remainingPathCount": 0
+  },
+  "temporaryAssetsCleaned": true,
+  "stopBoundary": "Close advanced course 1 only; do not research, draft, register or load advanced course 2, Reference or project practice"
+}

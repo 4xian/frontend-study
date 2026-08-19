@@ -60,7 +60,7 @@ recap:
 
 # RouterView 插槽与过渡
 
-## 插槽交付的是当前视图的 VNode 与 route
+## 一、插槽交付的是当前视图的 VNode 与 route
 
 `RouterView` 先解析当前 depth、命名视图、route props 与 attrs，再把已经创建的组件 VNode 作为 `Component` 交给插槽。插槽中的 `route` 则是该视图实际用于匹配的位置；key、诊断与过渡方向都应读取这份 route。
 
@@ -70,7 +70,7 @@ recap:
 </RouterView>
 ~~~~
 
-## 让过渡与缓存作用于 route component
+## 二、让过渡与缓存作用于 route component
 
 `Transition` 与 `KeepAlive` 都放在 `RouterView` 插槽内。外层 Transition 协调新旧视图，内层 KeepAlive 保存失活实例，最内层才渲染 slot 给出的 route component；不要缓存长期存在的 RouterView 本身。
 
@@ -91,11 +91,11 @@ recap:
 | KeepAlive、无 key | 同一 workspace 实例原位复用 | 失活后恢复原实例 |
 | KeepAlive、path key | alpha 与 beta 分别缓存 | 按 pathname 恢复实例 |
 
-## key 是产品身份选择，不是固定样板
+## 三、key 是产品身份选择，不是固定样板
 
 同一 route record 只改变 params 时，Vue Router 默认复用组件实例。`route.path` key 会让不同 pathname 拥有不同 VNode 身份，但不会把 query 与 hash 纳入身份；只有确实需要独立状态或过渡时才应添加。KeepAlive 保存的是实例，不会把状态序列化到 store。
 
-## 先完成初始导航，再挂载 memory router
+## 四、先完成初始导航，再挂载 memory router
 
 ~~~~ts
 const router = createRouter({
@@ -112,7 +112,7 @@ app.mount('#app')
 
 `isReady()` 等待初始导航结算，不是延时工具。先导航并等待 ready，再 mount，能避免空 RouterView 后插入首个页面时产生非预期 initial enter；导航失败时它也可能 reject。
 
-## 用一个受控实验分开观察三条时间线
+## 五、用一个受控实验分开观察三条时间线
 
 下面的独立 memory router 固定使用 `/workspace/\:id` 与 `/review`。切换 KeepAlive、path key 或 transition 都会卸载旧 mini-app 并创建新 generation，避免旧 cache 污染结论。导航结果、组件生命周期与 transition hooks 分区记录。
 
@@ -120,11 +120,11 @@ app.mount('#app')
 比较 RouterView 插槽内的实例复用、缓存生命周期与 out-in 过渡事件
 :::
 
-## 导航提交与视觉离入场不是同一时刻
+## 六、导航提交与视觉离入场不是同一时刻
 
 `await router.push()` 只说明导航已经结算。`mode="out-in"` 另行协调旧视图完成离场后再插入新视图。Vue 3.5.40 的公开回调日志是 `before-leave -&gt; before-enter -&gt; after-leave -&gt; after-enter`：内部 afterLeave 会先触发新视图更新，再调用公开 `onAfterLeave`。应等待可见 hook 事件，而不是用固定毫秒数猜测完成时间。
 
-## 易错使用提示
+## 七、易错使用提示
 
 :::pitfalls
 ### 把 Transition 或 KeepAlive 包在 RouterView 外
@@ -336,7 +336,7 @@ await expect(log).toContainText('after-enter')
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 从源码推导适用场景
+## 八、从源码推导适用场景
 
 :::steps
 ### 1. slot 是装饰现有视图 VNode 的边界

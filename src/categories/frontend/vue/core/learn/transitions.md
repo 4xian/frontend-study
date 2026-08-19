@@ -66,7 +66,7 @@ recap:
 
 # 过渡效果
 
-## 正文大纲
+## 一、正文大纲
 
 前面的课程已经能让页面状态正确变化。本课继续解决反馈问题：用户怎样看出一个节点正在出现、一个互斥状态已经交给另一个状态，以及列表顺序刚刚发生了什么。业务状态始终是事实来源，Transition 只协调状态变化的视觉过程；移除过渡后，功能仍应正确。
 
@@ -83,7 +83,7 @@ recap:
 本课限定 Vue 3.5.40、SFC 和 CSS 过渡。动态组件与 KeepAlive 的生命周期和缓存属于下一课；完整 props 签名回到关联的 Transition Reference，本课不重复 API 清单。
 :::
 
-## 页面状态正确后，过渡负责解释变化
+## 二、页面状态正确后，过渡负责解释变化
 
 过渡不应拥有打开、选中或排序等业务状态。事件处理函数先修改真实状态，Vue 再根据新旧 VNode 决定插入、移除或替换哪些节点，Transition 最后给这个过程增加视觉反馈。这样即使 CSS 没有加载、用户要求减弱动态效果，或自动化直接等待最终 DOM，页面仍然可用。
 
@@ -95,7 +95,7 @@ recap:
 | 同标签节点改变稳定 key | 旧身份替换为新身份 | 旧节点离开、新节点进入 |
 | 只修改同一节点文字或属性 | 原地 patch | 不会自动产生 leave / enter |
 
-## 先用 v-if 理解节点进入与离开
+## 三、先用 v-if 理解节点进入与离开
 
 一个 Transition 接受一个非注释元素或组件子节点。v-if 为 false 时，Vue 不会立刻把正在离开的节点从 DOM 删除，而是等待离开过程完成后调用真实 remove；再次显示则为新插入的节点执行进入过程。按钮只切换 visible，不等待动画，也不把动画完成写回业务状态。
 
@@ -125,7 +125,7 @@ function toggleNotice(): void {
 Transition 不是通用多节点容器。多个同级列表项由 TransitionGroup 管理；若只是同一节点的普通文本更新，也不应为了播放动画随意制造随机 key。
 :::
 
-## 沿两条时间线理解六个 CSS 类
+## 四、沿两条时间线理解六个 CSS 类
 
 name 决定类名前缀。name="notice" 时，Vue 在进入前添加 notice-enter-from 与 notice-enter-active，浏览器提交起点后切到 notice-enter-to；离开时则从 notice-leave-from 走到 notice-leave-to。active 类覆盖整个阶段，通常负责声明 transition 或 animation。
 
@@ -139,7 +139,7 @@ name 决定类名前缀。name="notice" 时，Vue 在进入前添加 notice-ente
 离开：leave-from + leave-active → leave-to + leave-active → 清理类并移除节点
 ~~~~
 
-## 用 name 编写最小 CSS 过渡
+## 五、用 name 编写最小 CSS 过渡
 
 最小实现只需要在 active 类声明时长和缓动，再为 enter-from 与 leave-to 写共同的不可见状态。浏览器默认样式就是进入终点和离开起点，因此不必重复声明 opacity: 1。优先选择 opacity 与 transform，它们通常不会引起文档流重新布局。
 
@@ -160,7 +160,7 @@ name 决定类名前缀。name="notice" 时，Vue 在进入前添加 notice-ente
 视觉时长不是业务时钟。不要在 180ms 后才更新状态，也不要让其他逻辑依赖某个临时类仍然存在；需要知道过渡完成时，使用 Vue 提供的钩子。
 :::
 
-## 文本 patch 与 key 身份替换是两种变化
+## 六、文本 patch 与 key 身份替换是两种变化
 
 同一个 p 的文本从“摘要”改成“详情”时，Vue 会原地 patch 文本，没有旧节点可离开。只有业务确实要表现两个互斥状态的交接时，才给它们稳定且不同的 key。key 应来自状态身份，不应使用 Date.now、随机数或整段可变文案。
 
@@ -188,7 +188,7 @@ name 决定类名前缀。name="notice" 时，Vue 在进入前添加 notice-ente
 | 完整 label 文案 | 文案微调也会被误判为新身份 | 不推荐 |
 | Date.now() / Math.random() | 每次渲染都强制替换 | 禁止 |
 
-## 用 mode 安排互斥视图的交接
+## 七、用 mode 安排互斥视图的交接
 
 默认模式允许旧节点离开与新节点进入同时发生。out-in 先完成旧节点离开，再插入新节点，适合摘要与详情这类不能同时出现的视图；in-out 先让新节点进入，再延迟旧节点离开，适合优先维持内容连续且允许短时重叠的场景。mode 只有在旧、新 VNode 身份不同时才会介入。
 
@@ -206,7 +206,7 @@ name 决定类名前缀。name="notice" 时，Vue 在进入前添加 notice-ente
 | out-in | 旧节点离开 → 新节点进入 | 避免互斥内容重叠，中间可能短暂留空 |
 | in-out | 新节点进入 → 旧节点离开 | 内容连续，但要求布局容纳短时重叠 |
 
-## 明确初次、持续挂载与结束边界
+## 八、明确初次、持续挂载与结束边界
 
 默认初次挂载不播放进入过程，只有显式 appear 才复用进入类或 appear 钩子。v-show 适合需要保留 DOM 与本地状态的节点，它切换 display 而不是卸载组件。两者都不会改变业务状态的所有权。
 
@@ -240,7 +240,7 @@ function leave(element: Element, done: () => void): void {
 使用纯 JavaScript 动画时设置 \:css="false"。否则 Vue 仍会检测 CSS 结束事件，形成两套结束边界；快速反向切换还必须允许取消或幂等完成。
 :::
 
-## 从单节点迁移到 TransitionGroup
+## 九、从单节点迁移到 TransitionGroup
 
 TransitionGroup 协调多个列表项的插入、移除和位置移动。每一项都必须使用唯一且稳定的业务 key，让 Vue 能把更新前后的同一项对应起来。Vue 3 默认渲染 Fragment，需要 ol、ul 或 div 等语义容器时显式传 tag；进入和离开类加在列表项上，而不是容器上。
 
@@ -268,7 +268,7 @@ TransitionGroup 协调多个列表项的插入、移除和位置移动。每一�
 
 重排时，runtime 记录更新前后每一项的位置，用反向 transform 暂时抵消位移，再让 move class 过渡回新位置。move class 必须包含 transform transition；若没有，Vue 会跳过移动动画，但最终 DOM 顺序仍然正确。TransitionGroup 不支持整体 mode。
 
-## 易错使用提示
+## 十、易错使用提示
 
 :::pitfalls
 ### 把 Transition 当成多个同级节点的动画容器
@@ -478,7 +478,7 @@ function animateLeave(element: Element, done: () => void): void {
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 从源码推导过渡的实际边界
+## 十一、从源码推导过渡的实际边界
 
 Vue 3.5.40 把职责分成两层：runtime-core 的 BaseTransition 组织 VNode 的进入、离开、延迟移除和取消状态；runtime-dom 的 Transition 把 name、六个 CSS 类、duration 与浏览器结束事件翻译成这些 hooks。因此业务状态、VNode 调度和 DOM 动画是三条不同边界。
 
@@ -508,7 +508,7 @@ runtime 记录旧、新矩形并写反向 translate，再由 move class 过渡�
 不要用 waitForTimeout、固定毫秒或临时 enter-from 类验证功能。帧率、后台标签页、不同浏览器和 reduced motion 都会改变墙钟时间；稳定契约是最终 DOM、可访问名称和业务状态。
 :::
 
-## 高级使用场景
+## 十二、高级使用场景
 
 | 场景 | 推荐设计 | 需要守住的边界 |
 | --- | --- | --- |
@@ -520,7 +520,7 @@ runtime 记录旧、新矩形并写反向 translate，再由 move class 过渡�
 | 第三方动画库 | \:css="false"、done 与取消处理 | 完成回调幂等，快速反向仍能收敛 |
 | 减弱动态效果 | 移除位移与可感知时长 | 显示、替换、排序和键盘操作保持完整 |
 
-## 在过渡身份实验台验证共同模型
+## 十三、在过渡身份实验台验证共同模型
 
 唯一 Demo 把三类变化放在同一实验台：通知使用 v-if 表达存在，摘要与详情使用稳定 key 和 out-in 表达身份交接，列表使用业务 ID 和 TransitionGroup 表达重排。永久汇总文本提供独立于动画的结果反馈。
 
@@ -528,7 +528,7 @@ runtime 记录旧、新矩形并写反向 translate，再由 move class 过渡�
 验证 presence、keyed identity、out-in 与稳定业务 key 列表重排
 :::
 
-## 用最终状态验证并完整降级动态效果
+## 十四、用最终状态验证并完整降级动态效果
 
 依次隐藏并显示通知、切换到详细视图、轮换列表两次，再重置实验。验证时等待通知节点真正移除或出现，读取 keyed 节点的 data-view，并直接断言列表最终顺序。快速连续切换通知两次，结果仍应与最后一次点击一致。
 
@@ -539,7 +539,7 @@ runtime 记录旧、新矩形并写反向 translate，再由 move class 过渡�
 - [ ] reduced motion 下移除位移和时长，所有业务断言保持不变
 - [ ] 390px 与 200% 文本下没有横向滚动、截断或控制重叠
 
-## 练习
+## 十五、练习
 
 :::exercise
 ### 修复不触发的状态切换
@@ -607,7 +607,7 @@ TransitionGroup 中使用 :key="course.id"，在 course-move 声明 transform tr
 ~~~~
 :::
 
-## 完成本课后的判断顺序
+## 十六、完成本课后的判断顺序
 
 先判断变化属于 presence、identity 还是 collection，再选择 v-if、v-show、稳定 key 或 TransitionGroup。随后用 name 与六个类建立最小 opacity / transform 效果；只有确有交接需求才增加 mode、type、duration 或 JavaScript hook。最后同时验证正常动态效果与 reduced motion 下的最终 DOM、语义状态和键盘操作。
 

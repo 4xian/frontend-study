@@ -51,7 +51,7 @@ anchors:
 
 # 单文件组件 CSS 功能
 
-## 组件作用域 CSS
+## 一、组件作用域 CSS
 
 `<style scoped>` 由 SFC 编译器把选择器改写为带组件 scope attribute 的选择器，不会创建 Shadow DOM。子组件根节点会同时受父、子 scope 影响，便于父组件控制子根布局；子组件内部后代默认不受父作用域规则影响。
 
@@ -65,7 +65,7 @@ anchors:
 `v-html` 生成的节点没有经过模板 scope 标记，普通 scoped selector 不会自动命中；只有明确的 deep 规则可能影响它。动态 HTML 仍必须先解决不可信内容安全问题。
 :::
 
-## CSS Modules
+## 二、CSS Modules
 
 `<style module>` 将局部 class 映射对象注入组件，模板默认通过 `$style.red` 访问。`module="classes"` 可自定义注入名；setup 逻辑则从 `vue` 导入 `useCssModule()`，参数必须与自定义 module 名一致。
 
@@ -86,7 +86,7 @@ const classes = useCssModule('classes')
 生成的 class 字符串属于构建产物，不是稳定业务 ID。测试和 DOM 查询应使用语义属性、role 或组件公开契约，不要硬编码哈希 class。
 :::
 
-## CSS 中的 v-bind()
+## 三、CSS 中的 v-bind()
 
 SFC style 中的 `v-bind(expr)` 会编译为哈希化 CSS 自定义属性，值通过组件根元素内联样式响应式更新，CSS 规则本身保持静态。简单标识符可直接写，成员访问等 JavaScript 表达式必须放进引号。
 
@@ -105,7 +105,7 @@ const theme = reactive({ color: '#0071e3' })
 `v-bind()` 是 SFC 编译期语法，不是浏览器原生 CSS 函数，也不能用于 selector、媒体查询等 CSS 自定义属性无法表达的位置。普通 CSS 文件应使用标准 `var(--token)` 和显式变量来源。
 :::
 
-## 易错使用提示
+## 四、易错使用提示
 
 :::pitfalls
 ### 把 scoped 当成 Shadow DOM 或绝对隔离
@@ -197,7 +197,7 @@ document.querySelector('.highlight_ab12')
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 五、源码推导与适用场景
 
 :::steps
 ### 1. scoped 是 selector 转换而非运行时容器

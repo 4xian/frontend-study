@@ -138,7 +138,7 @@ anchors:
 
 # 导航守卫
 
-## 概述
+## 一、概述
 
 本页的九个 API 描述同一条守卫契约：导航确认前的 guard 可以同步或异步地放行、取消、重定向或报错；导航落定后的 `NavigationHookAfter` 只能观察结果；`onBeforeRouteLeave()` 与 `onBeforeRouteUpdate()` 把同一 guard 契约注册到当前组件所属的 active route record。
 
@@ -146,7 +146,7 @@ anchors:
 `NavigationGuardNext` 在 5.2.0 仍可用，但类型和运行时都明确标记 deprecated，并说明未来会移除。官方 Guide 将第三个 `next` 参数称为常见错误来源；新代码应省略第三个形参并直接 `return`。只有维护旧守卫或 `beforeRouteEnter` 必须取得组件实例时才保留它。
 :::
 
-## 执行阶段速查
+## 二、执行阶段速查
 
 | 阶段 | 典型入口 | to 类型 | 能否改变导航 |
 | --- | --- | --- | --- |
@@ -159,7 +159,7 @@ anchors:
 
 固定运行时的队列顺序与官方 Guide 一致：离开组件、全局 beforeEach、复用组件、record beforeEnter、进入组件、全局 beforeResolve，确认后才触发 afterEach。每个阶段之间还会检查是否已有更新的导航取消了当前导航。
 
-## Navigation Guard
+## 三、Navigation Guard
 
 ~~~~ts
 interface NavigationGuard {
@@ -195,7 +195,7 @@ const requireAuth: NavigationGuard = async (to) => {
 `router.beforeResolve()` 是一个窄差异：本地 5.2.0 声明使用 internal `_NavigationGuardResolved`，其 `to` 已是 `RouteLocationNormalizedLoaded`。这属于 Router 方法的上下文类型，不是第十个公开 guard API；使用 beforeResolve 时让回调参数自然推断，不要为了这个差异导入 internal 类型。
 :::
 
-## Navigation Guard Next
+## 四、Navigation Guard Next
 
 ~~~~ts
 /** @deprecated Prefer returning a value from the guard. */
@@ -218,7 +218,7 @@ interface NavigationGuardNext {
 
 当函数声明了第三个形参时，5.2.0 运行时按 `guard.length &gt; 2` 视为 next 风格：它不会把函数返回值自动当作守卫结果，而会等待 `next`。开发构建首次调用会发出 deprecated 诊断；异步守卫或同步返回非 `undefined` 却漏调 next 时会报 invalid navigation guard，同步返回 `undefined` 且漏调时则会一直 pending。重叠路径的第二次调用也会诊断；官方契约仍要求每次逻辑路径恰好调用一次。
 
-## Navigation Guard With This
+## 五、Navigation Guard With This
 
 ~~~~ts
 interface NavigationGuardWithThis<T> {
@@ -238,7 +238,7 @@ interface NavigationGuardWithThis<T> {
 Options API 的 `beforeRouteUpdate` / `beforeRouteLeave` 已在 Vue component options 中获得组件上下文，应使用方法语法让 Vue/TypeScript 推断 `this`。不要自行给全局守卫伪造组件 `this`，也不要为了改写这些类型依赖 internal `TypesConfig`。Composition API 中则直接闭包访问 ref 和 store。
 :::
 
-## Navigation Hook After
+## 六、Navigation Hook After
 
 ~~~~ts
 interface NavigationHookAfter {
@@ -268,7 +268,7 @@ const removeAfterHook = router.afterEach((to, from, failure) => {
 removeAfterHook()
 ~~~~
 
-## Internal Awaitable
+## 七、Internal Awaitable
 
 ~~~~ts
 /** @internal */
@@ -281,7 +281,7 @@ type _Awaitable<T> = T | PromiseLike<T>
 公开替代不是另一个 Awaitable 别名：声明完整守卫时使用公开 `NavigationGuard`；只描述结果时使用 `NavigationGuardReturn` 或标准 `Promise&lt;NavigationGuardReturn&gt;`；普通回调直接让 `async` 函数推断。这样既表达真实契约，也不绑定 internal export。
 :::
 
-## Navigation Guard Next Callback
+## 八、Navigation Guard Next Callback
 
 ~~~~ts
 type NavigationGuardNextCallback = (
@@ -306,7 +306,7 @@ export default {
 只有 `beforeRouteEnter` 公开支持 `next(callback)`。全局守卫和 beforeEnter 没有对应的 record/name 上下文；update/leave 的底层组件守卫 wrapper 虽也携带 record/name、技术上会登记函数，但 RouterView 不承诺在该时机把它作为实例访问通道消费，因此同样不能依赖。
 :::
 
-## Navigation Guard Return
+## 九、Navigation Guard Return
 
 ~~~~ts
 type NavigationGuardReturn =
@@ -334,7 +334,7 @@ router.beforeEach(async (to) => {
 })
 ~~~~
 
-## On Before Route Leave
+## 十、On Before Route Leave
 
 ~~~~ts
 declare function onBeforeRouteLeave(
@@ -360,7 +360,7 @@ onBeforeRouteLeave(() => {
 
 调用位置必须处于由 RouterView 渲染的 route component 或其后代组件的同步 setup 上下文，因为实现需要注入当前 `matchedRouteKey`。API 保证组件卸载时移除守卫；固定运行时还会在 KeepAlive 组件 deactivated 时删除，activated 时把它加入当前 active record，避免非活动实例继续拦截。
 
-## On Before Route Update
+## 十一、On Before Route Update
 
 ~~~~ts
 declare function onBeforeRouteUpdate(
@@ -394,7 +394,7 @@ onBeforeRouteUpdate(async (to, from) => {
 
 它与 leave guard 共享 active-record 注册机制：可用于 RouterView 下的后代组件，组件卸载自动删除，KeepAlive deactivated 时暂停、activated 时恢复。官方 discussion #2328 的常见测试告警通常不是函数失效，而是直接 mount 组件、没有让真实 RouterView 渲染它，因而不存在 active route record。
 
-## 易错使用提示
+## 十二、易错使用提示
 
 :::pitfalls
 ### 声明 next 参数却只返回值
@@ -653,7 +653,7 @@ export default {
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 十三、源码推导与适用场景
 
 :::steps
 ### 1. 冻结公开类型值域

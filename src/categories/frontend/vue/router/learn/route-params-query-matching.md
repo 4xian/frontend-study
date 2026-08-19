@@ -52,7 +52,7 @@ recap:
 
 # 路由参数、查询与匹配
 
-## 先把一条地址拆成三类状态
+## 一、先把一条地址拆成三类状态
 
 路由记录的 path 决定 pathname 如何匹配，并把动态 segment 写入 route.params。问号后的 query 由独立解析器处理，井号后的 hash 原样表示页面内位置。三者都会出现在当前 route 中，但只有 pathname 参与选择 route record；不要把 query 当成路径匹配条件。
 
@@ -72,7 +72,7 @@ const route = {
 | ?tab=activity | query.tab | 表达筛选、排序、分页或视图状态 |
 | #history | hash | 表达页面内锚点或局部位置 |
 
-## 参数修饰符决定是否存在以及数据形态
+## 二、参数修饰符决定是否存在以及数据形态
 
 普通参数只消费一个 segment，得到 string。问号让参数可选；星号和加号让参数可重复，因此得到 string[]。星号允许空数组，加号至少需要一个值。custom regex 放在参数名后的括号中，用于限制单个参数可接受的字符。
 
@@ -88,7 +88,7 @@ const route = {
 路径配置写在 JavaScript 字符串中时，正则反斜杠还要经过字符串转义。数字规则应写成 \:orderId(\\d+)，否则传给 matcher 的不是预期正则。
 :::
 
-## 用命名位置让 router 负责拼接与编码
+## 三、用命名位置让 router 负责拼接与编码
 
 router.resolve() 与 router.push() 接受相同的位置对象。提供 name 与 params 时，matcher 会按记录规则 stringify 参数并编码 segment；resolve() 不发起导航，适合在执行前检查 href、matched 与标准化后的 params。重复参数在命名位置中也必须传数组。
 
@@ -118,7 +118,7 @@ router.resolve({ name: 'user', params: { id: '42' } })：得到 /users/42。
 ~~~~
 :::
 
-## 同一记录的新参数会复用组件实例
+## 四、同一记录的新参数会复用组件实例
 
 从 /users/42 到 /users/84 仍匹配同一个 route record，Vue Router 会复用已挂载的用户组件。setup() 与 onMounted() 不会重新执行，因此依赖 id 的请求或派生状态必须显式响应参数变化。通常只 watch route.params.id，不要 watch 整个响应式 route。
 
@@ -142,7 +142,7 @@ watch(
 </script>
 ~~~~
 
-## 在隔离 Demo 中观察解析与复用
+## 五、在隔离 Demo 中观察解析与复用
 
 下面的运行区创建独立 memory router，在用户、重复 tags 与 catch-all 三条记录间切换。可见区展示 resolve href、pathname、matched、params 的 string/array 形态、query/hash、导航结果与事件时间线；连续切换两个用户时，挂载次数保持不变而参数变化次数增加。
 
@@ -150,7 +150,7 @@ watch(
 比较单值与重复参数、resolve 结果和同记录组件复用
 :::
 
-## 易错使用提示
+## 六、易错使用提示
 
 :::pitfalls
 ### 同时提供 path 和 params
@@ -330,7 +330,7 @@ watch(() => route.params.id, (id) => loadUser(String(id)), { immediate: true })
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 从源码推导适用场景
+## 七、从源码推导适用场景
 
 :::steps
 ### 用 tokenizer 结果判断 params 的稳定形态

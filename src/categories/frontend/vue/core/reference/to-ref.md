@@ -43,7 +43,7 @@ anchors:
 
 # toRef() / toRefs()
 
-## 概述
+## 一、概述
 
 这是一对"属性转 ref"的工具函数。`toRef()` 基于响应式对象的某个属性创建 ref，该 ref 与源属性双向同步；3.3 起它还能把值、getter、已有 ref 规范化为 ref。`toRefs()` 则把响应式对象的每个可枚举属性都转为 ref（内部逐个调用 `toRef()`），返回一个普通对象——于是这个对象可以被随意解构、展开而不丢失响应性。
 
@@ -72,7 +72,7 @@ function toRefs<T extends object>(
 type ToRef<T> = T extends Ref ? T : Ref<T>
 ~~~~
 
-## 为什么需要它们
+## 二、为什么需要它们
 
 `reactive()` 的响应性依附在对象本身的属性访问上。直接解构出原始值属性，得到的只是解构那一刻的普通值，与源对象彻底断开连接——之后无论谁改谁，双方都不再同步。
 
@@ -93,7 +93,7 @@ callSomeFunction(state.count)
 现场对比：直接解构的值停在解构那一刻，toRefs 解构的 ref 始终跟随源对象更新
 :::
 
-## toRef()：单个属性转 ref
+## 三、toRef()：单个属性转 ref
 
 `toRef(object, key)` 创建的 ref 与源属性双向同步：修改 ref 的 `.value` 会写回源对象，修改源对象也会反映到 ref。即使 `key` 在源对象上暂不存在，也会返回一个可用的 ref（可传第三个参数作默认值）。
 
@@ -129,7 +129,7 @@ useFeature(toRef(props, 'title')) // 对象属性形式
 useFeature(toRef(() => props.title)) // 3.3+ getter 形式
 ~~~~
 
-## toRefs()：解构组合式函数的返回值
+## 四、toRefs()：解构组合式函数的返回值
 
 `toRefs()` 最典型的场景：组合式函数内部用 `reactive()` 组织状态，返回时转成 ref 集合，调用方就能直接解构而不丢失响应性——这正是官方约定"组合式函数返回装着 ref 的普通对象"的实现手段。
 
@@ -149,7 +149,7 @@ function useFeatureX() {
 const { foo, bar } = useFeatureX()
 ~~~~
 
-## 易错使用提示
+## 五、易错使用提示
 
 :::pitfalls
 ### 用 `ref(state.foo)` 代替属性 ref
@@ -260,7 +260,7 @@ const model = computed({
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 最小源码实现
+## 六、最小源码实现
 
 toRef 返回的不是普通 RefImpl，而是 `ObjectRefImpl`——它自己没有 Dep，不存储值：`get value` 直接读 `this._object[this._key]`，`set value` 直接写回去。由于 `_object` 是响应式代理，读写会穿透代理触发那一层的 track/trigger，这就是"双向同步"的本质：ObjectRefImpl 只是源属性的一个"访问转发器"。toRefs 则是 for-in 遍历对源对象每个键调用一次 toRef。也因此，对普通对象调用 toRef 得到的 ref 不具有响应性（没有代理可穿透），开发模式下 toRefs 对非代理对象会发出警告。
 
@@ -307,7 +307,7 @@ export function toRefs<T extends object>(object: T) {
 对比记忆：RefImpl 自带 Dep、自己管理订阅者；ObjectRefImpl 没有 Dep，track/trigger 都委托给源代理。所以 toRef 的响应性完全取决于源对象是不是响应式代理。
 :::
 
-## 三种方式对比
+## 七、三种方式对比
 
 | 特性 | toRef(obj, key) | toRefs(obj) | 直接解构 |
 | --- | --- | --- | --- |

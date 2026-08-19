@@ -52,7 +52,7 @@ recap:
 
 # 命名路由、重定向与别名
 
-## name 是记录身份，不是路径的第二份文案
+## 一、name 是记录身份，不是路径的第二份文案
 
 给 route record 配置唯一 name 后，RouterLink、push()、replace() 和 resolve() 都可以用 name 加 params 表达目标。路由器会负责 params 编码，并直接选择这个具名记录；如果传 path，则仍由 path matcher 的排序结果决定命中哪条记录。
 
@@ -74,7 +74,7 @@ router.resolve({ name: 'profile-main', params: { username: 'Jian Li/演示' } })
 | { name, params } | 由唯一 name 直接选择记录 | 按记录参数规则编码并生成 path |
 | { path } 或字符串 | 由 path matcher 排序后选择记录 | path 已经成形，不再读取 params |
 
-## redirect 换地址，alias 留地址
+## 二、redirect 换地址，alias 留地址
 
 :::compare
 ### 错误写法
@@ -111,7 +111,7 @@ const routes = [
 ]
 ~~~~
 
-## 嵌套 alias 先判断相对还是绝对
+## 三、嵌套 alias 先判断相对还是绝对
 
 嵌套记录中的 alias 不以 / 开头时，会相对父路径展开；以 / 开头时是绝对地址。绝对 alias 虽然不包含父路径片段，仍按原记录的父子链渲染。原路径含参数时，绝对 alias 也必须包含对应参数，否则无法生成相同的匹配数据。
 
@@ -130,7 +130,7 @@ const routes = [
 }
 ~~~~
 
-## 在隔离 Demo 中比较三条入口
+## 四、在隔离 Demo 中比较三条入口
 
 下面的 mini-app 每次都先回到 /start 中立页，再分别按 name、redirect 和绝对 alias 进入同一个目标组件。可见状态同时展示输入 location、最终 pathname、matched names、aliasOf、params/query、record guard 轨迹、导航结果和宿主 URL。
 
@@ -138,7 +138,7 @@ const routes = [
 从中立页比较 name、redirect 与 alias 的地址和守卫语义
 :::
 
-## 易错使用提示
+## 五、易错使用提示
 
 :::pitfalls
 ### 在不同记录上复用同一个 name
@@ -296,7 +296,7 @@ router.push({ name: 'profile-main', params: { username: 'Jian Li/演示' } })
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 从源码推导适用场景
+## 六、从源码推导适用场景
 
 :::steps
 ### 1. name map 把记录身份与 path ranking 分开

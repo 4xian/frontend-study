@@ -1,0 +1,123 @@
+.conditional-demo {
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+}
+
+.conditional-demo-heading p,
+.conditional-demo-card p,
+.conditional-demo-card h3,
+.conditional-demo-note {
+  margin: 0;
+}
+
+.conditional-demo-heading p {
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.conditional-demo-heading h2 {
+  margin: var(--space-1) 0 0;
+  font-size: 1.05rem;
+}
+
+.conditional-demo-cards {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  margin: var(--space-3) -6px 0;
+}
+
+.conditional-demo-card {
+  flex: 1 1 240px;
+  min-width: 0;
+  margin: 0 6px 12px;
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.conditional-demo-card-ready {
+  border-left: 4px solid #24845b;
+}
+
+.conditional-demo-card-warning {
+  border-left: 4px solid #bd6a24;
+}
+
+.conditional-demo-card-label {
+  color: var(--color-text-secondary);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.conditional-demo-card h3 {
+  margin-top: var(--space-2);
+  font-size: 0.95rem;
+  overflow-wrap: anywhere;
+}
+
+.conditional-demo-card h3 + p {
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+  overflow-wrap: anywhere;
+}
+
+.conditional-demo-choices {
+  margin: 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.conditional-demo-choice {
+  display: flex;
+  align-items: flex-start;
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.conditional-demo-choice dt {
+  flex: 0 0 190px;
+  font-weight: 700;
+}
+
+.conditional-demo-choice dd {
+  min-width: 0;
+  min-height: 1.5em;
+  margin: 0 0 0 var(--space-3);
+  color: var(--color-text-secondary);
+  overflow-wrap: anywhere;
+}
+
+.conditional-demo-choice:nth-child(3) dd {
+  color: #b3472f;
+  font-weight: 800;
+}
+
+.conditional-demo-internal {
+  margin: 0;
+}
+
+.conditional-demo-note {
+  margin-top: var(--space-3);
+  color: var(--color-text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.65;
+}
+
+@media (max-width: 520px) {
+  .conditional-demo-card {
+    flex-basis: 100%;
+  }
+
+  .conditional-demo-choice {
+    display: block;
+  }
+
+  .conditional-demo-choice dd {
+    margin: var(--space-1) 0 0;
+  }
+}

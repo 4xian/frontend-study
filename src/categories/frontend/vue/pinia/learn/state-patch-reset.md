@@ -45,7 +45,7 @@ recap:
 
 # State、Patch 与 Reset
 
-## 直接赋值本来就是公开用法
+## 一、直接赋值本来就是公开用法
 
 Pinia 不要求每次状态变化都经过 action。组件中可以直接修改可写 state；单字段更新用直接赋值最清楚。需要一次表达多个字段或集合操作时，再选择 `$patch()`。是否把业务规则集中到 action 是建模决策，不是 Pinia 的写入限制。
 
@@ -57,7 +57,7 @@ Pinia 不要求每次状态变化都经过 action。组件中可以直接修改�
 | store.$state = next | 用新快照合并状态 | patch function |
 | store.$reset() | Options Store 恢复 state factory 初始值 | patch function |
 
-## Patch 是一次同步状态事务
+## 二、Patch 是一次同步状态事务
 
 对象 patch 会递归合并给定字段，并把对象保存为 mutation payload。函数 patch 让多个同步修改共享一次 mutation 通知，适合 push、splice 等集合操作；回调不是异步事务容器，不能在 await 前后维持同一批次。
 
@@ -70,17 +70,17 @@ store.$patch((state) => {
 })
 ~~~~
 
-## 替换语法仍然保留响应式对象
+## 三、替换语法仍然保留响应式对象
 
 直接替换 Pinia 持有的 reactive state 会断开已有引用，所以 `$state` 的 setter 内部调用 `$patch()`。Options Store 的 `$reset()` 则重新执行 `state()` 工厂取得新初始值，再通过函数 patch 写回当前 Store。Setup Store 没有自动 `$reset()`。
 
-## 对比五种写入的可观察事件
+## 四、对比五种写入的可观察事件
 
 :::demo{id="vue.pinia.learn.basics.state-patch-reset.pinia-state-mutation-lab-demo" playground="true"}
 在同一独立 Options Store 中执行五种写入并观察 mutation 与订阅次数
 :::
 
-## 源码与测试推导
+## 五、源码与测试推导
 
 :::steps
 ### 1. Patch 聚合一次通知
@@ -92,7 +92,7 @@ store.$patch((state) => {
 Options Store 的 `$reset()` 调用原始 `state()` 取得新对象，再用 `$patch((state) =&gt; assign(state, newState))` 写回，因此它恢复的是工厂定义的初值。
 :::
 
-## 易错使用提示
+## 六、易错使用提示
 
 :::pitfalls
 ### 把直接赋值当作违规操作

@@ -15,7 +15,7 @@ tags:
   - 数组
   - 元组
   - tuple
-appliesTo: TypeScript 7.0.2（宿主 fixture：6.0.3）
+appliesTo: TypeScript 7.0.2
 verifiedAt: 2026-08-05
 sources:
   - title: "TypeScript Handbook: Object Types"
@@ -45,7 +45,7 @@ objectives:
   - 用必需、可选和 readonly 属性描述对象合同
   - 根据元素是否同质选择数组或元组
   - 读懂结构类型检查对多余属性和可赋值性的基本影响
-  - 通过正负 fixture 验证属性与元组位置约束
+  - 通过正反例验证属性与元组位置约束
 recap:
   - 必需、可选与 readonly 属性分别表达存在性和赋值边界。
   - 同质可变集合使用数组，长度与位置属于合同的少量值使用元组。
@@ -54,11 +54,11 @@ recap:
 
 # 对象、数组与元组
 
-## 为什么需要
+## 一、为什么需要
 
 真实数据通常不是孤立 primitive，而是一组有名字或位置含义的值。对象适合用属性名表达业务角色，数组适合保存同类集合，元组适合表达长度和位置都属于合同的少量值。选错模型会让调用方只能靠约定猜测。
 
-## 核心概念和最小模型
+## 二、核心概念和最小模型
 
 ~~~~ts
 interface LessonSummary {
@@ -80,35 +80,114 @@ export { lesson, progress, topics }
 
 对象类型按成员检查结构：必需属性必须存在，可选属性可能缺失，readonly 阻止通过该属性位置重新赋值。数组的所有元素共享一个元素类型；元组除了每个位置的类型，还保存长度与位置顺序。
 
-## 从数据形状到集合合同
+## 三、知识点详解
 
-:::steps
-### 先列出稳定属性
+### 1. 对象类型
 
-把调用方必定需要的字段设为必需，把真实可能缺失的字段写成 `?`。不要因为构造对象暂时麻烦就把所有字段改成可选。
+**它是什么：** 对象类型列出一个值必须具有的属性以及每个属性的类型。属性名称描述数据含义，属性类型
+限制允许的值。
 
-### 只保护需要稳定的入口
+**它有什么用：** 它能让课程、用户或配置对象在创建、传递和读取时保持同一数据形状。
 
-readonly 适合 ID、创建时间等不应被重新指向的属性。它是 TypeScript 的赋值检查，不会把嵌套对象自动变成深只读。
+**怎么使用：** 先把业务一定需要的字段写成必需属性，再为真实可能缺失的字段添加 `?`。
 
-### 同类且可变长度时选择数组
+~~~~ts
+type Course = {
+  id: string
+  title: string
+  description?: string
+}
 
-课程标签、搜索结果和日志记录通常是 `T[]`。调用方按元素类型处理，不依赖固定位置。
+const course: Course = { id: 'objects', title: '对象类型' }
+~~~~
 
-### 位置本身有含义时选择元组
+### 2. optional 与 readonly 属性
 
-坐标、成对结果或固定协议片段可用元组。给元素加标签能提升可读性，但标签不会改变运行时数组结构。
+**它们是什么：** `?` 表示属性可能不存在，`readonly` 表示属性在通过该类型访问时不能被重新赋值。
 
-### 在函数边界检查结构
+**它们有什么用：** optional 能准确表达缺失数据，readonly 能保护 ID、创建时间等稳定入口，避免意外修改。
 
-TypeScript 主要比较值是否拥有目标所需成员，而不是要求它来自某个特定声明。下一课会把对象合同放进参数和返回值。
-:::
+**怎么使用：** 只给真实可缺失字段添加 `?`，只保护需要稳定的属性；`readonly` 不会递归冻结嵌套对象。
 
-## 配套编译 fixture
+~~~~ts
+type Lesson = {
+  readonly id: string
+  title: string
+  completedAt?: Date
+}
 
-临时编译正例同时验证对象成员、字符串数组和带标签元组；负例颠倒元组两个位置，固定 TS2322。验证资产只在 `/tmp` 使用并在结束后删除。运行时两者都只是对象或数组，因此必须由 tsc 证明合同。
+const lesson: Lesson = { id: 'arrays', title: '数组' }
+lesson.title = '数组与元组'
+~~~~
 
-## 易错使用提示
+### 3. 数组
+
+**它是什么：** 数组是同类元素组成的可变长度集合，类型写成 `T[]` 或 `Array<T>`。
+
+**它有什么用：** 搜索结果、标签和课程列表都可以用数组表示，调用方只依赖元素类型，不依赖固定位置。
+
+**怎么使用：** 为元素定义对象类型，再把列表声明为该元素类型的数组；遍历时参数会自动获得元素类型。
+
+~~~~ts
+const lessons: Lesson[] = [
+  { id: 'objects', title: '对象' },
+  { id: 'arrays', title: '数组' },
+]
+
+const titles = lessons.map((item) => item.title)
+~~~~
+
+### 4. 元组
+
+**它是什么：** 元组是长度和每个位置类型都固定的数组类型，可以用标签说明各位置含义。
+
+**它有什么用：** 坐标、键值对、函数返回的成对结果等协议依赖位置含义，元组能阻止位置颠倒或数量错误。
+
+**怎么使用：** 用 `[名称: 类型, 名称: 类型]` 写出固定位置；如果集合会增长或元素同类，则继续使用数组。
+
+~~~~ts
+type LessonProgress = [completed: number, total: number]
+
+const progress: LessonProgress = [3, 8]
+const [completed, total] = progress
+~~~~
+
+### 5. 结构检查与多余属性检查
+
+**它们是什么：** TypeScript 按对象是否拥有目标所需成员判断兼容性；对象字面量直接赋值时还会检查多写的
+未知属性。
+
+**它们有什么用：** 结构检查允许不同来源的对象复用同一合同，多余属性检查则能及时发现字段拼写错误。
+
+**怎么使用：** 在函数参数上声明最小所需结构，并让对象字面量直接接受检查；运行时外部数据仍需单独验证。
+
+~~~~ts
+/** 显示任何拥有 title 属性的值。 */
+function showTitle(value: { title: string }): string {
+  return value.title
+}
+
+const titledValue = { title: '结构类型', extra: true }
+showTitle(titledValue)
+~~~~
+
+## 四、动手实践：为对象、列表和固定位置选择不同合同
+
+下面的模型分别使用对象表达具名数据、数组表达同类集合、tuple 表达固定位置协议。
+
+~~~~ts
+interface Course {
+  readonly id: string
+  title: string
+  tags?: string[]
+}
+
+const courses: Course[] = [{ id: 'ts', title: 'TypeScript', tags: ['types'] }]
+const progress: readonly [completed: number, total: number] = [3, 24]
+~~~~
+
+尝试修改 course.id、向 tags 添加数字以及颠倒 progress 的两个位置。然后把 tuple 改为普通 number[]，比较类型系统还能够保留哪些位置信息。
+## 五、易错使用提示
 
 :::pitfalls
 ### 把所有属性都声明为可选
@@ -244,20 +323,20 @@ const named: Named = { name: source.name }
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 原理与适用场景
+## 六、工作原理与适用边界
 
 :::steps
 ### 对象按所需成员比较
 
-官方事实：对象类型描述属性及其类型，赋值关注目标要求的结构。课程推导：让接口围绕调用方真正需要的成员，而不是复制整个来源对象。边界：新鲜对象字面量的多余属性检查不等同于运行时过滤或严格名义类型。
+**工作原理：** 对象类型描述属性及其类型，赋值关注目标要求的结构。**实践建议：** 让接口围绕调用方真正需要的成员，而不是复制整个来源对象。**使用边界：** 新鲜对象字面量的多余属性检查不等同于运行时过滤或严格名义类型。
 
 ### 修饰符只表达对应层级的合同
 
-官方事实：可选属性读取时可能为 undefined，readonly 属性不能通过该属性重新赋值。课程推导：分别用它们表达缺失与稳定引用。边界：readonly 不提供深冻结，也不改变 JavaScript 对象。
+**工作原理：** 可选属性读取时可能为 undefined，readonly 属性不能通过该属性重新赋值。**实践建议：** 分别用它们表达缺失与稳定引用。**使用边界：** readonly 不提供深冻结，也不改变 JavaScript 对象。
 
 ### 数组与元组共享运行时载体
 
-官方事实：元组是知道元素数量和位置类型的数组类型。课程推导：固定协议用元组，普通集合用数组。边界：标签与位置类型会被擦除；运行时验证仍需检查数组长度与元素。
+**工作原理：** 元组是知道元素数量和位置类型的数组类型。**实践建议：** 固定协议用元组，普通集合用数组。**使用边界：** 标签与位置类型会被擦除；运行时验证仍需检查数组长度与元素。
 :::
 
 :::exercise
@@ -265,9 +344,41 @@ const named: Named = { name: source.name }
 
 **要求：** 定义 LessonSummary 对象、LessonSummary[] 搜索结果，以及 `[current, total]` 进度元组。分别写一个缺少必需 title 和一个颠倒元组位置的负例。
 
-**验收：** 正例严格编译通过；两个负例产生类型诊断；能解释为什么搜索结果不用元组、进度不用普通 number[]。
+**完成标准：** 正例严格编译通过；两个负例产生类型诊断；能解释为什么搜索结果不用元组、进度不用普通 number[]。
 :::
 
-## 总结与下一课
+## 七、本节小结
 
 对象用成员名表达形状，数组表达同类集合，元组表达固定位置协议；可选与 readonly 只承担各自明确的合同。下一课“函数类型”会让这些数据模型通过参数、返回值和回调连接起来。
+
+:::code-details{title="查看本节完整示例"}
+~~~~ts
+interface Course {
+  readonly id: string
+  title: string
+  description?: string
+}
+
+type CourseRow = readonly [id: string, title: string, published: boolean]
+
+const course: Course = {
+  id: 'object-model',
+  title: '对象、数组与元组',
+}
+
+const courses: Course[] = [course]
+courses.push({ id: 'tuple-model', title: '固定位置协议', description: '三列数据' })
+
+const row: CourseRow = ['object-model', '对象模型', true]
+const [id, title, published] = row
+
+const imported = {
+  id: 'structural-check',
+  title: '结构检查',
+  author: '课程组',
+}
+const compatibleCourse: Course = imported
+
+console.log(courses.length, id, title, published, compatibleCourse.title)
+~~~~
+:::

@@ -55,7 +55,7 @@ recap:
 前置：请先完成 L01-L07，并能区分组件实例、Store registry 与独立 Pinia。
 :::
 
-## 先问所有者，再选容器
+## 一、先问所有者，再选容器
 
 Pinia 官方把 Store 定义为脱离组件树的共享 state 与业务逻辑，适合应用多处访问或跨页面保留的数据；可以留在组件内的短命局部状态不应为了“统一”而进入 Store。下面的三分法是应用建模建议，不是 runtime 强制规则。
 
@@ -66,7 +66,7 @@ Pinia 官方把 Store 定义为脱离组件树的共享 state 与业务逻辑，
 | 典型状态 | panel、draft、hover | session、任务、跨步流程 | 已持久化订单、权限事实 |
 | 副作用入口 | 组件事件 | 命名 action | API 或事务 |
 
-## 客户端缓存不是服务端真相
+## 二、客户端缓存不是服务端真相
 
 Store 可以拥有响应数据的浏览器缓存、请求状态和乐观更新，但后端仍可能拥有最终业务事实。建模时分别写清“谁能修改客户端副本”和“谁能确认最终结果”，避免把一次 API 响应复制成第二份权威源。
 
@@ -83,13 +83,13 @@ export const useTaskStore = defineStore('task', {
 })
 ~~~~
 
-## 生命周期与权威边界实验
+## 三、生命周期与权威边界实验
 
 :::demo{id="vue.pinia.learn.intermediate.store-modeling.pinia-store-responsibility-lab-demo" playground="true"}
 重挂载局部组件，比较局部 UI、业务 Store 与客户端缓存的存续差异
 :::
 
-## 练习与观察
+## 四、练习与观察
 
 :::steps
 ### 1. 修改三类状态
@@ -109,7 +109,7 @@ export const useTaskStore = defineStore('task', {
 确认服务端 fixture 仍被标为权威源。
 :::
 
-## 源码与测试推导
+## 五、源码与测试推导
 
 :::steps
 ### 1. registry 属于 Pinia 实例
@@ -137,7 +137,7 @@ Actions 指南支持用命名 action 修改业务 state，但协调者选择仍�
 确定性 fixture 只展示所有权，不证明真实网络一致性或服务端事务。
 :::
 
-## 易错使用提示
+## 六、易错使用提示
 
 :::pitfalls
 ### 把所有响应式值都放进 Pinia

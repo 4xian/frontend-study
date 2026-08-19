@@ -50,11 +50,11 @@ anchors:
 
 # provide() / inject()
 
-## 概述
+## 一、概述
 
 深层子组件若只靠 props 获取祖先数据，中间组件即使不使用该数据也要逐级声明和转发，这就是 prop 逐级透传。`provide()` / `inject()` 让祖先直接成为依赖提供者，任意深度的后代都能按 key 注入值，中间组件无需参与。
 
-## 签名与基础用法
+## 二、签名与基础用法
 
 ~~~~ts
 function provide<T>(key: InjectionKey<T> | string, value: T): void
@@ -87,7 +87,7 @@ const theme = inject('theme', 'light')
 状态跨过中间层直达叶子组件，并由提供方保留修改权
 :::
 
-## 响应式状态的所有权
+## 三、响应式状态的所有权
 
 提供 ref 或 reactive 对象时，注入方收到的是同一个响应式连接。官方建议把修改逻辑留在提供方：后代需要改状态时，一并注入一个动作函数；还可用 `readonly()` 包装状态，使注入方无法直接写入，但提供方仍可通过原始 ref 更新它。
 
@@ -100,7 +100,7 @@ provide('count', readonly(count))
 provide('increment', () => count.value++)
 ~~~~
 
-## 易错使用提示
+## 四、易错使用提示
 
 :::pitfalls
 ### 使用字符串 key 后直接断定类型和存在性
@@ -317,7 +317,7 @@ service?.start()
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## Symbol key 与类型标注
+## 五、Symbol key 与类型标注
 
 大型应用应集中导出 Symbol key，避免字符串撞名。`InjectionKey<T>` 是带泛型的 symbol 类型：provide 会校验值，inject 会推导 `T | undefined`。若业务保证值一定存在，也应在边界处显式检查并给出清晰错误，而不是在所有消费点散落非空断言。
 
@@ -334,7 +334,7 @@ provide(countKey, readonly(ref(0)))
 const count = inject(countKey)
 ~~~~
 
-## 查找范围与应用上下文
+## 六、查找范围与应用上下文
 
 inject 从当前组件的父链开始查找最近的提供者，近层同名 key 会遮蔽远层值。因此组件无论先调用 provide 还是 inject，都不能注入自己同一实例提供的值；只有后代能看到它。根组件可继续回退到 `app.provide()` 的应用级值。
 
@@ -347,7 +347,7 @@ const id = app.runWithContext(() => inject('id'))
 console.log(id) // 1
 ~~~~
 
-## hasInjectionContext()
+## 七、hasInjectionContext()
 
 ~~~~ts
 // 判断当前能否无警告地调用 inject()
@@ -365,7 +365,7 @@ const resolvedService = service ?? fallbackService
 
 应在调用 `inject()` 之前即时检查上下文。`app.runWithContext()` 只在回调同步执行期间提供应用上下文，可以同步取得依赖后再使用该值，但不能依赖它在 await 后重新调用 inject。此限制专指 runWithContext；`<script setup>` 顶层 await 会由编译器恢复当前组件实例。
 
-## 最小源码实现
+## 八、最小源码实现
 
 组件实例初始共享父级的 provides 对象；首次调用 provide 时，才以父级 provides 为原型创建自己的对象。这种写时复制让一次属性访问自然完成“向上找最近提供者”。inject 还会识别函数式组件的渲染实例和 app.runWithContext 的 currentApp；默认值工厂以组件公开实例作为 this 调用。
 

@@ -1,0 +1,225 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.intermediate.openapi-documentation-and-api-integration",
+  "batchId": "phase-c-i16-openapi-documentation-and-api-integration",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-16T06:54:17+08:00",
+  "phase": "Phase C",
+  "phaseCAdmission": {
+    "status": "PASS",
+    "predecessorCourseId": "backend.java.learn.intermediate.controller-testing-mockmvc-and-test-slices",
+    "predecessorSignoffPath": "docs/backend/java/audit/reviews/phase-4-controller-testing-mockmvc-and-test-slices-signoff.json",
+    "predecessorSignoffSha256": "cb3e95cbc30facde73090d632428a981735fcfa56587da6945fac711ef53ad42",
+    "phaseCProgressBeforeBatch": "15/20"
+  },
+  "phaseCProgress": "16/20",
+  "phaseAFreeze": {
+    "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+    "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81",
+    "designation": "I-16 / 必修、新增",
+    "title": "OpenAPI、接口文档与接口联调",
+    "estimatedMinutes": 120,
+    "prerequisite": "backend.java.learn.intermediate.controller-testing-mockmvc-and-test-slices",
+    "stableIdAdded": "backend.java.learn.intermediate.openapi-documentation-and-api-integration",
+    "slugAdded": "openapi-documentation-and-api-integration",
+    "urlAdded": "/backend/java/core/learn/openapi-documentation-and-api-integration",
+    "frozenSuccessor": "backend.java.learn.intermediate.lombok-and-generated-contracts"
+  },
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "newStagingPerformedThisBatch": false,
+    "existingIndexPreserved": true,
+    "unrelatedWorkspaceChangesPreserved": true
+  },
+  "versions": {
+    "verifiedAt": "2026-08-16",
+    "modern": {
+      "java": "25",
+      "springBoot": "4.1.0",
+      "springFramework": "7.0.8 or later",
+      "springdocOpenapi": "3.1.0",
+      "openapi": "3.1.x",
+      "classMajor": 69
+    },
+    "legacy": {
+      "java": "8",
+      "springBoot": "2.3.12.RELEASE",
+      "springFramework": "5.2.15.RELEASE or later",
+      "springdocOpenapi": "1.8.0",
+      "openapi": "3.0.x",
+      "classMajor": 52
+    }
+  },
+  "sourceDiscovery": {
+    "method": "官方候选回到 Spring Boot、springdoc、OpenAPI、JSON Schema、Swagger 与 Maven Central 一手页面核验",
+    "researchDirectSourceCount": 17,
+    "lessonOfficialSourceCardCount": 17,
+    "officialUrlStatus": "PASS; 17/17 returned HTTP 200 on the reviewed snapshot",
+    "communitySourcesUsedAsEvidence": false,
+    "projectEvidenceCount": 0,
+    "rejectedEvidenceIncludedInLesson": false
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/intermediate/openapi-documentation-and-api-integration.md",
+      "sha256": "2f439246ff4fb6ef2e6d0e2bfb557c9f4ebbab1c4dcd1bfa25a8e46d14f58007"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/openapi-documentation-and-api-integration.md",
+      "sha256": "3a154215466c51003246e01aebb3aa94450e4ee702fd60c312f8454a716c69dd"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "9ad6a77acdd8a57cae182f0b89c36816f5816f0926d0bbf5a580e257ed8870df"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "14d0f304d3e08cb4a8b7bb45891d2cd29d40ea9c35d7833bc995a9b432216138"
+    },
+    {
+      "path": "docs/backend/java/audit/phase-2-knowledge-path-manifest.json",
+      "sha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407"
+    }
+  ],
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "researchLineCount": 204,
+    "lessonLineCount": 965,
+    "rootH2Count": 16,
+    "independentKnowledgePointHeadings": 20,
+    "knowledgePointSevenPartCoverage": "20/20",
+    "zeroStartCompletePom": true,
+    "zeroStartCompleteJavaSource": true,
+    "pitfallCount": 4,
+    "exerciseCount": 1,
+    "officialSourceCount": 17,
+    "projectEvidenceCount": 0,
+    "javaMethodComments": "PASS; lesson Java methods and constructors use Chinese documentation comments"
+  },
+  "javaVerification": {
+    "modernRuntime": "Eclipse Temurin 25 container",
+    "modernResult": "PASS; the exact lesson POM and single-file source compiled from an empty temporary directory",
+    "modernFeedback": "PASS; OAS 3.1.x, JSON and YAML, UI 302 to 200, GET 200, POST 201 with Location, blank title 400 and missing task 404",
+    "modernNegativeFeedback": "PASS before final review; removing the GET 404 description failed the document assertion while the runtime 404 remained",
+    "modernClassMajor": 69,
+    "legacyRuntime": "Eclipse Temurin 8 container",
+    "legacyResult": "PASS; OAS 3.0.x, JSON and YAML, UI 302 to 200, GET 200, POST 201 with Location, blank title 400 and missing task 404",
+    "legacyNegativeFeedback": "PASS before final review; removing springdoc kept the business API at 200 while document and UI probes returned 404, then two restored runs passed",
+    "legacyClassMajor": 52
+  },
+  "catalogVerification": {
+    "coldRunCount": 3,
+    "allRunsPassed": true,
+    "intermediateAvailable": 21,
+    "currentTrackCount": 1,
+    "currentLoadable": true,
+    "currentContentBlocks": 204,
+    "knowledgePointSevenPartCoverage": "20/20",
+    "officialSourceCount": 17,
+    "projectEvidenceCount": 0,
+    "successorPhaseCAdjustmentStarted": false
+  },
+  "engineeringVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes and 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check",
+      "exitCode": 0,
+      "summary": "passed directly and again as part of the production build"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run test:unit",
+      "exitCode": 0,
+      "summary": "No persistent unit files; configured empty directory passed"
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "summary": "No persistent E2E files; configured empty directory passed"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "PASS; 1779 modules transformed and the production bundle was emitted"
+    }
+  ],
+  "repositoryFormatBoundary": {
+    "command": "npm run format:check",
+    "exitCode": 1,
+    "i16ScopedGate": "PASS",
+    "unrelatedBlockingFiles": [
+      "src/categories/frontend/engineering/vite/vite-reference-index.ts",
+      "src/categories/frontend/vue/core/vue-core-options-reference-index.ts",
+      "src/categories/frontend/vue/core/vue-core-reference-index.ts",
+      "src/categories/frontend/vue/core/vue-core-sfc-reference-index.ts"
+    ],
+    "unrelatedFilesModified": false
+  },
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "session": "java-i16-final",
+    "baseUrl": "http://127.0.0.1:4198/",
+    "targetPath": "/backend/java/core/learn/openapi-documentation-and-api-integration",
+    "sourceDevServerUsed": true,
+    "productionBuildSeparatelyPassed": true,
+    "desktop": {
+      "viewport": "1440x900",
+      "horizontalOverflow": false
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "horizontalOverflow": false
+    },
+    "title": "OpenAPI、接口文档与接口联调",
+    "outlineKnowledgePointCount": 20,
+    "officialSourceCount": 17,
+    "completePomVisible": true,
+    "completeJavaSourceVisible": true,
+    "previousEntryId": "backend.java.learn.intermediate.controller-testing-mockmvc-and-test-slices",
+    "currentNextEntryIdBeforeI17Adjustment": "backend.java.learn.intermediate.relational-data-and-sql-foundations",
+    "completionControlText": "标记为已完成",
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "visualInspection": "PASS; desktop and mobile screenshots show the title, evidence, complete examples and lesson content without overlap, clipping or horizontal overflow"
+  },
+  "review": {
+    "reviewer": "/root/i16_standards_spec_review",
+    "riskClassification": "I-16 adds a new OpenAPI lesson, dual-version runnable fixtures and atomic track and loader registration",
+    "independentReviewRequired": true,
+    "reviewedLessonSha256": "3a154215466c51003246e01aebb3aa94450e4ee702fd60c312f8454a716c69dd",
+    "reviewedResearchSha256": "2f439246ff4fb6ef2e6d0e2bfb557c9f4ebbab1c4dcd1bfa25a8e46d14f58007",
+    "standards": "PASS / 0 finding",
+    "spec": "PASS / 0 finding",
+    "highestSeverity": "none",
+    "resolvedFindings": [
+      "the zero-start workflow now contains a complete POM and complete runnable Java source",
+      "rejected project evidence was removed and the required projectEvidence field is an empty array",
+      "the Boot 2.3 Spring Framework claim now matches the official minimum-version evidence"
+    ],
+    "reviewWorkspaceModified": false,
+    "reviewStopBoundary": "reviewer did not read or modify I-17"
+  },
+  "cleanup": {
+    "status": "PASS",
+    "temporaryJavaAssetsAbsent": true,
+    "catalogTemporaryFileAbsent": true,
+    "browserArtifactsAbsent": true,
+    "browserSessionClosed": true,
+    "runtimeContainersStopped": true,
+    "devServerStopped": true
+  },
+  "successorExistingAssets": "I-17 reusable assets pre-existed in the user index and were not modified by I-16",
+  "selfHashPolicy": "signoff file does not record its own SHA-256; artifacts bind only stable external batch outputs",
+  "stopBoundary": "Phase C I-16 is closed at 16/20 after cleanup evidence is finalized. The only next authorized batch is I-17 (backend.java.learn.intermediate.lombok-and-generated-contracts); I-17 Phase C adjustment was not started before this signoff. Phase D remains unauthorized until the Phase C aggregate Gate closes."
+}

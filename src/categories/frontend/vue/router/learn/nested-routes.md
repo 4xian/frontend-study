@@ -50,7 +50,7 @@ recap:
 
 # 嵌套路由
 
-## 一条嵌套 URL 对应一条 matched 链
+## 一、一条嵌套 URL 对应一条 matched 链
 
 嵌套路由同时组织地址与界面。父记录 /teams/\:teamId 渲染团队 layout，children 中的 members/\:memberId 追加两个 URL segment，并交给 layout 内的第二层 RouterView。访问 /teams/core/members/42 时，父记录与详情 child 都位于 route.matched 中。
 
@@ -77,7 +77,7 @@ const routes = [
 | /teams/core | team-layout → team-home | 外层：TeamLayout；内层：TeamHome |
 | /teams/core/members/42 | team-layout → team-member | 外层：TeamLayout；内层：TeamMember |
 
-## children 的 path 默认相对父记录
+## 二、children 的 path 默认相对父记录
 
 child path 不以斜杠开头时，matcher 会把它接到父 path 后面。这样 records 的树形关系、URL segment 和组件布局表达同一层级。以 / 开头的 child path 是绝对地址；它仍可保留 parent 关系，但不会追加父 path，因此不适合这里的详情 segment。
 
@@ -95,7 +95,7 @@ child path 不以斜杠开头时，matcher 会把它接到父 path 后面。这�
 ~~~~
 :::
 
-## 每层 RouterView 只消费当前深度的记录
+## 三、每层 RouterView 只消费当前深度的记录
 
 应用根组件中的 RouterView 从 matched[0] 取得 TeamLayout。TeamLayout 自己还要渲染 RouterView，后者才会读取 matched[1] 的默认页或成员详情。父 layout 不会因为 child 切换而消失，变化的是第二层 outlet。
 
@@ -108,7 +108,7 @@ child path 不以斜杠开头时，matcher 会把它接到父 path 后面。这�
 </template>
 ~~~~
 
-## 空路径 child 提供父地址的默认内容
+## 四、空路径 child 提供父地址的默认内容
 
 父地址 /teams/core 已经匹配 TeamLayout，但仍需要一个 child 决定第二层 outlet 的内容。path: 空字符串的 child 不增加 URL segment，因此父地址会同时匹配 layout 与默认 child。它不是 redirect，也不会改变地址。
 
@@ -116,7 +116,7 @@ child path 不以斜杠开头时，matcher 会把它接到父 path 后面。这�
 默认 child 与详情 child 必须使用不同 name。name 在整个 router 中标识位置，不是只在同一 children 数组内局部唯一。
 :::
 
-## 在隔离 Demo 中观察两个 outlet
+## 五、在隔离 Demo 中观察两个 outlet
 
 下面的运行区创建独立 memory router。默认 child 与成员详情共享团队父 layout；可见区同时显示父 outlet、子 outlet、pathname、matched names、params/query、导航结果和事件时间线。所有按钮只驱动 mini-app，宿主课程 URL 保持不变。
 
@@ -124,7 +124,7 @@ child path 不以斜杠开头时，matcher 会把它接到父 path 后面。这�
 切换空路径默认 child 与成员详情 child，观察 matched 链和两层 outlet
 :::
 
-## 易错使用提示
+## 六、易错使用提示
 
 :::pitfalls
 ### 父组件没有放置 RouterView
@@ -260,7 +260,7 @@ child path 不以斜杠开头时，matcher 会把它接到父 path 后面。这�
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 从源码推导适用场景
+## 七、从源码推导适用场景
 
 :::steps
 ### 1. matcher 归一化 children 与 parent

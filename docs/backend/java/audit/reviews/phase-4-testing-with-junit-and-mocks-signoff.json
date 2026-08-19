@@ -1,0 +1,236 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.intermediate.testing-with-junit-and-mocks",
+  "batchId": "phase-c-i14-testing-with-junit-and-mocks",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-16T04:08:20+08:00",
+  "phase": "Phase C",
+  "phaseCAdmission": {
+    "status": "PASS",
+    "predecessorCourseId": "backend.java.learn.intermediate.errors-results-and-logging",
+    "predecessorSignoffPath": "docs/backend/java/audit/reviews/phase-4-errors-results-and-logging-signoff.json",
+    "predecessorSignoffSha256": "6d6b7607c9ef651e384919cc909d8cedadeaec479a0025c4bb8dd86685db27cd",
+    "phaseCProgressBeforeBatch": "13/20",
+    "trackChangeRequired": false,
+    "loaderChangeRequired": false
+  },
+  "phaseCProgress": "14/20",
+  "phaseAFreeze": {
+    "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+    "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81",
+    "designation": "I-14 / 必修、拆分复用",
+    "title": "JUnit、Mockito 与 Service 单元测试",
+    "estimatedMinutes": 150,
+    "prerequisite": "backend.java.learn.intermediate.errors-results-and-logging",
+    "stableIdReused": "backend.java.learn.intermediate.testing-with-junit-and-mocks",
+    "slugReused": "testing-with-junit-and-mocks",
+    "urlPreserved": "/backend/java/core/learn/testing-with-junit-and-mocks",
+    "frozenSuccessor": "backend.java.learn.intermediate.controller-testing-mockmvc-and-test-slices"
+  },
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "newStagingPerformedThisBatch": false,
+    "existingIndexPreserved": true,
+    "unrelatedWorkspaceChangesPreserved": true
+  },
+  "versions": {
+    "verifiedAt": "2026-08-16",
+    "modern": {
+      "java": "25",
+      "junit": "6.1.3",
+      "mockito": "5.23.0",
+      "mavenSurefire": "3.5.6"
+    },
+    "legacy": {
+      "java": "8",
+      "springBoot": "2.3.12.RELEASE",
+      "springFramework": "5.2.15.RELEASE",
+      "junitJupiter": "5.6.3",
+      "mockito": "3.3.3"
+    }
+  },
+  "sourceDiscovery": {
+    "method": "官方候选经 GitHub release API 与已知直接 URL 定位，最终结论回到 JUnit、Mockito、Spring Framework、Spring Boot 与 Maven Surefire 一手页面核验",
+    "researchDirectSourceCount": 18,
+    "versionApiCount": 3,
+    "researchHttp200Count": 21,
+    "researchHttpFailureCount": 0,
+    "lessonOfficialSourceCardCount": 18,
+    "lessonAndResearchSourceMapsMatch": true,
+    "communitySourcesUsedAsEvidence": false
+  },
+  "research": {
+    "scope": "I-14 only",
+    "phaseAContractAlignment": "PASS",
+    "serviceUnitBoundary": "PASS; real Service and values, mocked direct collaborators, no Spring context, database, network, Controller or MockMvc",
+    "b20Boundary": "PASS; JUnit fundamentals remain in B-20 and are only applied here",
+    "successorBoundary": "PASS; Controller, MockMvc, HTTP assertions and test slices remain in I-15",
+    "officialUrlCount": 18,
+    "stopBoundaryAlignment": "PASS; successor lesson and research were not read or modified before I-14 closure",
+    "researchSha256": "41c42701eb07ed03fb7f10baec88448f02df7cc95129116a61b193dd27eac02f"
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/intermediate/testing-with-junit-and-mocks.md",
+      "sha256": "41c42701eb07ed03fb7f10baec88448f02df7cc95129116a61b193dd27eac02f"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/testing-with-junit-and-mocks.md",
+      "sha256": "91ea5d5f565578dd3c864073c1e025bebe47b264b6d901d04b3dd8f24b759d3d"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "4c49ec0207e877d4abd0c2531360b893ddd532a164f1438ea47bcf143f8a1aac"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "a98375b0c98d2e104ffd6b4acfb12127e705bb015976882bf86f1e58d6473829"
+    },
+    {
+      "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+      "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81"
+    },
+    {
+      "path": "docs/backend/java/audit/phase-2-knowledge-path-manifest.json",
+      "sha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407"
+    }
+  ],
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "researchLineCount": 192,
+    "lessonLineCount": 1200,
+    "rootH2Count": 16,
+    "rootH2ChineseNumbering": "PASS; 一 through 十六 continuous",
+    "independentKnowledgePointHeadings": 24,
+    "knowledgePointSevenPartCoverage": "24/24",
+    "pitfallCount": 5,
+    "exerciseCount": 1,
+    "officialSourceCount": 18,
+    "duplicateVisibleNumberingCount": 0,
+    "pseudoCodeLabelling": "PASS",
+    "javaMethodComments": "PASS; lesson Java methods use Chinese documentation comments"
+  },
+  "javaVerification": {
+    "runtime": "Java 25 / JUnit 6.1.3 / Mockito 5.23.0 / Maven Surefire 3.5.6",
+    "negativeControl": "PASS; the captor-stubbing negative path failed first and exposed UnnecessaryStubbingException",
+    "remediationRerun": "PASS; the corrected same fixture passed 5/5",
+    "reviewFindingsRegression": "PASS; ReviewFindingsTest passed 3/3 with failures=0 and errors=0",
+    "verifiedContracts": [
+      "doThrow drives a void collaborator failure",
+      "STRICT_STUBS positive path remains clean",
+      "spy and doReturn stay behind the no-side-effect boundary",
+      "List fixture and matcher examples execute",
+      "void save captor negative path reproduces the intended diagnosis"
+    ],
+    "temporaryAssetsCleaned": true,
+    "cleanupCheck": "PASS; no /tmp/java-i14-* directory remains"
+  },
+  "engineeringVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes and 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check",
+      "exitCode": 0,
+      "summary": "passed directly and again as part of the production build"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run test:unit",
+      "exitCode": 0,
+      "summary": "No persistent unit files; configured empty directory passed"
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "summary": "No persistent E2E files; configured empty directory passed"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "PASS; 1786 modules transformed and testing-with-junit-and-mocks-BP0zRFFm.js was emitted"
+    },
+    {
+      "command": "npx prettier --check <I-14 research and lesson> and git diff --check -- <I-14 research and lesson>",
+      "exitCode": 0,
+      "summary": "targeted formatting and whitespace checks passed on the reviewed snapshot"
+    }
+  ],
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "session": "java-i14-final",
+    "baseUrl": "http://127.0.0.1:4194/",
+    "targetPath": "/backend/java/core/learn/testing-with-junit-and-mocks",
+    "productionPreviewUsed": true,
+    "sessionsClosed": true,
+    "previewServerStopped": true,
+    "desktop": {
+      "viewport": "1440x900",
+      "horizontalOverflow": false,
+      "knowledgePointCount": 24,
+      "pitfallCount": 5,
+      "officialSourceCount": 18,
+      "exerciseVisible": true
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "horizontalOverflow": false,
+      "knowledgePointCount": 24,
+      "pitfallCount": 5,
+      "officialSourceCount": 18,
+      "exerciseVisible": true
+    },
+    "title": "JUnit、Mockito 与 Service 单元测试",
+    "previousEntryId": "backend.java.learn.intermediate.errors-results-and-logging",
+    "frozenNextEntryId": "backend.java.learn.intermediate.controller-testing-mockmvc-and-test-slices",
+    "completionControlText": "标记为已完成",
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "pageErrors": 0,
+    "productionRequestCount": 210,
+    "failedRequests": 0,
+    "nonSuccessfulResponses": 0,
+    "visualInspection": "PASS; desktop and mobile screenshots show the title, lesson content, pitfalls, exercise, official sources and completion control without overlap, clipping or page overflow",
+    "temporaryScreenshotsCleaned": true,
+    "cleanupCheck": "PASS; exact I-14 browser directory, java-i14-final session and port 4194 listener no longer exist"
+  },
+  "review": {
+    "reviewer": "/root/i14_final_rereview",
+    "riskClassification": "I-14 substantially rewrites a reused lesson around the frozen Service unit-test boundary and executable Mockito failure diagnostics",
+    "independentReviewRequired": true,
+    "reviewedLessonSha256": "91ea5d5f565578dd3c864073c1e025bebe47b264b6d901d04b3dd8f24b759d3d",
+    "reviewedResearchSha256": "41c42701eb07ed03fb7f10baec88448f02df7cc95129116a61b193dd27eac02f",
+    "standards": "PASS / 0 finding",
+    "spec": "PASS / 0 finding",
+    "highestSeverity": "none",
+    "resolvedFindings": [
+      "pseudo-code examples are explicitly labelled",
+      "doThrow now demonstrates a void collaborator failure",
+      "STRICT_STUBS includes a valid positive example",
+      "spy and doReturn guidance preserves the no-side-effect boundary",
+      "the List fixture example is executable",
+      "matcher examples include reproducible negative and corrected forms",
+      "the void save captor negative example now reproduces the intended failure"
+    ],
+    "reviewWorkspaceModified": false,
+    "reviewStopBoundary": "reviewer did not read or implement the successor lesson"
+  },
+  "cleanup": {
+    "javaTemporaryFilesAbsent": true,
+    "browserTemporaryFilesAbsent": true,
+    "browserSessionClosed": true,
+    "previewListenerAbsent": true,
+    "unrelatedBrowserSessionsPreserved": true
+  },
+  "selfHashPolicy": "signoff file does not record its own SHA-256; artifacts bind only stable external batch outputs",
+  "stopBoundary": "Phase C I-14 is closed at 14/20. The only next authorized batch is I-15 (backend.java.learn.intermediate.controller-testing-mockmvc-and-test-slices); no successor lesson or research was read or modified before this signoff. Phase D remains unauthorized until the Phase C aggregate Gate closes."
+}

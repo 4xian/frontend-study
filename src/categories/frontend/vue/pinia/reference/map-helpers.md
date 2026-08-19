@@ -137,7 +137,7 @@ anchors:
 
 # Options API 映射 Helpers
 
-## 概述
+## 一、概述
 
 这些 helper 把 Pinia StoreDefinition 转成 Options API 的 computed 或 methods 选项。generated function 执行时都通过 useStore(this.$pinia) 取得当前组件所属 Pinia，而不是捕获某个全局 active singleton。
 
@@ -145,7 +145,7 @@ anchors:
 下划线 return 与 constraint 类型只还原发布声明，不是推荐 import。应用通常只导入 mapState、mapWritableState、mapActions、mapStores 与 setMapStoreSuffix。
 :::
 
-## Map State
+## 二、Map State
 
 mapState() 返回可 spread 到 computed 的 getter object。array 形状映射 state 或 getter 并保留 key；object 形状可以改名，也可用 function mapper 从整个 Store 计算组件值。
 
@@ -163,7 +163,7 @@ computed: {
 
 function mapper 通过 mapper.call(this, store) 执行。TypeScript 不会自动推导其中的组件 this；需要组件字段时使用普通 method shorthand，不要使用 arrow function 期待 this。
 
-## Map Writable State
+## 三、Map Writable State
 
 mapWritableState() 返回带 get 与 setter 的 computed descriptors，放在 computed。setter 直接赋值到 Store property，不代理 action，也不自动提供 validation、transaction 或业务事件。
 
@@ -176,7 +176,7 @@ computed: {
 
 readonly getter 不可写；state 与具有 setter 的 writable computed 才能映射。固定官方测试同时覆盖 array、object alias 和 Setup Store writable computed。
 
-## Map Actions
+## 四、Map Actions
 
 mapActions() 返回可 spread 到 methods 的 method wrappers。array 直接保留 action 名；object 只建立组件方法名到 action 名的映射，并透传 arguments 与 return value，不接受 mapState 那种自定义 function mapper。
 
@@ -187,7 +187,7 @@ methods: {
 }
 ~~~~
 
-## Map Stores
+## 五、Map Stores
 
 mapStores(useUserStore, useCartStore) 使用 rest Store definitions，并默认生成 userStore 与 cartStore computed getter。每个 getter 执行时调用 useStore(this.$pinia)，因此组件必须由 app.use(pinia) 获得 $pinia。
 
@@ -201,7 +201,7 @@ computed: {
 不要把 [useUserStore, useCartStore] 作为唯一参数。固定开发构建会对 array fallback 发出诊断 warning，官方形状是逐个传入。
 :::
 
-## Set Map Store Suffix
+## 六、Set Map Store Suffix
 
 setMapStoreSuffix(suffix) 修改 mapHelpers 模块级 suffix，默认值是 Store，也允许空字符串。它只影响后续 mapStores() 调用；已经生成的 mapping object key 在 helper 调用时已经冻结，不会被重命名。
 
@@ -212,11 +212,11 @@ const stores = mapStores(useUserStore)
 // stores.user_store
 ~~~~
 
-## Map Stores Customization
+## 七、Map Stores Customization
 
 MapStoresCustomization 是用于 declaration merging 的空 interface。它只影响 mapStores 返回 key 的类型推导，runtime 不读取 augmentation；mapStoreSuffix 与 _Spread 等内部 helper 不进入稳定索引。
 
-## Options API 形状与 Mapper
+## 八、Options API 形状与 Mapper
 
 | helper | Options API 位置 | mapper 形状 | 执行上下文 |
 | --- | --- | --- | --- |
@@ -227,7 +227,7 @@ MapStoresCustomization 是用于 declaration merging 的空 interface。它只�
 
 这些函数服务 Options API 形状：state/getter 属于 computed，action 属于 methods，整个 Store 也以 computed getter 暴露。它们不会把组件局部逻辑复制进 Store，也不会改变 StoreDefinition。
 
-## Deprecated Map Getters
+## 九、Deprecated Map Getters
 
 :::warning
 mapGetters 是 mapState 的同一 runtime value alias，官方 API 与 Guide 已标记 deprecated。保留相同参数，把 import 与调用名替换为 mapState()；该 warning 属于 restricted 账本，不进入 41 项 stable Overview。
@@ -249,7 +249,7 @@ computed: { ...mapState(useStore, ['total']) }
 ~~~~
 :::
 
-## 全局 Suffix 与类型同步
+## 十、全局 Suffix 与类型同步
 
 ~~~~ts
 import 'pinia'
@@ -265,13 +265,13 @@ setMapStoreSuffix('_store')
 
 augmentation 与 runtime setMapStoreSuffix() 必须使用同一个 literal。global .d.ts 先 import pinia，避免覆盖模块声明。suffix 是同一 mapHelpers 模块内所有 app 共用的全局启动配置，不是 per-component 或 per-request state。
 
-## Evidence 边界
+## 十一、Evidence 边界
 
 固定 mapHelpers.ts 与官方测试支撑 array/object/function mapper、this.$pinia、setter、suffix 与 deprecated alias 的上游事实。本站 focused seam 只证明 Reference catalog、正文与 anchors。
 
 本页没有运行真实 Options API SFC、suffix isolation 或浏览器交互，也没有证明不同 app 拥有独立 suffix；这些 runtime 证据均为 Deferred/not-run。
 
-## 易错使用提示
+## 十二、易错使用提示
 
 :::pitfalls
 ### 把 helper 放错 Options 区域
@@ -501,7 +501,7 @@ import { mapState } from 'pinia'
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 十三、源码推导与适用场景
 
 :::steps
 ### 1. State 映射属于 computed

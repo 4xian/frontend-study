@@ -68,7 +68,7 @@ recap:
 
 # 模板引用
 
-## 正文大纲
+## 一、正文大纲
 
 上一课已经建立组件生命周期与 DOM 更新时机。本课只解决一个更具体的问题：声明式渲染不能完成聚焦、测量或调用子组件命令时，怎样取得当前真实目标，并让引用跟随它的挂载、更新和卸载。
 
@@ -85,7 +85,7 @@ recap:
 本课不重新讲解完整生命周期或 nextTick 调度，也不扩展为动态组件、异步组件、KeepAlive、Suspense、Teleport、Transition、SSR 架构、观察器、焦点陷阱、编辑器或图表库课程。Props、Emits、组件 v-model、Provide/Inject 和 store 仍是数据流工具，模板引用不能取代它们。
 :::
 
-## 先分清三个 ref 概念
+## 二、先分清三个 ref 概念
 
 `ref()` 创建业务响应式状态；模板中的 `ref="search-input"` 是由 Vue 消费的特殊 attribute；`useTemplateRef("search-input")` 返回渲染器负责同步的只读浅层引用。三者名字相似，但所有者和用途不同。
 
@@ -118,7 +118,7 @@ function focusSearchInput() {
 模板 ref 是 Vue 的特殊 attribute，不会作为 `ref="search-input"` 留在最终 DOM。需要供 CSS、测试或查询使用的标识时，单独声明 id、data-&#42; 或语义化选择器。
 :::
 
-## 用 null 时间线理解引用
+## 三、用 null 时间线理解引用
 
 模板引用不是 setup 时查询 DOM 的结果，而是渲染器在目标存在时写入的结果。`T | null` 对应真实运行状态：setup 和 SSR 时没有目标，客户端挂载后得到元素或公开实例，目标被 v-if 移除或组件卸载后又回到 null。
 
@@ -148,7 +148,7 @@ onMounted(focusMountedInput)
 
 mounted 只说明首次同步子树已经挂载。只要目标受条件、列表或动态选择控制，之后仍可能回到 null；非空断言不能改变这条时间线。需要持续响应引用变化时，回调必须同时处理目标与 null。
 
-## 状态改变后再读取最新 DOM
+## 四、状态改变后再读取最新 DOM
 
 事件中先让 v-if 条件成立，引用不会在同一行同步变成元素。应先修改状态，再 `await nextTick()` 等待本轮 Vue DOM flush，最后执行聚焦、滚动或测量。可选链只能避免报错，不能替代本来应该发生的命令。
 
@@ -190,7 +190,7 @@ async function showAndFocus() {
 | 等待图片、动画或浏览器绘制 | 可能需要 | 对应浏览器事件或帧，不是 nextTick |
 | 父子传递数据与业务事件 | 否 | 使用 Props 与 Emits |
 
-## 在模板引用实验台验证三种目标
+## 五、在模板引用实验台验证三种目标
 
 唯一 Demo 把 DOM、组件和动态列表放在同一实验台。切换输入框观察引用在元素与 null 间变化；父级只调用子组件公开命令；列表轮换后仍按稳定业务 ID 聚焦 API 项。
 
@@ -198,7 +198,7 @@ async function showAndFocus() {
 观察 DOM 引用寿命、组件公开能力和函数 ref Map 的稳定身份
 :::
 
-## 组件 ref 只访问公开能力
+## 六、组件 ref 只访问公开能力
 
 ref 放在普通元素上得到 DOM 元素，放在有状态子组件上得到组件公开实例。`<script setup>` 子组件默认关闭内部绑定，只有 `defineExpose()` 明确列出的成员对父级可见；公开对象中的 ref 会在父级看到的实例上自动解包。
 
@@ -247,7 +247,7 @@ function resetSearch() {
 先判断交互能否表达为 Props 向下和 Emits 向上。确实需要 open()、reset()、focus() 一类命令时才 expose 窄方法；不要暴露整个可写状态，也不要读取 `$el` 穿透子组件结构。`defineExpose()` 必须位于任何 await 之前。
 :::
 
-## v-for 数组只代表当前集合
+## 七、v-for 数组只代表当前集合
 
 Vue 3.5+ 中，字符串 ref 位于 v-for 内时会得到目标数组。数组适合批量读取当前已挂载目标或核对数量，但官方不保证它与源数组同序，因此 `itemRefs[index]` 不能表示某个业务实体。
 
@@ -272,7 +272,7 @@ onMounted(reportMountedCount)
 </template>
 ~~~~
 
-## 函数 ref 用业务 ID 建立对应关系
+## 八、函数 ref 用业务 ID 建立对应关系
 
 需要“业务 ID → 元素”的稳定关系时，函数 ref 比数组索引更直接。它在更新时可能重复收到目标，在卸载时收到 null，因此回调只做幂等登记和删除；第三方实例、listener 或 observer 仍由明确生命周期管理。
 
@@ -309,7 +309,7 @@ function focusItem(id: string) {
 </template>
 ~~~~
 
-## v-if 与 v-show 改变引用寿命
+## 九、v-if 与 v-show 改变引用寿命
 
 | 条件方式 | DOM 行为 | 模板引用 |
 | --- | --- | --- |
@@ -318,7 +318,7 @@ function focusItem(id: string) {
 
 不要为了逃避 null 判断而把所有 v-if 改成 v-show。选择仍取决于条件语义、初始渲染成本和切换频率。对隐藏元素执行 focus 或测量也可能不符合业务目标，即使引用仍然非空。
 
-## 动态名称、TypeScript 与版本边界
+## 十、动态名称、TypeScript 与版本边界
 
 `useTemplateRef()` 从 Vue 3.5 开始提供，公开类型是 `Readonly<ShallowRef<T | null>>`。Vue 3.5 与 @vue/language-tools 2.1+ 可以推断静态模板引用；推断不足时，普通元素传 DOM 接口，导入组件使用 `InstanceType<typeof Child>`，动态组件使用实例联合或共同的 `ComponentPublicInstance`。类型泛型不会证明目标此刻已挂载。
 
@@ -337,7 +337,7 @@ function resetActivePanel() {
 
 模板可以用动态 `:ref` 在少量已登记 ID 间切换：旧句柄会清空，新句柄在渲染后得到目标。`useTemplateRef(activeKey.value)` 只登记调用时的字符串快照，不会因 activeKey 后续变化而重新调用 helper。任意数量的业务 key 更适合函数 ref Map。Vue 3.5 以前需用与静态模板 ref 同名的普通 `ref(null)`；旧写法仍兼容，但不是本课主线。
 
-## SSR 中等客户端接管后再使用
+## 十一、SSR 中等客户端接管后再使用
 
 服务端渲染没有客户端 DOM，mounted 也不在服务端执行，因此 setup 中的模板引用仍是 null。客户端 hydration 会把引用连接到已经存在并被接管的 DOM 节点；服务端 HTML 已经可见，不代表 setup 阶段已经取得元素。聚焦、测量和第三方 DOM 增强应从客户端 mounted 开始。
 
@@ -345,7 +345,7 @@ function resetActivePanel() {
 模板 ref 名称不会序列化为供客户端查询的 HTML attribute。SSR 页面需要稳定选择器时仍应使用真实 id 或 data-&#42;；本课不展开 hydration mismatch、流式渲染或服务端数据获取。
 :::
 
-## 易错使用提示
+## 十二、易错使用提示
 
 :::pitfalls
 ### 在 setup 或条件卸载后直接访问引用
@@ -614,7 +614,7 @@ function resetPanel() {
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 从 Vue 3.5.40 源码与官方测试推导
+## 十三、从 Vue 3.5.40 源码与官方测试推导
 
 以下八点都先固定一手实现或官方测试事实，再给出课程中的使用判断。它们解释当前版本行为，但不是新增的 Vue 公共 API 承诺。
 
@@ -737,6 +737,6 @@ function hideEmail() {
 - [ ] TypeScript 类型仍保留 null、联合类型和运行时判断
 - [ ] SSR 中不会在 setup 使用 DOM，客户端挂载后才增强
 
-## 完成本课后的判断顺序
+## 十四、完成本课后的判断顺序
 
 先判断需求能否由状态、Props 和 Emits 声明式完成；确实需要目标时，再判断它是 DOM 元素还是组件公开实例。接着沿 null 时间线确认目标当前是否存在；若刚修改了影响目标的状态，就 await nextTick。列表只遍历当前集合时用引用数组，需要业务身份时用函数 ref Map。最后检查 TypeScript、v-if 与 SSR 是否仍保留空值分支。

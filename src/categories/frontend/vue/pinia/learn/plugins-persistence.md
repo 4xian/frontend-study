@@ -69,7 +69,7 @@ recap:
 前置：请先完成 L01-L10，尤其要理解 Pinia 安装、Options/Setup Store、$reset、$subscribe 与组件外显式 Pinia。
 :::
 
-## Plugin 只在创建链中执行
+## 一、Plugin 只在创建链中执行
 
 `pinia.use(plugin)` 注册扩展，但安装前只进入待安装队列；`app.use(pinia)` 把队列并入实际 plugin 列表；真正执行发生在之后首次创建每个 Store 时。已经进入 registry 的 Store 不会被追补，重复 `useStore()` 只返回同一实例。
 
@@ -85,7 +85,7 @@ recap:
 不要读取 `_p`、`_s` 或待安装队列来实现业务。它们只帮助解释固定 4.0.2 的时序，不是公开扩展接口。
 :::
 
-## Context、属性与 State 分工
+## 二、Context、属性与 State 分工
 
 公开 context 包含 `pinia/app/store/options`。返回的方法、computed、元数据属于 custom properties；需要进入 Devtools state 与 SSR 序列化资格的字段，则先写入 `store.$state`，再用同一个 ref 接到 `store`。已有预置/水合值必须保留。
 
@@ -105,11 +105,11 @@ pinia.use(({ store, options }) => {
 
 Store 是 reactive 对象，所以返回的 ref/computed 在属性访问时会解包。外部类实例应使用 `markRaw()` 保持 identity。类型分别通过 `PiniaCustomProperties`、`PiniaCustomStateProperties` 和自定义 define options augmentation 声明，不能用 `any` 掩盖契约。
 
-## Reset 是插件自己的责任
+## 三、Reset 是插件自己的责任
 
 Options Store 的默认 `$reset()` 只把 state factory 字段 assign 回当前 state，不会重置 plugin 后加的字段。插件若承诺统一 reset，必须先绑定原方法再包装；Setup Store 没有内建 `$reset()`，应由 Store 自己定义。
 
-## 冻结一个最小 v1 持久化协议
+## 四、冻结一个最小 v1 持久化协议
 
 ~~~~ts
 type PersistedPreferencesV1 = {
@@ -132,7 +132,7 @@ type PersistedPreferencesV1 = {
 
 初始化时先读取、解码并恢复，再注册 `$subscribe()`。固定 4.0.2 在 plugin loop 之后才激活普通 Store subscriptions，因此初始化 patch 不应被当作一次用户 mutation。
 
-## Storage 事件与清理
+## 五、Storage 事件与清理
 
 :::steps
 ### 1. 过滤事件
@@ -156,13 +156,13 @@ type PersistedPreferencesV1 = {
 `storage` 不回发给执行 `setItem()` 的当前文档。synthetic StorageEvent 只能验证 listener seam，不能冒充两个同源标签页的真实浏览器证据。
 :::
 
-## 插件与持久化实验
+## 六、插件与持久化实验
 
 :::demo{id="vue.pinia.learn.advanced.plugins-persistence.pinia-plugin-persistence-boundary-lab-demo" playground="true"}
 观察两个 Store 的 plugin 时序、context、state alias、v1 解码、reset 与 storage listener
 :::
 
-## 练习与观察
+## 七、练习与观察
 
 :::steps
 ### 1. 核对四个检查点
@@ -182,7 +182,7 @@ type PersistedPreferencesV1 = {
 分别重建损坏 JSON、未知版本和错误 schema，确认都回到默认值。
 :::
 
-## 源码与测试推导
+## 八、源码与测试推导
 
 :::steps
 ### 1. 注册队列与实际列表分离
@@ -218,7 +218,7 @@ storePlugins.spec.ts 覆盖两个 Store、重复 useStore 与安装前后注册�
 MDN/OWASP 要求处理访问失败、按不可信输入校验且不存敏感标识。
 :::
 
-## 易错使用提示
+## 九、易错使用提示
 
 :::pitfalls
 ### 把 pinia.use 当成立即执行

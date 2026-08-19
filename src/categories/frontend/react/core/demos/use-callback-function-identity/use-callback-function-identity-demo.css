@@ -1,0 +1,266 @@
+.callback-identity-demo {
+  width: 100%;
+  max-width: 840px;
+  padding: 24px;
+  border: 1px solid #ccd7d3;
+  border-radius: 8px;
+  background: #fbfcfc;
+  color: #23312e;
+}
+
+.callback-identity-demo-heading p,
+.callback-identity-demo-heading h2,
+.callback-identity-demo-heading span,
+.callback-identity-demo-log h3,
+.callback-identity-demo-latest,
+.callback-identity-demo-result {
+  margin: 0;
+}
+
+.callback-identity-demo-heading p {
+  color: #9b4e23;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.callback-identity-demo-heading h2 {
+  margin-top: 6px;
+  font-size: 1.35rem;
+  line-height: 1.35;
+}
+
+.callback-identity-demo-heading > span {
+  display: block;
+  margin-top: 6px;
+  color: #596965;
+  line-height: 1.6;
+}
+
+.callback-identity-demo-heading output {
+  color: #24665b;
+  font-weight: 700;
+}
+
+.callback-identity-demo-controls {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 18px -5px 0;
+}
+
+.callback-identity-demo-controls button,
+.callback-identity-demo-toolbar button {
+  min-height: 42px;
+  max-width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #276d61;
+  border-radius: 5px;
+  background: #276d61;
+  color: #ffffff;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  white-space: normal;
+}
+
+.callback-identity-demo-controls button {
+  margin: 0 5px 10px;
+}
+
+.callback-identity-demo-controls button.is-secondary {
+  background: #ffffff;
+  color: #245e55;
+}
+
+.callback-identity-demo-controls button:hover,
+.callback-identity-demo-toolbar button:hover {
+  filter: brightness(0.95);
+}
+
+.callback-identity-demo-controls button:focus-visible,
+.callback-identity-demo-toolbar button:focus-visible {
+  outline: 3px solid #e29a55;
+  outline-offset: 2px;
+}
+
+.callback-identity-demo-result {
+  display: block;
+  min-height: 42px;
+  padding: 10px 12px;
+  margin-top: 4px;
+  border-left: 4px solid #34766b;
+  background: #edf6f3;
+  color: #284d47;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.callback-identity-demo-stage {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  margin: 16px -6px -12px;
+}
+
+.callback-identity-demo-toolbars,
+.callback-identity-demo-log {
+  flex: 1 1 300px;
+  min-width: 0;
+  margin: 0 6px 12px;
+}
+
+.callback-identity-demo-toolbars {
+  display: flex;
+  flex-direction: column;
+  order: 1;
+}
+
+.callback-identity-demo-toolbar {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid #d4ddda;
+  border-left: 4px solid #c46335;
+  border-radius: 6px;
+  background: #ffffff;
+}
+
+.callback-identity-demo-toolbar + .callback-identity-demo-toolbar {
+  margin-top: 10px;
+}
+
+.callback-identity-demo-toolbar.is-cached {
+  border-left-color: #32786c;
+}
+
+.callback-identity-demo-toolbar > span {
+  display: block;
+  color: #64726e;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.callback-identity-demo-toolbar > strong {
+  display: block;
+  margin-top: 8px;
+  color: #304f49;
+  font-size: 1.15rem;
+  overflow-wrap: anywhere;
+}
+
+.callback-identity-demo-toolbar p {
+  margin: 8px 0 0;
+  color: #53615d;
+}
+
+.callback-identity-demo-toolbar p output {
+  color: #91431e;
+  font-weight: 700;
+}
+
+.callback-identity-demo-toolbar button {
+  width: 100%;
+  margin-top: 12px;
+}
+
+.callback-identity-demo-log {
+  order: 2;
+  padding: 16px;
+  border: 1px solid #d4ddda;
+  border-radius: 6px;
+  background: #ffffff;
+}
+
+.callback-identity-demo-log header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.callback-identity-demo-log header > div {
+  min-width: 0;
+  margin-right: 10px;
+}
+
+.callback-identity-demo-log header span {
+  display: block;
+  color: #687571;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.callback-identity-demo-log h3 {
+  margin-top: 4px;
+  color: #286b60;
+  font-size: 1.3rem;
+  overflow-wrap: anywhere;
+}
+
+.callback-identity-demo-log header > output {
+  padding: 4px 7px;
+  border-radius: 4px;
+  background: #edf5f3;
+  color: #315f58;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.callback-identity-demo-counts {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 14px -4px 0;
+}
+
+.callback-identity-demo-counts > div {
+  flex: 1 1 110px;
+  min-width: 0;
+  padding: 10px;
+  margin: 0 4px 8px;
+  border-left: 3px solid #4b8178;
+  background: #f1f6f5;
+}
+
+.callback-identity-demo-counts dt {
+  color: #64716d;
+  font-size: 0.75rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.callback-identity-demo-counts dd {
+  margin: 5px 0 0;
+  color: #244f47;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.callback-identity-demo-latest {
+  min-height: 3.2em;
+  color: #53615d;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.callback-identity-demo-history {
+  display: block;
+  max-height: 166px;
+  padding: 0;
+  margin: 6px 0 0;
+  color: #596763;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  overflow: auto;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+@media (max-width: 560px) {
+  .callback-identity-demo {
+    padding: 18px;
+  }
+
+  .callback-identity-demo-controls button {
+    flex: 1 1 150px;
+  }
+}

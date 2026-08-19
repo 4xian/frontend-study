@@ -68,7 +68,7 @@ anchors:
 
 # 导航组合式 API
 
-## 概述
+## 一、概述
 
 这三个公开函数处在不同层次。`useRoute()` 从当前 Vue 注入上下文读取响应式的已加载 route；`useRouter()` 从同一上下文取得 Router 实例以解析或发起导航；`loadRouteLocation()` 不读取上下文，也不是名字以 `use` 开头的组合式函数，而是把一个已经解析的 route 中尚未加载的异步 route components 加载完成。
 
@@ -76,7 +76,7 @@ anchors:
 `loadRouteLocation()` 是面向自定义 `&lt;RouterView \:route&gt;`、模态路由等高级集成的低层异步 helper。普通页面要读取当前地址用 `useRoute()`，要改变地址用 `useRouter()` 取得的 `router.push()` 或 `router.replace()`；不要把三个入口按名字混为一类。
 :::
 
-## 三者职责
+## 二、三者职责
 
 | 入口 | 输入/上下文 | 结果 | 会发起导航吗 |
 | --- | --- | --- | --- |
@@ -84,7 +84,7 @@ anchors:
 | useRoute(_name?) | 当前 Vue injection context | 响应式当前 RouteLocationNormalizedLoaded | 不会 |
 | useRouter() | 当前 Vue injection context | 应用安装的 Router 实例 | 函数本身不会；调用实例方法才会 |
 
-## Load Route Location
+## 三、Load Route Location
 
 ~~~~ts
 declare function loadRouteLocation(
@@ -120,7 +120,7 @@ async function prepareDialogRoute() {
 此 helper 不执行导航守卫、不写 history、不更新 `router.currentRoute`，也不处理重定向导航。固定源码会拒绝没有 matched record 的地址，以及 matched records 全部为 redirect 的纯重定向地址；需要遵循 redirect 和 guards 时应使用 Router 导航方法。
 :::
 
-## Use Route
+## 四、Use Route
 
 ~~~~ts
 declare function useRoute<Name extends keyof RouteMap = keyof RouteMap>(
@@ -152,7 +152,7 @@ const userId = computed(() => String(route.params.id ?? ''))
 `useRoute()` 和 `useRouter()` 都只是对 `inject()` 的薄封装。常规用法是在组件 `setup()` / `&lt;script setup&gt;` 顶层，或由 setup 同步调用的 composable 中取得一次并保存。纯模块、任意定时器或没有当前 app injection context 的 service 不应临时调用它们；这类代码应显式接收 router 或 route。
 :::
 
-## Use Router
+## 五、Use Router
 
 ~~~~ts
 declare function useRouter(): Router
@@ -177,7 +177,7 @@ async function openSearch(term: string) {
 }
 ~~~~
 
-## 响应性与精确 Watch
+## 六、响应性与精确 Watch
 
 官方 Composition API Guide 明确说明 route 是响应式对象，但多数场景应避免侦听整个对象。把依赖写成 getter，精确返回真正驱动副作用的字段，例如 `route.params.id`、`route.query.page` 或 `route.name`；这样 query 的无关变化不会重复请求用户数据。
 
@@ -199,7 +199,7 @@ watch(
 
 不要在 setup 时把会被整项替换的顶层字段直接解构成普通变量。`const { params } = route` 只保存当时的 params 对象；后续导航让 route 的 `params` getter 指向新对象时，旧局部变量不会跟随。使用 getter、`computed()` 或 getter 形式的 `toRef()` 保留读取链。
 
-## 编程式导航
+## 七、编程式导航
 
 `router.push()` 新增 history 条目，`router.replace()` 替换当前条目；二者都接受 `RouteLocationRaw` 并返回 Promise。导航会先解析目标、处理 redirect、依次运行 guards 与加载进入组件，只有最终提交时才写 history 并替换 `currentRoute.value`。因此需要在导航后读取新 route 或启动依赖新页面的工作时，应等待该 Promise。
 
@@ -223,7 +223,7 @@ async function saveAndOpenDetails(id: string) {
 导航 Promise fulfilled 不必然表示已经进入目标页：重复、取消或守卫中止等预期结果会以 NavigationFailure 返回。真正的未预期错误仍可能 reject；不要用单一的 `await` 或 `catch` 把两类结果混为一谈。
 :::
 
-## 易错使用提示
+## 八、易错使用提示
 
 :::pitfalls
 ### 把 raw location 直接交给 loadRouteLocation()
@@ -467,7 +467,7 @@ if (!failure) trackPage(route.fullPath)
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 九、源码推导与适用场景
 
 :::steps
 ### 1. 从发布声明冻结三个签名

@@ -1,0 +1,132 @@
+.react-state-model-demo {
+  width: 100%;
+  color: var(--color-text);
+}
+
+.react-state-model-heading p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.react-state-model-heading h2 {
+  margin: var(--space-2) 0 0;
+  font-size: 1.1rem;
+}
+
+.react-state-model-form {
+  margin-top: var(--space-4);
+}
+
+.react-state-model-form fieldset {
+  min-width: 0;
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.react-state-model-form legend {
+  padding: 0 var(--space-2);
+  font-weight: 700;
+}
+
+.react-state-model-form label {
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--space-3);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.react-state-model-form label:first-of-type {
+  margin-top: 0;
+}
+
+.react-state-model-form input,
+.react-state-model-form select,
+.react-state-model-form textarea {
+  width: 100%;
+  min-width: 0;
+  min-height: 40px;
+  box-sizing: border-box;
+  margin-top: var(--space-1);
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+  font: inherit;
+  resize: vertical;
+}
+
+.react-state-model-actions {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: var(--space-3);
+}
+
+.react-state-model-actions button {
+  min-height: 40px;
+  margin: 0 var(--space-2) var(--space-2) 0;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+  font: inherit;
+  font-weight: 700;
+}
+
+.react-state-model-actions .primary {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: white;
+}
+
+.react-state-model-facts {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: var(--space-4);
+}
+
+.react-state-model-facts > div {
+  flex: 1 1 160px;
+  min-width: 0;
+  margin: 0 var(--space-3) var(--space-3) 0;
+  padding: var(--space-3);
+  border-left: 3px solid var(--color-accent);
+  background: var(--color-bg-subtle);
+}
+
+.react-state-model-facts dt {
+  color: var(--color-text-secondary);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.react-state-model-facts dd {
+  margin: var(--space-1) 0 0;
+  font-weight: 700;
+}
+
+.react-state-model-facts small {
+  display: block;
+  margin-top: var(--space-1);
+  color: var(--color-text-secondary);
+  line-height: 1.45;
+}
+
+@media (max-width: 520px) {
+  .react-state-model-facts {
+    display: block;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .react-state-model-facts > div {
+    margin-right: 0;
+  }
+}

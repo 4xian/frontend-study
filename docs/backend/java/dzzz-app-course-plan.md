@@ -1,8 +1,8 @@
 # `dzzz-app` Java 后端课程实施计划
 
-> 版本：v1.17
-> 日期：2026-08-05
-> 状态：Phase 4 第一课已完成；内容架构迁移已完成，下一课尚未开始
+> 版本：v1.49
+> 日期：2026-08-09
+> 状态：Java 基础课程 18/18 完成，中级课程 17/17 已完成并关闭
 > 目标项目：`/Users/jian/Desktop/work/TDH/dzzz/dzzz-app`<br>
 > 课程仓库：`/Users/jian/Desktop/tools/vue3-study`
 
@@ -27,7 +27,7 @@
 
 - [IT 学习站架构设计](../../architecture/IT学习站架构设计.md)
 - [后端课程研究与来源规范](../research-source-standard.md)
-- [后端知识点 Markdown 模板](../knowledge-point-template.md)
+- [Java 课程编写标准](./java-course-authoring-standard.md)
 
 冲突时按以下顺序处理：
 
@@ -35,7 +35,7 @@
 2. 全站架构；
 3. 本计划的执行阶段与 Gate；
 4. 研究与来源规范；
-5. 知识点 Markdown 模板；
+5. Java 课程编写标准；
 6. 课程站通用内容规范。
 
 ## 3. 已确认决策
@@ -189,7 +189,7 @@ src/categories/backend/java/core/demos/<topic>/...
 - [x] 确认后端 Markdown 能接入课程站；前后端统一 Markdown 与目标目录迁移已经完成。
 - [x] 确认现代稳定版优先、`dzzz-app` 旧版补充。
 - [x] 确认来源等级和易错点取证规则。
-- [x] 确认统一后端知识点模板。
+- [x] 确认 Java 课程编写标准。
 - [x] 确认只处理 `dzzz-app`。
 - [x] 形成正式计划。
 
@@ -531,9 +531,41 @@ Shiki 版本一致性问题均已关闭；root lint、format、audit 门禁也�
 
 ## 12. Phase 4：逐知识点实施
 
-截至 2026-08-05，Phase 4 已开始；第一课
-`backend.java.learn.basics.development-environment-and-runtime` 已完成单课闭环并关闭。基础阶段其余
-课程仍保持 planned，不据此宣布基础阶段完成。
+截至 2026-08-08，Phase 4 的基础阶段已经完成；前十八课
+`backend.java.learn.basics.development-environment-and-runtime`、
+`backend.java.learn.basics.packages-imports-and-source-structure` 和
+`backend.java.learn.basics.variables-types-and-operators`、
+`backend.java.learn.basics.control-flow`、
+`backend.java.learn.basics.methods-parameters-and-scope`、
+`backend.java.learn.basics.arrays-and-varargs` 和
+`backend.java.learn.basics.classes-objects-and-immutability`、
+`backend.java.learn.basics.interfaces-inheritance-and-polymorphism` 和
+`backend.java.learn.basics.enums-and-finite-values`、
+`backend.java.learn.basics.annotations-and-metadata`、
+`backend.java.learn.basics.exceptions-and-cause-chains`、
+`backend.java.learn.basics.generics-and-type-safety` 和
+`backend.java.learn.basics.strings-encoding-and-text-matching` 和
+`backend.java.learn.basics.collections-and-iteration-contracts` 和
+`backend.java.learn.basics.null-optional-and-failure-semantics` 和
+`backend.java.learn.basics.date-time-and-time-zones` 和
+`backend.java.learn.basics.io-files-and-resource-ownership` 和
+`backend.java.learn.basics.maven-project-model` 已分别完成单课闭环并关闭，独立 signoff 分别记录完成态。
+基础课程批准窗口已完成并关闭。用户已在 2026-08-08 明确批准串行完成中级课程 17 批；每批仍须
+完成研究、课程、验证、浏览器、独立 signoff 和双轴复审后才能进入下一批。高级、Reference 和项目
+实战仍不得开始。
+冻结的 Phase 2 状态仍保持 `not-started / not-started / planned`；Phase 4 完成态只由各课独立
+signoff 记录。基础阶段 18 课均已有独立完成证据，但不据此自动开启后续阶段。
+
+中级阶段 17 批已经全部完成并关闭。前 12 批 `lambda-stream-and-collectors`、
+`identifiers-equality-and-pagination`、`json-and-data-contracts` 和
+`http-uri-and-request-response-basics`、`relational-data-and-sql-foundations`、
+`layers-dto-and-service-boundaries`、`errors-results-and-logging`、`testing-with-junit-and-mocks` 和
+`spring-boot-and-configuration`、`dependency-injection-and-bean-lifecycle`、
+`spring-mvc-and-servlet-boundaries` 和 `bean-validation-and-input-contracts` 均已完成研究、课程、临时
+反馈环、工程 Gate、桌面/390px 浏览器验证和双轴 `PASS / 0 finding` signoff；
+`mybatis-and-mybatis-plus`、`transactions-and-idempotency`、`lombok-and-generated-contracts` 也已完成同一闭环；
+第 16 批 `service-design-patterns` 与第 17 批 `domain-values-trees-and-mapping` 均已通过完整闭环。
+中级阶段不再有可领取课程，当前窗口在此关闭。
 
 ### 单知识点闭环
 
@@ -549,7 +581,7 @@ Shiki 版本一致性问题均已关闭；root lint、format、audit 门禁也�
 8. 只在 `/tmp` 的 `mktemp` 目录创建覆盖本知识点的最少临时反馈环或编译 fixture，验证后删除。
 9. 登记 manifest、前后课程和搜索元数据。
 10. 运行同一反馈环、格式检查和目标页面验证。
-11. 更新能力矩阵与课程覆盖矩阵，关闭该知识点后再领取下一项。
+11. 用独立 Phase 4 signoff 记录完成态，不回写冻结的 Phase 2 矩阵；关闭该知识点后再领取下一项。
 
 ### 每课 Gate
 
@@ -565,6 +597,8 @@ Shiki 版本一致性问题均已关闭；root lint、format、audit 门禁也�
 - [ ] 方法定义具有规范中文注释。
 - [ ] 课程没有真实密钥、内网地址和敏感业务数据。
 - [ ] 前置关系、搜索、进度和前后课程正确。
+- [ ] `planned` 课程没有提前注册 loader；发布时 loader 与同 ID `available` 在同批变更中保持一致。
+- [ ] manifest 或 track 变更前后及最终 Gate 均执行 Catalog 冷启动检查，发布后连续三次无 manifest 错误。
 - [ ] 临时反馈环、type-check、lint 和 format 通过，且仓库内无新增测试资产。
 
 ### 阶段顺序
@@ -600,7 +634,7 @@ Phase 0 当时只新增三份 Markdown 文档，使用以下命令验证；该�
 ```bash
 npx prettier --check \
   docs/backend/research-source-standard.md \
-  docs/backend/knowledge-point-template.md \
+  docs/backend/java/java-course-authoring-standard.md \
   docs/backend/java/dzzz-app-course-plan.md
 ```
 
@@ -642,15 +676,16 @@ npm run build
 
 ## 16. 当前 Stop Boundary
 
-Phase 4 已开始，第一课 `backend.java.learn.basics.development-environment-and-runtime` 已完成并通过
-单课 Gate。全站内容架构迁移已经完成，但本计划尚未授权第二课。
+Phase 4 前十八课均已完成并通过各自的单课 Gate。用户在 2026-08-08 批准继续串行完成中级阶段
+17 批；本窗口只覆盖 `backend.java.learn.intermediate.*`，不得跳课或并行关闭多门课程。
 
 当前明确不做：
 
-- 不开始第二课“包、import 与源码目录”；
-- 不修改其余 50 个 planned 学习节点；
+- 不开始高级、Reference、项目实战或其他 Java / Go 内容；
 - 不进入 Phase 5 Reference 覆盖；
 - 不修改 `/Users/jian/Desktop/work/TDH/dzzz`；
 - 不暂存、提交或推送代码。
 
-下一后端内容批次仍需重新确认 Java 第二课的范围与 Gate，不由架构迁移自动开始。
+中级课程 17 批已从 `lambda-stream-and-collectors` 到 `domain-values-trees-and-mapping` 全部通过
+完整 Gate，并在第 17 批关闭后按授权边界停止。当前没有可领取的 Java 课程，不进入高级、Reference
+或项目实战；任何后续阶段都需要新的明确授权。

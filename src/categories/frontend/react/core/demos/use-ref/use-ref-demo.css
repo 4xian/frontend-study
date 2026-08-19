@@ -1,0 +1,139 @@
+.use-ref-demo {
+  width: 100%;
+  padding: var(--space-4);
+  box-sizing: border-box;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+}
+
+.use-ref-demo-heading p,
+.use-ref-demo-heading h2,
+.use-ref-demo-heading span,
+.use-ref-demo-observation p {
+  margin: 0;
+}
+
+.use-ref-demo-heading p {
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.use-ref-demo-heading h2 {
+  margin-top: var(--space-1);
+  font-size: 1.08rem;
+  line-height: 1.4;
+}
+
+.use-ref-demo-heading span {
+  display: block;
+  margin-top: var(--space-1);
+  color: var(--color-text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.6;
+}
+
+.use-ref-demo-status {
+  display: flex;
+  flex-wrap: wrap;
+  margin: var(--space-3) -5px 0;
+}
+
+.use-ref-demo-status > div {
+  flex: 1 1 132px;
+  min-width: 0;
+  padding: var(--space-3);
+  margin: 0 5px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xs);
+  background: var(--color-bg);
+}
+
+.use-ref-demo-status span,
+.use-ref-demo-status strong {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.use-ref-demo-status span {
+  color: var(--color-text-secondary);
+  font-size: 0.76rem;
+  line-height: 1.5;
+}
+
+.use-ref-demo-status strong {
+  margin-top: var(--space-1);
+  font-size: 1.15rem;
+}
+
+.use-ref-demo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  margin: var(--space-2) -5px -10px;
+}
+
+.use-ref-demo-actions button {
+  min-height: 40px;
+  padding: var(--space-2) var(--space-3);
+  margin: 0 5px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xs);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.35;
+  cursor: pointer;
+}
+
+.use-ref-demo-actions button:hover,
+.use-ref-demo-actions button:focus-visible {
+  border-color: var(--color-accent);
+}
+
+.use-ref-demo-actions button:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 32%, transparent);
+  outline-offset: 2px;
+}
+
+.use-ref-demo-observation {
+  padding: var(--space-3);
+  margin-top: var(--space-4);
+  border-left: 3px solid var(--color-accent);
+  background: var(--color-bg-subtle);
+}
+
+.use-ref-demo-observation strong {
+  display: block;
+  font-size: 0.84rem;
+}
+
+.use-ref-demo-observation p {
+  margin-top: var(--space-1);
+  color: var(--color-text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 520px) {
+  .use-ref-demo-status,
+  .use-ref-demo-actions {
+    display: block;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .use-ref-demo-status > div,
+  .use-ref-demo-actions button {
+    width: 100%;
+    box-sizing: border-box;
+    margin-right: 0;
+    margin-left: 0;
+  }
+}

@@ -26,13 +26,19 @@ interface ConversionContext {
 }
 
 interface PitfallFields {
+  phenomenon?: string
   trigger?: string
   cause?: string
   consequence?: string
+  affectedVersions?: string
   verification?: string
+  source?: string
   wrong?: PitfallExample
   correct?: PitfallExample
 }
+
+type ListConversionBlock =
+  Extract<ContentBlock, { type: 'list' }> | Extract<ContentBlock, { type: 'checklist' }>
 
 const directiveNames = new Set([
   'tip',
@@ -41,6 +47,7 @@ const directiveNames = new Set([
   'compare',
   'exercise',
   'steps',
+  'code-details',
   'demo',
   'interactive',
   'principle',
@@ -98,8 +105,8 @@ function listItemText(node: MarkdownAstNode, context: ConversionContext): string
   return value
 }
 
-/** 将普通列表转换为一个稳定 text block。 */
-function convertList(node: MarkdownAstNode, context: ConversionContext): ContentBlock {
+/** 将普通列表转换为保留顺序语义的 list block。 */
+function convertList(node: MarkdownAstNode, context: ConversionContext): ListConversionBlock {
   const items = childrenOf(node)
   const isTaskList = items.some((item) => typeof item.checked === 'boolean')
   if (isTaskList) {
@@ -115,13 +122,22 @@ function convertList(node: MarkdownAstNode, context: ConversionContext): Content
     }
   }
   return {
-    type: 'text',
-    content: items
-      .map(
-        (item, index) => `${node.ordered ? `${index + 1}.` : '-'} ${listItemText(item, context)}`,
-      )
-      .join('\n'),
+    type: 'list',
+    ordered: node.ordered === true,
+    items: items.map((item) => listItemText(item, context)),
   }
+}
+
+/** 将普通列表转换为旧 directive 所需的带前缀文本，并拒绝任务清单。 */
+function listDirectiveText(
+  block: ListConversionBlock,
+  directiveName: string,
+  context: ConversionContext,
+): string {
+  if (block.type === 'checklist') return fail(context, `${directiveName} 不接受任务清单`)
+  return block.items
+    .map((item, index) => `${block.ordered ? `${index + 1}.` : '-'} ${item}`)
+    .join('\n')
 }
 
 /** 将 GFM 表格转换为列数稳定的 table block。 */
@@ -168,9 +184,7 @@ function convertTip(node: MarkdownAstNode, context: ConversionContext): ContentB
     .map((child) => {
       if (child.type === 'paragraph') return phrasingText(child, context)
       if (child.type === 'list') {
-        const block = convertList(child, context)
-        if (block.type !== 'text') fail(context, `${node.name} 不接受任务清单`)
-        return block.content
+        return listDirectiveText(convertList(child, context), node.name!, context)
       }
       return fail(context, `${node.name} 不支持 AST 节点：${child.type}`)
     })
@@ -191,10 +205,13 @@ function convertPitfallItem(
   for (const node of nodes) {
     const labelled = readLabelledParagraph(node, context)
     if (labelled) {
-      if (labelled.label === '触发条件') fields.trigger = labelled.value
+      if (labelled.label === '现象') fields.phenomenon = labelled.value
+      else if (labelled.label === '触发条件') fields.trigger = labelled.value
       else if (labelled.label === '原因') fields.cause = labelled.value
       else if (labelled.label === '后果') fields.consequence = labelled.value
+      else if (labelled.label === '影响版本') fields.affectedVersions = labelled.value
       else if (labelled.label === '验证方式') fields.verification = labelled.value
+      else if (labelled.label === '来源') fields.source = labelled.value
       else if (labelled.label === '错误示例') pendingExample = 'wrong'
       else if (labelled.label === '正确写法') pendingExample = 'correct'
       else fail(context, `pitfalls 未知字段：${labelled.label}`)
@@ -221,12 +238,15 @@ function convertPitfallItem(
   return {
     title,
     description: fields.cause,
+    phenomenon: fields.phenomenon,
     trigger: fields.trigger,
     cause: fields.cause,
     consequence: fields.consequence,
     wrong: fields.wrong,
     correct: fields.correct,
+    affectedVersions: fields.affectedVersions,
     verification: fields.verification,
+    source: fields.source,
   }
 }
 
@@ -298,7 +318,7 @@ function convertCompare(node: MarkdownAstNode, context: ConversionContext): Cont
   }
 }
 
-/** 将 exercise directive 转换为练习、验收与可选答案。 */
+/** 将 exercise directive 转换为练习、完成标准与可选答案。 */
 function convertExercise(node: MarkdownAstNode, context: ConversionContext): ContentBlock {
   if (Object.keys(node.attributes ?? {}).length > 0) fail(context, 'exercise 不接受属性')
   const children = childrenOf(node)
@@ -315,15 +335,16 @@ function convertExercise(node: MarkdownAstNode, context: ConversionContext): Con
       continue
     }
     const labelled = readLabelledParagraph(child, context)
-    if (!labelled || !['要求', '验收', '参考答案'].includes(labelled.label)) {
+    if (!labelled || !['要求', '验收', '完成标准', '参考答案'].includes(labelled.label)) {
       fail(context, `exercise 包含未知字段或节点：${labelled?.label ?? child.type}`)
     }
+    const field = labelled.label === '完成标准' ? '验收' : labelled.label
     if (pendingCodeField) fail(context, `${pendingCodeField}标签后必须紧跟代码块`)
     if (!labelled.value) {
-      pendingCodeField = labelled.label
+      pendingCodeField = field
       continue
     }
-    fields.set(labelled.label, labelled.value)
+    fields.set(field, labelled.value)
   }
   if (pendingCodeField) fail(context, `${pendingCodeField}标签后缺少代码块`)
   if (!fields.get('要求') || !fields.get('验收')) fail(context, 'exercise 缺少要求或验收')
@@ -359,14 +380,31 @@ function convertSteps(node: MarkdownAstNode, context: ConversionContext): Conten
     if (!title) fail(context, 'steps 必须以三级标题开始')
     if (child.type === 'paragraph') content.push(phrasingText(child, context))
     else if (child.type === 'list') {
-      const block = convertList(child, context)
-      if (block.type !== 'text') fail(context, 'steps 不接受任务清单')
-      content.push(block.content)
+      content.push(listDirectiveText(convertList(child, context), 'steps', context))
     } else fail(context, `steps 不支持 AST 节点：${child.type}`)
   }
   flush()
   if (items.length === 0) fail(context, 'steps 至少需要一个步骤')
   return { type: 'steps', items }
+}
+
+/** 将单个具名代码块转换为默认折叠的完整示例。 */
+function convertCodeDetails(node: MarkdownAstNode, context: ConversionContext): ContentBlock {
+  const attributes = node.attributes ?? {}
+  if (Object.keys(attributes).length !== 1 || typeof attributes.title !== 'string') {
+    return fail(context, 'code-details 只接受一个非空 title 属性')
+  }
+  const title = attributes.title.trim()
+  if (!title) return fail(context, 'code-details title 不能为空')
+  const children = childrenOf(node)
+  if (children.length !== 1 || children[0]?.type !== 'code') {
+    return fail(context, 'code-details 必须且只能包含一个代码块')
+  }
+  const code = children[0]
+  if (!code.lang) return fail(context, 'code-details 代码缺少语言')
+  const content = (code.value ?? '').trimEnd()
+  if (!content) return fail(context, 'code-details 代码不能为空')
+  return { type: 'code-details', title, lang: code.lang, content }
 }
 
 /** 读取 demo 或 interactive directive 的唯一 ID 属性。 */
@@ -451,6 +489,7 @@ function convertDirective(node: MarkdownAstNode, context: ConversionContext): Co
   if (node.name === 'compare') return convertCompare(node, context)
   if (node.name === 'exercise') return convertExercise(node, context)
   if (node.name === 'steps') return convertSteps(node, context)
+  if (node.name === 'code-details') return convertCodeDetails(node, context)
   if (node.name === 'demo') return convertDemo(node, context)
   if (node.name === 'principle') return convertPrinciple(node, context)
   return convertInteractive(node, context)
@@ -466,8 +505,14 @@ export function convertMarkdownBlocks(
   const blocks: ContentBlock[] = []
   for (const node of nodes) {
     if (node.type === 'heading') {
-      if (node.depth !== 2) fail(context, `正文只允许二级标题，收到 H${node.depth}`)
-      blocks.push({ type: 'heading', content: phrasingText(node, context) })
+      if (node.depth !== 2 && node.depth !== 3) {
+        fail(context, `正文只允许二级或三级标题，收到 H${node.depth}`)
+      }
+      blocks.push({
+        type: 'heading',
+        content: phrasingText(node, context),
+        depth: node.depth,
+      })
     } else if (node.type === 'paragraph') {
       blocks.push({ type: 'text', content: phrasingText(node, context) })
     } else if (node.type === 'list') {

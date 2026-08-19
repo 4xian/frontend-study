@@ -55,11 +55,11 @@ anchors:
 
 # Setup Store 水合控制
 
-## 概述
+## 一、概述
 
 `skipHydrate()` 与 `shouldHydrate()` 只控制 Setup Store 顶层返回对象是否接收 initial state。它们不负责生成或解析 SSR payload，也不判断值能否安全序列化，更不处理 Vue 的 DOM hydration。
 
-## Skip Hydrate
+## 二、Skip Hydrate
 
 `skipHydrate(obj)` 在对象上写入不可枚举的 Symbol 标记，并返回同一个对象。公开用途是标记 Setup Store 返回的“有状态但不是真正 store state”的对象，例如 router instance，使它不被服务端 initial state 覆盖。
 
@@ -72,7 +72,7 @@ export const useAppStore = defineStore('app', () => {
 })
 ~~~~
 
-## Should Hydrate
+## 三、Should Hydrate
 
 | 输入 | shouldHydrate() | 边界 |
 | --- | --- | --- |
@@ -82,7 +82,7 @@ export const useAppStore = defineStore('app', () => {
 
 固定测试覆盖标记后的 plain object、Map、Set 与 Array 不水合，而 primitive/nullish 仍应水合。nested marker case 在上游仍是 skipped，因此不能把当前行为扩大成递归保证。
 
-## Setup Store 顶层水合
+## 四、Setup Store 顶层水合
 
 Setup Store 总会执行 setup。存在 initial state 时，Pinia 只对 setup 返回的顶层 ref/reactive property 调用 `shouldHydrate(prop)`：通过后，ref 接收 initial value，reactive object 合并 initial object，随后属性重新接回 Pinia root state。
 
@@ -90,7 +90,7 @@ Setup Store 总会执行 setup。存在 initial state 时，Pinia 只对 setup �
 `skipHydrate()` 不删除字段，不阻止字段进入 `pinia.state.value`，也不会自动把字段排除在序列化 payload 外。payload selection 仍由 SSR 宿主负责。
 :::
 
-## Options Store Hydrate
+## 五、Options Store Hydrate
 
 Options Store 不走 Setup Store 的 `shouldHydrate()` 分支。复杂或 custom ref 的公开补充入口是 `DefineStoreOptions.hydrate(storeState, initialState)` 成员；它不是第三个 Pinia 根入口，也不是普通 Options Store 都必须实现的 hook。
 
@@ -103,7 +103,7 @@ export const usePreferencesStore = defineStore('preferences', {
 })
 ~~~~
 
-## SSR 恢复顺序与安全边界
+## 六、SSR 恢复顺序与安全边界
 
 :::steps
 ### 1. 每个请求创建独立 Pinia
@@ -121,7 +121,7 @@ export const usePreferencesStore = defineStore('preferences', {
 
 本页没有 SSR renderer、server/client 双入口或 HTML injection seam。真实 Node SSR、浏览器 hydration 与安全序列化证据均为 `Deferred/not-run`；state 相等不能替代 DOM mismatch 与 console evidence。
 
-## 易错使用提示
+## 七、易错使用提示
 
 :::pitfalls
 ### 在 Options Store 使用 skipHydrate
@@ -304,7 +304,7 @@ expect(consoleMismatch).toBeUndefined()
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 八、源码推导与适用场景
 
 :::steps
 ### 1. Marker 只表达顶层跳过语义

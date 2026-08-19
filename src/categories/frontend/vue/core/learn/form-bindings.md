@@ -60,7 +60,7 @@ recap:
 
 # 表单输入绑定
 
-## 从显式事件绑定走向 v-model
+## 一、从显式事件绑定走向 v-model
 
 上一课已经能用 `@input` 读取原生事件。对于文本输入，Vue 把读取 DOM 值和回写响应式状态的固定组合简写为 `v-model`；程序修改模型时，Vue 也会把新值同步回输入框。
 
@@ -103,7 +103,7 @@ const message = ref('你好')
 `v-model` 不是所有控件都使用 `value + input`。checkbox 和 radio 读取 `checked` 并监听 `change`，select 也在 `change` 时收集已选 option。
 :::
 
-## 模型是表单初始状态的真值来源
+## 二、模型是表单初始状态的真值来源
 
 原生 `v-model` 会忽略元素上静态的初始 `value`、`checked` 和 `selected`，挂载后以 JavaScript 模型为准。先在 `ref()` 或 `reactive()` 中声明初始值，模板只负责把控件连接到这份状态。
 
@@ -116,7 +116,7 @@ const message = ref('你好')
 | 单选 select | 当前 option | change | 单个选项值或空字符串 |
 | 多选 select | 全部 selected option | change | Array&lt;T&gt;；客户端也支持 Set&lt;T&gt; |
 
-## 绑定 text、textarea 并理解 IME
+## 三、绑定 text、textarea 并理解 IME
 
 text input 与 textarea 都把文本写入字符串模型。textarea 的内容也必须通过模型提供，不能在标签内部用插值充当初始值。中文、日文、韩文等输入法处于拼字阶段时，普通 `v-model` 暂不更新，确认文字后才同步最终值。
 
@@ -156,7 +156,7 @@ function readComposingValue(event: Event): void {
 </template>
 ~~~~
 
-## 按模型形状理解 checkbox
+## 四、按模型形状理解 checkbox
 
 checkbox 的意义由模型形状决定。单个 checkbox 默认写入 boolean；自定义 `true-value` / `false-value` 可以写入两个业务值；同组选项则使用 Array 或 Set 增删每项的 `value`。
 
@@ -208,7 +208,7 @@ const selectedIds = ref(new Set<number>())
 </template>
 ~~~~
 
-## 用 radio 与 select 选择一个或多个值
+## 五、用 radio 与 select 选择一个或多个值
 
 radio 把当前选项值写入一个标量；单选 select 写入一个 option 值；多选 select 收集全部选中值并写入 Array，客户端也可以保留 Set。多选模型必须从 Array 或 Set 开始。
 
@@ -254,7 +254,7 @@ const topics = ref<string[]>([])
 静态 `value="1"` 是字符串，只有 `:value="1"` 才是数字。单选 select 若需要空状态，应提供 `disabled value=""` 的占位项，避免初始值不匹配任何 option。
 :::
 
-## 动态 value 保留非字符串值
+## 六、动态 value 保留非字符串值
 
 `v-bind:value` 可以绑定数字、对象甚至 Symbol。Vue 会把原始动态值保存在元素内部，radio、checkbox 和 select 读取时优先返回它，而不是只返回 DOM attribute 的字符串。
 
@@ -280,7 +280,7 @@ const selectedPlan = ref(plans[0])
 
 直接保存对象只适合选项来自同一个稳定数据源的局部状态。若数据要进入 URL、JSON、FormData 或持久化层，保存 primitive ID 往往更稳定，也能避开 Set 的对象身份问题。
 
-## 理解 lazy、number 与 trim
+## 七、理解 lazy、number 与 trim
 
 | 修饰符 | 实际行为 | 不提供什么 |
 | --- | --- | --- |
@@ -311,7 +311,7 @@ const priority = ref<number | string>('')
 
 文本控件会先 trim 再 number；`type="number"` 也会自动尝试宽松数值转换。checkbox 与 radio 不读取这三个修饰符，select 只使用 `.number`，不要把修饰符机械套到所有原生控件。
 
-## 在表单状态实验台观察完整同步链
+## 八、在表单状态实验台观察完整同步链
 
 下面的单一 Demo 共享一份表单状态。依次观察即时文本、IME 最终值、lazy 与 trim 的提交时机、number 的值和类型、boolean 与 Array checkbox、radio、单选和多选 select，再用重置按钮恢复统一初始值。
 
@@ -319,7 +319,7 @@ const priority = ref<number | string>('')
 在同一状态面板中比较原生控件、值类型与修饰符的更新结果
 :::
 
-## 文件、组件与 SSR 的边界
+## 九、文件、组件与 SSR 的边界
 
 file input 的值受浏览器安全规则限制，Vue 编译器明确拒绝在它上面使用 `v-model`。应监听 `change`，从 `files` 读取用户主动选择的 File 对象。
 
@@ -347,7 +347,7 @@ function selectFiles(event: Event): void {
 Vue 3.5.40 客户端支持 checkbox 和多选 select 的 Set 模型，但优化 SSR 模板编译路径没有完整覆盖同等 Set 分支。SSR 敏感的多选示例应优先使用 Array，不能把客户端能力外推到所有 SSR 路径。
 :::
 
-## 易错使用提示
+## 十、易错使用提示
 
 :::pitfalls
 ### 用静态 value、checked、selected 或 textarea 插值初始化模型
@@ -669,7 +669,7 @@ function selectFiles(event: Event): void {
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 从源码推导适用场景
+## 十一、从源码推导适用场景
 
 :::steps
 ### 动态 type 适合模型协议不变的小型字段配置

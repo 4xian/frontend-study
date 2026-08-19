@@ -1,0 +1,263 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.intermediate.layers-dto-and-service-boundaries",
+  "batchId": "phase-c-i11-layers-dto-and-service-boundaries",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-15T22:38:59+08:00",
+  "phase": "Phase C",
+  "phaseCProgress": "11/20",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "newStagingPerformedThisBatch": false,
+    "existingIndexPreserved": true,
+    "unrelatedWorkspaceChangesPreserved": true
+  },
+  "phaseAFreeze": {
+    "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+    "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81",
+    "designation": "I-11 / 必修、重排复用",
+    "title": "分层架构、DTO、Service 与仓储接口",
+    "estimatedMinutes": 150,
+    "prerequisite": "backend.java.learn.intermediate.bean-validation-and-input-contracts",
+    "stableIdReused": "backend.java.learn.intermediate.layers-dto-and-service-boundaries",
+    "slugReused": "layers-dto-and-service-boundaries",
+    "urlPreserved": "/backend/java/core/learn/layers-dto-and-service-boundaries",
+    "frozenSuccessor": "backend.java.learn.intermediate.spring-boot-mysql-mybatis-persistence-bridge"
+  },
+  "phaseCAdmission": {
+    "status": "PASS",
+    "predecessorCourseId": "backend.java.learn.intermediate.bean-validation-and-input-contracts",
+    "predecessorSignoffPath": "docs/backend/java/audit/reviews/phase-4-bean-validation-and-input-contracts-signoff.json",
+    "predecessorSignoffSha256": "0a21f36a736271582ad12c9c40a9eddf2f94e0b54c039d571a0db1d61c2c26e7",
+    "phaseCProgressBeforeBatch": "10/20",
+    "trackChangeRequired": false,
+    "loaderChangeRequired": false
+  },
+  "versions": {
+    "verifiedAt": "2026-08-15",
+    "modern": {
+      "java": "25",
+      "runtime": "Eclipse Temurin 25.0.3+9 LTS",
+      "springBoot": "4.1.0",
+      "springFramework": "7.0.8",
+      "mybatisDocumentation": "3.5.19"
+    },
+    "legacy": {
+      "java": "8",
+      "runtime": "Eclipse Temurin 8u492-b09",
+      "springBoot": "2.3.12.RELEASE",
+      "springFramework": "5.2.15.RELEASE"
+    }
+  },
+  "sourceDiscovery": {
+    "method": "Tavily 仅用于定位候选；最终结论回到 Oracle、OpenJDK、Spring、Jakarta、MyBatis、OWASP 与 ArchUnit 一手页面核验",
+    "researchDirectSourceCount": 29,
+    "researchHttp200Count": 29,
+    "researchHttpFailureCount": 0,
+    "lessonOfficialSourceCardCount": 23,
+    "communitySourcesUsedAsEvidence": false
+  },
+  "research": {
+    "scope": "I-11 only",
+    "phaseAContractAlignment": "PASS",
+    "neutralTaskScenario": "PASS; research examples and feedback loops use Task* types",
+    "officialUrlCount": 29,
+    "stopBoundaryAlignment": "PASS; I-12 lesson and research were not read or modified before I-11 closure",
+    "researchSha256": "9d938d6c053e691a6fb1fe7c460e21acb3044c6366db3d7dadb28b9da2246b41"
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/intermediate/layers-dto-and-service-boundaries.md",
+      "sha256": "9d938d6c053e691a6fb1fe7c460e21acb3044c6366db3d7dadb28b9da2246b41"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/layers-dto-and-service-boundaries.md",
+      "sha256": "8845e36a57b021f5480eac811b17d3e64a5055af6f773282a1935c65474dda1e"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "ee97e35c20eb2bd67514f5a777fbc368f421f6657f15e40da3df729643e9a612"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "e89e15d2335d8ddfd659e833633b0114edbfecb172c835dd07867b6221cfca72"
+    },
+    {
+      "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+      "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81"
+    },
+    {
+      "path": "docs/backend/java/audit/phase-2-knowledge-path-manifest.json",
+      "sha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407"
+    }
+  ],
+  "engineeringVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check",
+      "exitCode": 0,
+      "summary": "passed directly and again as part of the final production build"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run test:unit",
+      "exitCode": 0,
+      "summary": "No persistent unit files; configured empty directory passed"
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "summary": "No persistent E2E files; configured empty directory passed"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "PASS on the final numbered-heading snapshot; 1764 modules transformed and the I-11 chunk emitted"
+    },
+    {
+      "command": "npx prettier --check <I-11 research and lesson> && git diff --check -- <I-11 research and lesson>",
+      "exitCode": 0,
+      "summary": "targeted formatting and whitespace checks passed"
+    }
+  ],
+  "repositoryFormatBoundary": {
+    "command": "npm run format:check",
+    "exitCode": 1,
+    "i11ScopedGate": "PASS",
+    "unrelatedBlockingFiles": [
+      "src/categories/frontend/engineering/vite/vite-reference-index.ts",
+      "src/categories/frontend/vue/core/vue-core-options-reference-index.ts",
+      "src/categories/frontend/vue/core/vue-core-reference-index.ts",
+      "src/categories/frontend/vue/core/vue-core-sfc-reference-index.ts"
+    ],
+    "unrelatedFilesModified": false
+  },
+  "javaVerification": {
+    "combinedFixturePath": "/tmp/java-i11-phase-c.to94iS",
+    "combinedFixtureSha256": {
+      "modern/pom.xml": "cd28c8ef730a11b8685532c943584523c646d1bf3eb3d036ed8d5f50eec6dcf1",
+      "modern/BoundaryContractTest.java": "c931d2dc0714af52b7a614a0a8f439768ce8c0efe93a2e91071a14a1a6923f21",
+      "legacy/LegacyBoundaryMain.java": "cc152c46b9f08709c6691d1b5810111945488aad45aef3adf6b4e6dccf88d960"
+    },
+    "modernTests": "2 tests, 0 failures, 0 errors; two consecutive Maven runs",
+    "modernOutputs": [
+      "architecture|serviceInput=application|serviceOutput=application|repositoryPort=domain|internalNoteExposed=false",
+      "transaction|commitTasks=1|commitAudits=1|rollbackTasks=0|rollbackAudits=0"
+    ],
+    "legacyOutput": "legacy|id=1|title=整理 Java 8 笔记|status=DRAFT|repositoryPort=domain",
+    "legacyNegativeControl": "blank title exits non-zero with title must not be blank; success rerun restores the expected output",
+    "markdownExtraction": {
+      "path": "/tmp/java-i11-markdown.g9Hucj",
+      "modernJavaFileCount": 11,
+      "legacyJavaFileCount": 1,
+      "modernCompile": "PASS under Java 25 with -Xlint:all -Werror",
+      "modernNegativeControl": "blank title fails at CreateTaskRequest and a success rerun restores all three outputs",
+      "legacyCompile": "PASS under Java 8 with -source 8 -target 8 -Xlint:all -Werror",
+      "transactionPomSha256": "e1392103452fe9b3e7b1d7ddd60ccb6df8adbc21612ceccf35ef982b56554dff",
+      "transactionTestSha256": "33c64e131296c25acca3fe36e2e373a7aa181d40176aa7f8ecc7cb2d60d8442b",
+      "transactionRuns": "two consecutive Spring Boot 4.1.0/H2 Maven runs passed with commitTasks=1, commitAudits=1, rollbackTasks=0, rollbackAudits=0"
+    },
+    "temporaryAssetsCleaned": true,
+    "cleanupCommands": [
+      "find /tmp/java-i11-phase-c.to94iS -depth -delete",
+      "find /tmp/java-i11-markdown.g9Hucj -depth -delete"
+    ],
+    "cleanupCheck": "PASS; both exact fixture paths no longer exist"
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "adapter": "PASS",
+    "researchLineCount": 503,
+    "lessonLineCount": 1767,
+    "rootH2Count": 16,
+    "rootH2ChineseNumbering": "PASS; 一 through 十六 continuous",
+    "independentKnowledgePointHeadings": 17,
+    "knowledgePointSevenPartCoverage": "17/17",
+    "zeroStartProcedureStepHeadings": 8,
+    "verificationSubheadingNumbering": "PASS; 十五、如何验证 restarts at 1.",
+    "codeBlockCount": 53,
+    "exerciseCount": 1,
+    "exerciseOrderedItemCount": 7,
+    "officialSourceCount": 23,
+    "pitfallCount": 6,
+    "pitfallRequiredFieldCoverage": "6/6",
+    "javaMethodComments": "PASS",
+    "neutralTaskScenario": "PASS",
+    "sourceHeadingAbsent": true
+  },
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "session": "java-i11-final",
+    "baseUrl": "http://127.0.0.1:4179/",
+    "targetPath": "/backend/java/core/learn/layers-dto-and-service-boundaries",
+    "productionPreviewUsed": true,
+    "sessionsClosed": true,
+    "previewServerStopped": true,
+    "desktop": {
+      "viewport": "1440x900",
+      "horizontalOverflow": false,
+      "officialSourceCount": 23,
+      "exerciseOrderedItemCount": 7,
+      "transactionFeedbackLoopVisible": true
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "horizontalOverflow": false,
+      "officialSourceCount": 23,
+      "exerciseOrderedItemCount": 7,
+      "transactionFeedbackLoopVisible": true
+    },
+    "title": "分层架构、DTO、Service 与仓储接口",
+    "previousEntryId": "backend.java.learn.intermediate.bean-validation-and-input-contracts",
+    "frozenNextEntryId": "backend.java.learn.intermediate.spring-boot-mysql-mybatis-persistence-bridge",
+    "completionStatePersistedAfterReload": true,
+    "completionStateRestoredToIncomplete": true,
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "pageErrors": 0,
+    "latestProductionReloadStaticRequestCount": 35,
+    "failedRequests": 0,
+    "nonSuccessfulResponses": 0,
+    "visualInspection": "PASS; desktop and mobile screenshots show the numbered transaction loop without overlap, clipping or page overflow",
+    "temporaryScreenshotsCleaned": true,
+    "cleanupCommand": "find /tmp/java-i11-browser.8tRLV5 -depth -delete",
+    "cleanupCheck": "PASS; exact browser artifact path, browser PID and preview listener no longer exist"
+  },
+  "review": {
+    "reviewer": "independent Standards and Spec reviewer",
+    "riskClassification": "I-11 substantially rewrites architecture, DTO, mapping, transaction and dual-version teaching contracts while preserving the stable ID and URL",
+    "independentReviewRequired": true,
+    "reviewedLessonSha256": "8845e36a57b021f5480eac811b17d3e64a5055af6f773282a1935c65474dda1e",
+    "reviewedResearchSha256": "9d938d6c053e691a6fb1fe7c460e21acb3044c6366db3d7dadb28b9da2246b41",
+    "standards": "PASS / 0 finding",
+    "spec": "PASS / 0 finding",
+    "highestSeverity": "none",
+    "resolvedFindings": [
+      "research URL count aligned to 29 verified direct URLs",
+      "@Valid, @NotBlank and the pure Java CreateTaskRequest failure path aligned",
+      "Spring Boot 4.1.0/H2 transaction feedback loop made self-contained and executable",
+      "research examples aligned to the neutral Task* scenario",
+      "verification-level transaction heading numbered under its parent H2"
+    ],
+    "postReviewTargetedRepair": "added the required 1. prefix to the first root-level H3 under 十五、如何验证",
+    "postRepairTargetedReview": "PASS; Standards PASS / 0 finding and Spec PASS / 0 finding",
+    "reviewWorkspaceModified": false,
+    "reviewStopBoundary": "reviewer did not read or implement I-12"
+  },
+  "stopBoundary": "Phase C I-11 is closed at 11/20. The only next authorized batch is I-12 (backend.java.learn.intermediate.spring-boot-mysql-mybatis-persistence-bridge); no I-12 implementation was performed before this signoff. Phase D remains unauthorized until the Phase C total Gate closes.",
+  "selfHashPolicy": "signoff file does not record its own SHA-256; artifacts bind only stable external batch outputs"
+}

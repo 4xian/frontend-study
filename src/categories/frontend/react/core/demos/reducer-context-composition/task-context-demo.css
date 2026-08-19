@@ -1,0 +1,232 @@
+.react-task-context-demo {
+  width: 100%;
+  color: var(--color-text);
+}
+
+.react-task-context-heading p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.react-task-context-heading h2 {
+  margin: var(--space-2) 0 0;
+  font-size: 1.1rem;
+}
+
+.react-task-context-heading span {
+  display: block;
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+}
+
+.react-task-context-shell {
+  margin-top: var(--space-4);
+}
+
+.react-task-context-instances {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  margin: var(--space-4) -16px 0 0;
+}
+
+.react-task-context-instance {
+  flex: 1 1 320px;
+  min-width: 0;
+  box-sizing: border-box;
+  margin: 0 16px 16px 0;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-sm);
+}
+
+.react-task-context-instance-heading h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.react-task-context-instance-heading p {
+  margin: var(--space-1) 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+}
+
+.react-task-context-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--color-border-subtle);
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.react-task-context-summary div {
+  flex: 1 1 150px;
+  min-width: 0;
+  margin: 0 16px var(--space-2) 0;
+}
+
+.react-task-context-summary div:last-child {
+  margin-right: 0;
+}
+
+.react-task-context-summary span,
+.react-task-context-summary strong,
+.react-task-context-summary code {
+  display: block;
+}
+
+.react-task-context-summary span {
+  color: var(--color-text-secondary);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.react-task-context-summary strong,
+.react-task-context-summary code {
+  margin-top: var(--space-1);
+  overflow-wrap: anywhere;
+}
+
+.react-task-context-composer {
+  margin-top: var(--space-4);
+}
+
+.react-task-context-composer > label {
+  display: block;
+  margin-bottom: var(--space-1);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.react-task-context-composer > div {
+  display: flex;
+  align-items: stretch;
+}
+
+.react-task-context-composer input {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 42px;
+  box-sizing: border-box;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+  font: inherit;
+}
+
+.react-task-context-composer button,
+.react-task-context-reset {
+  min-height: 42px;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+  font: inherit;
+  font-weight: 700;
+}
+
+.react-task-context-composer button {
+  margin-left: -1px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.react-task-context-composer button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.react-task-context-list {
+  padding: 0;
+  margin: var(--space-4) 0 0;
+  list-style: none;
+}
+
+.react-task-context-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.react-task-context-list li:last-child {
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.react-task-context-list label {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.react-task-context-list input {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+  margin: 0 10px 0 0;
+}
+
+.react-task-context-list span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.react-task-context-delete {
+  flex: 0 0 auto;
+  margin-left: 12px;
+  padding: 4px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+  color: var(--color-text-secondary);
+  font: inherit;
+  font-size: 0.75rem;
+}
+
+.react-task-context-list .is-done span {
+  color: var(--color-text-secondary);
+  text-decoration: line-through;
+}
+
+.react-task-context-reset {
+  margin-top: var(--space-4);
+  border-radius: var(--radius-sm);
+}
+
+@media (max-width: 520px) {
+  .react-task-context-summary {
+    display: block;
+  }
+
+  .react-task-context-summary div {
+    margin-right: 0;
+  }
+
+  .react-task-context-composer > div {
+    display: block;
+  }
+
+  .react-task-context-composer input,
+  .react-task-context-composer button,
+  .react-task-context-reset {
+    width: 100%;
+  }
+
+  .react-task-context-composer input {
+    border-radius: var(--radius-sm);
+  }
+
+  .react-task-context-composer button {
+    margin: var(--space-2) 0 0;
+    border-radius: var(--radius-sm);
+  }
+}

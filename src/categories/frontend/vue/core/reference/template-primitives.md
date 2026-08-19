@@ -65,7 +65,7 @@ anchors:
 
 # 模板原语
 
-## &lt;component&gt;
+## 一、&lt;component&gt;
 
 `<component>` 是模板编译期识别的元元素，通过 `is` prop 渲染动态组件或元素。`is` 接受原生 HTML 标签名、已注册组件名或组件定义；直接绑定导入的组件定义不需要再按名称注册。内置组件也可以作为定义传入，但字符串形式仍须能从当前组件注册上下文解析。
 
@@ -86,7 +86,7 @@ import UserPanel from './UserPanel.vue'
 `<component>` 上的 `v-model` 按组件 `modelValue` / `update:modelValue` 协议编译。若运行时目标最终是原生 `input` 或 `select`，编译器不会再改写为原生控件协议；应使用静态原生控件，或显式绑定 value / checked 与对应事件。
 :::
 
-## &lt;template&gt;
+## 二、&lt;template&gt;
 
 模板内的 `<template>` 只有同时使用 `v-if`、`v-else-if`、`v-else`、`v-for` 或 `v-slot` 时，才是不会生成真实 DOM 包装的分组占位符。`<template v-for>` 可以携带 key；其他 attribute 与指令没有真实元素承载，会被丢弃。
 
@@ -104,13 +104,13 @@ import UserPanel from './UserPanel.vue'
 
 没有上述五类指令时，它会成为原生 HTML `<template>` 元素。SFC 最外层 `<template>` 则是文件格式的语言块容器，不属于组件模板 AST，也不接受这里的结构指令语义；两者名称相同，但位于不同编译层级。
 
-## key
+## 三、key
 
 `key` 的公开类型是 `number | string | symbol`，它为同一父级下的 VNode 提供身份；兄弟 key 必须唯一。没有 key 时，Vue 会尽量就地更新或复用同类型节点；提供 key 后，Vue 按身份重排，并卸载已经消失的项。
 
 同一位置的 key 改变会强制替换元素或组件，而不是就地更新，可用于有意重新触发生命周期或过渡。key 是渲染器保留字段，不会作为普通 prop 传给子组件。会插入、删除或重排的有状态列表应使用稳定业务 ID，不能用对象或漂移的 index 冒充身份。
 
-## is
+## 四、is
 
 `<component :is="target">` 的 `is` 是 Vue 元元素的动态目标 prop。原生 HTML 元素上的普通 `is` 首先属于 Web 平台 customized built-in element 机制；仅写 `<tr is="my-row">` 不会把 `my-row` 当成 Vue 组件。
 
@@ -124,7 +124,7 @@ import UserPanel from './UserPanel.vue'
 `vue:` 字面量前缀从 Vue 3.1 起用于原生宿主位置的 Vue 组件替换。这个版本边界不属于 Web 平台 customized built-in，也不表示 `<component :is>` 整体从 3.1 才可用。
 :::
 
-## 易错使用提示
+## 五、易错使用提示
 
 :::pitfalls
 ### 把组件变量名写成静态 is 字符串
@@ -261,7 +261,7 @@ import UserPanel from './UserPanel.vue'
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 六、源码推导与适用场景
 
 以下结论来自 `vuejs/core@fa2885d8` 的固定源码与官方测试，只解释 Vue 3.5.40 的可观察结果；编译器 AST、VNode 私有字段与渲染器内部流程都不是 public API。
 

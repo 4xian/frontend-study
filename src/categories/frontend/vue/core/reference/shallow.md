@@ -43,7 +43,7 @@ anchors:
 
 # shallowRef() / shallowReactive()
 
-## 概述
+## 一、概述
 
 `ref()` 和 `reactive()` 默认是深层响应式：对象无论嵌套多深都会被转换、追踪。浅层 API 是它们的"只到第一层"版本——`shallowRef()` 的内部值原样存储（stored as-is），只有 `.value` 属性本身的访问是响应式的；`shallowReactive()` 只让根级属性响应式，嵌套对象不会被转换，属性值中的 ref 也不会自动解包。
 
@@ -53,7 +53,7 @@ function shallowRef<T>(value: T): ShallowRef<T>
 function shallowReactive<T extends object>(target: T): T
 ~~~~
 
-## shallowRef() 用法
+## 二、shallowRef() 用法
 
 只有对 `.value` 的整体替换会触发更新；深层修改内部对象的属性时，值确实变了，但不会通知任何依赖它的副作用。
 
@@ -73,7 +73,7 @@ state.value = { count: 2 }
 深层修改不触发更新 vs 替换 .value 触发更新的现场对照，含 triggerRef 强制触发
 :::
 
-## shallowReactive() 用法
+## 三、shallowReactive() 用法
 
 与 `reactive()` 不同，`shallowReactive()` 没有深层转换：只有根级属性是响应式的。属性值原样存储——嵌套对象不是响应式代理（`isReactive` 返回 false），属性中的 ref 不会自动解包，访问仍需 `.value`。
 
@@ -99,7 +99,7 @@ state.nested.bar++
 根级属性修改触发更新，嵌套属性修改不触发；用 isReactive 验证嵌套对象未被转换
 :::
 
-## triggerRef()：强制触发
+## 四、triggerRef()：强制触发
 
 `triggerRef()` 强制触发依赖于一个浅层 ref 的副作用。典型用法：对 shallowRef 的内部值做了深层变更之后，手动通知一次，让 watchEffect、模板等副作用重新执行。
 
@@ -120,7 +120,7 @@ shallow.value.greet = 'Hello, universe'
 triggerRef(shallow)
 ~~~~
 
-## 适用场景
+## 五、适用场景
 
 深层响应式对大型嵌套结构有代价：每次属性访问都伴随依赖追踪。浅层 API 是官方给出的性能逃生舱，典型场景有两类：1）大型不可变结构（如巨大的列表）——用 `shallowRef` 持有，把嵌套数据当作不可变的，更新时整体替换根值（`state.value = [...state.value, newItem]`）；2）与外部状态管理集成（如 Immer、RxJS）——外部库管理数据本身，Vue 只在 `.value` 被替换时感知变化，内部值保持原样不被代理。
 
@@ -128,7 +128,7 @@ triggerRef(shallow)
 官方 Immer 集成范例就是这个思路：useImmer 用 shallowRef 持有状态，更新时以 produce 产出的新不可变对象整体替换 .value，兼得不可变数据的结构共享与 Vue 的响应式通知。
 :::
 
-## 最小源码实现
+## 六、最小源码实现
 
 源码里浅层 API 与深层 API 共用同一套实现，只差一个 `shallow` 布尔开关。`ref()` 与 `shallowRef()` 都返回 `RefImpl`，构造时 `shallow` 为 true 就跳过 `toReactive()` 转换、原样存储内部值；`shallowReactive()` 与 `reactive()` 共用同一个 Proxy handler 类，get 拦截在 `isShallow` 时提前返回结果，跳过"嵌套对象惰性递归转换"与"ref 解包"两步。`triggerRef()` 则是直接调用 ref 的 `dep.trigger()`，绕过值比较强制通知。
 
@@ -185,7 +185,7 @@ class BaseReactiveHandler {
 这解释了浅层 API 的性能来源：省掉的不是"追踪"本身（根级访问照常 track），而是嵌套对象的 Proxy 创建与嵌套属性访问时的逐层拦截开销。
 :::
 
-## 与深层 API 对比
+## 七、与深层 API 对比
 
 | 特性 | ref() / reactive() | shallowRef() / shallowReactive() |
 | --- | --- | --- |
@@ -195,7 +195,7 @@ class BaseReactiveHandler {
 | 性能开销 | 每层属性访问都伴随依赖追踪 | 嵌套属性访问无追踪开销 |
 | 典型用途 | 常规组件状态 | 大型不可变结构、外部状态管理集成 |
 
-## 易错使用提示
+## 八、易错使用提示
 
 :::pitfalls
 ### 深改 `shallowRef` 内部对象后等待自动更新

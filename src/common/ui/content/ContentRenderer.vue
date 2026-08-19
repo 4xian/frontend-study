@@ -7,6 +7,7 @@ import PitfallsBlock from '@/common/ui/blocks/PitfallsBlock.vue'
 import TableBlock from '@/common/ui/blocks/TableBlock.vue'
 import TextBlock from '@/common/ui/blocks/TextBlock.vue'
 import TipBlock from '@/common/ui/blocks/TipBlock.vue'
+import CodeDetailsBlock from './CodeDetailsBlock.vue'
 import ExerciseBlock from './ExerciseBlock.vue'
 import StepsBlock from './StepsBlock.vue'
 import { resolveInteractive } from '@/common/content/demo-registry'
@@ -22,6 +23,7 @@ defineProps<{ blocks: ContentBlock[] }>()
         v-if="block.type === 'heading'"
         class="block block-heading"
         :content="block.content"
+        :depth="block.depth"
       />
       <TextBlock
         v-else-if="block.type === 'text'"
@@ -31,6 +33,13 @@ defineProps<{ blocks: ContentBlock[] }>()
       <CodeBlock
         v-else-if="block.type === 'code'"
         class="block block-code"
+        :code="block.content"
+        :lang="block.lang"
+      />
+      <CodeDetailsBlock
+        v-else-if="block.type === 'code-details'"
+        class="block block-code-details"
+        :title="block.title"
         :code="block.content"
         :lang="block.lang"
       />
@@ -72,6 +81,15 @@ defineProps<{ blocks: ContentBlock[] }>()
         :acceptance="block.acceptance"
         :answer="block.answer"
       />
+      <component
+        :is="block.ordered ? 'ol' : 'ul'"
+        v-else-if="block.type === 'list'"
+        class="block block-list list"
+      >
+        <li v-for="(item, itemIndex) in block.items" :key="itemIndex">
+          <TextBlock :content="item" />
+        </li>
+      </component>
       <ul v-else-if="block.type === 'checklist'" class="block block-checklist checklist">
         <li v-for="item in block.items" :key="item.label">
           <label>
@@ -122,11 +140,16 @@ defineProps<{ blocks: ContentBlock[] }>()
   margin-top: 0;
 }
 
+.content-blocks > .block-heading + .block-list {
+  margin-top: 0;
+}
+
 .content-blocks > .block-text + .block-text {
   margin-top: var(--space-3);
 }
 
 .content-blocks > .block-code,
+.content-blocks > .block-code-details,
 .content-blocks > .block-demo,
 .content-blocks > .block-principle,
 .content-blocks > .block-table,
@@ -136,6 +159,18 @@ defineProps<{ blocks: ContentBlock[] }>()
 .content-blocks > .block-pitfalls,
 .content-blocks > .block-interactive {
   margin-top: var(--space-6);
+}
+
+.list {
+  padding-left: var(--space-6);
+}
+
+.list li + li {
+  margin-top: var(--space-2);
+}
+
+.list :deep(.text) {
+  margin: 0;
 }
 
 .checklist {

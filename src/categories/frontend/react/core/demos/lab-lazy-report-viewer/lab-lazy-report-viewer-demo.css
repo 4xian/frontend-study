@@ -1,0 +1,347 @@
+.lazy-report-viewer-demo {
+  width: 100%;
+  max-width: 920px;
+  padding: 24px;
+  border: 1px solid #c9d4d1;
+  border-radius: 8px;
+  background: #f7faf9;
+  color: #20312d;
+}
+
+.lazy-report-viewer-demo-heading,
+.lazy-report-viewer-picker > header,
+.lazy-report-viewer-area > header,
+.lazy-report-viewer-panel-heading,
+.lazy-report-viewer-body > header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.lazy-report-viewer-demo-heading p,
+.lazy-report-viewer-demo-heading h2,
+.lazy-report-viewer-picker h3,
+.lazy-report-viewer-picker header p,
+.lazy-report-viewer-area h3,
+.lazy-report-viewer-area header p,
+.lazy-report-viewer-panel-heading h2,
+.lazy-report-viewer-panel-heading p,
+.lazy-report-viewer-body h3,
+.lazy-report-viewer-body small {
+  margin: 0;
+}
+
+.lazy-report-viewer-demo-heading p,
+.lazy-report-viewer-picker header span,
+.lazy-report-viewer-area header span,
+.lazy-report-viewer-panel-heading span,
+.lazy-report-viewer-body header span,
+.lazy-report-viewer-fallback > span,
+.lazy-report-viewer-status span {
+  color: #a54b2b;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.lazy-report-viewer-demo-heading h2 {
+  margin: 5px 0 0;
+  color: #245f56;
+  font-size: 1.45rem;
+  line-height: 1.35;
+}
+
+.lazy-report-viewer-demo-heading > span {
+  margin: 4px 0 0 16px;
+  color: #596864;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.lazy-report-viewer-demo-heading output,
+.lazy-report-viewer-status output {
+  color: #245f56;
+}
+
+.lazy-report-viewer-picker,
+.lazy-report-viewer-area,
+.lazy-report-viewer-empty,
+.lazy-report-viewer-fallback {
+  margin-top: 16px;
+  padding: 18px;
+  border: 1px solid #d1d9d7;
+  border-radius: 6px;
+  background: #ffffff;
+}
+
+.lazy-report-viewer-picker h3,
+.lazy-report-viewer-area h3,
+.lazy-report-viewer-panel-heading h2,
+.lazy-report-viewer-body h3 {
+  margin-top: 4px;
+  color: #275f56;
+  font-size: 1.12rem;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.lazy-report-viewer-picker header p,
+.lazy-report-viewer-area header p,
+.lazy-report-viewer-panel-heading p,
+.lazy-report-viewer-body small {
+  margin-top: 4px;
+  color: #61706c;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.lazy-report-viewer-options {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 12px -5px -5px;
+}
+
+.lazy-report-viewer-options button {
+  flex: 1 1 260px;
+  min-width: 0;
+  margin: 5px;
+  text-align: left;
+}
+
+.lazy-report-viewer-options button strong,
+.lazy-report-viewer-options button span {
+  display: block;
+}
+
+.lazy-report-viewer-options button span {
+  margin-top: 4px;
+  color: #64736f;
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+.lazy-report-viewer-options button[aria-pressed='true'] span {
+  color: #eaf5f2;
+}
+
+.lazy-report-viewer-controls,
+.lazy-report-viewer-retry-probes,
+.lazy-report-viewer-fallback > div {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 12px -4px -4px;
+}
+
+.lazy-report-viewer-demo button {
+  min-height: 40px;
+  max-width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #2f6f65;
+  border-radius: 5px;
+  background: #ffffff;
+  color: #245f56;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  line-height: 1.35;
+  white-space: normal;
+}
+
+.lazy-report-viewer-controls button,
+.lazy-report-viewer-retry-probes button,
+.lazy-report-viewer-fallback > div button {
+  margin: 4px;
+}
+
+.lazy-report-viewer-demo button:hover:not(:disabled) {
+  filter: brightness(0.96);
+}
+
+.lazy-report-viewer-demo button:focus-visible {
+  outline: 3px solid #ed9c58;
+  outline-offset: 2px;
+}
+
+.lazy-report-viewer-demo button:disabled {
+  border-color: #c3cbc9;
+  background: #edf1f0;
+  color: #87928f;
+  cursor: not-allowed;
+}
+
+.lazy-report-viewer-demo button[aria-pressed='true'] {
+  border-color: #245f56;
+  background: #2c6b61;
+  color: #ffffff;
+}
+
+.lazy-report-viewer-demo button.is-secondary {
+  border-color: #7c8b87;
+  color: #4f5f5b;
+}
+
+.lazy-report-viewer-demo button.is-danger {
+  border-color: #a94a43;
+  color: #973e38;
+}
+
+.lazy-report-viewer-demo button.is-quiet {
+  border-color: #b4bdbb;
+  color: #5b6865;
+}
+
+.lazy-report-viewer-status {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 12px -4px -4px;
+}
+
+.lazy-report-viewer-status > div {
+  flex: 1 1 150px;
+  min-width: 0;
+  margin: 4px;
+  padding: 10px 12px;
+  border-left: 3px solid #d38648;
+  background: #fff7ee;
+}
+
+.lazy-report-viewer-status span,
+.lazy-report-viewer-status strong {
+  display: block;
+}
+
+.lazy-report-viewer-status strong {
+  margin-top: 4px;
+  color: #4d4035;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.lazy-report-viewer-area {
+  border-top: 4px solid #345f86;
+}
+
+.lazy-report-viewer-retry-probes {
+  padding: 8px;
+  border: 1px dashed #c8a86f;
+  border-radius: 5px;
+  background: #fffaf0;
+}
+
+.lazy-report-viewer-panel {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid #d9e0de;
+}
+
+.lazy-report-viewer-body {
+  margin-top: 12px;
+  padding: 16px;
+  border: 1px solid #b7ccc7;
+  border-radius: 6px;
+  background: #f3faf7;
+}
+
+.lazy-report-viewer-body > p {
+  margin: 12px 0 0;
+  color: #465854;
+  line-height: 1.65;
+}
+
+.lazy-report-viewer-body dl {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 12px -4px -4px;
+}
+
+.lazy-report-viewer-body dl > div {
+  flex: 1 1 130px;
+  min-width: 0;
+  margin: 4px;
+  padding: 12px;
+  border: 1px solid #c7d8d4;
+  border-radius: 5px;
+  background: #ffffff;
+}
+
+.lazy-report-viewer-body dt,
+.lazy-report-viewer-body dd {
+  margin: 0;
+}
+
+.lazy-report-viewer-body dt {
+  color: #63716e;
+  font-size: 0.78rem;
+}
+
+.lazy-report-viewer-body dd {
+  margin-top: 5px;
+  color: #244f48;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.lazy-report-viewer-fallback {
+  border-left: 4px solid #537fa7;
+}
+
+.lazy-report-viewer-fallback.is-data {
+  border-left-color: #2f786b;
+  background: #f2faf7;
+}
+
+.lazy-report-viewer-fallback.is-error,
+.lazy-report-viewer-fallback.is-outer-error {
+  border-left-color: #b34d45;
+  background: #fff5f3;
+}
+
+.lazy-report-viewer-fallback strong,
+.lazy-report-viewer-empty strong {
+  display: block;
+  margin-top: 5px;
+  color: #304d47;
+  font-size: 1.05rem;
+}
+
+.lazy-report-viewer-fallback.is-error strong,
+.lazy-report-viewer-fallback.is-outer-error strong {
+  color: #8d3933;
+}
+
+.lazy-report-viewer-fallback p,
+.lazy-report-viewer-empty p {
+  margin: 8px 0 0;
+  color: #5a6965;
+  line-height: 1.6;
+}
+
+@media (max-width: 620px) {
+  .lazy-report-viewer-demo {
+    padding: 16px;
+  }
+
+  .lazy-report-viewer-demo-heading > span,
+  .lazy-report-viewer-picker header p,
+  .lazy-report-viewer-area header p,
+  .lazy-report-viewer-panel-heading p,
+  .lazy-report-viewer-body small {
+    width: 100%;
+    margin: 8px 0 0;
+  }
+
+  .lazy-report-viewer-options button,
+  .lazy-report-viewer-status > div,
+  .lazy-report-viewer-body dl > div {
+    flex-basis: 100%;
+  }
+
+  .lazy-report-viewer-controls button,
+  .lazy-report-viewer-retry-probes button,
+  .lazy-report-viewer-fallback > div button {
+    flex: 1 1 100%;
+  }
+}

@@ -1,0 +1,267 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.intermediate.relational-data-and-sql-foundations",
+  "batchId": "phase-4-relational-data-and-sql-foundations",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-08T18:31:13+08:00",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "stagingPerformedThisBatch": false,
+    "existingStagedAndUnstagedStatePreserved": true
+  },
+  "sourceRepository": {
+    "path": "/Users/jian/Desktop/work/TDH/dzzz/dzzz-app",
+    "head": "167ca8aa91ca3a6b101246964ef4fddec3d21da0",
+    "accessBoundary": "Frozen Phase 2 evidence only; no batch-specific project access",
+    "readOnly": true,
+    "projectExecuted": false,
+    "projectModified": false
+  },
+  "phase2Freeze": {
+    "courseCoverageMatrixJsonSha256": "04d858896d07e975d3ab50796494873f09bd0ddf4b1a8b1ea87bd75cdd101d38",
+    "courseCoverageMatrixSha256": "b7fd50ffabbcf8a198802e907cef769ac969a71e4e14c40038f4aaaed09d91ad",
+    "researchStatus": "not-started",
+    "exampleStatus": "not-started",
+    "courseStatus": "planned",
+    "phase4StateRecordedOnlyInThisSignoff": true,
+    "admissionGate": "PASS",
+    "counts": {
+      "sourceItems": 167,
+      "courseNodes": 64,
+      "dependencyEdges": 114
+    }
+  },
+  "versions": {
+    "verifiedAt": "2026-08-08",
+    "modern": {
+      "java": "25",
+      "jdbc": "4.3",
+      "postgresql": "18.4",
+      "postgresqlImage": "postgres:18-alpine",
+      "postgresqlImageDigest": "sha256:9a8afca54e7861fd90fab5fdf4c42477a6b1cb7d293595148e674e0a3181de15",
+      "postgresqlJdbc": "42.7.13",
+      "postgresqlJdbcSha256": "6e0e4cc2d8cae902084f8a2b18728b073a6fd9d1f87c9d8bff8f298c18185b93",
+      "mybatisDocumentation": "3.5.19"
+    },
+    "legacy": {
+      "java": "8",
+      "jdbc": "4.2",
+      "runtimeImageDigest": "sha256:c8b86f2c0a9bd6cc1b7fabc5d1a097501a166eea7cad3b2764e90e96178bea9b",
+      "springBoot": "2.3.12.RELEASE",
+      "springFramework": "5.2.15.RELEASE",
+      "mybatisPlus": "3.4.2"
+    }
+  },
+  "sourceDiscovery": {
+    "method": "Tavily discovery followed by direct ISO, PostgreSQL, Oracle, pgJDBC, Spring, MyBatis, MyBatis-Plus and OWASP verification",
+    "communitySourcesUsedAsEvidence": false,
+    "projectEvidenceBoundary": "projectEvidence is empty; the frozen project was not accessed for this prerequisite lesson",
+    "directUrls": [
+      "https://www.iso.org/standard/76583.html",
+      "https://www.iso.org/standard/76584.html",
+      "https://www.postgresql.org/docs/current/tutorial-concepts.html",
+      "https://www.postgresql.org/docs/current/ddl-constraints.html",
+      "https://www.postgresql.org/docs/current/functions-comparison.html",
+      "https://www.postgresql.org/docs/current/sql-select.html",
+      "https://www.postgresql.org/docs/current/queries-table-expressions.html",
+      "https://www.postgresql.org/docs/current/queries-order.html",
+      "https://www.postgresql.org/docs/current/queries-limit.html",
+      "https://www.postgresql.org/docs/current/functions-aggregate.html",
+      "https://www.postgresql.org/docs/current/glossary.html",
+      "https://www.postgresql.org/docs/current/transaction-iso.html",
+      "https://www.postgresql.org/docs/current/explicit-locking.html",
+      "https://www.postgresql.org/docs/current/indexes-intro.html",
+      "https://www.postgresql.org/docs/current/using-explain.html",
+      "https://www.postgresql.org/docs/current/sql-explain.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.sql/java/sql/package-summary.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.sql/java/sql/PreparedStatement.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.sql/java/sql/Connection.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.sql/javax/sql/DataSource.html",
+      "https://jdbc.postgresql.org/download/",
+      "https://docs.oracle.com/javase/8/docs/api/java/sql/package-summary.html",
+      "https://docs.spring.io/spring-framework/docs/5.2.15.RELEASE/spring-framework-reference/data-access.html",
+      "https://docs.spring.io/spring-boot/docs/2.3.12.RELEASE/reference/html/getting-started.html#system-requirements",
+      "https://mybatis.org/mybatis-3/sqlmap-xml.html",
+      "https://mybatis.org/mybatis-3/dynamic-sql.html",
+      "https://mybatis.org/mybatis-3/java-api.html",
+      "https://mybatis.org/spring/transactions.html",
+      "https://github.com/baomidou/mybatis-plus/blob/v3.4.2/build.gradle",
+      "https://github.com/baomidou/mybatis-plus/blob/v3.4.2/mybatis-plus-extension/src/main/java/com/baomidou/mybatisplus/extension/plugins/PaginationInterceptor.java",
+      "https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html"
+    ]
+  },
+  "projectEvidence": [],
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/intermediate/relational-data-and-sql-foundations.md",
+      "sha256": "b8d3596e219a40ea3768d77dec5faa3d3dff0d895be9fbcd0f66c7a21916b437"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/relational-data-and-sql-foundations.md",
+      "sha256": "e787525a605019fbe206dfa8d31cc480d44e7ac023feefa1e24e423644418f3e"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "379b55e58cbca6f6d4aca63f2c2bc44345ccf56fdabfb8d98f22c1551f47406b"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "d1929337ff0ab88ef1a7a457f30b5d733a56985f4cb23c3532691e3ea6e4d4f6"
+    },
+    {
+      "path": "docs/backend/java/dzzz-app-course-plan.md",
+      "sha256": "76f0f6716de4711d11b48696db31916ec76ca1077e8744de21ff0201151b1f54"
+    }
+  ],
+  "baselineVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check",
+      "exitCode": 0,
+      "summary": "passed directly and again as part of the production build"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run format:check",
+      "exitCode": 0,
+      "summary": "passed across the full workspace"
+    },
+    {
+      "command": "npm run test:unit",
+      "exitCode": 0,
+      "summary": "No test files found; configured empty test directory is valid"
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "summary": "No persistent E2E test files; command passed with --pass-with-no-tests"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "1270 modules transformed; existing catalog chunk warning only"
+    },
+    {
+      "command": "git diff --check -- <five batch files> && git diff --cached --check -- <five batch files>",
+      "exitCode": 0,
+      "summary": "passed in the batch scope; no staging was performed"
+    }
+  ],
+  "javaVerification": {
+    "modernFixturePath": "/tmp/java-sql-course-final.DVNWP9",
+    "legacyFixturePath": "/tmp/java-sql-legacy.xmiodo",
+    "temporaryAssetsCleaned": true,
+    "cleanupVerifiedWithFinalAbsenceChecks": true,
+    "modernCodeChangedAfterFeedbackLoop": false,
+    "cases": [
+      {
+        "name": "PostgreSQL 18.4 and pgJDBC query and transaction loop",
+        "runtime": "Java 25 / JDBC 4.3 / pgJDBC 42.7.13 / PostgreSQL 18.4",
+        "exitCode": 0,
+        "summary": "jdbc|courses=2|rollbackCount=0"
+      },
+      {
+        "name": "MyBatis parameterization and session rollback loop",
+        "runtime": "Java 25 / MyBatis 3.5.19 / PostgreSQL 18.4",
+        "exitCode": 0,
+        "summary": "mybatis|injectedRows=0|uncommittedRows=0"
+      },
+      {
+        "name": "JDBC savepoint local rollback loop",
+        "runtime": "Java 25 / pgJDBC 42.7.13 / PostgreSQL 18.4",
+        "exitCode": 0,
+        "summary": "savepoint|updated=false|name=Java Updated"
+      },
+      {
+        "name": "Java 8 legacy JDBC example compilation",
+        "command": "docker run --rm --volume /tmp/java-sql-legacy.xmiodo:/work --workdir /work eclipse-temurin:8-jdk javac -Xlint:all -Werror LegacyCourseLookup.java",
+        "exitCode": 0,
+        "summary": "compiled without warnings"
+      }
+    ]
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "adapter": "PASS",
+    "lineCount": 1588,
+    "lineBudgetReview": "PASS; frozen SQL/JDBC/transaction/MyBatis foundation scope contains no confirmed independently splittable course",
+    "independentKnowledgePointHeadings": 16,
+    "orderedListCount": 34,
+    "orderedItemCount": 139,
+    "codeBlockCount": 44,
+    "exerciseCount": 1,
+    "sourceHeadingAbsent": true,
+    "officialSourceCount": 31,
+    "javaMethodComments": "PASS"
+  },
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "baseUrl": "http://127.0.0.1:4188/",
+    "targetPath": "/backend/java/core/learn/relational-data-and-sql-foundations",
+    "temporaryAssetsCleaned": true,
+    "desktop": {
+      "viewport": "1440x900",
+      "targetPageStatus": 200,
+      "documentClientWidth": 1440,
+      "documentScrollWidth": 1440,
+      "horizontalOverflow": false,
+      "title": "关系数据、SQL 与事务基础",
+      "knowledgePointCount": 16,
+      "orderedListCount": 34,
+      "orderedItemCount": 139,
+      "orderedItemsAreLi": true,
+      "officialSourceHeadingCount": 1,
+      "officialSourceItemCount": 31,
+      "duplicateSourceBodyHeadingCount": 0,
+      "manifestErrorVisible": false,
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "badResponses": 0
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "targetPageStatus": 200,
+      "documentClientWidth": 390,
+      "documentScrollWidth": 390,
+      "horizontalOverflow": false,
+      "title": "关系数据、SQL 与事务基础",
+      "knowledgePointCount": 16,
+      "orderedListCount": 34,
+      "orderedItemCount": 139,
+      "orderedItemsAreLi": true,
+      "officialSourceHeadingCount": 1,
+      "officialSourceItemCount": 31,
+      "duplicateSourceBodyHeadingCount": 0,
+      "manifestErrorVisible": false,
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "badResponses": 0
+    }
+  },
+  "review": {
+    "standards": "PASS / 0 finding",
+    "spec": "PASS / 0 finding",
+    "independentReviewRounds": 5,
+    "scope": "第 5 批研究稿、课程正文、Java manifest、课程轨道、计划记录",
+    "lastReviewFindingCount": 0,
+    "finalConsistency": "course loader, available track status and 5/17 plan state agree; batch 6 remains planned"
+  },
+  "stopBoundary": "第 5 批关闭后只领取第 6 批 layers-dto-and-service-boundaries；第 17 批关闭后立即停止，不进入高级、Reference 或项目实战。",
+  "selfHashPolicy": "signoff 文件不记录自身 SHA-256；artifacts 只绑定 signoff 外可稳定计算的本批产物"
+}

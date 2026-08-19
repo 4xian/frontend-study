@@ -50,7 +50,7 @@ recap:
 
 # 建立第一个路由器
 
-## 先认识四个不同对象
+## 一、先认识四个不同对象
 
 路由配置不是一个神秘的全局开关。routes 是可匹配的记录集合，history 负责承载位置，router 组合匹配、导航与插件能力，而 route 是某一次导航解析后的当前位置。先把四者分开，后续学习参数、守卫和嵌套出口时才不会把读取状态与发出命令混为一谈。
 
@@ -65,7 +65,7 @@ recap:
 router 是长期存在的命令与协调对象；route 是会随导航变化的状态。命名时保留这个差异，比使用含糊的 routerInfo 更容易读懂。
 :::
 
-## 用三项配置创建 router
+## 二、用三项配置创建 router
 
 createRouter() 的最小配置包含 history 和 routes。每条 route record 至少需要 path，并通过 component 指定匹配后渲染的页面。根级路径以 / 开头；组件可以是直接导入的组件，也可以在后续懒加载课程中改为返回 import() 的函数。
 
@@ -87,7 +87,7 @@ export const router = createRouter({
 
 createRouter() 会用 routes 建立 matcher，并保存传入的 history。它只创建路由器实例，不会自动把 RouterView、RouterLink、$router 或组合式 API 注入任何 Vue 应用；安装插件是下一步。
 
-## 按运行环境选择 history
+## 三、按运行环境选择 history
 
 | 模式 | 地址栏表现 | 适合场景 | 额外责任 |
 | --- | --- | --- | --- |
@@ -99,7 +99,7 @@ createRouter() 会用 routes 建立 matcher，并保存传入的 history。它�
 memory history 很适合本课的隔离 Demo，但不是普通浏览器站点的默认选择。它不会读取地址栏，也不会替你建立可用的浏览器前进后退记录。
 :::
 
-## 先安装插件，再挂载应用
+## 四、先安装插件，再挂载应用
 
 app.use(router) 会调用 router 的 install seam：注册 RouterLink 和 RouterView，提供 $router/$route 与组合式 API 所需的注入，并触发初始路由解析。Vue 插件必须在 app.mount() 之前安装，否则已经挂载的组件拿不到这些能力。
 
@@ -126,7 +126,7 @@ await router.isReady()
 app.mount('#app')
 ~~~~
 
-## 在隔离 Demo 中观察 currentRoute
+## 五、在隔离 Demo 中观察 currentRoute
 
 下面的运行区创建自己的 Vue mini-app、memory history 和两条静态 route。按钮只调用这份独立 router；页面同时展示 currentRoute 的 path、name 与 matched 名称，并记录宿主课程页 URL，验证示例导航没有污染站点路由。
 
@@ -138,7 +138,7 @@ app.mount('#app')
 调试时先看 router.currentRoute.value，而不是只看 window.location。memory history 的当前 route 会变化，浏览器地址栏保持不变，这正是隔离测试和嵌入式示例需要的行为。
 :::
 
-## 易错使用提示
+## 六、易错使用提示
 
 :::pitfalls
 ### 在 mount() 之后才安装 router
@@ -303,7 +303,7 @@ await demoRouter.push('/')
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 从源码推导适用场景
+## 七、从源码推导适用场景
 
 :::steps
 ### 把 router 创建集中在单一模块

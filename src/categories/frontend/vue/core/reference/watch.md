@@ -40,7 +40,7 @@ anchors:
 
 # watch()
 
-## 概述
+## 一、概述
 
 watch() 侦听一个或多个响应式数据源，源变化时调用回调。它默认是惰性的——回调只在源变化后执行；依赖追踪与副作用分离，你能精确控制"什么变化才触发"。返回的 `WatchHandle` 可停止、暂停、恢复侦听。
 
@@ -72,7 +72,7 @@ interface WatchHandle {
 }
 ~~~~
 
-## 侦听源的四种形式
+## 二、侦听源的四种形式
 
 源可以是：1）ref（含 computed ref）；2）getter 函数——只有返回值变化才触发，适合侦听"派生结果"或 reactive 对象的单个属性；3）reactive 对象——自动开启深层侦听；4）以上组合的数组——任一源变化都触发，回调收到新旧值数组。
 
@@ -80,7 +80,7 @@ interface WatchHandle {
 ref 源与 getter 源对比：getter 只在计算结果变化时触发
 :::
 
-## 易错使用提示
+## 三、易错使用提示
 
 :::pitfalls
 ### 直接把 reactive 对象的属性值传给 `watch()`
@@ -249,7 +249,7 @@ watch(() => state.user, saveUser, { deep: true })
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 选项：deep / immediate / once
+## 四、选项：deep / immediate / once
 
 `immediate: true` 让回调在创建时立即执行一次（此次 oldValue 为 undefined）；`deep: true` 对 getter 返回的对象做深层遍历（3.5+ 还可传数字限制深度）；`once: true`（3.4+）让回调只触发一次后自动停止。默认 `deep: false`——getter 源只比较返回值本身；reactive 对象源例外，隐式深层。
 
@@ -257,7 +257,7 @@ watch(() => state.user, saveUser, { deep: true })
 immediate、once 与 WatchHandle.stop() 的行为对照
 :::
 
-## 副作用清理
+## 五、副作用清理
 
 回调的第三个参数 `onCleanup`（或 3.5+ 的 `onWatcherCleanup` API）注册清理函数：在侦听器下一次触发前或停止时调用，用于取消过期的异步请求等。
 
@@ -274,13 +274,13 @@ watch(id, (newId) => {
 })
 ~~~~
 
-## 触发时序
+## 六、触发时序
 
 :::principle{id="vue.core.reference.reactivity-watchers.watch.watch-timing"}
 默认（pre）回调在父组件更新之后、当前组件 DOM 更新之前批量执行；post 在 DOM 更新后；sync 完全同步、不批量。
 :::
 
-## 最小源码实现
+## 七、最小源码实现
 
 watch 的实现分三步。第一步源归一化：四种源形式统一转成一个 getter 函数——ref 源变成 `() => source.value`，reactive 对象源变成 `() => traverse(source)`（深遍历每个属性，属性读取即完成依赖收集，这就是 reactive 源隐式深层侦听的原因），数组源逐项归一化；`deep: true` 就是在 getter 外再包一层 traverse。第二步：用这个 getter 创建 `ReactiveEffect`——与组件渲染、computed 同款的副作用原语。第三步job：依赖变化时调度器执行 job，重新运行 getter 拿新值，`hasChanged` 比较新旧值，变了才调用回调并把旧值换成新值。immediate/once/onCleanup 都只是这个骨架上的小开关。
 
@@ -352,7 +352,7 @@ function traverse(value: unknown, seen = new Set()) {
 deep 的代价在源码里一目了然：traverse 每次都要递归访问全部嵌套属性来维持订阅，对大对象开销可观——这就是官方建议 deep 按需使用、3.5+ 支持传数字限制遍历深度的原因。
 :::
 
-## 与 computed / watchEffect 如何选择
+## 八、与 computed / watchEffect 如何选择
 
 | 需求 | 推荐 API |
 | --- | --- |

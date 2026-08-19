@@ -1,0 +1,133 @@
+.react-product-table-demo {
+  width: 100%;
+  color: var(--color-text);
+}
+
+.react-product-panel h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.react-product-filters {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin: var(--space-3) -6px 0;
+}
+
+.react-product-filters > * {
+  margin: 0 6px 10px;
+}
+
+.react-product-search {
+  display: flex;
+  flex: 1 1 240px;
+  flex-direction: column;
+  min-width: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.react-product-search input {
+  min-width: 0;
+  min-height: 40px;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+  font: inherit;
+}
+
+.react-product-search input {
+  margin-top: 6px;
+}
+
+.react-product-stock-filter {
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+}
+
+.react-product-stock-filter input {
+  width: 18px;
+  height: 18px;
+  margin: 0 var(--space-2) 0 0;
+}
+
+.react-product-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 0 -6px var(--space-2);
+  overflow-wrap: anywhere;
+}
+
+.react-product-summary > * {
+  margin: 0 6px 8px;
+}
+
+.react-product-summary output {
+  display: block;
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+}
+
+.react-product-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.react-product-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.react-product-table th,
+.react-product-table td {
+  padding: var(--space-2);
+  border-bottom: 1px solid var(--color-border);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.react-product-table th:first-child {
+  width: 25%;
+}
+
+.react-product-table th:last-child {
+  width: 25%;
+}
+
+.react-product-empty {
+  margin: var(--space-3) 0 0;
+  color: var(--color-text-secondary);
+}
+
+@media (max-width: 520px) {
+  .react-product-filters {
+    display: block;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .react-product-filters > * {
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .react-product-category {
+    display: none;
+  }
+
+  .react-product-table th:first-child {
+    width: 65%;
+  }
+
+  .react-product-table th:last-child {
+    width: 35%;
+  }
+}

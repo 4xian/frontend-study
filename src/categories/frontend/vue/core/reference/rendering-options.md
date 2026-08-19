@@ -60,7 +60,7 @@ anchors:
 
 # Options API：渲染选项
 
-## 概述
+## 一、概述
 
 这四个选项并不处在同一个运行阶段：`template` 等待编译，`render` 已经是可执行的渲染入口，`compilerOptions` 只配置浏览器中的运行时模板编译，而 `slots` 只承载 TypeScript 插槽声明。先判断项目使用预编译 SFC、runtime-only 构建还是完整构建，再选择对应选项。
 
@@ -71,7 +71,7 @@ anchors:
 | `compilerOptions` | 调整当前组件的运行时编译 | 不影响 Vite 已预编译的 SFC |
 | `slots` | 声明插槽类型 | 运行时不会读取选项值 |
 
-## template
+## 二、template
 
 `template` 接收由开发者控制的模板字符串。完整构建会在浏览器中把它编译成 render function；默认 Vite SFC 通常已在构建期完成编译，因此不依赖这条运行时路径。以 `#` 开头的值会查询对应 DOM 元素并读取其 `innerHTML`。根组件没有 template 和 render 时，浏览器挂载也可能读取容器现有的 `innerHTML`。
 
@@ -94,7 +94,7 @@ export default defineComponent({
 
 若组件同时提供 `render`，`template` 不会再被编译。需要 CSP 禁止动态代码生成、较小客户端体积或稳定的生产构建时，优先使用预编译 SFC。
 
-## render
+## 三、render
 
 `render` 是编程式渲染入口，可在 runtime-only、完整构建和 SSR 中工作。普通 Options render 的 `this` 指向组件公共实例。SFC `<template>` 本身也会在构建期生成 render function；手写 render 主要适合高度动态的 VNode 组合，完整 VNode 规则请继续查阅关联的“渲染函数与 VNode”页面。
 
@@ -116,7 +116,7 @@ export default defineComponent({
 `setup()` 返回渲染函数时，该函数会先成为实例 render。不要再叠加 Options render 或 template；一个组件只保留一个清晰的渲染入口。
 :::
 
-## compilerOptions
+## 四、compilerOptions
 
 组件级 `compilerOptions` 包含 `isCustomElement`、`whitespace`、`delimiters` 和 `comments`。它只影响当前组件尚待运行时编译的 template，并按字段覆盖 `app.config.compilerOptions`；未覆盖的应用级字段继续生效。Vue 3.1+ 提供该选项。
 
@@ -139,7 +139,7 @@ export default defineComponent({
 
 上例只描述完整构建中的运行时编译。Vite 中的 `.vue` 文件已由构建插件编译，应在 `@vitejs/plugin-vue` 的 `template.compilerOptions` 配置编译行为；组件运行时选项无法回头改写已经生成的 render function。
 
-## slots
+## 五、slots
 
 Vue 3.3+ 的 Options `slots` 是 `defineComponent()` 的类型辅助。推荐写成 `Object as SlotsType<...>`，使 setup context 和公共 `$slots` 获得插槽名称与 slot props 类型。该选项值不参与浏览器或 SSR 运行时；真实 slots 始终来自父 VNode children。
 
@@ -165,7 +165,7 @@ export default defineComponent({
 
 类型声明不能保证父组件一定传入某个 slot，因此运行时仍要判空。`defineSlots<T>()` 是另一个 SFC 编译宏；其返回值被使用时会编译为 `useSlots()`，不能据此推断 Options `slots` 也读取运行时内容。
 
-## 易错使用提示
+## 六、易错使用提示
 
 :::pitfalls
 ### 在 runtime-only 或 Vite SFC 中期待 template 即时编译
@@ -340,7 +340,7 @@ defineComponent({
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 七、源码推导与适用场景
 
 :::steps
 ### 构建产物决定是否能即时编译

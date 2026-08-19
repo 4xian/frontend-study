@@ -1,0 +1,293 @@
+.start-transition-background-update-demo {
+  width: 100%;
+  max-width: 840px;
+  padding: 24px;
+  border: 1px solid #c9d4d0;
+  border-radius: 8px;
+  background: #fbfcfc;
+  color: #25312f;
+}
+
+.start-transition-background-update-heading p,
+.start-transition-background-update-heading h2,
+.start-transition-background-update-heading span,
+.start-transition-background-update-view p,
+.start-transition-background-update-log h3 {
+  margin: 0;
+}
+
+.start-transition-background-update-heading p {
+  color: #9b4d22;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.start-transition-background-update-heading h2 {
+  margin-top: 6px;
+  font-size: 1.35rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.start-transition-background-update-heading > span {
+  display: block;
+  margin-top: 6px;
+  color: #5a6865;
+  line-height: 1.6;
+}
+
+.start-transition-background-update-controls {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin: 18px -6px 0;
+}
+
+.start-transition-background-update-input,
+.start-transition-background-update-choices {
+  flex: 1 1 280px;
+  min-width: 0;
+  margin: 0 6px 12px;
+}
+
+.start-transition-background-update-input > span,
+.start-transition-background-update-choices > span {
+  display: block;
+  color: #5c6a67;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.start-transition-background-update-input small {
+  display: block;
+  margin-top: 6px;
+  color: #5c6a67;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.start-transition-background-update-input output {
+  color: #285f56;
+  font-weight: 700;
+}
+
+.start-transition-background-update-controls input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 42px;
+  padding: 8px 10px;
+  margin-top: 6px;
+  border: 1px solid #9eafaa;
+  border-radius: 5px;
+  background: #ffffff;
+  color: #25312f;
+  font: inherit;
+}
+
+.start-transition-background-update-controls input:focus-visible,
+.start-transition-background-update-choices button:focus-visible {
+  outline: 3px solid #e19a56;
+  outline-offset: 2px;
+}
+
+.start-transition-background-update-choices > div {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 6px -4px 0;
+}
+
+.start-transition-background-update-choices button {
+  min-height: 42px;
+  max-width: 100%;
+  padding: 8px 10px;
+  margin: 0 4px 8px;
+  border: 1px solid #286d61;
+  border-radius: 5px;
+  background: #ffffff;
+  color: #245f55;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  white-space: normal;
+}
+
+.start-transition-background-update-choices button[aria-pressed='true'] {
+  background: #286d61;
+  color: #ffffff;
+}
+
+.start-transition-background-update-choices button:hover {
+  filter: brightness(0.95);
+}
+
+.start-transition-background-update-status {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 4px -5px 0;
+}
+
+.start-transition-background-update-status > div {
+  flex: 1 1 160px;
+  min-width: 0;
+  padding: 11px 12px;
+  margin: 0 5px 10px;
+  border-left: 4px solid #3e756c;
+  background: #edf5f3;
+  overflow-wrap: anywhere;
+}
+
+.start-transition-background-update-status span,
+.start-transition-background-update-view > span,
+.start-transition-background-update-log header span {
+  display: block;
+  color: #65736f;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.start-transition-background-update-status strong,
+.start-transition-background-update-view strong,
+.start-transition-background-update-log h3 {
+  display: block;
+  margin-top: 5px;
+  color: #285f56;
+  font-size: 1.05rem;
+  overflow-wrap: anywhere;
+}
+
+.start-transition-background-update-stage {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  margin: 8px -6px -12px;
+}
+
+.start-transition-background-update-view,
+.start-transition-background-update-log {
+  flex: 1 1 300px;
+  min-width: 0;
+  padding: 16px;
+  margin: 0 6px 12px;
+  border: 1px solid #d5dcda;
+  border-radius: 6px;
+  background: #ffffff;
+  overflow-wrap: anywhere;
+}
+
+.start-transition-background-update-view {
+  border-left: 5px solid #33776c;
+}
+
+.start-transition-background-update-view strong {
+  font-size: 1.2rem;
+}
+
+.start-transition-background-update-view p {
+  margin-top: 8px;
+  color: #56635f;
+  line-height: 1.6;
+}
+
+.start-transition-background-update-view ul {
+  max-height: 172px;
+  padding: 0;
+  margin: 12px 0 0;
+  list-style: none;
+  overflow: auto;
+}
+
+.start-transition-background-update-view li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 7px 0;
+  border-top: 1px solid #e1e6e4;
+}
+
+.start-transition-background-update-view li > span {
+  margin-right: 10px;
+  color: #52605d;
+  font-size: 0.84rem;
+}
+
+.start-transition-background-update-view li > output {
+  color: #8f421e;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.start-transition-background-update-log header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.start-transition-background-update-log header > output {
+  padding: 4px 7px;
+  border-radius: 4px;
+  background: #edf5f3;
+  color: #315e57;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.start-transition-background-update-log ol {
+  padding: 0;
+  margin: 12px 0 0;
+  list-style: none;
+}
+
+.start-transition-background-update-log li {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  padding: 8px 0;
+  border-top: 1px solid #e1e6e4;
+}
+
+.start-transition-background-update-log li > span {
+  width: 34px;
+  color: #73807d;
+  font-size: 0.78rem;
+}
+
+.start-transition-background-update-log li > strong {
+  color: #2f645c;
+  font-size: 0.86rem;
+}
+
+@media (max-width: 560px) {
+  .start-transition-background-update-demo {
+    padding: 16px;
+  }
+
+  .start-transition-background-update-controls,
+  .start-transition-background-update-stage {
+    display: block;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .start-transition-background-update-input,
+  .start-transition-background-update-choices,
+  .start-transition-background-update-view,
+  .start-transition-background-update-log {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .start-transition-background-update-choices > div {
+    display: block;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .start-transition-background-update-choices button {
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+  }
+}

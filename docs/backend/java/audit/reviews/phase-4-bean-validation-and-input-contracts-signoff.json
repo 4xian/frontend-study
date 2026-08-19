@@ -1,0 +1,248 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.intermediate.bean-validation-and-input-contracts",
+  "batchId": "phase-c-i10-bean-validation-and-input-contracts",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-15T20:56:09+08:00",
+  "phase": "Phase C",
+  "phaseCProgress": "10/20",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "newStagingPerformedThisBatch": false,
+    "existingIndexPreserved": true,
+    "unrelatedWorkspaceChangesPreserved": true
+  },
+  "phaseAFreeze": {
+    "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+    "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81",
+    "designation": "I-10 / 必修、重排复用",
+    "title": "Bean Validation、参数绑定与输入合同",
+    "estimatedMinutes": 150,
+    "prerequisite": "backend.java.learn.intermediate.transactions-and-idempotency",
+    "stableIdReused": "backend.java.learn.intermediate.bean-validation-and-input-contracts",
+    "slugReused": "bean-validation-and-input-contracts",
+    "urlPreserved": "/backend/java/core/learn/bean-validation-and-input-contracts",
+    "frozenSuccessor": "backend.java.learn.intermediate.layers-dto-and-service-boundaries"
+  },
+  "phaseCAdmission": {
+    "status": "PASS",
+    "predecessorCourseId": "backend.java.learn.intermediate.transactions-and-idempotency",
+    "predecessorSignoffPath": "docs/backend/java/audit/reviews/phase-4-transactions-and-idempotency-signoff.json",
+    "predecessorSignoffSha256": "6a5961920408e9fa9d22688d11c46f3a5722e119cb669fd8af101098cd5030b0",
+    "phaseCProgressBeforeBatch": "9/20",
+    "trackChangeRequired": true,
+    "loaderChangeRequired": false
+  },
+  "versions": {
+    "verifiedAt": "2026-08-15",
+    "modern": {
+      "java": "25",
+      "runtime": "Eclipse Adoptium 25.0.2+10-LTS",
+      "springBoot": "4.1.0",
+      "springFramework": "7.0.8",
+      "validation": "Jakarta Validation 3.1",
+      "webStarter": "spring-boot-starter-webmvc"
+    },
+    "legacy": {
+      "java": "8",
+      "runtime": "Temurin 1.8.0_482-b08",
+      "classMajorVersion": 52,
+      "springBoot": "2.3.12.RELEASE",
+      "springFramework": "5.2.15.RELEASE",
+      "validation": "Bean Validation 2.0 / javax.validation",
+      "webStarter": "spring-boot-starter-web"
+    }
+  },
+  "sourceDiscovery": {
+    "method": "Tavily 仅用于定位候选；最终结论回到 Jakarta Validation、Bean Validation、Spring、Hibernate Validator 与 OWASP 一手页面核验",
+    "researchDirectSourceCount": 28,
+    "lessonOfficialSourceCardCount": 18,
+    "finalLessonHttp200Count": 18,
+    "finalLessonHttpFailureCount": 0,
+    "communitySourcesUsedAsEvidence": false
+  },
+  "research": {
+    "scope": "I-10 only",
+    "phaseAContractAlignment": "PASS",
+    "officialUrlCount": 28,
+    "stopBoundaryAlignment": "PASS; I-11 was not read or modified before I-10 closure",
+    "researchSha256": "63d260de0515f99f49feb625af486e9eb7ea835e9c4f4b1a303ec8c2cf7bd207"
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/intermediate/bean-validation-and-input-contracts.md",
+      "sha256": "63d260de0515f99f49feb625af486e9eb7ea835e9c4f4b1a303ec8c2cf7bd207"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/bean-validation-and-input-contracts.md",
+      "sha256": "b7f5b44269327487c75d47c37e52c60ca943e029946303627b1adca08b1cb6a6"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "ee97e35c20eb2bd67514f5a777fbc368f421f6657f15e40da3df729643e9a612"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "e89e15d2335d8ddfd659e833633b0114edbfecb172c835dd07867b6221cfca72"
+    },
+    {
+      "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+      "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81"
+    },
+    {
+      "path": "docs/backend/java/audit/phase-2-knowledge-path-manifest.json",
+      "sha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407"
+    }
+  ],
+  "engineeringVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run test:unit",
+      "exitCode": 0,
+      "summary": "No persistent unit files; configured empty directory passed"
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "summary": "No persistent E2E files; configured empty directory passed"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "PASS after splitting each pitfalls 影响版本 and 来源 field into parser-supported independent fields"
+    },
+    {
+      "command": "npx prettier --check <I-10 paths> && git diff --check -- <I-10 paths>",
+      "exitCode": 0,
+      "summary": "targeted formatting and whitespace checks passed"
+    }
+  ],
+  "repositoryFormatBoundary": {
+    "command": "npm run format:check",
+    "exitCode": 1,
+    "i10ScopedGate": "PASS",
+    "unrelatedBlockingFiles": [
+      "src/categories/frontend/engineering/vite/vite-reference-index.ts",
+      "src/categories/frontend/vue/core/vue-core-options-reference-index.ts",
+      "src/categories/frontend/vue/core/vue-core-reference-index.ts",
+      "src/categories/frontend/vue/core/vue-core-sfc-reference-index.ts"
+    ],
+    "unrelatedFilesModified": false
+  },
+  "javaVerification": {
+    "fixturePath": "/tmp/java-i10-phase-c.x1MtvN",
+    "fixtureSha256": {
+      "modern/pom.xml": "a07fc16fbb5f6955e8566bb7f1a1862f0910ad4e8545a518d7fa15e6e7e156eb",
+      "modern/ValidationApplication.java": "2cd648ed9717ca88f021aa3a0a387f0dbb81af4daf619a193eec3f81cc605f84",
+      "modern/ValidationContractTest.java": "e36cf876bae47cf95f22699a3000f593a9d53f7c8350cc26285547e31369853d",
+      "legacy/pom.xml": "13bffe924017b7d68f1d9c334c669ee84345ab897797eec1083de892bdfd6eb4",
+      "legacy/ValidationApplication.java": "b7b5c378229ced3a85e77b000faef4437e6ab1f7552c1807f327c86e4261b65d",
+      "legacy/ValidationContractTest.java": "3515a45bd8afd87daa649222b486b3792b06e90d80130b09f653355c352f77b8"
+    },
+    "modernTests": "10 tests, 0 failures, 0 errors; two consecutive runs",
+    "legacyTests": "8 tests, 0 failures, 0 errors; two consecutive runs",
+    "returnValueContract": "PASS; Spring 7 HandlerMethodValidationException return-value violation maps to 500 + INTERNAL_ERROR while input violations map to 400 + INPUT_VALIDATION_FAILED",
+    "negativeControls": [
+      "malformed JSON, unknown field and binding/type mismatch stay distinct from Bean Validation violations",
+      "nested and container-element violations preserve stable field paths",
+      "modern Controller input validation returns 400 and return-value validation returns 500",
+      "legacy javax.validation path compiles and preserves shared input contracts",
+      "response and captured logs exclude secret, request-body marker, cause chain, stack frames and related exception class names"
+    ],
+    "temporaryAssetsCleaned": true,
+    "cleanupCommand": "find /tmp/java-i10-phase-c.x1MtvN -depth -delete",
+    "cleanupCheck": "PASS; exact fixture no longer exists"
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "adapter": "PASS",
+    "researchLineCount": 352,
+    "lessonLineCount": 1060,
+    "rootH2Count": 16,
+    "rootH2ChineseNumbering": "PASS; 一 through 十六 continuous",
+    "independentKnowledgePointHeadings": 19,
+    "knowledgePointSevenPartCoverage": "19/19",
+    "javaCodeBlockCount": 14,
+    "exerciseCount": 1,
+    "officialSourceCount": 18,
+    "pitfallCount": 5,
+    "pitfallRequiredFieldCoverage": "5/5",
+    "requiredCoreInterfaceSection": "PASS",
+    "requiredSecuritySection": "PASS",
+    "javaMethodComments": "PASS",
+    "observableOutputContractCount": 9
+  },
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "session": "java-i10-final",
+    "baseUrl": "http://127.0.0.1:4179/",
+    "targetPath": "/backend/java/core/learn/bean-validation-and-input-contracts",
+    "productionPreviewUsed": true,
+    "sessionsClosed": true,
+    "previewServerStopped": true,
+    "desktop": {
+      "viewport": "1440x900",
+      "documentScrollWidth": 1440,
+      "horizontalOverflow": false,
+      "knowledgePointCount": 19,
+      "pitfallCount": 5,
+      "officialSourceCount": 18
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "documentScrollWidth": 390,
+      "horizontalOverflow": false,
+      "knowledgePointCount": 19,
+      "pitfallCount": 5,
+      "officialSourceCount": 18
+    },
+    "title": "Bean Validation、参数绑定与输入合同",
+    "previousEntryId": "backend.java.learn.intermediate.transactions-and-idempotency",
+    "frozenNextEntryId": "backend.java.learn.intermediate.layers-dto-and-service-boundaries",
+    "completionStatePersistedAfterReload": true,
+    "completionStateRestoredToIncomplete": true,
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "pageErrors": 0,
+    "failedRequests": 0,
+    "nonSuccessfulResponses": 0,
+    "visualInspection": "PASS; desktop and mobile screenshots show no overlap or clipping, and the mobile title wraps normally",
+    "temporaryScreenshotsCleaned": true
+  },
+  "review": {
+    "reviewer": "independent Standards and Spec reviewer",
+    "riskClassification": "I-10 substantially rewrites request binding, validation, error mapping, security and dual-version behavior while preserving the stable ID and URL",
+    "independentReviewRequired": true,
+    "reviewedLessonSha256": "b7f5b44269327487c75d47c37e52c60ca943e029946303627b1adca08b1cb6a6",
+    "reviewedResearchSha256": "63d260de0515f99f49feb625af486e9eb7ea835e9c4f4b1a303ec8c2cf7bd207",
+    "standards": "PASS / 0 finding",
+    "spec": "PASS / 0 finding",
+    "highestSeverity": "none",
+    "postReviewTargetedRepair": "split five combined pitfalls 影响版本与来源 fields into two parser-supported fields without changing meaning",
+    "postRepairTargetedReview": "PASS; no semantic drift and npm run build passed",
+    "reviewWorkspaceModified": false,
+    "reviewStopBoundary": "reviewer did not implement I-11"
+  },
+  "stopBoundary": "Phase C I-10 is closed at 10/20. The only next authorized batch is I-11 (backend.java.learn.intermediate.layers-dto-and-service-boundaries); no I-11 implementation was performed before this signoff. Phase D remains unauthorized until the Phase C total Gate closes.",
+  "selfHashPolicy": "signoff file does not record its own SHA-256; artifacts bind only stable external batch outputs"
+}

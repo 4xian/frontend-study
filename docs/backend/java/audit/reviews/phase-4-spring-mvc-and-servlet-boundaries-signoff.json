@@ -1,0 +1,243 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.intermediate.spring-mvc-and-servlet-boundaries",
+  "batchId": "phase-c-i08-spring-mvc-and-servlet-boundaries",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-15T17:04:45+08:00",
+  "phase": "Phase C",
+  "phaseCProgress": "8/20",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "newStagingPerformedThisBatch": false,
+    "existingIndexPreserved": true,
+    "unrelatedWorkspaceChangesPreserved": true
+  },
+  "phaseAFreeze": {
+    "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+    "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81",
+    "designation": "I-08 / 必修、重排、复用",
+    "title": "Spring MVC、Servlet 与请求生命周期",
+    "estimatedMinutes": 150,
+    "prerequisite": "backend.java.learn.intermediate.spring-boot-and-configuration",
+    "stableIdReused": "backend.java.learn.intermediate.spring-mvc-and-servlet-boundaries",
+    "slugReused": "spring-mvc-and-servlet-boundaries",
+    "urlPreserved": "/backend/java/core/learn/spring-mvc-and-servlet-boundaries",
+    "frozenSuccessor": "backend.java.learn.intermediate.transactions-and-idempotency"
+  },
+  "phaseCAdmission": {
+    "status": "PASS",
+    "predecessorCourseId": "backend.java.learn.intermediate.spring-boot-and-configuration",
+    "predecessorSignoffPath": "docs/backend/java/audit/reviews/phase-4-spring-boot-and-configuration-signoff.json",
+    "predecessorSignoffSha256": "dbbf2acdd273103faa30ac428f176307b42ac571c6940972fd512e8acfa4cf0f",
+    "phaseCProgressBeforeBatch": "7/20",
+    "trackChangeRequired": true,
+    "loaderChangeRequired": false
+  },
+  "versions": {
+    "verifiedAt": "2026-08-15",
+    "modern": {
+      "java": "25",
+      "runtime": "Eclipse Temurin 25",
+      "maven": "3.9.12",
+      "springBoot": "4.1.0",
+      "springFramework": "7.0.8",
+      "servlet": "Jakarta Servlet 6.1",
+      "webStarter": "spring-boot-starter-webmvc"
+    },
+    "legacy": {
+      "java": "8",
+      "runtime": "Eclipse Temurin 8",
+      "maven": "3.9.12",
+      "springBoot": "2.3.12.RELEASE",
+      "springFramework": "5.2.15.RELEASE",
+      "servlet": "Servlet 4.0 / javax.servlet",
+      "webStarter": "spring-boot-starter-web"
+    }
+  },
+  "sourceDiscovery": {
+    "method": "Tavily was used only to locate candidates; every retained claim was verified against current or archived Spring and Jakarta first-party pages",
+    "researchDirectSourceCount": 17,
+    "lessonOfficialSourceCardCount": 17,
+    "finalHttp200Count": 17,
+    "finalHttpFailureCount": 0,
+    "communitySourcesUsedAsEvidence": false,
+    "projectEvidenceBoundary": "Five frozen Phase 2 items remain display-only compatibility evidence; project source was not reopened or executed"
+  },
+  "research": {
+    "backgroundAgentUsed": true,
+    "scope": "I-08 only",
+    "phaseAContractAlignment": "PASS",
+    "officialUrlVerification": "17/17 HTTP 200",
+    "stopBoundaryAlignment": "PASS; I-09 was not read",
+    "researchSha256": "efff1eefb225a7be9b8d8357dc86417998654daa877ba206b03bc163e0028173"
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/intermediate/spring-mvc-and-servlet-boundaries.md",
+      "sha256": "efff1eefb225a7be9b8d8357dc86417998654daa877ba206b03bc163e0028173"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/spring-mvc-and-servlet-boundaries.md",
+      "sha256": "eb83c34ff38437d7b8a8a4e485a3115591f0e322495243cd1b7cbb81b225cb2a"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "771d314f5d425ecbecf204d69ae1cba799ba5a7f6d6401f017d03595eb57f0f3"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "e89e15d2335d8ddfd659e833633b0114edbfecb172c835dd07867b6221cfca72"
+    },
+    {
+      "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+      "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81"
+    },
+    {
+      "path": "docs/backend/java/audit/phase-2-knowledge-path-manifest.json",
+      "sha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407"
+    }
+  ],
+  "engineeringVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run format:check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run test:unit",
+      "exitCode": 0,
+      "summary": "No persistent unit files; configured empty directory passed"
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "summary": "No persistent E2E files; configured empty directory passed"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "1764 modules transformed; existing Markdown timing and chunk-size warnings only"
+    },
+    {
+      "command": "npx prettier --check <I-08 paths> && git diff --check -- <I-08 paths>",
+      "exitCode": 0,
+      "summary": "final targeted formatting and whitespace checks passed"
+    }
+  ],
+  "concurrentWorkspaceBoundary": {
+    "unrelatedDevIssue": "Vite dev-mode catalog validation reports that the React vite-react-project-setup H1 does not match its title",
+    "javaImpact": "none; the Java production build and isolated production preview passed",
+    "unrelatedFileModified": false,
+    "rootIssueClaimedFixed": false
+  },
+  "javaVerification": {
+    "fixturePath": "/tmp/java-i08-phase-c.20260815",
+    "fixtureSha256": {
+      "verify.sh": "3b1e10ab834938d5dba4ff7a93d9c9028ca0ae47814dd0a262e790cfa99a59fc",
+      "modern/pom.xml": "13c658609e7711af19367d21c60a85d124134e30d040ef9b694afab334371aa4",
+      "modern/ModernMvcFlowTest.java": "ebefbc9a1f3248e0c6ce08d8c7bf8e2e3a553d8ad6bb137d578eb490fae1985b",
+      "legacy/pom.xml": "ccff1b84bd3ce31ee7798ae005dab3c307cd21e45eb7cf1014edfb2c44c5e5ef",
+      "legacy/LegacyMvcFlowTest.java": "01d2d63c2b14e9dd64a2331c0912457da8281be3890a7affcc2cd747550273da"
+    },
+    "modernOutput": "modern PASS chain=filter/interceptor/controller error=problem-detail cors=allow/deny servlet=jakarta",
+    "legacyOutput": "legacy PASS chain=filter/interceptor/controller error=api-error cors=allow/deny servlet=javax",
+    "finalOutput": "I08_DUAL_RUNTIME_PASS",
+    "finalRunsPerRuntime": 2,
+    "postReviewJava8SnippetCompile": "PASS; LegacyRequestFilter compiled with javax.servlet-api 4.0.1 under Java 8",
+    "temporaryAssetsCleaned": true,
+    "cleanupCommand": "find /tmp/java-i08-phase-c.20260815 -depth -delete",
+    "cleanupCheck": "PASS; dual-runtime fixture and Java 8 snippet-check paths no longer exist"
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "adapter": "PASS",
+    "researchLineCount": 176,
+    "lessonLineCount": 911,
+    "independentKnowledgePointHeadings": 18,
+    "knowledgePointSevenPartCoverage": "18/18",
+    "codeBlockCount": 6,
+    "exerciseCount": 1,
+    "officialSourceCount": 17,
+    "pitfallCount": 6,
+    "requiredCoreInterfaceSection": "PASS",
+    "requiredSecuritySection": "PASS",
+    "javaMethodComments": "PASS",
+    "sourceHeadingAbsent": true
+  },
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "session": "i08-phase-c-final",
+    "baseUrl": "http://127.0.0.1:4195/",
+    "targetPath": "/backend/java/core/learn/spring-mvc-and-servlet-boundaries",
+    "productionPreviewUsed": true,
+    "sessionsClosed": true,
+    "previewServerStopped": true,
+    "desktop": {
+      "viewport": "1440x900",
+      "documentScrollWidth": 1440,
+      "horizontalOverflow": false,
+      "knowledgePointCount": 18,
+      "officialSourceCount": 17,
+      "estimatedMinutesVisible": true,
+      "verifiedAtVisible": true,
+      "requiredSectionsVisible": true
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "documentScrollWidth": 390,
+      "horizontalOverflow": false,
+      "knowledgePointCount": 18,
+      "officialSourceCount": 17,
+      "requiredSectionsVisible": true
+    },
+    "title": "Spring MVC、Servlet 与请求生命周期",
+    "previousEntryId": "backend.java.learn.intermediate.spring-boot-and-configuration",
+    "liveNextEntryBeforeI09Reorder": "backend.java.learn.intermediate.relational-data-and-sql-foundations",
+    "frozenSuccessorNotYetReordered": "backend.java.learn.intermediate.transactions-and-idempotency",
+    "completionButtonTextAfterReload": "取消完成",
+    "progressPersistedAfterReload": true,
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "staticRequestCount": 35,
+    "failedRequests": 0,
+    "nonSuccessfulResponses": 0
+  },
+  "review": {
+    "riskClassification": "I-08 substantially rewrites the lesson contract and track order while preserving the stable ID, URL and loader",
+    "independentReviewRequired": true,
+    "reviewedCurrentLessonSha256": "eb83c34ff38437d7b8a8a4e485a3115591f0e322495243cd1b7cbb81b225cb2a",
+    "standards": "PASS / 0 finding",
+    "spec": "PASS / 0 finding",
+    "highestSeverity": "none",
+    "initialStandardsFindingsClosed": 2,
+    "repairs": [
+      "added java.io.IOException to the Java 8 complete class and compiled it under Java 8",
+      "added the required core-interface and security sections without expanding the lesson scope"
+    ],
+    "reviewWorkspaceModified": false,
+    "reviewStopBoundary": "reviewer did not read I-09"
+  },
+  "stopBoundary": "Phase C I-08 is closed at 8/20. Per the latest instruction, execution stops here; I-09 was not started. Phase D remains unauthorized until the Phase C total Gate closes.",
+  "selfHashPolicy": "signoff file does not record its own SHA-256; artifacts bind only stable external batch outputs"
+}

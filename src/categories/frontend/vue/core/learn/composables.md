@@ -70,7 +70,7 @@ recap:
 
 # 组合式函数
 
-## 正文大纲
+## 一、正文大纲
 
 前面的课程已经能在组件内组织状态、侦听变化和管理生命周期。本课把这些能力提取成可复用的有状态逻辑：先确定函数拥有的状态，再设计输入与返回值，最后明确外部资源由谁创建、暂停和清理。组合式函数仍是普通 JavaScript 函数，不是新的组件或运行时容器。
 
@@ -87,7 +87,7 @@ recap:
 本课限定 SFC、&lt;script setup lang="ts"&gt;、Composition API 与 Vue 3.5.40。Provide / Inject、Pinia、共享 store、事件总线、第三方 composables、完整网络层、完整 effectScope API、SSR 数据获取与后续课程均不在本课范围内。
 :::
 
-## 组合式函数复用的是有状态逻辑
+## 二、组合式函数复用的是有状态逻辑
 
 组合式函数是利用 Vue Composition API 封装和复用有状态逻辑的函数。这里的“有状态”包括 ref、computed、watcher、生命周期或外部订阅。只做输入到输出转换的逻辑继续使用普通工具函数；把文件改名为 useSomething.ts 并不会改变它的职责。
 
@@ -121,7 +121,7 @@ function useCounter() {
 `use*` 是清晰的生态命名约定，不是 Vue 运行时强制语法。它提醒调用方：这个函数可能创建响应式状态、注册生命周期或拥有需要清理的副作用。
 :::
 
-## 先冻结每次调用的实例边界
+## 三、先冻结每次调用的实例边界
 
 状态写在组合式函数体内时，每次调用都会重新执行函数并创建新的 refs。共享的是算法，不是数据。一个实例的 reset 或 stop 只影响它自己；只有把状态刻意移到函数外，才会形成模块级共享。
 
@@ -150,7 +150,7 @@ counterA.reset()
 
 先问“状态属于哪一次调用”，再问“函数放在哪个文件”。默认把 ref 放在函数体内；需要共享时重新设计请求级、应用级或组件树级所有权。
 
-## 返回普通对象中的 refs
+## 四、返回普通对象中的 refs
 
 官方推荐返回一个装有多个 refs 的普通对象。调用方解构后拿到的仍是 ref，脚本中用 .value，模板中由 Vue 自动解包。若组合式函数返回 reactive 代理，直接解构基本类型属性只会复制当时的值，之后不再访问原代理。
 
@@ -182,7 +182,7 @@ const { x, y } = usePosition()
 
 若调用方确实偏好对象式访问，可以在调用处保留整个返回对象，或写 reactive(useCounter())；关键是不要先让 reactive 自动解包 ref，再把其中的基本值解构出来。
 
-## 用 MaybeRefOrGetter 设计响应式输入
+## 五、用 MaybeRefOrGetter 设计响应式输入
 
 可复用逻辑经常既要接受固定配置，又要跟随 ref 或 getter。MaybeRefOrGetter&lt;T&gt; 正好表达“普通值、ref 或无参 getter”三种输入，toValue() 在每次真正使用时把它们规范化为当前值。函数值会被当作 getter 执行，因此不要把普通回调误当成这种输入。
 
@@ -212,7 +212,7 @@ const doubled = useStepCounter(() => step.value * 2)
 `toValue()` 只返回调用当下的值，不会自动建立 watcher。把 toValue(step) 存在函数入口，只会留下一个快照；要让事件处理器使用最新值，就在事件发生时读取。
 :::
 
-## 在 watch 或 watchEffect 中读取输入
+## 六、在 watch 或 watchEffect 中读取输入
 
 如果输入变化本身就要驱动逻辑重跑，应在 watch 的 getter 或 watchEffect 的同步执行段内调用 toValue()。watch 适合依赖来源明确、需要新旧值或精确触发的场景；watchEffect 适合逻辑自然读取多个依赖的场景。两者负责追踪，toValue 只负责规范化。
 
@@ -254,7 +254,7 @@ function useStepSummary(step: MaybeRefOrGetter<number>) {
 | 同步逻辑自然读取多个输入 | watchEffect | effect 同步执行段内读取 |
 | 只需要当前值一次 | 直接读取 | 调用处 toValue(input) |
 
-## 把外部副作用设计成可停止资源
+## 七、把外部副作用设计成可停止资源
 
 DOM listener、timer、Observer 和第三方订阅不由 Vue 自动释放。组合式函数应保存稳定 handler，让创建和清理走同一条路径；若资源允许暂停，再公开幂等 start / stop，重复调用不会重复注册或错误移除。浏览器资源放到 mounted 后建立，也能避开 SSR 没有 window 的阶段。
 
@@ -304,7 +304,7 @@ function useEventCounter(step: MaybeRefOrGetter<number>) {
 不是所有副作用都必须放在 onMounted 中。同步创建的 watcher 可以直接归属当前组件 scope；网络逻辑也可能在调用期间启动。mounted 主要用于只能在客户端访问的 DOM/浏览器资源，以及需要与 unmounted 对称管理的资源。
 :::
 
-## 同步调用决定生命周期与 effect 的归属
+## 八、同步调用决定生命周期与 effect 的归属
 
 依赖生命周期或组件 effect scope 的组合式函数，应在 &lt;script setup&gt; 或 setup() 的同步执行阶段调用。此时 Vue 能把生命周期钩子、watcher 和清理登记到当前组件。普通 async setup 在第一个 await 后可能已失去活动实例；&lt;script setup&gt; 顶层 await 能恢复上下文是编译器特例。
 
@@ -330,7 +330,7 @@ onMounted(() => {
 
 组件卸载会停止在其活跃 scope 中同步创建的响应式 effects，但不会猜测如何移除应用自己创建的 listener。watcher cleanup 还会在下一轮重跑前执行，所以“失效时清理”和“组件卸载时清理”是两个互补时机。
 
-## 每次调用、显式共享与 SSR 边界
+## 九、每次调用、显式共享与 SSR 边界
 
 函数体内 ref 默认属于一次调用。把 ref 移到模块顶层会让所有调用共享它，这有时是有意的客户端单例，但在 SSR 中模块通常被多个请求复用，一个请求写入的用户状态可能被另一个请求读取。共享需求必须先确定所有者，再由每个 SSR 请求创建独立状态。
 
@@ -363,7 +363,7 @@ const requestCounter = createCounterState()
 SSR 不能简化成“所有 watcher 都运行”或“所有 watcher 都不运行”。Vue 3.5.40 会按 flush、immediate 和 API 类型走不同分支；本课只要求不在服务端 setup 直接访问 window，并避免跨请求模块级可变状态。
 :::
 
-## 用唯一 Demo 验证组合式函数契约
+## 十、用唯一 Demo 验证组合式函数契约
 
 实验用同一个 useEventCounter 创建 A、B 两个实例。A 接收 step ref，B 接收 step &#42; 2 getter；每次 tick 才读取最新输入。暂停 B 后 A 继续计数，重置 A 不影响 B，重复启停也不会重复注册监听。
 
@@ -385,7 +385,7 @@ SSR 不能简化成“所有 watcher 都运行”或“所有 watcher 都不运�
 停止 B 后 tick 只改变 A；重新启动 B 后每次仍只增加一次，重置 A 不影响 B。
 :::
 
-## 易错使用提示
+## 十一、易错使用提示
 
 :::pitfalls
 ### 1. 先取 .value，把响应式输入截成快照
@@ -662,7 +662,7 @@ watchEffect((onCleanup) => {
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## Vue 3.5.40 源码与官方测试的独立推导
+## 十二、Vue 3.5.40 源码与官方测试的独立推导
 
 这一节只用固定版本源码解释公开契约，不把内部函数形状升级成未来版本承诺。公开文档说明该怎么用；源码与测试帮助回答当前版本为什么有这些边界。
 
@@ -701,7 +701,7 @@ apiWatch.ts 会按 flush、immediate 与 API 类型处理服务端 watcher；官
   -> unmounted / scope.stop：停止 effect 并执行清理
 ~~~~
 
-## 高级使用场景
+## 十三、高级使用场景
 
 | 场景 | 推荐设计 | 避免的误读 |
 | --- | --- | --- |
@@ -782,6 +782,6 @@ export function useEventCounter(step: MaybeRefOrGetter<number>) {
 - [ ] 能区分 watcher 失效清理、组件卸载清理与手工 scope 清理
 - [ ] SSR 不直接访问浏览器 API，也不默认共享模块级可变状态
 
-## 完成本课后的判断顺序
+## 十四、完成本课后的判断顺序
 
 先判断逻辑是否拥有响应式状态或副作用；若有，再确定每次调用的状态边界。输入可能变化时保留 ref/getter，并在动作或 effect 真正读取处 toValue；返回多个状态时使用普通对象中的 refs。最后列出所有外部资源，给它们稳定 handler、幂等启停和明确 owner，再检查 SSR 是否会触碰浏览器 API 或跨请求单例。

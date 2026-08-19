@@ -1,0 +1,488 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.basics.maven-project-model",
+  "batchId": "phase-4-maven-project-model",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "phase": "Phase B",
+  "phaseBProgress": "19/21",
+  "phaseBReverification": {
+    "recordedAt": "2026-08-15T00:16:05Z",
+    "contract": {
+      "title": "Maven 坐标、依赖、生命周期与多模块结构",
+      "url": "/backend/java/core/learn/maven-project-model",
+      "durationMinutes": 90,
+      "prerequisites": ["backend.java.learn.basics.io-files-and-resource-ownership"],
+      "requiredTopics": [
+        "POM、GAV、packaging 与 effective POM",
+        "parent 继承与 modules aggregation",
+        "dependencies、dependencyManagement、scope 与传递依赖",
+        "生命周期 phase、plugin goal 与 pluginManagement",
+        "Maven 3 reactor、局部构建与 Java 25/8 兼容反馈环"
+      ]
+    },
+    "phaseAFrozenPlan": {
+      "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+      "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81",
+      "previousCourse": "backend.java.learn.basics.io-files-and-resource-ownership",
+      "nextCourse": "backend.java.learn.basics.first-automated-test-with-junit",
+      "nextCourseStarted": false,
+      "phaseBStopBoundary": "B-19 关闭后才允许读取 B-20；B-21 基础 Gate 关闭后立即停止，不进入 Phase C。"
+    },
+    "sourceReverification": {
+      "method": "使用 Tavily 发现候选页，再直接核对 Maven 3.9.16、POM、依赖、生命周期、插件、reactor 与 Maven 4 RC 官方页面",
+      "communitySourcesUsedAsEvidence": false,
+      "verifiedAt": "2026-08-15",
+      "researchUniqueUrls": 13,
+      "lessonOfficialLinks": 12,
+      "httpStatus": "13/13 全部返回 200"
+    },
+    "routeIdentity": {
+      "stableIdPreserved": true,
+      "stableUrlPreserved": true,
+      "trackPosition": 19,
+      "trackStatus": "available",
+      "loaderSlug": "maven-project-model",
+      "trackChangedInThisBatch": false,
+      "loaderChangedInThisBatch": false
+    },
+    "artifacts": [
+      {
+        "path": "docs/research/backend/java/basics/maven-project-model.md",
+        "sha256": "9bd6160681c83d40865307391166fabf6542dfe941550dc06500a4ffd4ba7aa7"
+      },
+      {
+        "path": "src/categories/backend/java/core/learn/maven-project-model.md",
+        "sha256": "3ec8ab9cccce394b5a0ce1574f9df8d3144e51f7c8a00537b169d7c71188c439"
+      },
+      {
+        "path": "src/categories/backend/java/core/backend-java-track.ts",
+        "sha256": "dcb7a04baa824bd0d1106bea799715b042fde27812d21f31678160f28c8efd42"
+      },
+      {
+        "path": "src/categories/backend/java/core/entry-manifest.ts",
+        "sha256": "4385da9b31d862fdc4184d6fae0130eaf43d2b3e9c7f08d4d55a7818dd05eb76"
+      },
+      {
+        "path": "docs/backend/java/audit/phase-2-knowledge-path-manifest.json",
+        "sha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407"
+      }
+    ],
+    "baselineVerification": [
+      {
+        "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+        "exitCode": 0,
+        "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+      },
+      { "command": "npm run type-check", "exitCode": 0, "summary": "passed" },
+      { "command": "npm run lint", "exitCode": 0, "summary": "passed" },
+      { "command": "npm run format:check", "exitCode": 0, "summary": "passed" },
+      {
+        "command": "npm run test:unit",
+        "exitCode": 0,
+        "summary": "empty configured unit directory is valid"
+      },
+      {
+        "command": "npm run test:e2e",
+        "exitCode": 0,
+        "summary": "empty configured E2E directory is valid"
+      },
+      {
+        "command": "npm run build",
+        "exitCode": 0,
+        "summary": "passed; 1731 modules transformed; existing catalog chunk and plugin timing warnings only"
+      },
+      {
+        "command": "git diff --check -- <B-19 paths> && git diff --cached --check -- <B-19 paths>",
+        "exitCode": 0,
+        "summary": "passed"
+      }
+    ],
+    "mavenVerification": {
+      "command": "extract the 如何验证 bash block from the final lesson and execute it with bash",
+      "exitCode": 0,
+      "sharedStableOutput": "maven|version=3.9.16|model=true|managed=true|inherit=true|effective=true|tree=true|order=library,app|verify=true|partial=true|target=52|repeat=true",
+      "versions": ["Eclipse Temurin 25.0.3+9 LTS", "Eclipse Temurin 8u492-b09"],
+      "temporaryAssets": {
+        "location": "host and container /tmp",
+        "cleanupMethod": "shell trap with find -depth -delete",
+        "cleanupStatus": "complete"
+      }
+    },
+    "browserVerification": {
+      "tool": "Playwright CLI",
+      "session": "b19",
+      "sessionClosed": true,
+      "baseUrl": "http://127.0.0.1:4173/",
+      "targetPath": "/backend/java/core/learn/maven-project-model",
+      "desktop": {
+        "viewport": "1440x900",
+        "documentClientWidth": 1440,
+        "documentScrollWidth": 1440,
+        "horizontalOverflow": false,
+        "title": "Maven 坐标、依赖、生命周期与多模块结构",
+        "codeBlockCount": 23,
+        "officialSourceUniqueUrlCount": 12,
+        "durationText": "约 90 分钟",
+        "previousPath": "/backend/java/core/learn/io-files-and-resource-ownership",
+        "nextAvailablePathBeforeB20Publication": "/backend/java/core/learn/lambda-stream-and-collectors",
+        "searchTerm": "Maven 坐标、依赖、生命周期与多模块结构",
+        "searchResultCount": 1
+      },
+      "mobile": {
+        "viewport": "390x844",
+        "documentClientWidth": 390,
+        "documentScrollWidth": 390,
+        "horizontalOverflow": false,
+        "codeBlockCount": 23
+      },
+      "completionButtonTextAfterReload": "取消完成",
+      "progressPersistedAfterReload": true,
+      "progressTextAfterReload": "1 / 52",
+      "console": { "errors": 0, "warnings": 0 },
+      "productionRequests": { "count": 70, "allSuccessful": true, "statuses": [200] }
+    },
+    "review": {
+      "riskClassification": "复用课程的路线前置、时长和签核状态修正",
+      "independentReviewRequired": false,
+      "priorFullReview": "PASS / 0 finding",
+      "currentVerification": "Maven 3.9.16 双 JDK 反馈、完整工程 Gate、官方链接和生产浏览器验证通过"
+    },
+    "workspaceProtection": {
+      "dirtyWorkspaceProtected": true,
+      "unrelatedChangesPreserved": true,
+      "statusSnapshotSha256": "ff539c42d79f4c39778c283fe0839bbecb1c1403f6c5ae6f72f5f1dd5394061f",
+      "scopedStagedAndUnstagedDiffCheck": "PASS"
+    },
+    "changedFiles": [
+      "docs/research/backend/java/basics/maven-project-model.md",
+      "src/categories/backend/java/core/learn/maven-project-model.md",
+      "docs/backend/java/audit/reviews/phase-4-maven-project-model-signoff.json"
+    ]
+  },
+  "recordedAt": "2026-08-07T02:18:17Z",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "stagedBatchSpecificChanges": false,
+    "sharedManifestStagingPreserved": true
+  },
+  "sourceRepository": {
+    "path": "/Users/jian/Desktop/work/TDH/dzzz/dzzz-app",
+    "head": "167ca8aa91ca3a6b101246964ef4fddec3d21da0",
+    "accessedThisBatch": true,
+    "statusRechecked": true,
+    "statusShort": "",
+    "readOnly": true,
+    "projectExecuted": false,
+    "projectModified": false
+  },
+  "phase2Freeze": {
+    "courseCoverageMatrixJsonSha256": "04d858896d07e975d3ab50796494873f09bd0ddf4b1a8b1ea87bd75cdd101d38",
+    "courseCoverageMatrixSha256": "b7fd50ffabbcf8a198802e907cef769ac969a71e4e14c40038f4aaaed09d91ad",
+    "researchStatus": "not-started",
+    "exampleStatus": "not-started",
+    "courseStatus": "planned",
+    "phase4StateRecordedOnlyInThisSignoff": true,
+    "admissionGate": "PASS",
+    "counts": {
+      "sourceItems": 167,
+      "courseNodes": 64,
+      "dependencyEdges": 114
+    }
+  },
+  "versions": {
+    "verifiedAt": "2026-08-07",
+    "maven": "3.9.16",
+    "modern": {
+      "java": "25",
+      "runtime": "Eclipse Temurin 25.0.3+9 LTS"
+    },
+    "legacy": {
+      "java": "8",
+      "runtime": "Eclipse Temurin 8u492-b09",
+      "springBootBackground": "2.3.12.RELEASE"
+    },
+    "maven4Boundary": "4.0.0-rc-6 remains a release candidate and is not taught as the stable baseline"
+  },
+  "sourceDiscovery": {
+    "method": "Tavily reviewer extract and direct official-page checks; all course frontmatter URLs are reachable, and the research table records HTTP 200 for all 13 Maven official pages",
+    "communitySourcesUsedAsEvidence": false,
+    "projectEvidenceBoundary": "sourceCapabilityIds and projectEvidence are both empty; course content did not use the current dzzz-app POM or source as project evidence; final drift reverification only read source files to calculate SHA-256 and did not run or modify the project",
+    "directUrls": [
+      "https://maven.apache.org/docs/3.9.16/release-notes.html",
+      "https://maven.apache.org/install.html",
+      "https://maven.apache.org/docs/history.html",
+      "https://maven.apache.org/guides/introduction/introduction-to-the-pom.html",
+      "https://maven.apache.org/pom.html",
+      "https://maven.apache.org/ref/3.9.16/maven-model/maven.html",
+      "https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html",
+      "https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html",
+      "https://maven.apache.org/guides/mini/guide-configuring-plugins.html",
+      "https://maven.apache.org/guides/mini/guide-multiple-modules.html",
+      "https://maven.apache.org/plugins/maven-help-plugin/effective-pom-mojo.html",
+      "https://maven.apache.org/developers/compatibility-plan.html",
+      "https://maven.apache.org/docs/4.0.0-rc-6/release-notes.html"
+    ]
+  },
+  "projectEvidence": [],
+  "docker": {
+    "engine": "Docker 29.6.1",
+    "feedbackSource": "extract the 如何验证 bash block from the course Markdown and pipe the same script to bash",
+    "classOutput": "container-mounted mktemp project and isolated Maven repository under /tmp; shell trap uses find -depth -delete",
+    "images": [
+      {
+        "role": "modern",
+        "requestedTag": "eclipse-temurin:25-jdk",
+        "digest": "sha256:12e44624adee6808a36d962717e1656e0afeeeff5a100f9cb00e0136513558f0"
+      },
+      {
+        "role": "legacy",
+        "requestedTag": "eclipse-temurin:8-jdk",
+        "digest": "sha256:c8b86f2c0a9bd6cc1b7fabc5d1a097501a166eea7cad3b2764e90e96178bea9b"
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/basics/maven-project-model.md",
+      "sha256": "35ef46526cba8c0a7fe7e8c27ad3086909bb2a23859a8cbbf2456d60f138e91c"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/maven-project-model.md",
+      "sha256": "89623c86d37559796e515bfb831d5b504c29555d0ff2cd96205a99b3f4ddba26"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "2844172a9f03f5f37eb98361446f4d76e5b4c1a61a9216040e410cd82b1a92fe"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "a6d062784c82ffb33378f7ca33b070bda4f76b4f2bc3023892346697e9d503c3"
+    },
+    {
+      "path": "docs/backend/java/dzzz-app-course-plan.md",
+      "sha256": "35783758d76d11b96e5cc2aae4f15d9c49ecf9ad041f48dcc08bd43960a3f3fc"
+    }
+  ],
+  "selfHashPolicy": "signoff 文件不记录自身 SHA-256；artifacts 只绑定 signoff 外可稳定计算的本批课程产物。",
+  "baselineVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run format:check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run test:unit",
+      "exitCode": 0,
+      "summary": "No test files found; configured empty test directory is valid"
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "summary": "No persistent E2E test files; command passed with --pass-with-no-tests"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "passed; 1214 modules transformed; existing >500 kB catalog chunk warning only"
+    },
+    {
+      "command": "git diff --check && git diff --cached --check",
+      "exitCode": 0,
+      "summary": "passed; no new staging performed"
+    }
+  ],
+  "mavenVerification": {
+    "command": "extract 如何验证 bash block from src/categories/backend/java/core/learn/maven-project-model.md and pipe to bash",
+    "exitCode": 0,
+    "sharedOutput": "maven|version=3.9.16|model=true|managed=true|inherit=true|effective=true|tree=true|order=library,app|verify=true|partial=true|target=52|repeat=true",
+    "cases": [
+      {
+        "name": "Java 25 full and partial reactor builds",
+        "exitCode": 0,
+        "assertions": "clean verify and offline -pl app -am verify passed; library precedes app; both JARs exist"
+      },
+      {
+        "name": "Java 8 full and partial reactor builds",
+        "exitCode": 0,
+        "assertions": "same script and stable summary as Java 25"
+      },
+      {
+        "name": "effective POM",
+        "assertions": "app direct dependency resolves library 1.0.0; compiler plugin 3.14.1 and release 8 are inherited from pluginManagement"
+      },
+      {
+        "name": "dependency tree",
+        "assertions": "app contains exactly one lesson.maven:library:jar:1.0.0:compile edge"
+      },
+      {
+        "name": "runtime, class target, and repeatability",
+        "assertions": "app prints maven-course; library and app class files are major version 52; second clean verify succeeds offline"
+      }
+    ],
+    "initialFindings": [
+      "the research HTTP table omitted the course model-reference URL",
+      "the original course feedback ran only offline validate while claiming effective POM, dependency tree, plugin, classpath, package, and Java target evidence",
+      "the plan claimed an independent signoff that did not yet exist"
+    ],
+    "repairs": [
+      "added the Maven 3.9.16 Model Reference HTTP 200 row",
+      "added Java sources, pluginManagement/plugins, isolated repository, full and partial verify, effective POM, dependency tree, JAR/runtime/class-target assertions, offline repeat, and raw Maven failure output",
+      "created this independent signoff and bound it to the final non-self artifacts"
+    ],
+    "temporaryAssetsCleaned": true
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "adapter": "PASS",
+    "blockCount": 77,
+    "codeBlockCount": 12,
+    "exerciseCount": 1,
+    "exerciseContract": "要求、验收、参考答案三字段完整",
+    "javaMethodComments": "PASS"
+  },
+  "catalogVerification": {
+    "method": "fresh Vite middleware SSR 加载真实 entry-manifest、track 和目标 content-entry",
+    "exitCode": 0,
+    "registeredEntries": 18,
+    "availableEntries": 18,
+    "targetId": "backend.java.learn.basics.maven-project-model",
+    "projectEvidenceCount": 0,
+    "blockCount": 77,
+    "codeBlockCount": 12,
+    "exerciseCount": 1
+  },
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "baseUrl": "http://127.0.0.1:4188/",
+    "targetPath": "/backend/java/core/learn/maven-project-model",
+    "desktop": {
+      "viewport": "1440x900",
+      "documentClientWidth": 1440,
+      "documentScrollWidth": 1440,
+      "horizontalOverflow": false,
+      "title": "Maven 坐标、依赖、生命周期与多模块结构",
+      "codeBlockCount": 22,
+      "searchTerm": "dependencyManagement",
+      "searchResultCount": 1
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "documentClientWidth": 390,
+      "documentScrollWidth": 390,
+      "horizontalOverflow": false,
+      "codeBlockCount": 22
+    },
+    "console": {
+      "errors": 0,
+      "warnings": 0,
+      "pageErrors": 0,
+      "failedRequests": 0
+    },
+    "progressPersistedAfterReload": true,
+    "completionButtonTextAfterReload": "取消完成",
+    "previousEntryId": "backend.java.learn.basics.io-files-and-resource-ownership",
+    "nextLink": false,
+    "targetPageStatus": 200,
+    "targetCatalogMetaStatus": 200,
+    "targetContentEntryStatus": 200,
+    "batchSpecificRepositoryBrowserOutputAbsent": true,
+    "preExistingRepositoryBrowserOutputProtected": true
+  },
+  "sourceDriftReverification": {
+    "status": "PASS",
+    "verifiedAt": "2026-08-07T02:47:40Z",
+    "expectedHead": "167ca8aa91ca3a6b101246964ef4fddec3d21da0",
+    "liveHead": "167ca8aa91ca3a6b101246964ef4fddec3d21da0",
+    "statusShort": "",
+    "scope": "第 10 至第 18 批冻结 projectEvidence 的代表路径、稳定符号与源码 SHA-256",
+    "representativePairs": 82,
+    "uniquePaths": 82,
+    "missingPaths": 0,
+    "hashMismatches": 0,
+    "missingFrozenSymbols": 0,
+    "method": "逐项比较冻结 extracted JSONL 的 path、sourceSha256 与 declaredTypes.qualifiedName，再对只读 live source 计算 SHA-256",
+    "projectExecuted": false,
+    "projectModified": false
+  },
+  "finalClosureBrowserReverification": {
+    "tool": "Playwright CLI",
+    "baseUrl": "http://127.0.0.1:4189/",
+    "mobileViewport": "390x844",
+    "mobileRouteCount": 18,
+    "http200Count": 18,
+    "horizontalOverflowCount": 0,
+    "navigationFailureCount": 0,
+    "desktopViewport": "1440x900",
+    "desktopSpotChecks": [
+      "development-environment-and-runtime",
+      "generics-and-type-safety",
+      "maven-project-model"
+    ],
+    "desktopFailureCount": 0,
+    "consoleErrors": 0,
+    "consoleWarnings": 0
+  },
+  "changedFiles": [
+    "docs/research/backend/java/basics/maven-project-model.md",
+    "src/categories/backend/java/core/learn/maven-project-model.md",
+    "src/categories/backend/java/core/entry-manifest.ts",
+    "src/categories/backend/java/core/backend-java-track.ts",
+    "docs/backend/java/audit/reviews/phase-4-maven-project-model-signoff.json",
+    "docs/backend/java/dzzz-app-course-plan.md"
+  ],
+  "priorClosedJavaAssets": {
+    "protected": true,
+    "summary": "第一至第十七批研究、课程与 signoff 保持原样，不归入第十八批课程产物。"
+  },
+  "concurrentWorkspaceAssets": {
+    "protected": true,
+    "attribution": "frontend TypeScript、Vite、Vue、frontend 文档、HeadingBlock 与 ContentEntryPage 资产由并行工作产生，不属于本批 changedFiles；根级校验在包含这些资产的当前工作区上执行。",
+    "preSignoffStatusSnapshotSha256": "63f3d267616b4019df4ecda32e527a141c6c8ffce3e452b83f8b551079e239bd",
+    "paths": [
+      "docs/frontend/",
+      "src/app/pages/ContentEntryPage.vue",
+      "src/categories/frontend/engineering/",
+      "src/categories/frontend/vue/",
+      "src/common/ui/blocks/HeadingBlock.vue"
+    ]
+  },
+  "review": {
+    "standards": "PASS",
+    "standardsFindings": 0,
+    "spec": "PASS",
+    "specFindings": 0
+  },
+  "beginnerContentReverification": {
+    "verifiedAt": "2026-08-07",
+    "courseArtifact": {
+      "path": "src/categories/backend/java/core/learn/maven-project-model.md",
+      "sha256": "aae5e2be1923b2c7ff861d2849336fc918d2e4ce992bc0f760b6b0cf9e1d8668"
+    },
+    "content": "PASS; exactly one 从零跟着做, usage, pitfalls, verification, one exercise and runnable code",
+    "sources": "PASS; source type, appliesTo and claims shown only in the official-source regions; 正文无来源详情",
+    "browser": "PASS; 1440px and 390px routes, 36/36 HTTP 200, no horizontal overflow or browser errors",
+    "root": "PASS; knowledge-path, type-check, lint, format and diff checks"
+  },
+  "stopBoundary": "Phase B 的 B-19 已关闭；下一批只允许 B-20 first-automated-test-with-junit，不得跳到 B-21，不得进入 Phase C、D、E。B-21 基础 Gate 关闭后立即停止。"
+}

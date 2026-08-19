@@ -90,11 +90,11 @@ anchors:
 
 # Store 类型与实例 Surface
 
-## State Tree
+## 一、State Tree
 
 `StateTree` 是 `Record&lt;PropertyKey, any&gt;`，是 Pinia 公共泛型约束而不是推荐把业务 state 写成 `any`。实际 store 仍应让 `state()` 或 Setup 返回值推导精确字段；只有需要表达“任意 Pinia state shape”的基础设施才使用这个宽边界。
 
-## Store Type
+## 二、Store Type
 
 `Store` 是实例的完整交叉类型：基础 `$` 成员、解包后的 state、getters、actions，以及插件声明合并得到的 custom properties/state。上方签名是固定声明的可读摘要；应用不应直接导入 `_StoreWithState`、`_StoreWithGetters` 或 `_ActionsTree` 手工重建它。
 
@@ -102,23 +102,23 @@ anchors:
 同一个 store 变量可以直接读取 state/getter 并调用 action，是类型组合与 reactive proxy 解包共同形成的 public surface。需要解构 state/getter 时，改用 `storeToRefs()` 保留响应式连接。
 :::
 
-## Store Generic
+## 三、Store Generic
 
 `StoreGeneric` 是 type-unsafe convenience：id 与 state/getter/action 都被放宽，允许字符串属性访问。它适合不关心具体 store shape 的诊断器、通用 plugin helper 或函数边界，不应替代业务层的精确 `ReturnType&lt;typeof useStore&gt;`。
 
-## Store Actions
+## 四、Store Actions
 
 `StoreActions&lt;SS&gt;` 从 Options Store 的 actions 或 Setup Store 返回的 function 中提取公共 action shape。库代码需要只消费行为面时使用它；它是稳定根入口，优先于 internal `_ExtractActionsFromSetupStore`。
 
-## Store Getters
+## 五、Store Getters
 
 `StoreGetters&lt;SS&gt;` 对 Options Store 提取 getters，对 Setup Store 提取 computed 返回面。它描述实例解包后的 getter 值类型；要在组件解构后保持 computed ref，使用 `storeToRefs()` 的返回值。
 
-## Store State
+## 六、Store State
 
 `StoreState&lt;SS&gt;` 提取 Options 或 Setup Store 的 unwrapped state。它适合持久化 adapter、fixture 与函数参数的 state-only 约束；不要把类型提取等同于复制 state，也不要据此绕过 `$patch()` 的 mutation 语义。
 
-## Store Properties
+## 七、Store Properties
 
 | 成员 | 分类 | 正文边界 |
 | --- | --- | --- |
@@ -131,7 +131,7 @@ anchors:
 | _hmrPayload | internal | dev-only state/actions/getters payload |
 | _customProperties | public specialized | 固定声明未标 internal；仅供插件登记 Devtools custom keys，不是业务 state 容器 |
 
-## 实例成员
+## 八、实例成员
 
 | 成员 | 公开契约 | 关键边界 |
 | --- | --- | --- |
@@ -163,7 +163,7 @@ stop()
 
 `$subscribe()` 的 `detached` 决定是否脱离当前组件 scope；`$onAction()` 同样支持脱离并暴露 `after/onError`。`$patch()` 会暂停常规 listener、完成 object merge 或同步 mutator，再主动发出一次 patch 通知，因此 watch `flush` 不能用来推断 patch 次数或异步事务。mutation variants 与 listener 类型的完整 Reference 属于 PRA2。
 
-## 易错使用提示
+## 九、易错使用提示
 
 :::pitfalls
 ### 用 StoreGeneric 逃避业务类型
@@ -393,7 +393,7 @@ store.$patch({ profile })
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 十、源码推导与适用场景
 
 :::steps
 ### 1. Store 是多个公开面的交叉类型

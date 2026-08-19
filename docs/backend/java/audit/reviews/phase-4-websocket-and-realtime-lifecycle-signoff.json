@@ -1,0 +1,279 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.advanced.websocket-and-realtime-lifecycle",
+  "batchId": "phase-4-websocket-and-realtime-lifecycle",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-11T00:53:52+08:00",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "stagingPerformedThisBatch": false,
+    "existingStagedAndUnstagedStatePreserved": true
+  },
+  "sourceRepository": {
+    "path": "/Users/jian/Desktop/work/TDH/dzzz/dzzz-app",
+    "readOnly": true,
+    "projectExecuted": false,
+    "projectModified": false,
+    "accessBoundary": "Frozen Phase 2 evidence only; no batch-specific project access"
+  },
+  "phase2Freeze": {
+    "researchStatus": "not-started",
+    "exampleStatus": "not-started",
+    "courseStatus": "planned",
+    "phase4StateRecordedOnlyInThisSignoff": true,
+    "knowledgePath": {
+      "sourceItems": 167,
+      "courseNodes": 64,
+      "dependencyEdges": 114,
+      "gateStatus": "passed"
+    }
+  },
+  "versions": {
+    "verifiedAt": "2026-08-10",
+    "modern": {
+      "java": "25",
+      "springBoot": "4.1.0",
+      "springFramework": "7.0.8",
+      "jakartaWebSocket": "2.2.0",
+      "maven": "3.9.12"
+    },
+    "legacy": {
+      "java": "8",
+      "springBoot": "2.3.12.RELEASE",
+      "springFramework": "5.2.15.RELEASE",
+      "webSocketNamespace": "javax.websocket",
+      "maven": "3.9.12"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/advanced/websocket-and-realtime-lifecycle.md",
+      "sha256": "a9a7744da3fb4a08e3509628c7c7bb6839cf2b37d71ca645de32ff3274d23241"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/websocket-and-realtime-lifecycle.md",
+      "sha256": "63ca86023fcb47454ee5148322feb9d09d75740ad81649705f196961002a4247"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "ed8f392f04ebf714ff53943e80d49347e4dd6b7625639b1a61fa08c39ca1dd48"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "4c0209bb254a4d6cf986551caa3461ebf171d8670c3f246741209d3d4b4cf03b"
+    }
+  ],
+  "sourceVerification": {
+    "researchCardCount": 38,
+    "researchUniqueUrlCount": 38,
+    "frontmatterOfficialSourceCount": 38,
+    "frontmatterUniqueUrlCount": 38,
+    "researchFrontmatterSetDifference": 0,
+    "communitySourcesUsedAsEvidence": false,
+    "directUrlCheck": "PASS; all 38 official targets returned HTTP 200 and research/frontmatter IDs and URL order matched"
+  },
+  "projectEvidence": {
+    "itemCount": 8,
+    "observedCount": 5,
+    "adaptedCount": 0,
+    "correctedCount": 0,
+    "rejectedCount": 3,
+    "projectEvidenceSetDifference": 0,
+    "currentDefectClaimedFromFrozenEvidence": false,
+    "boundary": "Representative paths and symbols came only from the frozen Phase 2 matrix; corrected risks are teaching boundaries, not claims that the current project is defective"
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "lineCount": 1261,
+    "lineBudget": "PASS; single-course exception reviewed because the frozen topic joins protocol, registry, per-session send, heartbeat and cleanup boundaries",
+    "independentKnowledgePointHeadings": 16,
+    "knowledgePointSevenPartCoverage": "16/16",
+    "pitfallCount": 10,
+    "pitfallNinePartCoverage": "10/10",
+    "orderedListLineBreaks": "PASS; rendered ordered-list items occupy distinct rows",
+    "officialSourceCount": 38,
+    "projectEvidenceCount": 8,
+    "javaCodeBlockCount": 5,
+    "javaMethodComments": "PASS",
+    "sourceHeadingAbsent": true,
+    "securitySection": "PASS",
+    "contentCheck": "PASS; knowledge=16 fields=16/16 pitfalls=10 sources=38 projectEvidence=8 javaBlocks=5",
+    "deadlineBoundary": "PASS; matching Pong and scan both reject/close at now == pongDeadline"
+  },
+  "javaVerification": {
+    "temporaryFixtureRoot": "/tmp/java-advanced-06-feedback.5amEZW",
+    "temporaryAssetsCleaned": true,
+    "cleanupVerifiedWithFinalAbsenceChecks": true,
+    "cases": [
+      {
+        "name": "Documented lifecycle example",
+        "runtime": "Java 25",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "WEBSOCKET_LIFECYCLE_PASS fastIsolation=true overflow=true serial=true pong=true idle=true closeOnce=true roomReclaimed=true tooBig=1009 shutdownZero=true"
+      },
+      {
+        "name": "Documented lifecycle example",
+        "runtime": "Java 8",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "WEBSOCKET_LIFECYCLE_PASS fastIsolation=true overflow=true serial=true pong=true idle=true closeOnce=true roomReclaimed=true tooBig=1009 shutdownZero=true"
+      },
+      {
+        "name": "Negative feedback runner",
+        "runtime": "Java 25 and Java 8",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "WEBSOCKET_EXAMPLE_NEGATIVE_PASS cleanup=true race=true"
+      },
+      {
+        "name": "Jakarta WebSocket API namespace fixture",
+        "runtime": "Jakarta WebSocket 2.2.0 / Java 25 / Maven 3.9.12",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "EndpointApiProbe compiled against jakarta.websocket.Session"
+      },
+      {
+        "name": "javax WebSocket API namespace fixture",
+        "runtime": "javax.websocket-api 1.1 / Java 8 / Maven 3.9.12",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "EndpointApiProbe compiled against javax.websocket.Session"
+      }
+    ],
+    "negativeControls": [
+      "now == pongDeadline rejects matching Pong and closes missing-Pong connection",
+      "unmatched nonce does not confirm a probe",
+      "Ping never overlaps an in-flight text send",
+      "ordinary activity prevents premature idle close",
+      "close failure still removes the registry entry",
+      "enqueue/close race never starts a send after close"
+    ]
+  },
+  "verification": [
+    {
+      "command": "node /tmp/java-advanced-06-feedback.5amEZW/content-check.mjs",
+      "exitCode": 0,
+      "summary": "CONTENT_PASS knowledge=16 fields=16/16 pitfalls=10 sources=38 projectEvidence=8 javaBlocks=5"
+    },
+    {
+      "command": "Java module Catalog cold start check (three consecutive runs)",
+      "exitCode": 0,
+      "summary": "JAVA_MODULE_COLD_PASS on all runs; basics=18 intermediate=17 advancedAvailable=6 advancedPlanned=10 currentLoadable=true nextLoader=false"
+    },
+    {
+      "command": "Global Catalog cold start check (three consecutive runs)",
+      "exitCode": 0,
+      "summary": "CATALOG_COLD_PASS on all runs; basics=18 intermediate=17 advancedAvailable=6 advancedPlanned=10 currentLoadable=true nextLoader=false"
+    },
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check && npm run lint && npm run format:check && npm run test:unit && npm run test:e2e",
+      "exitCode": 0,
+      "summary": "PASS on the current repository quality gates"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "PASS; 1502 modules transformed and websocket-and-realtime-lifecycle chunk emitted"
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0,
+      "summary": "PASS"
+    }
+  ],
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "session": "java-advanced-06",
+    "baseUrl": "http://127.0.0.1:4184/",
+    "targetPath": "/backend/java/core/learn/websocket-and-realtime-lifecycle",
+    "temporaryScreenshots": [
+      "/tmp/java-advanced-06-feedback.5amEZW/desktop-top.png",
+      "/tmp/java-advanced-06-feedback.5amEZW/desktop-bottom.png",
+      "/tmp/java-advanced-06-feedback.5amEZW/mobile-top.png",
+      "/tmp/java-advanced-06-feedback.5amEZW/mobile-bottom.png"
+    ],
+    "desktop": {
+      "viewport": "1440x900",
+      "targetPageStatus": 200,
+      "documentClientWidth": 1440,
+      "documentScrollWidth": 1440,
+      "knowledgePointCount": 16,
+      "pitfallCount": 10,
+      "officialSourceCount": 38,
+      "projectEvidenceCount": 8,
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "failedRequests": 0,
+      "non200Requests": 0,
+      "requestCount": 478,
+      "scrollContainersChecked": "article, lesson-path sidebar, lesson-context sidebar; all at bottom"
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "targetPageStatus": 200,
+      "documentClientWidth": 390,
+      "documentScrollWidth": 390,
+      "knowledgePointCount": 16,
+      "pitfallCount": 10,
+      "officialSourceCount": 38,
+      "projectEvidenceCount": 8,
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "failedRequests": 0,
+      "non200Requests": 0,
+      "requestCount": 478,
+      "atBottom": true,
+      "compareLayout": "single-column responsive reading layout"
+    },
+    "manualScreenshotReview": "PASS; no incoherent overlap, no horizontal overflow, code remains within its own reading boundaries, and mobile bottom content is reachable"
+  },
+  "manifestRegression": {
+    "basicsAvailable": 18,
+    "intermediateAvailable": 17,
+    "advancedAvailable": 6,
+    "advancedPlanned": 10,
+    "currentEntryLoadable": true,
+    "futurePlannedEntriesHaveNoLoader": true,
+    "nextCourseId": "backend.java.learn.advanced.database-sharding-and-sql-boundaries",
+    "nextCourseStatus": "planned",
+    "nextCourseLoader": false,
+    "finalColdStartRuns": 3,
+    "finalColdStartErrors": 0,
+    "finalColdStartPending": false
+  },
+  "review": {
+    "standards": "PASS / 0 finding",
+    "spec": "PASS / 0 finding",
+    "findingCount": 0,
+    "independentReviewRounds": 5,
+    "finalIndependentConfirmationPending": false,
+    "finalIndependentConfirmedAt": "2026-08-11T01:05:17+08:00",
+    "confirmation": "Final published-state review confirmed the course, research contract, manifest registration, signoff evidence and stop boundary with zero findings"
+  },
+  "temporaryAssetCleanup": {
+    "pending": false,
+    "verifiedAt": "2026-08-11T00:53:52+08:00",
+    "temporaryRoots": [
+      "/tmp/java-advanced-06-feedback.5amEZW"
+    ],
+    "playwrightSessions": ["java-advanced-06"],
+    "playwrightSessionsClosed": true,
+    "previewPort": 4184,
+    "previewStopped": true,
+    "removedFileCount": 502,
+    "remainingPathCount": 0
+  },
+  "stopBoundary": "Close advanced course 6 only; do not research, draft, register or load advanced course 7 database-sharding-and-sql-boundaries, Reference, project practice or other stages"
+}

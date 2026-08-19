@@ -63,7 +63,7 @@ recap:
 
 # 依赖注入
 
-## 正文大纲
+## 一、正文大纲
 
 上一课把响应式状态和副作用封装成组合式函数，但每次调用默认仍拥有独立状态。本课处理另一种所有权：依赖属于一段组件子树，实际消费方却隔着多个不使用该依赖的中间组件。祖先用 provide 建立上下文，后代用 inject 按 key 读取，中间组件不再机械转发。
 
@@ -80,7 +80,7 @@ recap:
 本课限定 SFC、&lt;script setup lang="ts"&gt;、Composition API 与 Vue 3.5.40。插件实现、完整 app.runWithContext Demo、SSR 应用工厂、Pinia、事件总线、过渡效果和后续课程均不在本课范围内。
 :::
 
-## 先判断依赖属于哪一层
+## 二、先判断依赖属于哪一层
 
 依赖注入不是“少写 Props”的快捷方式。直接父子之间的公开输入仍应使用 Props；复用有状态算法使用组合式函数；只有当一段组件子树共享同一上下文，而且中间层不关心该上下文时，Provide / Inject 才能减少无意义转发。若状态没有共同组件祖先或需要跨页面集中调试，则应考虑 Store。
 
@@ -112,7 +112,7 @@ const context = inject(lessonContextKey)
 ~~~~
 :::
 
-## 用 InjectionKey 建立一份共享契约
+## 三、用 InjectionKey 建立一份共享契约
 
 provide 与 inject 往往分散在不同文件。把 Symbol key 和上下文接口放进一个独立模块，提供方与消费方导入同一个 Symbol 实例，TypeScript 才能同时校验提供值并推导注入结果。Symbol 的描述只用于调试，两个描述相同的 Symbol 仍是两个不同 key。
 
@@ -134,7 +134,7 @@ export const lessonContextKey: InjectionKey<LessonContext> = Symbol('lesson-cont
 InjectionKey 只提供编译期约束。运行时仍按 key 的真实身份查找，所以提供方和注入方必须导入同一个 key，不能分别调用 Symbol()。
 :::
 
-## 提供只读状态和修改命令
+## 四、提供只读状态和修改命令
 
 提供 ref 时，后代注入到的是同一个 ref，不会自动解包。官方建议尽可能把状态修改留在提供方：向外提供 readonly 包装后的状态，并把合法修改动作作为命令一起提供。这样叶子组件可以表达意图，但不能绕过规则直接写共享状态。
 
@@ -161,7 +161,7 @@ provide(lessonContextKey, {
 
 readonly 只限制通过注入引用写入，不会冻结原始 ref。提供方仍能更新原始状态，所有注入方会继续响应变化。这个模式表达的是“可观察、不可随意改；需要修改时调用领域命令”。
 
-## 在注入边界立即处理缺失提供者
+## 五、在注入边界立即处理缺失提供者
 
 没有默认值时，inject 的类型包含 undefined，因为运行时无法保证祖先一定提供了 key。必需依赖应在消费边界立即检查并抛出带组件语义的错误，不要在每次读取时散落可选链，也不要用非空断言隐藏错误的组件树结构。
 
@@ -183,7 +183,7 @@ export function useLessonContext() {
 
 这个 use 函数只复用“如何读取与校验上下文”，并不创建或共享状态。它必须和 inject 一样在 setup 同步执行期间调用。依赖的所有者仍是上层提供方。
 
-## 最近提供者定义局部作用域
+## 六、最近提供者定义局部作用域
 
 当多个祖先提供同一个 key，inject 解析离消费方最近的提供者。局部提供者可以先注入祖先上下文作为输入，再向自己的后代提供完整的新上下文。覆盖发生在整个 key 上，不会把两个对象的字段自动合并。
 
@@ -215,7 +215,7 @@ provide(lessonContextKey, {
 })
 ~~~~
 
-## 普通值、ref 与对象身份
+## 七、普通值、ref 与对象身份
 
 | 提供的值 | 注入结果 | 提供方变化后 |
 | --- | --- | --- |
@@ -226,7 +226,7 @@ provide(lessonContextKey, {
 
 provide 保存的是传入值的身份。如果把变量重新指向另一个 ref，已经提供的仍是旧 ref；应更新原 ref 的 value，或提供一个 computed 来表达派生关系。依赖注入不会自动观察普通变量，也不会替你重新执行 provide。
 
-## 可选依赖与默认值工厂
+## 八、可选依赖与默认值工厂
 
 依赖确实可选时，可以传普通默认值。创建成本较高或每个消费组件需要独立实例时，可传工厂函数并把第三个参数设为 true。若依赖类型本身就是函数，不传 true，函数本身就是默认值。
 
@@ -245,7 +245,7 @@ const service = inject(serviceKey, () => new Service(), true)
 提供者显式提供 undefined 时，key 已经命中，不会回退到默认工厂。若 undefined 不合法，应修正提供契约，不要依赖默认值掩盖它。
 :::
 
-## 组件级与应用级上下文
+## 九、组件级与应用级上下文
 
 组件 provide 的作用域随组件子树自然建立和销毁，适合表单、Tabs、主题分区等局部上下文。app.provide 在挂载前向整个应用提供依赖，常用于插件服务。Vue 3.3+ 的 app.runWithContext 允许 setup 外代码在同步回调期间读取应用依赖，但这个上下文不会跨 await 保存。
 
@@ -265,7 +265,7 @@ async function runTask() {
 验证根级依赖、深层消费、局部同 key 覆盖和提供方命令的作用域
 :::
 
-## 易错使用提示
+## 十、易错使用提示
 
 :::pitfalls
 ### 为了少写一层 Props 就隐藏直接父子的公开输入
@@ -466,7 +466,7 @@ async function run() {
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 从源码推导作用域行为
+## 十一、从源码推导作用域行为
 
 Vue 3.5.40 的 apiInject.ts 显示：组件实例默认继承父级 provides 对象，第一次 provide 时才通过 Object.create(parentProvides) 建立自己的原型层。inject 从父级 provides 查询，并用 key in provides 让 JavaScript 原型链完成向上查找。
 
@@ -500,7 +500,7 @@ if (provides && key in provides) {
 显式提供 undefined 仍算命中；工厂创建次数属于每次 inject 调用。
 :::
 
-## 高级使用场景
+## 十二、高级使用场景
 
 | 场景 | 推荐设计 | 需要守住的边界 |
 | --- | --- | --- |
@@ -571,6 +571,6 @@ if (!context) throw new Error('缺少 LessonContext 提供者')
 - [ ] 组件内 provide 与 inject 都在 setup 同步阶段调用
 - [ ] 应用级服务才考虑 app.provide，并明确应用与请求生命周期
 
-## 完成本课后的判断顺序
+## 十三、完成本课后的判断顺序
 
 先确定依赖所有者：直接父子输入用 Props，复用算法用组合式函数，组件子树上下文才用 Provide / Inject。决定注入后，先定义共享 InjectionKey 和完整契约，再由提供方公开 readonly 状态与命令；消费方同步注入并立即处理缺失。最后检查是否存在局部同 key 覆盖、默认值工厂、应用级生命周期或跨 await 误用。

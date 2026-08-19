@@ -56,7 +56,7 @@ recap:
 前置：请先完成建立 Store、State/Patch/Reset、Getters 与 Actions 四课。
 :::
 
-## 响应式 Store 不等于可以随意解构
+## 一、响应式 Store 不等于可以随意解构
 
 Pinia Store 是响应式对象。模板持续读取 `store.count` 时，Vue 每次都能经过代理追踪依赖；`const { count } = store` 则只在解构当下取得一个 primitive 值，后续写入不会改变这个局部快照。getter 直接解构也有同样问题。
 
@@ -74,7 +74,7 @@ const { count, doubleCount } = storeToRefs(store)
 ~~~~
 :::
 
-## State 和 getter 转 refs，action 直接解构
+## 二、State 和 getter 转 refs，action 直接解构
 
 `storeToRefs()` 专门遍历 Store 的响应式属性，返回 state、getters 和插件添加的响应式 state。methods 与普通非响应值会被忽略，因此 action 应直接从 Store 解构。Pinia 的 action wrapper 会在失去合格 `this` 时回到所属 Store。
 
@@ -97,17 +97,17 @@ function increase(): void {
 | action/function | 忽略 | 直接从 Store 解构 |
 | 普通插件值 | 忽略 | 按普通非响应属性读取 |
 
-## 插件字段只演示筛选，不提前讲持久化
+## 三、插件字段只演示筛选，不提前讲持久化
 
 一个插件返回 ref 时，`storeToRefs()` 能发现它；返回普通字符串时则会忽略。能被提取只说明字段具有响应性，不等于它已经同步到 `store.$state`、可以参与 SSR 序列化或重置。完整插件 state 设计属于后续插件课程。
 
-## 在同一次操作里对比四种结果
+## 四、在同一次操作里对比四种结果
 
 :::demo{id="vue.pinia.learn.basics.component-store-to-refs.pinia-store-to-refs-lab-demo" playground="true"}
 解构同一个 Store，观察快照、refs、action 与插件字段的差异
 :::
 
-## 源码与测试推导
+## 五、源码与测试推导
 
 :::steps
 ### 1. Raw Store 暴露原始响应容器
@@ -127,7 +127,7 @@ computed 分支只创建代理 getter/setter，没有读取 `.value`；固定上
 固定 `store.ts` 在 action 调用没有合格 Store `this` 时回退到闭包捕获的 Store，所以解构 action 仍能读写该实例。
 :::
 
-## 易错使用提示
+## 六、易错使用提示
 
 :::pitfalls
 ### 直接解构 primitive state

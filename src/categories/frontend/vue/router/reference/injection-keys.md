@@ -93,7 +93,7 @@ anchors:
 
 # Injection Keys
 
-## 概述
+## 一、概述
 
 这五个 Symbol 连接 Vue Router 插件、组合式 API、RouterLink、RouterView 与组件内守卫。它们虽然由 `vue-router` 根入口导出并出现在 API Reference，5.2.0 固定源码却逐项标记 `@internal`；可导入不等于适合普通应用依赖，也不形成跨版本兼容承诺。
 
@@ -109,7 +109,7 @@ anchors:
 | routerViewLocationKey | Ref&lt;RouteLocationNormalizedLoaded&gt; | RouterView | RouterView 的 route prop；普通场景直接嵌套 RouterView |
 | viewDepthKey | Ref&lt;number&gt; \| number | RouterView | 嵌套路由与嵌套 RouterView；读取 records 用 useRoute().matched |
 
-## Internal 边界与公开替代
+## 二、Internal 边界与公开替代
 
 官方变量页描述了这些 key 当前承担的能力，但稳定性标签以固定源码为准。五项全部是 internal；测试 seam 也只是让 Router 自身或专用测试工具替换上下文，不是让业务层把 provide/inject 变成第二套路由架构。
 
@@ -125,7 +125,7 @@ anchors:
 官方 issue #1408 说明“当前 RouterView 对应 record”确有生态需求，但该公开能力仍标记为 needs RFC。issue 中的 `inject(matchedRouteKey)` 是提案背景里的 workaround，不是稳定推荐；discussion #1827 的片段同样只作使用风险证据。
 :::
 
-## Matched Route Key
+## 三、Matched Route Key
 
 :::warning
 【internal】`matchedRouteKey` 不是普通应用 API。公开替代是 `onBeforeRouteUpdate()`、`onBeforeRouteLeave()`；若只需路由记录或合并 meta，使用 `useRoute().matched`、`useRoute().meta`。
@@ -142,7 +142,7 @@ RouterView 计算 `matched[depth]` 后提供这条引用；两个公开组件内
 | 读取整条匹配链 | useRoute().matched | 从父到子；不等同于当前 outlet record |
 | 读取合并后的页面 meta | useRoute().meta | 父到子浅合并，常可避免寻找当前 record |
 
-## Route Location Key
+## 四、Route Location Key
 
 :::warning
 【internal】`routeLocationKey` 只解释 `useRoute()` 与测试覆盖 seam。业务代码应调用 `useRoute()`；验证真实导航、matched 与守卫时，应安装 `createMemoryHistory()` 创建的 Router。
@@ -166,7 +166,7 @@ const wrapper = mount(ReportSummary, {
 })
 ~~~~
 
-## Router Key
+## 五、Router Key
 
 :::warning
 【internal】`routerKey` 不是业务 service locator。组件内使用 `useRouter()`，应用启动用 `app.use(router)`；组件外服务通过参数接收 Router 或由组装层调用，不要自行 inject。
@@ -185,7 +185,7 @@ export async function openReports(router: Router): Promise<void> {
 }
 ~~~~
 
-## Router View Location Key
+## 六、Router View Location Key
 
 :::warning
 【internal】`routerViewLocationKey` 只属于 RouterView 显示上下文。公开替代是 `RouterView` 及其 `route` prop；普通应用不要通过 provide 改写某棵子树的 route。
@@ -209,7 +209,7 @@ const previewRoute = shallowRef(
 `router.resolve()` 本身不加载 lazy components。向 RouterView 的 route prop 提供独立解析结果时，先用公开的 `loadRouteLocation()` 得到 `RouteLocationNormalizedLoaded`；当 matched 中的 records 全部是 redirect 时，该函数会拒绝加载。
 :::
 
-## View Depth Key
+## 七、View Depth Key
 
 :::warning
 【internal】`viewDepthKey` 不是 breadcrumb 层级或 URL 段数。公开替代是 `routes.children` 与嵌套 `RouterView`；读取完整记录链使用 `useRoute().matched`。
@@ -236,7 +236,7 @@ const routes: RouteRecordRaw[] = [
 </template>
 ~~~~
 
-## 测试与高级集成速查
+## 八、测试与高级集成速查
 
 | 要验证的行为 | 建议反馈环 | 不要声称 |
 | --- | --- | --- |
@@ -251,7 +251,7 @@ const routes: RouteRecordRaw[] = [
 若基础设施确实必须接触 internal seam，应把所有依赖收口在一个适配器，固定 Vue Router 版本，并以真实嵌套路由、route prop、lazy component 与组件内守卫形成集成测试。升级前重新核对声明与源码，不能只依赖类型仍可导入。
 :::
 
-## 易错使用提示
+## 九、易错使用提示
 
 :::pitfalls
 ### 把根入口可导出误当成稳定业务 API
@@ -507,7 +507,7 @@ expect(wrapper.get('[data-page="report"]').exists()).toBe(true)
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 十、源码推导与适用场景
 
 :::steps
 ### 1. 五个 Symbol 都从 internal 声明开始

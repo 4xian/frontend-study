@@ -11,7 +11,7 @@ export const vueRouterComponentsComposablesReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.components.router-link',
-        'internal-router-link-i',
+        '二internal-router-link-i',
       ],
       [
         'interfaces.routerlinkprops',
@@ -19,7 +19,7 @@ export const vueRouterComponentsComposablesReferenceSections = [
         'public',
         'detail',
         'vue.router.reference.components.router-link',
-        'router-link-props',
+        '三router-link-props',
       ],
       [
         'interfaces.uselinkoptions',
@@ -27,7 +27,7 @@ export const vueRouterComponentsComposablesReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.components.router-link',
-        'use-link-options',
+        '四use-link-options',
       ],
       [
         'interfaces.uselinkreturn',
@@ -35,7 +35,7 @@ export const vueRouterComponentsComposablesReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.components.router-link',
-        'use-link-return',
+        '五use-link-return',
       ],
       [
         'variables.routerlink',
@@ -43,7 +43,7 @@ export const vueRouterComponentsComposablesReferenceSections = [
         'public',
         'detail',
         'vue.router.reference.components.router-link',
-        'router-link',
+        '六router-link',
       ],
       [
         'functions.uselink',
@@ -51,7 +51,7 @@ export const vueRouterComponentsComposablesReferenceSections = [
         'public',
         'detail',
         'vue.router.reference.components.router-link',
-        'use-link',
+        '七use-link',
       ],
     ],
   },
@@ -65,7 +65,7 @@ export const vueRouterComponentsComposablesReferenceSections = [
         'public',
         'detail',
         'vue.router.reference.components.router-view',
-        'router-view-props',
+        '三router-view-props',
       ],
       [
         'type-aliases.routecomponent',
@@ -73,7 +73,7 @@ export const vueRouterComponentsComposablesReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.components.router-view',
-        'route-component',
+        '四route-component',
       ],
       [
         'variables.routerview',
@@ -81,7 +81,7 @@ export const vueRouterComponentsComposablesReferenceSections = [
         'public',
         'detail',
         'vue.router.reference.components.router-view',
-        'router-view',
+        '五router-view',
       ],
     ],
   },
@@ -95,7 +95,7 @@ export const vueRouterComponentsComposablesReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.composables.navigation',
-        'load-route-location',
+        '三load-route-location',
       ],
       [
         'functions.useroute',
@@ -103,7 +103,7 @@ export const vueRouterComponentsComposablesReferenceSections = [
         'public',
         'detail',
         'vue.router.reference.composables.navigation',
-        'use-route',
+        '四use-route',
       ],
       [
         'functions.userouter',
@@ -111,7 +111,7 @@ export const vueRouterComponentsComposablesReferenceSections = [
         'public',
         'detail',
         'vue.router.reference.composables.navigation',
-        'use-router',
+        '五use-router',
       ],
     ],
   },
@@ -125,7 +125,7 @@ export const vueRouterComponentsComposablesReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.composables.injection-keys',
-        'matched-route-key',
+        '三matched-route-key',
       ],
       [
         'variables.routelocationkey',
@@ -133,7 +133,7 @@ export const vueRouterComponentsComposablesReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.composables.injection-keys',
-        'route-location-key',
+        '四route-location-key',
       ],
       [
         'variables.routerkey',
@@ -141,7 +141,7 @@ export const vueRouterComponentsComposablesReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.composables.injection-keys',
-        'router-key',
+        '五router-key',
       ],
       [
         'variables.routerviewlocationkey',
@@ -149,7 +149,7 @@ export const vueRouterComponentsComposablesReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.composables.injection-keys',
-        'router-view-location-key',
+        '六router-view-location-key',
       ],
       [
         'variables.viewdepthkey',
@@ -157,7 +157,7 @@ export const vueRouterComponentsComposablesReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.composables.injection-keys',
-        'view-depth-key',
+        '七view-depth-key',
       ],
     ],
   },

@@ -1,0 +1,132 @@
+.use-effect-demo {
+  padding: 24px;
+  border: 1px solid #cfd8d3;
+  border-radius: 8px;
+  background: #f8fbf9;
+  color: #17352a;
+}
+
+.use-effect-demo-heading p,
+.use-effect-demo-heading span,
+.use-effect-demo-panel span,
+.use-effect-demo-panel small {
+  display: block;
+  margin: 0;
+}
+
+.use-effect-demo-heading p {
+  color: #087f5b;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.use-effect-demo-heading h2 {
+  max-width: 34rem;
+  margin: 8px 0;
+  color: #102c22;
+  font-size: 1.35rem;
+  line-height: 1.25;
+}
+
+.use-effect-demo-heading span,
+.use-effect-demo-panel small {
+  color: #50655c;
+  line-height: 1.55;
+}
+
+.use-effect-demo-controls {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.use-effect-demo-controls button {
+  min-height: 42px;
+  margin: 0 10px 10px 0;
+  padding: 9px 14px;
+  border: 1px solid #5f746a;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #17352a;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.use-effect-demo-controls button[aria-pressed='true'] {
+  border-color: #087f5b;
+  background: #087f5b;
+  color: #ffffff;
+}
+
+.use-effect-demo-panels {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -8px;
+}
+
+.use-effect-demo-panel {
+  flex: 1 1 220px;
+  min-width: 0;
+  margin: 0 8px 12px;
+  padding: 16px;
+  border: 1px solid #d5e0da;
+  border-radius: 6px;
+  background: #ffffff;
+}
+
+.use-effect-demo-panel > span {
+  color: #50655c;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.use-effect-demo-panel strong,
+.use-effect-demo-external > div {
+  display: block;
+  min-height: 32px;
+  margin: 8px 0;
+  color: #102c22;
+  font-size: 1.25rem;
+  line-height: 1.35;
+}
+
+.use-effect-demo-external > div {
+  padding: 4px 8px;
+  border-left: 4px solid #f08c46;
+  background: #fff6ed;
+}
+
+.use-effect-demo-external > div[data-mode='expanded'] {
+  border-left-color: #087f5b;
+  background: #edf8f2;
+}
+
+.use-effect-demo-status {
+  margin: 4px 0 0;
+  padding: 12px 14px;
+  border-left: 3px solid #f08c46;
+  background: #fff6ed;
+  line-height: 1.55;
+}
+
+.use-effect-demo-status code {
+  color: #874c1e;
+}
+
+@media (max-width: 560px) {
+  .use-effect-demo {
+    padding: 18px;
+  }
+
+  .use-effect-demo-panels {
+    display: block;
+    margin: 0;
+  }
+
+  .use-effect-demo-panel {
+    margin: 0 0 12px;
+  }
+}

@@ -1,9 +1,10 @@
 <script setup lang="ts">
 /* 演示容器：上方真实运行区 + 可选描述 + 下方源码折叠区（需求文档 §5.2） */
-import { ref, shallowRef, watchEffect } from 'vue'
+import { computed, ref, shallowRef, watch } from 'vue'
 import type { Component } from 'vue'
 import CodeBlock from './CodeBlock.vue'
 import { resolveDemo } from '@/common/content/demo-registry'
+import type { ResolvedDemoAsset } from '@/common/content/demo-registry'
 
 const props = defineProps<{
   id: string
@@ -11,18 +12,76 @@ const props = defineProps<{
   playground?: boolean
 }>()
 
-/** demo 运行组件（shallowRef：组件对象不需要深层响应式） */
-const demo = shallowRef<Component | null>(null)
+/** 已按需加载的 React Demo 宿主 Adapter。 */
+const ReactDemoHost = shallowRef<Component | null>(null)
+/** 当前 Demo 的运行时资产。 */
+const asset = shallowRef<ResolvedDemoAsset | null>(null)
+/** React Demo 宿主 Adapter 的局部加载错误。 */
+const reactHostError = ref('')
 /** demo 源码字符串（?raw 同源导入） */
 const source = ref('')
 /** 源码区是否展开 */
 const showSource = ref(false)
+/** 按当前运行时选择源码高亮语言。 */
+const sourceLanguage = computed(() => (asset.value?.runtime === 'react' ? 'tsx' : 'vue'))
+let reactHostLoadId = 0
 
-// 完整 ID 变化时重新解析组件与同源源码。
-watchEffect(async () => {
-  const asset = resolveDemo(props.id)
-  demo.value = asset?.component ?? null
-  source.value = asset ? await asset.loadSource() : ''
+/** 把未知异常转换为当前 stage 可展示的信息。 */
+function getErrorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : String(error)
+}
+
+/** 仅在 React Demo stage 中加载宿主 Adapter，并隔离加载失败。 */
+async function loadReactDemoHost(): Promise<void> {
+  const loadId = ++reactHostLoadId
+  reactHostError.value = ''
+  try {
+    const hostModule = await import('./ReactDemoHost.vue')
+    if (loadId === reactHostLoadId && asset.value?.runtime === 'react') {
+      ReactDemoHost.value = hostModule.default
+    }
+  } catch (error) {
+    if (loadId === reactHostLoadId && asset.value?.runtime === 'react') {
+      reactHostError.value = getErrorMessage(error)
+    }
+  }
+}
+
+/** 通过新页面环境清除浏览器缓存的失败 ESM 模块。 */
+function reloadPage(): void {
+  window.location.reload()
+}
+
+watch(
+  () => props.id,
+  async (id, _previousId, onCleanup) => {
+    let cancelled = false
+    onCleanup(() => {
+      cancelled = true
+    })
+    const nextAsset = resolveDemo(id)
+    reactHostLoadId += 1
+    reactHostError.value = ''
+    asset.value = nextAsset
+    source.value = ''
+    showSource.value = false
+    if (nextAsset?.runtime === 'react') {
+      if (!ReactDemoHost.value) void loadReactDemoHost()
+      return
+    }
+    if (nextAsset?.runtime === 'vue') {
+      const nextSource = await nextAsset.loadSource()
+      if (!cancelled) source.value = nextSource
+    }
+  },
+  { immediate: true },
+)
+
+watch(showSource, async (expanded) => {
+  const currentAsset = asset.value
+  if (!expanded || source.value || currentAsset?.runtime !== 'react') return
+  const nextSource = await currentAsset.loadSource()
+  if (showSource.value && asset.value === currentAsset) source.value = nextSource
 })
 </script>
 
@@ -30,7 +89,21 @@ watchEffect(async () => {
   <div class="demo-box">
     <p v-if="props.desc" class="desc">{{ props.desc }}</p>
     <div class="stage">
-      <component :is="demo" v-if="demo" />
+      <component :is="asset.component" v-if="asset?.runtime === 'vue'" />
+      <template v-else-if="asset?.runtime === 'react'">
+        <component
+          :is="ReactDemoHost"
+          v-if="ReactDemoHost"
+          :key="props.id"
+          :load-component="asset.loadComponent"
+        />
+        <div v-else-if="reactHostError" class="adapter-error" role="alert">
+          <strong>React Demo 宿主加载失败</strong>
+          <span>{{ reactHostError }}</span>
+          <button type="button" @click="reloadPage">重新加载页面</button>
+        </div>
+        <p v-else class="adapter-status" role="status">正在加载 React Demo...</p>
+      </template>
       <p v-else class="missing">未找到演示组件：{{ props.id }}</p>
     </div>
     <div class="actions">
@@ -45,7 +118,7 @@ watchEffect(async () => {
     </div>
     <Transition name="source">
       <div v-if="showSource" class="source">
-        <CodeBlock :code="source" lang="vue" />
+        <CodeBlock :code="source" :lang="sourceLanguage" />
       </div>
     </Transition>
   </div>
@@ -74,6 +147,30 @@ watchEffect(async () => {
 .missing {
   color: var(--color-warning);
   font-size: var(--font-size-sm);
+}
+
+.adapter-status {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.adapter-error {
+  color: var(--color-danger);
+}
+
+.adapter-error span {
+  display: block;
+  margin-top: var(--space-1);
+  color: var(--color-text-secondary);
+}
+
+.adapter-error button {
+  min-height: 36px;
+  padding: 0 var(--space-3);
+  margin-top: var(--space-3);
+  border: 1px solid currentColor;
+  border-radius: var(--radius-sm);
+  color: inherit;
 }
 
 .actions {

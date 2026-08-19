@@ -1,0 +1,177 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.basics.debugging-stack-traces-and-javadoc",
+  "batchId": "phase-4-debugging-stack-traces-and-javadoc",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-14T18:13:10Z",
+  "phase": "Phase B",
+  "phaseBProgress": "11/21",
+  "contract": {
+    "title": "程序调试、异常栈与 Javadoc 阅读",
+    "url": "/backend/java/core/learn/debugging-stack-traces-and-javadoc",
+    "durationMinutes": 75,
+    "prerequisites": ["backend.java.learn.basics.exceptions-and-cause-chains"],
+    "requiredTopics": [
+      "编译失败、运行时异常与错误结果",
+      "异常类型、消息、栈帧与第一条应用帧",
+      "jdb 断点、where、locals、print、dump、next、cont",
+      "Javadoc 描述、参数、返回值与 Throws",
+      "Java 8/25 兼容反馈与安全边界"
+    ]
+  },
+  "phaseAFrozenPlan": {
+    "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+    "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81",
+    "nextCourse": "backend.java.learn.basics.generics-and-type-safety",
+    "nextCourseStarted": false,
+    "phaseBStopBoundary": "B-11 关闭后才允许读取 B-12；不进入 Phase C。"
+  },
+  "sourceDiscovery": {
+    "method": "Tavily 仅用于发现直接页面，随后逐页核对 Oracle、JLS、JVMS、Dev.java 与 OpenJDK 正文",
+    "communitySourcesUsedAsEvidence": false,
+    "officialSourceCardCount": 16,
+    "securitySource": "https://www.oracle.com/java/technologies/javase/seccodeguide.html",
+    "versionSources": [
+      "https://docs.oracle.com/en/java/javase/25/docs/specs/man/jdb.html",
+      "https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jdb.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/specs/man/javadoc.html",
+      "https://docs.oracle.com/javase/8/docs/technotes/tools/windows/javadoc.html"
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/basics/debugging-stack-traces-and-javadoc.md",
+      "sha256": "c4bbd553414e62df631de2178d21561ff8e8619e744385479453d399f07e38a5"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/debugging-stack-traces-and-javadoc.md",
+      "sha256": "3a37fbd510b9917c46cb875b11ddaca981176c78ba2d107b927e69117068a7f9"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "dcb7a04baa824bd0d1106bea799715b042fde27812d21f31678160f28c8efd42"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "4385da9b31d862fdc4184d6fae0130eaf43d2b3e9c7f08d4d55a7818dd05eb76"
+    },
+    {
+      "path": "docs/backend/java/audit/phase-2-knowledge-path-manifest.json",
+      "sha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407"
+    }
+  ],
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "stagedLessonChanges": false,
+    "unrelatedChangesPreserved": true
+  },
+  "baselineVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+    },
+    { "command": "npm run type-check", "exitCode": 0, "summary": "passed" },
+    { "command": "npm run lint", "exitCode": 0, "summary": "passed" },
+    { "command": "npm run format:check", "exitCode": 0, "summary": "passed" },
+    { "command": "npm run test:unit", "exitCode": 0, "summary": "empty configured unit directory is valid" },
+    { "command": "npm run test:e2e", "exitCode": 0, "summary": "empty configured E2E directory is valid" },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "passed; existing catalog chunk >500 kB warning only"
+    },
+    { "command": "git diff --check", "exitCode": 0, "summary": "passed" },
+    { "command": "git diff --cached --check", "exitCode": 0, "summary": "passed" }
+  ],
+  "javaVerification": {
+    "command": "extract the b11-feedback-loop block from the final lesson and execute it with zsh -f",
+    "images": [
+      {
+        "role": "modern",
+        "requestedTag": "eclipse-temurin:25-jdk",
+        "digest": "sha256:12e44624adee6808a36d962717e1656e0afeeeff5a100f9cb00e0136513558f0"
+      },
+      {
+        "role": "legacy",
+        "requestedTag": "eclipse-temurin:8-jdk",
+        "digest": "sha256:c8b86f2c0a9bd6cc1b7fabc5d1a097501a166eea7cad3b2764e90e96178bea9b"
+      }
+    ],
+    "dockerEngine": "29.6.1",
+    "exitCode": 0,
+    "sharedStableOutput": [
+      "B11_JDB_PASS",
+      "B11_COMPILE_FAILURE_PASS",
+      "B11_WRONG_RESULT_PASS",
+      "B11_RUNTIME:NumberFormatException",
+      "B11_FEEDBACK_PASS"
+    ],
+    "cases": [
+      { "name": "Java 25 positive feedback", "exitCode": 0, "stableOutputMatches": true },
+      { "name": "Java 8 positive feedback", "exitCode": 0, "stableOutputMatches": true },
+      { "name": "checked compile failure", "java25CompileExit": 1, "java8CompileExit": 1 },
+      { "name": "wrong result assertion", "exitCode": 0, "stableOutput": "B11_WRONG_RESULT_PASS" },
+      { "name": "runtime exception classification", "exitCode": 0, "stableOutput": "B11_RUNTIME:NumberFormatException" },
+      {
+        "name": "jdb command availability",
+        "commands": ["where", "locals", "print", "dump", "next", "cont"],
+        "helpChecksPassed": true,
+        "dumpDedicatedSessionPassed": true,
+        "unknownCommandRejected": true
+      }
+    ],
+    "temporaryAssets": {
+      "path": "/tmp/vue3-study-b11.1okdAH",
+      "cleanupMethod": "find <exact-dir> -depth -delete",
+      "cleanupStatus": "complete"
+    }
+  },
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "session": "b11",
+    "baseUrl": "http://127.0.0.1:4179/",
+    "targetPath": "/backend/java/core/learn/debugging-stack-traces-and-javadoc",
+    "previewPort": 4179,
+    "previewStopped": true,
+    "desktop": {
+      "viewport": "1440x900",
+      "documentClientWidth": 1440,
+      "documentScrollWidth": 1440,
+      "horizontalOverflow": false,
+      "headingSections": ["新旧版本差异", "安全注意"],
+      "searchTerm": "程序调试",
+      "searchResultCount": 1,
+      "jdbSourceCardUpdated": true
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "documentClientWidth": 390,
+      "documentScrollWidth": 390,
+      "horizontalOverflow": false,
+      "completionButtonTextAfterReload": "取消完成",
+      "progressPersistedAfterReload": true
+    },
+    "console": { "errors": 0, "warnings": 0 }
+  },
+  "review": {
+    "reviewer": "/root/b11_combined_review",
+    "independentReviewRounds": 3,
+    "standards": "PASS",
+    "standardsFindings": 0,
+    "spec": "PASS",
+    "specFindings": 0,
+    "confirmation": "Final frozen-state review confirmed the required version-difference and security sections, precise jdb help gates, dedicated dump assertion, artifact hashes and the B-12 stop boundary."
+  },
+  "changedFiles": [
+    "docs/research/backend/java/basics/debugging-stack-traces-and-javadoc.md",
+    "src/categories/backend/java/core/learn/debugging-stack-traces-and-javadoc.md",
+    "src/categories/backend/java/core/backend-java-track.ts",
+    "src/categories/backend/java/core/entry-manifest.ts",
+    "docs/backend/java/audit/reviews/phase-4-debugging-stack-traces-and-javadoc-signoff.json"
+  ],
+  "stopBoundary": "B-11 已关闭；B-12 泛型、类型边界与类型安全尚未读取、研究或启动。不得进入 B-13、Phase C 或其他课程。"
+}

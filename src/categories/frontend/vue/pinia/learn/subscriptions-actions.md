@@ -64,7 +64,7 @@ recap:
 前置：请先完成 L01-L08，并理解 direct/patch、同步/异步 action 与组件 scope。
 :::
 
-## 选择要观察的语义层
+## 一、选择要观察的语义层
 
 `$subscribe()` 观察 state mutation，适合持久化适配和状态审计；`$onAction()` 观察 action 意图、参数和结算，适合 tracing 与指标。二者都是观察边界，不应替代显式业务 action 或变成 Store 间消息总线。
 
@@ -78,11 +78,11 @@ recap:
 `events` 是 DEV-only 调试字段，不是稳定的生产审计协议。业务代码只依赖公开的 type、storeId 和 patch object payload。
 :::
 
-## flush 与 patch 特例
+## 二、flush 与 patch 特例
 
 `$subscribe()` 把选项交给 Vue `watch()`，默认沿用 `pre`，也可选择 `sync` 或 `post`。固定 4.0.2 的 `$patch()` 会暂停普通 watcher 通知，再手动同步聚合触发一次，因此 patch 通知不会被 `post` 延后；逐次观察 direct mutation 时才需要按 flush 选择时机。
 
-## Action 的开始、成功与失败
+## 三、Action 的开始、成功与失败
 
 ~~~~ts
 const stop = store.$onAction(({ name, args, after, onError }) => {
@@ -96,13 +96,13 @@ stop()
 
 `after` 会等待 Promise resolve 并收到 resolved value；`onError` 覆盖同步 throw 与 Promise reject，但错误仍继续传播给调用方。固定 4.0.2 有一处陈旧 JSDoc 声称返回 false 可阻止传播，类型、实现和测试都不支持，本课不采用该说法。
 
-## 订阅生命周期实验
+## 四、订阅生命周期实验
 
 :::demo{id="vue.pinia.learn.intermediate.subscriptions-actions.pinia-subscription-lifecycle-lab-demo" playground="true"}
 比较 mutation、flush、action hook，以及 mini-app 卸载前后的订阅计数
 :::
 
-## 练习与观察
+## 五、练习与观察
 
 :::steps
 ### 1. 比较三种 mutation
@@ -122,7 +122,7 @@ stop()
 先卸载 scoped listener，再显式停止 detached listener。
 :::
 
-## 源码与测试推导
+## 六、源码与测试推导
 
 :::steps
 ### 1. mutation 是判别联合
@@ -158,7 +158,7 @@ detached 只改变 scope 归属，不免除所有者的显式清理责任。
 store.$dispose() 停 scope 与订阅但保留 root state；Demo 总清理使用 disposePinia。
 :::
 
-## 易错使用提示
+## 七、易错使用提示
 
 :::pitfalls
 ### 依赖 DEV-only events

@@ -60,11 +60,11 @@ recap:
 
 # CustomRef 与触发控制
 
-## 正文大纲
+## 一、正文大纲
 
 上一课建立浅层响应式与原始对象边界，本课继续控制“什么时候才算发生更新”。customRef() 仍返回普通 Ref 接口，但把 value 的读取与写入交给工厂返回的 get 和 set，并把依赖收集与更新通知两个开关交给 track 和 trigger。我们先拆开四个职责，再建立防抖的两阶段提交，最后用稳定 getter 身份和定时器清理收紧工程边界。
 
-## CustomRef 仍是 Ref，定制的是 value 协议
+## 二、CustomRef 仍是 Ref，定制的是 value 协议
 
 调用方仍通过 model.value 读写，也可以把它交给模板、computed 或 watch。不同之处在内部：工厂在创建 customRef 时接收 track 与 trigger，并返回 get 和 set。Vue 不替工厂保存业务值，也不规定一次 set 必须立刻改变下一次 get 的结果。
 
@@ -95,7 +95,7 @@ function usePlainCustomRef(initialValue: string) {
 一般写法是在 get 中 track、在 set 中 trigger，但官方明确说明调用时机乃至是否调用都由工厂决定。这份自由适合延迟提交、外部信号或协议适配，也意味着正确性责任转移给实现者。
 :::
 
-## track 只负责建立读取方与当前 Ref 的关系
+## 三、track 只负责建立读取方与当前 Ref 的关系
 
 组件渲染、computed 或 watchEffect 正在执行时读取 customRef.value，get 中的 track 才能把当前活跃副作用登记为订阅者。事件处理器里的普通读取没有活跃副作用，不会凭空创建一个以后自动运行的任务。漏掉 track 后，get 仍能返回最新变量，却没有任何响应式消费方知道应该订阅它。
 
@@ -106,7 +106,7 @@ function usePlainCustomRef(initialValue: string) {
 | watchEffect 中读取 | 登记 watcher 副作用 | 按 watcher 调度规则重新运行 |
 | 点击事件中单独读取 | 没有活跃副作用可登记 | 这次读取本身不会创建持续监听 |
 
-## trigger 只通知，不替你提交业务值
+## 四、trigger 只通知，不替你提交业务值
 
 trigger 会通知已经订阅当前 CustomRef 的响应式副作用，但下一次 get 返回什么仍由工厂的闭包状态决定。正确顺序通常是先写入要公开的语义值，再 trigger。反过来先通知再异步写值，订阅者重读时仍可能拿到旧值，而且后续写入若没有第二次 trigger 就永远不可见。
 
@@ -123,7 +123,7 @@ function commitTitle(nextTitle: string): void {
 trigger() 不等于 DOM 已同步更新。它启动 Vue 的响应式通知与调度，组件 DOM 仍遵循批处理和 nextTick 边界；需要读取更新后 DOM 时继续使用 nextTick，而不是重复 trigger。
 :::
 
-## 防抖需要把草稿、提交值和通知拆开
+## 五、防抖需要把草稿、提交值和通知拆开
 
 防抖 CustomRef 的 set 先接收最新草稿并取消上一只定时器，但不立即替换 committedValue。用户停止输入达到 delay 后，回调才提交最新草稿并 trigger。这样连续十次 set 可以合并为一次语义提交和一次响应式通知；输入框的即时草稿与下游已提交快照是两个有意区分的状态。
 
@@ -175,7 +175,7 @@ function useDebouncedRef(initialValue: string, delay = 300) {
 }
 ~~~~
 
-## 对象 getter 要在语义提交之间保持身份稳定
+## 六、对象 getter 要在语义提交之间保持身份稳定
 
 官方特别提醒：若 get 每次都创建新对象，父组件因无关状态重渲染时也会重新求值并把一个新 prop 传给子组件。setter 没有运行，父侧 CustomRef 没有 trigger，子组件却因 prop 身份变化而更新。正确做法是缓存快照对象，只在真正提交新语义值时替换该对象。
 
@@ -220,7 +220,7 @@ const model = customRef((track, trigger) => ({
 
 稳定身份不是把对象原地改到永远不换。下游依赖浅比较时，有效提交应创建新快照；无关父更新和相同语义写入则继续返回旧快照。这个边界同时避免虚假子更新，也让一次真实提交拥有清楚的新身份。
 
-## 相等性、转换和清理由工厂负责
+## 七、相等性、转换和清理由工厂负责
 
 普通 ref 会规范化输入并在值变化时通知；CustomRefImpl 的 setter 只调用工厂返回的 set。若每次都 trigger，相同值也会重新通知；若把对象原样保存，它也不会自动变成深层 reactive。防抖实现还创建了 Vue 不会自动知道的定时器，因此重排、取消和所有者卸载都要显式清理。
 
@@ -241,7 +241,7 @@ onUnmounted(cancelPendingCommit)
 如果 CustomRef 被封装为可复用组合式函数，可以返回 cancel/dispose 命令，并在拥有它的组件或 effect scope 中登记清理。清理函数应保持幂等：没有待处理定时器时直接返回。
 :::
 
-## 先判断是否真的需要 CustomRef
+## 八、先判断是否真的需要 CustomRef
 
 | 需求 | 首选工具 | 理由 |
 | --- | --- | --- |
@@ -255,7 +255,7 @@ onUnmounted(cancelPendingCommit)
 不要只为了“高级”而使用 customRef。若需求只是防抖网络请求，保留普通 ref 作为输入源并在 watch 中取消旧请求通常更清楚；只有下游读取到的 Ref 值本身也必须延迟提交时，防抖 CustomRef 才匹配问题。
 :::
 
-## 易错使用提示
+## 九、易错使用提示
 
 :::pitfalls
 ### get 返回值却没有调用 track
@@ -501,7 +501,7 @@ onUnmounted(cancel)
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 从 Vue 3.5.40 源码推导边界
+## 十、从 Vue 3.5.40 源码推导边界
 
 :::steps
 ### 工厂明确返回 get 与 set
@@ -537,13 +537,13 @@ ref.spec.ts 的 customRef 用例先 set 但不 trigger，副作用保持旧结�
 CustomRefImpl、&#95;get、&#95;set、&#95;value 与 Dep 是 Vue 3.5.40 的实现证据，不是应用可读取的公共接口。业务测试应观察响应式消费次数、提交值、对象身份和清理结果。
 :::
 
-## 动手验证：把写入、提交和通知分开
+## 十一、动手验证：把写入、提交和通知分开
 
 :::demo{id="vue.core.learn.advanced.custom-ref-triggering.custom-ref-trigger-control-lab-demo" playground="true"}
 连续输入只提交最后一份稳定快照；比较 track/trigger 消费轮次、无关父更新、子预览身份与定时器取消结果
 :::
 
-## 练习与回顾
+## 十二、练习与回顾
 
 :::exercise
 ### 设计搜索条件提交边界

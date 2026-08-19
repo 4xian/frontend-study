@@ -77,7 +77,7 @@ watch(
   () => [entryMeta.value?.id, route.hash] as const,
   ([entryId, hash], previous) => {
     if (entry.value === undefined || entryId !== previous?.[0]) {
-      entry.value = undefined
+      // 已有详情时保留布局，避免左侧导航随正文异步加载被卸载。
       void loadCurrentEntry(entryId)
     } else if (hash !== previous?.[1]) {
       void scrollToHash()

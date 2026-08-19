@@ -4,6 +4,7 @@ import { learningCatalog } from '@/app/catalog'
 import type { DomainId, ReferenceOverviewItem } from '@/common/catalog'
 
 const filterQuery = ref('')
+const selectedGroupId = ref('')
 const props = defineProps<{ domain: DomainId; technology: string; module: string }>()
 
 const depthLabels = {
@@ -41,9 +42,17 @@ const overview = computed(() =>
 /** 当前页内筛选使用的标准化关键词。 */
 const normalizedQuery = computed(() => filterQuery.value.trim().toLocaleLowerCase())
 
+/** 当前模块仍然存在的分类筛选值。 */
+const activeGroupId = computed(() =>
+  (overview.value?.groups ?? []).some((group) => group.id === selectedGroupId.value)
+    ? selectedGroupId.value
+    : '',
+)
+
 /** 保留原有大分类和小标题结构的筛选结果。 */
 const filteredGroups = computed(() =>
   (overview.value?.groups ?? [])
+    .filter((group) => !activeGroupId.value || group.id === activeGroupId.value)
     .map((group) => ({
       ...group,
       sections: group.sections
@@ -65,6 +74,9 @@ const resultCount = computed(() =>
     0,
   ),
 )
+
+/** 当前总览是否正在按分类或关键词缩小结果集。 */
+const hasActiveFilter = computed(() => Boolean(activeGroupId.value || normalizedQuery.value))
 
 /** 判断参考条目的名称、别名或来源标签是否命中当前关键词。 */
 function matchesReferenceItem(item: ReferenceOverviewItem): boolean {
@@ -132,8 +144,14 @@ function clearFilter(): void {
             ×
           </button>
         </div>
+        <select v-model="selectedGroupId" class="category-filter" aria-label="按 API 大分类筛选">
+          <option value="">全部分类</option>
+          <option v-for="group in overview.groups" :key="group.id" :value="group.id">
+            {{ group.title }}
+          </option>
+        </select>
         <p class="result-status" role="status" aria-live="polite">
-          {{ normalizedQuery ? `找到 ${resultCount} 项` : `共 ${overview.total} 项` }}
+          {{ hasActiveFilter ? `找到 ${resultCount} 项` : `共 ${overview.total} 项` }}
         </p>
       </section>
 
@@ -303,6 +321,26 @@ function clearFilter(): void {
 .filter-control:focus-within {
   border-color: var(--color-accent);
   box-shadow: 0 0 0 3px var(--color-accent-soft);
+}
+
+.category-filter {
+  width: min(18rem, 100%);
+  height: 42px;
+  padding: 0 var(--space-3);
+  margin-left: var(--space-3);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  font: inherit;
+  letter-spacing: 0;
+  background: var(--color-bg-elevated);
+  box-shadow: var(--shadow-sm);
+}
+
+.category-filter:focus-visible {
+  border-color: var(--color-accent);
+  outline: 3px solid var(--color-accent-soft);
+  outline-offset: 0;
 }
 
 .search-icon {
@@ -661,6 +699,12 @@ function clearFilter(): void {
     width: 100%;
   }
 
+  .category-filter {
+    width: 100%;
+    margin-top: var(--space-2);
+    margin-left: 0;
+  }
+
   .result-status {
     margin-top: var(--space-2);
     margin-left: 0;
@@ -725,6 +769,7 @@ function clearFilter(): void {
 @media (prefers-reduced-transparency: reduce) {
   .coverage-status,
   .filter-control,
+  .category-filter,
   .group-navigation a {
     background: var(--color-bg-elevated);
     box-shadow: none;
@@ -734,6 +779,7 @@ function clearFilter(): void {
 @media (prefers-contrast: more) {
   .coverage-status,
   .filter-control,
+  .category-filter,
   .group-navigation a,
   .api-item {
     border-color: var(--color-border-strong);

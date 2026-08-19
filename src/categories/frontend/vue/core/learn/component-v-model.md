@@ -64,7 +64,7 @@ recap:
 
 # 组件 v-model
 
-## 正文大纲
+## 一、正文大纲
 
 组件 v-model 是一条明确的父子契约：父组件拥有状态，子组件接收 prop，并通过 update 事件请求父组件写回。本课沿最小协议逐步加入 defineModel、具名模型、修饰符与受控边界，最后用一个可复跑 Demo 对照完整绑定和本地回退。
 
@@ -81,7 +81,7 @@ recap:
 本课限定 SFC、&lt;script setup lang="ts"&gt;、Composition API 与 Vue 3.5.40。Props、Emits 和原生表单绑定只复用最小协议；Provide / Inject、事件总线、Pinia、Slots、Attributes 透传、动态组件、第三方 useVModel、SSR 与完整 Options API 均不在本课范围内。
 :::
 
-## 最小协议：状态向下，事件向上
+## 二、最小协议：状态向下，事件向上
 
 父组件写下 &lt;Child v-model="message" /&gt; 时，Vue 不会创建一条隐藏的共享状态通道。默认模型的公开名称是 modelValue，子组件写回时必须发出 update\:modelValue；父级收到事件后更新自己的 ref，新值再作为 prop 向下流动。
 
@@ -126,7 +126,7 @@ function emitValue(event: Event) {
 prop 名和事件名必须成对对应。只声明 modelValue、只发 update\:value，或者在子组件直接改写 props.modelValue，都会断开 v-model 或违反 Props 单向数据流。
 :::
 
-## defineModel：把协议收拢为可读写 ref
+## 三、defineModel：把协议收拢为可读写 ref
 
 Vue 3.4+ 的 defineModel() 是仅限 &lt;script setup&gt; 的编译器宏。无参数时，它声明 modelValue prop 和 update\:modelValue 事件，并返回与父级绑定的 ref。读取 ref 反映最新 prop，给 ref 赋值则经过模型 setter 发出更新事件；这只是收起样板，不会改变父组件拥有状态的原则。
 
@@ -165,7 +165,7 @@ const model = defineModel<string>({ required: true })
 
 宏调用会在编译阶段改写为 useModel(&#95;&#95;props, name, options)，同时生成模型 prop、修饰符 prop 和 update 事件。代码阅读时把 defineModel 当作公开组件契约的单点声明，而不是运行时可以从 vue 导入的普通函数。
 
-## 具名模型与多个 v-model
+## 四、具名模型与多个 v-model
 
 defineModel() 的第一个字符串参数是公开模型名。defineModel('title') 对应 title prop 与 update\:title 事件；父模板可以写 v-model\:title。一个组件可以声明多个不同名称的模型，每条链独立同步，适合姓名、权限等原本就有独立更新边界的字段。
 
@@ -203,7 +203,7 @@ const lastName = defineModel<string>('lastName', { required: true })
 名称字符串是组件 API 的一部分。同一个 SFC 重复声明同名 defineModel 会触发 compiler-sfc 的 duplicate model name 错误；不要用一个模糊的大对象替代本来可以独立更新的模型。
 :::
 
-## 修饰符、get 与 set 的方向
+## 五、修饰符、get 与 set 的方向
 
 组件修饰符不会自动复制原生 input 的 trim 或 number 逻辑。v-model\:title.capitalize 会额外传入 titleModifiers: { capitalize: true }。解构 defineModel() 的第二项可以读取这些标记；get 负责 prop 进入子模型时的读取转换，set 负责子模型写回父级前的转换。
 
@@ -250,7 +250,7 @@ const [displayName] = defineModel<string>('name', {
 set 的每个分支都要返回要提交的值。把 get 与 set 方向写反，或在修饰符关闭时隐式返回 undefined，会把错误载荷发给父组件。转换器应保持纯粹，不在其中触发网络请求或修改其他状态。
 :::
 
-## required 与 default：类型和初始值边界
+## 六、required 与 default：类型和初始值边界
 
 不带选项的 defineModel&lt;T&gt;() 通常得到 Ref&lt;T | undefined&gt;。required: true 表达调用约定必须提供模型，并让类型排除 undefined；default 则只在子级解析 prop 时提供缺省值，不会反向初始化父级 ref。
 
@@ -286,7 +286,7 @@ const child = defineModel<number>({ required: true })
 父 ref 为 undefined、子模型配置 default: 1 时，首次渲染可能出现父 undefined 与子 1 的失同步。要么让父级显式初始化，要么用 required 强制调用方提供绑定；不要用 default 掩盖缺失状态。
 :::
 
-## 受控模型与未绑定时的本地回退
+## 七、受控模型与未绑定时的本地回退
 
 Vue 3.5.40 的 useModel() 以当前 vnode 的原始 props 判断受控状态：模型 prop 与对应 onUpdate:&#42; listener 必须同时存在。受控写入只 emit，等待父级更新后通过 prop 回流；缺少任一项时，模型先更新内部 localValue，再仍然发出 update 事件。
 
@@ -310,7 +310,7 @@ Vue 3.5.40 的 useModel() 以当前 vnode 的原始 props 判断受控状态：�
 对照默认、具名和多个模型的受控同步、capitalize 修饰符以及未绑定 notes 的本地回退
 :::
 
-## 易错使用提示
+## 八、易错使用提示
 
 :::pitfalls
 ### 1. 只声明 modelValue，却没有声明 update\:modelValue
@@ -567,7 +567,7 @@ function updateNotes(event: Event) {
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## Vue 3.5.40 源码与官方测试的独立推导
+## 九、Vue 3.5.40 源码与官方测试的独立推导
 
 本节把公开文档、固定版本实现事实和课程推导分开。源码可以帮助理解当前版本如何实现契约，但不应把内部函数形状当成未来版本的长期公共 API。
 
@@ -602,7 +602,7 @@ setter 写入
 
 对外稳定的是 v-model 的 prop、事件、修饰符与 transformer 方向；compiler-sfc 的内部 metadata、useModel 的 customRef 细节和 listener 变体只作为当前版本的解释证据。
 
-## 高级使用场景
+## 十、高级使用场景
 
 | 场景 | 推荐设计 | 避免的误读 |
 | --- | --- | --- |
@@ -630,6 +630,6 @@ function replaceSettings(next: Settings) {
 多个模型优先表达多个独立更新边界；只有字段必须原子提交时才选择一个结构固定的对象模型。transformer 应保持同步、纯函数式，并把副作用留在事件处理函数或更高层业务逻辑中。
 :::
 
-## 本课边界回顾
+## 十一、本课边界回顾
 
 完成本课后，你应能从父级模板反推出组件的 prop 与 update 事件，并在 defineModel 的名称、修饰符、required/default 和受控判断之间保持一致。Provide / Inject、跨层依赖共享、状态库与其他通信机制留到各自分类，不把它们混入组件 v-model 的契约。

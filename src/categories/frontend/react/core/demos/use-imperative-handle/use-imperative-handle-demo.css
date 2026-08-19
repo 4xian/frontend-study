@@ -1,0 +1,216 @@
+.use-imperative-handle-demo {
+  width: 100%;
+  padding: var(--space-4);
+  box-sizing: border-box;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+}
+
+.use-imperative-handle-demo-heading p,
+.use-imperative-handle-demo-heading h2,
+.use-imperative-handle-demo-heading span {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.use-imperative-handle-demo-heading p {
+  color: #087f5b;
+  font-size: 0.74rem;
+  font-weight: 800;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.use-imperative-handle-demo-heading h2 {
+  margin-top: var(--space-1);
+  font-size: 1.1rem;
+  line-height: 1.35;
+}
+
+.use-imperative-handle-demo-heading span {
+  display: block;
+  margin-top: var(--space-1);
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.use-imperative-handle-demo-ledger {
+  display: flex;
+  flex-wrap: wrap;
+  margin: var(--space-3) -5px -10px;
+}
+
+.use-imperative-handle-demo-ledger div {
+  flex: 1 1 150px;
+  min-width: 0;
+  padding: var(--space-2) var(--space-3);
+  margin: 0 5px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xs);
+  background: var(--color-bg-subtle);
+}
+
+.use-imperative-handle-demo-ledger dt,
+.use-imperative-handle-demo-ledger dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.use-imperative-handle-demo-ledger dt {
+  color: var(--color-text-secondary);
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+
+.use-imperative-handle-demo-ledger dd {
+  margin-top: var(--space-1);
+  color: #087f5b;
+  font-size: 0.84rem;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.use-imperative-handle-demo-panel {
+  padding: var(--space-3);
+  margin-top: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid #087f5b;
+  border-radius: var(--radius-xs);
+  background: var(--color-bg);
+}
+
+.use-imperative-handle-demo-field,
+.use-imperative-handle-demo-field span,
+.use-imperative-handle-demo-field small {
+  display: block;
+}
+
+.use-imperative-handle-demo-field span,
+.use-imperative-handle-demo-field small {
+  overflow-wrap: anywhere;
+}
+
+.use-imperative-handle-demo-field span {
+  color: var(--color-text-secondary);
+  font-size: 0.76rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.use-imperative-handle-demo-field input {
+  width: 100%;
+  min-width: 0;
+  min-height: 42px;
+  padding: var(--space-2) var(--space-3);
+  margin-top: var(--space-2);
+  box-sizing: border-box;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xs);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+
+.use-imperative-handle-demo-field input:focus-visible {
+  border-color: var(--color-accent);
+  outline: 2px solid color-mix(in srgb, var(--color-accent) 32%, transparent);
+  outline-offset: 2px;
+}
+
+.use-imperative-handle-demo-field small {
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: 0.74rem;
+  line-height: 1.45;
+}
+
+.use-imperative-handle-demo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  margin: var(--space-3) -5px 0;
+}
+
+.use-imperative-handle-demo-actions button {
+  min-height: 42px;
+  padding: var(--space-2) var(--space-3);
+  margin: 0 5px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xs);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.35;
+  cursor: pointer;
+}
+
+.use-imperative-handle-demo-actions button:hover,
+.use-imperative-handle-demo-actions button:focus-visible {
+  border-color: var(--color-accent);
+}
+
+.use-imperative-handle-demo-result {
+  min-height: 174px;
+  padding: var(--space-3);
+  margin-top: var(--space-2);
+  box-sizing: border-box;
+  border: 1px solid var(--color-border);
+  border-left: 3px solid #087f5b;
+  border-radius: var(--radius-xs);
+  background: var(--color-bg-subtle);
+}
+
+.use-imperative-handle-demo-result span,
+.use-imperative-handle-demo-result strong,
+.use-imperative-handle-demo-result p,
+.use-imperative-handle-demo-result code {
+  display: block;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.use-imperative-handle-demo-result span {
+  color: var(--color-text-secondary);
+  font-size: 0.74rem;
+  line-height: 1.4;
+}
+
+.use-imperative-handle-demo-result strong {
+  margin-top: var(--space-1);
+  font-size: 0.98rem;
+  line-height: 1.45;
+}
+
+.use-imperative-handle-demo-result p {
+  margin-top: var(--space-1);
+  color: var(--color-text-secondary);
+  font-size: 0.8rem;
+  line-height: 1.55;
+}
+
+.use-imperative-handle-demo-result code {
+  padding: var(--space-2);
+  margin-top: var(--space-2);
+  border-radius: var(--radius-xs);
+  background: var(--color-bg);
+  color: #087f5b;
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 520px) {
+  .use-imperative-handle-demo {
+    padding: var(--space-3);
+  }
+
+  .use-imperative-handle-demo-actions button {
+    flex: 1 1 150px;
+  }
+}

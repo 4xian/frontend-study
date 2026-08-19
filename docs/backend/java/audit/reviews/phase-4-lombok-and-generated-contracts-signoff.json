@@ -1,0 +1,256 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.intermediate.lombok-and-generated-contracts",
+  "batchId": "phase-c-i17-lombok-and-generated-contracts",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-16T07:42:35+08:00",
+  "phase": "Phase C",
+  "phaseCAdmission": {
+    "status": "PASS",
+    "predecessorCourseId": "backend.java.learn.intermediate.openapi-documentation-and-api-integration",
+    "predecessorSignoffPath": "docs/backend/java/audit/reviews/phase-4-openapi-documentation-and-api-integration-signoff.json",
+    "predecessorSignoffSha256": "f1c430ceae4631378f5dd12e7de3dd27616fdfa80d2dbd3af65cec90365be2e6",
+    "phaseCProgressBeforeBatch": "16/20"
+  },
+  "phaseCProgress": "17/20",
+  "phaseAFreeze": {
+    "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+    "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81",
+    "designation": "I-17 / 扩展、主线内、复用",
+    "title": "Lombok、可变模型与生成合同",
+    "estimatedMinutes": 120,
+    "prerequisite": "backend.java.learn.intermediate.openapi-documentation-and-api-integration",
+    "stableIdPreserved": "backend.java.learn.intermediate.lombok-and-generated-contracts",
+    "slugPreserved": "lombok-and-generated-contracts",
+    "urlPreserved": "/backend/java/core/learn/lombok-and-generated-contracts",
+    "frozenSuccessor": "backend.java.learn.intermediate.service-design-patterns"
+  },
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "newStagingPerformedThisBatch": false,
+    "existingIndexPreserved": true,
+    "unrelatedWorkspaceChangesPreserved": true
+  },
+  "versions": {
+    "verifiedAt": "2026-08-16",
+    "modern": {
+      "java": "25",
+      "springBoot": "4.1.0",
+      "lombok": "1.18.42",
+      "mavenCompilerPlugin": "3.14.1",
+      "classMajor": 69
+    },
+    "legacy": {
+      "java": "8",
+      "springBoot": "2.3.12.RELEASE",
+      "lombok": "1.18.30",
+      "mavenCompilerPlugin": "3.14.1",
+      "classMajor": 52
+    }
+  },
+  "sourceDiscovery": {
+    "method": "已知 Lombok、Java、Maven 与 OWASP 官方页面逐条核验；无需启动外部搜索接替链",
+    "lessonOfficialSourceCardCount": 20,
+    "uniqueSourceIdCount": 20,
+    "uniqueSourceUrlCount": 20,
+    "officialUrlStatus": "PASS; 20/20 returned HTTP 200 on the reviewed snapshot",
+    "projectEvidenceCount": 4,
+    "projectEvidenceBoundary": "只复用冻结审计证据；未读取、运行或修改 dzzz-app"
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/intermediate/lombok-and-generated-contracts.md",
+      "sha256": "30753ed2a96a5137d48f92fdeecdea91f1aa62bab77c5d0db8d718b8b308848e"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/lombok-and-generated-contracts.md",
+      "sha256": "f20818305f8dbef36756ae58a189b36900667bf0c8f75e7e23f060f1f1fdf9ed"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "f798160ce17c1b6a7dd5a137cbd5c9fec217bfd99c94520efeb9fc5f3274c0ed"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "14d0f304d3e08cb4a8b7bb45891d2cd29d40ea9c35d7833bc995a9b432216138"
+    },
+    {
+      "path": "docs/backend/java/audit/phase-2-knowledge-path-manifest.json",
+      "sha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407"
+    }
+  ],
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "researchLineCount": 88,
+    "lessonLineCount": 792,
+    "rootH2Count": 17,
+    "independentKnowledgePointHeadings": 16,
+    "knowledgePointSevenPartCoverage": "16/16",
+    "pitfallCount": 5,
+    "pitfallNinePartCoverage": "5/5",
+    "orderedListItemsRenderAsSeparateBlocks": "PASS",
+    "completeModernPom": true,
+    "completeModernJavaSources": true,
+    "completeJava8Pom": true,
+    "completeJava8Source": true,
+    "officialSourceCount": 20,
+    "uniqueOfficialSourceUrlCount": 20,
+    "projectEvidenceCount": 4,
+    "javaMethodComments": "PASS; lesson Java methods use Chinese documentation comments"
+  },
+  "javaVerification": {
+    "temporaryRoot": "/tmp/java-i17-phase-c.T2t3ZZ",
+    "modernBuildImage": "maven@sha256:4f82a03a7d6679281952d628131299b1be88d7030a49c6a2b7d2ba2642e44e3e",
+    "modernRuntimeImage": "eclipse-temurin@sha256:12e44624adee6808a36d962717e1656e0afeeeff5a100f9cb00e0136513558f0",
+    "legacyBuildImage": "maven@sha256:5ad4be2ba5946d2513786e6e5374659a28e39ad5f3dfbc8a9109e1d3a1fde655",
+    "legacyRuntimeImage": "eclipse-temurin@sha256:c8b86f2c0a9bd6cc1b7fabc5d1a097501a166eea7cad3b2764e90e96178bea9b",
+    "modern": {
+      "buildRuns": 2,
+      "allBuildsPassed": true,
+      "feedbackRuns": 2,
+      "feedback": "LOMBOK_FEEDBACK_PASS builder=1 immutable=1 equality=1 redacted=1",
+      "classMajor": 69
+    },
+    "legacy": {
+      "buildRuns": 2,
+      "allBuildsPassed": true,
+      "feedbackRuns": 2,
+      "feedback": "LOMBOK_LEGACY_PASS getter=1 redacted=1",
+      "classMajor": 52
+    },
+    "negative": {
+      "mutation": "remove annotationProcessorPaths from the modern POM",
+      "expectedExitCode": 1,
+      "observedExitCode": 1,
+      "summary": "PASS; clean Maven compilation failed because builder(), getStatus() and getTags() were absent"
+    }
+  },
+  "catalogVerification": {
+    "trackStatus": "available",
+    "loaderStatus": "pre-existing and loadable",
+    "stableIdPreserved": true,
+    "stableUrlPreserved": true,
+    "productionColdBuild": "PASS; 1791 modules transformed and the Lombok lesson chunk was emitted",
+    "directPageLoad": "PASS; lesson route loaded from the source development server"
+  },
+  "engineeringVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes and 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check",
+      "exitCode": 0,
+      "summary": "passed directly and again as part of the production build"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run test:unit",
+      "exitCode": 0,
+      "summary": "No persistent unit files; configured empty directory passed"
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "summary": "No persistent E2E files; configured empty directory passed"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "PASS; 1791 modules transformed and the production bundle was emitted"
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0,
+      "summary": "passed before signoff writeback"
+    }
+  ],
+  "repositoryFormatBoundary": {
+    "command": "npm run format:check",
+    "exitCode": 1,
+    "i17ScopedGate": "PASS",
+    "unrelatedBlockingFiles": [
+      "src/categories/frontend/engineering/vite/vite-reference-index.ts",
+      "src/categories/frontend/vue/core/vue-core-options-reference-index.ts",
+      "src/categories/frontend/vue/core/vue-core-reference-index.ts",
+      "src/categories/frontend/vue/core/vue-core-sfc-reference-index.ts"
+    ],
+    "unrelatedFilesModified": false
+  },
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "session": "java-i17-final",
+    "baseUrl": "http://127.0.0.1:4199/",
+    "targetPath": "/backend/java/core/learn/lombok-and-generated-contracts",
+    "sourceDevServerUsed": true,
+    "productionBuildSeparatelyPassed": true,
+    "desktop": {
+      "viewport": "1440x900",
+      "documentClientWidth": 1440,
+      "documentScrollWidth": 1440,
+      "horizontalOverflow": false
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "documentClientWidth": 390,
+      "documentScrollWidth": 390,
+      "horizontalOverflow": false
+    },
+    "title": "Lombok、可变模型与生成合同",
+    "outlineKnowledgePointCount": 16,
+    "pitfallCount": 5,
+    "orderedListCount": 34,
+    "orderedItemCount": 249,
+    "officialSourceCount": 20,
+    "completeJava8PomVisible": true,
+    "completeJava8SourceVisible": true,
+    "requiredConstructorConditionVisible": true,
+    "completionControlText": "标记为已完成",
+    "requestCount": 1068,
+    "failedRequests": 0,
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "visualInspection": "PASS; desktop and mobile screenshots showed the lesson without overlap, clipping or horizontal overflow"
+  },
+  "review": {
+    "reviewer": "/root/i17_standards_spec_review",
+    "riskClassification": "I-17 materially expands a reused lesson, adds dual-version runnable instructions and adjusts the track grouping",
+    "independentReviewRequired": true,
+    "reviewedLessonSha256": "f20818305f8dbef36756ae58a189b36900667bf0c8f75e7e23f060f1f1fdf9ed",
+    "reviewedResearchSha256": "30753ed2a96a5137d48f92fdeecdea91f1aa62bab77c5d0db8d718b8b308848e",
+    "reviewedTrackSha256": "f798160ce17c1b6a7dd5a137cbd5c9fec217bfd99c94520efeb9fc5f3274c0ed",
+    "standards": "PASS / 0 finding",
+    "spec": "PASS / 0 finding",
+    "highestSeverity": "none",
+    "independentReviewRounds": 3,
+    "resolvedFindings": [
+      "added a dedicated Lombok execution-path source card for AST transformation claims",
+      "aligned the research Filer and execution-path evidence with the lesson source cards",
+      "renamed the track group to model-and-service-design without changing stable course IDs",
+      "limited RequiredArgsConstructor claims to uninitialized final and uninitialized NonNull fields",
+      "added a complete Java 8 POM and LegacyModel.java zero-start workflow"
+    ],
+    "reviewWorkspaceModified": false,
+    "reviewStopBoundary": "reviewer did not read or modify I-18 or later lessons"
+  },
+  "cleanup": {
+    "status": "PASS",
+    "temporaryJavaAssetsAbsent": true,
+    "browserScreenshotsAbsent": true,
+    "currentBatchBrowserSnapshotsAbsent": true,
+    "browserSessionClosed": true,
+    "runtimeContainersStopped": true,
+    "devServerStopped": true,
+    "unrelatedBrowserSessionsPreserved": true
+  },
+  "selfHashPolicy": "signoff file does not record its own SHA-256; artifacts bind only stable external batch outputs",
+  "stopBoundary": "Phase C I-17 is closed at 17/20 after cleanup evidence is finalized. The only next authorized batch is I-18 (backend.java.learn.intermediate.service-design-patterns); I-18 lesson or research content was not read or modified before this signoff. Phase D remains unauthorized until the Phase C aggregate Gate closes."
+}

@@ -1,0 +1,236 @@
+.memo-bailout-demo {
+  width: 100%;
+  max-width: 840px;
+  padding: 24px;
+  border: 1px solid #cfd7d4;
+  border-radius: 8px;
+  background: #fbfcfc;
+  color: #24312f;
+}
+
+.memo-bailout-demo-heading p,
+.memo-bailout-demo-heading h2,
+.memo-bailout-demo-heading span,
+.memo-bailout-demo-report p,
+.memo-bailout-demo-log h3,
+.memo-bailout-demo-latest {
+  margin: 0;
+}
+
+.memo-bailout-demo-heading p {
+  color: #9a4c20;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.memo-bailout-demo-heading h2 {
+  margin-top: 6px;
+  font-size: 1.35rem;
+  line-height: 1.35;
+}
+
+.memo-bailout-demo-heading > span {
+  display: block;
+  margin-top: 6px;
+  color: #5b6966;
+  line-height: 1.6;
+}
+
+.memo-bailout-demo-heading output {
+  color: #245d55;
+  font-weight: 700;
+}
+
+.memo-bailout-demo-controls {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 18px -5px 0;
+}
+
+.memo-bailout-demo-controls button {
+  min-height: 42px;
+  max-width: 100%;
+  padding: 8px 12px;
+  margin: 0 5px 10px;
+  border: 1px solid #296b62;
+  border-radius: 5px;
+  background: #296b62;
+  color: #ffffff;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  white-space: normal;
+}
+
+.memo-bailout-demo-controls button.is-secondary {
+  background: #ffffff;
+  color: #245d55;
+}
+
+.memo-bailout-demo-controls button:hover {
+  filter: brightness(0.95);
+}
+
+.memo-bailout-demo-controls button:focus-visible {
+  outline: 3px solid #e39a56;
+  outline-offset: 2px;
+}
+
+.memo-bailout-demo-stage {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  margin: 8px -6px -12px;
+}
+
+.memo-bailout-demo-reports,
+.memo-bailout-demo-log {
+  flex: 1 1 300px;
+  min-width: 0;
+  margin: 0 6px 12px;
+}
+
+.memo-bailout-demo-reports {
+  display: flex;
+  flex-direction: column;
+  order: 1;
+}
+
+.memo-bailout-demo-report {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid #d5dcda;
+  border-left: 4px solid #c45f2f;
+  border-radius: 6px;
+  background: #ffffff;
+}
+
+.memo-bailout-demo-report + .memo-bailout-demo-report {
+  margin-top: 10px;
+}
+
+.memo-bailout-demo-report.is-memoized {
+  border-left-color: #35786e;
+}
+
+.memo-bailout-demo-report > span,
+.memo-bailout-demo-log header span {
+  display: block;
+  color: #64716e;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.memo-bailout-demo-report > strong {
+  display: block;
+  margin-top: 8px;
+  color: #3b5550;
+  font-size: 1.15rem;
+  overflow-wrap: anywhere;
+}
+
+.memo-bailout-demo-report p {
+  margin-top: 8px;
+  color: #52605d;
+}
+
+.memo-bailout-demo-report output {
+  color: #91431e;
+  font-weight: 700;
+}
+
+.memo-bailout-demo-log {
+  order: 2;
+  padding: 16px;
+  border: 1px solid #d5dcda;
+  border-radius: 6px;
+  background: #ffffff;
+}
+
+.memo-bailout-demo-log header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.memo-bailout-demo-log header > div {
+  min-width: 0;
+  margin-right: 10px;
+}
+
+.memo-bailout-demo-log h3 {
+  margin-top: 4px;
+  color: #28685f;
+  font-size: 1.3rem;
+  overflow-wrap: anywhere;
+}
+
+.memo-bailout-demo-log header > output {
+  padding: 4px 7px;
+  border-radius: 4px;
+  background: #edf5f3;
+  color: #315e57;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.memo-bailout-demo-counts {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 14px -4px 0;
+}
+
+.memo-bailout-demo-counts > div {
+  flex: 1 1 110px;
+  min-width: 0;
+  padding: 10px;
+  margin: 0 4px 8px;
+  border-left: 3px solid #4b8179;
+  background: #f1f6f5;
+}
+
+.memo-bailout-demo-counts dt {
+  color: #63706d;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.memo-bailout-demo-counts dd {
+  margin: 5px 0 0;
+  color: #244d47;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.memo-bailout-demo-latest {
+  min-height: 3.2em;
+  color: #52605d;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.memo-bailout-demo-history {
+  display: block;
+  max-height: 166px;
+  padding: 0;
+  margin: 6px 0 0;
+  color: #596663;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  overflow: auto;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+@media (max-width: 560px) {
+  .memo-bailout-demo {
+    padding: 18px;
+  }
+
+  .memo-bailout-demo-controls button {
+    flex: 1 1 150px;
+  }
+}

@@ -71,7 +71,7 @@ recap:
 
 # 类型化与文件路由
 
-## 先看懂手工 RouteNamedMap 的五个位置
+## 一、先看懂手工 RouteNamedMap 的五个位置
 
 `RouteRecordInfo` 依次描述 name、path、导航输入 paramsRaw、URL 归一化后的 params，以及全部 child route names。必填 `\:id` 的导航输入可接受 string 或 number，但从 URL 读取的值是 string；这两个位置不能交换。
 
@@ -94,7 +94,7 @@ interface RouteNamedMap {
 
 这个 map 只影响编译期，不会创建任何运行时 route record。手工 routes 与手工 map 必须由开发者双份维护；路径、name 或参数一边变化而另一边未同步时，类型仍可通过，运行时却会走向另一套结构。
 
-## TypesConfig 让公共 Router API 读取同一张 map
+## 二、TypesConfig 让公共 Router API 读取同一张 map
 
 ~~~~ts
 declare module 'vue-router' {
@@ -106,7 +106,7 @@ declare module 'vue-router' {
 
 module augmentation 被 TypeScript 纳入后，`router.push()`、`router.resolve()`、RouterLink 与 route location 类型会从这张 map 取得 name 和 params。若声明未进入 tsconfig，它们会回退为 generic；编辑器没有报错并不证明类型生成有效。
 
-## 文件路由把双份维护变成构建期生成
+## 三、文件路由把双份维护变成构建期生成
 
 `vue-router/vite` 扫描 pages tree，生成可执行 routes 虚拟模块和 d.ts。Vite 插件必须位于 `Vue()` 前；运行时仍从稳定主入口创建 Router，只从 `vue-router/auto-routes` 导入生成的 routes。
 
@@ -132,7 +132,7 @@ export const router = createRouter({
 })
 ~~~~
 
-## 本课的可执行示例是独立 production fixture
+## 四、本课的可执行示例是独立 production fixture
 
 fixture 只扫描自己的 `pages/index.vue` 与 `pages/users/[id].vue`，生成声明也保留在 fixture 内，bundle 输出写入 `node_modules/.tmp/`。它不注册到宿主 DemoBox、不修改宿主 Vite 或 router，因此能验证构建期 seam 而不改变学习站 URL。
 
@@ -144,7 +144,7 @@ fixture 只扫描自己的 `pages/index.vue` 与 `pages/users/[id].vue`，生成
 | src/type-contract.ts | 合法与预期非法类型调用 | 不能只看编辑器提示 |
 | vite.config.ts | 限定扫描、插件顺序与输出目录 | 不能修改宿主配置 |
 
-## 用正反例证明生成类型真的生效
+## 五、用正反例证明生成类型真的生效
 
 ~~~~ts
 router.resolve({ name: '/users/[id]', params: { id: '42' } })
@@ -159,7 +159,7 @@ router.resolve({ name: '/missing', params: {} })
 
 `@ts-expect-error` 不是忽略错误：它要求下一行必须产生类型错误。若 augmentation 失效而 API 退化为 generic，指令会变成 unused 并让 Gate 失败。normalized route 还要单独断言 `params.id` 是 string，而不是导航输入允许的 number。
 
-## 构建期扩展与运行时 addRoute 属于两个阶段
+## 六、构建期扩展与运行时 addRoute 属于两个阶段
 
 `extendRoute` 与 `beforeWriteFiles` 修改生成器的 editable tree，结果可同时进入 routes 和 d.ts；B14 的 `addRoute()` 只修改已运行 Router 的 matcher，不会回写声明。需要新增类型时必须回到构建输入或 public build-time hook。
 
@@ -171,7 +171,7 @@ router.resolve({ name: '/missing', params: {} })
 - [ ] production build 与独立 vue-tsc Gate 都通过
 - [ ] 宿主 vite.config.ts、src/router 与 URL contract 保持不变
 
-## 易错使用提示
+## 七、易错使用提示
 
 :::pitfalls
 ### 把 VueRouter() 放到 Vue() 后
@@ -396,7 +396,7 @@ B15 主线不依赖该宏，并明确固定版本边界
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 从源码推导适用场景
+## 八、从源码推导适用场景
 
 :::steps
 ### 1. augmentation 是 typed map 的开关

@@ -135,7 +135,7 @@ anchors:
 
 # Pinia Internal Types Watchlist
 
-## 概述
+## 一、概述
 
 本页只登记 Pinia 4.0.2 根发布物仍导出的 24 个 internal 类型。它们解释公开 Store、订阅、Setup Store 推断、map helpers 与 storeToRefs 的声明如何组装，但 sourceTag 始终是 internal，不属于 41 个稳定 Reference 项。
 
@@ -143,151 +143,151 @@ anchors:
 sourceTag: internal。应用代码不要 import 下列名称；发布物可导出不等于兼容性承诺。应优先使用每项列出的公开类型、helper 或具体 Store 推断结果。
 :::
 
-## Internal Store On Action Listener Context
+## 二、Internal Store On Action Listener Context
 
 | 名称 | sourceTag | 固定源码说明 | 所在公开签名 | 公开替代 |
 | --- | --- | --- | --- | --- |
 | _StoreOnActionListenerContext | internal | `src/types.ts` 组合 action name、store、args、after 与 onError 的内部泛型上下文。 | `StoreOnActionListenerContext`、`StoreOnActionListener` 与 `$onAction()` | 让 `$onAction()` 回调直接推断，或使用 `StoreOnActionListenerContext`。 |
 
-## Internal Store With State
+## 三、Internal Store With State
 
 | 名称 | sourceTag | 固定源码说明 | 所在公开签名 | 公开替代 |
 | --- | --- | --- | --- | --- |
 | _StoreWithState | internal | `src/types.ts` 汇集 `$state/$patch/$reset/$subscribe/$dispose` 的内部 Store 基座。 | `Store`、`StoreGeneric` 与 `StoreDefinition` 的实例返回值 | 使用 `ReturnType&lt;typeof useStore&gt;`、`Store` 或 `StoreGeneric`。 |
 
-## Internal Subscription Callback Mutation Base
+## 四、Internal Subscription Callback Mutation Base
 
 | 名称 | sourceTag | 固定源码说明 | 所在公开签名 | 公开替代 |
 | --- | --- | --- | --- | --- |
 | _SubscriptionCallbackMutationBase | internal | `src/types.ts` 为三种公开 mutation 分支提供 type、storeId 与 dev-only events。 | `SubscriptionCallbackMutationDirect/PatchObject/PatchFunction` | 使用公开联合 `SubscriptionCallbackMutation&lt;S&gt;` 做分支收窄。 |
 
-## Internal Actions Tree
+## 五、Internal Actions Tree
 
 | 名称 | sourceTag | 固定源码说明 | 所在公开签名 | 公开替代 |
 | --- | --- | --- | --- | --- |
 | _ActionsTree | internal | `src/types.ts` 以字符串到 `_Method` 的记录作为内部 action 默认约束。 | `StoreDefinition`、`StoreGeneric`、`StoreOnActionListener` | 让 `defineStore()` 推断 actions，读取时使用 `StoreActions&lt;SS&gt;`。 |
 
-## Internal Deep Partial
+## 六、Internal Deep Partial
 
 | 名称 | sourceTag | 固定源码说明 | 所在公开签名 | 公开替代 |
 | --- | --- | --- | --- | --- |
 | _DeepPartial | internal | `src/types.ts` 递归放宽 `$patch()` object 与 patch-object payload 的字段。 | `Store.$patch()`、`SubscriptionCallbackMutationPatchObject&lt;S&gt;` | 直接让 `$patch({ ... })` 校验输入，订阅侧使用公开 patch-object 类型。 |
 
-## Internal Extract Actions From Setup Store
+## 七、Internal Extract Actions From Setup Store
 
 | 名称 | sourceTag | 固定源码说明 | 所在公开签名 | 公开替代 |
 | --- | --- | --- | --- | --- |
 | _ExtractActionsFromSetupStore | internal | `src/types.ts` 从 Setup Store 返回对象挑出 action，供定义返回类型内部组装。 | `SetupStoreDefinition`、Setup 形式 `defineStore()` | 从 Store 实例读取 `StoreActions&lt;ReturnType&lt;typeof useStore&gt;&gt;`。 |
 
-## Internal Extract Actions From Setup Store Keys
+## 八、Internal Extract Actions From Setup Store Keys
 
 | 名称 | sourceTag | 固定源码说明 | 所在公开签名 | 公开替代 |
 | --- | --- | --- | --- | --- |
 | _ExtractActionsFromSetupStore_Keys | internal | `src/types.ts` 用 key remapping 选择 Setup Store 返回对象中的函数键。 | Setup 形式 `defineStore()`、`SetupStoreDefinition`、`StoreActions&lt;SS&gt;` | 让 `defineStore()` 推断；消费结果时使用 `StoreActions&lt;SS&gt;`。 |
 
-## Internal Extract Getters From Setup Store
+## 九、Internal Extract Getters From Setup Store
 
 | 名称 | sourceTag | 固定源码说明 | 所在公开签名 | 公开替代 |
 | --- | --- | --- | --- | --- |
 | _ExtractGettersFromSetupStore | internal | `src/types.ts` 从 Setup Store 返回对象挑出 computed getters。 | `SetupStoreDefinition`、Setup 形式 `defineStore()` | 从 Store 实例读取 `StoreGetters&lt;ReturnType&lt;typeof useStore&gt;&gt;`。 |
 
-## Internal Extract Getters From Setup Store Keys
+## 十、Internal Extract Getters From Setup Store Keys
 
 | 名称 | sourceTag | 固定源码说明 | 所在公开签名 | 公开替代 |
 | --- | --- | --- | --- | --- |
 | _ExtractGettersFromSetupStore_Keys | internal | `src/types.ts` 用 key remapping 选择 Setup Store 返回对象中的 ComputedRef 键。 | Setup 形式 `defineStore()`、`SetupStoreDefinition`、`StoreGetters&lt;SS&gt;` | 让 `defineStore()` 推断；消费结果时使用 `StoreGetters&lt;SS&gt;`。 |
 
-## Internal Extract State From Setup Store
+## 十一、Internal Extract State From Setup Store
 
 | 名称 | sourceTag | 固定源码说明 | 所在公开签名 | 公开替代 |
 | --- | --- | --- | --- | --- |
 | _ExtractStateFromSetupStore | internal | `src/types.ts` 从 Setup Store 返回对象挑出既非方法也非 computed 的 state。 | `SetupStoreDefinition`、Setup 形式 `defineStore()` | 从 Store 实例读取 `StoreState&lt;ReturnType&lt;typeof useStore&gt;&gt;`。 |
 
-## Internal Extract State From Setup Store Keys
+## 十二、Internal Extract State From Setup Store Keys
 
 | 名称 | sourceTag | 固定源码说明 | 所在公开签名 | 公开替代 |
 | --- | --- | --- | --- | --- |
 | _ExtractStateFromSetupStore_Keys | internal | `src/types.ts` 用 key remapping 排除方法与 ComputedRef 键。 | Setup 形式 `defineStore()`、`SetupStoreDefinition`、`StoreState&lt;SS&gt;` | 让 `defineStore()` 推断；消费结果时使用 `StoreState&lt;SS&gt;`。 |
 
-## Internal Getters Tree
+## 十三、Internal Getters Tree
 
 | 名称 | sourceTag | 固定源码说明 | 所在公开签名 | 公开替代 |
 | --- | --- | --- | --- | --- |
 | _GettersTree | internal | `src/types.ts` 表达 Options getter 的 state 参数或无参 getter 内部约束。 | `Store`、`StoreDefinition`、map helpers 的泛型约束 | 在 `defineStore()` 中声明 getters，并用 `StoreGetters&lt;SS&gt;` 读取结果。 |
 
-## Internal Map Actions Object Return
+## 十四、Internal Map Actions Object Return
 
 | 名称 | sourceTag | 固定源码说明 | 所在公开签名 | 公开替代 |
 | --- | --- | --- | --- | --- |
 | _MapActionsObjectReturn | internal | `src/mapHelpers.ts` 按 object mapper 的新键名重组 action 返回类型。 | `mapActions(useStore, { localName: actionName })` | 直接调用 `mapActions()` object overload，让调用结果自行推断。 |
 
-## Internal Map Actions Return
+## 十五、Internal Map Actions Return
 
 | 名称 | sourceTag | 固定源码说明 | 所在公开签名 | 公开替代 |
 | --- | --- | --- | --- | --- |
 | _MapActionsReturn | internal | `src/mapHelpers.ts` 保留 array overload 选中的 action 键与函数签名。 | `mapActions(useStore, [actionName])` | 直接调用 `mapActions()` array overload，让调用结果自行推断。 |
 
-## Internal Map State Object Return
+## 十六、Internal Map State Object Return
 
 | 名称 | sourceTag | 固定源码说明 | 所在公开签名 | 公开替代 |
 | --- | --- | --- | --- | --- |
 | _MapStateObjectReturn | internal | `src/mapHelpers.ts` 把 object mapper 转为 Options API computed getter 集合。 | `mapState(useStore, { localName: stateOrGetter })` | 直接调用 `mapState()` object overload，让调用结果自行推断。 |
 
-## Internal Map State Return
+## 十七、Internal Map State Return
 
 | 名称 | sourceTag | 固定源码说明 | 所在公开签名 | 公开替代 |
 | --- | --- | --- | --- | --- |
 | _MapStateReturn | internal | `src/mapHelpers.ts` 把 array overload 的 state/getter 键转为 computed getter。 | `mapState(useStore, [stateOrGetter])` | 直接调用 `mapState()` array overload，让调用结果自行推断。 |
 
-## Internal Map Writable State Object Return
+## 十八、Internal Map Writable State Object Return
 
 | 名称 | sourceTag | 固定源码说明 | 所在公开签名 | 公开替代 |
 | --- | --- | --- | --- | --- |
 | _MapWritableStateObjectReturn | internal | `src/mapHelpers.ts` 为 object mapper 生成 computed getter/setter 对。 | `mapWritableState(useStore, { localName: stateName })` | 直接调用 `mapWritableState()` object overload，让结果自行推断。 |
 
-## Internal Map Writable State Return
+## 十九、Internal Map Writable State Return
 
 | 名称 | sourceTag | 固定源码说明 | 所在公开签名 | 公开替代 |
 | --- | --- | --- | --- | --- |
 | _MapWritableStateReturn | internal | `src/mapHelpers.ts` 为 array overload 生成选中 state 的 getter/setter 对。 | `mapWritableState(useStore, [stateName])` | 直接调用 `mapWritableState()` array overload，让结果自行推断。 |
 
-## Internal Method
+## 二十、Internal Method
 
 | 名称 | sourceTag | 固定源码说明 | 所在公开签名 | 公开替代 |
 | --- | --- | --- | --- | --- |
 | _Method | internal | `src/types.ts` 提供可推断参数与返回值的最宽内部函数约束。 | `StoreOnActionListener`、`StoreActions&lt;SS&gt;` 与 Setup Store action 推断链 | 为业务 action 写明确函数类型，或使用 `StoreActions&lt;SS&gt;`。 |
 
-## Internal Spread
+## 二十一、Internal Spread
 
 | 名称 | sourceTag | 固定源码说明 | 所在公开签名 | 公开替代 |
 | --- | --- | --- | --- | --- |
 | _Spread | internal | `src/mapHelpers.ts` 递归合并多个 `_StoreObject`，形成 mapStores 返回对象。 | `mapStores(...stores)` | 直接调用 `mapStores()`，不要手写它的递归交叉类型。 |
 
-## Internal Store Object
+## 二十二、Internal Store Object
 
 | 名称 | sourceTag | 固定源码说明 | 所在公开签名 | 公开替代 |
 | --- | --- | --- | --- | --- |
 | _StoreObject | internal | `src/mapHelpers.ts` 把单个 StoreDefinition 转为带 suffix 的 computed 属性。 | `mapStores()` 返回对象中的单个 Store 项 | 使用 `mapStores()` 与公开 `MapStoresCustomization`。 |
 
-## Internal Store With Actions
+## 二十三、Internal Store With Actions
 
 | 名称 | sourceTag | 固定源码说明 | 所在公开签名 | 公开替代 |
 | --- | --- | --- | --- | --- |
 | _StoreWithActions | internal | `src/types.ts` 映射 action 的参数与返回值；固定声明只定义并导出该 alias，`Store` 直接交叉 `A`。 | 无；固定 `pinia.d.ts` 未由其他公开签名引用 | 使用 `Store`、`StoreActions&lt;SS&gt;` 或具体 Store 的返回类型。 |
 
-## Internal Store With Getters
+## 二十四、Internal Store With Getters
 
 | 名称 | sourceTag | 固定源码说明 | 所在公开签名 | 公开替代 |
 | --- | --- | --- | --- | --- |
 | _StoreWithGetters | internal | `src/types.ts` 合并 readonly 与 writable computed getter 的展开结果。 | `Store` | 使用 `Store`、`StoreGetters&lt;SS&gt;` 或具体 Store 的返回类型。 |
 
-## Internal Unwrap All
+## 二十五、Internal Unwrap All
 
 | 名称 | sourceTag | 固定源码说明 | 所在公开签名 | 公开替代 |
 | --- | --- | --- | --- | --- |
 | _UnwrapAll | internal | `src/types.ts` 逐键 UnwrapRef；`src/storeToRefs.ts` 用它识别 state ref 形态。 | `storeToRefs(store)` 返回值 | 调用 `storeToRefs()`，或使用 `StoreState&lt;SS&gt;` 等公开类型。 |
 
-## 易错使用提示
+## 二十六、易错使用提示
 
 :::pitfalls
 ### 把 internal 导出当成稳定应用契约
@@ -401,7 +401,7 @@ type State = StoreState<ReturnType<typeof useStore>>
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 二十七、源码推导与适用场景
 
 :::steps
 ### 1. 发布物导出与稳定性是两条轴

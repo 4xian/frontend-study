@@ -44,7 +44,7 @@ recap:
 
 # Getters
 
-## Getter 是 Store 上的计算属性
+## 一、Getter 是 Store 上的计算属性
 
 Getter 根据 state 或其他响应式来源计算结果。Pinia 把 Options Store getter 包装成 Vue `computed()`：重复读取会复用缓存，只有实际依赖变化后才在下次读取时重新求值。与 state 无关的字段变化不会让 getter 失效。
 
@@ -65,7 +65,7 @@ export const useCartStore = defineStore('cart', {
 箭头 getter 使用 state 参数时通常可以自动推导返回类型；通过 `this` 访问其他 getter 时，TypeScript 的限制要求显式写出返回类型。
 :::
 
-## 跨 Store 读取仍然保留响应式依赖
+## 二、跨 Store 读取仍然保留响应式依赖
 
 Getter 可以在求值时调用另一个 `useStore()`。Pinia 会把当前容器设为 active Pinia，另一个 Store 的 state/getter 读取仍被 computed 收集为依赖。不要在模块顶层提前取值形成普通快照。
 
@@ -86,7 +86,7 @@ const useCartStore = defineStore('cart', {
 })
 ~~~~
 
-## 用确定计数观察缓存
+## 三、用确定计数观察缓存
 
 Demo 的运行次数只是教学仪表，不是业务 getter 应有的副作用。连续读取、修改无关备注、修改价格和修改另一个 Store 的税率，会分别显示哪些依赖使缓存保持或失效；不使用毫秒耗时作为正确性证据。
 
@@ -94,7 +94,7 @@ Demo 的运行次数只是教学仪表，不是业务 getter 应有的副作用�
 用确定性求值计数器观察单 Store 与跨 Store getter 的缓存依赖
 :::
 
-## 源码与测试推导
+## 四、源码与测试推导
 
 :::steps
 ### 1. Options getter 包装为 computed
@@ -106,7 +106,7 @@ Demo 的运行次数只是教学仪表，不是业务 getter 应有的副作用�
 固定 `getters.spec.ts` 覆盖 getter 中调用另一个 Store 的场景；依赖 Store 的 state 变化后，下一次读取会得到重新计算的值。
 :::
 
-## 易错使用提示
+## 五、易错使用提示
 
 :::pitfalls
 ### 在 getter 中写入 state

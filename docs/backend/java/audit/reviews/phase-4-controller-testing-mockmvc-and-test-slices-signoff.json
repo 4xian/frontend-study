@@ -1,0 +1,258 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.intermediate.controller-testing-mockmvc-and-test-slices",
+  "batchId": "phase-c-i15-controller-testing-mockmvc-and-test-slices",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-16T05:49:50+08:00",
+  "phase": "Phase C",
+  "phaseCAdmission": {
+    "status": "PASS",
+    "predecessorCourseId": "backend.java.learn.intermediate.testing-with-junit-and-mocks",
+    "predecessorSignoffPath": "docs/backend/java/audit/reviews/phase-4-testing-with-junit-and-mocks-signoff.json",
+    "predecessorSignoffSha256": "5b7c56746a438b55a0581872b11e850625d8d4d3bdb40891ac349122ce5d250d",
+    "phaseCProgressBeforeBatch": "14/20",
+    "trackChangeRequired": true,
+    "loaderChangeRequired": true
+  },
+  "phaseCProgress": "15/20",
+  "phaseAFreeze": {
+    "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+    "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81",
+    "designation": "I-15 / 必修、新增",
+    "title": "Controller 测试、MockMvc 与测试切片",
+    "estimatedMinutes": 150,
+    "prerequisite": "backend.java.learn.intermediate.testing-with-junit-and-mocks",
+    "stableIdAdded": "backend.java.learn.intermediate.controller-testing-mockmvc-and-test-slices",
+    "slugAdded": "controller-testing-mockmvc-and-test-slices",
+    "urlAdded": "/backend/java/core/learn/controller-testing-mockmvc-and-test-slices",
+    "frozenSuccessor": "backend.java.learn.intermediate.openapi-documentation-and-api-integration"
+  },
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "newStagingPerformedThisBatch": false,
+    "existingIndexPreserved": true,
+    "unrelatedWorkspaceChangesPreserved": true
+  },
+  "versions": {
+    "verifiedAt": "2026-08-16",
+    "modern": {
+      "java": "25",
+      "springBoot": "4.1.0",
+      "springFramework": "7.0.8",
+      "junit": "6.0.3",
+      "mockito": "5.23.0"
+    },
+    "legacy": {
+      "java": "8",
+      "springBoot": "2.3.12.RELEASE",
+      "springFramework": "5.2.15.RELEASE",
+      "junitJupiter": "5.6.3",
+      "mockito": "3.3.3"
+    }
+  },
+  "sourceDiscovery": {
+    "method": "官方候选最终回到 Spring Boot、Spring Framework、Spring Security 与 Maven Central 一手页面核验",
+    "researchDirectSourceCount": 17,
+    "lessonOfficialSourceCardCount": 17,
+    "lessonAndResearchSourceMapsMatch": true,
+    "communitySourcesUsedAsEvidence": false
+  },
+  "research": {
+    "scope": "I-15 only",
+    "phaseAContractAlignment": "PASS",
+    "controllerBoundary": "PASS; MockMvc, Controller, MVC test slice and HTTP failure contracts only",
+    "predecessorBoundary": "PASS; Service unit testing remains in I-14",
+    "successorBoundary": "PASS; OpenAPI generation, API documentation and integration workflow remain in I-16",
+    "officialUrlCount": 17,
+    "stopBoundaryAlignment": "PASS; I-16 research and lesson did not exist and were not implemented before I-15 closure",
+    "researchSha256": "113844c3235fa309f6df784ba4c64c11da4831d0589ead2ab1f5b21904380997"
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/intermediate/controller-testing-mockmvc-and-test-slices.md",
+      "sha256": "113844c3235fa309f6df784ba4c64c11da4831d0589ead2ab1f5b21904380997"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/controller-testing-mockmvc-and-test-slices.md",
+      "sha256": "3d34e6af804cc7191b9ccaa5900a61080b634f78ecf6824e079856ecf9e8487b"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "b5a6de56689672ada572a1f92b06db45a9162418f100c00ce33e8d807d9386c6"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "43e895578cdc7d3838c6dcd3080d82d7bdb1b6458ed61265de2101f9cd940fa0"
+    },
+    {
+      "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+      "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81"
+    },
+    {
+      "path": "docs/backend/java/audit/phase-2-knowledge-path-manifest.json",
+      "sha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407"
+    }
+  ],
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "researchLineCount": 171,
+    "lessonLineCount": 1213,
+    "rootH2Count": 17,
+    "independentKnowledgePointHeadings": 24,
+    "knowledgePointSevenPartCoverage": "24/24",
+    "zeroStartOrderedListCount": 1,
+    "zeroStartOrderedListItemCount": 5,
+    "pitfallCount": 4,
+    "exerciseCount": 1,
+    "officialSourceCount": 17,
+    "projectEvidenceCount": 3,
+    "javaMethodComments": "PASS; lesson Java methods use Chinese documentation comments"
+  },
+  "javaVerification": {
+    "modernRuntime": "Eclipse Temurin 25 container",
+    "modernResult": "PASS twice; 8 tests, failures=0, errors=0, skipped=0",
+    "modernClassMajor": 69,
+    "legacyRuntime": "Eclipse Temurin 8 container",
+    "legacyResult": "PASS twice; 4 tests, failures=0, errors=0, skipped=0",
+    "legacyClassMajor": 52,
+    "reviewFindingsRegression": "PASS; Maven command, file paths, cleanup, advice discovery, query parameter and Boot 2.3 BOM checks passed 6/6",
+    "verifiedContracts": [
+      "same-package ControllerAdvice is discovered without a universal Import requirement",
+      "query parameter default, valid and invalid conversion paths are executable",
+      "GET and POST success paths are covered",
+      "blank input returns 400 before Service invocation",
+      "missing resource returns 404 Problem Details",
+      "duplicate title returns 409 with a stable public code"
+    ],
+    "temporaryAssetsCleaned": true,
+    "cleanupCheck": "PASS; /tmp/java-i15-review-regression.hZDWrk and /tmp/java-i15-catalog-check.mjs are absent"
+  },
+  "catalogVerification": {
+    "coldRunCount": 3,
+    "allRunsPassed": true,
+    "intermediateAvailable": 20,
+    "currentTrackCount": 1,
+    "currentLoadable": true,
+    "numberedKnowledgeHeadings": 24,
+    "knowledgePointSevenPartCoverage": "24/24",
+    "pitfallCount": 4,
+    "exerciseCount": 1,
+    "officialSourceCount": 17,
+    "projectEvidenceCount": 3,
+    "successorRegistered": false
+  },
+  "engineeringVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes and 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check",
+      "exitCode": 0,
+      "summary": "passed directly and again as part of the production build"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run test:unit",
+      "exitCode": 0,
+      "summary": "No persistent unit files; configured empty directory passed"
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "summary": "No persistent E2E files; configured empty directory passed"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "PASS; 1783 modules transformed and the production bundle was emitted"
+    },
+    {
+      "command": "npx prettier --check <I-15 lesson> and git diff --check -- <I-15 paths>",
+      "exitCode": 0,
+      "summary": "targeted formatting and whitespace checks passed on the reviewed snapshot"
+    }
+  ],
+  "repositoryFormatBoundary": {
+    "command": "npm run format:check",
+    "exitCode": 1,
+    "i15ScopedGate": "PASS",
+    "unrelatedBlockingFiles": [
+      "src/categories/frontend/engineering/vite/vite-reference-index.ts",
+      "src/categories/frontend/vue/core/vue-core-options-reference-index.ts",
+      "src/categories/frontend/vue/core/vue-core-reference-index.ts",
+      "src/categories/frontend/vue/core/vue-core-sfc-reference-index.ts"
+    ],
+    "unrelatedFilesModified": false
+  },
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "session": "java-i15-recheck",
+    "baseUrl": "http://127.0.0.1:4196/",
+    "targetPath": "/backend/java/core/learn/controller-testing-mockmvc-and-test-slices",
+    "sourceDevServerUsed": true,
+    "productionBuildSeparatelyPassed": true,
+    "sessionsClosed": true,
+    "serverStopped": true,
+    "desktop": {
+      "viewport": "1440x900",
+      "horizontalOverflow": false,
+      "corrected409Visible": true,
+      "zeroStartOrderedListItemCount": 5
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "horizontalOverflow": false,
+      "corrected409Visible": true,
+      "zeroStartOrderedListItemCount": 5
+    },
+    "title": "Controller 测试、MockMvc 与测试切片",
+    "previousEntryId": "backend.java.learn.intermediate.testing-with-junit-and-mocks",
+    "frozenNextEntryId": "backend.java.learn.intermediate.openapi-documentation-and-api-integration",
+    "completionControlText": "标记为已完成",
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "pageErrors": 0,
+    "failedRequests": 0,
+    "visualInspection": "PASS; desktop and mobile screenshots show the title, lesson content and ordered procedure without overlap, clipping or page overflow",
+    "temporaryScreenshotsCleaned": true,
+    "cleanupCheck": "PASS; output/playwright/java-i15-final, java-i15 sessions and port 4196 listener are absent"
+  },
+  "review": {
+    "reviewer": "/root/i15_combined_review",
+    "riskClassification": "I-15 adds a new Controller test lesson, dual-version runnable fixtures and atomic track/loader registration",
+    "independentReviewRequired": true,
+    "reviewedLessonSha256": "3d34e6af804cc7191b9ccaa5900a61080b634f78ecf6824e079856ecf9e8487b",
+    "reviewedResearchSha256": "113844c3235fa309f6df784ba4c64c11da4831d0589ead2ab1f5b21904380997",
+    "standards": "PASS / 0 finding",
+    "spec": "PASS / 0 finding",
+    "highestSeverity": "none",
+    "resolvedFindings": [
+      "the zero-start workflow renders as one real ordered list with five independent items",
+      "the final knowledge point explicitly includes the duplicate-title 409 path",
+      "the same-package advice discovery rule is stated conditionally and verified",
+      "query parameter default, valid and invalid paths are executable",
+      "Boot 2.3.12 exact JUnit and Mockito versions are bound to the official dependency BOM"
+    ],
+    "reviewWorkspaceModified": false,
+    "reviewStopBoundary": "reviewer confirmed I-16 research and lesson are absent and I-16 is not registered"
+  },
+  "cleanup": {
+    "javaTemporaryFilesAbsent": true,
+    "catalogTemporaryFileAbsent": true,
+    "browserTemporaryFilesAbsent": true,
+    "browserSessionClosed": true,
+    "serverListenerAbsent": true,
+    "unrelatedBrowserSessionsPreserved": true
+  },
+  "selfHashPolicy": "signoff file does not record its own SHA-256; artifacts bind only stable external batch outputs",
+  "stopBoundary": "Phase C I-15 is closed at 15/20. The only next authorized batch is I-16 (backend.java.learn.intermediate.openapi-documentation-and-api-integration); no successor lesson or research was implemented before this signoff. Phase D remains unauthorized until the Phase C aggregate Gate closes."
+}

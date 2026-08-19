@@ -1,0 +1,152 @@
+.effect-lifecycle-demo {
+  padding: 24px;
+  border: 1px solid #d5d0c4;
+  border-radius: 8px;
+  background: #fffdf8;
+  color: #302d28;
+}
+
+.effect-lifecycle-demo-heading p,
+.effect-lifecycle-demo-heading span,
+.effect-lifecycle-demo-status span {
+  display: block;
+  margin: 0;
+}
+
+.effect-lifecycle-demo-heading p {
+  color: #b45309;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.effect-lifecycle-demo-heading h2 {
+  max-width: 34rem;
+  margin: 8px 0;
+  color: #2b2620;
+  font-size: 1.35rem;
+  line-height: 1.25;
+}
+
+.effect-lifecycle-demo-heading span {
+  color: #6b6258;
+  line-height: 1.55;
+}
+
+.effect-lifecycle-demo-controls {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.effect-lifecycle-demo-controls button {
+  min-height: 42px;
+  margin: 0 10px 10px 0;
+  padding: 9px 14px;
+  border: 1px solid #857766;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #302d28;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.effect-lifecycle-demo-controls button[aria-pressed='true'] {
+  border-color: #b45309;
+  background: #b45309;
+  color: #ffffff;
+}
+
+.effect-lifecycle-demo-status {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -6px 16px;
+}
+
+.effect-lifecycle-demo-status > div {
+  flex: 1 1 150px;
+  min-width: 0;
+  margin: 0 6px 12px;
+  padding: 14px;
+  border: 1px solid #e1d9cb;
+  border-radius: 6px;
+  background: #ffffff;
+}
+
+.effect-lifecycle-demo-status span {
+  color: #6b6258;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.effect-lifecycle-demo-status strong {
+  display: block;
+  min-height: 30px;
+  margin-top: 8px;
+  color: #2b2620;
+  font-size: 1.2rem;
+  line-height: 1.35;
+}
+
+.effect-lifecycle-demo-events {
+  padding: 16px;
+  border-left: 3px solid #0f766e;
+  background: #f0fdfa;
+}
+
+.effect-lifecycle-demo-events > strong {
+  color: #115e59;
+}
+
+.effect-lifecycle-demo-events ol {
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.effect-lifecycle-demo-events li {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  margin: 0 0 8px;
+  padding: 8px 10px;
+  border: 1px solid #c7e5df;
+  border-radius: 6px;
+  background: #ffffff;
+}
+
+.effect-lifecycle-demo-events li:last-child {
+  margin-bottom: 0;
+}
+
+.effect-lifecycle-demo-events li > span:first-child {
+  flex: 0 0 28px;
+  color: #6b6258;
+  font-variant-numeric: tabular-nums;
+}
+
+.effect-lifecycle-demo-events li > strong {
+  flex: 0 0 48px;
+  color: #115e59;
+}
+
+.effect-lifecycle-demo-events p {
+  margin: 12px 0 0;
+  color: #6b6258;
+}
+
+@media (max-width: 560px) {
+  .effect-lifecycle-demo {
+    padding: 18px;
+  }
+
+  .effect-lifecycle-demo-status {
+    display: block;
+    margin: 0 0 16px;
+  }
+
+  .effect-lifecycle-demo-status > div {
+    margin: 0 0 12px;
+  }
+}

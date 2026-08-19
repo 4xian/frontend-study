@@ -70,7 +70,7 @@ anchors:
 
 # &lt;script setup&gt;
 
-## 基本语法
+## 一、基本语法
 
 `<script setup>` 是单文件组件中使用组合式 API 的编译时语法糖。块内可执行语句进入生成的 `setup()`，因此每创建一个组件实例都会执行一次；顶层变量、函数和 import 可直接在同一 SFC 模板中使用，不需要构造返回对象或再次注册。
 
@@ -78,7 +78,7 @@ anchors:
 模板可见不等于公开实例可见。父组件通过模板引用访问子组件时，script setup 组件默认是关闭的；需要公开的成员由已有 `defineExpose()` Reference 负责。
 :::
 
-## 响应式
+## 二、响应式
 
 `<script setup>` 不会把普通 JavaScript 值自动变成响应式状态。仍须使用 `ref()`、`reactive()`、`computed()` 等 API；ref 在模板中自动解包，而脚本逻辑仍通过 `.value` 读写。
 
@@ -93,7 +93,7 @@ const count = ref(0)
 </template>
 ~~~~
 
-## 使用组件
+## 三、使用组件
 
 导入的组件是模板词法作用域中的变量，可以直接写成 PascalCase 标签。动态组件应把组件变量传给 `<component :is>`；命名空间导入还支持 `<Form.Input />` 这样的点号成员。显式同名导入优先于 SFC 文件名递归自引用。
 
@@ -110,7 +110,7 @@ import * as Form from './form-components'
 </template>
 ~~~~
 
-## 使用自定义指令
+## 四、使用自定义指令
 
 本地指令顶层绑定必须遵循 `vNameOfDirective` 命名约定，例如 `vFocus` 对应模板 `v-focus`。从模块导入时可以用别名适配；变量本身仍须满足自定义指令的公开形状。全局注册指令不受本地命名约定影响。
 
@@ -122,7 +122,7 @@ import { focus as vFocus } from './directives'
 <template><input v-focus /></template>
 ~~~~
 
-## defineProps() 和 defineEmits()
+## 五、defineProps() 和 defineEmits()
 
 `defineProps()` 与 `defineEmits()` 是仅在 script setup 中可用的编译器宏，不需要 import，并会在编译结果中被消除。声明会转成组件运行时 props / emits 选项，同时为脚本中的 props 对象和 emit 函数提供类型。
 
@@ -139,7 +139,7 @@ const emit = defineEmits<{ save: [id: number] }>()
 Vue 3.5+ 会把同一 script setup 中的 props 解构标识符读取改写为 `props.title` 等价访问。解构变量不是 Ref；交给 `watch()` 等需要响应式源的 API 时应传 `() => title`。
 :::
 
-## defineOptions()
+## 六、defineOptions()
 
 Vue 3.3+ 的 `defineOptions()` 用于声明 `inheritAttrs` 或插件自定义选项，免去只为这些静态选项增加普通 script。它也是编译器宏，参数会提升，不能读取实例局部状态；`props`、`emits`、`expose` 和 `slots` 应继续使用各自专用宏。
 
@@ -152,7 +152,7 @@ defineOptions({
 </script>
 ~~~~
 
-## useSlots() 和 useAttrs()
+## 七、useSlots() 和 useAttrs()
 
 模板通常直接使用 `$slots` 与 `$attrs`。setup 逻辑确实需要它们时，从 `vue` 导入 `useSlots()`、`useAttrs()`；二者是真实运行时函数，返回值分别等价于 `setupContext.slots` 和 `setupContext.attrs`，普通组合式 API 也能调用。
 
@@ -160,13 +160,13 @@ defineOptions({
 `useAttrs()` 返回对象会反映最新透传 attribute，但不是响应式对象。需要建立侦听契约的输入应声明成 prop；只需在渲染或更新时读取时再使用 attrs。
 :::
 
-## 与普通的 &lt;script&gt; 一起使用
+## 八、与普通的 &lt;script&gt; 一起使用
 
 一个 SFC 可以同时包含一个普通 `<script>` 和一个 `<script setup>`。普通 script 适合模块作用域只执行一次的副作用、具名导出和仍无法由宏表达的组件选项；script setup 负责每个实例的状态与逻辑。
 
 两块不是共享局部变量的混合词法作用域。script setup 变量不会自动成为组件实例属性，Options API 也不能靠 `this` 读取。若必须深度混用两套 API，应改用显式 `setup()`，让输入和返回值清晰可见。
 
-## 顶层 await
+## 九、顶层 await
 
 script setup 允许顶层 await，并编译成 `async setup()`。编译器使用内部 `withAsyncContext()` 包装 await，在恢复后保持当前组件实例上下文；这个保障不适用于任意异步回调。
 
@@ -174,13 +174,13 @@ script setup 允许顶层 await，并编译成 `async setup()`。编译器使用
 异步 setup 需要 `<Suspense>` 协调 pending UI，而 Suspense 当前仍是实验性功能。编译成功不等于加载、失败与超时体验已经设计完成。
 :::
 
-## 导入语句
+## 十、导入语句
 
 import 遵循 ECMAScript 模块规范并保留在模块作用域。`@/`、`~/` 等 alias 由 Vite、TypeScript 等项目配置提供，不是 Vue 内建。导入绑定可以直接用于模板插值、组件标签、动态组件和符合命名约定的本地指令。
 
 compiler-sfc 根据 template AST 分析实际运行时引用，区分类型 import 和运行时 binding；注释或纯文本中出现同名字符串不会建立模板绑定。
 
-## 泛型
+## 十一、泛型
 
 Vue 3.3+ 的 TypeScript SFC 可以通过 `<script setup lang="ts" generic="T">` 声明组件类型参数。值使用 TypeScript 类型参数列表语法，支持多个参数、`extends` 约束、默认类型和导入类型，并可供类型式宏引用。
 
@@ -188,13 +188,13 @@ Vue 3.3+ 的 TypeScript SFC 可以通过 `<script setup lang="ts" generic="T">` 
 `generic` 只服务 SFC 与 TypeScript 语言工具链，不会在浏览器生成运行时泛型或自动 prop 校验器。本页不引入外部泛型组件 helper。
 :::
 
-## 限制
+## 十二、限制
 
 `<script setup>` 依赖完整 SFC 文件上下文，不能使用 `src` attribute 外置到 `.js` 或 `.ts` 文件。普通 script 与 script setup 并存时也必须由 compiler-sfc 一起处理，不能通过外部 source 拼接作用域。
 
 script setup 不支持 DOM 内根组件模板。浏览器不会自行编译服务器输出 HTML 中的 `<script setup>`；它必须位于 `.vue` 文件并经过 SFC 工具链预处理。
 
-## 易错使用提示
+## 十三、易错使用提示
 
 :::pitfalls
 ### 把每实例执行误当成自动响应式或模块单例
@@ -423,7 +423,7 @@ defineProps<{ items: T[] }>()
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 十四、源码推导与适用场景
 
 :::steps
 ### 1. 每实例 setup 与模板绑定

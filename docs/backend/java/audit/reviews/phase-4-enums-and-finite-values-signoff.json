@@ -1,0 +1,420 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.basics.enums-and-finite-values",
+  "batchId": "phase-4-enums-and-finite-values",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-06T14:10:04Z",
+  "revalidatedAt": "2026-08-06T14:24:31Z",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "89378a4fcd620c433f879c7a492104721cde7d6f07fa51936b78b2cb6dadfb7b",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "stagedLessonChanges": false
+  },
+  "sourceRepository": {
+    "path": "/Users/jian/Desktop/work/TDH/dzzz/dzzz-app",
+    "head": "167ca8aa91ca3a6b101246964ef4fddec3d21da0",
+    "statusShort": "",
+    "readOnly": true
+  },
+  "phase2Freeze": {
+    "courseCoverageMatrixSha256": "04d858896d07e975d3ab50796494873f09bd0ddf4b1a8b1ea87bd75cdd101d38",
+    "researchStatus": "not-started",
+    "exampleStatus": "not-started",
+    "courseStatus": "planned",
+    "phase4StateRecordedOnlyInThisSignoff": true,
+    "knownFrozenArtifactMismatch": {
+      "artifact": "docs/backend/java/audit/course-coverage-matrix.md",
+      "officialSha256": "b7fd50ffabbcf8a198802e907cef769ac969a71e4e14c40038f4aaaed09d91ad",
+      "recomputedExpectedSha256": "c4283551b4f37081097551957d3b4e1ea44922e0a1bb5865be2c5cc18faa6021",
+      "difference": "仅首部两处：正式文件使用 <br>，生成器预期使用 Markdown 行尾双空格；冻结 JSON、manifest、源码 HEAD 和库存身份未漂移。",
+      "introducedByThisLesson": false,
+      "action": "保留冻结文件并记录；不修改 Phase 2 产物或 tooling。"
+    }
+  },
+  "versions": {
+    "verifiedAt": "2026-08-06",
+    "modern": {
+      "java": "25",
+      "runtime": "Eclipse Temurin 25.0.3+9 LTS"
+    },
+    "legacy": {
+      "java": "8",
+      "runtime": "Eclipse Temurin 8u492-b09",
+      "springBootBackground": "2.3.12.RELEASE"
+    }
+  },
+  "sourceDiscovery": {
+    "method": "Tavily 仅用于发现直接页面，随后逐页核对 Oracle、JLS、Dev.java 和 OpenJDK 正文",
+    "communitySourcesUsedAsEvidence": false,
+    "projectEvidenceBoundary": "AJFL、IEnum 与 BjmMs 只作为 observed/corrected 证据；AymsJc 与 VidyoDataCommon 只作为 rejected 边界，不复制空返回、宽松匹配、共享可变状态、业务枚举清单或凭证式值。",
+    "directUrls": [
+      "https://openjdk.org/projects/jdk/25/",
+      "https://www.oracle.com/java/technologies/java-se-support-roadmap.html",
+      "https://docs.oracle.com/javase/specs/jls/se25/html/jls-8.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Enum.html",
+      "https://dev.java/learn/classes-objects/enums",
+      "https://docs.oracle.com/javase/specs/jls/se8/html/jls-8.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/lang/Enum.html"
+    ]
+  },
+  "projectEvidence": [
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/enums/AJFL.java",
+      "symbol": "com.tdh.bdzz.enums.AJFL",
+      "usage": "corrected",
+      "sha256": "bdfe5fa9885bb90549f133c309260ea355f83d53f42ee2d0576c3f07009549c2",
+      "inventoryMatched": true
+    },
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/enums/IEnum.java",
+      "symbol": "com.tdh.bdzz.enums.IEnum",
+      "usage": "observed",
+      "sha256": "a396a9a4a41dbd2137d1e01a0e747581e976b0d9c1636db9f18eea9a8f7f9dcb",
+      "inventoryMatched": true
+    },
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/enums/BjmMs.java",
+      "symbol": "com.tdh.bdzz.enums.BjmMs",
+      "usage": "corrected",
+      "sha256": "f3a4a202aa3619f4447811bc2cb7acb8a253bbb00e5a57e361bfac8fb0476ca9",
+      "inventoryMatched": true
+    },
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/enums/AymsJc.java",
+      "symbol": "com.tdh.bdzz.enums.AymsJc",
+      "usage": "rejected",
+      "sha256": "fc2fc184c713af9f37a92aad2b53d8af2926ca72b0562d2ef780ef365e56bdef",
+      "inventoryMatched": true
+    },
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/enums/vidyo/common/VidyoDataCommon.java",
+      "symbol": "com.tdh.bdzz.enums.vidyo.common.VidyoDataCommon",
+      "usage": "rejected",
+      "sha256": "5a44eb3e478e19a1fa53fca510229760456cc1b714f097c26b6d90b9be78bfeb",
+      "inventoryMatched": true
+    }
+  ],
+  "docker": {
+    "engine": "Docker 29.6.1",
+    "feedbackSource": "从课程 Markdown 的 如何验证 代码块提取同一 bash 反馈环，经 stdin 交给固定 RepoDigest 容器执行",
+    "classOutput": "容器内 /tmp 的 mktemp 目录，shell trap 使用 find -depth -delete 清理",
+    "images": [
+      {
+        "role": "modern",
+        "requestedTag": "eclipse-temurin:25-jdk",
+        "digest": "sha256:12e44624adee6808a36d962717e1656e0afeeeff5a100f9cb00e0136513558f0"
+      },
+      {
+        "role": "legacy",
+        "requestedTag": "eclipse-temurin:8-jdk",
+        "digest": "sha256:c8b86f2c0a9bd6cc1b7fabc5d1a097501a166eea7cad3b2764e90e96178bea9b"
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/basics/enums-and-finite-values.md",
+      "sha256": "5dff4b27bc0d9cdf804eae2f3f48d1bd3a62485f4273c986d746d3b5e5c08f0b"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/enums-and-finite-values.md",
+      "sha256": "9806ccf020cbbb0bb12fba99aeda2bb9062c62d7ba3441e98f4937583751c33f"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "5e72e6cfc30251956487f1278fe73294c5fd3c6ddf86d3a5bf2939dc41cbbecc"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "49740ff3714c83a9134b8b78f196a9b3528b2a549e5db0749c99e2feba066e05"
+    },
+    {
+      "path": "docs/backend/java/dzzz-app-course-plan.md",
+      "sha256": "62b9787936dff2158b717f0ce3ffdcc760a920ea6a8029e413374b18edd489d9"
+    }
+  ],
+  "selfHashPolicy": "signoff 文件不记录自身哈希，避免递归自引用；artifacts 中其余最终文件逐一绑定 SHA-256",
+  "changedFiles": [
+    "docs/research/backend/java/basics/enums-and-finite-values.md",
+    "src/categories/backend/java/core/learn/enums-and-finite-values.md",
+    "src/categories/backend/java/core/entry-manifest.ts",
+    "src/categories/backend/java/core/backend-java-track.ts",
+    "docs/backend/java/audit/reviews/phase-4-enums-and-finite-values-signoff.json",
+    "docs/backend/java/dzzz-app-course-plan.md"
+  ],
+  "priorClosedJavaAssets": {
+    "protected": true,
+    "summary": "第一至第八批研究、课程与 signoff 保持原样，不归入第九批 changedFiles。"
+  },
+  "concurrentWorkspaceAssets": {
+    "protected": true,
+    "attribution": "frontend TypeScript、frontend 文档、HeadingBlock 与 ContentEntryPage 资产由并行工作产生，不属于本批 changedFiles；本批验证前后工作区指纹一致。",
+    "frontendTrackedDiffSha256": "2ec010054762ad4f27ca8c844503ae8e580b80488dcd01b43be626b4c942bdf1",
+    "frontendUntrackedContentsSha256": "220f67a7735133544a78975c893f7f2810854f7dfee2624c02ce6c5ebe9d9fe5",
+    "preSignoffTrackedDiffSha256": "a4dc51cd7373bea744ee9b0249535f6a78e475b201226a260255b5c359f9ab6c",
+    "preSignoffUntrackedContentsSha256": "1024cef9dc766ddf7f2001114dc0c822ac20a81a938feedd2f5685f45e6e12f0",
+    "preSignoffStatusSha256": "b6b00442bb62cb39376f2001d80cbbb654135ea424a8aedc89e9aee4c07b7de6",
+    "stabilityCheck": "完整 Gate 前后重算三组工作区指纹一致",
+    "paths": [
+      "docs/frontend/",
+      "src/app/pages/ContentEntryPage.vue",
+      "src/categories/frontend/engineering/typescript/",
+      "src/common/ui/blocks/HeadingBlock.vue"
+    ]
+  },
+  "baselineVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 1,
+      "summary": "既有冻结 Markdown 确定性字节 mismatch；未修改冻结文件或 tooling。"
+    },
+    {
+      "command": "npm run type-check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run format:check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run test:unit",
+      "exitCode": 0,
+      "summary": "No test files found; configured empty test directory is valid"
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "summary": "No persistent E2E test files; command passed with --pass-with-no-tests; generated test-results output removed after review"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "1089 modules transformed; existing >500 kB catalog chunk warning only"
+    },
+    {
+      "command": "git diff HEAD --check && git diff --cached --check",
+      "exitCode": 0,
+      "summary": "passed; no staged lesson changes"
+    },
+    {
+      "command": "git -C /Users/jian/Desktop/work/TDH/dzzz status --short -- dzzz-app",
+      "exitCode": 0,
+      "summary": "empty; source repository remained read-only"
+    }
+  ],
+  "markdownVerification": {
+    "requiredFrontmatterFieldCount": 21,
+    "sourceCount": 7,
+    "projectEvidenceCount": 3,
+    "containerDirectives": [
+      "tip",
+      "pitfalls",
+      "exercise"
+    ],
+    "loadedBlockCount": 56,
+    "methodCommentCheck": "正文和反馈环中的所有 Java 构造器与方法定义上方均有规范中文注释",
+    "adapterBuildPassed": true
+  },
+  "javaVerification": {
+    "command": "sed -n '456,627p' src/categories/backend/java/core/learn/enums-and-finite-values.md | bash",
+    "exitCode": 0,
+    "sharedOutput": "A|已支付|PAID|3|PENDING|invalid-name|invalid-code",
+    "cases": [
+      {
+        "name": "Java 25 and Java 8 finite enum values",
+        "java25ExitCode": 0,
+        "java8ExitCode": 0,
+        "stdout": "A|已支付|PAID|3|PENDING|invalid-name|invalid-code"
+      },
+      {
+        "name": "mutable enum shared-state risk",
+        "java25ExitCode": 0,
+        "java8ExitCode": 0,
+        "stdout": "1|1"
+      },
+      {
+        "name": "public enum constructor",
+        "java25CompileExit": 1,
+        "java8CompileExit": 1,
+        "diagnosticTextBound": false
+      }
+    ],
+    "temporaryAssetsCleaned": true
+  },
+  "catalogVerification": {
+    "availableJavaLessonCount": 9,
+    "roadmapNodeCount": 51,
+    "targetId": "backend.java.learn.basics.enums-and-finite-values",
+    "targetSlug": "enums-and-finite-values",
+    "officialSourceCount": 7,
+    "searchTerm": "枚举",
+    "searchResultCount": 1,
+    "previousEntryId": "backend.java.learn.basics.interfaces-inheritance-and-polymorphism",
+    "nextEntryId": null,
+    "laterEntriesAllPlanned": true,
+    "detailLoaderPassed": true
+  },
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "baseUrl": "http://127.0.0.1:4173/",
+    "targetPath": "/backend/java/core/learn/enums-and-finite-values",
+    "desktop": {
+      "viewport": "1440x900",
+      "documentClientWidth": 1440,
+      "documentScrollWidth": 1440,
+      "title": "枚举与有限值建模",
+      "sourceSectionVisible": true,
+      "pitfallsVisible": true,
+      "exerciseVisible": true,
+      "searchTerm": "枚举",
+      "searchResultCount": 1,
+      "previousEntryId": "backend.java.learn.basics.interfaces-inheritance-and-polymorphism",
+      "nextLink": false,
+      "initialProgress": "0 / 9",
+      "completedProgress": "1 / 9"
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "documentClientWidth": 390,
+      "documentScrollWidth": 390,
+      "horizontalOverflow": false,
+      "completionButtonAfterReload": "取消完成"
+    },
+    "console": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "progressPersistedAfterReload": true,
+    "navigationFromPreviousLesson": {
+      "fromPath": "/backend/java/core/learn/interfaces-inheritance-and-polymorphism",
+      "viaLink": "下一篇：枚举与有限值建模",
+      "loadedTarget": true
+    },
+    "sessionClosed": true,
+    "generatedSnapshotsCleaned": true,
+    "generatedTestResultsCleaned": true,
+    "repositoryBrowserOutputAbsentAfterCleanup": true,
+    "preExistingSharedArtifactsPreserved": true
+  },
+  "review": {
+    "standards": "PASS",
+    "standardsFindings": 0,
+    "spec": "PASS",
+    "specFindings": 0
+  },
+  "beginnerContentReverification": {
+    "verifiedAt": "2026-08-07",
+    "courseArtifact": {
+      "path": "src/categories/backend/java/core/learn/enums-and-finite-values.md",
+      "sha256": "304621475c80d6e781e443a4c1b5447fe64913d807b38c1cf9e6daf76f2a3d20"
+    },
+    "content": "PASS; exactly one 从零跟着做, usage, pitfalls, verification, one exercise and runnable code",
+    "sources": "PASS; source type, appliesTo and claims shown only in the official-source regions; 正文无来源详情",
+    "browser": "PASS; 1440px and 390px routes, 36/36 HTTP 200, no horizontal overflow or browser errors",
+    "root": "PASS; knowledge-path, type-check, lint, format and diff checks"
+  },
+  "stopBoundary": "第九课 enums-and-finite-values 通过完整 Gate 后立即停止；第十课 annotations-and-metadata 及其后 Java / Go 课程、Reference 与项目实战保持未开始。",
+  "phaseBReverification": {
+    "batchId": "B-09",
+    "status": "implementation-complete / lesson-passed",
+    "verifiedAt": "2026-08-14",
+    "historicalEvidencePreserved": true,
+    "courseContract": {
+      "title": "枚举与有限值建模",
+      "estimatedMinutes": 60,
+      "prerequisites": ["B-08"],
+      "path": "/backend/java/core/learn/enums-and-finite-values"
+    },
+    "currentArtifacts": [
+      {
+        "path": "docs/research/backend/java/basics/enums-and-finite-values.md",
+        "sha256": "ffda60dd5bc0271ee88e6f89f7a3e516914fd7c11937235e67d1b35555f5189f"
+      },
+      {
+        "path": "src/categories/backend/java/core/learn/enums-and-finite-values.md",
+        "sha256": "3cc919eb06bdd9e03b17fc541ca7d5ad5e6726ae76e63a522a4536404e6d368e"
+      }
+    ],
+    "runtimeProtection": {
+      "trackChanged": true,
+      "trackSha256": "8c770f2225121d0fd76a02cef06962e4c1f608895c2200beb3fb84c46fb28255",
+      "loaderChanged": true,
+      "loaderSha256": "57c139ca77c73c92bd0acee96b7a022f340e16d9b10060817c6aee3aa3a543ab",
+      "change": "仅交换既有异常与注解条目的清单顺序，使 B-09 的下一篇为 B-10；未改变 B-10 研究、正文、状态或 loader 语义。"
+    },
+    "research": {
+      "status": "PASS",
+      "discovery": "Tavily",
+      "finalEvidence": "7 个 Java 25/8、JLS、Enum API、OpenJDK、Oracle Roadmap 与 Dev.java 官方直接 URL；搜索摘要未作为结论证据",
+      "modernBaseline": "Java 25 LTS",
+      "legacyBaseline": "Java 8",
+      "scopeBoundary": "封闭有限值、枚举实例、不可变字段与构造器、values/valueOf/name/toString、ordinal 边界、稳定外部 code 与解析失败；不进入 B-10 异常、B-11 调试或后续主题"
+    },
+    "javaFeedbackLoop": {
+      "environment": "固定 Eclipse Temurin 25 与 8 Docker 镜像；javac 25.0.3 与 1.8.0_492",
+      "source": "从最终课程 Markdown AST 提取唯一 lang: bash、meta: b09-feedback-loop 节点并执行",
+      "classOutput": "源码、class 与日志仅进入容器内 mktemp 临时目录，完成后使用 find -depth -delete 清理",
+      "status": "PASS; 9 个唯一 B09 标记",
+      "sharedOutput": "A|已支付|PAID|3|PENDING|invalid-name|invalid-code",
+      "mutableEnumRisk": "1|1",
+      "negativeCompilation": "Java 25 与 Java 8 均拒绝公开枚举构造器",
+      "finalMarker": "B09_FEEDBACK_PASS"
+    },
+    "qualityGates": {
+      "knowledgePath": "PASS; 167 source items, 64 course nodes, 114 dependency edges",
+      "typeCheck": "PASS",
+      "lint": "PASS",
+      "formatCheck": "PASS",
+      "unit": "PASS; no persistent unit tests",
+      "e2e": "PASS; no persistent E2E tests",
+      "build": "PASS; 1717 modules transformed; existing large-chunk and plugin-timing warnings only",
+      "diffCheck": "PASS; B-09 allowed paths only; unrelated workspace assets preserved"
+    },
+    "browserVerification": {
+      "tool": "Playwright CLI",
+      "server": "production preview",
+      "baseUrl": "http://127.0.0.1:4178/",
+      "targetPath": "/backend/java/core/learn/enums-and-finite-values",
+      "viewports": ["1440x900", "390x844"],
+      "httpStatus": 200,
+      "courseInfo": "PASS; 60 分钟与 2026-08-14；移动端展开课程信息后可见",
+      "requiredContentAssertions": "PASS; 5 个学习目标、5 个零基础知识点、5 步从零实践、5 组怎么用有序列表、7 个官方来源",
+      "searchTerm": "枚举",
+      "searchResultCount": 1,
+      "previousEntryId": "backend.java.learn.basics.interfaces-inheritance-and-polymorphism",
+      "nextEntryId": "backend.java.learn.basics.exceptions-and-cause-chains",
+      "navigationClicks": "未点击下一篇，未进入 B-10",
+      "horizontalOverflow": false,
+      "longCodeBlocks": "PASS; 长代码由内部滚动容器承载；桌面 2 个、移动 16 个可滚动代码容器，unsafe 0",
+      "progressPersistence": "PASS; 标记完成后刷新保持，再取消并刷新恢复未完成基线",
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "staticRequests": "PASS; 105/105 HTTP 200",
+      "sessionClosed": true,
+      "generatedBrowserArtifactsCleaned": true
+    },
+    "independentReview": {
+      "reviewer": "b09_combined_review",
+      "standards": "PASS / 0 finding",
+      "spec": "PASS / 0 finding",
+      "reviewedResearchSha256": "ffda60dd5bc0271ee88e6f89f7a3e516914fd7c11937235e67d1b35555f5189f",
+      "reviewedCourseSha256": "3cc919eb06bdd9e03b17fc541ca7d5ad5e6726ae76e63a522a4536404e6d368e"
+    },
+    "verificationBoundary": {
+      "temporaryAssets": "B-09 before 快照、Playwright 会话与 4178 预览已关闭并清理；未保留测试文件或浏览器输出",
+      "nextCourse": "B-10 研究、正文、课程状态与 loader 语义未读取或修改；未创建 B-11"
+    }
+  }
+}

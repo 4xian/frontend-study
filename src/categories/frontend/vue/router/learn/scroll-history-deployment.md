@@ -64,7 +64,7 @@ recap:
 
 # 滚动、历史模式与部署
 
-## 一次导航涉及三层不同责任
+## 一、一次导航涉及三层不同责任
 
 Router 负责匹配、提交 route 并调用滚动策略；history adapter 负责 URL 或内部位置队列；服务器负责首次深链接能否返回 SPA 入口。客户端 matcher 看不到尚未进入应用的 HTTP 请求，服务器 fallback 也不知道该显示哪个应用页面。
 
@@ -74,7 +74,7 @@ Router 负责匹配、提交 route 并调用滚动策略；history adapter 负�
 | History adapter | location、state、href、push/replace/go | 静态资源和服务器 rewrite |
 | 部署服务器 | 入口、资源、fallback、HTTP status | 客户端组件与页面滚动 |
 
-## scrollBehavior 是导航后的独立回调
+## 二、scrollBehavior 是导航后的独立回调
 
 ~~~~ts
 const router = createRouter({
@@ -90,11 +90,11 @@ const router = createRouter({
 
 `savedPosition` 主要来自浏览器 back/forward 对 history entry 的恢复；普通 push 得到 `null`。返回 falsy 或空对象不会滚动，返回 Promise 可以等待真实过渡事件。`router.push()` 并不等待该 Promise，因此业务验收应观察滚动或过渡的完成信号。
 
-## 元素、偏移和 hash 都需要显式策略
+## 三、元素、偏移和 hash 都需要显式策略
 
 `{ top, left }` 表示窗口坐标；带 `el` 时二者是相对元素的偏移。`to.hash` 本身不会替应用返回滚动位置，固定头部宜使用目标元素的 `scroll-margin-top`。相同锚点的 duplicated 导航仍可能再次执行滚动，以便重新定位。
 
-## 选择 history 前先确认 URL 与部署条件
+## 四、选择 history 前先确认 URL 与部署条件
 
 | 模式 | 公开 URL / 初始位置 | base 与服务器责任 |
 | --- | --- | --- |
@@ -104,11 +104,11 @@ const router = createRouter({
 
 部署在 `/academy/` 时，构建工具的资源 base、history base、服务器 rewrite 前缀和入口目标必须表达同一个根。memory history 维护内部队列，但不等于浏览器地址栏与 back/forward；它适合 SSR、测试和受控宿主，不是免部署配置的捷径。
 
-## fallback、应用 404 与 HTTP 404 不是一件事
+## 五、fallback、应用 404 与 HTTP 404 不是一件事
 
 HTML5 history 的深链接先到服务器。服务器应保留真实文件和目录，再把 client paths rewrite 到 `index.html`。未知地址因此通常先得到 HTTP 200，应用仍需 catch-all route 显示 NotFound；如果 SEO 或协议要求真实 HTTP 404，应由 SSR 或服务器 matcher 决定响应状态。
 
-## 用独立 memory router 观察真实滚动回调
+## 六、用独立 memory router 观察真实滚动回调
 
 下面的实验使用 `/academy` base，只创建 `/guide/\:chapter` 与 `/search` 两条记录。每次导航都由真实 `scrollBehavior` 写入 to、from、savedPosition 与返回值；固定返回 `false`，并在销毁时恢复宿主 `history.scrollRestoration`。静态责任表只解释部署，不冒充真实服务器验证。
 
@@ -116,7 +116,7 @@ HTML5 history 的深链接先到服务器。服务器应保留真实文件和目
 观察真实 scrollBehavior 回调，同时比较三种 history 与部署责任
 :::
 
-## 易错使用提示
+## 七、易错使用提示
 
 :::pitfalls
 ### HTML5 history 未配置服务器 fallback
@@ -350,7 +350,7 @@ history.scrollRestoration = original
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 从源码推导适用场景
+## 八、从源码推导适用场景
 
 :::steps
 ### 1. 导航结算与滚动 Promise 应分别观测

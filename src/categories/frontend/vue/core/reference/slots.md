@@ -43,7 +43,7 @@ anchors:
 
 # 插槽 slots
 
-## 概述
+## 一、概述
 
 props 传递 JavaScript 数据，插槽传递由父组件编写的模板片段。子组件用 `<slot>` 声明出口，父组件放在组件标签内的内容在该出口渲染。插槽内容在父组件作用域编译；子组件不能直接改变它能访问的变量，只能在调用插槽时通过 slot props 提供数据。
 
@@ -57,7 +57,7 @@ props 传递 JavaScript 数据，插槽传递由父组件编写的模板片段�
 <FancyButton>保存</FancyButton>
 ~~~~
 
-## 默认插槽与后备内容
+## 二、默认插槽与后备内容
 
 未命名的 `<slot>` 隐式名为 `default`。写在出口标签内部的内容是后备内容：父组件没有提供有效插槽内容时才渲染；父组件提供内容后，后备内容被替换。一个组件同时接收默认和具名插槽时，顶层且不在具名 `<template>` 内的节点会进入默认插槽。
 
@@ -74,7 +74,7 @@ props 传递 JavaScript 数据，插槽传递由父组件编写的模板片段�
 <SubmitButton>保存</SubmitButton>
 ~~~~
 
-## 具名与条件插槽
+## 三、具名与条件插槽
 
 `<slot name="header">` 声明具名出口，父组件用 `<template #header>` 定向提供内容，`#` 是 `v-slot:` 的缩写。子组件可通过 `$slots.header` 判断父组件是否提供了对应插槽，再决定是否创建包裹元素；动态插槽名则使用 `#[expression]`，并遵守动态指令参数的表达式限制。
 
@@ -94,7 +94,7 @@ props 传递 JavaScript 数据，插槽传递由父组件编写的模板片段�
 </Card>
 ~~~~
 
-## 作用域插槽
+## 四、作用域插槽
 
 插槽内容仍属于父组件作用域。子组件若要把内部数据交给这段模板，应在 `<slot>` 出口上绑定属性；父组件通过 `v-slot` 接收这些 slot props。具名作用域插槽写作 `<template #item="{ body }">`。当默认作用域插槽与具名插槽混用时，默认插槽也必须放入显式的 `<template #default>`，否则作用域归属存在歧义并会编译失败。
 
@@ -118,7 +118,7 @@ props 传递 JavaScript 数据，插槽传递由父组件编写的模板片段�
 同一个列表组件由父组件提供两种作用域插槽模板，展示数据与渲染职责分离
 :::
 
-## useSlots() 与 defineSlots()
+## 五、useSlots() 与 defineSlots()
 
 模板中可直接使用 `$slots`；`<script setup>` 中的 `useSlots()` 返回与 setup context 相同的插槽对象，每个插槽是接收 slot props、返回 VNode 数组的函数。`defineSlots()` 是编译器宏，只接受类型参数、不接受运行时参数；它为插槽名和 slot props 提供类型检查，并返回等价的 slots 对象。其函数返回类型在 Vue 3.5.40 中尚未用于检查插槽内容。
 
@@ -131,7 +131,7 @@ const slots = defineSlots<{
 const hasItemSlot = Boolean(slots.item)
 ~~~~
 
-## 易错使用提示
+## 六、易错使用提示
 
 :::pitfalls
 ### 在父组件的插槽模板中直接读取子组件状态
@@ -263,7 +263,7 @@ defineSlots<{
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 最小源码实现
+## 七、最小源码实现
 
 Vue 3.5.40 把插槽表示为返回 VNode 数组的函数。`initSlots()` 为实例创建 slots 对象：编译器生成的插槽可直接赋值，手写插槽对象则逐项归一化，非函数值会被包装为函数并在开发环境警告。模板中的 `<slot>` 编译为 `renderSlot()`；它以 slot props 调用对应函数，结果没有有效 VNode 时才调用后备函数。`useSlots()` 只是从当前组件的 setup context 返回同一 slots 对象。
 

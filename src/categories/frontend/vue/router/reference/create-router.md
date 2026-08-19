@@ -71,7 +71,7 @@ anchors:
 
 # createRouter() 与 RouterOptions
 
-## 概述
+## 一、概述
 
 `createRouter()` 是稳定的 Router 工厂。它接收一份 `RouterOptions`，立即建立路由 matcher、导航守卫集合与初始 `currentRoute`，再返回供应用安装和导航的 `Router`。创建实例不等于安装插件：只有 `app.use(router)` 才会把路由能力接入具体 Vue 应用。
 
@@ -79,7 +79,7 @@ anchors:
 通常在独立的 `router.ts` 中创建并导出一个实例。组件消费这个实例或 `useRouter()`，不要在每次渲染或每个页面中重新创建 Router。
 :::
 
-## Create Router
+## 二、Create Router
 
 `createRouter(options)` 只有一个参数：完整的 Router 配置对象；返回值是 `Router` 实例。`history` 决定位置如何保存以及是否连接浏览器 URL，`routes` 则是在创建 matcher 时加入的初始路由记录。两项都必须显式提供，即使初始路由列表为空。
 
@@ -105,7 +105,7 @@ export const router = createRouter({
 | options.routes | readonly RouteRecordRaw[] | 必填；允许空数组，创建时加入 matcher |
 | 返回值 | Router | 持有当前路由、matcher、history、守卫和导航方法 |
 
-## Router Options
+## 三、Router Options
 
 `RouterOptions` 由两项必填配置、五个可选属性以及三个继承的路径解析选项组成。5.2.0 的声明复用了名为 `EXPERIMENTAL_RouterOptions_Base` 的基础接口，但稳定根入口导出的 `RouterOptions` 与 `createRouter()` 仍是 public API；应用无需也不应改为依赖 experimental 子路径。它是 Router 级全局策略，单条 route record 自己的 `strict`、`sensitive` 等设置可覆盖相应的全局默认。
 
@@ -140,7 +140,7 @@ export const router = createRouter({
 自定义 query 库可能产生嵌套对象或数字等超出 `LocationQuery` 常规值域的结果。Vue Router 会保留自定义实现返回的对象，但应用需要自行统一运行时约定与 TypeScript 类型；官方 issue #2165 记录了 `qs.parse` 与默认 query 类型不完全吻合的场景。
 :::
 
-## 安装到 Vue 应用
+## 四、安装到 Vue 应用
 
 `createRouter()` 只创建实例；`app.use(router)` 才注册 `RouterLink`、`RouterView`、`$router`、`$route` 与组合式 API 所需的注入，并在浏览器中触发初始导航。官方 Guide 要求它发生在 `app.mount()` 之前。
 
@@ -154,11 +154,11 @@ app.use(router)
 app.mount('#app')
 ~~~~
 
-## 配置所有权
+## 五、配置所有权
 
 `router.options` 暴露创建时传入的原始配置对象，但这不代表任意后续修改都会实时重配 Router。固定源码在创建阶段就把 `options.routes` 交给 matcher，并把 query 函数与 history 保存到内部闭包；运行期间新增或移除记录应使用 `addRoute()`、`removeRoute()` 或 `clearRoutes()`。需要更换 history 或全局匹配策略时，应创建新的 Router 实例。
 
-## 易错使用提示
+## 六、易错使用提示
 
 :::pitfalls
 ### 省略 history 或 routes，期待 createRouter() 自动补齐
@@ -306,7 +306,7 @@ router.addRoute({
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 七、源码推导与适用场景
 
 :::steps
 ### 1. 创建阶段固定匹配基础

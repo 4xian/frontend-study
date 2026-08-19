@@ -1,0 +1,376 @@
+.metadata-demo {
+  color: #1d2533;
+  background: #f6f7f9;
+  border: 1px solid #d4d8df;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.metadata-demo-heading {
+  padding: 24px;
+  color: #ffffff;
+  background: #263445;
+}
+
+.metadata-demo-heading p,
+.metadata-demo-heading h2,
+.metadata-demo-heading span {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.metadata-demo-heading p {
+  color: #b8d7d0;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.metadata-demo-heading h2 {
+  margin-top: 8px;
+  font-size: 24px;
+  line-height: 1.35;
+}
+
+.metadata-demo-heading span {
+  display: block;
+  margin-top: 8px;
+  color: #e4e9ef;
+  line-height: 1.65;
+}
+
+.metadata-demo-body {
+  padding: 20px;
+}
+
+.metadata-controls,
+.metadata-observation,
+.metadata-boundaries {
+  min-width: 0;
+  padding: 18px;
+  background: #ffffff;
+  border: 1px solid #d8dce3;
+  border-radius: 8px;
+}
+
+.metadata-observation,
+.metadata-boundaries {
+  margin-top: 16px;
+}
+
+.metadata-control-heading,
+.metadata-observation-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.metadata-control-heading > div,
+.metadata-observation-heading > div {
+  min-width: 0;
+  margin-right: 16px;
+}
+
+.metadata-control-heading span,
+.metadata-control-heading strong,
+.metadata-observation-heading span,
+.metadata-observation-heading h3,
+.metadata-observation-heading strong {
+  overflow-wrap: anywhere;
+}
+
+.metadata-control-heading span,
+.metadata-observation-heading span {
+  color: #667083;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.metadata-control-heading strong {
+  display: block;
+  margin-top: 5px;
+  color: #1b6252;
+}
+
+.metadata-segments,
+.metadata-secondary-actions {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 14px -5px -10px;
+}
+
+.metadata-controls button {
+  min-height: 42px;
+  padding: 9px 12px;
+  margin: 0 5px 10px;
+  color: #25364c;
+  background: #ffffff;
+  border: 1px solid #8995a6;
+  border-radius: 6px;
+  font: inherit;
+  font-weight: 700;
+  line-height: 1.35;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+.metadata-segments button {
+  flex: 1 1 170px;
+}
+
+.metadata-controls button[aria-pressed='true'] {
+  color: #ffffff;
+  background: #226a59;
+  border-color: #226a59;
+}
+
+.metadata-controls button.is-quiet {
+  color: #445068;
+  background: #f5f7fa;
+  border-color: #aeb6c3;
+}
+
+.metadata-controls button.is-danger {
+  color: #7b302c;
+  background: #fff7f5;
+  border-color: #c89b96;
+}
+
+.metadata-controls button:hover {
+  filter: brightness(0.96);
+}
+
+.metadata-controls button:focus-visible,
+.metadata-secondary-actions input:focus-visible {
+  outline: 3px solid #e1a736;
+  outline-offset: 2px;
+}
+
+.metadata-controls button:disabled {
+  color: #858b94;
+  background: #e9ebef;
+  border-color: #d5d8de;
+  cursor: not-allowed;
+  filter: none;
+}
+
+.metadata-secondary-actions {
+  align-items: center;
+}
+
+.metadata-secondary-actions label {
+  display: flex;
+  flex: 1 1 260px;
+  align-items: center;
+  min-height: 42px;
+  padding: 8px 12px;
+  margin: 0 5px 10px;
+  color: #354154;
+  background: #f7f8fa;
+  border: 1px solid #d8dce3;
+  border-radius: 6px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.metadata-secondary-actions input {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  margin: 0 10px 0 0;
+}
+
+.metadata-secondary-actions label span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.metadata-counts {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 16px -6px -12px;
+}
+
+.metadata-counts > div {
+  flex: 1 1 150px;
+  min-width: 0;
+  padding: 14px;
+  margin: 0 6px 12px;
+  background: #ffffff;
+  border: 1px solid #d8dce3;
+  border-radius: 8px;
+}
+
+.metadata-counts span,
+.metadata-counts strong {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.metadata-counts span {
+  color: #667083;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.metadata-counts strong {
+  margin-top: 7px;
+  color: #253c59;
+  font-size: 24px;
+}
+
+.metadata-observation-heading h3 {
+  margin: 5px 0 0;
+  font-size: 18px;
+  line-height: 1.45;
+}
+
+.metadata-observation-heading > strong {
+  flex: 0 1 220px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.metadata-observation-heading > strong.is-pass {
+  color: #14503f;
+  background: #dcefe8;
+}
+
+.metadata-observation-heading > strong.is-fail {
+  color: #7a322e;
+  background: #f7dfdc;
+}
+
+.metadata-values,
+.metadata-boundaries {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.metadata-values {
+  margin: 14px -6px -12px;
+}
+
+.metadata-values > div,
+.metadata-boundaries > div {
+  flex: 1 1 220px;
+  min-width: 0;
+}
+
+.metadata-values > div {
+  padding: 12px;
+  margin: 0 6px 12px;
+  background: #f5f7fa;
+  border: 1px solid #e0e3e8;
+  border-radius: 6px;
+}
+
+.metadata-values dt,
+.metadata-values dd,
+.metadata-boundaries dt,
+.metadata-boundaries dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.metadata-values dt,
+.metadata-boundaries dt {
+  color: #667083;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.metadata-values dd {
+  margin-top: 7px;
+  color: #25364c;
+  line-height: 1.55;
+}
+
+.metadata-markup {
+  min-width: 0;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #e0e3e8;
+}
+
+.metadata-markup > span {
+  color: #5e687a;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.metadata-markup pre,
+.metadata-markup p {
+  margin: 8px 0 0;
+}
+
+.metadata-markup pre {
+  max-width: 100%;
+  padding: 14px;
+  overflow-x: auto;
+  color: #e8edf4;
+  background: #202936;
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.metadata-markup p {
+  color: #667083;
+  line-height: 1.6;
+}
+
+.metadata-boundaries {
+  padding-bottom: 6px;
+}
+
+.metadata-boundaries > div {
+  padding: 0 12px 12px;
+}
+
+.metadata-boundaries dd {
+  margin-top: 5px;
+  color: #4d586b;
+  line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  .metadata-demo-heading,
+  .metadata-demo-body {
+    padding: 16px;
+  }
+
+  .metadata-demo-heading h2 {
+    font-size: 21px;
+  }
+
+  .metadata-control-heading,
+  .metadata-observation-heading {
+    display: block;
+  }
+
+  .metadata-control-heading > div,
+  .metadata-observation-heading > div {
+    margin-right: 0;
+  }
+
+  .metadata-control-heading > button,
+  .metadata-observation-heading > strong {
+    display: block;
+    width: 100%;
+    margin: 12px 0 0;
+  }
+
+  .metadata-values > div,
+  .metadata-boundaries > div {
+    flex-basis: 100%;
+  }
+}

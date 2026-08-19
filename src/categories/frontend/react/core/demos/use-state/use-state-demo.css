@@ -1,0 +1,206 @@
+.use-state-demo {
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+}
+
+.use-state-demo-heading p,
+.use-state-demo-heading h2,
+.use-state-demo-heading span,
+.use-state-demo-copy p,
+.use-state-demo-copy span,
+.use-state-demo-values,
+.use-state-demo-values dd,
+.use-state-demo-facts,
+.use-state-demo-facts dd {
+  margin: 0;
+}
+
+.use-state-demo-heading p {
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.use-state-demo-heading h2 {
+  margin-top: var(--space-1);
+  font-size: 1.08rem;
+}
+
+.use-state-demo-heading span {
+  display: block;
+  margin-top: var(--space-1);
+  color: var(--color-text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.6;
+}
+
+.use-state-demo-copies {
+  display: flex;
+  align-items: stretch;
+  margin: var(--space-4) -12px 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.use-state-demo-copy {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: var(--space-3) 12px;
+}
+
+.use-state-demo-copy + .use-state-demo-copy {
+  border-left: 1px solid var(--color-border);
+}
+
+.use-state-demo-copy header {
+  min-height: 52px;
+}
+
+.use-state-demo-copy header p {
+  font-size: 0.92rem;
+  font-weight: 800;
+}
+
+.use-state-demo-copy header span {
+  display: block;
+  margin-top: var(--space-1);
+  color: var(--color-text-secondary);
+  font-size: 0.78rem;
+}
+
+.use-state-demo-values {
+  display: flex;
+  margin: var(--space-2) -5px 0;
+}
+
+.use-state-demo-values > div {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: var(--space-2);
+  margin: 0 5px;
+  background: var(--color-bg);
+}
+
+.use-state-demo-values dt {
+  color: var(--color-text-secondary);
+  font-size: 0.72rem;
+}
+
+.use-state-demo-values dd {
+  margin-top: var(--space-1);
+  font-size: 0.94rem;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.use-state-demo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  margin: var(--space-3) -4px -8px;
+}
+
+.use-state-demo-actions button {
+  min-height: 38px;
+  padding: 0 var(--space-2);
+  margin: 0 4px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xs);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.use-state-demo-actions button:hover,
+.use-state-demo-actions button:focus-visible {
+  border-color: var(--color-accent);
+}
+
+.use-state-demo-actions button:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 32%, transparent);
+  outline-offset: 2px;
+}
+
+.use-state-demo-facts {
+  margin-top: var(--space-3);
+}
+
+.use-state-demo-facts > div {
+  display: flex;
+  align-items: flex-start;
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.use-state-demo-facts dt {
+  flex: 0 0 104px;
+  font-weight: 700;
+}
+
+.use-state-demo-facts dd {
+  min-width: 0;
+  margin-left: var(--space-3);
+  color: var(--color-text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.use-state-demo-facts code {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 620px) {
+  .use-state-demo-copies {
+    display: block;
+  }
+
+  .use-state-demo-copy + .use-state-demo-copy {
+    border-top: 1px solid var(--color-border);
+    border-left: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .use-state-demo-values {
+    display: block;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .use-state-demo-values > div {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .use-state-demo-values > div + div {
+    margin-top: var(--space-2);
+  }
+
+  .use-state-demo-actions {
+    display: block;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .use-state-demo-actions button {
+    display: block;
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .use-state-demo-facts > div {
+    display: block;
+  }
+
+  .use-state-demo-facts dd {
+    margin-top: var(--space-1);
+    margin-left: 0;
+  }
+}

@@ -16,7 +16,7 @@ tags:
   - useUnknownInCatchVariables
   - 穷尽检查
   - Result
-appliesTo: TypeScript 7.0.2（宿主 fixture：6.0.3）
+appliesTo: TypeScript 7.0.2
 verifiedAt: 2026-08-05
 sources:
   - title: "TypeScript Handbook: More on Functions"
@@ -58,11 +58,11 @@ recap:
 
 # unknown、never 与错误处理
 
-## 为什么需要
+## 一、为什么需要
 
 JavaScript 允许抛出任何值，外部解析结果也未必符合预期。unknown 保留这种不确定性，要求代码先取得证据；never 则位于另一端，表示控制流已经排除所有可能成员。
 
-## 核心概念和最小模型
+## 二、核心概念和最小模型
 
 ~~~~ts
 /** 把任意抛出值转换为可显示消息。 */
@@ -80,25 +80,77 @@ try {
 
 strict 会让 catch 变量按 unknown 处理。读取 message 前先用 instanceof Error 验证真实运行身份；非 Error 值仍需明确的回退策略，而不是用断言把它假装成 Error。
 
-## 用 never 守住状态穷尽
+## 三、知识点详解
 
-:::steps
-### 不可信边界先使用 unknown
+### 1. unknown 异常边界
 
-unknown 可以接收任何值，但阻止未经检查的属性访问和调用。
+**它是什么：** `unknown` 表示当前还不能确定类型的值。严格 catch 配置下，`catch (error)` 也应按
+`unknown` 处理。
 
-### 用真实条件取得证据
+**它有什么用：** JavaScript 可以抛出字符串、对象或 `Error`，使用 `unknown` 能阻止代码直接假设
+`error.message` 一定存在。
 
-instanceof、typeof、in 或验证函数应检查实际运行形状。
+**怎么使用：** 捕获后先通过 `instanceof Error` 或其他真实检查归一化，再把安全结果交给业务代码。
 
-### 用判别字段组织结果
+~~~~ts
+/** 把任意抛出值转换为可显示消息。 */
+function normalizeError(error: unknown): string {
+  return error instanceof Error ? error.message : String(error)
+}
 
-Result 联合把成功值与失败原因放进可收窄的不同分支。
+try {
+  throw new Error('加载失败')
+} catch (error) {
+  console.log(normalizeError(error))
+}
+~~~~
 
-### 把剩余状态交给 never
+### 2. 从 unknown 获得类型证据
 
-default 分支赋值给 never；新增成员未处理时，编译器会在此处报错。
-:::
+**它是什么：** 收窄条件会在控制流中建立证据，使 `unknown` 在特定分支变成更具体的类型。
+
+**它有什么用：** 外部响应和解析结果只有通过运行时检查后，才能安全访问属性和方法。
+
+**怎么使用：** 按从外到内的顺序检查对象非空、属性存在和属性值类型，不要用断言跳过其中步骤。
+
+~~~~ts
+/** 判断未知值是否包含字符串形式的课程 ID。 */
+function hasCourseId(value: unknown): value is { id: string } {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    'id' in value &&
+    typeof value.id === 'string'
+  )
+}
+~~~~
+
+### 3. 判别结果联合
+
+**它是什么：** 结果联合用共同字面量字段区分成功和失败，每个分支只携带自己需要的数据。
+
+**它有什么用：** 调用方必须先检查状态，成功分支读取值，失败分支读取错误，避免两个字段都被写成可选。
+
+**怎么使用：** 为每个分支定义 `status` 或 `ok` 判别字段，并在 `if` 或 `switch` 中处理。
+
+~~~~ts
+type LoadResult<Value> =
+  | { status: 'success'; value: Value }
+  | { status: 'failure'; error: string }
+
+/** 读取加载结果中的课程标题。 */
+function readResult(result: LoadResult<string>): string {
+  return result.status === 'success' ? result.value : result.error
+}
+~~~~
+
+### 4. never 穷尽检查
+
+**它是什么：** 当联合成员已经全部处理，剩余值会被收窄为 `never`。
+
+**它有什么用：** 新增状态后，未更新的分支会在编译期报错，不会被静默的默认逻辑吞掉。
+
+**怎么使用：** 在 `switch` 的剩余分支把值赋给 `never`，并保留明确的不可达返回。
 
 ~~~~ts
 type LoadResult<Value> =
@@ -124,11 +176,33 @@ function describeResult(result: LoadResult<string>): string {
 分别捕获 Error 与字符串抛出值，观察同一个 unknown 归一化边界。
 :::
 
-## 配套编译 fixture
+## 四、动手实践：安全处理异常并保持穷尽
 
-临时编译正例覆盖 catch unknown 收窄与两状态穷尽；负例先直接读取 catch 的 message，再遗漏新增状态并赋给 never，固定 TS18046 与 TS2322。验证资产只在 `/tmp` 使用并在结束后删除。Demo 只展示运行消息，不替代这些诊断。
+catch 中先把错误当作 unknown，再通过可证明的检查提取消息。
 
-## 易错使用提示
+~~~~ts
+function errorMessage(error: unknown): string {
+  if (error instanceof Error) return error.message
+  if (typeof error === 'string') return error
+  return '未知错误'
+}
+
+type SaveResult = { kind: 'saved'; id: string } | { kind: 'failed'; error: unknown }
+
+function renderResult(result: SaveResult): string {
+  switch (result.kind) {
+    case 'saved': return `已保存 ${result.id}`
+    case 'failed': return errorMessage(result.error)
+    default: {
+      const unreachable: never = result
+      return unreachable
+    }
+  }
+}
+~~~~
+
+先直接读取 catch 变量的 message，理解为什么 strict 模式会拒绝；再给 SaveResult 新增 queued 分支，观察 never 如何提醒你补齐处理逻辑。
+## 五、易错使用提示
 
 :::pitfalls
 ### 把 unknown 断言成目标类型
@@ -220,20 +294,20 @@ default: { const exhaustive: never = result; return exhaustive }
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 原理与适用场景
+## 六、工作原理与适用边界
 
 :::steps
 ### unknown 要求先收窄
 
-官方事实：unknown 可接收任意值但不能直接操作。课程推导：所有不可信边界先验证。边界：静态 unknown 不会自动校验数据。
+**工作原理：** unknown 可接收任意值但不能直接操作。**实践建议：** 所有不可信边界先验证。**使用边界：** 静态 unknown 不会自动校验数据。
 
 ### strict catch 默认保留不确定性
 
-官方事实：useUnknownInCatchVariables 随 strict 默认开启。课程推导：统一错误归一化入口。边界：JavaScript 仍可抛出非 Error 值。
+**工作原理：** useUnknownInCatchVariables 随 strict 默认开启。**实践建议：** 统一错误归一化入口。**使用边界：** JavaScript 仍可抛出非 Error 值。
 
 ### never 证明没有剩余成员
 
-官方事实：没有普通类型可赋给 never。课程推导：在 default 分支检查判别联合穷尽。边界：它不替代运行时异常处理。
+**工作原理：** 没有普通类型可赋给 never。**实践建议：** 在 default 分支检查判别联合穷尽。**使用边界：** 它不替代运行时异常处理。
 :::
 
 :::exercise
@@ -241,9 +315,51 @@ default: { const exhaustive: never = result; return exhaustive }
 
 **要求：** 定义 success/failure 结果联合，用 unknown 归一化捕获值，并在 switch 默认分支赋给 never；再加入第三种状态观察负例。
 
-**验收：** 两状态正例通过；未经收窄读取产生 TS18046，遗漏状态产生 TS2322。
+**完成标准：** 两状态正例通过；未经收窄读取产生 TS18046，遗漏状态产生 TS2322。
 :::
 
-## 总结与下一课
+## 七、本节小结
 
-unknown 强制不可信值先取得运行证据，never 让已知状态必须被完整处理。中级课程至此完成；下一批将用 infer 与分布控制进入高级类型提取。
+unknown 强制不可信值先取得运行证据，never 让已知状态必须被完整处理。中级课程至此完成；下一课将用 infer 与分布控制进入高级类型提取。
+
+:::code-details{title="查看本节完整示例"}
+~~~~ts
+type LoadResult =
+  | { kind: 'success'; title: string }
+  | { kind: 'not-found'; courseId: string }
+  | { kind: 'failure'; message: string }
+
+/** 从 unknown 异常中提取安全消息。 */
+function errorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : String(error)
+}
+
+/** 在穷尽分支后拒绝剩余成员。 */
+function assertNever(value: never): never {
+  throw new Error(`未处理结果：${JSON.stringify(value)}`)
+}
+
+/** 把不可信输入转换为可穷尽的结果联合。 */
+function parseResult(value: unknown): LoadResult {
+  try {
+    if (typeof value !== 'object' || value === null || !('title' in value)) {
+      return { kind: 'not-found', courseId: 'unknown' }
+    }
+    if (typeof value.title !== 'string') throw new TypeError('title 必须是字符串')
+    return { kind: 'success', title: value.title }
+  } catch (error: unknown) {
+    return { kind: 'failure', message: errorMessage(error) }
+  }
+}
+
+/** 显示每一种结果。 */
+function render(result: LoadResult): string {
+  if (result.kind === 'success') return result.title
+  if (result.kind === 'not-found') return `未找到：${result.courseId}`
+  if (result.kind === 'failure') return `失败：${result.message}`
+  return assertNever(result)
+}
+
+console.log(render(parseResult({ title: '错误边界' })))
+~~~~
+:::

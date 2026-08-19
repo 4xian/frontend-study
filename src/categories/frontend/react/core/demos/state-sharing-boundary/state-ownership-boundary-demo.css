@@ -1,0 +1,272 @@
+.react-boundary-demo {
+  width: 100%;
+  color: var(--color-text);
+}
+
+.react-boundary-heading p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.react-boundary-heading h2 {
+  margin: var(--space-2) 0 0;
+  font-size: 1.1rem;
+}
+
+.react-boundary-heading span {
+  display: block;
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+}
+
+.react-boundary-examples {
+  margin-top: var(--space-5);
+  border-top: 1px solid var(--color-border);
+}
+
+.react-boundary-example {
+  padding: var(--space-5) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.react-boundary-example > header > span {
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.react-boundary-example > header h3 {
+  margin: var(--space-1) 0 0;
+  font-size: 1rem;
+}
+
+.react-boundary-example > header p {
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-secondary);
+}
+
+.react-boundary-local-panel,
+.react-boundary-shared-layout,
+.react-boundary-mode-picker {
+  display: flex;
+  align-items: center;
+}
+
+.react-boundary-local-panel {
+  justify-content: space-between;
+  margin-top: var(--space-4);
+}
+
+.react-boundary-local-panel > div {
+  min-width: 0;
+  margin-right: var(--space-4);
+}
+
+.react-boundary-local-panel strong,
+.react-boundary-local-panel p {
+  display: block;
+}
+
+.react-boundary-local-panel p {
+  margin: var(--space-1) 0 0;
+  color: var(--color-text-secondary);
+}
+
+.react-boundary-local-panel button,
+.react-boundary-document-list button,
+.react-boundary-reset,
+.react-boundary-mode-picker button {
+  min-height: 42px;
+  box-sizing: border-box;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+  font: inherit;
+  font-weight: 700;
+}
+
+.react-boundary-local-help {
+  padding: var(--space-3);
+  margin: var(--space-3) 0 0;
+  border-left: 3px solid var(--color-accent);
+  background: var(--color-bg-sunken);
+}
+
+.react-boundary-local-help[hidden] {
+  display: none;
+}
+
+.react-boundary-shared-layout {
+  align-items: stretch;
+  margin-top: var(--space-4);
+}
+
+.react-boundary-shared-layout > div {
+  flex: 0 1 220px;
+  min-width: 0;
+  margin-right: var(--space-4);
+}
+
+.react-boundary-document-list button {
+  width: 100%;
+  text-align: left;
+}
+
+.react-boundary-document-list button + button {
+  margin-top: var(--space-2);
+}
+
+.react-boundary-document-list button[aria-pressed='true'],
+.react-boundary-mode-picker button[aria-pressed='true'] {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+
+.react-boundary-reset {
+  width: 100%;
+  margin-top: var(--space-3);
+}
+
+.react-boundary-document-preview {
+  flex: 1 1 260px;
+  min-width: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-sunken);
+}
+
+.react-boundary-document-preview span,
+.react-boundary-document-preview strong,
+.react-boundary-document-preview code {
+  display: block;
+}
+
+.react-boundary-document-preview span,
+.react-boundary-mode-summary span {
+  color: var(--color-text-secondary);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.react-boundary-document-preview strong {
+  margin-top: var(--space-2);
+  font-size: 1rem;
+}
+
+.react-boundary-document-preview p {
+  margin: var(--space-2) 0 0;
+}
+
+.react-boundary-document-preview code {
+  margin-top: var(--space-3);
+  overflow-wrap: anywhere;
+}
+
+.react-boundary-context-layout {
+  padding: var(--space-4);
+  margin-top: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.react-boundary-layout-label {
+  padding-bottom: var(--space-3);
+  margin-bottom: var(--space-4);
+  border-bottom: 1px dashed var(--color-border);
+  color: var(--color-text-secondary);
+  font-size: 0.75rem;
+  overflow-wrap: anywhere;
+}
+
+.react-boundary-mode-picker {
+  flex-wrap: wrap;
+}
+
+.react-boundary-mode-picker button + button {
+  margin-left: var(--space-2);
+}
+
+.react-boundary-mode-summary {
+  padding-top: var(--space-4);
+  margin-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+.react-boundary-mode-summary strong {
+  display: block;
+  margin-top: var(--space-1);
+}
+
+.react-boundary-mode-summary p {
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-secondary);
+}
+
+.react-boundary-outside {
+  padding: var(--space-3);
+  margin: var(--space-3) 0 0;
+  border-left: 3px solid var(--color-border-strong);
+  background: var(--color-bg-sunken);
+}
+
+.react-boundary-outside span,
+.react-boundary-outside strong {
+  display: block;
+}
+
+.react-boundary-outside span {
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+}
+
+.react-boundary-outside strong {
+  margin-top: var(--space-1);
+}
+
+.react-boundary-outside p {
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-secondary);
+}
+
+@media (max-width: 620px) {
+  .react-boundary-local-panel,
+  .react-boundary-shared-layout {
+    display: block;
+  }
+
+  .react-boundary-local-panel > div,
+  .react-boundary-shared-layout > div {
+    margin-right: 0;
+  }
+
+  .react-boundary-local-panel button {
+    width: 100%;
+    margin-top: var(--space-3);
+  }
+
+  .react-boundary-document-preview {
+    margin-top: var(--space-4);
+  }
+}
+
+@media (max-width: 420px) {
+  .react-boundary-mode-picker {
+    display: block;
+  }
+
+  .react-boundary-mode-picker button {
+    width: 100%;
+  }
+
+  .react-boundary-mode-picker button + button {
+    margin: var(--space-2) 0 0;
+  }
+}

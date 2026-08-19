@@ -52,7 +52,7 @@ anchors:
 
 # Vite 与 Unplugin 构建入口
 
-## 概述
+## 一、概述
 
 `vue-router/vite` 与 `vue-router/unplugin` 都运行在构建工具进程，不是浏览器运行时 API。它们扫描页面、生成 routes/声明、提供虚拟模块，并把确定的构建输入交给应用；`createRouter()`、`RouterLink` 等运行时 API仍从根入口 `vue-router` 导入。
 
@@ -60,7 +60,7 @@ anchors:
 本页记录 5.2.0 已发布入口，不修改本站 Vite 配置，也不把 experimental flag 或低层 context helper 推荐为普通应用配置。
 :::
 
-## Vite 插件入口
+## 二、Vite 插件入口
 
 `vue-router/vite` 默认导出接收文件路由 Options 的 Vite plugin factory。官方要求它位于 `@vitejs/plugin-vue` 之前，使页面扫描、`definePage()` 转换和虚拟模块准备先于 Vue SFC 编译。
 
@@ -87,7 +87,7 @@ export default defineConfig({
 | 生成声明 | 扫描后或 tree 变化后 | 被 tsconfig 纳入的 route map d.ts |
 | 转换页面宏 | SFC 进入 Vue 插件前 | 静态 route metadata |
 
-## 通用 Unplugin 入口
+## 三、通用 Unplugin 入口
 
 `vue-router/unplugin` 默认导出 `UnpluginInstance`，供 Webpack、Rollup、esbuild 等适配器消费；同一入口还导出 Options、EditableTreeNode、命名 helper 与 `VueRouterAutoImports`。普通 Vite 项目使用更直接的 `vue-router/vite`，只有非 Vite 或自定义构建集成才需要通用入口。
 
@@ -108,7 +108,7 @@ export default {
 上例表达通用入口的 adapter 属性，不意味着所有 bundler 配置格式相同。插件 options 可以共用，bundler 的 plugin 容器与执行生命周期仍由各自工具决定。
 :::
 
-## 适配器与发布物边界
+## 四、适配器与发布物边界
 
 5.2.0 同时发布 Vite、Webpack、Rollup、Rolldown、esbuild 的 ESM/CJS 适配器文件，但 package export 的 `./unplugin/*` 是原样映射。固定发布物中，`vue-router/unplugin/webpack`、`rollup`、`esbuild` 的无扩展名子路径不能由 Node 直接解析，而带 `.mjs` 的文件存在。稳定教学写法因此使用精确 `vue-router/unplugin`，不把 wildcard 的具体解析行为当跨工具承诺。
 
@@ -119,7 +119,7 @@ export default {
 | 直接发布物排障 | vue-router/unplugin/*.mjs 或 *.cjs | 低层且依赖确切文件名 |
 | 内部构建文件 | vue-router/dist/* | 逃生口，不保证统一格式或稳定文件名 |
 
-## Package Exports
+## 五、Package Exports
 
 下表只登记本页负责的四个 package export key。它们不增加稳定根入口 118 项的分母；export map 能解析某个子路径，也不代表其中每个 helper 都适合应用层直接使用。
 
@@ -130,7 +130,7 @@ export default {
 | ./unplugin/* | 原样映射 dist/unplugin/* | 存在扩展名解析陷阱，不作首选 |
 | ./dist/* | 原样映射 dist/* | 低层发布物逃生口，不作稳定 API |
 
-## 易错使用提示
+## 六、易错使用提示
 
 :::pitfalls
 ### 把 VueRouter 插件放在 Vue 插件之后
@@ -322,7 +322,7 @@ VueRouter({
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 七、源码推导与适用场景
 
 :::steps
 ### 1. 精确入口优先于发布物猜测

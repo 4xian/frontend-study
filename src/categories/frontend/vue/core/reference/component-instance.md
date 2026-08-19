@@ -102,7 +102,7 @@ anchors:
 
 # 组件公共实例
 
-## 概述
+## 一、概述
 
 公共实例是模板、Options API 的 `this`、组件模板引用以及 `$parent` / `$root` 所看到的受控代理，不是 Vue 的内部组件实例。除 `$data` 的嵌套字段外，本页列出的公共实例属性全部只读；开发构建是否给出额外警告，不会改变这项 public contract。业务代码不得通过 `$`、`vnode`、`subTree` 等内部字段绕过公开边界。
 
@@ -119,7 +119,7 @@ anchors:
 父级持有的组件 ref、`$parent` 与 `$root` 都受对方 `expose` / `defineExpose()` 约束。只依赖子组件明确承诺的窄方法，例如 `focus()` 或 `reset()`；不要读取任意内部状态。
 :::
 
-## $data
+## 二、$data
 
 `$data` 是当前实例 `data()` 返回的响应式对象，`this.$data.count` 与 `this.count` 访问同一份组件状态。可以修改其内部字段，但 `$data` 属性本身只读，不能替换成新对象。`setup()` 返回的绑定不属于 `$data`；组合式状态应通过 setup bindings 或显式暴露的能力访问。
 
@@ -138,7 +138,7 @@ export default {
 }
 ~~~~
 
-## $props
+## 三、$props
 
 `$props` 只包含通过 `props` 声明并解析后的输入，未声明输入会进入 `$attrs`。对象本身只读，子组件应通过 emit 请求父组件更新。只读属于浅层边界：嵌套对象技术上仍可能可变，但随意修改会破坏单向数据流；只有父子明确约定共享同一对象语义时才可协商使用。完整声明、校验和默认值规则参见“组件 Props”。
 
@@ -155,7 +155,7 @@ export default {
 }
 ~~~~
 
-## $el
+## 四、$el
 
 `$el` 是当前组件管理的根 DOM 节点。挂载完成前为 `undefined`；单元素根指向该元素，文本根指向文本节点，多根组件则只提供 Vue 用来标记组件范围的文本或 hydration 注释占位节点。因此它不是稳定的业务 DOM 契约。聚焦、测量和第三方库接入应使用目标元素的模板引用。
 
@@ -174,7 +174,7 @@ export default {
 </script>
 ~~~~
 
-## $options
+## 五、$options
 
 `$options` 是实例化当前组件时的已解析选项。存在全局 mixin、`extends` 或组件级 mixin 时，运行时按 Options 合并策略生成结果；没有合并来源时可能直接返回原始组件选项。它适合读取由 `app.config.optionMergeStrategies` 处理的静态自定义 option 元数据，不适合在实例运行后动态改写组件定义。
 
@@ -182,11 +182,11 @@ export default {
 合并结果按组件类型缓存，而不是为每个实例复制。修改 `$options` 不会重新执行 data、watch、computed 或生命周期初始化，还可能制造跨实例共享状态。
 :::
 
-## $parent
+## 六、$parent
 
 `$parent` 指向父级组件的公共实例，根组件的 `$parent` 为 `null`。它会尊重父组件的公开边界，且插入包装组件就可能改变父链。仅在调试、迁移旧代码或受控框架集成时把它当作逃生口；业务通信不要依赖父级的任意字段。
 
-## $root
+## 七、$root
 
 `$root` 指向当前组件树的根公共实例，根组件的 `$root` 是自身。一个页面可以存在多个 Vue 应用，每个应用都有自己的根；Teleport 只改变 DOM 落点，不会改变组件树根。全局业务状态应使用明确的状态容器或依赖注入，而不是挂在 `$root` 上。
 
@@ -202,7 +202,7 @@ export default {
 }
 ~~~~
 
-## $slots
+## 八、$slots
 
 `$slots` 的 key 是插槽名，值是接收 slot props 并返回 VNode 数组的函数；默认插槽位于 `this.$slots.default`。可以检查 `this.$slots.header` 是否存在，但需要内容时必须在渲染期间调用该函数，不能把函数本身当作 VNode 数组，也不要在 created 中缓存调用结果。完整作用域插槽规则参见“组件 Slots”。
 
@@ -218,7 +218,7 @@ export default {
 }
 ~~~~
 
-## $refs
+## 九、$refs
 
 `$refs` 由渲染器维护，包含模板 `ref` 对应的 DOM 元素或子组件公共实例。首次挂载前目标不存在，条件卸载后会清空；非空值在 post-render 阶段写入。它不是可供 `watch()` 跟踪的业务响应式状态。`v-for` 下同名 ref 可能得到数组，且官网不保证数组顺序与源数组一致。
 
@@ -243,13 +243,13 @@ defineExpose({ focus })
 </template>
 ~~~~
 
-## $attrs
+## 十、$attrs
 
 `$attrs` 包含未被 props 或 emits 声明消费的 attributes 与监听器。普通 attribute key 保留原始大小写，例如 `foo-bar` 要用 `this.$attrs['foo-bar']`；`@click` 以 `onClick` 暴露。对象始终反映最新输入，但官方明确它不是响应式对象，不能以 watcher 监听其字段。需要响应性时声明 prop；只需在更新后执行副作用时，可在 `updated` 中读取。
 
 `inheritAttrs: false` 只关闭 attributes 自动继承到根节点，不会清空 `$attrs`。多根或包装组件应使用 `v-bind="$attrs"` 将它显式绑定到真正承载交互和可访问性语义的元素。
 
-## $watch()
+## 十一、$watch()
 
 `$watch()` 命令式创建当前实例作用域内的侦听器，并返回停止函数。字符串来源只支持属性名或由点分隔的简单路径，例如 `'profile.name'`；索引、可选链和计算表达式必须改用 getter。getter 与 callback 都以当前公共实例为 `this`，`immediate`、`deep`、`flush`、`once`、`onTrack` 和 `onTrigger` 沿用 `watch()` 的语义。
 
@@ -277,7 +277,7 @@ export default {
 实例卸载会停止其作用域内的 watcher；如果业务条件更早结束，仍应立即调用返回的停止函数，避免无效副作用继续执行。完整来源、清理、深度和 flush 规则参见 `watch()` 页面。
 :::
 
-## $emit()
+## 十二、$emit()
 
 `$emit(event, ...args)` 只通知当前组件调用点上的匹配监听器，不沿组件树冒泡。事件应在 `emits` 中声明，以获得类型、开发期未声明事件提示、参数校验以及 attrs listener 的正确消费边界。模板监听推荐 kebab-case，代码中可用 camelCase 触发；不要把名称归一化理解成任意字符串都等价。
 
@@ -300,11 +300,11 @@ export default {
 `$emit()` 的公开签名返回 `void`。不要依赖父级 listener 的返回值建立同步请求响应协议；需要结果时应通过状态、回调 prop 或显式服务契约表达。
 :::
 
-## $forceUpdate()
+## 十三、$forceUpdate()
 
 `$forceUpdate()` 将当前组件的更新 job 放入调度队列，同一轮重复请求会被去重，因此它不是同步重绘命令。官方只建议在刻意使用高阶响应式 API 创建了非响应式组件状态时，把它作为极少使用的逃生口。它不会把普通对象变成响应式数据，也不能替代正确声明 `ref()`、`reactive()` 或 `shallowRef()`。
 
-## $nextTick()
+## 十四、$nextTick()
 
 `$nextTick()` 是绑定当前公共实例的全局 `nextTick()`。它等待当前 Vue 更新 flush；传入回调时，实例版的差异是回调 `this` 指向当前组件。Promise 写法通常更清晰：先修改响应式状态，再 `await this.$nextTick()` 读取本轮更新后的 DOM。
 
@@ -323,7 +323,7 @@ export default {
 `$nextTick()` 不保证网络请求、计时器、CSS transition 或浏览器绘制已经结束，也不会在没有状态变化时主动触发更新。需要等待实际绘制或动画结束时，应选择对应的浏览器时机。
 :::
 
-## 易错使用提示
+## 十五、易错使用提示
 
 :::pitfalls
 ### 替换只读公共属性，或把生产期少警告当作可写契约
@@ -611,7 +611,7 @@ const text = this.$refs.counter?.textContent
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 十六、源码推导与适用场景
 
 :::steps
 ### 1. 公共属性来自固定映射并受代理写入边界保护

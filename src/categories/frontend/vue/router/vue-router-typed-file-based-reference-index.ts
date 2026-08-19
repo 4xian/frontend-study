@@ -11,7 +11,7 @@ export const vueRouterTypedFileBasedReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.typed-routes.route-map',
-        'route-location-as-path-typed',
+        '三route-location-as-path-typed',
       ],
       [
         'interfaces.routelocationasrelativetyped',
@@ -19,7 +19,7 @@ export const vueRouterTypedFileBasedReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.typed-routes.route-map',
-        'route-location-as-relative-typed',
+        '四route-location-as-relative-typed',
       ],
       [
         'interfaces.routelocationnormalizedloadedtyped',
@@ -27,7 +27,7 @@ export const vueRouterTypedFileBasedReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.typed-routes.route-map',
-        'route-location-normalized-loaded-typed',
+        '五route-location-normalized-loaded-typed',
       ],
       [
         'interfaces.routelocationnormalizedtyped',
@@ -35,7 +35,7 @@ export const vueRouterTypedFileBasedReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.typed-routes.route-map',
-        'route-location-normalized-typed',
+        '六route-location-normalized-typed',
       ],
       [
         'interfaces.routelocationresolvedtyped',
@@ -43,7 +43,7 @@ export const vueRouterTypedFileBasedReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.typed-routes.route-map',
-        'route-location-resolved-typed',
+        '七route-location-resolved-typed',
       ],
       [
         'interfaces.routelocationtyped',
@@ -51,7 +51,7 @@ export const vueRouterTypedFileBasedReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.typed-routes.route-map',
-        'route-location-typed',
+        '八route-location-typed',
       ],
       [
         'interfaces.routerecordinfo',
@@ -59,7 +59,7 @@ export const vueRouterTypedFileBasedReferenceSections = [
         'public',
         'detail',
         'vue.router.reference.typed-routes.route-map',
-        'route-record-info',
+        '九route-record-info',
       ],
       [
         'interfaces.typesconfig',
@@ -67,7 +67,7 @@ export const vueRouterTypedFileBasedReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.typed-routes.route-map',
-        'types-config',
+        '十types-config',
       ],
       [
         'type-aliases.routelocationaspathtypedlist',
@@ -75,7 +75,7 @@ export const vueRouterTypedFileBasedReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.typed-routes.route-map',
-        'route-location-as-path-typed-list',
+        '十一route-location-as-path-typed-list',
       ],
       [
         'type-aliases.routelocationasrelativetypedlist',
@@ -83,7 +83,7 @@ export const vueRouterTypedFileBasedReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.typed-routes.route-map',
-        'route-location-as-relative-typed-list',
+        '十二route-location-as-relative-typed-list',
       ],
       [
         'type-aliases.routelocationasstringtyped',
@@ -91,7 +91,7 @@ export const vueRouterTypedFileBasedReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.typed-routes.route-map',
-        'route-location-as-string-typed',
+        '十三route-location-as-string-typed',
       ],
       [
         'type-aliases.routelocationasstringtypedlist',
@@ -99,7 +99,7 @@ export const vueRouterTypedFileBasedReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.typed-routes.route-map',
-        'route-location-as-string-typed-list',
+        '十四route-location-as-string-typed-list',
       ],
       [
         'type-aliases.routelocationnormalizedloadedtypedlist',
@@ -107,7 +107,7 @@ export const vueRouterTypedFileBasedReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.typed-routes.route-map',
-        'route-location-normalized-loaded-typed-list',
+        '十五route-location-normalized-loaded-typed-list',
       ],
       [
         'type-aliases.routelocationnormalizedtypedlist',
@@ -115,7 +115,7 @@ export const vueRouterTypedFileBasedReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.typed-routes.route-map',
-        'route-location-normalized-typed-list',
+        '十六route-location-normalized-typed-list',
       ],
       [
         'type-aliases.routelocationresolvedtypedlist',
@@ -123,7 +123,7 @@ export const vueRouterTypedFileBasedReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.typed-routes.route-map',
-        'route-location-resolved-typed-list',
+        '十七route-location-resolved-typed-list',
       ],
       [
         'type-aliases.routelocationtypedlist',
@@ -131,7 +131,7 @@ export const vueRouterTypedFileBasedReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.typed-routes.route-map',
-        'route-location-typed-list',
+        '十八route-location-typed-list',
       ],
       [
         'type-aliases.routemap',
@@ -139,7 +139,7 @@ export const vueRouterTypedFileBasedReferenceSections = [
         'public',
         'detail',
         'vue.router.reference.typed-routes.route-map',
-        'route-map',
+        '十九route-map',
       ],
       [
         'type-aliases.routemapgeneric',
@@ -147,7 +147,7 @@ export const vueRouterTypedFileBasedReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.typed-routes.route-map',
-        'route-map-generic',
+        '二十route-map-generic',
       ],
       [
         'type-aliases.routerecordinfogeneric',
@@ -155,7 +155,7 @@ export const vueRouterTypedFileBasedReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.typed-routes.route-map',
-        'route-record-info-generic',
+        '二十一route-record-info-generic',
       ],
     ],
   },

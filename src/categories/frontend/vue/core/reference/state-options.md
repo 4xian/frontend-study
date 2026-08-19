@@ -99,7 +99,7 @@ anchors:
 
 # Options API：状态选项
 
-## 概述
+## 一、概述
 
 状态选项共同定义一个 Options API 组件实例的公开代理：`data` 提供本地响应式状态，`props` 接收父级输入，`computed` 声明缓存派生值，`methods` 提供命令，`watch` 处理状态变化副作用，`emits` 声明向父级发送的事件，`expose` 则收窄父级模板引用能够访问的成员。除 `props` 在更早阶段完成初始化外，Vue 3.5.40 按 methods、data、computed、watch 的顺序把状态能力应用到实例。
 
@@ -113,7 +113,7 @@ anchors:
 | emits | 组件 Emits | 声明并校验子到父的事件协议 |
 | expose | 模板引用 | 限制父级通过组件引用访问的表面 |
 
-## data
+## 二、data
 
 `data` 必须是同步函数，并返回一个对象。Vue 会在创建每个组件实例时以公开实例作为 `this` 调用它，再把返回对象传给 `reactive()`；因此嵌套对象也进入深层响应式转换，顶层字段可以通过 `this` 和模板直接访问。函数形式保证各实例得到独立状态。返回 Promise 或非对象不构成有效状态；以 `$` 或 `_` 开头的字段不会被代理到公开实例上。需要在组合式写法中表达相同状态时，参见 `reactive()` 页面。
 
@@ -133,7 +133,7 @@ export default {
 `data()` 的返回对象是原始状态声明，不要依赖它与实例公开代理具有相同身份。业务代码通过 `this.count` 读写；需要组合式复用时，把状态创建放入 composable 并返回 `reactive()` 或 refs。
 :::
 
-## props
+## 三、props
 
 `props` 可以是名称数组，也可以是“名称到类型或选项对象”的映射。对象声明支持 `type`、`required`、`default` 和 `validator`。未传入且没有默认值的普通 prop 解析为 `undefined`，Boolean prop 另有缺省转换规则。数组、对象等可变默认值应由工厂函数逐实例创建；当 prop 的 `type` 是 `Function` 时，函数默认值本身作为值使用而不会被调用。默认值工厂接收原始 props；`validator(value, props)` 从 Vue 3.4 起还能读取已经解析的全部 props。两者都发生在组件实例完整创建前，不能依赖组件 `this`。完整的单向数据流与运行时声明边界参见“组件 Props”页面。
 
@@ -167,7 +167,7 @@ export default {
 `type`、`required` 与 `validator` 的运行时校验属于开发期诊断；失败会产生 warning，而不是把输入自动修正为合法值。真正的安全校验应放在信任边界，组件校验用于尽早暴露调用错误。
 :::
 
-## computed
+## 四、computed
 
 `computed` 的每个字段可以是只读 getter，也可以是包含 `get` 和 `set` 的可写对象。Vue 会把 getter 包装成 `computed()`：首次读取时求值并收集响应式依赖，依赖不变时复用缓存，依赖变化后在下一次读取时重算。getter-only 字段是只读的，赋值在开发环境会告警。getter 或 setter 需要访问实例时必须使用普通函数，由 Vue 把 `this` 绑定到公开实例。组合式写法和缓存细节参见 `computed()` 页面。
 
@@ -196,7 +196,7 @@ export default {
 }
 ~~~~
 
-## methods
+## 五、methods
 
 `methods` 是名称到函数的映射。Vue 在应用选项时把每个函数绑定到组件公开实例，因此模板事件、生命周期钩子、computed 和 watch 都可以通过 `this.methodName()` 调用它。只在函数确实使用实例状态时依赖 `this`，且此时不能使用箭头函数，因为箭头函数保留定义位置的词法 `this`，Vue 无法重新绑定。可跨组件复用的状态与命令应提取为组合式函数，参见“组合式函数”页面。
 
@@ -219,7 +219,7 @@ export default {
 }
 ~~~~
 
-## watch
+## 六、watch
 
 `watch` 的 key 是实例上的根属性名或简单点分隔路径，例如 `query`、`filters.status`；字符串不支持任意表达式、可选链或方括号索引。值可以是 methods 中的方法名字符串、直接函数、带 `handler` 的对象，或这些形态组成的数组。回调默认是惰性的，接收新值、旧值和清理注册函数；需要访问实例时使用普通函数。`immediate: true` 会在组件创建阶段立即执行一次，此时旧值是 `undefined`；`deep: true` 会遍历嵌套属性，Vue 3.5+ 也可用数字限制最大遍历深度。`flush` 默认为 `pre`，在组件自身 DOM 更新前执行；`post` 延后到自身 DOM 更新后，`sync` 则在响应式修改时同步执行且不批处理，应谨慎用于简单数据源。`once` 从 Vue 3.4 起可在首次变化后停止。需要 getter、多来源或更精确的响应式源时，使用组合式 `watch()`，参见其参考页面。
 
@@ -263,7 +263,7 @@ export default {
 深度侦听器因嵌套修改触发时，新值与旧值可能是同一个对象引用。需要比较变化前后的结构时，显式保存快照；不要把 `deep: true` 理解为 Vue 会自动深拷贝旧值。
 :::
 
-## emits
+## 七、emits
 
 `emits` 可以是事件名数组，也可以是“事件名到校验函数或 `null`”的映射。组件通过 `this.$emit(event, ...args)` 派发；对象校验函数接收本次全部参数并返回 boolean。声明事件会建立清晰的组件通信契约，并让匹配的父级监听器不再作为普通透传 attribute 处理。Vue 3.5.40 只在开发环境运行校验；返回 `false` 会产生 warning，但源码随后仍继续解析并调用父级监听器，不会阻止派发。更完整的命名、监听和类型边界参见“组件 Emits”页面。
 
@@ -286,7 +286,7 @@ export default {
 }
 ~~~~
 
-## expose
+## 八、expose
 
 `expose` 只接收组件自身公开成员名称组成的数组。设置后，父组件通过模板引用或 `$parent` 只能访问列出的用户定义成员；空数组不公开任何用户定义成员，但 `$el`、`$emit` 等内置公共属性仍保留。它不会限制组件自己的模板或其他选项访问实例。为了避免 mixin 或 extends 隐式改变基组件的公开契约，Vue 3.5.40 在合并这些来源时直接忽略其中的 `expose` 并在开发环境告警，因此必须在最终基组件上声明。组合式组件的对应边界是 `setup()` 的 `expose()` 或 `<script setup>` 的 `defineExpose()`，参见“模板引用”页面。
 
@@ -314,7 +314,7 @@ export default {
 }
 ~~~~
 
-## 易错使用提示
+## 九、易错使用提示
 
 :::pitfalls
 ### 把共享对象直接写成 data 选项
@@ -546,7 +546,7 @@ export default {
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 十、源码推导与适用场景
 
 :::steps
 ### 1. data：逐实例建立响应式状态

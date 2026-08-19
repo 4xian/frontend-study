@@ -63,11 +63,11 @@ anchors:
 
 # createApp()
 
-## 概述
+## 一、概述
 
 `createApp()` 根据根组件创建一个独立的应用实例。实例保存应用级配置、全局组件、全局指令、插件和应用级 provide；只有调用 `mount()` 后，根组件才会渲染到指定容器中。它本身不是站点启动链的约定入口，而是一项可在任意 Vue 应用中使用的 API。
 
-## 创建、配置与挂载
+## 二、创建、配置与挂载
 
 `use()`、`component()`、`directive()`、`provide()` 和 `config` 用来准备该应用实例，通常应在首次挂载前完成。它们返回 `app`，所以可以链式调用；`mount()` 例外，它返回根组件公开实例，并且同一个应用实例只能挂载一次。
 
@@ -98,7 +98,7 @@ app.mount('#app')
 在当前页面中创建、挂载并卸载一个独立的迷你应用，观察应用级 provide 与 mount 返回值
 :::
 
-## 应用实例隔离
+## 三、应用实例隔离
 
 每次调用 `createApp()` 都会创建新的应用上下文。一个 app 注册的组件、指令、provide、`globalProperties` 与错误处理器不会自动进入另一个 app；同页嵌入多个 Vue 应用时，需要对每个实例分别安装共享资源。
 
@@ -106,7 +106,7 @@ app.mount('#app')
 挂载容器只是 Vue 向其内部渲染根组件的宿主元素，不是根组件本身。客户端 `createApp()` 会在首次渲染前清空容器既有内容；需要保留的静态或服务端内容应放在容器外部。
 :::
 
-## app.onUnmount()
+## 四、app.onUnmount()
 
 `app.onUnmount(callback)` 在当前应用实例上登记卸载清理回调，签名为 `(callback: () => void) => void`，仅 Vue 3.5+ 可用。它适合回收插件或应用级代码创建的窗口监听器、订阅和其他不属于单个组件的资源。可以登记多个回调；它们属于各自 app，并在 `app.unmount()` 卸载组件树时执行。它不同于跟随某个组件实例的 `onUnmounted()`，也不返回 app，不能参与链式调用。
 
@@ -132,7 +132,7 @@ app.mount('#app')
 app.unmount()
 ~~~~
 
-## app.version
+## 五、app.version
 
 `app.version: string` 是创建该应用实例的 Vue 运行时版本。插件的 `install(app)` 已经拿到应用实例，适合从 `app.version` 读取宿主 Vue 版本，而不必额外导入全局变量。它描述 Vue 运行时，不是业务应用版本，也不是插件自身版本。
 
@@ -147,7 +147,7 @@ const compatibilityPlugin = {
 createApp(AppRoot).use(compatibilityPlugin).mount('#app')
 ~~~~
 
-## 全局 version
+## 六、全局 version
 
 `version` 是从 `vue` 包直接导出的命名导出，签名为 `const version: string`。它不依赖应用实例，适合在创建 app 之前、库初始化代码或诊断信息中读取。`app.version` 与全局 `version` 分别解决“已有 app 引用”和“只有 Vue 模块引用”的场景；在同一份 Vue 运行时中二者来自同一个版本常量。需要判断版本范围时应使用语义化版本解析，不要按字符串字典序比较。
 
@@ -160,7 +160,7 @@ const app = createApp(AppRoot)
 console.info(app.version === version) // 同一份 Vue 运行时中为 true
 ~~~~
 
-## 易错使用提示
+## 七、易错使用提示
 
 :::pitfalls
 ### 在 mount() 之后继续链式安装插件或注册资源
@@ -313,7 +313,7 @@ installSharedResources(storefrontApp)
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 最小源码实现
+## 八、最小源码实现
 
 Vue 3.5.40 为每个 app 创建独立 `context` 与 `pluginCleanupFns`，并用 `isMounted` 限制根组件只挂载一次。应用对象的 `version` 直接引用 runtime-core 导出的 `__VERSION__` 常量；`onUnmount()` 只向当前 app 的清理数组追加回调。`unmount()` 先通过应用卸载错误边界调用这些回调，再用 `render(null, container)` 卸载整棵树，但不会重置 `isMounted`。`apiCreateApp.spec.ts` 覆盖应用挂载、卸载及实例行为。
 

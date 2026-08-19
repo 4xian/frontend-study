@@ -1,0 +1,213 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.basics.command-line-task-manager-project",
+  "batchId": "phase-4-command-line-task-manager-project",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "phase": "Phase B",
+  "phaseBProgress": "21/21",
+  "phaseBGateStatus": "closed",
+  "phaseCStatus": "not-started / not-authorized",
+  "recordedAt": "2026-08-15T03:49:44Z",
+  "contract": {
+    "title": "基础实战：命令行任务管理器",
+    "url": "/backend/java/core/learn/command-line-task-manager-project",
+    "durationMinutes": 180,
+    "checkpointMinutes": [60, 60, 60],
+    "prerequisites": [
+      "backend.java.learn.basics.first-automated-test-with-junit"
+    ],
+    "requiredTopics": [
+      "类、枚举、LinkedHashMap 与 Optional 组成的内存任务模型",
+      "add、done、list、delete、save、load、help、exit 命令合同与状态筛选",
+      "显式 UTF-8 文本保存、重启往返、缺失文件和损坏行恢复",
+      "Reader、Writer 与 TaskStore 注入形成的可测试 I/O 边界",
+      "Java 25/JUnit 6.1.3 与 Java 8/JUnit 5.14.4 双版本测试",
+      "jdb 局部变量、行号、调用栈与 TaskFormatException 调试证据"
+    ]
+  },
+  "phaseAFrozenPlan": {
+    "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+    "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81",
+    "courseNumber": "B-21",
+    "previousCourse": "backend.java.learn.basics.first-automated-test-with-junit",
+    "nextPhaseCourse": "backend.java.learn.intermediate.lambda-stream-and-collectors",
+    "nextPhaseCourseStarted": false,
+    "nextPhaseAuthorized": false,
+    "phaseBStopBoundary": "B-21 关闭后 Phase B 基础 Gate 关闭并立即停止；不得开始 I-01 或 Phase C。"
+  },
+  "sourceReverification": {
+    "method": "Tavily 仅用于候选发现，逐页回到 Oracle、Dev.java、JUnit 与 Apache Maven 官方直接页面核验",
+    "communitySourcesUsedAsEvidence": false,
+    "verifiedAt": "2026-08-15",
+    "researchUniqueUrls": 31,
+    "researchHttpStatus": "31/31 全部返回 200",
+    "lessonOfficialLinks": 22,
+    "lessonOfficialLinksReachable": true
+  },
+  "routeIdentity": {
+    "stableIdPreserved": true,
+    "stableUrlPreserved": true,
+    "trackPosition": 21,
+    "trackStatus": "available",
+    "loaderSlug": "command-line-task-manager-project",
+    "trackChangedInThisBatch": true,
+    "loaderChangedInThisBatch": true
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/basics/command-line-task-manager-project.md",
+      "sha256": "01060719d121dabbcc1fe4fc3594cb9d96e95137c03bc2e09b64498967c9dd6a"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/command-line-task-manager-project.md",
+      "sha256": "5c2200a7c4748d7843fc52ef180d52a629f2ef3abd3acae2cce628d6be4681ed"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "23de3ba037d253c8eba2b40ec1cb0c1b5dba4235e93910b35e1936759caf3b0a"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "d8778a4dd7ed5b9027f159f2e959ed113f42839c5106490f98fc3b0554e2e10b"
+    },
+    {
+      "path": "docs/backend/java/audit/phase-2-knowledge-path-manifest.json",
+      "sha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407"
+    }
+  ],
+  "engineeringVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run format:check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run test:unit",
+      "exitCode": 0,
+      "summary": "empty configured unit directory is valid"
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "summary": "empty configured E2E directory is valid"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "passed; 1753 modules transformed; existing catalog chunk and content-markdown timing warnings only"
+    }
+  ],
+  "javaVerification": {
+    "method": "从最终正文的原始 Java 代码块重新提取 Task、两个 Main 和六测试源码，再与三个 checkpoint 快照组合验证",
+    "temporaryPath": "/tmp/vue3-study-b21-postreview.IQ9FOi",
+    "modern": {
+      "runtime": "eclipse-temurin:25-jdk",
+      "imageDigest": "sha256:12e44624adee6808a36d962717e1656e0afeeeff5a100f9cb00e0136513558f0",
+      "checkpoint1": "BUILD SUCCESS",
+      "checkpoint2": "BUILD SUCCESS",
+      "checkpoint3": "6 tests, 0 failures, 0 errors, 0 skipped"
+    },
+    "legacy": {
+      "runtime": "eclipse-temurin:8-jdk",
+      "imageDigest": "sha256:c8b86f2c0a9bd6cc1b7fabc5d1a097501a166eea7cad3b2764e90e96178bea9b",
+      "checkpoint1": "BUILD SUCCESS",
+      "checkpoint2": "BUILD SUCCESS",
+      "checkpoint3": "6 tests, 0 failures, 0 errors, 0 skipped"
+    },
+    "broaderBatchFeedback": {
+      "focusedFullRepeat": "Java 25 与 Java 8 的定向、完整和重复测试均通过",
+      "negativeAssertion": "故意把 expected 改为 2 后两条线均非零失败并报告 actual 1",
+      "cliAndPersistence": "两条线的命令、状态筛选、UTF-8 重启往返、损坏行恢复和缺失文件均通过",
+      "debugger": "两条线的交互式 jdb 均观察到坏行、lineNumber=2、调用栈与 TaskFormatException"
+    },
+    "cleanupMethod": "find <exact-dir> -depth -delete"
+  },
+  "catalogVerification": {
+    "phaseBBasicsEntries": 21,
+    "availableEntries": 21,
+    "uniqueStableIds": 21,
+    "uniqueLoaders": 21,
+    "targetId": "backend.java.learn.basics.command-line-task-manager-project",
+    "targetLoaderCount": 1,
+    "targetBlocks": 184,
+    "searchResultCount": 1,
+    "intermediateMetadataPresent": true,
+    "intermediateBodyPreloaded": false
+  },
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "session": "vue3-b21-final-live",
+    "sessionClosed": true,
+    "baseUrl": "http://127.0.0.1:4196/",
+    "targetPath": "/backend/java/core/learn/command-line-task-manager-project",
+    "desktop": {
+      "viewport": "1440x900",
+      "documentClientWidth": 1440,
+      "documentScrollWidth": 1440,
+      "horizontalOverflow": false,
+      "h1Count": 1,
+      "codeBlockCount": 43,
+      "taskBlockHasPackageDeclaration": true
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "documentClientWidth": 390,
+      "documentScrollWidth": 390,
+      "horizontalOverflow": false,
+      "h1Count": 1,
+      "checkpointHeadingCount": 6
+    },
+    "officialSourceUniqueUrlCount": 22,
+    "completionButtonTextAfterReload": "取消完成",
+    "progressPersistedAfterReload": true,
+    "console": {
+      "errors": 0,
+      "warnings": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "nonSuccessfulResponses": 0,
+      "staticRequests": "105/105 HTTP 200"
+    }
+  },
+  "review": {
+    "reviewer": "/root/b21_combined_review",
+    "riskClassification": "新增阶段项目课程、研究稿、track/loader 注册和完整双版本/浏览器验收",
+    "independentReviewRequired": true,
+    "standards": "PASS",
+    "standardsFindings": 0,
+    "spec": "PASS",
+    "specFindings": 0,
+    "reviewSummary": "最终四文件快照关闭 package、中文 Javadoc 与来源计数问题；课程合同、三个 checkpoint、版本线和停止边界均通过"
+  },
+  "workspaceProtection": {
+    "dirtyWorkspaceProtected": true,
+    "unrelatedChangesPreserved": true,
+    "scopedStagedAndUnstagedDiffCheck": "PASS",
+    "noStageCommitPushStashReset": true
+  },
+  "changedFiles": [
+    "docs/research/backend/java/basics/command-line-task-manager-project.md",
+    "src/categories/backend/java/core/learn/command-line-task-manager-project.md",
+    "src/categories/backend/java/core/backend-java-track.ts",
+    "src/categories/backend/java/core/entry-manifest.ts",
+    "docs/backend/java/audit/reviews/phase-4-command-line-task-manager-project-signoff.json"
+  ],
+  "stopBoundary": "Phase B 基础 Gate 已关闭；Phase C 尚未开始且未经授权。立即停止，不读取、研究或实现 I-01 及任何后续课程。"
+}

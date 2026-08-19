@@ -3,17 +3,22 @@
 import { computed } from 'vue'
 import { headingId } from '@/common/content'
 
-const props = defineProps<{ content: string }>()
+const props = defineProps<{ content: string; depth?: 2 | 3 }>()
 
 /** 锚点 id */
 const id = computed(() => headingId(props.content))
 </script>
 
 <template>
-  <h2 :id="id" class="heading">
+  <component
+    :is="props.depth === 3 ? 'h3' : 'h2'"
+    :id="id"
+    class="heading"
+    :class="{ 'heading-depth-3': props.depth === 3 }"
+  >
     <a class="anchor" :href="`#${id}`" aria-hidden="true">#</a>
     {{ props.content }}
-  </h2>
+  </component>
 </template>
 
 <style scoped>
@@ -39,5 +44,17 @@ const id = computed(() => headingId(props.content))
 
 .heading:hover .anchor {
   opacity: 1;
+}
+
+.heading-depth-3 {
+  margin-top: var(--space-5);
+  margin-bottom: var(--space-3);
+  font-size: var(--font-size-lg);
+}
+
+@media (max-width: 1250px) {
+  .heading {
+    scroll-margin-top: calc(var(--header-height) + 58px + var(--space-8));
+  }
 }
 </style>

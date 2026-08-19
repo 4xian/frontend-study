@@ -98,7 +98,7 @@ const coreAndStoresSections = [
         'public',
         'detail',
         piniaInstanceEntryId,
-        'pinia-interface',
+        '二pinia-interface',
       ],
       [
         'variables.getactivepinia',
@@ -107,7 +107,7 @@ const coreAndStoresSections = [
         'public',
         'quick',
         piniaInstanceEntryId,
-        'get-active-pinia',
+        '四get-active-pinia',
       ],
       [
         'variables.setactivepinia',
@@ -116,7 +116,7 @@ const coreAndStoresSections = [
         'public',
         'quick',
         piniaInstanceEntryId,
-        'set-active-pinia',
+        '五set-active-pinia',
       ],
       [
         'functions.createpinia',
@@ -125,7 +125,7 @@ const coreAndStoresSections = [
         'public',
         'detail',
         piniaInstanceEntryId,
-        'create-pinia',
+        '三create-pinia',
       ],
       [
         'functions.disposepinia',
@@ -134,7 +134,7 @@ const coreAndStoresSections = [
         'public',
         'quick',
         piniaInstanceEntryId,
-        'dispose-pinia',
+        '六dispose-pinia',
       ],
     ],
   },
@@ -149,7 +149,7 @@ const coreAndStoresSections = [
         'public',
         'detail',
         defineStoreEntryId,
-        'define-setup-store-options',
+        '三define-setup-store-options',
       ],
       [
         'interfaces.definestoreoptions',
@@ -158,7 +158,7 @@ const coreAndStoresSections = [
         'public',
         'detail',
         defineStoreEntryId,
-        'define-store-options',
+        '二define-store-options',
       ],
       [
         'interfaces.definestoreoptionsbase',
@@ -167,7 +167,7 @@ const coreAndStoresSections = [
         'public',
         'merged',
         defineStoreEntryId,
-        'define-store-options-base',
+        '四define-store-options-base',
       ],
       [
         'interfaces.setupstoredefinition',
@@ -176,7 +176,7 @@ const coreAndStoresSections = [
         'public',
         'detail',
         defineStoreEntryId,
-        'setup-store-definition',
+        '六setup-store-definition',
       ],
       [
         'interfaces.storedefinition',
@@ -185,7 +185,7 @@ const coreAndStoresSections = [
         'public',
         'detail',
         defineStoreEntryId,
-        'store-definition',
+        '五store-definition',
       ],
       [
         'functions.definestore',
@@ -194,7 +194,7 @@ const coreAndStoresSections = [
         'public',
         'detail',
         defineStoreEntryId,
-        'define-store',
+        '一define-store',
         ['defineStore()'],
       ],
     ],
@@ -210,7 +210,7 @@ const coreAndStoresSections = [
         'public',
         'detail',
         storeShapeEntryId,
-        'store-properties',
+        '七store-properties',
       ],
       [
         'type-aliases.statetree',
@@ -219,7 +219,7 @@ const coreAndStoresSections = [
         'public',
         'quick',
         storeShapeEntryId,
-        'state-tree',
+        '一state-tree',
       ],
       [
         'type-aliases.store',
@@ -228,7 +228,7 @@ const coreAndStoresSections = [
         'public',
         'detail',
         storeShapeEntryId,
-        'store-type',
+        '二store-type',
       ],
       [
         'type-aliases.storeactions',
@@ -237,7 +237,7 @@ const coreAndStoresSections = [
         'public',
         'merged',
         storeShapeEntryId,
-        'store-actions',
+        '四store-actions',
       ],
       [
         'type-aliases.storegeneric',
@@ -246,7 +246,7 @@ const coreAndStoresSections = [
         'public',
         'quick',
         storeShapeEntryId,
-        'store-generic',
+        '三store-generic',
       ],
       [
         'type-aliases.storegetters',
@@ -255,7 +255,7 @@ const coreAndStoresSections = [
         'public',
         'merged',
         storeShapeEntryId,
-        'store-getters',
+        '五store-getters',
       ],
       [
         'type-aliases.storestate',
@@ -264,7 +264,7 @@ const coreAndStoresSections = [
         'public',
         'merged',
         storeShapeEntryId,
-        'store-state',
+        '六store-state',
       ],
     ],
   },
@@ -279,7 +279,7 @@ const coreAndStoresSections = [
         'public',
         'detail',
         storeToRefsEntryId,
-        'store-to-refs',
+        '一store-to-refs',
       ],
     ],
   },
@@ -297,7 +297,7 @@ const observationAndRuntimeSections = [
         'public',
         'detail',
         subscriptionsEntryId,
-        'mutation-type',
+        '二mutation-type',
       ],
       [
         'interfaces.subscriptioncallbackmutationdirect',
@@ -306,7 +306,7 @@ const observationAndRuntimeSections = [
         'public',
         'merged',
         subscriptionsEntryId,
-        'direct-mutation',
+        '三direct-mutation',
       ],
       [
         'interfaces.subscriptioncallbackmutationpatchfunction',
@@ -315,7 +315,7 @@ const observationAndRuntimeSections = [
         'public',
         'merged',
         subscriptionsEntryId,
-        'patch-function-mutation',
+        '五patch-function-mutation',
       ],
       [
         'interfaces.subscriptioncallbackmutationpatchobject',
@@ -324,7 +324,7 @@ const observationAndRuntimeSections = [
         'public',
         'merged',
         subscriptionsEntryId,
-        'patch-object-mutation',
+        '四patch-object-mutation',
       ],
       [
         'type-aliases.storeonactionlistener',
@@ -333,7 +333,7 @@ const observationAndRuntimeSections = [
         'public',
         'detail',
         subscriptionsEntryId,
-        'store-on-action-listener',
+        '九store-on-action-listener',
       ],
       [
         'type-aliases.storeonactionlistenercontext',
@@ -342,7 +342,7 @@ const observationAndRuntimeSections = [
         'public',
         'merged',
         subscriptionsEntryId,
-        'store-on-action-listener-context',
+        '八store-on-action-listener-context',
       ],
       [
         'type-aliases.subscriptioncallback',
@@ -351,7 +351,7 @@ const observationAndRuntimeSections = [
         'public',
         'detail',
         subscriptionsEntryId,
-        'subscription-callback',
+        '七subscription-callback',
       ],
       [
         'type-aliases.subscriptioncallbackmutation',
@@ -360,7 +360,7 @@ const observationAndRuntimeSections = [
         'public',
         'merged',
         subscriptionsEntryId,
-        'subscription-callback-mutation',
+        '六subscription-callback-mutation',
       ],
     ],
   },
@@ -375,7 +375,7 @@ const observationAndRuntimeSections = [
         'public',
         'detail',
         hmrEntryId,
-        'accept-hmr-update',
+        '二accept-hmr-update',
       ],
       [
         'functions.shouldhydrate',
@@ -384,7 +384,7 @@ const observationAndRuntimeSections = [
         'public',
         'merged',
         hydrationEntryId,
-        'should-hydrate',
+        '三should-hydrate',
       ],
       [
         'functions.skiphydrate',
@@ -393,7 +393,7 @@ const observationAndRuntimeSections = [
         'public',
         'detail',
         hydrationEntryId,
-        'skip-hydrate',
+        '二skip-hydrate',
       ],
     ],
   },
@@ -411,7 +411,7 @@ const pluginsAndOptionsSections = [
         'public',
         'merged',
         pluginContractsEntryId,
-        'define-store-options-in-plugin',
+        '四define-store-options-in-plugin',
       ],
       [
         'interfaces.piniacustomproperties',
@@ -420,7 +420,7 @@ const pluginsAndOptionsSections = [
         'public',
         'merged',
         pluginContractsEntryId,
-        'pinia-custom-properties',
+        '五pinia-custom-properties',
       ],
       [
         'interfaces.piniacustomstateproperties',
@@ -429,7 +429,7 @@ const pluginsAndOptionsSections = [
         'public',
         'merged',
         pluginContractsEntryId,
-        'pinia-custom-state-properties',
+        '六pinia-custom-state-properties',
       ],
       [
         'interfaces.piniaplugin',
@@ -438,7 +438,7 @@ const pluginsAndOptionsSections = [
         'public',
         'detail',
         pluginContractsEntryId,
-        'pinia-plugin',
+        '二pinia-plugin',
       ],
       [
         'interfaces.piniaplugincontext',
@@ -447,7 +447,7 @@ const pluginsAndOptionsSections = [
         'public',
         'merged',
         pluginContractsEntryId,
-        'pinia-plugin-context',
+        '三pinia-plugin-context',
       ],
     ],
   },
@@ -462,7 +462,7 @@ const pluginsAndOptionsSections = [
         'public',
         'quick',
         mapHelpersEntryId,
-        'map-stores-customization',
+        '七map-stores-customization',
       ],
       [
         'functions.mapactions',
@@ -471,7 +471,7 @@ const pluginsAndOptionsSections = [
         'public',
         'merged',
         mapHelpersEntryId,
-        'map-actions',
+        '四map-actions',
       ],
       [
         'functions.mapstate',
@@ -480,7 +480,7 @@ const pluginsAndOptionsSections = [
         'public',
         'detail',
         mapHelpersEntryId,
-        'map-state',
+        '二map-state',
       ],
       [
         'functions.mapstores',
@@ -489,7 +489,7 @@ const pluginsAndOptionsSections = [
         'public',
         'merged',
         mapHelpersEntryId,
-        'map-stores',
+        '五map-stores',
       ],
       [
         'functions.mapwritablestate',
@@ -498,7 +498,7 @@ const pluginsAndOptionsSections = [
         'public',
         'merged',
         mapHelpersEntryId,
-        'map-writable-state',
+        '三map-writable-state',
       ],
       [
         'functions.setmapstoresuffix',
@@ -507,7 +507,7 @@ const pluginsAndOptionsSections = [
         'public',
         'quick',
         mapHelpersEntryId,
-        'set-map-store-suffix',
+        '六set-map-store-suffix',
       ],
     ],
   },
@@ -520,7 +520,7 @@ export const piniaRestrictedReferenceItems = [
     'internal',
     'https://pinia.vuejs.org/api/pinia/interfaces/StoreOnActionListenerContext.html',
     'vue.pinia.reference.boundaries.internal-types',
-    'internal-store-on-action-listener-context',
+    '二internal-store-on-action-listener-context',
     'documented',
   ],
   [
@@ -529,7 +529,7 @@ export const piniaRestrictedReferenceItems = [
     'internal',
     'https://pinia.vuejs.org/api/pinia/interfaces/StoreWithState.html',
     'vue.pinia.reference.boundaries.internal-types',
-    'internal-store-with-state',
+    '三internal-store-with-state',
     'documented',
   ],
   [
@@ -538,7 +538,7 @@ export const piniaRestrictedReferenceItems = [
     'internal',
     'https://pinia.vuejs.org/api/pinia/interfaces/SubscriptionCallbackMutationBase.html',
     'vue.pinia.reference.boundaries.internal-types',
-    'internal-subscription-callback-mutation-base',
+    '四internal-subscription-callback-mutation-base',
     'documented',
   ],
   [
@@ -547,7 +547,7 @@ export const piniaRestrictedReferenceItems = [
     'internal',
     'https://pinia.vuejs.org/api/pinia/type-aliases/ActionsTree.html',
     'vue.pinia.reference.boundaries.internal-types',
-    'internal-actions-tree',
+    '五internal-actions-tree',
     'documented',
   ],
   [
@@ -556,7 +556,7 @@ export const piniaRestrictedReferenceItems = [
     'internal',
     'https://pinia.vuejs.org/api/pinia/type-aliases/DeepPartial.html',
     'vue.pinia.reference.boundaries.internal-types',
-    'internal-deep-partial',
+    '六internal-deep-partial',
     'documented',
   ],
   [
@@ -565,7 +565,7 @@ export const piniaRestrictedReferenceItems = [
     'internal',
     'https://pinia.vuejs.org/api/pinia/type-aliases/ExtractActionsFromSetupStore.html',
     'vue.pinia.reference.boundaries.internal-types',
-    'internal-extract-actions-from-setup-store',
+    '七internal-extract-actions-from-setup-store',
     'documented',
   ],
   [
@@ -574,7 +574,7 @@ export const piniaRestrictedReferenceItems = [
     'internal',
     'https://pinia.vuejs.org/api/pinia/type-aliases/ExtractActionsFromSetupStore_Keys.html',
     'vue.pinia.reference.boundaries.internal-types',
-    'internal-extract-actions-from-setup-store-keys',
+    '八internal-extract-actions-from-setup-store-keys',
     'documented',
   ],
   [
@@ -583,7 +583,7 @@ export const piniaRestrictedReferenceItems = [
     'internal',
     'https://pinia.vuejs.org/api/pinia/type-aliases/ExtractGettersFromSetupStore.html',
     'vue.pinia.reference.boundaries.internal-types',
-    'internal-extract-getters-from-setup-store',
+    '九internal-extract-getters-from-setup-store',
     'documented',
   ],
   [
@@ -592,7 +592,7 @@ export const piniaRestrictedReferenceItems = [
     'internal',
     'https://pinia.vuejs.org/api/pinia/type-aliases/ExtractGettersFromSetupStore_Keys.html',
     'vue.pinia.reference.boundaries.internal-types',
-    'internal-extract-getters-from-setup-store-keys',
+    '十internal-extract-getters-from-setup-store-keys',
     'documented',
   ],
   [
@@ -601,7 +601,7 @@ export const piniaRestrictedReferenceItems = [
     'internal',
     'https://pinia.vuejs.org/api/pinia/type-aliases/ExtractStateFromSetupStore.html',
     'vue.pinia.reference.boundaries.internal-types',
-    'internal-extract-state-from-setup-store',
+    '十一internal-extract-state-from-setup-store',
     'documented',
   ],
   [
@@ -610,7 +610,7 @@ export const piniaRestrictedReferenceItems = [
     'internal',
     'https://pinia.vuejs.org/api/pinia/type-aliases/ExtractStateFromSetupStore_Keys.html',
     'vue.pinia.reference.boundaries.internal-types',
-    'internal-extract-state-from-setup-store-keys',
+    '十二internal-extract-state-from-setup-store-keys',
     'documented',
   ],
   [
@@ -619,7 +619,7 @@ export const piniaRestrictedReferenceItems = [
     'internal',
     'https://pinia.vuejs.org/api/pinia/type-aliases/GettersTree.html',
     'vue.pinia.reference.boundaries.internal-types',
-    'internal-getters-tree',
+    '十三internal-getters-tree',
     'documented',
   ],
   [
@@ -628,7 +628,7 @@ export const piniaRestrictedReferenceItems = [
     'internal',
     'https://pinia.vuejs.org/api/pinia/type-aliases/MapActionsObjectReturn.html',
     'vue.pinia.reference.boundaries.internal-types',
-    'internal-map-actions-object-return',
+    '十四internal-map-actions-object-return',
     'documented',
   ],
   [
@@ -637,7 +637,7 @@ export const piniaRestrictedReferenceItems = [
     'internal',
     'https://pinia.vuejs.org/api/pinia/type-aliases/MapActionsReturn.html',
     'vue.pinia.reference.boundaries.internal-types',
-    'internal-map-actions-return',
+    '十五internal-map-actions-return',
     'documented',
   ],
   [
@@ -646,7 +646,7 @@ export const piniaRestrictedReferenceItems = [
     'internal',
     'https://pinia.vuejs.org/api/pinia/type-aliases/MapStateObjectReturn.html',
     'vue.pinia.reference.boundaries.internal-types',
-    'internal-map-state-object-return',
+    '十六internal-map-state-object-return',
     'documented',
   ],
   [
@@ -655,7 +655,7 @@ export const piniaRestrictedReferenceItems = [
     'internal',
     'https://pinia.vuejs.org/api/pinia/type-aliases/MapStateReturn.html',
     'vue.pinia.reference.boundaries.internal-types',
-    'internal-map-state-return',
+    '十七internal-map-state-return',
     'documented',
   ],
   [
@@ -664,7 +664,7 @@ export const piniaRestrictedReferenceItems = [
     'internal',
     'https://pinia.vuejs.org/api/pinia/type-aliases/MapWritableStateObjectReturn.html',
     'vue.pinia.reference.boundaries.internal-types',
-    'internal-map-writable-state-object-return',
+    '十八internal-map-writable-state-object-return',
     'documented',
   ],
   [
@@ -673,7 +673,7 @@ export const piniaRestrictedReferenceItems = [
     'internal',
     'https://pinia.vuejs.org/api/pinia/type-aliases/MapWritableStateReturn.html',
     'vue.pinia.reference.boundaries.internal-types',
-    'internal-map-writable-state-return',
+    '十九internal-map-writable-state-return',
     'documented',
   ],
   [
@@ -682,7 +682,7 @@ export const piniaRestrictedReferenceItems = [
     'internal',
     'https://pinia.vuejs.org/api/pinia/type-aliases/Method.html',
     'vue.pinia.reference.boundaries.internal-types',
-    'internal-method',
+    '二十internal-method',
     'documented',
   ],
   [
@@ -691,7 +691,7 @@ export const piniaRestrictedReferenceItems = [
     'internal',
     'https://pinia.vuejs.org/api/pinia/type-aliases/Spread.html',
     'vue.pinia.reference.boundaries.internal-types',
-    'internal-spread',
+    '二十一internal-spread',
     'documented',
   ],
   [
@@ -700,7 +700,7 @@ export const piniaRestrictedReferenceItems = [
     'internal',
     'https://pinia.vuejs.org/api/pinia/type-aliases/StoreObject.html',
     'vue.pinia.reference.boundaries.internal-types',
-    'internal-store-object',
+    '二十二internal-store-object',
     'documented',
   ],
   [
@@ -709,7 +709,7 @@ export const piniaRestrictedReferenceItems = [
     'internal',
     'https://pinia.vuejs.org/api/pinia/type-aliases/StoreWithActions.html',
     'vue.pinia.reference.boundaries.internal-types',
-    'internal-store-with-actions',
+    '二十三internal-store-with-actions',
     'documented',
   ],
   [
@@ -718,7 +718,7 @@ export const piniaRestrictedReferenceItems = [
     'internal',
     'https://pinia.vuejs.org/api/pinia/type-aliases/StoreWithGetters.html',
     'vue.pinia.reference.boundaries.internal-types',
-    'internal-store-with-getters',
+    '二十四internal-store-with-getters',
     'documented',
   ],
   [
@@ -727,7 +727,7 @@ export const piniaRestrictedReferenceItems = [
     'internal',
     'https://pinia.vuejs.org/api/pinia/type-aliases/UnwrapAll.html',
     'vue.pinia.reference.boundaries.internal-types',
-    'internal-unwrap-all',
+    '二十五internal-unwrap-all',
     'documented',
   ],
   [
@@ -736,7 +736,7 @@ export const piniaRestrictedReferenceItems = [
     'deprecated',
     'https://pinia.vuejs.org/api/pinia/variables/mapGetters.html',
     'vue.pinia.reference.options-api.map-helpers',
-    'deprecated-map-getters',
+    '九deprecated-map-getters',
     'documented',
   ],
   [
@@ -745,7 +745,7 @@ export const piniaRestrictedReferenceItems = [
     'internal',
     undefined,
     piniaInstanceEntryId,
-    'internal-pinia-symbol',
+    '七internal-pinia-symbol',
     'documented',
   ],
 ] as const satisfies readonly PiniaRestrictedReferenceItemDefinition[]

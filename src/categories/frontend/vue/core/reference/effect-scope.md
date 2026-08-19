@@ -34,7 +34,7 @@ anchors:
 
 # effectScope()
 
-## 概述
+## 一、概述
 
 effectScope() 创建一个"副作用收集箱"：在 `scope.run(fn)` 里创建的所有响应式副作用（computed、watch、watchEffect）都会被登记到这个 scope 上，之后调用 `scope.stop()` 即可一次性全部停止。组件内部正是用它管理副作用的——组件卸载时 Vue 停止组件的 scope，setup 里创建的侦听器随之自动清理。
 
@@ -47,7 +47,7 @@ interface EffectScope {
 }
 ~~~~
 
-## 基础用法
+## 二、基础用法
 
 ~~~~ts
 import { effectScope, computed, watch, watchEffect } from 'vue'
@@ -70,7 +70,7 @@ scope.stop()
 scope 内创建两个侦听器，stop() 之后再修改数据不再有任何日志输出
 :::
 
-## 易错使用提示
+## 三、易错使用提示
 
 :::pitfalls
 ### 在 `scope.run()` 外创建副作用，再期待 `scope.stop()` 接管
@@ -162,7 +162,7 @@ function disposeCache() {
 
 `detached: true` 创建"游离"scope：不作为当前 scope 的子级被收集，父级停止时它不受影响，需要自己负责 stop——适合生命周期长于组件的共享状态（如跨组件复用的一份请求缓存）。
 
-## getCurrentScope() 与 onScopeDispose()
+## 四、getCurrentScope() 与 onScopeDispose()
 
 ~~~~ts
 function getCurrentScope(): EffectScope | undefined
@@ -172,7 +172,7 @@ function onScopeDispose(fn: () => void, failSilently?: boolean): void
 
 `getCurrentScope()` 返回当前活跃的 scope（组件 setup 期间就是组件自己的 scope）。`onScopeDispose()` 在当前 scope 上注册清理回调，scope 停止时调用——它是 `onUnmounted` 的通用化版本：不依赖组件实例，组合式函数用它注册清理逻辑后，既能在组件里用（卸载时清理），也能在独立的 effectScope 里用（stop 时清理）。3.5+ 第二个参数 `failSilently` 可抑制"无活跃 scope"警告。
 
-## 最小源码实现
+## 五、最小源码实现
 
 实现核心是一个模块级全局变量 `activeEffectScope`。`run(fn)` 把自己设为当前活跃 scope 再执行 fn，结束后恢复原值（try/finally 保证嵌套正确）；期间创建的 ReactiveEffect 在构造时读取这个全局变量，把自己 push 进 `scope.effects`。`stop()` 遍历停止全部 effects、执行全部 cleanups、递归停止子 scope。非 detached 的 scope 在构造时把自己挂到父 scope 的 `scopes` 数组上——这就形成了组件树对应的 scope 树。
 

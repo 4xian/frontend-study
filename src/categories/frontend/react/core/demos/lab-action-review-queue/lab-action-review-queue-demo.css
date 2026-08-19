@@ -1,0 +1,468 @@
+.lab-action-review-queue-demo {
+  color: #26343a;
+  background: #f7f9fa;
+}
+
+.review-heading {
+  padding: 20px;
+  border: 1px solid #cbd8de;
+  border-radius: 6px;
+  background: #edf5f6;
+}
+
+.review-heading p,
+.review-heading h2,
+.review-heading span {
+  margin: 0;
+}
+
+.review-heading p {
+  color: #176b62;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.review-heading h2 {
+  margin-top: 6px;
+  color: #183f46;
+  font-size: 1.35rem;
+  line-height: 1.35;
+}
+
+.review-heading span {
+  display: block;
+  margin-top: 8px;
+  color: #55676d;
+  line-height: 1.6;
+}
+
+.review-workspace {
+  margin-top: 14px;
+}
+
+.review-summary,
+.review-main,
+.review-submit-buttons,
+.review-settlement > div {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.review-summary {
+  margin: -4px 0;
+}
+
+.review-summary > div {
+  flex: 1 1 145px;
+  min-width: 0;
+  margin: 4px;
+  padding: 11px 12px;
+  border-left: 3px solid #397b8f;
+  background: #ffffff;
+  box-shadow: 0 1px 0 #dce5e8;
+}
+
+.review-summary > div:nth-child(2) {
+  border-left-color: #b66d27;
+}
+
+.review-summary > div:nth-child(3) {
+  border-left-color: #6e5ba5;
+}
+
+.review-summary > div:nth-child(4) {
+  border-left-color: #2c7d62;
+}
+
+.review-summary span,
+.review-summary strong {
+  display: block;
+}
+
+.review-summary span {
+  color: #68787d;
+  font-size: 0.78rem;
+}
+
+.review-summary strong {
+  margin-top: 4px;
+  overflow-wrap: anywhere;
+  color: #264750;
+  font-size: 0.98rem;
+  line-height: 1.4;
+}
+
+.review-main {
+  align-items: stretch;
+  margin: 10px 0 0;
+}
+
+.review-queue,
+.review-editor {
+  flex: 1 1 330px;
+  min-width: 0;
+  margin: 5px;
+  padding: 16px;
+  border: 1px solid #c8d4d9;
+  border-radius: 6px;
+  background: #ffffff;
+}
+
+.review-queue {
+  border-top: 4px solid #357790;
+}
+
+.review-editor {
+  border-top: 4px solid #2f7a62;
+}
+
+.review-queue > header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.review-queue header span,
+.review-editor > header span {
+  color: #6a787d;
+  font-size: 0.78rem;
+}
+
+.review-queue h3,
+.review-editor h3 {
+  margin: 4px 0 0;
+  overflow-wrap: anywhere;
+  color: #244a54;
+  font-size: 1.08rem;
+  line-height: 1.4;
+}
+
+.review-queue output {
+  color: #4c6269;
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.review-queue ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.review-queue li + li {
+  margin-top: 8px;
+}
+
+.review-queue li {
+  border: 1px solid #d5dfe2;
+  border-left: 3px solid #9aabb1;
+  border-radius: 5px;
+  background: #fbfcfc;
+}
+
+.review-queue li.is-selected {
+  border-color: #4e8da0;
+  border-left-color: #2f7188;
+  background: #edf6f8;
+}
+
+.review-queue li button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 58px;
+  padding: 10px 11px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.review-queue li button:hover:not(:disabled) {
+  background: #e4f1f4;
+}
+
+.review-queue li button:focus-visible,
+.review-editor textarea:focus-visible,
+.review-submit-buttons button:focus-visible,
+.review-settlement button:focus-visible,
+.review-reset:focus-visible {
+  outline: 3px solid #b6ddd5;
+  outline-offset: 2px;
+}
+
+.review-queue li button:disabled {
+  cursor: not-allowed;
+}
+
+.review-queue li button > span {
+  min-width: 0;
+  margin-right: 12px;
+}
+
+.review-queue li strong,
+.review-queue li small {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.review-queue li strong {
+  color: #294950;
+  font-size: 0.92rem;
+}
+
+.review-queue li small {
+  margin-top: 3px;
+  color: #6b797e;
+  font-size: 0.76rem;
+}
+
+.review-queue li em {
+  flex: 0 1 130px;
+  overflow-wrap: anywhere;
+  color: #8a561f;
+  font-size: 0.78rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: right;
+}
+
+.review-editor > header {
+  margin-bottom: 14px;
+}
+
+.review-editor > header p {
+  margin: 4px 0 0;
+  color: #607176;
+  font-size: 0.82rem;
+}
+
+.review-editor form > label {
+  display: block;
+  margin-bottom: 6px;
+  color: #40575e;
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.review-editor textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 94px;
+  padding: 9px 10px;
+  resize: vertical;
+  border: 1px solid #aebdc2;
+  border-radius: 5px;
+  background: #ffffff;
+  color: #26383e;
+  font: inherit;
+  line-height: 1.5;
+}
+
+.review-editor textarea[aria-invalid='true'] {
+  border-color: #b65353;
+  background: #fff8f8;
+}
+
+.review-submit-area {
+  margin-top: 10px;
+}
+
+.review-submit-buttons,
+.review-settlement > div {
+  margin: -4px;
+}
+
+.review-submit-buttons button,
+.review-settlement button,
+.review-reset {
+  min-height: 42px;
+  margin: 4px;
+  padding: 8px 12px;
+  border: 1px solid #286b58;
+  border-radius: 5px;
+  background: #2f7a62;
+  color: #ffffff;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  line-height: 1.35;
+  white-space: normal;
+}
+
+.review-submit-buttons button {
+  flex: 1 1 140px;
+}
+
+.review-submit-buttons button.is-secondary {
+  border-color: #9a6529;
+  background: #ac7332;
+}
+
+.review-submit-buttons button:hover:not(:disabled),
+.review-settlement button:hover:not(:disabled),
+.review-reset:hover:not(:disabled) {
+  filter: brightness(0.92);
+}
+
+.review-submit-buttons button:disabled,
+.review-settlement button:disabled,
+.review-reset:disabled {
+  cursor: not-allowed;
+  opacity: 0.52;
+}
+
+.review-form-status {
+  min-height: 2.8em;
+  margin: 8px 0 0;
+  padding: 8px 10px;
+  border-left: 3px solid #6b5aa1;
+  background: #f5f2fb;
+  color: #4f456f;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.review-settlement {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #dde4e6;
+}
+
+.review-settlement > span,
+.review-settlement > strong {
+  display: block;
+}
+
+.review-settlement > span {
+  color: #6a797d;
+  font-size: 0.78rem;
+}
+
+.review-settlement > strong {
+  min-height: 1.5em;
+  margin-top: 4px;
+  overflow-wrap: anywhere;
+  color: #314d55;
+  font-size: 0.88rem;
+}
+
+.review-settlement > div {
+  margin-top: 7px;
+}
+
+.review-settlement button {
+  flex: 1 1 130px;
+}
+
+.review-settlement button.is-danger {
+  border-color: #a64545;
+  background: #b34d4d;
+}
+
+.review-result {
+  margin-top: 10px;
+  padding: 13px 14px;
+  border: 1px solid #cad7db;
+  border-left: 4px solid #778a91;
+  border-radius: 5px;
+  background: #ffffff;
+}
+
+.review-result.is-success {
+  border-left-color: #2c7d62;
+  background: #f2faf6;
+}
+
+.review-result.is-invalid {
+  border-left-color: #b34d4d;
+  background: #fff6f6;
+}
+
+.review-result span,
+.review-result strong {
+  display: block;
+}
+
+.review-result span {
+  color: #69787d;
+  font-size: 0.78rem;
+}
+
+.review-result strong {
+  margin-top: 3px;
+  color: #304d55;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.review-result p {
+  margin: 5px 0 0;
+  overflow-wrap: anywhere;
+  color: #40575e;
+  line-height: 1.5;
+}
+
+.review-reset {
+  margin: 12px 0 0;
+  border-color: #839399;
+  background: #ffffff;
+  color: #40555c;
+}
+
+@media (max-width: 620px) {
+  .review-heading,
+  .review-queue,
+  .review-editor {
+    padding: 14px;
+  }
+
+  .review-main {
+    display: block;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .review-queue,
+  .review-editor {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .review-queue li button {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .review-queue li button > span {
+    margin-right: 0;
+  }
+
+  .review-queue li em {
+    flex-basis: auto;
+    margin-top: 7px;
+    text-align: left;
+  }
+
+  .review-submit-buttons,
+  .review-settlement > div {
+    display: block;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .review-submit-buttons button,
+  .review-settlement button,
+  .review-reset {
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+  }
+}

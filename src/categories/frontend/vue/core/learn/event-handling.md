@@ -62,7 +62,7 @@ recap:
 
 # 事件处理
 
-## 一次明确动作，直接交给事件处理器
+## 一、一次明确动作，直接交给事件处理器
 
 上一课用侦听器响应状态变化。本课处理另一类因果关系：用户刚刚点击、按键或提交，代码要响应这一次动作。模板中的 `v-on:event`（简写 `@event`）会在对应 DOM 事件发生时运行 JavaScript。
 
@@ -90,7 +90,7 @@ const count = ref(0)
 不要先把点击转成 `clicked` 布尔值，再用 watch 转发动作。只有副作用必须覆盖事件之外的所有状态变化来源时，侦听器才更合适。
 :::
 
-## 内联处理器与方法处理器
+## 二、内联处理器与方法处理器
 
 简单赋值或调用可以留在模板内联表达式中。逻辑需要复用、分支、类型标注或独立阅读时，应提取为方法。直接绑定方法路径时，Vue 会把原生事件作为唯一参数传入。
 
@@ -121,7 +121,7 @@ function reset(event: MouseEvent): void {
 | @click="count++" | 内联处理器 | 表达式可通过 $event 访问事件 |
 | @click="save('draft', $event)" | 内联调用 | 参数与事件都由模板明确传入 |
 
-## 传递 $event，并控制动作顺序
+## 三、传递 $event，并控制动作顺序
 
 内联处理器里的 `$event` 指向当前原生事件。既要传业务参数又要读取事件时，应显式把两者都传给方法。同一次事件也可以用分号顺序执行多个同步语句。
 
@@ -153,7 +153,7 @@ function execute(): void {
 多语句合法，但仍只生成一个处理函数，不是多个独立 DOM 监听器。出现条件、错误处理或复用需求时，把顺序提取到一个有名称的方法里。
 :::
 
-## 为 TypeScript 事件参数选择类型
+## 四、为 TypeScript 事件参数选择类型
 
 已知事件类别时使用浏览器提供的具体类型：按键用 `KeyboardEvent`，点击和指针按钮用 `MouseEvent`，表单提交可用 `SubmitEvent`。通用处理器可以从 `Event` 开始，再根据模板上下文收窄目标元素。
 
@@ -172,7 +172,7 @@ function handleSubmit(event: KeyboardEvent): void {
 
 `target` 是最初触发事件的节点，冒泡时可能是子元素；`currentTarget` 是当前监听器所在元素。两者的静态类型都不会自动变成模板里的具体元素，读取 `value` 等属性前仍要收窄。
 
-## 用普通修饰符表达 DOM 约束
+## 五、用普通修饰符表达 DOM 约束
 
 | 修饰符 | 运行行为 | 典型用途 |
 | --- | --- | --- |
@@ -192,7 +192,7 @@ function handleSubmit(event: KeyboardEvent): void {
 </div>
 ~~~~
 
-## 在事件指令台验证完整调用链
+## 六、在事件指令台验证完整调用链
 
 下面的单一 Demo 共享命令次数、最后事件和最近 8 条日志。依次验证内联与方法处理器、`$event`、多语句顺序、修饰符顺序、键盘组合、`.once` 以及 capture → target → bubble。
 
@@ -200,7 +200,7 @@ function handleSubmit(event: KeyboardEvent): void {
 在同一事件日志中观察处理器判定、修饰符 guard 与传播阶段
 :::
 
-## 键盘、系统键与鼠标按钮修饰符
+## 七、键盘、系统键与鼠标按钮修饰符
 
 按键修饰符匹配 `KeyboardEvent.key`。常用别名包括 `.enter`、`.tab`、`.delete`、`.esc`、`.space` 和方向键；其他键名使用 kebab-case，例如 `.page-down`。`.delete` 同时匹配 Delete 与 Backspace。
 
@@ -215,7 +215,7 @@ function handleSubmit(event: KeyboardEvent): void {
 
 鼠标 `.left`、`.right`、`.middle` 检查主、次、辅助触发器，而不是保证物理左、右、中位置。主要操作仍应使用语义化按钮，不要用只响应某个鼠标按键的 `div` 排除键盘用户。
 
-## 监听器选项影响注册方式
+## 八、监听器选项影响注册方式
 
 | 修饰符 | 原生选项 | 可观察结果 |
 | --- | --- | --- |
@@ -229,7 +229,7 @@ function handleSubmit(event: KeyboardEvent): void {
 
 `.capture`、`.once`、`.passive` 会被编译进事件属性名，DOM 运行时再解析为 `addEventListener` 选项。它们与触发后才运行的 `.stop`、`.prevent`、`.self` 属于不同层级。
 
-## 原生 DOM 事件与组件事件是两条路径
+## 九、原生 DOM 事件与组件事件是两条路径
 
 | 监听位置 | 收到什么 | 传播边界 |
 | --- | --- | --- |
@@ -238,7 +238,7 @@ function handleSubmit(event: KeyboardEvent): void {
 
 组件事件由子组件主动 `emit()`，载荷不一定是原生 Event，也不会沿组件树冒泡。完整的事件声明、校验和透传边界属于组件通信课程；本课不要把 DOM 修饰符机械套到任意组件载荷上。
 
-## 易错使用提示
+## 十、易错使用提示
 
 :::pitfalls
 ### 以为 save() 会自动收到事件
@@ -444,7 +444,7 @@ watch(clicked, (value) => {
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 从源码推导适用场景
+## 十一、从源码推导适用场景
 
 :::steps
 ### 表达式形状决定处理器包装方式

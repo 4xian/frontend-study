@@ -74,11 +74,11 @@ recap:
 
 # 插件
 
-## 正文大纲
+## 一、正文大纲
 
 上一课从渲染函数与 VNode 观察组件树，本课把视角提升到应用实例。学习重点是判断哪些能力值得在应用启动时统一安装，再用 app.use()、类型化 options 与 Provide / Inject 建立显式契约，最后用同一插件在两个应用中的结果理解幂等、隔离和清理。
 
-## 插件是应用级安装协议
+## 二、插件是应用级安装协议
 
 插件不是所有复用逻辑的默认容器。它适合需要在应用启动时统一安装、并被应用内多处消费的能力；单个界面仍由组件负责，可复用有状态逻辑优先使用组合式函数，只有必须直接操作普通元素 DOM 的行为才考虑自定义指令。
 
@@ -93,7 +93,7 @@ recap:
 Vue 官方列出的插件用途包括注册组件或指令、提供可注入资源、添加全局属性，或组合这些能力。开放的安装范围不等于应该把局部能力全部提升为全局资源。
 :::
 
-## 在 mount() 前通过 app.use() 安装
+## 三、在 mount() 前通过 app.use() 安装
 
 app.use(plugin, ...options) 让当前应用执行插件安装协议，并返回同一个应用实例。插件可能注册资源或提供根组件首次 setup 就要注入的服务，因此标准顺序是创建应用、安装插件、完成其他配置，最后 mount()。本课用逐行调用清楚展示顺序，不把链式写法当作重点。
 
@@ -112,7 +112,7 @@ app.mount('#app')
 不要在 mount() 后才补装插件。本课不承诺已经创建的组件会重新获得后来注册的 provide、组件、指令或全局属性。
 :::
 
-## 对象插件与函数插件共享安装协议
+## 四、对象插件与函数插件共享安装协议
 
 对象插件由 install() 方法承担安装，函数插件本身就是 install function。两种形状的第一个参数都是当前 app，其余参数都来自 app.use()；它们没有运行结果上的等级差异。需要稳定命名的库级导出时适合对象插件，只有一个窄安装动作且函数名已足够清楚时适合函数插件。
 
@@ -138,7 +138,7 @@ const functionPlugin: Plugin<[LessonPluginOptions]> = (app, options) => {
 
 一个插件应向消费者提供一个稳定身份。不要只为展示语法而把同一能力同时导出为对象和函数两套插件，否则安装去重与消费选择都会变得含糊。
 
-## 用 Plugin&lt;[Options]&gt; 固定当前应用的安装输入
+## 五、用 Plugin&lt;[Options]&gt; 固定当前应用的安装输入
 
 Vue 会把 app.use() 的尾随参数原样交给安装函数。正式插件优先传一个具名 options 对象，并用 Plugin&lt;[LessonPluginOptions]&gt; 同时约束调用端与 install 端。options 只属于这一次、这个应用的安装输入；普通对象不会因为传给插件就自动成为响应式配置。
 
@@ -162,7 +162,7 @@ app.use(lessonPlugin, { label: '课程应用 A' })
 如果配置需要在运行期变化，服务应明确公开响应式状态或更新命令。再次调用 app.use() 不是更新已经安装插件的配置接口。
 :::
 
-## 用 Provide / Inject 暴露显式服务
+## 六、用 Provide / Inject 暴露显式服务
 
 应用级服务首选 app.provide()。根组件和后代都能通过同一个 InjectionKey&lt;T&gt; 注入服务，提供端与消费端共享类型契约；消费组合式函数集中处理插件缺失，也避免每个组件重复非空断言。
 
@@ -186,7 +186,7 @@ export function useLessonService(): LessonService {
 
 某个子树还可以用同一 InjectionKey 提供局部替身或实现。更近的 provider 会覆盖该子树中的应用默认值，而不会改写插件提供给其他分支的服务。
 
-## 全局属性、组件与指令各有边界
+## 七、全局属性、组件与指令各有边界
 
 | 暴露面 | 适合用途 | 默认边界 |
 | --- | --- | --- |
@@ -209,7 +209,7 @@ const lessonPlugin: Plugin = {
 import LessonEditor from './LessonEditor.vue'
 ~~~~
 
-## 同一应用按插件身份幂等安装
+## 八、同一应用按插件身份幂等安装
 
 同一 app 对同一个插件多次调用 app.use()，安装函数只执行一次。Vue 3.5.40 按对象或函数身份判断“同一个”，不比较插件名、源码或 options 内容；第二次 options 不会更新第一次的安装结果。
 
@@ -231,7 +231,7 @@ app.use(lessonPlugin, { label: '不会重新安装' })
 保存并复用稳定插件引用。需要运行期更新时调用服务的明确命令，不要把重复 use() 当作重新配置或安装失败后的重试 API。
 :::
 
-## 多个应用各有安装与资源作用域
+## 九、多个应用各有安装与资源作用域
 
 同一页面可以创建多个 Vue 应用，每个应用都拥有自己的配置、全局资源和安装记录。因此同一个插件身份在应用 A 安装一次后，仍会在应用 B 再安装一次；A 的 options、provide、组件、指令和全局属性不会自动进入 B。
 
@@ -257,7 +257,7 @@ const lessonPlugin: Plugin<[LessonPluginOptions]> = {
 }
 ~~~~
 
-## 用 app.onUnmount() 清理应用级副作用
+## 十、用 app.onUnmount() 清理应用级副作用
 
 插件若添加窗口监听器、订阅或客户端连接，应在 install 中用 app.onUnmount() 登记清理。它跟随整个应用实例；组件的 onUnmounted() 则只跟随某个组件实例。多个应用分别安装时，也要分别登记并分别释放自己的副作用。
 
@@ -278,7 +278,7 @@ const resizePlugin: Plugin = {
 注册与移除必须使用同一个函数身份。应用 A 的 unmount() 只清理 A 登记的回调，不应影响仍在运行的应用 B。
 :::
 
-## 从 Vue 3.5.40 源码解释可观察结果
+## 十一、从 Vue 3.5.40 源码解释可观察结果
 
 :::steps
 ### Plugin 联合两种安装器形状
@@ -318,7 +318,7 @@ componentPublicInstance.ts 在 setup state、data、props、ctx 等来源之后�
 installedPlugins、内部 WeakSet、app context、provides 原型链与公开实例属性查找顺序都只是 Vue 3.5.40 的实现证据。业务代码只能观察稳定结果，不能读取 app.&#95;context、组件内部实例或其他私有字段。
 :::
 
-## 易错使用提示
+## 十二、易错使用提示
 
 :::pitfalls
 ### 绕过 app.use() 直接调用 install()
@@ -548,7 +548,7 @@ const resizePlugin: Plugin = {
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 动手验证：同一插件，每个应用各安装一次
+## 十三、动手验证：同一插件，每个应用各安装一次
 
 :::demo{id="vue.core.learn.advanced.plugins.plugin-installation-scope-lab-demo" playground="true"}
 切换对象插件与函数插件，观察应用 A 重复 use 的去重结果、应用 B 的独立安装输入，以及两个应用各自的卸载清理

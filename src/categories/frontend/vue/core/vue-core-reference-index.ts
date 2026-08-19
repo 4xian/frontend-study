@@ -56,7 +56,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'quick',
             'available',
             entryIds.createSsrApp,
-            '概述',
+            '一概述',
           ],
           [
             'app-mount',
@@ -65,7 +65,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.createApp,
-            '创建配置与挂载',
+            '二创建配置与挂载',
           ],
           [
             'app-unmount',
@@ -74,7 +74,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.createApp,
-            '创建配置与挂载',
+            '二创建配置与挂载',
           ],
           [
             'app-on-unmount',
@@ -83,7 +83,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.createApp,
-            'apponunmount',
+            '四apponunmount',
           ],
           [
             'app-component',
@@ -92,7 +92,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.createApp,
-            '创建配置与挂载',
+            '二创建配置与挂载',
           ],
           [
             'app-directive',
@@ -101,7 +101,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.createApp,
-            '创建配置与挂载',
+            '二创建配置与挂载',
           ],
           [
             'app-use',
@@ -110,7 +110,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.createApp,
-            '创建配置与挂载',
+            '二创建配置与挂载',
           ],
           [
             'app-mixin',
@@ -119,7 +119,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.applicationConfiguration,
-            'appmixin',
+            '二appmixin',
           ],
           [
             'app-provide',
@@ -128,7 +128,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.createApp,
-            '创建配置与挂载',
+            '二创建配置与挂载',
           ],
           [
             'app-run-with-context',
@@ -137,7 +137,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.applicationConfiguration,
-            'apprunwithcontext',
+            '三apprunwithcontext',
           ],
           [
             'app-version',
@@ -146,7 +146,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'quick',
             'available',
             entryIds.createApp,
-            'appversion',
+            '五appversion',
           ],
           [
             'app-config',
@@ -155,7 +155,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.createApp,
-            '创建配置与挂载',
+            '二创建配置与挂载',
           ],
           [
             'app-config-error-handler',
@@ -164,7 +164,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.createApp,
-            '创建配置与挂载',
+            '二创建配置与挂载',
           ],
           [
             'app-config-warn-handler',
@@ -173,7 +173,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.applicationConfiguration,
-            'appconfigwarnhandler',
+            '四appconfigwarnhandler',
           ],
           [
             'app-config-performance',
@@ -182,7 +182,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.applicationConfiguration,
-            'appconfigperformance',
+            '五appconfigperformance',
           ],
           [
             'app-config-compiler-options',
@@ -191,7 +191,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.applicationConfiguration,
-            'appconfigcompileroptions',
+            '六appconfigcompileroptions',
           ],
           [
             'app-config-global-properties',
@@ -200,7 +200,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.createApp,
-            '应用实例隔离',
+            '三应用实例隔离',
           ],
           [
             'app-config-option-merge-strategies',
@@ -209,7 +209,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.applicationConfiguration,
-            'appconfigoptionmergestrategies',
+            '七appconfigoptionmergestrategies',
           ],
           [
             'app-config-id-prefix',
@@ -218,7 +218,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.applicationConfiguration,
-            'appconfigidprefix',
+            '八appconfigidprefix',
           ],
           [
             'app-config-throw-unhandled-error-in-production',
@@ -227,7 +227,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.applicationConfiguration,
-            'appconfigthrowunhandlederrorinproduction',
+            '九appconfigthrowunhandlederrorinproduction',
           ],
         ]),
         referenceSection('general', '通用', [
@@ -238,7 +238,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'quick',
             'available',
             entryIds.createApp,
-            '全局-version',
+            '六全局-version',
           ],
           ['next-tick', 'nextTick()', 'nexttick', 'detail', 'available', entryIds.nextTick],
           [
@@ -272,7 +272,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.defineComponent,
-            '基本使用',
+            '二基本使用',
           ],
           [
             'accessing-props',
@@ -281,7 +281,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.defineComponent,
-            '访问-props',
+            '三访问-props',
           ],
           [
             'setup-context',
@@ -290,7 +290,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.defineComponent,
-            'setup-上下文',
+            '四setup-上下文',
           ],
           [
             'render-functions',
@@ -299,7 +299,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.renderFunction,
-            '元素与组件',
+            '二元素与组件',
           ],
         ]),
         referenceSection('reactivity-core', '响应式：核心', [
@@ -339,16 +339,16 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.watch,
-            '副作用清理',
+            '五副作用清理',
           ],
         ]),
         referenceSection('reactivity-utilities', '响应式：工具', [
-          ['is-ref', 'isRef()', 'isref', 'merged', 'available', entryIds.utils, 'isref'],
-          ['unref', 'unref()', 'unref', 'merged', 'available', entryIds.utils, 'unref'],
+          ['is-ref', 'isRef()', 'isref', 'merged', 'available', entryIds.utils, '四isref'],
+          ['unref', 'unref()', 'unref', 'merged', 'available', entryIds.utils, '二unref'],
           ['to-ref', 'toRef()', 'toref', 'detail', 'available', entryIds.toRef],
-          ['to-value', 'toValue()', 'tovalue', 'merged', 'available', entryIds.utils, 'tovalue'],
+          ['to-value', 'toValue()', 'tovalue', 'merged', 'available', entryIds.utils, '三tovalue'],
           ['to-refs', 'toRefs()', 'torefs', 'detail', 'available', entryIds.toRef],
-          ['is-proxy', 'isProxy()', 'isproxy', 'merged', 'available', entryIds.utils, 'isproxy'],
+          ['is-proxy', 'isProxy()', 'isproxy', 'merged', 'available', entryIds.utils, '七isproxy'],
           [
             'is-reactive',
             'isReactive()',
@@ -356,7 +356,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.utils,
-            'isreactive',
+            '五isreactive',
           ],
           [
             'is-readonly',
@@ -365,7 +365,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.utils,
-            'isreadonly',
+            '六isreadonly',
           ],
         ]),
         referenceSection('reactivity-advanced', '响应式：进阶', [
@@ -377,7 +377,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.shallow,
-            'triggerref强制触发',
+            '四triggerref强制触发',
           ],
           ['custom-ref', 'customRef()', 'customref', 'detail', 'available', entryIds.customRef],
           [
@@ -396,8 +396,8 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'available',
             entryIds.readonly,
           ],
-          ['to-raw', 'toRaw()', 'toraw', 'merged', 'available', entryIds.utils, 'toraw'],
-          ['mark-raw', 'markRaw()', 'markraw', 'merged', 'available', entryIds.utils, 'markraw'],
+          ['to-raw', 'toRaw()', 'toraw', 'merged', 'available', entryIds.utils, '八toraw'],
+          ['mark-raw', 'markRaw()', 'markraw', 'merged', 'available', entryIds.utils, '十markraw'],
           [
             'effect-scope',
             'effectScope()',
@@ -413,7 +413,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.effectScope,
-            'getcurrentscope-与-onscopedispose',
+            '四getcurrentscope-与-onscopedispose',
           ],
           [
             'on-scope-dispose',
@@ -422,7 +422,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.effectScope,
-            'getcurrentscope-与-onscopedispose',
+            '四getcurrentscope-与-onscopedispose',
           ],
         ]),
         referenceSection('composition-api-lifecycle', '生命周期钩子', [
@@ -433,7 +433,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.lifecycle,
-            '六个核心钩子的签名',
+            '二六个核心钩子的签名',
           ],
           [
             'on-updated',
@@ -442,7 +442,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.lifecycle,
-            '六个核心钩子的签名',
+            '二六个核心钩子的签名',
           ],
           [
             'on-unmounted',
@@ -451,7 +451,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.lifecycle,
-            '六个核心钩子的签名',
+            '二六个核心钩子的签名',
           ],
           [
             'on-before-mount',
@@ -460,7 +460,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.lifecycle,
-            '六个核心钩子的签名',
+            '二六个核心钩子的签名',
           ],
           [
             'on-before-update',
@@ -469,7 +469,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.lifecycle,
-            '六个核心钩子的签名',
+            '二六个核心钩子的签名',
           ],
           [
             'on-before-unmount',
@@ -478,7 +478,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.lifecycle,
-            '六个核心钩子的签名',
+            '二六个核心钩子的签名',
           ],
           [
             'on-error-captured',
@@ -487,7 +487,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.lifecycle,
-            '错误捕获',
+            '九错误捕获',
           ],
           [
             'on-render-tracked',
@@ -496,7 +496,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.lifecycle,
-            'onrendertracked',
+            '五onrendertracked',
           ],
           [
             'on-render-triggered',
@@ -505,7 +505,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.lifecycle,
-            'onrendertriggered',
+            '六onrendertriggered',
           ],
           [
             'on-activated',
@@ -514,7 +514,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.lifecycle,
-            'ssr-与-keepalive-边界',
+            '八ssr-与-keepalive-边界',
           ],
           [
             'on-deactivated',
@@ -523,7 +523,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.lifecycle,
-            'ssr-与-keepalive-边界',
+            '八ssr-与-keepalive-边界',
           ],
           [
             'on-server-prefetch',
@@ -532,7 +532,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.lifecycle,
-            'ssr-与-keepalive-边界',
+            '八ssr-与-keepalive-边界',
           ],
         ]),
         referenceSection('composition-api-dependency-injection', '依赖注入', [
@@ -545,7 +545,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.provideInject,
-            'hasinjectioncontext',
+            '七hasinjectioncontext',
           ],
         ]),
         referenceSection('composition-api-helpers', '辅助', [
@@ -556,7 +556,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.attrs,
-            'useattrs',
+            '五useattrs',
           ],
           [
             'use-slots',
@@ -565,7 +565,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.slots,
-            'useslots-与-defineslots',
+            '五useslots-与-defineslots',
           ],
           [
             'use-model',
@@ -574,7 +574,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.defineModel,
-            '受控与本地模式',
+            '五受控与本地模式',
           ],
           [
             'use-template-ref',
@@ -584,7 +584,7 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'available',
             entryIds.templateRefs,
           ],
-          ['use-id', 'useId()', 'useid', 'detail', 'available', entryIds.useId, '概述'],
+          ['use-id', 'useId()', 'useid', 'detail', 'available', entryIds.useId, '一概述'],
         ]),
       ],
     },
@@ -594,11 +594,11 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
       title: '内置内容',
       sections: [
         referenceSection('built-in-directives', '指令', [
-          ['v-text', 'v-text', 'v-text', 'merged', 'available', entryIds.directives, 'v-text'],
-          ['v-html', 'v-html', 'v-html', 'merged', 'available', entryIds.directives, 'v-html'],
-          ['v-show', 'v-show', 'v-show', 'merged', 'available', entryIds.directives, 'v-show'],
-          ['v-if', 'v-if', 'v-if', 'merged', 'available', entryIds.directives, 'v-if'],
-          ['v-else', 'v-else', 'v-else', 'merged', 'available', entryIds.directives, 'v-else'],
+          ['v-text', 'v-text', 'v-text', 'merged', 'available', entryIds.directives, '二v-text'],
+          ['v-html', 'v-html', 'v-html', 'merged', 'available', entryIds.directives, '三v-html'],
+          ['v-show', 'v-show', 'v-show', 'merged', 'available', entryIds.directives, '四v-show'],
+          ['v-if', 'v-if', 'v-if', 'merged', 'available', entryIds.directives, '五v-if'],
+          ['v-else', 'v-else', 'v-else', 'merged', 'available', entryIds.directives, '六v-else'],
           [
             'v-else-if',
             'v-else-if',
@@ -606,17 +606,17 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.directives,
-            'v-else-if',
+            '七v-else-if',
           ],
-          ['v-for', 'v-for', 'v-for', 'merged', 'available', entryIds.directives, 'v-for'],
-          ['v-on', 'v-on', 'v-on', 'merged', 'available', entryIds.directives, 'v-on'],
-          ['v-bind', 'v-bind', 'v-bind', 'merged', 'available', entryIds.directives, 'v-bind'],
-          ['v-model', 'v-model', 'v-model', 'merged', 'available', entryIds.directives, 'v-model'],
-          ['v-slot', 'v-slot', 'v-slot', 'merged', 'available', entryIds.directives, 'v-slot'],
-          ['v-pre', 'v-pre', 'v-pre', 'merged', 'available', entryIds.directives, 'v-pre'],
-          ['v-once', 'v-once', 'v-once', 'merged', 'available', entryIds.directives, 'v-once'],
-          ['v-memo', 'v-memo', 'v-memo', 'merged', 'available', entryIds.directives, 'v-memo'],
-          ['v-cloak', 'v-cloak', 'v-cloak', 'merged', 'available', entryIds.directives, 'v-cloak'],
+          ['v-for', 'v-for', 'v-for', 'merged', 'available', entryIds.directives, '八v-for'],
+          ['v-on', 'v-on', 'v-on', 'merged', 'available', entryIds.directives, '九v-on'],
+          ['v-bind', 'v-bind', 'v-bind', 'merged', 'available', entryIds.directives, '十v-bind'],
+          ['v-model', 'v-model', 'v-model', 'merged', 'available', entryIds.directives, '十一v-model'],
+          ['v-slot', 'v-slot', 'v-slot', 'merged', 'available', entryIds.directives, '十二v-slot'],
+          ['v-pre', 'v-pre', 'v-pre', 'merged', 'available', entryIds.directives, '十三v-pre'],
+          ['v-once', 'v-once', 'v-once', 'merged', 'available', entryIds.directives, '十四v-once'],
+          ['v-memo', 'v-memo', 'v-memo', 'merged', 'available', entryIds.directives, '十五v-memo'],
+          ['v-cloak', 'v-cloak', 'v-cloak', 'merged', 'available', entryIds.directives, '十六v-cloak'],
         ]),
         referenceSection('built-in-components', '组件', [
           ['transition', '<Transition>', 'transition', 'detail', 'available', entryIds.transition],
@@ -640,9 +640,9 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.templatePrimitives,
-            'component',
+            '一component',
           ],
-          ['slot', '<slot>', 'slot', 'merged', 'available', entryIds.slots, '默认插槽与后备内容'],
+          ['slot', '<slot>', 'slot', 'merged', 'available', entryIds.slots, '二默认插槽与后备内容'],
           [
             'template',
             '<template>',
@@ -650,13 +650,13 @@ export const vueCoreReferenceIndexManifest: ReferenceIndexManifest = {
             'merged',
             'available',
             entryIds.templatePrimitives,
-            'template',
+            '二template',
           ],
         ]),
         referenceSection('built-in-special-attributes', '特殊 Attributes', [
-          ['key', 'key', 'key', 'merged', 'available', entryIds.templatePrimitives, 'key'],
-          ['ref', 'ref', 'ref', 'merged', 'available', entryIds.templateRefs, '基础用法与可用时机'],
-          ['is', 'is', 'is', 'merged', 'available', entryIds.templatePrimitives, 'is'],
+          ['key', 'key', 'key', 'merged', 'available', entryIds.templatePrimitives, '三key'],
+          ['ref', 'ref', 'ref', 'merged', 'available', entryIds.templateRefs, '二基础用法与可用时机'],
+          ['is', 'is', 'is', 'merged', 'available', entryIds.templatePrimitives, '四is'],
         ]),
       ],
     },

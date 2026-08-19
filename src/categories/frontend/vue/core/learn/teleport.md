@@ -62,7 +62,7 @@ recap:
 
 # Teleport
 
-## 正文大纲
+## 一、正文大纲
 
 上一课处理的是同一逻辑位置上组件实例如何保留或重建。本课遇到的是另一种问题：状态仍由当前组件拥有，但提示、菜单或对话框的 DOM 需要离开会裁剪它的祖先。Teleport 只负责位置；状态归属、层级和无障碍仍由应用明确设计。
 
@@ -77,7 +77,7 @@ recap:
 本课聚焦 Vue 3.5.40 的学习路径和可验证对话框。完整 props 速查回到关联的 Teleport Reference；不会在这里实现 Suspense、全局弹层服务或路由模态框。
 :::
 
-## 先分开看两棵树
+## 二、先分开看两棵树
 
 Teleport 改变的是渲染后的 DOM 位置，不是组件逻辑树。传送后的子内容仍从声明 Teleport 的组件接收 props，emit 仍向原逻辑父组件报告，provide/inject 和 Vue Devtools 父子关系也不迁移到目标 DOM 所属组件。目标只是一个 DOM 容器。
 
@@ -107,7 +107,7 @@ function confirmDialog(): void {
 </template>
 ~~~~
 
-## to 是已存在目标的契约
+## 三、to 是已存在目标的契约
 
 `to` 可以是 CSS selector，也可以是实际 HTMLElement。普通 Teleport 会在挂载时解析它，因此调用方必须保证 target 已出现并有明确 owner。跨页面统一层通常放在应用挂载前；若使用元素对象，也应只在客户端拿到已连接的元素后传入。
 
@@ -123,7 +123,7 @@ function confirmDialog(): void {
 不要把用户输入、空 ref 或“以后可能出现”的 selector 直接交给 to。目标属于页面结构契约，不是 Teleport 的异步发现能力。
 :::
 
-## defer 只延后到同一个 tick
+## 四、defer 只延后到同一个 tick
 
 Vue 3.5 的 defer 会把 target 解析推到当前 mount 或 update tick 的 post-render 阶段，因此同一模板中更靠后的同步节点可以成为目标。它不是订阅、轮询或重试；网络请求、计时器或下一次 tick 才出现的 target 仍然无效。
 
@@ -137,7 +137,7 @@ Vue 3.5 的 defer 会把 target 解析推到当前 mount 或 update tick 的 pos
 <div v-if="requestFinished" id="late-host"></div>
 ~~~~
 
-## disabled 切换位置，也要切换语义
+## 五、disabled 切换位置，也要切换语义
 
 disabled 为 true 时，同一份 children 留在声明位置，而不是创建第二个组件实例。它适合让窄屏或特定工作流把覆盖层改为行内内容，但不能沿用虚假的模态声明：overlay 使用 dialog 和 aria-modal；行内内容应是普通 region，不制造焦点陷阱或背景 inert。
 
@@ -154,7 +154,7 @@ disabled 为 true 时，同一份 children 留在声明位置，而不是创建�
 </Teleport>
 ~~~~
 
-## 共享 target 只会追加
+## 六、共享 target 只会追加
 
 多个 Teleport 可以指向同一 target，Vue 只按挂载顺序追加内容。这个结果不是弹层栈、z-index 策略、业务优先级或焦点管理器。需要多个层时，应用应维护一个有序数组，由一个明确 owner 决定顺序、互斥、关闭和焦点恢复。
 
@@ -164,7 +164,7 @@ disabled 为 true 时，同一份 children 留在声明位置，而不是创建�
 </Teleport>
 ~~~~
 
-## Teleport 管位置，Transition 管视觉交接
+## 七、Teleport 管位置，Transition 管视觉交接
 
 把 Teleport 放在外层，让 Transition 包裹真正按 open 存在或离开的 dialog 节点。这样位置和动画各自只有一个职责。状态、inert 和焦点不能等待动画结束；reduced motion 只取消非必要位移和时长，不能改变打开、关闭或键盘操作的最终结果。
 
@@ -176,11 +176,11 @@ disabled 为 true 时，同一份 children 留在声明位置，而不是创建�
 </Teleport>
 ~~~~
 
-## 模态对话框是额外交互契约
+## 八、模态对话框是额外交互契约
 
 Teleport 不会自动使内容成为 modal。只有 overlay 模式真实做到可访问名称、焦点进入、Tab 与 Shift+Tab 循环、Escape 关闭、关闭后恢复触发焦点，以及背景不可交互时，才可设置 aria-modal="true"。本课 Demo 用 body 作为目标并把 #app 设为 inert；disabled 行内模式刻意不承诺这些行为。
 
-## 易错使用提示
+## 九、易错使用提示
 
 :::pitfalls
 ### 目标还未存在就挂载普通 Teleport
@@ -371,7 +371,7 @@ await expect(page.getByRole('dialog')).toBeVisible()
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 从源码推导可观察边界
+## 十、从源码推导可观察边界
 
 :::steps
 ### 字符串目标由 renderer 查询
@@ -395,7 +395,7 @@ resolveTarget 对字符串 to 调用 querySelector；找不到 target 不会变�
 锚点、shapeFlag 和内部 target 字段用于理解实现，不是页面或自动化的 selector。验证应只操作公开控件，再观察最终 DOM 位置、语义、焦点和业务摘要。
 :::
 
-## 在对话框实验台验证位置与交互
+## 十一、在对话框实验台验证位置与交互
 
 唯一 Demo 先以 body 中的真实 overlay 验证焦点和 inert，再通过同一 Teleport 的 disabled 切换到行内 region。确认、取消和 Escape 都通过逻辑父组件更新关闭次数；它们不依赖 Teleport 目标所属的 DOM。
 
@@ -403,7 +403,7 @@ resolveTarget 对字符串 to 调用 querySelector；找不到 target 不会变�
 验证 body overlay、disabled 行内模式、逻辑事件、焦点恢复和 reduced motion 下的相同终态
 :::
 
-## 练习与回顾
+## 十二、练习与回顾
 
 :::exercise
 ### 修复目标时机与布尔值

@@ -1,0 +1,236 @@
+.use-memo-demo {
+  width: 100%;
+  max-width: 860px;
+  padding: 24px;
+  border: 1px solid #ccd8d4;
+  border-radius: 8px;
+  background: #fbfcfc;
+  color: #23332f;
+}
+
+.use-memo-demo-heading p,
+.use-memo-demo-heading h2,
+.use-memo-demo-heading span,
+.use-memo-demo-observation,
+.use-memo-demo-generation {
+  margin: 0;
+}
+
+.use-memo-demo-heading p {
+  color: #9a4c20;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.use-memo-demo-heading h2 {
+  margin-top: 6px;
+  font-size: 1.35rem;
+  line-height: 1.35;
+}
+
+.use-memo-demo-heading span {
+  display: block;
+  margin-top: 6px;
+  color: #596864;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.use-memo-demo-heading output {
+  color: #276b60;
+  font-weight: 700;
+}
+
+.use-memo-demo-controls {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin: 18px -5px 0;
+}
+
+.use-memo-demo-controls button,
+.use-memo-demo-controls fieldset {
+  margin: 0 5px 10px;
+}
+
+.use-memo-demo-controls button {
+  min-height: 42px;
+  max-width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #286c61;
+  border-radius: 5px;
+  background: #286c61;
+  color: #ffffff;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+  white-space: normal;
+}
+
+.use-memo-demo-controls button.is-secondary {
+  background: #ffffff;
+  color: #255e55;
+}
+
+.use-memo-demo-controls button:hover {
+  filter: brightness(0.95);
+}
+
+.use-memo-demo-controls button:focus-visible {
+  outline: 3px solid #e29a55;
+  outline-offset: 2px;
+}
+
+.use-memo-demo-controls fieldset {
+  min-width: 0;
+  padding: 6px 8px 8px;
+  border: 1px solid #aebbb7;
+  border-radius: 6px;
+}
+
+.use-memo-demo-controls legend {
+  padding: 0 4px;
+  color: #55645f;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.use-memo-demo-controls fieldset button {
+  min-height: 36px;
+  margin: 2px 3px;
+  background: #ffffff;
+  color: #255e55;
+}
+
+.use-memo-demo-controls fieldset button[aria-pressed='true'] {
+  background: #286c61;
+  color: #ffffff;
+}
+
+.use-memo-demo-observation {
+  display: block;
+  min-height: 42px;
+  padding: 10px 12px;
+  margin-top: 4px;
+  border-left: 4px solid #34766b;
+  background: #edf6f3;
+  color: #284f48;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.use-memo-demo-stage {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  margin: 16px -6px -12px;
+}
+
+.use-memo-demo-panel {
+  flex: 1 1 300px;
+  min-width: 0;
+  margin: 0 6px 12px;
+  padding: 18px;
+  border: 1px solid #d4ddda;
+  border-radius: 6px;
+  background: #ffffff;
+}
+
+.use-memo-demo-panel.is-direct {
+  border-top: 4px solid #c46335;
+}
+
+.use-memo-demo-panel.is-cached {
+  border-top: 4px solid #34766b;
+}
+
+.use-memo-demo-panel > span {
+  display: block;
+  color: #64726e;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.use-memo-demo-panel > strong {
+  display: block;
+  margin-top: 12px;
+  color: #2f5f56;
+  font-size: 1.2rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.use-memo-demo-panel.is-direct > strong {
+  color: #91431e;
+}
+
+.use-memo-demo-panel > p {
+  min-height: 3.2em;
+  margin: 10px 0 0;
+  color: #56635f;
+  line-height: 1.6;
+}
+
+.use-memo-demo-details {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 14px -4px 0;
+}
+
+.use-memo-demo-details > div {
+  flex: 1 1 140px;
+  min-width: 0;
+  margin: 0 4px 8px;
+  padding: 10px;
+  border-left: 3px solid #4b8178;
+  background: #f1f6f5;
+}
+
+.use-memo-demo-details dt {
+  color: #64716d;
+  font-size: 0.75rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.use-memo-demo-details dd {
+  margin: 5px 0 0;
+  color: #244f47;
+  font-size: 1.05rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.use-memo-demo-panel .use-memo-demo-observation {
+  min-height: 0;
+  padding: 8px 0 0;
+  margin-top: 4px;
+  border-top: 1px solid #e1e7e4;
+  border-left: 0;
+  background: transparent;
+  color: #5a6763;
+  font-size: 0.82rem;
+}
+
+.use-memo-demo-generation {
+  margin-top: 6px;
+  color: #55645f;
+  font-size: 0.82rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 560px) {
+  .use-memo-demo {
+    padding: 18px;
+  }
+
+  .use-memo-demo-controls fieldset {
+    width: 100%;
+  }
+
+  .use-memo-demo-controls > button {
+    flex: 1 1 160px;
+  }
+}

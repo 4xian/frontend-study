@@ -1,0 +1,474 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.basics.io-files-and-resource-ownership",
+  "batchId": "phase-4-io-files-and-resource-ownership",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "phase": "Phase B",
+  "phaseBProgress": "18/21",
+  "phaseBReverification": {
+    "recordedAt": "2026-08-15T00:05:27Z",
+    "contract": {
+      "title": "I/O、文件系统、资源所有权与关闭",
+      "url": "/backend/java/core/learn/io-files-and-resource-ownership",
+      "durationMinutes": 90,
+      "prerequisites": ["backend.java.learn.basics.date-time-and-time-zones"],
+      "requiredTopics": [
+        "字节流、字符流与显式 Charset",
+        "短读、EOF 与循环读取合同",
+        "Path、Files 与路径解析边界",
+        "try-with-resources、反向关闭、suppressed exception 与资源所有权",
+        "Java 25/8 兼容反馈环"
+      ]
+    },
+    "phaseAFrozenPlan": {
+      "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+      "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81",
+      "previousCourse": "backend.java.learn.basics.date-time-and-time-zones",
+      "nextCourse": "backend.java.learn.basics.maven-project-model",
+      "nextCourseStarted": false,
+      "phaseBStopBoundary": "B-18 关闭后才允许读取 B-19；B-21 基础 Gate 关闭后立即停止，不进入 Phase C。"
+    },
+    "sourceReverification": {
+      "method": "复用既有调研，并回到 Java SE 25/9/8 JLS、java.io、AutoCloseable、Path、Files 与 Dev.java 官方正文核验",
+      "communitySourcesUsedAsEvidence": false,
+      "verifiedAt": "2026-08-15",
+      "researchUniqueUrls": 16,
+      "lessonOfficialLinks": 16,
+      "httpStatus": "16/16 全部返回 200"
+    },
+    "routeIdentity": {
+      "stableIdPreserved": true,
+      "stableUrlPreserved": true,
+      "trackPosition": 18,
+      "trackStatus": "available",
+      "loaderSlug": "io-files-and-resource-ownership",
+      "trackChangedInThisBatch": false,
+      "loaderChangedInThisBatch": false
+    },
+    "artifacts": [
+      {
+        "path": "docs/research/backend/java/basics/io-files-and-resource-ownership.md",
+        "sha256": "130cd45ebf6393efab706224b336569abfed0d144901c1cacaabd99c20f03a74"
+      },
+      {
+        "path": "src/categories/backend/java/core/learn/io-files-and-resource-ownership.md",
+        "sha256": "77ac9c21ab38b4b77f5f0d05e9e668ce297cbad8a021127859da4dd70a7f8e47"
+      },
+      {
+        "path": "src/categories/backend/java/core/backend-java-track.ts",
+        "sha256": "dcb7a04baa824bd0d1106bea799715b042fde27812d21f31678160f28c8efd42"
+      },
+      {
+        "path": "src/categories/backend/java/core/entry-manifest.ts",
+        "sha256": "4385da9b31d862fdc4184d6fae0130eaf43d2b3e9c7f08d4d55a7818dd05eb76"
+      },
+      {
+        "path": "docs/backend/java/audit/phase-2-knowledge-path-manifest.json",
+        "sha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407"
+      }
+    ],
+    "baselineVerification": [
+      {
+        "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+        "exitCode": 0,
+        "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+      },
+      { "command": "npm run type-check", "exitCode": 0, "summary": "passed" },
+      { "command": "npm run lint", "exitCode": 0, "summary": "passed" },
+      { "command": "npm run format:check", "exitCode": 0, "summary": "passed" },
+      {
+        "command": "npm run test:unit",
+        "exitCode": 0,
+        "summary": "empty configured unit directory is valid"
+      },
+      {
+        "command": "npm run test:e2e",
+        "exitCode": 0,
+        "summary": "empty configured E2E directory is valid"
+      },
+      {
+        "command": "npm run build",
+        "exitCode": 0,
+        "summary": "passed; 1731 modules transformed; existing catalog chunk and plugin timing warnings only"
+      },
+      {
+        "command": "git diff --check -- <B-18 paths> && git diff --cached --check -- <B-18 paths>",
+        "exitCode": 0,
+        "summary": "passed"
+      }
+    ],
+    "javaVerification": {
+      "command": "extract the 如何验证 bash block from the final lesson and execute it with zsh -f",
+      "exitCode": 0,
+      "sharedStableOutput": "io|text=true|bytes=true|reads=3|walk=3|close=BA|primary=body|suppressed=close-B,close-A",
+      "versions": ["Eclipse Temurin 25.0.3+9 LTS", "Eclipse Temurin 8u492-b09"],
+      "temporaryAssets": {
+        "location": "host and container /tmp",
+        "cleanupMethod": "shell trap with find -depth -delete",
+        "cleanupStatus": "complete"
+      }
+    },
+    "browserVerification": {
+      "tool": "Playwright CLI",
+      "session": "b18",
+      "sessionClosed": true,
+      "baseUrl": "http://127.0.0.1:4173/",
+      "targetPath": "/backend/java/core/learn/io-files-and-resource-ownership",
+      "desktop": {
+        "viewport": "1440x900",
+        "documentClientWidth": 1440,
+        "documentScrollWidth": 1440,
+        "horizontalOverflow": false,
+        "title": "I/O、文件系统、资源所有权与关闭",
+        "codeBlockCount": 24,
+        "officialSourceUniqueUrlCount": 16,
+        "durationText": "约 90 分钟",
+        "previousPath": "/backend/java/core/learn/date-time-and-time-zones",
+        "nextPath": "/backend/java/core/learn/maven-project-model",
+        "searchTerm": "I/O、文件系统、资源所有权与关闭",
+        "searchResultCount": 1
+      },
+      "mobile": {
+        "viewport": "390x844",
+        "documentClientWidth": 390,
+        "documentScrollWidth": 390,
+        "horizontalOverflow": false,
+        "codeBlockCount": 24
+      },
+      "completionButtonTextAfterReload": "取消完成",
+      "progressPersistedAfterReload": true,
+      "progressTextAfterReload": "1 / 52",
+      "console": { "errors": 0, "warnings": 0 },
+      "productionRequests": { "count": 70, "allSuccessful": true, "statuses": [200] }
+    },
+    "review": {
+      "riskClassification": "复用课程的路线前置、时长和签核状态修正",
+      "independentReviewRequired": false,
+      "priorFullReview": "PASS / 0 finding",
+      "currentVerification": "Java 25/8 反馈、完整工程 Gate、官方链接和生产浏览器验证通过"
+    },
+    "workspaceProtection": {
+      "dirtyWorkspaceProtected": true,
+      "unrelatedChangesPreserved": true,
+      "statusSnapshotSha256": "de65edacafab66615eb97d9ee0689eb8df71df561920d5cbfb6fe52fca7fa8c3",
+      "scopedStagedAndUnstagedDiffCheck": "PASS"
+    },
+    "changedFiles": [
+      "docs/research/backend/java/basics/io-files-and-resource-ownership.md",
+      "src/categories/backend/java/core/learn/io-files-and-resource-ownership.md",
+      "docs/backend/java/audit/reviews/phase-4-io-files-and-resource-ownership-signoff.json"
+    ]
+  },
+  "recordedAt": "2026-08-07T01:09:59Z",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "stagedBatchSpecificChanges": false,
+    "sharedManifestStagingPreserved": true
+  },
+  "sourceRepository": {
+    "path": "/Users/jian/Desktop/work/TDH/dzzz/dzzz-app",
+    "head": "167ca8aa91ca3a6b101246964ef4fddec3d21da0",
+    "statusShort": "",
+    "readOnly": true
+  },
+  "phase2Freeze": {
+    "courseCoverageMatrixJsonSha256": "04d858896d07e975d3ab50796494873f09bd0ddf4b1a8b1ea87bd75cdd101d38",
+    "courseCoverageMatrixSha256": "b7fd50ffabbcf8a198802e907cef769ac969a71e4e14c40038f4aaaed09d91ad",
+    "researchStatus": "not-started",
+    "exampleStatus": "not-started",
+    "courseStatus": "planned",
+    "phase4StateRecordedOnlyInThisSignoff": true,
+    "admissionGate": "PASS",
+    "counts": {
+      "sourceItems": 167,
+      "courseNodes": 64,
+      "dependencyEdges": 114
+    }
+  },
+  "versions": {
+    "verifiedAt": "2026-08-07",
+    "modern": {
+      "java": "25",
+      "runtime": "Eclipse Temurin 25.0.3+9 LTS"
+    },
+    "legacy": {
+      "java": "8",
+      "runtime": "Eclipse Temurin 8u492-b09",
+      "springBootBackground": "2.3.12.RELEASE"
+    }
+  },
+  "sourceDiscovery": {
+    "method": "Tavily 当前无可调用入口，按仓库回退规则直接核对 Oracle JLS、API 与 Dev.java 页面；16 个直接 URL 均返回 HTTP 200",
+    "communitySourcesUsedAsEvidence": false,
+    "projectEvidenceBoundary": "JAVA-STDLIB-013、JAVA-LANG-014、JAVA-STDLIB-014、JAVA-STDLIB-015 与 JAVA-RISK-027 只按冻结矩阵解释；327/28/44/20/15 项集合可重叠且不相加，本批不读取当前 dzzz-app 源码。",
+    "directUrls": [
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/package-summary.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/io/package-summary.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/InputStream.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/io/InputStream.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/FilterInputStream.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/io/FilterInputStream.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/AutoCloseable.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/lang/AutoCloseable.html",
+      "https://docs.oracle.com/javase/specs/jls/se25/html/jls-14.html#jls-14.20.3",
+      "https://docs.oracle.com/javase/specs/jls/se8/html/jls-14.html#jls-14.20.3",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Path.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/nio/file/Path.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/nio/file/Files.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/nio/file/Files.html",
+      "https://docs.oracle.com/javase/specs/jls/se9/html/jls-14.html#jls-14.20.3",
+      "https://dev.java/learn/java-io/"
+    ]
+  },
+  "projectEvidence": [
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/cache/WrongWordDictionaryLoader.java",
+      "symbol": "com.tdh.bdzz.cache.WrongWordDictionaryLoader",
+      "usage": "observed",
+      "sha256": "584b1598854df0fab6ef48dea115b05818cad022477cba9afc0424f6d6285adc",
+      "inventoryMatched": true
+    },
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/LoggingFileTailReader.java",
+      "symbol": "com.tdh.bdzz.config.websocket.server.LoggingFileTailReader",
+      "usage": "observed",
+      "sha256": "30ba45d30d77f1e0306aefb17c403eaba8018688c1b0f707443e0f3f0451da7b",
+      "inventoryMatched": true
+    },
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/CustomMultipartFile.java",
+      "symbol": "com.tdh.bdzz.util.CustomMultipartFile",
+      "usage": "observed",
+      "sha256": "5ed33cd6c1759a52d711e5bc2619e122acdbe0713dbf93db4dd2e07d1e97fbb2",
+      "inventoryMatched": true
+    },
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/storage/NioUtil.java",
+      "symbol": "com.tdh.bdzz.storage.NioUtil",
+      "usage": "observed",
+      "sha256": "8fa7b38f18524ea50d8bd54707071f90da08a60028a5232bf490b039baec2b40",
+      "inventoryMatched": true
+    },
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/filter/AccessFilter.java",
+      "symbol": "com.tdh.bdzz.filter.AccessFilter",
+      "usage": "corrected",
+      "sha256": "47d5393b00dfdba1a1fee3e03f3972e95bbe591e5d01f58f7549dae567d13a40",
+      "inventoryMatched": true
+    }
+  ],
+  "docker": {
+    "engine": "Docker 29.6.1",
+    "feedbackSource": "从课程 Markdown 的如何验证 bash 代码块提取同一反馈环，经 stdin 交给固定 RepoDigest 容器执行",
+    "classOutput": "容器内 /tmp 的 mktemp 目录，shell trap 使用 find -depth -delete 清理",
+    "images": [
+      {
+        "role": "modern",
+        "requestedTag": "eclipse-temurin:25-jdk",
+        "digest": "sha256:12e44624adee6808a36d962717e1656e0afeeeff5a100f9cb00e0136513558f0"
+      },
+      {
+        "role": "legacy",
+        "requestedTag": "eclipse-temurin:8-jdk",
+        "digest": "sha256:c8b86f2c0a9bd6cc1b7fabc5d1a097501a166eea7cad3b2764e90e96178bea9b"
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/basics/io-files-and-resource-ownership.md",
+      "sha256": "b6f0268978eba62c3c03998aa68e38881ac62520b5633166114672e19c1abe81"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/io-files-and-resource-ownership.md",
+      "sha256": "cca2a90111f5fcadc074f6aa5c579bcd9ee5bc5334de80ac94e31be5e9963708"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "db9f550ecec80805649e74c69b9aefe9c3b577fb52a0a89ffa8cfbd7fd7a3aa3"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "4c470d259fc79c01c4e307a09a2be040af6c1cb461f53925608c8795ce00fcf9"
+    },
+    {
+      "path": "docs/backend/java/dzzz-app-course-plan.md",
+      "sha256": "2af5acb8870cc5d01ccbe2800063e1e6aa8579167df6526936621bd2b35a9e76"
+    }
+  ],
+  "selfHashPolicy": "signoff 文件不记录自身 SHA-256；artifacts 只绑定 signoff 外可稳定计算的本批课程产物。",
+  "baselineVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run format:check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run test:unit",
+      "exitCode": 0,
+      "summary": "No test files found; configured empty test directory is valid"
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "summary": "No persistent E2E test files; command passed with --pass-with-no-tests"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "passed; 1212 modules transformed; existing >500 kB catalog chunk warning only"
+    },
+    {
+      "command": "git diff --check && git diff --cached --check",
+      "exitCode": 0,
+      "summary": "passed; no new staging performed"
+    },
+    {
+      "command": "git -C /Users/jian/Desktop/work/TDH/dzzz status --short -- dzzz-app",
+      "exitCode": 0,
+      "summary": "empty at the frozen verification point; source repository remained read-only"
+    }
+  ],
+  "javaVerification": {
+    "command": "extract 如何验证 bash block from src/categories/backend/java/core/learn/io-files-and-resource-ownership.md and pipe to zsh -f",
+    "exitCode": 0,
+    "sharedOutput": "io|text=true|bytes=true|reads=3|walk=3|close=BA|primary=body|suppressed=close-B,close-A",
+    "cases": [
+      {
+        "name": "Java 25 shared compile/run",
+        "exitCode": 0
+      },
+      {
+        "name": "Java 8 shared compile/run",
+        "exitCode": 0
+      },
+      {
+        "name": "short read and explicit UTF-8",
+        "assertions": "five bytes preserved across three reads; UTF-8 text round trip passed"
+      },
+      {
+        "name": "Files.walk resource scope",
+        "assertions": "isolated data directory count equals root plus two files"
+      },
+      {
+        "name": "try-with-resources failure semantics",
+        "assertions": "reverse close order BA; body remains primary; close-B and close-A remain suppressed"
+      }
+    ],
+    "initialFailure": "Files.walk(work) also counted the fixture source and class output, producing 7 instead of the intended business-file count",
+    "repair": "placed business files in an isolated data directory and walked only that directory; both runtimes then produced walk=3",
+    "temporaryAssetsCleaned": true
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "adapter": "PASS",
+    "blockCount": 67,
+    "exerciseContract": "要求、验收、参考答案三字段完整",
+    "javaMethodComments": "PASS"
+  },
+  "catalogVerification": {
+    "method": "fresh Vite middleware SSR 加载真实 entry-manifest、track 和目标 content-entry",
+    "exitCode": 0,
+    "registeredEntries": 17,
+    "availableEntries": 17,
+    "targetId": "backend.java.learn.basics.io-files-and-resource-ownership",
+    "projectEvidenceCount": 5,
+    "blockCount": 67
+  },
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "baseUrl": "http://127.0.0.1:4175/",
+    "targetPath": "/backend/java/core/learn/io-files-and-resource-ownership",
+    "desktop": {
+      "viewport": "1440x900",
+      "documentClientWidth": 1440,
+      "documentScrollWidth": 1440,
+      "horizontalOverflow": false,
+      "title": "I/O、文件系统、资源所有权与关闭",
+      "codeBlockCount": 23,
+      "searchTerm": "Files.walk",
+      "targetVisibleInSearch": true
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "documentClientWidth": 390,
+      "documentScrollWidth": 390,
+      "horizontalOverflow": false,
+      "codeBlockCount": 23
+    },
+    "console": {
+      "errors": 0,
+      "warnings": 0,
+      "pageErrors": 0
+    },
+    "progressPersistedAfterReload": true,
+    "completionButtonTextAfterReload": "取消完成",
+    "targetPageStatus": 200,
+    "targetLazyChunkStatus": 200,
+    "batchSpecificRepositoryBrowserOutputAbsent": true,
+    "preExistingRepositoryBrowserOutputProtected": true
+  },
+  "changedFiles": [
+    "docs/research/backend/java/basics/io-files-and-resource-ownership.md",
+    "src/categories/backend/java/core/learn/io-files-and-resource-ownership.md",
+    "src/categories/backend/java/core/entry-manifest.ts",
+    "src/categories/backend/java/core/backend-java-track.ts",
+    "docs/backend/java/audit/reviews/phase-4-io-files-and-resource-ownership-signoff.json",
+    "docs/backend/java/dzzz-app-course-plan.md"
+  ],
+  "priorClosedJavaAssets": {
+    "protected": true,
+    "summary": "第一至第十六批研究、课程与 signoff 保持原样，不归入第十七批课程产物。"
+  },
+  "concurrentWorkspaceAssets": {
+    "protected": true,
+    "attribution": "frontend TypeScript、Vite、Vue、frontend 文档、HeadingBlock 与 ContentEntryPage 资产由并行工作产生，不属于本批 changedFiles；根级校验在包含这些资产的当前工作区上执行。",
+    "preSignoffStatusSnapshotSha256": "55b1ef6a945298764f8ccdd7dc6a9a03ccc28a378a7535153a99a9df44adcb65",
+    "paths": [
+      "docs/frontend/",
+      "src/app/pages/ContentEntryPage.vue",
+      "src/categories/frontend/engineering/",
+      "src/categories/frontend/vue/",
+      "src/common/ui/blocks/HeadingBlock.vue"
+    ]
+  },
+  "review": {
+    "standards": "PASS",
+    "standardsFindings": 0,
+    "spec": "PASS",
+    "specFindings": 0
+  },
+  "beginnerContentReverification": {
+    "verifiedAt": "2026-08-07",
+    "courseArtifact": {
+      "path": "src/categories/backend/java/core/learn/io-files-and-resource-ownership.md",
+      "sha256": "55d6a5df8dbec3b3770d520ef0dfbfd032e494c1227bd9e30612a8a8f61d6c8a"
+    },
+    "content": "PASS; exactly one 从零跟着做, usage, pitfalls, verification, one exercise and runnable code",
+    "sources": "PASS; source type, appliesTo and claims shown only in the official-source regions; 正文无来源详情",
+    "browser": "PASS; 1440px and 390px routes, 36/36 HTTP 200, no horizontal overflow or browser errors",
+    "root": "PASS; knowledge-path, type-check, lint, format and diff checks"
+  },
+  "stopBoundary": "Phase B 的 B-18 已关闭；下一批只允许 B-19 maven-project-model，不得跳到 B-20，不得进入 Phase C、D、E。B-21 基础 Gate 关闭后立即停止。"
+}

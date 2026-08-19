@@ -41,11 +41,11 @@ anchors:
 
 # nextTick()
 
-## 概述
+## 一、概述
 
 响应式状态变化后，Vue 不会立即逐次更新 DOM，而是把同一同步任务中的组件更新合并到一次异步冲刷。`nextTick()` 返回一个在当前批次 DOM 更新完成后兑现的 Promise；只有确实需要读取、聚焦、测量或依赖更新后 DOM 时才需要等待它。
 
-## 等待 DOM 更新
+## 二、等待 DOM 更新
 
 ~~~~vue
 <script setup lang="ts">
@@ -73,7 +73,7 @@ async function increment() {
 同一次点击中，记录状态更新后、await nextTick 前后读取到的 DOM 文本
 :::
 
-## 回调与返回值
+## 三、回调与返回值
 
 除了 `await nextTick()`，也可传入回调。回调签名保留泛型 `T` 与 `R`：Vue 会在当前冲刷 Promise 后调用它，并把同步返回值或 Promise 返回值包装成 `Promise<R>`。在组合式 API 中通常优先使用 `await`，便于按代码顺序表达状态修改、等待与 DOM 操作。
 
@@ -89,7 +89,7 @@ nextTick(function () {
 `nextTick()` 只等待调用时已排入或正在冲刷的 Vue 更新。它不是浏览器绘制帧、网络请求、定时器、第三方动画或异步组件 loader 的通用等待器。
 :::
 
-## 易错使用提示
+## 四、易错使用提示
 
 :::pitfalls
 ### 调用 nextTick() 却不等待它，再立刻读取 DOM
@@ -235,7 +235,7 @@ async function increment() {
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 最小源码实现
+## 五、最小源码实现
 
 Vue 3.5.40 让 `nextTick()` 与组件更新共享 `currentFlushPromise`。第一个更新任务入队时，调度器安排一个微任务冲刷队列；`nextTick()` 把回调链接在这个 Promise 之后，因此回调执行前本轮 DOM 更新已经完成。没有待冲刷任务时，它退化为已兑现 Promise 的下一次微任务。
 

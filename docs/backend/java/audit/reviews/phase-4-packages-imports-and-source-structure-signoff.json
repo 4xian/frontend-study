@@ -1,0 +1,358 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.basics.packages-imports-and-source-structure",
+  "batchId": "phase-4-packages-imports-and-source-structure",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-06T07:46:35Z",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "89378a4fcd620c433f879c7a492104721cde7d6f07fa51936b78b2cb6dadfb7b",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "stagedLessonChanges": false
+  },
+  "sourceRepository": {
+    "path": "/Users/jian/Desktop/work/TDH/dzzz/dzzz-app",
+    "head": "167ca8aa91ca3a6b101246964ef4fddec3d21da0",
+    "statusShort": "",
+    "readOnly": true
+  },
+  "phase2Freeze": {
+    "courseCoverageMatrixSha256": "04d858896d07e975d3ab50796494873f09bd0ddf4b1a8b1ea87bd75cdd101d38",
+    "researchStatus": "not-started",
+    "exampleStatus": "not-started",
+    "courseStatus": "planned",
+    "phase4StateRecordedOnlyInThisSignoff": true,
+    "knownFrozenArtifactMismatch": {
+      "artifact": "docs/backend/java/audit/course-coverage-matrix.md",
+      "officialSha256": "b7fd50ffabbcf8a198802e907cef769ac969a71e4e14c40038f4aaaed09d91ad",
+      "recomputedExpectedSha256": "c4283551b4f37081097551957d3b4e1ea44922e0a1bb5865be2c5cc18faa6021",
+      "difference": "仅首部两处：正式文件使用 <br>，生成器预期使用 Markdown 行尾双空格；冻结 JSON、manifest、源码 HEAD 和库存身份均未漂移。",
+      "introducedByThisLesson": false,
+      "action": "保留冻结文件并记录；不修改 Phase 2 产物或 tooling。"
+    }
+  },
+  "versions": {
+    "verifiedAt": "2026-08-06",
+    "modern": {
+      "java": "25",
+      "runtime": "Eclipse Temurin 25.0.3+9 LTS"
+    },
+    "legacy": {
+      "java": "8",
+      "runtime": "Eclipse Temurin 8u492-b09",
+      "springBootBackground": "2.3.12.RELEASE"
+    }
+  },
+  "sourceDiscovery": {
+    "method": "Tavily 仅用于发现直接页面，随后打开 Oracle、JLS、Dev.java 和 javac 正文逐项核对",
+    "communitySourcesUsedAsEvidence": false,
+    "directUrls": [
+      "https://www.oracle.com/java/technologies/java-se-support-roadmap.html",
+      "https://docs.oracle.com/javase/specs/jls/se25/html/jls-7.html",
+      "https://docs.oracle.com/javase/specs/jls/se8/html/jls-7.html",
+      "https://dev.java/learn/packages/",
+      "https://docs.oracle.com/en/java/javase/25/docs/specs/man/javac.html"
+    ]
+  },
+  "docker": {
+    "engine": "Docker 29.6.1",
+    "feedbackSource": "从课程 Markdown 提取 bash 代码，经 stdin 交给容器执行",
+    "classOutput": "临时 /tmp 目录，shell trap 使用 find -depth -delete 清理",
+    "images": [
+      {
+        "role": "modern",
+        "requestedTag": "eclipse-temurin:25-jdk",
+        "digest": "sha256:12e44624adee6808a36d962717e1656e0afeeeff5a100f9cb00e0136513558f0"
+      },
+      {
+        "role": "legacy",
+        "requestedTag": "eclipse-temurin:8-jdk",
+        "digest": "sha256:c8b86f2c0a9bd6cc1b7fabc5d1a097501a166eea7cad3b2764e90e96178bea9b"
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/basics/packages-imports-and-source-structure.md",
+      "sha256": "cdea79c2486c0757ab01d485dbe9d279d861eb43f21126b309d0288d86acb17c"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/packages-imports-and-source-structure.md",
+      "sha256": "6f71aaa0f87682de77d1e24faf0c10d18808bdc0d659c5c8ae621c1391e23c68"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "6f0ebc509077bd98fa0d60b271291371a9fda61c7e33aa071b7725ebe5a69aa8"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "5c40183fbc596c6897294094ed87ccbd2037c4b88a5e706493800436e74d7109"
+    },
+    {
+      "path": "docs/backend/java/dzzz-app-course-plan.md",
+      "sha256": "73d734b63c653a3e6b2cacd8bc5abeb75255887ec912f7a9e638f5721033ee8e"
+    }
+  ],
+  "selfHashPolicy": "signoff 文件不记录自身哈希，避免递归自引用；artifacts 中其余最终文件逐一绑定 SHA-256",
+  "changedFiles": [
+    "docs/research/backend/java/basics/packages-imports-and-source-structure.md",
+    "src/categories/backend/java/core/learn/packages-imports-and-source-structure.md",
+    "src/categories/backend/java/core/entry-manifest.ts",
+    "src/categories/backend/java/core/backend-java-track.ts",
+    "docs/backend/java/audit/reviews/phase-4-packages-imports-and-source-structure-signoff.json",
+    "docs/backend/java/dzzz-app-course-plan.md"
+  ],
+  "concurrentWorkspaceAssets": {
+    "protected": true,
+    "attribution": "以下 frontend TypeScript 资产由并行工作产生，不属于本批 changedFiles；全量校验和构建在包含这些资产的当前工作区上执行。",
+    "paths": [
+      "docs/frontend/plans/typescript/T3-1-官方事实核验.md",
+      "docs/frontend/plans/typescript/T3-2-官方事实核验.md",
+      "src/categories/frontend/engineering/typescript/entry-manifest.ts",
+      "src/categories/frontend/engineering/typescript/typescript-track.ts",
+      "src/categories/frontend/engineering/typescript/learn/declaration-files.md",
+      "src/categories/frontend/engineering/typescript/learn/framework-type-integration.md",
+      "src/categories/frontend/engineering/typescript/learn/infer-and-distribution.md",
+      "src/categories/frontend/engineering/typescript/learn/library-author-boundaries.md",
+      "src/categories/frontend/engineering/typescript/learn/package-exports.md",
+      "src/categories/frontend/engineering/typescript/learn/tsconfig-layering.md",
+      "src/categories/frontend/engineering/typescript/learn/type-design.md",
+      "src/categories/frontend/engineering/typescript/learn/type-performance.md"
+    ]
+  },
+  "baselineVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 1,
+      "summary": "既有冻结 Markdown 确定性字节 mismatch；未修改冻结文件或 tooling。"
+    },
+    {
+      "command": "node docs/backend/java/audit/tooling/course-coverage-matrix-validator.mjs",
+      "exitCode": 1,
+      "summary": "既有 frozen course-coverage-matrix.md signoff SHA mismatch；JSON/manifest/source identity 未漂移。"
+    },
+    {
+      "command": "npm run type-check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run format:check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm test",
+      "exitCode": 0,
+      "summary": "No test files found; configured empty test directory is valid"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "1055 modules; catalog 521.13 kB，existing chunk size warning only"
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "summary": "No persistent E2E test files; command passed with --pass-with-no-tests"
+    },
+    {
+      "command": "git diff --check && git diff --cached --check",
+      "exitCode": 0,
+      "summary": "passed; no staged lesson changes"
+    },
+    {
+      "command": "git -C /Users/jian/Desktop/work/TDH/dzzz status --short -- dzzz-app",
+      "exitCode": 0,
+      "summary": "empty; source repository remained read-only"
+    }
+  ],
+  "javaVerification": {
+    "command": "extract course section 如何验证 and pipe to docker run --rm -i <fixed digest> bash -euxo pipefail",
+    "exitCode": 0,
+    "cases": [
+      {
+        "name": "Java 25 positive compile/run",
+        "exitCode": 0,
+        "stdout": "包结构正常",
+        "classPaths": [
+          "classes/lesson/model/Greeting.class",
+          "classes/lesson/app/Main.class"
+        ]
+      },
+      {
+        "name": "Java 8 positive compile/run",
+        "exitCode": 0,
+        "stdout": "包结构正常",
+        "classPaths": [
+          "classes/lesson/model/Greeting.class",
+          "classes/lesson/app/Main.class"
+        ]
+      },
+      {
+        "name": "package declaration after import",
+        "java25CompileExit": 1,
+        "java8CompileExit": 1
+      },
+      {
+        "name": "import is not shared with another compilation unit",
+        "java25CompileExit": 1,
+        "java8CompileExit": 1,
+        "classpathProvided": true
+      },
+      {
+        "name": "adding the import fixes the separate compilation unit",
+        "java25CompileExit": 0,
+        "java8CompileExit": 0,
+        "classpathProvided": true,
+        "classPath": "classes/lesson/app/Other.class"
+      }
+    ],
+    "correctionVerified": "脚本先创建 Java 8 所需的 -d 输出目录，并在负向 Other.java 失败后覆盖为含 import 的正确版；Java 25/8 均生成 Other.class。"
+  },
+  "browserVerification": {
+    "tool": "playwright CLI",
+    "baseUrl": "http://127.0.0.1:4173/",
+    "targetPath": "/backend/java/core/learn/packages-imports-and-source-structure",
+    "desktop": {
+      "viewport": "1440x1000",
+      "documentScrollWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "title": "包、import 与源码目录",
+      "officialSourceCount": 5,
+      "searchTerm": "源码根目录",
+      "searchResultCount": 1,
+      "previousLink": true,
+      "nextLink": false,
+      "completedProgress": "1 / 2",
+      "correctOtherCodeBlockCount": 2,
+      "correctOtherCodeBlocksContainedByHorizontalScroll": true
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "documentScrollWidth": 390,
+      "bodyScrollWidth": 390,
+      "completionButtonAfterReload": "取消完成",
+      "localStorageContainsEntryId": true,
+      "correctOtherCodeBlocksContainedByHorizontalScroll": true
+    },
+    "console": {
+      "errors": 0,
+      "warnings": 0
+    }
+  },
+  "reviews": {
+    "standards": {
+      "status": "PASS",
+      "findingCount": 0
+    },
+    "spec": {
+      "status": "PASS",
+      "findingCount": 0
+    },
+    "smellBaseline": "PASS / 0 finding",
+    "fixedPoint": "HEAD 203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb plus current uncommitted lesson files"
+  },
+  "beginnerContentReverification": {
+    "verifiedAt": "2026-08-07",
+    "courseArtifact": {
+      "path": "src/categories/backend/java/core/learn/packages-imports-and-source-structure.md",
+      "sha256": "b743ddcd8f54e42deac1cbfeb57c55e5c52c2d565cc36d3ff90b37267b6d2402"
+    },
+    "content": "PASS; exactly one 从零跟着做, usage, pitfalls, verification, one exercise and runnable code",
+    "sources": "PASS; source type, appliesTo and claims shown only in the official-source regions; 正文无来源详情",
+    "browser": "PASS; 1440px and 390px routes, 36/36 HTTP 200, no horizontal overflow or browser errors",
+    "root": "PASS; knowledge-path, type-check, lint, format and diff checks"
+  },
+  "phaseBReverification": {
+    "batchId": "B-02",
+    "status": "implementation-complete / lesson-passed",
+    "verifiedAt": "2026-08-14",
+    "historicalEvidencePreserved": true,
+    "courseContract": {
+      "title": "包、import 与源码目录",
+      "estimatedMinutes": 45,
+      "prerequisites": ["B-01"],
+      "path": "/backend/java/core/learn/packages-imports-and-source-structure"
+    },
+    "currentArtifacts": [
+      {
+        "path": "docs/research/backend/java/basics/packages-imports-and-source-structure.md",
+        "sha256": "e5ace3f01a9cdee6aec8d6a4bc3d783a954a0c8534c735e1cc38fa2799bac2c2"
+      },
+      {
+        "path": "src/categories/backend/java/core/learn/packages-imports-and-source-structure.md",
+        "sha256": "d9346aeec590656ad5f3f22955605ae86e30ddaabf40626c70c950b1529ef3c9"
+      }
+    ],
+    "runtimeProtection": {
+      "trackChanged": false,
+      "trackSha256": "10f44a4f0582f4236032c39a209302b1f0fd6db1251b86b059db3e51e95fb57a",
+      "loaderChanged": false,
+      "loaderSha256": "9226427b5a9606fe12e9265b5a082f991cbda7b0ba0fdcef756cd58f26ad2dad"
+    },
+    "research": {
+      "status": "PASS",
+      "discovery": "Tavily",
+      "finalEvidence": "10 个官方直接 URL；搜索摘要未作为结论证据",
+      "modernBaseline": "Java 25 LTS",
+      "legacyBaseline": "Java 8",
+      "scopeBoundary": "Java 8 与 Java 25 共有四种非模块 import；SingleModuleImportDeclaration 仅作为 Java 25 差异说明"
+    },
+    "javaFeedbackLoop": {
+      "environment": "Docker 29.6.1; Eclipse Temurin 25.0.3+9 LTS and 8u492-b09",
+      "sourceMount": "read-only bind mount",
+      "classOutput": "一次性 /tmp 目录",
+      "status": "PASS",
+      "java25": "positive=0; loose=0; missing-import=1; bad-order=1; wildcard=1; wildcard-recovery=0; wrong-classpath=1; recovery=0",
+      "java8": "positive=0; loose=0; missing-import=1; bad-order=1; wildcard=1; wildcard-recovery=0; wrong-classpath=1; recovery=0",
+      "stdout": "任务：整理包结构"
+    },
+    "qualityGates": {
+      "knowledgePath": "PASS; 167 source items, 64 course nodes, 114 dependency edges",
+      "typeCheck": "PASS",
+      "lint": "PASS",
+      "formatCheck": "PASS",
+      "unit": "PASS; no persistent unit tests",
+      "e2e": "PASS; no persistent E2E tests",
+      "build": "PASS; 1715 modules transformed; existing large-chunk warning only",
+      "diffCheck": "PASS"
+    },
+    "browserVerification": {
+      "server": "production preview",
+      "viewports": ["1440x900", "390x844"],
+      "httpStatus": 200,
+      "orderedStepCount": 9,
+      "officialSourceCount": 10,
+      "previousEntryId": "backend.java.learn.basics.development-environment-and-runtime",
+      "nextEntryId": "backend.java.learn.basics.variables-types-and-operators",
+      "requiredContentAssertions": "PASS; four shared non-module imports, SingleModuleImportDeclaration boundary, mkdir -p classes and wildcard failure/recovery",
+      "horizontalOverflow": false,
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "badResponses": 0
+    },
+    "independentReview": {
+      "reviewer": "b02_final_review",
+      "standards": "PASS / 0 finding",
+      "spec": "PASS / 0 finding",
+      "reviewedCourseSha256": "d9346aeec590656ad5f3f22955605ae86e30ddaabf40626c70c950b1529ef3c9",
+      "reviewedResearchSha256": "e5ace3f01a9cdee6aec8d6a4bc3d783a954a0c8534c735e1cc38fa2799bac2c2"
+    },
+    "verificationBoundary": {
+      "temporaryAssets": "签核后删除 /tmp 一次性验证目录；仓库不保留测试、截图或浏览器输出",
+      "moduleImports": "JPMS module import 未作为 Java 8 共有语法教授，只记录现代版本差异"
+    }
+  },
+  "stopBoundary": "Phase B 的 B-02 已关闭；下一批只允许 B-03 variables-types-and-operators，不得跳到 B-04，不得进入 Phase C、D、E。"
+}

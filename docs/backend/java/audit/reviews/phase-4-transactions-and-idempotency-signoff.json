@@ -1,0 +1,255 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.intermediate.transactions-and-idempotency",
+  "batchId": "phase-c-i09-transactions-and-idempotency",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-15T18:14:21+08:00",
+  "phase": "Phase C",
+  "phaseCProgress": "9/20",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "newStagingPerformedThisBatch": false,
+    "existingIndexPreserved": true,
+    "unrelatedWorkspaceChangesPreserved": true
+  },
+  "phaseAFreeze": {
+    "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+    "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81",
+    "designation": "I-09 / 必修、拆分重组",
+    "title": "REST 资源、状态码、分页参数与幂等请求",
+    "estimatedMinutes": 150,
+    "prerequisite": "backend.java.learn.intermediate.spring-mvc-and-servlet-boundaries",
+    "stableIdReused": "backend.java.learn.intermediate.transactions-and-idempotency",
+    "slugReused": "transactions-and-idempotency",
+    "urlPreserved": "/backend/java/core/learn/transactions-and-idempotency",
+    "splitBoundary": "分页合同从 I-02 移入本课；数据库事务、SQL 分页、Redis 与跨实例幂等留给 I-12 或专项",
+    "frozenSuccessor": "backend.java.learn.intermediate.bean-validation-and-input-contracts"
+  },
+  "phaseCAdmission": {
+    "status": "PASS",
+    "predecessorCourseId": "backend.java.learn.intermediate.spring-mvc-and-servlet-boundaries",
+    "predecessorSignoffPath": "docs/backend/java/audit/reviews/phase-4-spring-mvc-and-servlet-boundaries-signoff.json",
+    "predecessorSignoffSha256": "1770a4439c93545b753381a4523e9f05ebddbbbe5be7c626191a3bca6cafbf88",
+    "phaseCProgressBeforeBatch": "8/20",
+    "trackChangeRequired": true,
+    "loaderChangeRequired": false
+  },
+  "versions": {
+    "verifiedAt": "2026-08-15",
+    "modern": {
+      "java": "25",
+      "runtime": "Eclipse Temurin 25.0.2",
+      "springBoot": "4.1.0",
+      "springFramework": "7.0.8",
+      "webStarter": "spring-boot-starter-webmvc"
+    },
+    "legacy": {
+      "java": "8",
+      "runtime": "Eclipse Temurin 8",
+      "classMajorVersion": 52,
+      "springBoot": "2.3.12.RELEASE",
+      "springFramework": "5.2.15.RELEASE",
+      "webStarter": "spring-boot-starter-web"
+    }
+  },
+  "sourceDiscovery": {
+    "method": "Tavily 仅用于定位候选；最终结论回到 RFC Editor、IANA、IETF Datatracker、Spring 与 OWASP 一手页面核验",
+    "researchDirectSourceCount": 22,
+    "lessonOfficialSourceCardCount": 22,
+    "finalHttp200Count": 22,
+    "finalHttpFailureCount": 0,
+    "idempotencyDraftStatusDisclosed": true,
+    "communitySourcesUsedAsEvidence": false
+  },
+  "research": {
+    "backgroundAgentUsed": true,
+    "scope": "I-09 only",
+    "phaseAContractAlignment": "PASS",
+    "officialUrlVerification": "22/22 HTTP 200",
+    "stopBoundaryAlignment": "PASS; I-10 was not modified",
+    "researchSha256": "b06fc2005b3e019a3ce649edf02839f413a49c246e1f1f734b2a537e7f9acb74"
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/intermediate/transactions-and-idempotency.md",
+      "sha256": "b06fc2005b3e019a3ce649edf02839f413a49c246e1f1f734b2a537e7f9acb74"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/transactions-and-idempotency.md",
+      "sha256": "b51b6cdce4d2bb2abeab2963c44eb95f4903e29742fa8e96c8e26e6bfbaae2a0"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "74538891a54281fe94dc197a0d44b1b13d3414a644901991cf0a8aa5ab485345"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "e89e15d2335d8ddfd659e833633b0114edbfecb172c835dd07867b6221cfca72"
+    },
+    {
+      "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+      "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81"
+    },
+    {
+      "path": "docs/backend/java/audit/phase-2-knowledge-path-manifest.json",
+      "sha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407"
+    }
+  ],
+  "engineeringVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run test:unit",
+      "exitCode": 0,
+      "summary": "No persistent unit files; configured empty directory passed"
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "summary": "No persistent E2E files; configured empty directory passed"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "1764 modules transformed; screenshot-reported ordinary-list-item Markdown error no longer reproduces"
+    },
+    {
+      "command": "npx prettier --check <I-09 paths> && git diff --check -- <I-09 paths>",
+      "exitCode": 0,
+      "summary": "targeted formatting and whitespace checks passed"
+    }
+  ],
+  "repositoryFormatBoundary": {
+    "command": "npm run format:check",
+    "exitCode": 1,
+    "i09ScopedGate": "PASS",
+    "unrelatedBlockingFiles": [
+      "src/categories/frontend/engineering/vite/vite-reference-index.ts",
+      "src/categories/frontend/vue/core/vue-core-options-reference-index.ts",
+      "src/categories/frontend/vue/core/vue-core-reference-index.ts",
+      "src/categories/frontend/vue/core/vue-core-sfc-reference-index.ts"
+    ],
+    "unrelatedFilesModified": false
+  },
+  "javaVerification": {
+    "fixturePath": "/tmp/java-i09-phase-c.gvPn9e",
+    "fixtureSha256": {
+      "verify.sh": "c1a9019887b42eebe82123c846fc7fb7b3833031d0a43f2bd10b430bfc515961",
+      "modern/pom.xml": "d00430b7303dc540db19345daf3d69d1b7f282e393c8791de4f8a3042a39ea3d",
+      "legacy/pom.xml": "38c101f27aefb6d5f5f780a4c8cd194fe5a486b537402ccc567df26e8b435648",
+      "shared/main/course/i09/TaskController.java": "5e3f6282767324ab3faf18e4c8c2d7eeef523334be324062131d1293e8c30845",
+      "shared/main/course/i09/TaskService.java": "789f793dcbe8509cfe3b1d33725f7889200059ff8383b1da9d4d8313f530246b",
+      "shared/test/course/i09/RestContractTest.java": "d121e584762992ca10a9f111d5b1cc1700f16b3e3043dca51deff6f50a43c104"
+    },
+    "contractOutput": [
+      "resource|create=201|location=true|get=200|missing=404",
+      "pagination|order=1,2,3|emptyPage0=200|invalid=400|outOfRange=404|links=true",
+      "conditional|missing=428|stale=412|matched=200|newEtag=task-1-v2",
+      "idempotency|first=201|replay=201|payloadConflict=422|processingConflict=409|tasks=1"
+    ],
+    "modernTests": "4 tests, 0 failures, 0 errors; two consecutive runs",
+    "legacyTests": "4 tests, 0 failures, 0 errors; two consecutive runs",
+    "legacyClassMajorVersion": 52,
+    "temporaryAssetsCleaned": true,
+    "cleanupCommand": "find /tmp/java-i09-phase-c.gvPn9e -depth -delete",
+    "cleanupCheck": "PASS; exact fixture and supporting source captures no longer exist"
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "adapter": "PASS",
+    "researchLineCount": 477,
+    "lessonLineCount": 848,
+    "rootH2Count": 15,
+    "rootH2ChineseNumbering": "PASS; 一 through 十五 continuous",
+    "independentKnowledgePointHeadings": 11,
+    "knowledgePointSevenPartCoverage": "11/11",
+    "codeBlockCount": 14,
+    "exerciseCount": 1,
+    "officialSourceCount": 22,
+    "pitfallCount": 5,
+    "requiredCoreInterfaceSection": "PASS",
+    "requiredSecuritySection": "PASS",
+    "javaMethodComments": "PASS",
+    "ordinaryListItemSingleParagraphRule": "PASS; Docker commands use complete single-paragraph inline code"
+  },
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "session": "i09-phase-c-final",
+    "baseUrl": "http://127.0.0.1:4196/",
+    "targetPath": "/backend/java/core/learn/transactions-and-idempotency",
+    "productionPreviewUsed": true,
+    "sessionsClosed": true,
+    "previewServerStopped": true,
+    "desktop": {
+      "viewport": "1440x900",
+      "documentScrollWidth": 1440,
+      "horizontalOverflow": false,
+      "rootH2Count": 15,
+      "knowledgePointCount": 11,
+      "pitfallCount": 5,
+      "officialSourceCount": 22
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "documentScrollWidth": 390,
+      "horizontalOverflow": false,
+      "rootH2Count": 15,
+      "knowledgePointCount": 11,
+      "pitfallCount": 5,
+      "officialSourceCount": 22
+    },
+    "title": "REST 资源、状态码、分页参数与幂等请求",
+    "previousEntryId": "backend.java.learn.intermediate.spring-mvc-and-servlet-boundaries",
+    "frozenNextEntryId": "backend.java.learn.intermediate.bean-validation-and-input-contracts",
+    "completionStatePersistedAfterReload": true,
+    "completionStateRestoredToIncomplete": true,
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "requestCount": 105,
+    "failedRequests": 0,
+    "nonSuccessfulResponses": 0,
+    "visualInspection": "PASS; desktop and mobile have no overlap or clipping"
+  },
+  "review": {
+    "reviewer": "/root/i09_independent_review",
+    "riskClassification": "I-09 substantially reorganizes REST, pagination, conditional update and idempotency contracts while preserving the stable ID and URL",
+    "independentReviewRequired": true,
+    "reviewedLessonSha256": "b51b6cdce4d2bb2abeab2963c44eb95f4903e29742fa8e96c8e26e6bfbaae2a0",
+    "reviewedResearchSha256": "b06fc2005b3e019a3ce649edf02839f413a49c246e1f1f734b2a537e7f9acb74",
+    "standards": "PASS / 0 finding",
+    "spec": "PASS / 0 finding",
+    "highestSeverity": "none",
+    "initialFindingsClosed": 5,
+    "repairs": [
+      "added continuous Chinese numbering to all root H2 headings",
+      "bound security claims to OWASP Input Validation and Logging primary sources",
+      "moved ResponseEntity mapping into the Controller and kept TaskService HTTP-independent",
+      "aligned modern and legacy starter artifacts with the verified research baselines",
+      "added reproducible JDK 25 and JDK 8 Docker commands"
+    ],
+    "postReviewMarkdownRepair": "Moved Docker commands out of nested fenced blocks so the ordinary-list-item validator accepts the lesson; same npm run build feedback loop passed",
+    "reviewWorkspaceModified": false,
+    "reviewStopBoundary": "reviewer did not modify I-10"
+  },
+  "stopBoundary": "Phase C I-09 is closed at 9/20. The only next authorized batch is I-10 (backend.java.learn.intermediate.bean-validation-and-input-contracts); no I-10 implementation was performed in this batch. Phase D remains unauthorized until the Phase C total Gate closes.",
+  "selfHashPolicy": "signoff file does not record its own SHA-256; artifacts bind only stable external batch outputs"
+}

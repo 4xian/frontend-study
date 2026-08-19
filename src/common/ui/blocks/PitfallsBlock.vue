@@ -11,6 +11,10 @@ defineProps<{ items: PitfallItem[] }>()
     <li v-for="(item, index) in items" :key="item.title" class="pitfall-item">
       <h3>{{ index + 1 }}. {{ item.title }}</h3>
       <TextBlock v-if="!item.cause" class="pitfall-description" :content="item.description" />
+      <div v-if="item.phenomenon" class="pitfall-detail pitfall-phenomenon">
+        <strong>现象</strong>
+        <TextBlock :content="item.phenomenon" />
+      </div>
       <div v-if="item.trigger" class="pitfall-detail pitfall-trigger">
         <strong>触发条件</strong>
         <TextBlock :content="item.trigger" />
@@ -33,9 +37,17 @@ defineProps<{ items: PitfallItem[] }>()
           <CodeBlock :code="item.correct.content" :lang="item.correct.lang" />
         </section>
       </div>
+      <div v-if="item.affectedVersions" class="pitfall-detail pitfall-affected-versions">
+        <strong>影响版本</strong>
+        <TextBlock :content="item.affectedVersions" />
+      </div>
       <div v-if="item.verification" class="pitfall-detail pitfall-verification">
         <strong>验证方式</strong>
         <TextBlock :content="item.verification" />
+      </div>
+      <div v-if="item.source" class="pitfall-detail pitfall-source">
+        <strong>来源</strong>
+        <TextBlock :content="item.source" />
       </div>
     </li>
   </ol>

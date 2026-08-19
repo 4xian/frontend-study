@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.intermediate.mybatis-and-mybatis-plus",
+  "batchId": "phase-4-mybatis-and-mybatis-plus",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-09T06:44:33+08:00",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "stagingPerformedThisBatch": false,
+    "existingStagedAndUnstagedStatePreserved": true
+  },
+  "sourceRepository": {
+    "path": "/Users/jian/Desktop/work/TDH/dzzz/dzzz-app",
+    "readOnly": true,
+    "projectExecuted": false,
+    "projectModified": false,
+    "accessBoundary": "Frozen Phase 2 evidence only; no batch-specific project access"
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/intermediate/mybatis-and-mybatis-plus.md",
+      "sha256": "658f10f1feaad3f0a3fe5a823559f0cbc0f064717c846a3dec0c2085813e01a2"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/mybatis-and-mybatis-plus.md",
+      "sha256": "d146386bf7af44cc7e4f2066a00c0617f534a44803dae675985b6b22948f2d63"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "7ef4c6922933f30ccb4305a16b9bee73be69a2fb099ba257f6fb69460bf9696d"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "12d2ef5fb8d0a5dbfbbd685e89e558484d8a9dfe2677167459dbaf943220c5bf"
+    },
+    {
+      "path": "docs/backend/java/dzzz-app-course-plan.md",
+      "sha256": "f5dba4c11d3ca5a790fc49f9e9f2416637f29a4b76668a772c511278b95610a9"
+    },
+    {
+      "path": "docs/backend/knowledge-point-template.md",
+      "sha256": "bff59682f067fa4c3c50d28ee6efa2b372572b120507e81330c36015ae97f617"
+    },
+    {
+      "path": "docs/backend/research-source-standard.md",
+      "sha256": "b28656e8200c484f0782115077a0215c2c7a2d90327557bfab1e0c139b8fcbca"
+    }
+  ],
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "independentKnowledgePointHeadings": 16,
+    "knowledgePointSevenPartCoverage": "16/16",
+    "orderedListItemsRenderAsSeparateBlocks": "PASS",
+    "officialSourceCount": 16,
+    "sourceHeadingAbsent": true,
+    "javaMethodComments": "PASS",
+    "securitySection": "PASS"
+  },
+  "verification": [
+    {
+      "command": "docker run ... maven:3.9.12-eclipse-temurin-25 mvn -q test",
+      "exitCode": 0,
+      "summary": "MYBATIS_FEEDBACK_PASS rows=2 dynamicRows=1 foreachRows=2 injectionRows=0 batchQueryCount=1 emptyWrapperRows=2 rollbackRows=0"
+    },
+    {
+      "command": "docker run ... maven:3.9.12-eclipse-temurin-8 mvn -q -DskipTests package",
+      "exitCode": 0,
+      "summary": "PASS; class major version 52 and legacy JAR present"
+    },
+    {
+      "command": "npm exec prettier -- --check <batch markdown>",
+      "exitCode": 0,
+      "summary": "PASS"
+    },
+    {
+      "command": "node /tmp/catalog-cold-check.mjs ... (three consecutive commands)",
+      "exitCode": 0,
+      "summary": "PASS; current lesson loadable and next lesson absent in nine internal cold starts"
+    },
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check && npm run lint && npm run format:check && npm run test:unit && npm run test:e2e && npm run build",
+      "exitCode": 0,
+      "summary": "all repository quality gates passed"
+    },
+    {
+      "command": "Playwright at 1440x900 and 390x844 on /backend/java/core/learn/mybatis-and-mybatis-plus",
+      "exitCode": 0,
+      "summary": "16 knowledge headings; 19 ordered lists; 73 ordered items; 16 unique official sources; 0 source-detail headings; no horizontal overflow; 0 console errors and warnings"
+    }
+  ],
+  "review": {
+    "standards": "PASS / 0 finding",
+    "spec": "PASS / 0 finding",
+    "findingCount": 0,
+    "independentReviewRounds": 4,
+    "repairs": [
+      "补齐动态 SQL、foreach、参数注入、空 Wrapper 和查询次数反馈环",
+      "收窄版本与安全来源 claims 并补齐五个易错点来源依据",
+      "统一 Mapper XML、应用配置、建表脚本、测试类和所有 Java 文件落盘路径",
+      "修正 legacy 工作目录切换并验证现代与 Java 8 两条反馈环可按顺序复现"
+    ]
+  }
+}

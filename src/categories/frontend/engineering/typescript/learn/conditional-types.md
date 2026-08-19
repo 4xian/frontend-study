@@ -14,7 +14,7 @@ tags:
   - 类型分支
   - 分布式条件
   - 联合类型
-appliesTo: TypeScript 7.0.2（宿主 fixture：6.0.3）
+appliesTo: TypeScript 7.0.2
 verifiedAt: 2026-08-05
 sources:
   - title: "TypeScript Handbook: Conditional Types"
@@ -44,11 +44,11 @@ recap:
 
 # 条件类型
 
-## 为什么需要
+## 一、为什么需要
 
 重载可以描述少量固定调用，但类型工具常需根据任意输入合同计算结果。条件类型把可赋值关系写成类型层分支，让一个泛型类型表达多组输入与输出对应。
 
-## 核心概念和最小模型
+## 二、核心概念和最小模型
 
 ~~~~ts
 type LessonLabel<Type> = Type extends string ? { title: Type } : { id: Type }
@@ -62,45 +62,90 @@ const numbered: NumberedLesson = { id: 12 }
 
 extends 左侧是否可赋给右侧决定选择哪个分支。这里字符串输入得到 title 合同，数字输入得到 id 合同；条件类型只计算静态结果，不会在运行时生成判断。
 
-## 理解约束与联合分布
+## 三、知识点详解
 
-:::steps
-### 先写清分支条件
+### 1. 条件类型语法
 
-条件应对应真实类型能力，例如是否具有 message 属性，而不是把复杂业务规则塞进一个表达式。
+**它是什么：** 条件类型写成 `Type extends Check ? TrueType : FalseType`，根据可赋值关系选择结果类型。
 
-### 在 true 分支使用证明
+**它有什么用：** 同一个工具类型可以根据输入形状返回不同类型结果，而不必为每种输入复制一个类型别名。
 
-通过 `{ message: unknown }` 检查后，true 分支可以安全索引 Type["message"]。
+**怎么使用：** 先写出一个清晰、可解释的判断条件，再分别定义满足和不满足条件时的结果。
 
-### 观察裸类型参数
+~~~~ts
+type IsString<Type> = Type extends string ? true : false
 
-`Type extends ...` 中 Type 若直接接收 union，条件会分别作用于每个成员。
+type TitleCheck = IsString<'TypeScript'>
+type OrderCheck = IsString<12>
+~~~~
 
-### 区分联合数组结果
+### 2. true 分支中的约束
 
-分布后的 `string[] | number[]` 要求数组内部保持同类，不等于 `(string | number)[]`。
-:::
+**它是什么：** 当条件证明 `Type` 满足某个结构后，true 分支可以使用该结构提供的成员。
+
+**它有什么用：** 可以安全提取对象属性、数组元素或函数返回值，而不用事先给所有输入添加统一约束。
+
+**怎么使用：** 把需要读取的能力写进 `extends` 右侧，只在 true 分支索引对应成员。
 
 ~~~~ts
 type MessageOf<Type> = Type extends { message: unknown } ? Type['message'] : never
-type ToArray<Type> = Type extends unknown ? Type[] : never
 
 type CourseMessage = MessageOf<{ message: '已发布' }>
+type MissingMessage = MessageOf<{ title: string }>
+~~~~
+
+### 3. 分布式条件类型
+
+**它是什么：** 条件左侧是裸类型参数时，传入联合会对每个成员分别计算，再把结果重新组成联合。
+
+**它有什么用：** 它适合过滤联合成员或把联合中的每个成员转换成对应结果。
+
+**怎么使用：** 直接使用 `Type extends ...` 触发分布，并检查结果是否确实需要逐成员处理。
+
+~~~~ts
+type ToArray<Type> = Type extends unknown ? Type[] : never
 type Distributed = ToArray<string | number>
 
 const textItems: Distributed = ['泛型', '条件类型']
 const numberItems: Distributed = [1, 2]
-
-export { numberItems, textItems }
-export type { CourseMessage }
 ~~~~
 
-## 配套编译 fixture
+### 4. 阻止条件类型分布
 
-临时编译正例验证 true 分支读取已证明成员，以及裸泛型参数对 string | number 分布；负例把混合数组赋给 `string[] | number[]`，固定 TS2322。验证资产只在 `/tmp` 使用并在结束后删除。
+**它是什么：** 把条件两侧包进单元素元组，例如 `[Type] extends [Check]`，可以让联合整体参与比较。
 
-## 易错使用提示
+**它有什么用：** 它能表达“整个联合都满足条件吗”，并生成 `(string | number)[]` 这类混合元素数组。
+
+**怎么使用：** 只有确实需要整体判断时才包裹元组，并与分布结果并排验证差异。
+
+~~~~ts
+type ToArrayTogether<Type> = [Type] extends [unknown] ? Type[] : never
+type Mixed = ToArrayTogether<string | number>
+
+const mixedItems: Mixed = ['条件类型', 12]
+
+export { mixedItems, numberItems, textItems }
+export type { CourseMessage, MissingMessage }
+~~~~
+
+## 四、动手实践：先写分支，再观察联合分布
+
+用条件类型描述“数组取元素，非数组保持原值”，然后分别传入单一类型和联合类型。
+
+~~~~ts
+type ElementOf<T> = T extends readonly (infer Item)[] ? Item : T
+
+type Name = ElementOf<string[]>
+type Count = ElementOf<number>
+type Mixed = ElementOf<string[] | number[]>
+
+const name: Name = 'Ada'
+const count: Count = 1
+const mixed: Mixed = Math.random() > 0.5 ? 'Ada' : 1
+~~~~
+
+把定义改成 `[T] extends [readonly (infer Item)[]]`，比较联合是否仍逐项分布。这个改动能直观看出 tuple 包裹不是语法装饰，而是在控制条件类型处理联合的方式。
+## 五、易错使用提示
 
 :::pitfalls
 ### 把条件类型当成运行判断
@@ -193,20 +238,20 @@ const values: ToArray<string | number> = ['a', 'b']
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 原理与适用场景
+## 六、工作原理与适用边界
 
 :::steps
 ### 可赋值关系选择分支
 
-官方事实：条件类型依据左侧是否可赋给右侧选择结果。课程推导：只用于表达清晰的输入输出关系。边界：它不执行运行时校验。
+**工作原理：** 条件类型依据左侧是否可赋给右侧选择结果。**实践建议：** 只用于表达清晰的输入输出关系。**使用边界：** 它不执行运行时校验。
 
 ### true 分支获得额外约束
 
-官方事实：检查成立的分支可使用已证明成员。课程推导：先检查能力，再索引成员类型。边界：false 分支没有这份证明。
+**工作原理：** 检查成立的分支可使用已证明成员。**实践建议：** 先检查能力，再索引成员类型。**使用边界：** false 分支没有这份证明。
 
 ### 裸泛型参数默认分布
 
-官方事实：条件作用于裸类型参数时会逐个处理 union 成员。课程推导：看到 union 输入先展开每个成员预测结果。边界：infer 与主动抑制分布留到高级课程。
+**工作原理：** 条件作用于裸类型参数时会逐个处理 union 成员。**实践建议：** 看到 union 输入先展开每个成员预测结果。**使用边界：** infer 与主动抑制分布留到高级课程。
 :::
 
 :::exercise
@@ -214,9 +259,39 @@ const values: ToArray<string | number> = ['a', 'b']
 
 **要求：** 定义 MessageOf 和 ToArray，分别验证有 message、无 message 以及 string | number 输入；保留混合数组负例。
 
-**验收：** 正例严格编译通过，混合数组产生 TS2322，并能解释为什么结果是数组联合。
+**完成标准：** 正例严格编译通过，混合数组产生 TS2322，并能解释为什么结果是数组联合。
 :::
 
-## 总结与下一课
+## 七、本节小结
 
 条件类型按可赋值关系选择静态结果，裸泛型参数会对 union 默认分布。下一课“模板字面量类型”会继续处理有限字符串协议，并与映射类型的键重映射衔接。
+
+:::code-details{title="查看本节完整示例"}
+~~~~ts
+type MessageOf<T> = T extends { message: unknown } ? T['message'] : never
+type ElementOf<T> = T extends readonly (infer Item)[] ? Item : T
+type ToArray<T> = T extends unknown ? T[] : never
+type ToArrayWithoutDistribution<T> = [T] extends [unknown] ? T[] : never
+
+interface EmailEvent {
+  message: string
+}
+
+interface RetryEvent {
+  message: { count: number }
+}
+
+type EmailMessage = MessageOf<EmailEvent>
+type RetryMessage = MessageOf<RetryEvent>
+type CourseId = ElementOf<readonly ['ts', 'vite']>
+type SeparateLists = ToArray<'ts' | 'vite'>
+type MixedList = ToArrayWithoutDistribution<'ts' | 'vite'>
+
+const email: EmailMessage = '课程已发布'
+const retry: RetryMessage = { count: 2 }
+const id: CourseId = 'ts'
+const separate: SeparateLists = ['vite']
+const mixed: MixedList = ['ts', 'vite']
+console.log(email, retry.count, id, separate, mixed)
+~~~~
+:::

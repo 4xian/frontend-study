@@ -51,7 +51,7 @@ recap:
 
 # 链接、视图与激活状态
 
-## 链接负责导航，视图负责渲染
+## 一、链接负责导航，视图负责渲染
 
 RouterLink 接收 to，把字符串路径或位置对象交给 router.resolve()，并在站内点击时调用 router.push() 或 replace()。RouterView 不发起导航，它只从当前 route 的 matched 链中取出本层记录对应的组件。把两个职责分开后，链接状态和页面渲染都由同一份路由匹配结果驱动。
 
@@ -72,7 +72,7 @@ RouterLink 接收 to，把字符串路径或位置对象交给 router.resolve()�
 位置对象比散落的字符串更能表达意图。命名路由改 path 时，调用处仍可保持不变；需要参数时也能由 router 统一编码。
 :::
 
-## active 与 exact active 比较什么
+## 二、active 与 exact active 比较什么
 
 RouterLink 先解析 to，再在当前 route.matched 中寻找同一条 route record。找到记录且目标 params 被当前 params 包含时，链接就是 active；exact active 还要求这条记录位于当前 matched 链末端，并且当前与目标 params 完全一致。嵌套页面中，父记录链接因此可以 active 但不 exact。
 
@@ -95,7 +95,7 @@ RouterLink 先解析 to，再在当前 route.matched 中寻找同一条 route re
 ~~~~
 :::
 
-## query 不参与激活判断
+## 三、query 不参与激活判断
 
 官方规则明确说明 query 不参与 active 判断。/workspace/overview?mode=summary 与 /workspace/overview?mode=detail 仍命中同一记录和 params，因此同一个概览链接在两种位置都保持 active 与 exact active。hash 也不是这项判断的输入。
 
@@ -114,7 +114,7 @@ RouterLink 先解析 to，再在当前 route.matched 中寻找同一条 route re
 如果产品要求不同 query 对应不同选中项，需要自己比较 route.query 并呈现额外状态；不要改写 RouterLink 原有 active 语义。
 :::
 
-## class 与 aria-current 各自表达什么
+## 四、class 与 aria-current 各自表达什么
 
 默认情况下，active 链接获得 router-link-active，exact active 链接再获得 router-link-exact-active。非 custom 的 RouterLink 只在 exact active 时把 aria-current 写入锚点，默认值是 page。父级导航可用 active class 表示“位于该分区”，但不应同时宣称它就是当前页面。
 
@@ -135,7 +135,7 @@ RouterLink 先解析 to，再在当前 route.matched 中寻找同一条 route re
 }
 ~~~~
 
-## RouterView 按深度选择组件
+## 五、RouterView 按深度选择组件
 
 RouterView 从注入的当前 route 读取 matched，并按当前 view depth 选择记录组件。每渲染一层 RouterView，向后代提供的 depth 增加一；这让父布局和子页面可以消费同一条 matched 链中的不同记录。本课只观察结果，嵌套配置与默认子路由会在后续课程展开。
 
@@ -148,7 +148,7 @@ RouterView 从注入的当前 route 读取 matched，并按当前 view depth 选
 </template>
 ~~~~
 
-## 在隔离 Demo 中核对公开状态
+## 六、在隔离 Demo 中核对公开状态
 
 下面的运行区创建独立 memory router。三条真实 RouterLink 对应父记录与两个子记录，RouterView 显示当前页面；状态区直接读取链接生成的 class 和 aria-current。切换概览 query 时，fullPath 改变但激活状态保持不变。
 
@@ -156,7 +156,7 @@ RouterView 从注入的当前 route 读取 matched，并按当前 view depth 选
 观察父子链接的 active、exact active、aria-current 与 query 边界
 :::
 
-## 易错使用提示
+## 七、易错使用提示
 
 :::pitfalls
 ### 用普通 a 标签处理站内路由
@@ -298,7 +298,7 @@ const exact = route.fullPath === router.resolve(to).fullPath
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 从源码推导适用场景
+## 八、从源码推导适用场景
 
 :::steps
 ### 用位置对象统一生成 href 与导航目标

@@ -133,7 +133,7 @@ anchors:
 
 # Router 实例
 
-## Router
+## 一、Router
 
 `Router` 是公开的条件类型，不是需要自行实现的 class。默认 `TypesConfig` 没有覆盖 `Router` 槽位时，它解析为 `_RouterClassic`；只有路由器扩展作者通过模块增强替换该槽位时，应用看到的 Router 类型才会改变。普通应用应从 `createRouter()`、`useRouter()` 或显式参数取得实例。
 
@@ -141,7 +141,7 @@ anchors:
 本页按默认 `_RouterClassic` 展开 19 个公开成员。`install` 是另计的 internal 插件方法，7 个 symbol 属性也是 internal；它们都不属于这 19 个应用层成员。
 :::
 
-## Router Classic
+## 二、Router Classic
 
 根入口把源码中的 `RouterClassic` 以 `_RouterClassic` 名称导出。它自身声明 `options`、`addRoute()`、`removeRoute()`、`clearRoutes()`，并从 Router base 继承其余 15 个公开属性与方法。下划线只是导出名的一部分；固定 5.2.0 声明没有把 `_RouterClassic` 标成 internal，但应用通常仍以 `Router` 作为参数类型，以保留 `TypesConfig` 的替换能力。
 
@@ -153,7 +153,7 @@ anchors:
 | history | back、forward、go | 返回 void，只请求 history 移动 |
 | 导航生命周期 | beforeEach、beforeResolve、afterEach、onError、isReady | 注册函数均可注销；isReady 只关注初始导航 |
 
-## current route
+## 三、current route
 
 `currentRoute: ShallowRef&lt;RouteLocationNormalizedLoaded&gt;` 是只读属性，`.value` 才是当前已规范化、且懒加载组件已解析的 route。创建实例时它先指向 `START_LOCATION`；成功导航在最终提交阶段才替换 `.value`。组件 `setup` 中通常优先用 `useRoute()`，组件外持有 router 实例时才直接读取或侦听 `currentRoute`。
 
@@ -166,15 +166,15 @@ console.info(router.currentRoute.value.fullPath)
 app.mount('#app')
 ~~~~
 
-## listening
+## 四、listening
 
 `listening: boolean` 默认是 `true`。设为 `false` 时，5.2.0 的 history listener 会忽略随后收到的浏览器前进/后退事件；这是给微前端协调 history 所有权的低层开关。它不会卸载 Router、清空路由、取消当前导航，也不会禁止代码继续调用 `push()` 或 `replace()`；重新启用也不会自动补放错过的 history 事件。
 
-## options
+## 五、options
 
 `readonly options: RouterOptions` 指向传给 `createRouter()` 的原始配置，适合诊断 history、scrollBehavior 或 link class 选项。`readonly` 只限制属性重新赋值，不承诺深度冻结；运行时 matcher 和已安装 listener 已从选项完成初始化，因此不要通过修改 `router.options` 期待重新配置实例。
 
-## add route
+## 六、add route
 
 `addRoute(route)` 添加顶层记录；`addRoute(parentName, route)` 把记录放到已命名父记录下。两个 overload 都返回 `() =&gt; void` disposer，适合插件或功能模块按自己的生命周期移除本次注册。它只改变 matcher；如果新记录应接管当前 URL，需要在守卫外 `await router.replace(router.currentRoute.value.fullPath)`，守卫内则返回目标位置触发重定向。
 
@@ -194,7 +194,7 @@ if (router.currentRoute.value.path === '/reports') {
 removeFeatureRoute()
 ~~~~
 
-## after each
+## 七、after each
 
 `afterEach(guard): () =&gt; void` 在每次导航结算后调用 guard，第三个参数会携带 Navigation Failure。它适合分析、标题同步和无障碍播报，返回值不会改变已经结算的导航；保存返回的函数即可注销。需要阻止或重定向导航时应使用 `beforeEach()` 或 `beforeResolve()`。
 
@@ -207,11 +207,11 @@ const stopAnalytics = router.afterEach((to, from, failure) => {
 stopAnalytics()
 ~~~~
 
-## back
+## 八、back
 
 `back(): void` 等价于 `go(-1)`，请求 history 后退一个条目；没有可后退条目时不会产生新的 route。它不返回导航 Promise，最终是否发生导航应通过 `afterEach()` 或 `currentRoute` 的响应式变化观察。
 
-## before each
+## 九、before each
 
 `beforeEach(guard): () =&gt; void` 按注册顺序执行全局前置守卫。guard 可以同步或异步返回 `undefined/true` 放行、`false` 取消、RouteLocation 重定向，或抛出 Error；应优先 return，而不是使用仍兼容但已 deprecated 的第三个 `next` 参数。返回的注销函数适合测试、插件或按功能启停的规则。
 
@@ -227,31 +227,31 @@ const stopAuthGuard = router.beforeEach(async (to) => {
 stopAuthGuard()
 ~~~~
 
-## before resolve
+## 十、before resolve
 
 `beforeResolve(guard): () =&gt; void` 位于导航确认前，但此时异步 route component 已取得，之前的组件内守卫和全局 `beforeEach` 也已成功。它适合只在目标页面确实可进入时申请相机权限或加载最后一段必要数据；返回值与注销方式和 `beforeEach()` 相同。
 
-## clear routes
+## 十一、clear routes
 
 `clearRoutes(): void` 清空当前 matcher 的所有 route records。它不会自动重置 `currentRoute`、history 或已渲染组件，也没有返回可恢复快照；因此只适合将 matcher 完全重建的明确生命周期，不应把它当作普通登出或权限刷新捷径。
 
-## forward
+## 十二、forward
 
 `forward(): void` 等价于 `go(1)`，请求 history 前进一个条目。和浏览器前进按钮一样，没有可前进条目时不会导航；它也不提供可 await 的完成结果。
 
-## get routes
+## 十三、get routes
 
 `getRoutes(): RouteRecordNormalized[]` 从 matcher 读取当前全部标准化记录并返回一个新数组。它适合生成诊断信息或读取公开的 `name/path/meta`，但不是响应式订阅，也不应依赖 score、regexp 等未公开实现字段；动态增删后需要重新调用才能得到新清单。
 
-## go
+## 十四、go
 
 `go(delta: number): void` 把整数 delta 交给配置的 `RouterHistory.go()`：负数后退、正数前进、0 交由 history 实现处理。该方法只发出移动请求；目标记录仍会经过 Router 导航管线，但调用点拿不到 Promise 或 Navigation Failure。
 
-## has route
+## 十五、has route
 
 `hasRoute(name): boolean` 按 `string | symbol` route name 查询 matcher。它不接受 path，也不证明某个 URL 当前能否成功解析；匿名记录无法通过它查询。动态功能应共享同一个稳定 name，并用该方法让守卫内注册条件收敛。
 
-## is ready
+## 十六、is ready
 
 `isReady(): Promise&lt;void&gt;` 等待首次导航成功完成，包括异步进入守卫和目标异步组件；初始导航已完成时立即兑现，初始导航发生未捕获错误时拒绝。浏览器端 `app.use(router)` 会启动首个 URL 导航；服务端使用 memory history 时必须先 `push()` 请求 URL，再等待 ready。它不是等待每一次后续导航的 API。
 
@@ -263,11 +263,11 @@ await router.isReady()
 const html = await renderApplication(router)
 ~~~~
 
-## on error
+## 十七、on error
 
 `onError(handler): () =&gt; void` 接收导航守卫抛出或返回的 Error，以及解析目标异步组件时出现的未捕获错误；handler 参数是 `error/to/from`。常规 aborted、cancelled、duplicated Navigation Failure 是 `push()`/`replace()` 的 fulfilled 结果或 `afterEach` 第三参，不应等同为 `onError`。保存返回值可注销处理器。
 
-## push
+## 十八、push
 
 `push(to): Promise&lt;NavigationFailure | void | undefined&gt;` 解析 RouteLocationRaw、执行完整守卫管线，并在成功时新增 history entry。成功（也包括守卫重定向最终成功）通常兑现 `undefined`；aborted、cancelled、duplicated 会兑现 Navigation Failure；未被 Router 归类的真实错误才会触发 `onError` 并让 Promise 拒绝。
 
@@ -283,15 +283,15 @@ if (isNavigationFailure(failure, NavigationFailureType.aborted)) {
 }
 ~~~~
 
-## remove route
+## 十九、remove route
 
 `removeRoute(name): void` 按名称移除记录；移除 parent 时，其 children 和 aliases 也会一起从 matcher 删除。记录不存在时生产版本不执行操作，开发版本给出诊断。和 `addRoute()` 一样，它不会主动重新匹配当前 URL；有明确所有权时优先执行 `addRoute()` 返回的 disposer。
 
-## replace
+## 二十、replace
 
 `replace(to)` 与 `push(to)` 使用相同解析、守卫和 Promise 结果，只在最终提交时替换当前 history entry。它适合登录回跳、规范化 URL 或当前地址重新匹配；需要让用户能返回当前页面时仍应使用 `push()`。也可向 `push()` 的对象地址传入 `replace: true` 获得相同行为。
 
-## resolve
+## 二十一、resolve
 
 `resolve(to, currentLocation?)` 把 raw location 规范化为带 `href`、`matched`、`params`、`query` 的 `RouteLocationResolved`。默认相对当前 `currentRoute.value` 解析；覆盖 currentLocation 只适合预览其他上下文的相对链接。它不会执行守卫、写 history 或修改 `currentRoute`，适合生成 href、预检匹配和构建原生链接。
 
@@ -308,7 +308,7 @@ console.info(target.href, target.matched.map((record) => record.name))
 await router.push(target.fullPath)
 ~~~~
 
-## install
+## 二十二、install
 
 `install(app: App): void` 在 5.2.0 类型和源码中明确标记为 `@internal`。它只由 Vue 的插件协议在 `app.use(router)` 时自动调用，应用代码不得手动调用。安装过程登记 RouterLink/RouterView、设置 `$router`/`$route`、提供组合式 API 所需 injection，并在浏览器端触发初始导航；绕过 `app.use()` 会破坏 Vue 的插件去重与应用生命周期约定。
 
@@ -326,7 +326,7 @@ app.mount('#app')
 `install` 虽然可在对象上观察到，但不是稳定的应用层调用面；不要提取、包装或手动调用它。多 app 场景也应让每个 app 各自执行 `app.use(router)`。
 :::
 
-## 内部集成边界
+## 二十三、内部集成边界
 
 TypeDoc 还会把继承自 Data Loader extensions 的 7 个 symbol 属性展示在 `_RouterClassic` 上。固定 5.2.0 声明逐项标记 `@internal`；它们服务于 experimental Data Loaders 与 SSR 协调，不属于稳定 Router 用法，不计入 19 个公开成员，也不应由应用读取、写入或做存在性探测。
 
@@ -340,7 +340,7 @@ TypeDoc 还会把继承自 Data Loader extensions 的 7 个 symbol 属性展示�
 | PENDING_LOCATION_KEY | 保存 loaders 等待的 pending location | 排除；不作为导航状态入口 |
 | SERVER_INITIAL_DATA_KEY | 保存服务端生成的初始数据 | 排除；不与应用序列化协议耦合 |
 
-## 易错使用提示
+## 二十四、易错使用提示
 
 :::pitfalls
 ### 直接从 currentRoute 读取字段，或在初始导航前把占位 route 当结果
@@ -524,7 +524,7 @@ if (!failure) showReportsReady()
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 二十五、源码推导与适用场景
 
 :::steps
 ### 1. Router 条件类型保留替换能力

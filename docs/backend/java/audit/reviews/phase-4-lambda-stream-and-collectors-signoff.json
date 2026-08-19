@@ -1,0 +1,275 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.intermediate.lambda-stream-and-collectors",
+  "batchId": "phase-4-lambda-stream-and-collectors",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-15T04:56:55Z",
+  "phase": "Phase C",
+  "phaseCProgress": "1/20",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "batchFilesAlreadyStagedAtAdmission": true,
+    "newStagingPerformedThisBatch": false,
+    "existingIndexPreserved": true,
+    "unrelatedWorkspaceChangesPreserved": true
+  },
+  "phaseAFreeze": {
+    "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+    "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81",
+    "designation": "I-01 / 保留、复用",
+    "estimatedMinutes": 120,
+    "prerequisite": "backend.java.learn.basics.command-line-task-manager-project",
+    "stableIdPreserved": true,
+    "slugPreserved": true,
+    "urlPreserved": "/backend/java/core/learn/lambda-stream-and-collectors"
+  },
+  "phaseCAdmission": {
+    "status": "PASS",
+    "phaseBAggregateStatus": "21/21 closed",
+    "predecessorCourseId": "backend.java.learn.basics.command-line-task-manager-project",
+    "predecessorSignoffPath": "docs/backend/java/audit/reviews/phase-4-command-line-task-manager-project-signoff.json",
+    "predecessorSignoffSha256": "9aa031644d0e015093c40e021e871fa6735c1b3d630491a7dad370780b1af6f0",
+    "trackChangeRequired": false,
+    "loaderChangeRequired": false
+  },
+  "sourceRepository": {
+    "path": "/Users/jian/Desktop/work/TDH/dzzz/dzzz-app",
+    "headAtHistoricalVerification": "167ca8aa91ca3a6b101246964ef4fddec3d21da0",
+    "accessedThisBatch": false,
+    "historicalEvidenceReused": true,
+    "historicalVerifiedAt": "2026-08-08",
+    "readOnlyBoundaryPreserved": true,
+    "projectExecuted": false,
+    "projectModified": false
+  },
+  "versions": {
+    "verifiedAt": "2026-08-15",
+    "modern": {
+      "java": "25",
+      "runtime": "Eclipse Temurin 25.0.3+9 LTS",
+      "apiSnapshot": "25.0.4+7-LTS-189",
+      "imageDigest": "sha256:12e44624adee6808a36d962717e1656e0afeeeff5a100f9cb00e0136513558f0"
+    },
+    "legacy": {
+      "java": "8",
+      "runtime": "Eclipse Temurin 8u492-b09",
+      "imageDigest": "sha256:c8b86f2c0a9bd6cc1b7fabc5d1a097501a166eea7cad3b2764e90e96178bea9b",
+      "springBootBackground": "2.3.12.RELEASE"
+    }
+  },
+  "sourceDiscovery": {
+    "method": "直接复核既有 Oracle、OpenJDK 与 Dev.java 官方入口；当前环境未提供 Tavily，未新增候选来源",
+    "officialUrlCount": 19,
+    "java25OfficialHttp200Count": 14,
+    "java8ContractsRechecked": [
+      "Collectors.toSet",
+      "Stream.reduce(identity, accumulator, combiner)"
+    ],
+    "communitySourcesUsedAsEvidence": false,
+    "projectEvidenceBoundary": "5 个 dzzz-app 项目证据沿用 2026-08-08 只读快照，不声明本批重新核验"
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/intermediate/lambda-stream-and-collectors.md",
+      "sha256": "e5fdebde78c15c80e1744943035966a27c1e0483b649efe31bbe3d906fb2c090"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/lambda-stream-and-collectors.md",
+      "sha256": "078254f84541c443821b49160e21abb4dc12aaeca635aad91e0b19d225c284e0"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "23de3ba037d253c8eba2b40ec1cb0c1b5dba4235e93910b35e1936759caf3b0a"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "d8778a4dd7ed5b9027f159f2e959ed113f42839c5106490f98fc3b0554e2e10b"
+    },
+    {
+      "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+      "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81"
+    },
+    {
+      "path": "docs/backend/java/audit/phase-2-knowledge-path-manifest.json",
+      "sha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407"
+    }
+  ],
+  "engineeringVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "summary": "passed before review and after finding fixes"
+    },
+    {
+      "command": "npm run format:check",
+      "exitCode": 0,
+      "summary": "passed; final lesson also passed targeted Prettier check"
+    },
+    {
+      "command": "npm run test:unit",
+      "exitCode": 0,
+      "summary": "No persistent test files; configured empty directory passed"
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "summary": "No persistent E2E files; command passed with configured empty directory"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "passed after review fixes; 1760 modules transformed; existing chunk-size and content-markdown timing warnings only"
+    },
+    {
+      "command": "git diff --check -- <I-01 paths> && git diff --cached --check",
+      "exitCode": 0,
+      "summary": "passed; no new staging performed"
+    }
+  ],
+  "javaVerification": {
+    "fixturePath": "/tmp/vue3-study-i01-phase-c.YpZxj5",
+    "feedbackLoop": "Java 25 与 Java 8 固定 Eclipse Temurin 镜像只读挂载同一 mktemp fixture",
+    "positiveCases": [
+      {
+        "name": "Java 25 common contract",
+        "exitCode": 0,
+        "stdout": "phase-c-i01|PASS|result=JAVA,GO,JS|merge=a/A",
+        "coverage": "函数式接口、四类方法引用、toSet、toMap merge、分组、分区、joining、二参数和三参数归约"
+      },
+      {
+        "name": "Java 8 common contract",
+        "exitCode": 0,
+        "stdout": "phase-c-i01|PASS|result=JAVA,GO,JS|merge=a/A"
+      },
+      {
+        "name": "Java 25 modern collectors",
+        "exitCode": 0,
+        "stdout": "modern-collectors|PASS|checks=3"
+      },
+      {
+        "name": "Java 8 collectingAndThen compatibility",
+        "exitCode": 0,
+        "stdout": "legacy-unmodifiable|PASS"
+      }
+    ],
+    "negativeCases": [
+      {
+        "name": "effectively-final capture",
+        "java25ExitCode": 1,
+        "java8ExitCode": 1,
+        "diagnostic": "local variables referenced from a lambda expression must be final or effectively final"
+      },
+      {
+        "name": "method-reference target mismatch",
+        "java25ExitCode": 1,
+        "java8ExitCode": 1,
+        "diagnostic": "bad return type in method reference"
+      },
+      {
+        "name": "inexact method-reference overload ambiguity",
+        "java25ExitCode": 1,
+        "diagnostic": "reference to use is ambiguous"
+      },
+      {
+        "name": "duplicate-key toMap",
+        "java25ExitCode": 0,
+        "java8ExitCode": 0,
+        "stdout": "duplicate-key|caught|java.lang.IllegalStateException"
+      },
+      {
+        "name": "Stream reuse",
+        "java25ExitCode": 0,
+        "java8ExitCode": 0,
+        "stdout": "stream-reuse|caught|java.lang.IllegalStateException"
+      },
+      {
+        "name": "source interference",
+        "java25ExitCode": 0,
+        "java8ExitCode": 0,
+        "stdout": "source-interference|caught|java.util.ConcurrentModificationException",
+        "interpretation": "只证明固定镜像观察结果；跨实现结论仍以 non-interference 合同为准"
+      }
+    ],
+    "temporaryAssetsCleaned": true,
+    "cleanupCommand": "find /tmp/vue3-study-i01-phase-c.YpZxj5 -depth -delete",
+    "cleanupCheck": "PASS; exact path no longer exists"
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "adapter": "PASS",
+    "researchLineCount": 437,
+    "lessonLineCount": 1010,
+    "independentKnowledgePointHeadings": 10,
+    "codeBlockCount": 20,
+    "exerciseCount": 1,
+    "javaMethodComments": "PASS"
+  },
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "baseUrl": "http://127.0.0.1:4197/",
+    "targetPath": "/backend/java/core/learn/lambda-stream-and-collectors",
+    "sessionsClosed": true,
+    "desktop": {
+      "viewport": "1440x900",
+      "targetPageStatus": 200,
+      "h1Count": 1,
+      "prerequisiteVisible": true,
+      "toSetHeadingVisible": true,
+      "threeArgumentReduceContractVisible": true,
+      "takeWhileJava9BoundaryVisible": true,
+      "estimatedMinutesVisible": true,
+      "horizontalOverflow": false
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "targetPageStatus": 200,
+      "h1Count": 1,
+      "prerequisiteVisible": true,
+      "toSetHeadingVisible": true,
+      "threeArgumentReduceContractVisible": true,
+      "horizontalOverflow": false
+    },
+    "completionButtonTextAfterReload": "取消完成",
+    "progressPersistedAfterReload": true,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "failedRequests": 0,
+    "nonSuccessfulResponses": 0
+  },
+  "review": {
+    "reviewer": "/root/i01_combined_review",
+    "riskClassification": "Phase C 复用课程的实质内容扩展、双版本反馈环与前置路线调整",
+    "independentReviewRequired": true,
+    "initialStandards": "PASS",
+    "initialStandardsFindings": 0,
+    "initialSpec": "FAIL",
+    "initialSpecFindings": 3,
+    "resolvedFindings": [
+      "补三参数 reduce 的最小正例与 accumulator/combiner compatibility 公式",
+      "takeWhile 标注 Java 9+",
+      "移除未由独立示例支撑的 flatMap 学习目标承诺"
+    ],
+    "standards": "PASS",
+    "standardsFindings": 0,
+    "spec": "PASS",
+    "specFindings": 0
+  },
+  "stopBoundary": "Phase C 的 I-01 已关闭，进度为 1/20；I-02 未读取、未研究、未实现。本批立即停止，不自动开始 I-02。",
+  "selfHashPolicy": "signoff 文件不记录自身 SHA-256；artifacts 只绑定 signoff 外可稳定计算的本批产物"
+}

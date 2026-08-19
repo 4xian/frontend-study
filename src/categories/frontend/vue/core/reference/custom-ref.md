@@ -34,7 +34,7 @@ anchors:
 
 # customRef()
 
-## 概述
+## 一、概述
 
 customRef() 把 ref 内部的两个开关交到你手上：`track`（收集依赖）与 `trigger`（触发更新）。它接收一个工厂函数，工厂函数以这两个函数为参数，返回带 `get` 和 `set` 方法的对象——你在 get 里决定何时 track、在 set 里决定何时（甚至是否延迟）trigger。
 
@@ -50,7 +50,7 @@ type CustomRefFactory<T> = (
 }
 ~~~~
 
-## 典型用途：防抖 ref
+## 二、典型用途：防抖 ref
 
 官方示例：一个只在最后一次 set 之后延迟一段时间才向模板同步的防抖 ref。关键在于 set 里不立即调用 `trigger()`，而是放进 `setTimeout`——期间的连续输入会不断重置定时器，只有停止输入后才真正触发一次更新。
 
@@ -81,7 +81,7 @@ export function useDebouncedRef(value, delay = 200) {
 防抖 ref 实测：输入框连续输入时镜像文本不动，停顿 400ms 后一次性同步
 :::
 
-## 易错使用提示
+## 三、易错使用提示
 
 :::pitfalls
 ### 把 `track()` / `trigger()` 当成可省略的样板代码
@@ -158,7 +158,7 @@ const model = customRef((track, trigger) => ({
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 最小源码实现
+## 四、最小源码实现
 
 CustomRefImpl 与 RefImpl 一样持有一个 Dep，区别是它把 `dep.track` 与 `dep.trigger` 用 bind 绑定后直接交给工厂函数，自己的 value 存取器完全委托给工厂返回的 get/set。也就是说：普通 ref 的"读取必 track、写入变化必 trigger"在这里换成了"你说了算"。
 

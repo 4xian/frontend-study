@@ -1,0 +1,218 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.intermediate.dependency-injection-and-bean-lifecycle",
+  "batchId": "phase-c-i06-dependency-injection-and-bean-lifecycle",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-15T16:02:00+08:00",
+  "phase": "Phase C",
+  "phaseCProgress": "6/20",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "newStagingPerformedThisBatch": false,
+    "existingIndexPreserved": true,
+    "unrelatedWorkspaceChangesPreserved": true
+  },
+  "phaseAFreeze": {
+    "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+    "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81",
+    "designation": "I-06 / 必修、重排、复用",
+    "title": "IoC、构造器注入与 Bean 生命周期",
+    "estimatedMinutes": 150,
+    "prerequisite": "backend.java.learn.intermediate.first-spring-boot-web-api",
+    "stableIdReused": "backend.java.learn.intermediate.dependency-injection-and-bean-lifecycle",
+    "slugReused": "dependency-injection-and-bean-lifecycle",
+    "urlPreserved": "/backend/java/core/learn/dependency-injection-and-bean-lifecycle",
+    "frozenSuccessor": "backend.java.learn.intermediate.spring-boot-and-configuration"
+  },
+  "phaseCAdmission": {
+    "status": "PASS",
+    "predecessorCourseId": "backend.java.learn.intermediate.first-spring-boot-web-api",
+    "predecessorSignoffPath": "docs/backend/java/audit/reviews/phase-4-first-spring-boot-web-api-signoff.json",
+    "predecessorSignoffSha256": "dd8a8c0727b9636cafaa3512f0debc83bdf444d2c0f51190d056d4a661b03512",
+    "phaseCProgressBeforeBatch": "5/20",
+    "trackChangeRequired": true,
+    "loaderChangeRequired": false
+  },
+  "versions": {
+    "verifiedAt": "2026-08-15",
+    "modern": {
+      "java": "25",
+      "runtime": "Eclipse Temurin 25.0.3+9 LTS",
+      "maven": "3.9.12",
+      "springBoot": "4.1.0",
+      "springFramework": "7.0.8",
+      "lifecycleAnnotations": "jakarta.annotation"
+    },
+    "legacy": {
+      "java": "8",
+      "runtime": "Eclipse Temurin 8u492-b09",
+      "maven": "3.9.12",
+      "springBoot": "2.3.12.RELEASE",
+      "springFramework": "5.2.15.RELEASE",
+      "lifecycleAnnotations": "javax.annotation"
+    }
+  },
+  "sourceDiscovery": {
+    "method": "Tavily located Spring candidates; all claims were verified against current Spring reference, exact 7.0.8 API, and archived 5.2.15 reference pages",
+    "researchDirectSourceCount": 12,
+    "lessonOfficialSourceCardCount": 12,
+    "finalHttp200Count": 12,
+    "finalHttpFailureCount": 0,
+    "communitySourcesUsedAsEvidence": false,
+    "projectEvidenceBoundary": "Five frozen Phase 2 items remain display-only compatibility evidence; project source was not reopened or executed"
+  },
+  "researchReview": {
+    "independentReadOnlyReview": true,
+    "status": "PASS / 0 findings",
+    "officialUrlHttp200Count": 12,
+    "officialUrlFailureCount": 0,
+    "phaseAContractAlignment": "PASS",
+    "lessonResearchAlignment": "PASS",
+    "stopBoundaryAlignment": "PASS",
+    "workspaceModifiedByReviewer": false
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/intermediate/dependency-injection-and-bean-lifecycle.md",
+      "sha256": "a6f926dd1169a63fa1c0a2407df42005994cc67b4f9c607ca7b61a449002a571"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/dependency-injection-and-bean-lifecycle.md",
+      "sha256": "ac0874db1eed82b0eabf5bb0bccfd4b56b8391e5d8ea3f9b5388da708b31cd9f"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "072e57e87d301752526989d7137fbf85f96b208e4c05b0145e4a1bbff2b894aa"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "e89e15d2335d8ddfd659e833633b0114edbfecb172c835dd07867b6221cfca72"
+    },
+    {
+      "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+      "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81"
+    },
+    {
+      "path": "docs/backend/java/audit/phase-2-knowledge-path-manifest.json",
+      "sha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407"
+    }
+  ],
+  "engineeringVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run format:check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run test:unit",
+      "exitCode": 0,
+      "summary": "No persistent test files; configured empty directory passed"
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "summary": "No persistent E2E files; configured empty directory passed"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "1764 modules transformed; existing Markdown timing and chunk-size warnings only"
+    },
+    {
+      "command": "git diff --check -- <I-06 paths>",
+      "exitCode": 0,
+      "summary": "passed"
+    }
+  ],
+  "javaVerification": {
+    "fixturePath": "/tmp/java-i06-phase-c.j7eH2E",
+    "fixtureSha256": {
+      "verify.sh": "873d573a24d1282dd3b537a0cc876b7bbe5aec14c454a006e4dec2026538a560",
+      "modern/pom.xml": "0a44cb41b49ced75b15db41d7054e35a6e99f9f46d9ece82565f2c82ffd8743a",
+      "legacy/pom.xml": "9915e23ffa89b6ca866e60862053802e98a55a02a2a5d5d343de09f41a10da6c"
+    },
+    "modernOutput": "modern PASS direct=true primary=email qualifier=sms list=2 prototype=true lifecycle=init,use,destroy missing=true ambiguous=true cycle=true",
+    "legacyOutput": "legacy PASS primary=email qualifier=sms list=2 prototype=true lifecycle=init,use,destroy",
+    "finalOutput": "I06_DUAL_RUNTIME_PASS",
+    "finalRunsPerRuntime": 2,
+    "temporaryAssetsCleaned": true,
+    "cleanupCommand": "find /tmp/java-i06-phase-c.j7eH2E -depth -delete",
+    "cleanupCheck": "PASS; exact path no longer exists"
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "adapter": "PASS",
+    "researchLineCount": 201,
+    "lessonLineCount": 983,
+    "independentKnowledgePointHeadings": 18,
+    "codeBlockCount": 17,
+    "exerciseCount": 1,
+    "officialSourceCount": 12,
+    "pitfallCount": 6,
+    "javaMethodComments": "PASS",
+    "sourceHeadingAbsent": true
+  },
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "baseUrl": "http://127.0.0.1:4194/",
+    "targetPath": "/backend/java/core/learn/dependency-injection-and-bean-lifecycle",
+    "sessionsClosed": true,
+    "devServerStopped": true,
+    "desktop": {
+      "viewport": "1440x900",
+      "horizontalOverflow": false,
+      "knowledgePointCount": 18,
+      "officialSourceCount": 12,
+      "estimatedMinutesVisible": true,
+      "verifiedAtVisible": true
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "horizontalOverflow": false,
+      "knowledgePointCount": 18,
+      "officialSourceCount": 12,
+      "estimatedMinutesAttachedButCollapsed": true,
+      "verifiedAtVisible": true
+    },
+    "title": "IoC、构造器注入与 Bean 生命周期",
+    "previousEntryId": "backend.java.learn.intermediate.first-spring-boot-web-api",
+    "liveNextEntryBeforeI07Reorder": "backend.java.learn.intermediate.relational-data-and-sql-foundations",
+    "frozenSuccessorNotYetReordered": "backend.java.learn.intermediate.spring-boot-and-configuration",
+    "completionButtonTextAfterReload": "取消完成",
+    "progressPersistedAfterReload": true,
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "desktopFailedRequests": 0,
+    "mobileFailedRequests": 0
+  },
+  "review": {
+    "riskClassification": "复用课程只更新冻结前置、时长、核验日期和 track 顺序；未改变核心教学内容、loader、共享行为或架构",
+    "independentCodeReviewRequired": false,
+    "standards": "targeted verification PASS",
+    "spec": "Phase A I-06 route alignment PASS",
+    "highestSeverity": "none"
+  },
+  "stopBoundary": "Phase C 的 I-06 已关闭，进度为 6/20；下一批只允许 I-07（backend.java.learn.intermediate.spring-boot-and-configuration）。I-07 关闭前不得读取 I-08 或后续课程；Phase C 总 Gate 关闭前不得进入 Phase D。",
+  "selfHashPolicy": "signoff 文件不记录自身 SHA-256；artifacts 只绑定 signoff 外可稳定计算的本批产物"
+}

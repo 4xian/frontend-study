@@ -1,0 +1,80 @@
+.react-tsx-markup-card,
+.react-tsx-markup-note {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+}
+
+.react-tsx-markup-card {
+  padding: var(--space-4);
+}
+
+.react-tsx-markup-card header p,
+.react-tsx-markup-card h3 {
+  margin: 0;
+}
+
+.react-tsx-markup-card header > p:last-child {
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+}
+
+.react-tsx-markup-kicker {
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.react-tsx-markup-card h3 {
+  margin-top: var(--space-1);
+  font-size: 1.05rem;
+}
+
+.react-tsx-markup-card ul {
+  padding: 0;
+  margin: var(--space-4) 0 0;
+  list-style: none;
+}
+
+.react-tsx-markup-card li {
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--color-border);
+  line-height: 1.65;
+}
+
+.react-tsx-markup-card li:last-child {
+  border-bottom: 0;
+}
+
+.react-tsx-markup-card code {
+  padding: 2px 5px;
+  border-radius: 4px;
+  background: var(--color-bg-subtle);
+  font-size: 0.875em;
+}
+
+.react-tsx-markup-card footer {
+  display: flex;
+  align-items: center;
+  padding-top: var(--space-3);
+  margin-top: var(--space-2);
+  border-top: 1px solid var(--color-border);
+  color: var(--color-success, #18794e);
+}
+
+.react-tsx-markup-card footer span {
+  margin-right: var(--space-2);
+  font-size: 1rem;
+}
+
+.react-tsx-markup-note {
+  padding: var(--space-3) var(--space-4);
+  margin-top: var(--space-3);
+  border-left: 3px solid var(--color-accent);
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.7;
+}

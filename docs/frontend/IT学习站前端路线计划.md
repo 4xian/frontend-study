@@ -1,27 +1,28 @@
 # IT 学习站前端路线计划
 
-> 版本：v1.2
-> 日期：2026-08-05
-> 状态：TypeScript T2-2 已完成；内容架构迁移已完成，下一内容批次为 T3-1
+> 版本：v1.11
+> 日期：2026-08-19
+> 状态：React Core 74/74；Router、Redux、Zustand 与 Data 课程地图已确认；API Reference 统一后置
 > 权威规范：[`IT学习站前端规范.md`](./IT学习站前端规范.md)
 
 ## 1. 计划目标
 
-本计划只管理 IT 学习站的前端内容域。已完成的 Vue 生态保持维护状态；新内容严格
-按照 TypeScript → Vite → React Core → React Router → 状态管理 → 数据管理 → 测试与交付的依赖
-顺序推进。Next.js 和 Nuxt 不进入本计划。
+本计划只管理 IT 学习站的前端内容域。已完成的 Vue 生态保持维护状态；新内容严格按照 TypeScript →
+Vite → React Core 课程 → React Router 课程 → Redux Toolkit/React Redux 课程 → Zustand 课程 →
+TanStack Query 课程 → React 生态 API Reference → 测试与交付 → 生产级综合项目的依赖顺序推进。
+Next.js 和 Nuxt 不进入本计划。
 
 ## 2. 执行规则
 
-1. 每个模块从只读 R0 开始，冻结官方范围、版本、课程顺序、Reference 索引、Demo seam 和批次。
-2. 一批完成调研、实现、临时反馈环、浏览器验证、复审和状态登记后，才能开始下一批。
+1. 每个技术模块先确认一份课程计划，只冻结阶段、课程顺序和学习终点；每课实施时再核对当前版本和官方资料。
+2. 一课完成实时调研、实现、临时反馈环、浏览器验证、按风险复审并勾选计划后，才能开始下一课。
 3. 课程和 Reference 使用独立模板；Reference 不机械地为每个官方名称创建长文。
 4. 新模块先建立总览、manifest 和最小垂直切片，再按冻结批次扩展。
 5. 外部事实使用 Tavily 查找并回到官方来源；源码固定 tag 或 commit。
 6. 不修改已完成 Vue 内容，除非新工作暴露真实回归或官方维护任务。
 7. 普通前端内容批次不修改 `docs/backend/`、后端内容或后端审计资产。
 8. 不主动提交、推送或创建 PR。
-9. Gate 关闭后提取长期事实并删除该模块的调研和实施计划。
+9. 调研、验证和复审不建立仓库记录；模块课程计划长期保留，并只用复选框登记单课完成状态。
 10. 当前架构已经切换完成，后续批次不得恢复旧目录、旧 URL 或 TypeScript 正文模式。
 
 ## 3. 当前基线
@@ -31,9 +32,9 @@
 | Vue Core | 31 | 官网索引 206/206 | 完成，进入维护 |
 | Vue Router | 15 | 稳定 118/118；Experimental 86 项观察清单 | 完成，进入维护 |
 | Pinia | 14 | 稳定 41/41；restricted 26/26 已说明 | 完成，进入维护 |
-| TypeScript | 16/24 | 0/200 planned | T2-2 已完成，下一批为 T3-1 |
-| Vite | 0 | 0 | 等待 TypeScript Gate |
-| React 生态 | 0 | 0 | 等待 Vite Gate |
+| TypeScript | 24/24 | 199/199 available；0 planned；11 个观察范围 | Gate T 已通过，进入维护 |
+| Vite | 24/24 | 175/175 available；0 planned；15 个观察项；4 个 deferred | Gate V 已通过，进入维护 |
+| React 生态 | Core 74/74；Router/Redux/Data 各 48 课；Zustand 36 课 | 全部 Module 0 | 课程完成状态以各模块计划复选框为准；API Reference 统一后置 |
 
 已有 Vue 内容、目录、搜索、进度、课程/Reference layout 和交互 registry 是后续模块复用的宿主能力。
 目录、Markdown、Catalog 和 URL 以全站架构为准；不能据此跳过新生态的 adapter、按需加载和卸载
@@ -46,16 +47,32 @@ T3 TypeScript 高级课程
   -> TA TypeScript Reference
   -> Gate T
     -> V0 Vite 调研冻结
-    -> V1-V3 Vite 基础/中级/高级课程
-    -> VA Vite Reference
-    -> Gate V
-      -> R0 React 宿主与官方范围冻结
-      -> RC React Core 课程与 Reference
-      -> RR React Router 课程与 Reference
-      -> RS React 状态管理课程与 Reference
-      -> RD React 数据管理课程与 Reference
+      -> V1-V3 Vite 基础/中级/高级课程
+      -> VA Vite Reference
+      -> Gate V
+      -> R0-A React 生态范围冻结
+      -> R0-B1 React Core/DOM/宿主范围冻结
+      -> 停止并确认
+      -> R0-B2 宿主 admission 与最小垂直切片
+      -> RC React Core 74 课
+      -> RR0 React Router 冻结
+      -> RR React Router 课程
+      -> RS0 Redux Toolkit/React Redux 与 Zustand 冻结
+      -> RS-R Redux Toolkit + React Redux 课程
+      -> RS-Z Zustand 课程
+      -> RD0 TanStack Query 冻结
+      -> RD TanStack Query 课程
+      -> RA React 生态 API Reference 集中阶段
+        -> RCA React Core Reference
+        -> RRA React Router Reference
+        -> RSA Redux Toolkit/React Redux 与 Zustand Reference
+        -> RDA TanStack Query Reference
+        -> Gate RC / Gate RR / Gate RS / Gate RD
+      -> GT-R React 生态集成验收
       -> Gate R
         -> Q 测试、交付、性能与质量
+        -> RP React 生产级综合项目
+        -> Gate RP
         -> UI 前端入口与前端路径验收
 ```
 
@@ -67,12 +84,11 @@ T3 TypeScript 高级课程
 固定源码。建立官方主题到站内课程/Reference 的覆盖矩阵，冻结课程 ID、前置关系、难度、唯一 Demo
 或临时编译 fixture、批次数量和 Gate。R0 结束前不发布正文。
 
-T0 已于 2026-08-05 冻结：官方稳定版为 TypeScript `7.0.2`，课程为 24 课，稳定 Reference 为 200 个
-映射键。权威交付物为
-[`T0-官方调研与实施冻结.md`](./plans/typescript/T0-官方调研与实施冻结.md) 与
-[`TypeScript官方覆盖矩阵.md`](./coverage-matrices/TypeScript官方覆盖矩阵.md)。T1 与 T2 已按冻结范围
-开放十六课；T2-2 已通过独立双轴复审。T3-1 尚未开始，是迁移关闭后的下一内容批次，仍须按本计划
-单独执行完整 Gate。
+TypeScript 官方基线于 2026-08-05 冻结为 `7.0.2`，课程为 24 课，稳定 Reference 为 199 个映射键；
+长期统计与维护规则见
+[`TypeScript官方覆盖矩阵.md`](./coverage-matrices/TypeScript官方覆盖矩阵.md)。课程现为 `24/24`，
+稳定 Reference 为 `199/199 available`、`0 planned`，11 个观察范围已登记。GT-1 已完成，Gate T 已通过，
+TypeScript 进入维护状态。
 
 TypeScript 的“API”按 Reference 理解，至少区分：语言语法、类型操作符、Utility Types、模块与
 声明文件、TSConfig、编译器行为。Compiler API 和语言服务属于高级/低频范围，由 T0 决定采用
@@ -138,74 +154,167 @@ JavaScript API 分类建立索引。核心配置详解，相关选项主题合�
 ### Gate V
 
 - Vite 课程与 Reference 均从总览可达，官方冻结范围全部登记。
-- 开发服务器、插件和生产构建的结论由对应阶段的真实临时 fixture 验证。
+- 开发服务器、插件和生产构建的结论均有对应验证证据。
 - 现有 Vue 应用构建、懒加载、Demo 源码和 chunk 行为无回归。
 - TypeScript 课程可作为 Vite 配置与插件课程的真实前置关联。
 
+Vite 教学基线固定为 `8.2.1`。课程为 `24/24`，稳定 Reference 为
+`175/175 available`、`0 planned`；15 个实验/弃用观察项和 4 个 deferred 外部证据项已登记。
+Gate V 已通过，Vite 进入维护状态。
+
 ## 7. React Core 阶段
 
-### R0：官方范围与宿主冻结
+### R0-A：React 生态范围冻结
 
-核对 React、React DOM 和 JSX/TypeScript 配置的当前稳定范围及固定源码。设计 React Demo Adapter：
+冻结 React 全家桶的能力边界、四个运行时 Module、候选状态库与服务端数据管理库、观察/延期/排除规则，
+并定义 React Demo Adapter 的职责与后续 Gate 顺序。R0-A 不安装依赖、不冻结具体版本、课程数量或
+Reference 分母，不创建运行时入口。完整冻结记录见
+[`R0-A-React生态范围冻结.md`](./plans/react/R0-A-React生态范围冻结.md)。R0-A 已完成。
+
+### R0-B1：React Core、React DOM 与宿主范围冻结
+
+React/DOM `19.2.8`、类型 `19.2.18`/`19.2.4`、React 插件 `6.0.5`、52 个稳定 officialKey、11 个
+deferred、初始 24 课、12 个 RCA 聚合 entry、Error Boundary legacy 例外和默认 StrictMode 已冻结。
+后续 RC1、RC2 已分别重拆为 20 篇与 29 篇单知识点课程；完整记录见
+[`R0-B-React-Core-DOM与宿主冻结.md`](./plans/react/R0-B-React-Core-DOM与宿主冻结.md)。R0-B1 已
+完成，后续 R0-B2 已按独立授权闭环。
+
+### R0-B2：宿主 admission 与最小垂直切片
+
+已安装冻结的精确依赖并实现 React Demo Adapter：
 动态加载 runtime，挂载 TSX Demo，切换或离开时 `unmount`，并继续用 `?raw` 展示同源源码。先证明
 访问 Vue、TypeScript 或 Vite 页面不会提前加载 React runtime。
 
-同时冻结 React Core 课程与稳定 Reference；experimental、canary 和框架专属能力进入独立观察清单，
-不计入稳定完成度。
+R0-B2 已完成临时反馈环、构建 manifest、浏览器网络、错误恢复、三轮生命周期、桌面/390px 与双轴
+复审；React Demo Adapter 已作为 Core、Router、State 和 Data Module 的共享宿主基线。
 
-### RC1：基础课程
+### RC：React Core 74 课
 
-顺序为 JSX → 组件 → Props → 条件与列表 → 事件 → State → 表单 → 组件组合。示例默认 TypeScript，
-只关联已完成的 TypeScript 课程，不在 React 课程中重复讲完整类型系统。
+React Core 已按调整后的路线完成 `74/74`：基础 `24/24`、中级 `21/21`、高级 `29/29`，共 `62` 节
+知识课和 `12` 节实战课。课程覆盖 React 19.2 客户端 Core/DOM、稳定 Hooks、状态建模、Effect、Ref、
+性能、异步边界、并发 UI、Action、Hydration 与宿主资源。现行课程数量、顺序、ID、合并迁移和最终
+闭环记录统一见 [`React课程调整总计划.md`](./plans/react/React课程调整总计划.md)。
 
-### RC2：中级课程
+[`RC1-基础课程官方事实核验.md`](./plans/react/RC1-基础课程官方事实核验.md)、
+[`RC2-中级课程单知识点计划.md`](./plans/react/RC2-中级课程单知识点计划.md) 和
+[`RC3-高级课程单知识点计划.md`](./plans/react/RC3-高级课程单知识点计划.md) 只保留调整前的历史冻结、
+逐课研究和验收证据，不再定义现行课程数量、顺序或下一任务。
 
-进入状态建模、更新队列、Reducer、Context、Ref、Effect、资源清理和自定义 Hook。Effect 放在能够
-先区分事件与渲染计算之后，避免把它教成通用同步工具。
+React Core API Reference 不在课程完成后立即实施，统一后置到 RA 阶段；Gate RC 因此保持 Pending，
+但不再阻塞 RR0 和后续课程阶段。
 
-### RC3：高级课程
+## 8. React Router 阶段
 
-覆盖错误边界、Suspense、Transition、外部 store 接入、可复用组合、性能分析、服务端能力边界和
-第三方库 interface。仅讲稳定公开能力；版本敏感内容由 R0 决定状态。
+### RR0：React Router 课程计划确认
+
+React Router 课程地图已确认，共 48 课，基础、中级、高级各 14 节知识课和 2 节实战课。课程使用 Data
+Mode 作为唯一实现主线；Declarative Mode 只用于模式识别，Framework Mode 只说明能力边界与迁移。
+精确版本、官方资料和每课内容在实施当前课时实时核对，不单独保存调研文档。完整顺序见
+[`React-Router课程计划.md`](./plans/react/React-Router课程计划.md)。
+
+### RR：React Router 课程
+
+按已确认的 48 课清单从基础到高级逐课实施，完成状态只读取计划复选框。每课只讲本课知识，不把 Vue
+Router 结构直接复制过来，也不在 Router 课程中承担 TanStack Query 的服务端缓存教学。
+
+React Router API Reference 和 Gate RR 统一后置到 RA 阶段。课程阶段仍须独立验收深链刷新、静态部署
+fallback 与代表浏览器路径，不能把 Reference 后置理解为降低课程 Gate。
+
+## 9. React 状态管理阶段
+
+### RS0：客户端状态双分支冻结
+
+模块 ID 保持 `react/state`，不绑定单一 vendor。Redux Toolkit + React Redux 作为同一 Redux 技术栈的
+系统主线，Zustand 作为独立的完整轻量分支；两个分支分别冻结课程和 Demo，Jotai 只进入观察。
+
+RS0 完成后依次实施 Redux 与 Zustand 课程；两组稳定 Reference 和 Gate RS 统一后置到 RA 阶段。
+
+### RS-R：Redux Toolkit + React Redux 课程
+
+Redux Toolkit 负责 Redux 逻辑和 store 的标准写法，React Redux 负责 React 组件与 Redux store 的绑定。
+课程按 store 与 Provider → slice、reducer 与 action → selector 与派生状态 → 异步 thunk 与 middleware
+→ TypeScript、调试、测试和 SSR 边界递进，不教学旧式手写 Redux 样板作为主线。课程地图已确认为 48
+课，完成状态只读取计划复选框；完整顺序见
+[`Redux-Toolkit与React-Redux课程计划.md`](./plans/react/Redux-Toolkit与React-Redux课程计划.md)。
+
+### RS-Z：Zustand 课程
+
+Zustand 课程地图已确认为 36 课，基础、中级、高级各 10 节知识课和 2 节实战课。基础和中级只使用
+React 绑定 Store 作为常用开发主线；Vanilla Store、作用域隔离、多实例和 SSR/hydration 后移到高级
+阶段。完成状态只读取计划复选框；完整顺序见
+[`Zustand课程计划.md`](./plans/react/Zustand课程计划.md)。Zustand API Reference 和 Gate RS 统一后置到
+RA 阶段。
+
+## 10. React 数据管理阶段
+
+### RD0：TanStack Query 课程计划确认
+
+模块 ID 保持 `react/data`。TanStack Query 是正式主线；RTK Query 与 SWR 只进入观察。课程地图不固定
+具体版本，每课实施时实时核对最新稳定版，并明确与两个 client store 及 React Router Data 模式的
+组合边界。
+
+### RD：TanStack Query 课程
+
+TanStack Query 课程地图已确认为 48 课，基础、中级、高级各 14 节知识课和 2 节实战课。课程以
+`fetch`、`QueryClientProvider`、`useQuery` 和 `useMutation` 作为常用 React 开发主线，再进入失效、
+分页、乐观更新、预取、Router 集成、SSR 与测试。完成状态只读取计划复选框；完整顺序见
+[`TanStack-Query课程计划.md`](./plans/react/TanStack-Query课程计划.md)。不得把所有远程数据复制到客户端
+状态 store；与 React Router Data 模式的缓存所有权必须保持明确。
+
+表单与校验只作为 React Core 和数据 mutation 的组合专题；Gate R 不新增独立表单库 Module。未来如需
+扩展，必须在 Gate R 之外重新调研、授权和冻结，不在本计划中预创建空入口。
+
+TanStack Query 是独立课程路线，不并入 Redux、Zustand 或 Router 课程。API Reference 和 Gate RD 统一
+后置到 RA 阶段；课程阶段仍须验收缓存、mutation、按需加载及跨模块所有权。
+
+## 11. React 生态 API Reference 集中阶段
+
+Router、Redux Toolkit + React Redux、Zustand 和 TanStack Query 课程全部完成后，再集中实施四个运行时
+Module 的 API Reference。Reference 仍按 Module 独立登记、独立统计和独立验收，不合并成一篇大文档。
+
+### RA0：Reference 范围复核
+
+开始前重新核对各库当时的稳定版本、官方索引、公开 API、废弃项、实验项和源码固定点。课程阶段冻结的
+候选分母只能作为输入，不能代替 Reference 实施前的当前事实复核。
 
 ### RCA：React Core Reference
 
 按官方 Components、Hooks、APIs 与 React DOM 分类建立稳定索引。每个条目区分纯函数规则、渲染期
 规则、事件期行为和宿主 DOM 行为；合并相关 overload 或类型，不为每个导出机械创建长文。
 
-## 8. React Router 阶段
+### RRA：React Router Reference
 
-在 React Core 组件、State、Effect 和 Context 之后进入。R0 核对当前稳定版本、模式与官方索引，
-然后按路由配置与导航 → Params/Query/嵌套 → Loader/Action/错误与并发 → 鉴权、懒加载、滚动、类型和
-部署递进。课程与 Reference 独立完成 Gate，不把 Vue Router 结构直接复制过来。
+按所选 Declarative、Data 与共享 API 范围建立索引，Framework 专属能力按 RR0 冻结结果登记为详解、
+边界说明或观察项。
 
-## 9. React 状态管理阶段
+### RSA：Redux 与 Zustand Reference
 
-模块 ID 保持 `react/state`，不提前绑定 vendor。R0 对候选库的官方维护状态、TypeScript 体验、学习
-成本、运行模型和生态采用情况做短决策记录，只选择一个主讲方案；其他方案进入对比或后续计划。
+Redux Toolkit、React Redux 和 Zustand 使用三个独立官方索引与统计分母。Redux Toolkit 与 React Redux
+虽属于同一教学主线，但不能混淆各自导出的 API；Zustand 保持独立分支。
 
-课程顺序为局部状态边界 → 共享状态建模 → selector 与派生状态 → 异步 action → 持久化、调试、测试
-和 SSR 边界。Reference 只覆盖选定主线的稳定公开 interface，并明确与 React Context、Reducer 和
-服务端数据管理的分工。
+### RDA：TanStack Query Reference
 
-## 10. React 数据管理阶段
+按 React 适配层的查询、mutation、缓存、无限查询、hydration 与 Devtools 等稳定公开接口建立索引，
+不把 Router 或客户端 store API 混入其分母。
 
-模块 ID 保持 `react/data`。R0 决定首批服务端状态库，课程按查询键与缓存 → 加载/错误 → mutation
-与失效 → 分页与无限加载 → optimistic update → 预取、并发、SSR 与测试递进。不得把所有远程数据
-复制到客户端状态 store。
+### Module Gates 与 Gate R
 
-表单与校验先作为 React Core 和数据 mutation 的组合专题；只有 R0 证明独立库具有足够教学深度和
-稳定官方 Reference 时，才新增单独模块，不在总计划中预创建空入口。
+- Gate RC：React Core 课程、Reference、观察项和 Demo Adapter 合同通过。
+- Gate RR：Router 课程、Reference、深链、部署 fallback 和代表路径通过。
+- Gate RS：Redux 与 Zustand 两个课程分支、各自 Reference、订阅清理和按需加载通过。
+- Gate RD：TanStack Query 课程、Reference、缓存与 mutation 及跨模块所有权通过。
 
-### Gate R
+### GT-R 与 Gate R
 
 - React Core、Router、状态管理、数据管理均有独立课程总览和 Reference 总览。
 - TSX Demo 真实运行、源码同源、正确卸载，不产生重复 root 警告。
-- React runtime 只在进入 React 内容或 Demo 时按需加载。
+- React runtime 只在实际运行 React Demo 时按需加载；React 轻量总览不得提前加载。
 - 四条路线的关联只指向真实可用条目，Next.js 未混入。
 - 桌面、390px、键盘、reduced motion、搜索和跨生态切换通过代表路径验证。
 
-## 11. 测试、交付与质量阶段
+GT-R 负责四个独立 Module Gate 的集成复验；Gate R 关闭后才进入 Q 阶段。当前 Gate R 为 Pending。
+
+## 12. 测试、交付与质量阶段
 
 在 TypeScript、Vite 和 React 均有真实内容后，开放通用工程化模块：
 
@@ -216,14 +325,25 @@ JavaScript API 分类建立索引。核心配置详解，相关选项主题合�
 
 课程必须围绕已有 Vue/React 项目验证，不建立与实际宿主脱节的命令百科。
 
-## 12. 前端入口与体验验收
+## 13. React 生产级综合项目阶段
+
+Gate R 与 Q 阶段完成后，新增一个 React 生产级综合项目作为最终整合课程。项目只复用已经完成的
+Core、Router、State、Data、测试与交付知识，不在项目中首次教学新的框架或库。项目至少整合多页面与
+嵌套路由、URL 状态、真实 API、鉴权边界、CRUD、分页、缓存、mutation、客户端状态、表单、错误恢复、
+组件/集成/E2E 测试、性能检查、构建和部署。
+
+项目的业务主题、后端接口、状态库选择、课程拆分、验收矩阵和部署目标在独立 RP0 中冻结；未完成前置
+Module Gate 时不得创建正文、Demo、依赖或空运行时入口。项目完成后单独关闭 Gate RP。
+
+## 14. 前端入口与体验验收
 
 前述模块关闭 Gate 后，再统一复验技术中心中的前端入口、Module 总览、课程与 Reference
 详情、Demo 视图、搜索、进度、深链、构建 chunks、390px、键盘和降级模式。视觉工作不能反向改变
 内容 ID、课程顺序、Reference 覆盖或全站信息架构。
 
-## 13. 下一任务
+## 15. 下一任务
 
-下一内容批次固定为 TypeScript T3-1，高级范围和 T0 冻结结论不变。开始前仍需按执行规则冻结本批
-范围、反馈环和停止边界；本次架构迁移不自动授权创建 T3-1 调研、条目、Demo、持久化 fixture 或
-测试文件。
+React Core 课程已达到 `74/74 available`，调整路线的课程 Gate 已通过。React Core Reference 仍为
+`0`，Gate RC 与 Gate R 保持 Pending，但 API Reference 已统一后置，不再阻塞课程路线。React Router、
+Redux Toolkit + React Redux、TanStack Query 的 48 课地图与 Zustand 的 36 课地图均已确认，完成状态
+以各模块计划复选框为准。后续按总路线顺序逐个实施课程，完成四条课程路线后再进入 API Reference。

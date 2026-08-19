@@ -11,7 +11,7 @@ export const vueRouterMatchingReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.matching.matcher',
-        'internal-path-parser-options',
+        '二internal-path-parser-options',
       ],
       [
         'interfaces.matcherlocation',
@@ -19,7 +19,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.matcher',
-        'matcher-location',
+        '三matcher-location',
       ],
       [
         'interfaces.matcherlocationaspath',
@@ -27,7 +27,7 @@ export const vueRouterMatchingReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.matching.matcher',
-        'matcher-location-as-path',
+        '四matcher-location-as-path',
       ],
       [
         'interfaces.routermatcher',
@@ -35,7 +35,7 @@ export const vueRouterMatchingReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.matching.matcher',
-        'router-matcher',
+        '五router-matcher',
       ],
       [
         'type-aliases.pathparseroptions',
@@ -43,7 +43,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.matcher',
-        'path-parser-options',
+        '六path-parser-options',
       ],
       [
         'functions.createroutermatcher',
@@ -51,7 +51,7 @@ export const vueRouterMatchingReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.matching.matcher',
-        'create-router-matcher',
+        '七create-router-matcher',
       ],
     ],
   },
@@ -65,7 +65,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'quick',
         'vue.router.reference.matching.route-records',
-        'route-record-base',
+        '二route-record-base',
       ],
       [
         'interfaces.routemeta',
@@ -73,7 +73,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.route-records',
-        'route-meta',
+        '三route-meta',
       ],
       [
         'interfaces.routerecordmultipleviews',
@@ -81,7 +81,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.route-records',
-        'route-record-multiple-views',
+        '四route-record-multiple-views',
       ],
       [
         'interfaces.routerecordmultipleviewswithchildren',
@@ -89,7 +89,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.route-records',
-        'route-record-multiple-views-with-children',
+        '五route-record-multiple-views-with-children',
       ],
       [
         'interfaces.routerecordnormalized',
@@ -97,7 +97,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.route-records',
-        'route-record-normalized',
+        '六route-record-normalized',
       ],
       [
         'interfaces.routerecordredirect',
@@ -105,7 +105,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.route-records',
-        'route-record-redirect',
+        '七route-record-redirect',
       ],
       [
         'interfaces.routerecordsingleview',
@@ -113,7 +113,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.route-records',
-        'route-record-single-view',
+        '八route-record-single-view',
       ],
       [
         'interfaces.routerecordsingleviewwithchildren',
@@ -121,7 +121,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.route-records',
-        'route-record-single-view-with-children',
+        '九route-record-single-view-with-children',
       ],
       [
         'type-aliases.routerecordprops',
@@ -129,7 +129,7 @@ export const vueRouterMatchingReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.matching.route-records',
-        'internal-route-record-props',
+        '十internal-route-record-props',
       ],
       [
         'type-aliases.routerecord',
@@ -137,7 +137,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.route-records',
-        'route-record',
+        '十一route-record',
       ],
       [
         'type-aliases.routerecordname',
@@ -145,7 +145,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.route-records',
-        'route-record-name',
+        '十二route-record-name',
       ],
       [
         'type-aliases.routerecordnamegeneric',
@@ -153,7 +153,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.route-records',
-        'route-record-name-generic',
+        '十三route-record-name-generic',
       ],
       [
         'type-aliases.routerecordraw',
@@ -161,7 +161,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'detail',
         'vue.router.reference.matching.route-records',
-        'route-record-raw',
+        '十四route-record-raw',
       ],
       [
         'type-aliases.routerecordredirectoption',
@@ -169,7 +169,7 @@ export const vueRouterMatchingReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.matching.route-records',
-        'route-record-redirect-option',
+        '十五route-record-redirect-option',
       ],
     ],
   },
@@ -183,7 +183,7 @@ export const vueRouterMatchingReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.matching.route-locations',
-        'internal-route-location-base',
+        '三internal-route-location-base',
       ],
       [
         'interfaces.locationasrelativeraw',
@@ -191,7 +191,7 @@ export const vueRouterMatchingReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.matching.route-locations',
-        'location-as-relative-raw',
+        '四location-as-relative-raw',
       ],
       [
         'interfaces.routelocationaspathgeneric',
@@ -199,7 +199,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.route-locations',
-        'route-location-as-path-generic',
+        '五route-location-as-path-generic',
       ],
       [
         'interfaces.routelocationasrelativegeneric',
@@ -207,7 +207,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.route-locations',
-        'route-location-as-relative-generic',
+        '六route-location-as-relative-generic',
       ],
       [
         'interfaces.routelocationgeneric',
@@ -215,7 +215,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.route-locations',
-        'route-location-generic',
+        '七route-location-generic',
       ],
       [
         'interfaces.routelocationmatched',
@@ -223,7 +223,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.route-locations',
-        'route-location-matched',
+        '八route-location-matched',
       ],
       [
         'interfaces.routelocationnamedraw',
@@ -231,7 +231,7 @@ export const vueRouterMatchingReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.matching.route-locations',
-        'route-location-named-raw',
+        '九route-location-named-raw',
       ],
       [
         'interfaces.routelocationnormalizedgeneric',
@@ -239,7 +239,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.route-locations',
-        'route-location-normalized-generic',
+        '十route-location-normalized-generic',
       ],
       [
         'interfaces.routelocationnormalizedloadedgeneric',
@@ -247,7 +247,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.route-locations',
-        'route-location-normalized-loaded-generic',
+        '十一route-location-normalized-loaded-generic',
       ],
       [
         'interfaces.routelocationoptions',
@@ -255,7 +255,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.route-locations',
-        'route-location-options',
+        '十二route-location-options',
       ],
       [
         'interfaces.routelocationpathraw',
@@ -263,7 +263,7 @@ export const vueRouterMatchingReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.matching.route-locations',
-        'route-location-path-raw',
+        '十三route-location-path-raw',
       ],
       [
         'interfaces.routelocationresolvedgeneric',
@@ -271,7 +271,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.route-locations',
-        'route-location-resolved-generic',
+        '十四route-location-resolved-generic',
       ],
       [
         'type-aliases.routelocation',
@@ -279,7 +279,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'detail',
         'vue.router.reference.matching.route-locations',
-        'route-location',
+        '十五route-location',
       ],
       [
         'type-aliases.routelocationaspath',
@@ -287,7 +287,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.route-locations',
-        'route-location-as-path',
+        '十六route-location-as-path',
       ],
       [
         'type-aliases.routelocationasrelative',
@@ -295,7 +295,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.route-locations',
-        'route-location-as-relative',
+        '十七route-location-as-relative',
       ],
       [
         'type-aliases.routelocationasstring',
@@ -303,7 +303,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.route-locations',
-        'route-location-as-string',
+        '十八route-location-as-string',
       ],
       [
         'type-aliases.routelocationnormalized',
@@ -311,7 +311,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.route-locations',
-        'route-location-normalized',
+        '十九route-location-normalized',
       ],
       [
         'type-aliases.routelocationnormalizedloaded',
@@ -319,7 +319,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.route-locations',
-        'route-location-normalized-loaded',
+        '二十route-location-normalized-loaded',
       ],
       [
         'type-aliases.routelocationraw',
@@ -327,7 +327,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'detail',
         'vue.router.reference.matching.route-locations',
-        'route-location-raw',
+        '二十一route-location-raw',
       ],
       [
         'type-aliases.routelocationresolved',
@@ -335,7 +335,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.route-locations',
-        'route-location-resolved',
+        '二十二route-location-resolved',
       ],
       [
         'variables.start_location',
@@ -343,7 +343,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.route-locations',
-        'start-location',
+        '二十三start-location',
       ],
     ],
   },
@@ -357,7 +357,7 @@ export const vueRouterMatchingReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.matching.params-query',
-        'route-query-and-hash',
+        '三route-query-and-hash',
       ],
       [
         'type-aliases.locationquery',
@@ -365,7 +365,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'detail',
         'vue.router.reference.matching.params-query',
-        'location-query',
+        '四location-query',
       ],
       [
         'type-aliases.locationqueryraw',
@@ -373,7 +373,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.params-query',
-        'location-query-raw',
+        '五location-query-raw',
       ],
       [
         'type-aliases.locationqueryvalue',
@@ -381,7 +381,7 @@ export const vueRouterMatchingReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.matching.params-query',
-        'location-query-value',
+        '六location-query-value',
       ],
       [
         'type-aliases.locationqueryvalueraw',
@@ -389,7 +389,7 @@ export const vueRouterMatchingReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.matching.params-query',
-        'location-query-value-raw',
+        '七location-query-value-raw',
       ],
       [
         'type-aliases.paramvalue',
@@ -397,7 +397,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.params-query',
-        'param-value',
+        '八param-value',
       ],
       [
         'type-aliases.paramvalueoneormore',
@@ -405,7 +405,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.params-query',
-        'param-value-one-or-more',
+        '九param-value-one-or-more',
       ],
       [
         'type-aliases.paramvaluezeroormore',
@@ -413,7 +413,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.params-query',
-        'param-value-zero-or-more',
+        '十param-value-zero-or-more',
       ],
       [
         'type-aliases.paramvaluezeroorone',
@@ -421,7 +421,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.params-query',
-        'param-value-zero-or-one',
+        '十一param-value-zero-or-one',
       ],
       [
         'type-aliases.routeparams',
@@ -429,7 +429,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.params-query',
-        'route-params',
+        '十二route-params',
       ],
       [
         'type-aliases.routeparamsgeneric',
@@ -437,7 +437,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.params-query',
-        'route-params-generic',
+        '十三route-params-generic',
       ],
       [
         'type-aliases.routeparamsraw',
@@ -445,7 +445,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.params-query',
-        'route-params-raw',
+        '十四route-params-raw',
       ],
       [
         'type-aliases.routeparamsrawgeneric',
@@ -453,7 +453,7 @@ export const vueRouterMatchingReferenceSections = [
         'public',
         'merged',
         'vue.router.reference.matching.params-query',
-        'route-params-raw-generic',
+        '十五route-params-raw-generic',
       ],
       [
         'type-aliases.routeparamvalue',
@@ -461,7 +461,7 @@ export const vueRouterMatchingReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.matching.params-query',
-        'route-param-value',
+        '十六route-param-value',
       ],
       [
         'type-aliases.routeparamvalueraw',
@@ -469,7 +469,7 @@ export const vueRouterMatchingReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.matching.params-query',
-        'route-param-value-raw',
+        '十七route-param-value-raw',
       ],
       [
         'functions.parsequery',
@@ -477,7 +477,7 @@ export const vueRouterMatchingReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.matching.params-query',
-        'parse-query',
+        '十八parse-query',
       ],
       [
         'functions.stringifyquery',
@@ -485,7 +485,7 @@ export const vueRouterMatchingReferenceSections = [
         'internal',
         'quick',
         'vue.router.reference.matching.params-query',
-        'stringify-query',
+        '十九stringify-query',
       ],
     ],
   },

@@ -70,11 +70,11 @@ anchors:
 
 # defineComponent()
 
-## 概述
+## 一、概述
 
 `defineComponent()` 是运行时函数，也是 TypeScript 类型辅助工具。对象签名会在运行时原样返回组件选项，函数签名会把传入函数包装成 `setup`。它不会注册、挂载或渲染组件；主要价值是让 props、emits、setup 返回值和组件实例获得可靠的类型推导。
 
-## 基本使用
+## 二、基本使用
 
 `setup(props, context)` 是 Options API 组件使用组合式 API 的入口，在组件实例创建、props 与 slots 初始化之后执行，并早于 Options API 生命周期钩子。它没有组件公开实例 `this`。同步返回普通对象时，其中的属性可供模板和组件其余选项使用，ref 会在模板与公开代理上自动解包；返回函数时，该函数就是组件的渲染函数；没有绑定需要暴露时可以不返回。`async setup()` 返回 Promise，客户端组件必须位于 `<Suspense>` 后代中才能等待并渲染其结果。
 
@@ -100,7 +100,7 @@ const Counter = defineComponent({
 })
 ~~~~
 
-## 访问 Props
+## 三、访问 Props
 
 `props` 包含组件已声明并解析后的输入。它会随父组件更新而更新，但属于只读的浅层代理：不要给顶层 prop 赋值。直接解构会断开局部变量与后续 prop 更新的联系；需要保留单个字段的响应性时使用 `toRef(props, key)` 或 `toRefs(props)`。这不同于 Vue 3.5+ `<script setup>` 中由编译器改写的响应式 `defineProps()` 解构。
 
@@ -120,7 +120,7 @@ const UserBadge = defineComponent({
 })
 ~~~~
 
-## Setup 上下文
+## 四、Setup 上下文
 
 `SetupContext` 提供 `{ attrs, slots, emit, expose }`，上下文对象本身不是响应式状态，可以安全地在参数位置解构。`attrs` 是未被 props/emits 消费的透传 attributes 与监听器，`slots` 保存插槽函数，`emit` 触发组件事件，`expose` 限定父组件通过模板引用可访问的公开成员。`attrs` 与 `slots` 会随组件更新，但不要继续解构其中的字段，也不能把它们当作可由 `watch()` 深度追踪的普通响应式状态；插槽函数应在渲染阶段调用。
 
@@ -150,7 +150,7 @@ const ActionButton = defineComponent({
 })
 ~~~~
 
-## 对象签名
+## 五、对象签名
 
 对象签名适合 Options API 或需要同时声明 props、emits、components 等选项的组件。运行时声明既参与 props 分类与校验，也为 TypeScript 推导 setup 参数；它不是只在编译期存在的宏。
 
@@ -166,7 +166,7 @@ const Greeting = defineComponent({
 })
 ~~~~
 
-## 函数签名
+## 六、函数签名
 
 Vue 3.3+ 支持把 setup 函数作为第一个参数。该函数必须返回渲染函数，props 与 emits 的运行时声明仍要放在第二个参数中；TypeScript 参数类型会被擦除，不能替代运行时声明。
 
@@ -183,11 +183,11 @@ const Greeting = defineComponent(
 )
 ~~~~
 
-## 运行时边界
+## 七、运行时边界
 
 对象签名近似身份函数，函数签名则生成 `{ name, setup }` 选项对象，所以 defineComponent 本身仍会在运行时执行。它与 `defineProps()` 等仅在 `<script setup>` 编译阶段展开的宏不同。定义完成后还要在父组件中导入使用，或通过 `app.component()` 注册，Vue 才会创建实例并渲染。
 
-## 易错使用提示
+## 八、易错使用提示
 
 :::pitfalls
 ### 认为调用 defineComponent 就完成注册或挂载
@@ -363,7 +363,7 @@ const Greeting = defineComponent(
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 最小源码实现
+## 九、最小源码实现
 
 Vue 3.5.40 的 `defineComponent()` 先判断第一个参数是否为函数：函数签名会合并名称、额外选项和 setup，对象签名直接返回原对象。组件实例执行阶段则先初始化 props 与 slots，再以 props 和按需创建的 SetupContext 调用 setup；返回函数会安装为 render，返回对象会经 `proxyRefs()` 暴露给模板，Promise 则登记为异步依赖并检查客户端 Suspense 边界。官方 `apiSetupContext.spec.ts` 与 `componentProps.spec.ts` 分别覆盖上下文、expose 和只读 props 等外部行为。
 

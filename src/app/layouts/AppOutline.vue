@@ -6,6 +6,7 @@ import { headingId } from '@/common/content'
 interface OutlineBlock {
   type: string
   content?: string
+  depth?: 2 | 3
 }
 
 const props = defineProps<{ blocks: OutlineBlock[] }>()
@@ -17,7 +18,7 @@ const items = computed(() =>
       (block): block is OutlineBlock & { type: 'heading'; content: string } =>
         block.type === 'heading' && typeof block.content === 'string',
     )
-    .map((b) => ({ text: b.content, id: headingId(b.content) })),
+    .map((b) => ({ text: b.content, id: headingId(b.content), depth: b.depth ?? 2 })),
 )
 
 /** 当前高亮的锚点 id */
@@ -59,7 +60,11 @@ onUnmounted(() => observer?.disconnect())
       :key="item.id"
       :href="`#${item.id}`"
       class="outline-item"
-      :class="{ active: activeId === item.id }"
+      :class="{
+        active: activeId === item.id,
+        'outline-item-depth-2': item.depth === 2,
+        'outline-item-depth-3': item.depth === 3,
+      }"
     >
       {{ item.text }}
     </a>
@@ -86,11 +91,23 @@ onUnmounted(() => observer?.disconnect())
 .outline-item {
   padding: var(--space-1) 0;
   font-size: var(--font-size-sm);
+  font-weight: 500;
   color: var(--color-text-secondary);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   transition: color var(--duration-fast) var(--ease-out);
+}
+
+.outline-item-depth-2 {
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.outline-item-depth-3 {
+  padding-left: var(--space-4);
+  font-size: var(--font-size-xs);
+  font-weight: 400;
 }
 
 .outline-item:hover {

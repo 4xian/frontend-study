@@ -45,11 +45,11 @@ anchors:
 
 # 透传 attributes
 
-## 概述
+## 一、概述
 
 父组件传给组件、但没有被接收方声明为 prop 或 emits 监听器的 attribute，会进入透传 attributes。常见成员包括 `class`、`style`、`id` 和原生事件监听器。它们保存在 `$attrs` 中；单根节点组件默认还会把它们合并到根元素或根组件。
 
-## 单根节点的自动继承
+## 二、单根节点的自动继承
 
 组件渲染单个元素根节点时，透传 attributes 自动加到该根节点。根节点已有的 `class` 和 `style` 会与父组件传入值合并；根节点已有同类 `v-on` 监听器时，父子监听器都会执行。该行为关注的是组件最终的根节点，而不是文件中看起来最重要的交互元素。
 
@@ -64,7 +64,7 @@ anchors:
 <button class="button large">保存</button>
 ~~~~
 
-## 控制 attributes 的落点
+## 三、控制 attributes 的落点
 
 包装组件常需要把 attributes 交给内层输入框或按钮，而不是外层布局容器。此时用 `defineOptions({ inheritAttrs: false })` 关闭自动继承，再在目标节点写 `v-bind="$attrs"`。`$attrs` 保留 attribute 的原始大小写：`foo-bar` 应用方括号访问；`@click` 在对象中对应 `onClick`。
 
@@ -84,7 +84,7 @@ defineOptions({ inheritAttrs: false })
 对比默认自动继承与 inheritAttrs: false 时 class 和点击监听器的实际落点
 :::
 
-## 多根节点与组件根节点
+## 四、多根节点与组件根节点
 
 多根节点组件没有唯一自动落点，必须显式选择一个节点绑定 `$attrs`，否则开发环境会警告无法继承。若单根节点本身是另一个组件，透传 attributes 会继续转发给这个根组件；当前组件已声明的 props 和 emits 监听器已被消费，不在继续转发的集合中，而根组件仍可把收到的 key 声明为自己的 prop。
 
@@ -98,7 +98,7 @@ defineOptions({ inheritAttrs: false })
 </template>
 ~~~~
 
-## useAttrs()
+## 五、useAttrs()
 
 `useAttrs()` 在 `<script setup>` 中返回 setup context 的 attrs 对象，始终能读到最新的透传值。官方明确说明它出于性能考虑不是响应式对象，不能用 watch 观察某个键；需要响应式连接时应把该值声明为 prop，需要在每次组件更新后读取最新 attrs 做副作用时可使用 `onUpdated()`。模板中通常直接使用 `$attrs` 即可。
 
@@ -112,7 +112,7 @@ onUpdated(() => {
 })
 ~~~~
 
-## 易错使用提示
+## 六、易错使用提示
 
 :::pitfalls
 ### 包装组件仍让 attributes 自动落到外层容器
@@ -251,7 +251,7 @@ const click = attrs.onClick
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 最小源码实现
+## 七、最小源码实现
 
 `componentProps.ts` 遍历父组件传入对象：匹配声明的 key 进入 props，匹配声明 emits 的监听器被消费，其余 key 保留原始大小写进入 attrs。`componentRenderUtils.ts` 在渲染单个元素或组件根节点时，通过 `cloneVNode()` 合并 attrs；`inheritAttrs: false` 跳过该步骤，多根、文本或 Teleport 根节点在未显式访问 attrs 时发出开发环境警告。`useAttrs()` 只是返回当前实例 setup context 中的 attrs。
 

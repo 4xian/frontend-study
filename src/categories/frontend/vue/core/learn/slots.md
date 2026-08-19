@@ -68,7 +68,7 @@ recap:
 
 # 插槽
 
-## 正文大纲
+## 一、正文大纲
 
 上一课已经学习怎样在必要时访问真实渲染目标。本课回到声明式组件组合：父组件提供模板片段，子组件决定片段出现在哪个出口，并明确哪些子状态和命令可以交给这段内容使用。
 
@@ -85,7 +85,7 @@ recap:
 本课只讲 SFC、&lt;script setup lang="ts"&gt;、Composition API 与 Vue 3.5.40 中的插槽契约。重点是模板组合和清楚的状态所有权，不把插槽扩展成任意穿透组件内部状态的通道。
 :::
 
-## 父组件拥有内容，子组件拥有出口
+## 二、父组件拥有内容，子组件拥有出口
 
 先把插槽拆成两端：父组件写在组件标签之间的内容，是由父组件定义的模板片段；子组件模板中的 `<slot>` 是调用这段内容的出口。子组件决定出口位于按钮、面板还是其他结构中，但不会因此取得内容的所有权。
 
@@ -109,7 +109,7 @@ recap:
 | &lt;slot /&gt; | 子组件 | 决定内容的渲染出口 |
 | 最终按钮内部 | 双方协作 | 子结构包裹父级提供的片段 |
 
-## 插槽表达式仍属于父级渲染作用域
+## 三、插槽表达式仍属于父级渲染作用域
 
 插槽内容写在父组件模板中，所以其中的表达式只能直接读取父组件作用域。它最终出现在子组件 DOM 内，也不会自动看见子组件局部变量；这与 JavaScript 函数在定义位置决定可见变量的规则一致。
 
@@ -129,7 +129,7 @@ const parentLabel = '来自父组件'
 若 LearningPanel 内部还有 activeTopic，父级插槽不能直接读取它。子组件必须在 `<slot>` 出口上把允许读取的值显式传为 slot props。
 :::
 
-## 默认插槽与 fallback
+## 四、默认插槽与 fallback
 
 没有 `name` 的 `<slot>` 隐式名为 `default`。写在出口标签内部的内容是 fallback：父级没有为该出口产生有效内容时，子组件才渲染它。fallback 定义在子组件中，因此其中的表达式读取子组件作用域。
 
@@ -153,7 +153,7 @@ const parentLabel = '来自父组件'
 | &lt;SubmitButton /&gt; | 显示“提交” | 子组件 fallback |
 | &lt;SubmitButton&gt;保存&lt;/SubmitButton&gt; | 显示“保存” | 父组件默认插槽 |
 
-## 具名插槽与显式 default
+## 五、具名插槽与显式 default
 
 `<slot name="header">` 声明 header 出口，父组件用 `<template #header>` 提供对应片段；`#header` 是 `v-slot:header` 的缩写。没有放进具名 `<template>` 的顶层内容进入隐式 default。
 
@@ -185,7 +185,7 @@ const parentLabel = '来自父组件'
 </LearningPanel>
 ~~~~
 
-## 作用域插槽显式提供子组件能力
+## 六、作用域插槽显式提供子组件能力
 
 子组件在 `<slot>` 出口上绑定的普通 attribute 会成为 slot props。父组件用 `v-slot` 或 `#name="slotProps"` 接收参数。父级仍未取得子组件内部变量，只拿到子组件在调用插槽时主动提供的值和命令。
 
@@ -219,7 +219,7 @@ function selectTopic(topic: TopicId) {
 </template>
 ~~~~
 
-## 用只读状态与窄命令守住所有权
+## 七、用只读状态与窄命令守住所有权
 
 slot props 是调用插槽时的能力参数，不是新的双向绑定。优先传字符串、布尔值等值类型状态，并用参数已收窄的命令表达允许的修改。不要传出内部 ref、可写对象或数组；TypeScript 的 `readonly` 只能限制属性赋值，不能冻结嵌套引用。
 
@@ -241,7 +241,7 @@ type DefaultSlotProps = {
 | panelState 可写对象 | 父级可绕过规则修改内部字段 | 不适合 |
 | 内部 ref | 父级可直接写入子状态 | 不适合 |
 
-## 在学习面板插槽实验中串起契约
+## 八、在学习面板插槽实验中串起契约
 
 唯一 Demo 由真实父子 SFC 组成。父级提供标题、默认内容和操作片段；子级拥有当前主题、详情状态和四个出口，只通过 slot props 提供值类型状态、selectTopic() 与 toggleDetails()。父级不提供 support，因而由子级显示真实 fallback。
 
@@ -249,7 +249,7 @@ type DefaultSlotProps = {
 验证父级渲染作用域、显式作用域插槽、窄命令与子级 fallback
 :::
 
-## 条件插槽只判断函数是否存在
+## 九、条件插槽只判断函数是否存在
 
 子组件可以在模板中读取 `$slots.header`，只在父级提供 header 插槽函数时创建外围结构。这适合控制标题区或操作区是否出现，但只回答“函数是否存在”，不保证函数最终产生用户可见文本。
 
@@ -269,7 +269,7 @@ type DefaultSlotProps = {
 若业务必须区分“有操作数据”和“无操作数据”，应让数据本身提供明确状态。不要把 `$slots.actions` 当作最终 VNode 数量或可见内容的检测器。
 :::
 
-## 动态插槽名遵守动态参数限制
+## 十、动态插槽名遵守动态参数限制
 
 动态名称写作 `#[activeSlotName]`，适合目标出口确实由状态决定的场景。动态参数值应为字符串或 `null`；包含空格、引号等不合法 attribute 名字符号的复杂表达式不能直接写在方括号中，应先整理为脚本中的简单变量。固定出口仍优先使用静态名称。
 
@@ -289,7 +289,7 @@ const activeSlotName = ref<'header' | 'footer'>('header')
 </template>
 ~~~~
 
-## 插槽的函数契约
+## 十一、插槽的函数契约
 
 公开 API 把 slots 对象的每个属性表示为函数：函数接收 slot props，返回 VNode 数组。模板使用者无需手写这个函数；编译器把父级插槽模板转成函数，把子级 `<slot>` 转成渲染期调用。这个模型能统一解释父级作用域、参数和 fallback。
 
@@ -299,7 +299,7 @@ type Slot = (...args: any[]) => VNode[]
 
 `default` 只是保留的隐式名称。`<slot name="header" message="hello">` 中的 `name` 只负责选择目标函数，不属于 slot props；父级 header 插槽只会收到 `{ message: "hello" }`。
 
-## $slots、useSlots 与 defineSlots
+## 十二、$slots、useSlots 与 defineSlots
 
 | 入口 | 使用位置 | 主要职责 |
 | --- | --- | --- |
@@ -345,7 +345,7 @@ const slots = defineSlots<{
 defineSlots() 提供 TypeScript 提示，不会在浏览器中要求某个插槽必须存在，也不会检查插槽函数返回的实际节点。运行时缺省体验仍由子组件出口和 fallback 负责。
 :::
 
-## 易错使用提示
+## 十三、易错使用提示
 
 :::pitfalls
 ### 在父组件插槽内容中直接读取子组件状态
@@ -633,7 +633,7 @@ defineSlots<{
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 从 Vue 3.5.40 源码与官方测试推导
+## 十四、从 Vue 3.5.40 源码与官方测试推导
 
 以下八点都明确区分固定版本的官方事实与课程推导。课程推导只帮助判断 Vue 3.5.40 下的写法，不是新增的 Vue 公共 API 承诺。
 
@@ -787,6 +787,6 @@ const parentNote = '父级备注：内容布局由父组件决定'
 - [ ] 模板优先使用 $slots 与 &lt;slot&gt;，不提前执行并缓存插槽函数
 - [ ] 会用 defineSlots() 描述名称和 slot props，但不把它当运行时校验
 
-## 完成本课后的判断顺序
+## 十五、完成本课后的判断顺序
 
 先确认内容由哪个父组件定义、出口由哪个子组件拥有，再判断片段只需 default 还是需要静态具名出口。父级需要子状态时，由子级提供值类型 slot props 与窄命令；多个插槽则为默认片段显式写 #default。结构是否出现由模板中的 $slots 判断，业务空状态交给显式数据。最后再判断脚本是否真的需要 useSlots，并用 defineSlots 补充类型边界。

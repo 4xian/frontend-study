@@ -57,7 +57,7 @@ anchors:
 
 # 响应式工具函数
 
-## 总览
+## 一、总览
 
 本页汇总 8 个响应式工具函数：两个取值工具（`unref`、`toValue`）、四个判断工具（`isRef`、`isReactive`、`isReadonly`、`isProxy`）和两个进阶逃生舱（`toRaw`、`markRaw`）。它们不创建响应式状态，只围绕已有的 ref 与代理做取值、判断和转换。
 
@@ -72,7 +72,7 @@ anchors:
 | toRaw(proxy) | 取回代理背后的原始对象 | 原始对象 |
 | markRaw(obj) | 标记对象永不被转为代理 | 对象本身 |
 
-## unref()
+## 二、unref()
 
 ~~~~ts
 function unref<T>(ref: T | Ref<T>): T
@@ -80,7 +80,7 @@ function unref<T>(ref: T | Ref<T>): T
 
 如果参数是 ref，返回其内部值；否则原样返回参数本身。它是 `val = isRef(val) ? val.value : val` 的语法糖，常用于 composable 中统一处理"可能是 ref 也可能是普通值"的参数（即 `MaybeRef<T>` 类型）。
 
-## toValue()
+## 三、toValue()
 
 ~~~~ts
 function toValue<T>(source: T | Ref<T> | (() => T)): T
@@ -94,7 +94,7 @@ toValue(ref(1))   // 1
 toValue(() => 1)  // 1
 ~~~~
 
-## isRef()
+## 四、isRef()
 
 ~~~~ts
 function isRef<T>(r: Ref<T> | unknown): r is Ref<T>
@@ -102,7 +102,7 @@ function isRef<T>(r: Ref<T> | unknown): r is Ref<T>
 
 检查值是否为 ref 对象。返回类型是类型谓词（type predicate），因此可以直接当 TypeScript 类型守卫用：`if (isRef(foo))` 分支内 `foo` 会被收窄为 `Ref` 类型，可安全访问 `.value`。
 
-## isReactive()
+## 五、isReactive()
 
 ~~~~ts
 function isReactive(value: unknown): boolean
@@ -110,7 +110,7 @@ function isReactive(value: unknown): boolean
 
 检查对象是否为 `reactive()` 或 `shallowReactive()` 创建的代理。注意一个隐藏行为：如果 `readonly()` 包裹的是一个 reactive 代理，`isReactive` 对这个只读代理同样返回 `true`（见下方 demo 第 5 项）。
 
-## isReadonly()
+## 六、isReadonly()
 
 ~~~~ts
 function isReadonly(value: unknown): boolean
@@ -118,7 +118,7 @@ function isReadonly(value: unknown): boolean
 
 检查值是否为只读对象。`readonly()` 与 `shallowReadonly()` 创建的代理都算，没有 `set` 函数的 `computed()` ref 也算。只读对象的属性值可以变化（源数据变了它会跟着变），只是不能通过这个对象直接赋值。
 
-## isProxy()
+## 七、isProxy()
 
 ~~~~ts
 function isProxy(value: any): boolean
@@ -130,7 +130,7 @@ function isProxy(value: any): boolean
 预置七种值，逐一查看 isRef / isReactive / isReadonly / isProxy / toRaw 的判断结果
 :::
 
-## toRaw()
+## 八、toRaw()
 
 ~~~~ts
 function toRaw<T>(proxy: T): T
@@ -145,7 +145,7 @@ const reactiveFoo = reactive(foo)
 console.log(toRaw(reactiveFoo) === foo) // true
 ~~~~
 
-## 易错使用提示
+## 九、易错使用提示
 
 :::pitfalls
 ### 用 `unref()` 解析 getter
@@ -255,7 +255,7 @@ console.log(raw.nested === state.nested) // true
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## markRaw()
+## 十、markRaw()
 
 ~~~~ts
 function markRaw<T extends object>(value: T): T
@@ -286,7 +286,7 @@ const bar = reactive({
 console.log(foo.nested === bar.nested) // false，同一对象出现了两个版本
 ~~~~
 
-## 最小源码实现
+## 十一、最小源码实现
 
 这 8 个函数在源码里几乎都是几行代码，秘密全在几个内部标记属性上：`__v_isRef` 是 RefImpl 上的真实属性；`__v_isReactive`、`__v_isReadonly`、`__v_raw` 则不存在于任何对象上，而是 Proxy get 拦截识别到这些特殊 key 时动态返回的"暗号"——所以普通对象查这些属性得到 undefined，代理对象则由 handler 按自己的身份作答。`markRaw` 就是给对象定义 `__v_skip: true`，reactive() 创建代理前会检查它。
 

@@ -42,7 +42,7 @@ recap:
 
 # 响应式状态
 
-## 用 ref 声明状态
+## 一、用 ref 声明状态
 
 在 Composition API 中，`ref()` 是声明响应式状态的首选方式。它把传入值包装为带 `.value` 的 ref 对象；脚本读取或修改 `.value` 时，Vue 可以追踪依赖并通知使用该状态的界面更新。
 
@@ -63,7 +63,7 @@ function increment(): void {
 </template>
 ~~~~
 
-## 脚本与模板的访问方式
+## 二、脚本与模板的访问方式
 
 脚本中的 `count` 是 ref 对象，所以要通过 `count.value` 访问内部值。模板会自动解包渲染上下文中的顶层 ref，因此写 `{{ count }}` 和 `count++` 即可。先记住这条位置差异，不需要提前学习响应式内部实现。
 
@@ -71,7 +71,7 @@ function increment(): void {
 修改 ref 后，模板中的计数会自动重新渲染
 :::
 
-## 对象状态与 reactive
+## 三、对象状态与 reactive
 
 `ref()` 可以保存基本类型或对象；对象会被转换为深层响应式代理。`reactive()` 则直接返回对象代理，但它不能接收基本类型，也要求持续使用同一个代理引用。新手主线优先使用 `ref()`，需要集中操作多个相关字段时再选择 `reactive()`。
 
@@ -91,7 +91,7 @@ form.name = 'Ada'
 ~~~~
 :::
 
-## DOM 更新在下一轮完成
+## 四、DOM 更新在下一轮完成
 
 状态修改是同步的，但 Vue 会缓冲 DOM 更新，避免同一轮修改触发多次渲染。只有确实需要读取更新后的元素尺寸、文本或焦点状态时才调用 `await nextTick()`；普通业务逻辑继续直接读取状态。
 
@@ -108,7 +108,7 @@ async function incrementAndMeasure(): Promise<void> {
 }
 ~~~~
 
-## 练习顺序
+## 五、练习顺序
 
 :::steps
 ### 声明
@@ -124,7 +124,7 @@ async function incrementAndMeasure(): Promise<void> {
 连续点击按钮，确认状态与界面保持一致。
 :::
 
-## 易错使用提示
+## 六、易错使用提示
 
 :::pitfalls
 ### 在脚本中省略 .value

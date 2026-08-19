@@ -1,0 +1,106 @@
+.module-tree-demo {
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+}
+
+.module-tree-header p {
+  margin: 0 0 var(--space-1);
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.module-tree-header h3 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.module-tree-status {
+  margin: var(--space-3) 0 0;
+  color: var(--color-text-secondary);
+}
+
+.module-tree-current {
+  display: flex;
+  align-items: baseline;
+  padding: var(--space-3);
+  margin-top: var(--space-3);
+  border-left: 4px solid var(--color-accent);
+  background: var(--color-bg);
+}
+
+.module-tree-current span {
+  margin-right: var(--space-2);
+  color: var(--color-text-secondary);
+}
+
+.module-tree-compare {
+  display: flex;
+  flex-wrap: wrap;
+  margin: var(--space-4) -8px 0;
+}
+
+.module-tree-panel {
+  flex: 1 1 260px;
+  min-width: 0;
+  padding: 0 8px;
+  margin-bottom: var(--space-3);
+}
+
+.module-tree-panel + .module-tree-panel {
+  border-left: 1px solid var(--color-border);
+}
+
+.module-tree-panel h4 {
+  margin: 0 0 var(--space-2);
+  font-size: 0.88rem;
+}
+
+.module-tree-panel ul {
+  margin: 0;
+  padding-left: var(--space-4);
+}
+
+.module-tree-panel li + li {
+  margin-top: var(--space-1);
+}
+
+.module-tree-panel li {
+  overflow-wrap: anywhere;
+}
+
+.module-tree-conclusion {
+  padding-top: var(--space-3);
+  margin: 0;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+}
+
+@media (max-width: 620px) {
+  .module-tree-current {
+    display: block;
+  }
+
+  .module-tree-current span,
+  .module-tree-current strong {
+    display: block;
+  }
+
+  .module-tree-current span {
+    margin: 0 0 var(--space-1);
+  }
+
+  .module-tree-panel {
+    flex-basis: 100%;
+  }
+
+  .module-tree-panel + .module-tree-panel {
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--color-border);
+    border-left: 0;
+  }
+}

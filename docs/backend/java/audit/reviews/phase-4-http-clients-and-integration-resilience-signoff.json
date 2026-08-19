@@ -1,0 +1,271 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.advanced.http-clients-and-integration-resilience",
+  "batchId": "phase-4-http-clients-and-integration-resilience",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-12T13:00:54+08:00",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "stagingPerformedThisBatch": false,
+    "existingStagedAndUnstagedStatePreserved": true
+  },
+  "sourceRepository": {
+    "path": "/Users/jian/Desktop/work/TDH/dzzz/dzzz-app",
+    "readOnly": true,
+    "projectExecuted": false,
+    "projectModified": false,
+    "accessBoundary": "Frozen Phase 2 evidence only; no batch-specific project access"
+  },
+  "phase2Freeze": {
+    "researchStatus": "not-started",
+    "exampleStatus": "not-started",
+    "courseStatus": "planned",
+    "phase4StateRecordedOnlyInThisSignoff": true,
+    "knowledgePath": {
+      "sourceItems": 167,
+      "courseNodes": 64,
+      "dependencyEdges": 114,
+      "gateStatus": "passed"
+    }
+  },
+  "versions": {
+    "verifiedAt": "2026-08-11",
+    "modern": {
+      "java": "25",
+      "springBoot": "4.1.0",
+      "springFramework": "7.0.8",
+      "apacheHttpClient": "5.6.4",
+      "maven": "3.9.12"
+    },
+    "legacy": {
+      "java": "8",
+      "springBoot": "2.3.12.RELEASE",
+      "springFramework": "5.2.15.RELEASE",
+      "apacheHttpClient": "4.5.14",
+      "maven": "3.9.12"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/advanced/http-clients-and-integration-resilience.md",
+      "sha256": "168ba448c718123b55428047864256420b4a934f3e1fffeb1eff7e8a544435aa"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/http-clients-and-integration-resilience.md",
+      "sha256": "9f3177e173ab3b61d7c5e46eade9e5a48f44f6c2227fff1b24900c0753fee5c9"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "ab6ef4a58d3bf190e0041998e0746cf071aed2e439e9e192c20a3abf79baf1eb"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "1e29d9511d6597b656a35cd288a5928dbf2569381548d6a56fef4bf12e8ea580"
+    }
+  ],
+  "sourceVerification": {
+    "researchCardCount": 35,
+    "researchUniqueUrlCount": 35,
+    "frontmatterOfficialSourceCount": 35,
+    "frontmatterUniqueUrlCount": 35,
+    "researchFrontmatterSetDifference": 0,
+    "communitySourcesUsedAsEvidence": false,
+    "preciseVersionContract": "PASS; frontmatter appliesTo values match the frozen research cards",
+    "directUrlCheck": "PASS; all 35 unique official targets were reachable and research/frontmatter IDs and URL order matched"
+  },
+  "projectEvidence": {
+    "itemCount": 8,
+    "observedCount": 5,
+    "adaptedCount": 0,
+    "correctedCount": 0,
+    "rejectedCount": 3,
+    "projectEvidenceSetDifference": 0,
+    "currentDefectClaimedFromFrozenEvidence": false,
+    "boundary": "Representative paths and symbols came only from the frozen Phase 2 matrix; rejected risks remain teaching boundaries, not claims that the current project is defective"
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "researchLineCount": 452,
+    "lineCount": 1113,
+    "lineBudget": "PASS; single-course exception reviewed because the frozen topic joins client ownership, timeout maps, resource closure, resilience, security, observation and Java 8/25 boundaries",
+    "independentKnowledgePointHeadings": 15,
+    "knowledgePointSevenPartCoverage": "15/15",
+    "pitfallCount": 12,
+    "pitfallNinePartCoverage": "12/12",
+    "orderedListLineBreaks": "PASS; rendered ordered-list items occupy distinct rows",
+    "officialSourceCount": 35,
+    "projectEvidenceCount": 8,
+    "javaCodeBlockCount": 25,
+    "javaMethodComments": "PASS",
+    "sourceHeadingAbsent": true,
+    "securitySection": "PASS",
+    "contentCheck": "CONTENT_CATALOG_PASS knowledge=15 pitfalls=12 sources=35 projectEvidence=5-observed/3-rejected advancedAvailable=8 advancedPlanned=8 currentLoadable=true nextLoader=false",
+    "completeExampleContract": "PASS; JDK 25, Java 8 and HttpIntegrationExample sources were re-extracted from the current Markdown after the final repair",
+    "currentBodyShaBinding": "PASS; final course body SHA-256 is bound in artifacts"
+  },
+  "javaVerification": {
+    "temporaryFixtureRoot": "/tmp/java-advanced-08-final.ChJpM2",
+    "temporaryAssetsCleaned": true,
+    "cleanupVerifiedWithFinalAbsenceChecks": true,
+    "cases": [
+      {
+        "name": "JDK 25 API snippet and documented HTTP integration example",
+        "runtime": "Java 25",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "HTTP_INTEGRATION_PASS attempts=2 postAttempts=1 bodyClosed=3"
+      },
+      {
+        "name": "Java 8 API snippet and documented HTTP integration example",
+        "runtime": "Java 8",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "HTTP_INTEGRATION_PASS attempts=2 postAttempts=1 bodyClosed=3"
+      }
+    ],
+    "negativeControls": [
+      "connect timeout, 429 and 503 remain retryable only inside the remaining logical-call budget",
+      "400, TLS failure, body overflow and decode failure do not create an extra attempt",
+      "POST without an idempotency contract is attempted once",
+      "all response bodies close on success, failure and cancellation paths",
+      "unknown host, non-HTTPS, private and link-local targets reject before transport",
+      "DNS rebinding is checked again before each attempt",
+      "admission, circuit and fallback keep distinct outcomes",
+      "shutdown rejects new calls and drains in-flight work",
+      "header values, bearer token and cookie value never enter attempt observations",
+      "header-name CR/LF becomes X-Trace__Injected and cannot forge a log line"
+    ]
+  },
+  "verification": [
+    {
+      "command": "Java 25 and Java 8 documented API snippet and runner checks",
+      "exitCode": 0,
+      "summary": "PASS; both runtimes compiled the current extracted sources and ran HttpIntegrationExample twice"
+    },
+    {
+      "command": "Content and Catalog cold-start check (three consecutive runs)",
+      "exitCode": 0,
+      "summary": "CONTENT_CATALOG_PASS on all runs; knowledge=15 pitfalls=12 sources=35 projectEvidence=5-observed/3-rejected advancedAvailable=8 advancedPlanned=8 currentLoadable=true nextLoader=false"
+    },
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check && npm run lint && npm run format:check && npm run test:unit && npm run test:e2e",
+      "exitCode": 0,
+      "summary": "PASS on current repository quality gates"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "PASS; 1561 modules transformed and http-clients-and-integration-resilience chunk emitted at 83.64 kB"
+    },
+    {
+      "command": "scoped current-course git diff --check",
+      "exitCode": 0,
+      "summary": "PASS; unrelated existing workspace changes remain outside this course scope"
+    },
+    {
+      "command": "curl official source URLs",
+      "exitCode": 0,
+      "summary": "SOURCE_URL_CHECK cards=35 urls=35 unique=35 failed=0"
+    }
+  ],
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "session": "java-advanced-08-final",
+    "baseUrl": "http://127.0.0.1:4188/",
+    "targetPath": "/backend/java/core/learn/http-clients-and-integration-resilience",
+    "temporaryScreenshotsRemoved": true,
+    "desktop": {
+      "viewport": "1440x900",
+      "targetPageStatus": 200,
+      "documentClientWidth": 1440,
+      "documentScrollWidth": 1440,
+      "articleClientWidth": 900,
+      "articleScrollWidth": 900,
+      "articleClientHeight": 766,
+      "articleScrollHeight": 28805,
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "failedRequests": 0,
+      "non200Requests": 0,
+      "atBottom": true
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "targetPageStatus": 200,
+      "documentClientWidth": 390,
+      "documentScrollWidth": 390,
+      "documentScrollHeight": 43160,
+      "documentScrollYAtBottom": 42316,
+      "articleClientWidth": 358,
+      "articleScrollWidth": 358,
+      "articleHeight": 42989.609375,
+      "officialSourcesPresent": true,
+      "duplicateReferenceDetailHeadingCount": 0,
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "failedRequests": 0,
+      "non200Requests": 0,
+      "requestCount": 2521,
+      "atBottom": true
+    },
+    "manualReview": "PASS; desktop and mobile have no page-level horizontal overflow or incoherent overlap, code remains inside its reading boundary, and final mobile bottom content is reachable"
+  },
+  "manifestRegression": {
+    "basicsAvailable": 18,
+    "intermediateAvailable": 17,
+    "advancedAvailable": 8,
+    "advancedPlanned": 8,
+    "currentEntryLoadable": true,
+    "futurePlannedEntriesHaveNoLoader": true,
+    "nextCourseId": "backend.java.learn.advanced.file-storage-and-archive-boundaries",
+    "nextCourseStatus": "planned",
+    "nextCourseLoader": false,
+    "nextCourseResearchAbsent": true,
+    "nextCourseBodyAbsent": true,
+    "finalColdStartRuns": 3,
+    "finalColdStartErrors": 0,
+    "finalColdStartPending": false
+  },
+  "review": {
+    "reviewer": "/root/advanced_08_sha_review",
+    "standards": "PASS / 0 finding",
+    "spec": "PASS / 0 finding",
+    "initialFindingCount": 1,
+    "remainingFindingCount": 0,
+    "finalIndependentConfirmationPending": false,
+    "artifactDriftAfterReview": false,
+    "confirmation": "Final frozen-state review confirmed CR/LF header-name sanitation, value redaction, Java 25/8 execution and unchanged artifact SHA and line counts with zero remaining findings"
+  },
+  "temporaryAssetCleanup": {
+    "pending": false,
+    "verifiedAt": "2026-08-12T13:00:54+08:00",
+    "temporaryTargets": [
+      "/tmp/java-advanced-08-final.ChJpM2",
+      "/tmp/java-advanced-08-gates.gCgsS4",
+      "/tmp/java-advanced-08-remediate.9MVn76",
+      "/tmp/java-advanced-08-scoped.Bd5vIC",
+      "/tmp/java-advanced-08-course-diffcheck.out",
+      "/tmp/java-advanced-08-research-diffcheck.out"
+    ],
+    "removedTemporaryFileCount": 118,
+    "removedPlaywrightArtifactCount": 35,
+    "remainingTargetCount": 0,
+    "finalPlaywrightSession": "java-advanced-08-final",
+    "finalPlaywrightSessionClosed": true,
+    "preservedOutOfCleanupScopeSession": "java-advanced-08",
+    "previewPort": 4188,
+    "previewStopped": true
+  },
+  "stopBoundary": "Close advanced course 8 only and stop; do not research, draft, register or load advanced course 9 file-storage-and-archive-boundaries, Reference, project practice or other stages"
+}

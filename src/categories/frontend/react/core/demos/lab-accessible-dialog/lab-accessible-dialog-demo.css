@@ -1,0 +1,267 @@
+.accessible-dialog-demo {
+  width: 100%;
+  min-width: 0;
+  color: var(--color-text);
+}
+
+.accessible-dialog-demo * {
+  box-sizing: border-box;
+}
+
+.accessible-dialog-heading p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.accessible-dialog-heading h2 {
+  margin: var(--space-2) 0 0;
+  font-size: 1.1rem;
+  letter-spacing: 0;
+}
+
+.accessible-dialog-heading span {
+  display: block;
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+}
+
+.accessible-dialog-workspace {
+  margin-top: var(--space-5);
+  border-top: 1px solid var(--color-border);
+}
+
+.accessible-dialog-announcement {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.accessible-dialog-announcement > div {
+  flex: 1 1 360px;
+  min-width: 0;
+  margin-right: var(--space-5);
+}
+
+.accessible-dialog-announcement span,
+.accessible-dialog-status span {
+  display: block;
+  color: var(--color-text-secondary);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.accessible-dialog-announcement strong {
+  display: block;
+  margin-top: var(--space-1);
+  overflow-wrap: anywhere;
+}
+
+.accessible-dialog-announcement p {
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-secondary);
+  overflow-wrap: anywhere;
+}
+
+.accessible-dialog-demo button {
+  min-height: 42px;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+  font: inherit;
+  font-weight: 700;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+  touch-action: manipulation;
+}
+
+.accessible-dialog-demo button:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.accessible-dialog-demo button:focus-visible,
+.accessible-dialog h2:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 62%, transparent);
+  outline-offset: 3px;
+}
+
+.accessible-dialog-trigger,
+.accessible-dialog-primary {
+  border-color: var(--color-accent) !important;
+  background: var(--color-accent) !important;
+  color: var(--color-text-inverse) !important;
+}
+
+.accessible-dialog-trigger {
+  flex: 0 1 auto;
+  margin-top: var(--space-3);
+}
+
+.accessible-dialog-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: var(--space-4);
+}
+
+.accessible-dialog-toolbar button {
+  margin: 0 var(--space-2) var(--space-2) 0;
+}
+
+.accessible-dialog-status {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: var(--space-3);
+}
+
+.accessible-dialog-status > div {
+  flex: 1 1 170px;
+  min-width: 0;
+  padding: var(--space-3);
+  margin: 0 var(--space-3) var(--space-3) 0;
+  border-left: 3px solid var(--color-accent);
+  background: var(--color-bg-sunken);
+}
+
+.accessible-dialog-status strong {
+  display: block;
+  margin-top: var(--space-1);
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+.accessible-dialog-host {
+  width: 0;
+  height: 0;
+}
+
+.accessible-dialog {
+  width: calc(100% - 2 * var(--space-5));
+  max-width: 560px;
+  max-height: calc(100vh - 2 * var(--space-5));
+  padding: 0;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+  box-shadow: var(--shadow-xl);
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.accessible-dialog::backdrop {
+  background: var(--color-bg-scrim);
+}
+
+.accessible-dialog-body {
+  min-width: 0;
+  padding: var(--space-5);
+}
+
+.accessible-dialog-eyebrow {
+  margin: 0;
+  color: var(--color-warning);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.accessible-dialog h2 {
+  margin: var(--space-2) 0 0;
+  font-size: 1.25rem;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+
+.accessible-dialog-lead {
+  margin: var(--space-3) 0 0;
+  color: var(--color-text-secondary);
+  overflow-wrap: anywhere;
+}
+
+.accessible-dialog-summary {
+  margin: var(--space-5) 0 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.accessible-dialog-summary > div {
+  display: flex;
+  align-items: flex-start;
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.accessible-dialog-summary dt {
+  flex: 0 0 96px;
+  color: var(--color-text-secondary);
+  font-weight: 700;
+}
+
+.accessible-dialog-summary dd {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0 0 0 var(--space-3);
+  overflow-wrap: anywhere;
+}
+
+.accessible-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  margin-top: var(--space-5);
+}
+
+.accessible-dialog-actions button {
+  margin: var(--space-2) 0 0 var(--space-2);
+}
+
+@media (max-width: 520px) {
+  .accessible-dialog-announcement {
+    align-items: stretch;
+  }
+
+  .accessible-dialog-announcement > div {
+    flex-basis: 100%;
+    margin-right: 0;
+  }
+
+  .accessible-dialog-trigger {
+    width: 100%;
+  }
+
+  .accessible-dialog-status > div {
+    flex-basis: 100%;
+    margin-right: 0;
+  }
+
+  .accessible-dialog {
+    width: calc(100% - 2 * var(--space-2));
+    max-height: calc(100vh - 2 * var(--space-2));
+  }
+
+  .accessible-dialog-body {
+    padding: var(--space-4);
+  }
+
+  .accessible-dialog-summary > div {
+    display: block;
+  }
+
+  .accessible-dialog-summary dd {
+    margin: var(--space-1) 0 0;
+  }
+
+  .accessible-dialog-actions button {
+    flex: 1 1 100%;
+    width: 100%;
+    margin-left: 0;
+  }
+}

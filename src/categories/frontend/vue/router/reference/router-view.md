@@ -90,7 +90,7 @@ anchors:
 
 # RouterView
 
-## 概述
+## 一、概述
 
 `RouterView` 是当前 route location 的视图出口。它读取当前位置的 `matched` 记录链、当前嵌套 depth 与 `name`，选出这一层 record 的对应组件，再把 route-record props 和 RouterView attrs 合并到该组件。没有默认插槽时直接渲染组件；有默认插槽时把已创建的 VNode 与实际显示的 route 交给插槽。
 
@@ -98,7 +98,7 @@ anchors:
 `RouterViewProps` 控制“显示哪条 location、哪个 named view”；`RouteComponent` 描述已加载 route component 的定义；`RouterView` 才是运行时出口。默认插槽里的 `Component` 名称容易误导：5.2.0 本地声明与源码都表明它是已带 props、attrs 和 ref 的 `VNode`，不是 `RouteComponent` 类型的原始组件定义。
 :::
 
-## 渲染管线与选型
+## 二、渲染管线与选型
 
 | 阶段 | 关键值 | 负责的边界 |
 | --- | --- | --- |
@@ -108,7 +108,7 @@ anchors:
 | 创建页面 VNode | record props + attrs | 计算 route props，并把 RouterView 未声明 attrs 继续传给页面组件 |
 | 默认插槽 | { Component, route } | 包装实际页面 VNode；Transition、KeepAlive、页面级 props/slots 在此组合 |
 
-## Router View Props
+## 三、Router View Props
 
 ~~~~ts
 interface RouterViewProps {
@@ -124,7 +124,7 @@ interface RouterViewProps {
 
 `RouterView` 设置了 `inheritAttrs: false`，但不是丢弃 attrs。固定源码在创建页面 VNode 时依次合并 route-record props、RouterView attrs 和内部 ref/unmount hook，因此 `&lt;RouterView aria-label="main" /&gt;` 的未声明属性会落到当前 route component，且同名 attrs 会覆盖 record props。跨页面统一透传通常会扩大所有页面的 prop/attribute 契约，应优先在 route record 的 `props` 中按页面声明。
 
-## Route Component
+## 四、Route Component
 
 ~~~~ts
 type RouteComponent = Component | DefineComponent
@@ -139,7 +139,7 @@ type RawRouteComponent = RouteComponent | Lazy<RouteComponent>
 应用声明 routes 时通常让 `RouteRecordRaw` 自动推断 `component`/`components`，不需要显式标注 `RouteComponent`。只有库要接收已经加载的 route component，或读取 `RouteLocationNormalizedLoaded.matched` 时，这个别名才是合适边界。
 :::
 
-## Router View
+## 五、Router View
 
 ~~~~ts
 declare const RouterView: {
@@ -168,7 +168,7 @@ declare const RouterView: {
 
 无插槽时，RouterView 直接返回当前 record、depth 与 name 选出的页面 VNode。若该位置没有 matched record，或 record 没有对应 name 的 component，则无插槽时渲染为空；有插槽时仍调用插槽，并传入 `Component: undefined` 与当前显示 route。需要 fallback 时应在插槽内检查 Component。
 
-## Nested Depth
+## 六、Nested Depth
 
 depth 不是公开 prop，而是 RouterView 之间的注入链。最外层从 0 开始；当前 RouterView 选中 record 后，为后代提供 `depth + 1`。若 matched 链中的某条 parent record 没有 `components`，实现会继续向后寻找下一条有组件的 record，所以“只分组路径、不提供布局组件”的 parent 不会消耗一个可见出口。
 
@@ -190,7 +190,7 @@ const routes: RouteRecordRaw[] = [
 
 `UserDetail` 要在 `UsersLayout` 自己的模板中放置下一层 `&lt;RouterView /&gt;` 才能显示。depth 沿组件后代的 provide/inject 传播，不按 URL 段数计算；同一模板中的多个 sibling RouterView 处于相同 depth，通过不同 `name` 选择同一 record 上的 named components。
 
-## Name 与命名视图
+## 七、Name 与命名视图
 
 `name` 选择当前 matched record 的 view key。未命名 RouterView 等价于 `name="default"`；命名出口必须与 route record 的 `components` key 对齐。route record 自身的 `name` 服务于按名导航，两者只是字段同名，语义与命名空间完全不同。
 
@@ -214,7 +214,7 @@ const routes: RouteRecordRaw[] = [
 ]
 ~~~~
 
-## Route Prop
+## 八、Route Prop
 
 `route` 允许出口显示一个显式的 normalized location，而不是当前 URL 对应的位置。RouterView 会把该 location 继续提供给嵌套 RouterView，使整条嵌套出口链从同一 matched 数组与 params 取值。传入由 `router.resolve()` 得到且仍含 lazy component 的结果前，可用 `loadRouteLocation()` 加载为 `RouteLocationNormalizedLoaded`。
 
@@ -235,7 +235,7 @@ const previewRoute = await loadRouteLocation(resolved)
 5.2.0 的 `route` 覆盖只通过 `routerViewLocationKey` 传给 RouterView 链；普通 `useRoute()` 仍读取全局 `routeLocationKey`。官方 issue #2673 正在讨论单独的 local-route 入口。当前代码若依赖显式 route，应使用默认插槽传出的 `route`，或把它作为普通 prop 继续传给页面组件，不能假定子组件的 `useRoute()` 已同步覆盖。
 :::
 
-## Default Slot
+## 九、Default Slot
 
 默认插槽提供 `{ Component, route }`。`Component` 是 RouterView 已经创建好的页面 VNode，包含 record props、RouterView attrs、实例 ref 与卸载清理 hook；`route` 是这个出口实际显示的 `RouteLocationNormalizedLoaded`，在使用 `route` prop 时可能与全局 currentRoute 不同。
 
@@ -252,7 +252,7 @@ const previewRoute = await loadRouteLocation(resolved)
 在插槽里的 `&lt;component&gt;` 增加 prop 或 slot，会应用于这个 RouterView 可能渲染的每个页面。官方 Passing Props Guide 明确提示这通常不是好主意：所有页面都必须接受同一 prop。能在 route record 中用 boolean、静态对象或无状态函数声明的页面数据，应优先放进 `props` 配置。
 :::
 
-## Transition 与 KeepAlive
+## 十、Transition 与 KeepAlive
 
 Transition 与 KeepAlive 应包装 route component，而不是 RouterView 自身，因此它们必须放在默认插槽内。两者并用时，官方 Guide 的组合顺序是外层 Transition、内层 KeepAlive、最内层动态页面 VNode。固定源码还会在检测到 Transition/KeepAlive 直接包 RouterView 时发出迁移诊断。
 
@@ -277,7 +277,7 @@ Transition 与 KeepAlive 应包装 route component，而不是 RouterView 自身
 
 官方 discussion #1968 的维护者答复同时确认：KeepAlive 的 include/exclude 看组件名而不是 route 名，Transition 下的页面组件需要单根。discussion #2508 进一步把精细缓存身份留给插槽外层 wrapper 与 Vue 自身的组件/props 机制，而不是增加 Router 专属 KeepAlive 集成。
 
-## 易错使用提示
+## 十一、易错使用提示
 
 :::pitfalls
 ### 用 Transition 或 KeepAlive 直接包住 RouterView
@@ -511,7 +511,7 @@ watch(
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 十二、源码推导与适用场景
 
 :::steps
 ### 1. 从 route location 确定显示链

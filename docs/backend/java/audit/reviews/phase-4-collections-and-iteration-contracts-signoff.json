@@ -1,0 +1,515 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.basics.collections-and-iteration-contracts",
+  "batchId": "phase-4-collections-and-iteration-contracts",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "phase": "Phase B",
+  "phaseBProgress": "15/21",
+  "phaseBReverification": {
+    "recordedAt": "2026-08-14T23:34:28Z",
+    "contract": {
+      "title": "Collection、List、Set、Map 与迭代合同",
+      "url": "/backend/java/core/learn/collections-and-iteration-contracts",
+      "durationMinutes": 90,
+      "prerequisites": ["backend.java.learn.basics.strings-encoding-and-text-matching"],
+      "requiredTopics": [
+        "Collection、List、Set、Map 的语义与常用实现选择",
+        "ArrayList、LinkedList、HashSet、HashMap、TreeMap 的条件化成本",
+        "equals、hashCode、Iterator.remove 与 fail-fast 边界",
+        "不可修改视图、结构快照、排序与比较器合同",
+        "Java 25/8 兼容反馈环"
+      ]
+    },
+    "phaseAFrozenPlan": {
+      "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+      "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81",
+      "previousCourse": "backend.java.learn.basics.strings-encoding-and-text-matching",
+      "nextCourse": "backend.java.learn.basics.null-optional-and-failure-semantics",
+      "nextCourseStarted": false,
+      "phaseBStopBoundary": "B-15 关闭后才允许读取 B-16；B-21 基础 Gate 关闭后立即停止，不进入 Phase C。"
+    },
+    "sourceReverification": {
+      "method": "Tavily 调研结果回到 Java SE 25 RI、Oracle、JLS 25/8、Java SE API、OpenJDK JEP 与 Dev.java 官方正文核验",
+      "communitySourcesUsedAsEvidence": false,
+      "verifiedAt": "2026-08-15",
+      "researchUniqueUrls": 36,
+      "lessonOfficialLinks": 27,
+      "httpStatus": "全部返回 200",
+      "repair": "补充 Java 25/8 ArrayList、HashSet、HashMap 直接 Javadoc，并将复杂度限定为具体实现和输入条件下的预期"
+    },
+    "artifacts": [
+      {
+        "path": "docs/research/backend/java/basics/collections-and-iteration-contracts.md",
+        "sha256": "c023c813f4cda486e616f96fabb58e635d3318e28ffa21b19386f4c9b497af0c"
+      },
+      {
+        "path": "src/categories/backend/java/core/learn/collections-and-iteration-contracts.md",
+        "sha256": "d2de097ed258669b4be0b404635cf04c12d47a7ec56383d609ba5f5beb8a7359"
+      },
+      {
+        "path": "src/categories/backend/java/core/backend-java-track.ts",
+        "sha256": "dcb7a04baa824bd0d1106bea799715b042fde27812d21f31678160f28c8efd42"
+      },
+      {
+        "path": "src/categories/backend/java/core/entry-manifest.ts",
+        "sha256": "4385da9b31d862fdc4184d6fae0130eaf43d2b3e9c7f08d4d55a7818dd05eb76"
+      },
+      {
+        "path": "docs/backend/java/audit/phase-2-knowledge-path-manifest.json",
+        "sha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407"
+      }
+    ],
+    "routeIdentity": {
+      "stableIdPreserved": true,
+      "stableUrlPreserved": true,
+      "trackPosition": 15,
+      "trackStatus": "available",
+      "loaderSlug": "collections-and-iteration-contracts",
+      "trackChangedInThisBatch": false,
+      "loaderChangedInThisBatch": false
+    },
+    "baselineVerification": [
+      {
+        "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+        "exitCode": 0,
+        "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+      },
+      { "command": "npm run type-check", "exitCode": 0, "summary": "passed" },
+      { "command": "npm run lint", "exitCode": 0, "summary": "passed" },
+      { "command": "npm run format:check", "exitCode": 0, "summary": "passed" },
+      {
+        "command": "npm run test:unit",
+        "exitCode": 0,
+        "summary": "empty configured unit directory is valid"
+      },
+      {
+        "command": "npm run test:e2e",
+        "exitCode": 0,
+        "summary": "empty configured E2E directory is valid"
+      },
+      {
+        "command": "npm run build",
+        "exitCode": 0,
+        "summary": "passed; 1725 modules transformed; existing catalog chunk warning only"
+      },
+      {
+        "command": "git diff --check -- <B-15 paths> && git diff --cached --check -- <B-15 paths>",
+        "exitCode": 0,
+        "summary": "passed"
+      }
+    ],
+    "javaVerification": {
+      "command": "extract the 如何验证 bash block from the final lesson and execute it with zsh -f",
+      "exitCode": 0,
+      "sharedStableOutput": "collections|list=[keep-1, keep-2]|set=2|map=2:2|view=3|snapshot=2|sorted=[a, b, cc]|hashCollision=true|tree=1|errors=true,true,true,true,true",
+      "modernOutput": "modern|list=2|set=2|map=1|first=alpha|last=beta|reversedFirst=beta|errors=true,true",
+      "java8BoundaryOutput": "java8-boundary|modern-api-rejected=true",
+      "versions": ["Eclipse Temurin 25.0.3+9 LTS", "Eclipse Temurin 8u492-b09"],
+      "temporaryAssets": {
+        "location": "host and container /tmp",
+        "cleanupMethod": "shell trap with find -depth -delete",
+        "cleanupStatus": "complete"
+      }
+    },
+    "browserVerification": {
+      "tool": "Playwright CLI",
+      "session": "b15",
+      "baseUrl": "http://127.0.0.1:4173/",
+      "targetPath": "/backend/java/core/learn/collections-and-iteration-contracts",
+      "desktop": {
+        "viewport": "1440x900",
+        "documentClientWidth": 1440,
+        "documentScrollWidth": 1440,
+        "horizontalOverflow": false,
+        "title": "Collection、List、Set、Map 与迭代合同",
+        "codeBlockCount": 24,
+        "officialSourceCount": 27,
+        "durationText": "约 90 分钟",
+        "previousPath": "/backend/java/core/learn/strings-encoding-and-text-matching",
+        "nextPath": "/backend/java/core/learn/null-optional-and-failure-semantics",
+        "searchTerm": "Collection、List、Set、Map 与迭代合同",
+        "searchResultCount": 1
+      },
+      "mobile": {
+        "viewport": "390x844",
+        "documentClientWidth": 390,
+        "documentScrollWidth": 390,
+        "horizontalOverflow": false,
+        "codeBlockCount": 24,
+        "completionButtonTextAfterReload": "取消完成",
+        "progressPersistedAfterReload": true
+      },
+      "console": { "errors": 0, "warnings": 0 },
+      "productionRequests": { "count": 70, "allStatus200": true }
+    },
+    "review": {
+      "riskClassification": "复用课程的路线元数据、零基础集合成本解释和官方来源卡扩展",
+      "independentReviewRequired": false,
+      "priorFullReview": "PASS / 0 finding",
+      "currentVerification": "Java 25/8 反馈、完整工程 Gate、官方链接和生产浏览器验证通过"
+    },
+    "workspaceProtection": {
+      "dirtyWorkspaceProtected": true,
+      "unrelatedChangesPreserved": true,
+      "statusSnapshotSha256": "0209e841287a11edb13b4d341ca269adfa5193214131a30580fd76c490bb634b",
+      "scopedStagedAndUnstagedDiffCheck": "PASS"
+    },
+    "changedFiles": [
+      "docs/research/backend/java/basics/collections-and-iteration-contracts.md",
+      "src/categories/backend/java/core/learn/collections-and-iteration-contracts.md",
+      "docs/backend/java/audit/reviews/phase-4-collections-and-iteration-contracts-signoff.json"
+    ]
+  },
+  "recordedAt": "2026-08-07T00:13:28Z",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "stagedBatchSpecificChanges": false,
+    "sharedManifestStagingPreserved": true
+  },
+  "sourceRepository": {
+    "path": "/Users/jian/Desktop/work/TDH/dzzz/dzzz-app",
+    "head": "167ca8aa91ca3a6b101246964ef4fddec3d21da0",
+    "statusShort": "",
+    "readOnly": true
+  },
+  "phase2Freeze": {
+    "courseCoverageMatrixJsonSha256": "04d858896d07e975d3ab50796494873f09bd0ddf4b1a8b1ea87bd75cdd101d38",
+    "courseCoverageMatrixSha256": "b7fd50ffabbcf8a198802e907cef769ac969a71e4e14c40038f4aaaed09d91ad",
+    "researchStatus": "not-started",
+    "exampleStatus": "not-started",
+    "courseStatus": "planned",
+    "phase4StateRecordedOnlyInThisSignoff": true,
+    "admissionGate": "PASS",
+    "counts": {
+      "sourceItems": 167,
+      "courseNodes": 64,
+      "dependencyEdges": 114
+    }
+  },
+  "versions": {
+    "verifiedAt": "2026-08-07",
+    "modern": {
+      "java": "25",
+      "runtime": "Eclipse Temurin 25.0.3+9 LTS"
+    },
+    "legacy": {
+      "java": "8",
+      "runtime": "Eclipse Temurin 8u492-b09",
+      "springBootBackground": "2.3.12.RELEASE"
+    }
+  },
+  "sourceDiscovery": {
+    "method": "Tavily 仅用于发现直接页面，随后逐页核对 Oracle、JLS、OpenJDK 和 Dev.java 正文",
+    "communitySourcesUsedAsEvidence": false,
+    "projectEvidenceBoundary": "项目集合、迭代删除、只读边界和自然顺序实现只作为 observed 证据；不把 frozen unreviewed 抽取提升成人工源码复审，不把 fail-fast 写成并发正确性机制。",
+    "directUrls": [
+      "https://openjdk.org/projects/jdk/25/",
+      "https://www.oracle.com/java/technologies/java-se-support-roadmap.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Collection.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/List.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Set.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Map.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Iterator.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Collections.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Object.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Comparable.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Comparator.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/HashMap.html",
+      "https://docs.oracle.com/javase/specs/jls/se25/html/jls-14.html",
+      "https://openjdk.org/jeps/431",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/SequencedCollection.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/util/Collection.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/util/List.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/util/Set.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/util/Map.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/util/Iterator.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/util/Collections.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/util/Comparator.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html",
+      "https://docs.oracle.com/javase/specs/jls/se8/html/jls-14.html",
+      "https://dev.java/learn/api/collections-framework/organization/",
+      "https://dev.java/learn/api/collections-framework/iterating/",
+      "https://dev.java/learn/api/collections-framework/factory-methods/",
+      "https://dev.java/learn/api/collections-framework/lists/",
+      "https://dev.java/learn/api/collections-framework/working-with-keys-and-values/",
+      "https://dev.java/learn/api/collections-framework/choosing-keys/"
+    ]
+  },
+  "projectEvidence": [
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/JzTabUtils.java",
+      "symbol": "com.tdh.bdzz.util.JzTabUtils",
+      "usage": "observed",
+      "sha256": "bcd4fd6258012199f2bb33fea27bf94064ccebfab722eed532401c8e145ab564",
+      "inventoryMatched": true
+    },
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/CacheUtil.java",
+      "symbol": "com.tdh.bdzz.util.CacheUtil",
+      "usage": "observed",
+      "sha256": "30a1127a6bc74beb10bd41d970d6dacd5b53596d705962e722996dda981ddca6",
+      "inventoryMatched": true
+    },
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/websocket/server/fyb/jdyh/NoteSignWsServer.java",
+      "symbol": "com.tdh.bdzz.config.websocket.server.fyb.jdyh.NoteSignWsServer",
+      "usage": "observed",
+      "sha256": "34a02597c46ffdf102b380a0fa8a299ee780bcbc1aa7db9db1de1949be896370",
+      "inventoryMatched": true
+    },
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/constant/TuDmKzCategoryConstant.java",
+      "symbol": "com.tdh.bdzz.constant.TuDmKzCategoryConstant",
+      "usage": "observed",
+      "sha256": "cca14e4a2dce17b4e40ccbaafed6c0cce2e985ffd776cb1a8eeacb1afe5dc0cc",
+      "inventoryMatched": true
+    },
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/ComparableFutureTask.java",
+      "symbol": "com.tdh.bdzz.util.ComparableFutureTask",
+      "usage": "observed",
+      "sha256": "63e70feeebcebc81a2c38d5e958ea823d9f46dd6556c8ef156edd3be6c09dd8a",
+      "inventoryMatched": true
+    }
+  ],
+  "docker": {
+    "engine": "Docker 29.6.1",
+    "feedbackSource": "从课程 Markdown 的 如何验证 bash 代码块提取同一反馈环，经 stdin 交给固定 RepoDigest 容器执行",
+    "classOutput": "容器内 /tmp 的 mktemp 目录，shell trap 使用 find -depth -delete 清理",
+    "images": [
+      {
+        "role": "modern",
+        "requestedTag": "eclipse-temurin:25-jdk",
+        "digest": "sha256:12e44624adee6808a36d962717e1656e0afeeeff5a100f9cb00e0136513558f0"
+      },
+      {
+        "role": "legacy",
+        "requestedTag": "eclipse-temurin:8-jdk",
+        "digest": "sha256:c8b86f2c0a9bd6cc1b7fabc5d1a097501a166eea7cad3b2764e90e96178bea9b"
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/basics/collections-and-iteration-contracts.md",
+      "sha256": "bff54e7f3543fbafd753f0ff0130a7a2890d96777605bdeef1ee686c28ace0dc"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/collections-and-iteration-contracts.md",
+      "sha256": "32baef2792f090571fb9f04c9623eb9396738fa3164f165aa5abf2ed594871b3"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "2163a5f3daaabb49d94b59181b179c5c335ee172b98cf82701c0be12d0286315"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "2325b2f3809cb9b7287b469db6f53667d83f1c1bb7f611225dc084a5c0c9908c"
+    },
+    {
+      "path": "docs/backend/java/dzzz-app-course-plan.md",
+      "sha256": "27b341d1014f5e66e794449cfc1cf36a1213a8e8f2b183215b72cdeb45ff42e6"
+    }
+  ],
+  "selfHashPolicy": "signoff 文件不记录自身 SHA-256；artifacts 只绑定 signoff 外可稳定计算的本批课程产物。",
+  "baselineVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run format:check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run test:unit",
+      "exitCode": 0,
+      "summary": "No test files found; configured empty test directory is valid"
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "summary": "No persistent E2E test files; command passed with --pass-with-no-tests"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "passed; 1206 modules transformed; existing >500 kB catalog chunk warning only"
+    },
+    {
+      "command": "git diff --check && git diff --cached --check",
+      "exitCode": 0,
+      "summary": "passed; no new staging performed"
+    },
+    {
+      "command": "git -C /Users/jian/Desktop/work/TDH/dzzz status --short -- dzzz-app",
+      "exitCode": 0,
+      "summary": "empty; source repository remained read-only"
+    }
+  ],
+  "javaVerification": {
+    "command": "extract 如何验证 bash block from src/categories/backend/java/core/learn/collections-and-iteration-contracts.md and pipe to zsh -f",
+    "exitCode": 0,
+    "sharedOutput": "collections|list=[keep-1, keep-2]|set=2|map=2:2|view=3|snapshot=2|sorted=[a, b, cc]|hashCollision=true|tree=1|errors=true,true,true,true,true",
+    "cases": [
+      {
+        "name": "Java 25 shared compile/run",
+        "exitCode": 0,
+        "stdout": "collections|list=[keep-1, keep-2]|set=2|map=2:2|view=3|snapshot=2|sorted=[a, b, cc]|hashCollision=true|tree=1|errors=true,true,true,true,true"
+      },
+      {
+        "name": "Java 8 shared compile/run",
+        "exitCode": 0,
+        "stdout": "collections|list=[keep-1, keep-2]|set=2|map=2:2|view=3|snapshot=2|sorted=[a, b, cc]|hashCollision=true|tree=1|errors=true,true,true,true,true"
+      },
+      {
+        "name": "iterator state and unsupported-operation rejection",
+        "java25Rejected": true,
+        "java8Rejected": true
+      },
+      {
+        "name": "ArrayList fixed fail-fast diagnostic path",
+        "java25Rejected": true,
+        "java8Rejected": true,
+        "contractLimit": "best effort; not generalized to all implementations"
+      },
+      {
+        "name": "view and defensive snapshot comparison",
+        "java25ViewSize": 3,
+        "java8ViewSize": 3,
+        "snapshotSize": 2
+      },
+      {
+        "name": "hash collision, comparator overflow and sorted equality class",
+        "exitCode": 0,
+        "assertions": "collision does not imply equals; Integer.compare preserves extreme ordering; compare==0 collapses TreeSet equivalence class"
+      },
+      {
+        "name": "Java 25 modern-only factories and sequenced List",
+        "exitCode": 0,
+        "stdout": "modern|list=2|set=2|map=1|first=alpha|last=beta|reversedFirst=beta|errors=true,true"
+      },
+      {
+        "name": "Java 8 modern API boundary",
+        "compileRejected": true,
+        "stdout": "java8-boundary|modern-api-rejected=true"
+      }
+    ],
+    "temporaryAssetsCleaned": true
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "adapter": "PASS",
+    "blockCount": 69,
+    "exerciseContract": "要求、验收、参考答案三字段完整",
+    "javaMethodComments": "PASS",
+    "initialFailure": "pitfalls items used prose-only wrong/correct examples and were rejected by the adapter",
+    "repair": "added the required minimal wrong and correct code blocks to all five pitfalls items, then reran the same SSR feedback to PASS"
+  },
+  "catalogVerification": {
+    "method": "fresh Vite middleware SSR 加载真实 entry-manifest、track 和目标 content-entry",
+    "exitCode": 0,
+    "registeredEntries": 14,
+    "availableEntries": 14,
+    "targetId": "backend.java.learn.basics.collections-and-iteration-contracts",
+    "projectEvidenceCount": 5,
+    "blockCount": 69
+  },
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "baseUrl": "http://127.0.0.1:4173/",
+    "targetPath": "/backend/java/core/learn/collections-and-iteration-contracts",
+    "desktop": {
+      "viewport": "1440x900",
+      "documentClientWidth": 1440,
+      "documentScrollWidth": 1440,
+      "horizontalOverflow": false,
+      "title": "Collection、List、Set、Map 与迭代合同",
+      "codeBlockCount": 19,
+      "searchTerm": "Iterator.remove",
+      "searchResultCount": 1,
+      "previousEntryId": "backend.java.learn.basics.strings-encoding-and-text-matching",
+      "nextLink": false
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "documentClientWidth": 390,
+      "documentScrollWidth": 390,
+      "horizontalOverflow": false,
+      "codeBlockCount": 19,
+      "completionButtonPressed": true,
+      "completionButtonText": "取消完成"
+    },
+    "console": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "progressPersistedAfterReload": true,
+    "lazyLoadedTarget": true,
+    "targetContentEntryRequestStatus": 200,
+    "batchSpecificRepositoryBrowserOutputAbsent": true,
+    "preExistingRepositoryBrowserOutputProtected": true
+  },
+  "changedFiles": [
+    "docs/research/backend/java/basics/collections-and-iteration-contracts.md",
+    "src/categories/backend/java/core/learn/collections-and-iteration-contracts.md",
+    "src/categories/backend/java/core/entry-manifest.ts",
+    "src/categories/backend/java/core/backend-java-track.ts",
+    "docs/backend/java/audit/reviews/phase-4-collections-and-iteration-contracts-signoff.json",
+    "docs/backend/java/dzzz-app-course-plan.md"
+  ],
+  "priorClosedJavaAssets": {
+    "protected": true,
+    "summary": "第一至第十三批研究、课程与 signoff 保持原样，不归入第十四批课程产物。"
+  },
+  "concurrentWorkspaceAssets": {
+    "protected": true,
+    "attribution": "frontend TypeScript、Vite、Vue、frontend 文档、HeadingBlock 与 ContentEntryPage 资产由并行工作产生，不属于本批 changedFiles；根级校验在包含这些资产的当前工作区上执行。",
+    "preSignoffStatusSnapshotSha256": "73fd777a48a55cb676703b44a199b05d5a9072b7574196086c56cb8680f100ba",
+    "paths": [
+      "docs/frontend/",
+      "src/app/pages/ContentEntryPage.vue",
+      "src/categories/frontend/engineering/",
+      "src/categories/frontend/vue/",
+      "src/common/ui/blocks/HeadingBlock.vue"
+    ]
+  },
+  "review": {
+    "standards": "PASS",
+    "standardsFindings": 0,
+    "spec": "PASS",
+    "specFindings": 0
+  },
+  "beginnerContentReverification": {
+    "verifiedAt": "2026-08-07",
+    "courseArtifact": {
+      "path": "src/categories/backend/java/core/learn/collections-and-iteration-contracts.md",
+      "sha256": "7b9fdb1bc91bc95ba00332873e8c16ada840327d787fcc9178ff2dfc0285924b"
+    },
+    "content": "PASS; exactly one 从零跟着做, usage, pitfalls, verification, one exercise and runnable code",
+    "sources": "PASS; source type, appliesTo and claims shown only in the official-source regions; 正文无来源详情",
+    "browser": "PASS; 1440px and 390px routes, 36/36 HTTP 200, no horizontal overflow or browser errors",
+    "root": "PASS; knowledge-path, type-check, lint, format and diff checks"
+  },
+  "stopBoundary": "Phase B 的 B-15 已关闭；下一批只允许 B-16 null-optional-and-failure-semantics，不得跳到 B-17，不得进入 Phase C、D、E。B-21 基础 Gate 关闭后立即停止。"
+}

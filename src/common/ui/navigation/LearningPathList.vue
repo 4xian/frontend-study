@@ -40,7 +40,7 @@ const emit = defineEmits<{ select: [] }>()
 
 .path-group-title {
   margin-bottom: var(--space-1);
-  color: var(--color-text-tertiary);
+  color: var(--color-text);
   font-size: var(--font-size-xs);
   font-weight: 600;
   line-height: 1.35;
@@ -49,7 +49,7 @@ const emit = defineEmits<{ select: [] }>()
 .path-link {
   display: block;
   padding: var(--space-2) 0;
-  color: var(--color-text-secondary);
+  color: var(--color-text);
   font-size: var(--font-size-sm);
   line-height: 1.35;
   transition:

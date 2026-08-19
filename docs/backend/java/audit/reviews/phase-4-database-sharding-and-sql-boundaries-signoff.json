@@ -1,0 +1,307 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.advanced.database-sharding-and-sql-boundaries",
+  "batchId": "phase-4-database-sharding-and-sql-boundaries",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-11T13:07:33+08:00",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "stagingPerformedThisBatch": false,
+    "existingStagedAndUnstagedStatePreserved": true
+  },
+  "sourceRepository": {
+    "path": "/Users/jian/Desktop/work/TDH/dzzz/dzzz-app",
+    "readOnly": true,
+    "projectExecuted": false,
+    "projectModified": false,
+    "accessBoundary": "Frozen Phase 2 evidence only; no batch-specific project access"
+  },
+  "phase2Freeze": {
+    "researchStatus": "not-started",
+    "exampleStatus": "not-started",
+    "courseStatus": "planned",
+    "phase4StateRecordedOnlyInThisSignoff": true,
+    "knowledgePath": {
+      "sourceItems": 167,
+      "courseNodes": 64,
+      "dependencyEdges": 114,
+      "gateStatus": "passed"
+    }
+  },
+  "versions": {
+    "verifiedAt": "2026-08-11",
+    "modern": {
+      "java": "25",
+      "springBoot": "4.1.0",
+      "springFramework": "7.0.8",
+      "mybatis": "3.5.19",
+      "mybatisSpring": "4.0.0",
+      "mybatisPlus": "3.5.17",
+      "maven": "3.9.12"
+    },
+    "legacy": {
+      "java": "8",
+      "springBoot": "2.3.12.RELEASE",
+      "springFramework": "5.2.15.RELEASE",
+      "mybatis": "3.5.19",
+      "mybatisSpring": "2.1.2",
+      "mybatisPlus": "3.4.2",
+      "maven": "3.9.12"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/advanced/database-sharding-and-sql-boundaries.md",
+      "sha256": "adadc995648a70df7372afe3e9caf3df664117213c63801e2ce6e9ec3d00bab1"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/database-sharding-and-sql-boundaries.md",
+      "sha256": "cd3472f15c6b6a1fb22523015a56da07bfb04bee7cd8be18fd76c8d3bdb8ff81"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "ad96cbb72aed6a5db48a2976eacac9e3ab8ed89690323c59886bb2b8d282751d"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "0d91eb77fcbdc2544c32f24b3d0fc8eaf1299d23dbb76384149fa13203fd2ee3"
+    }
+  ],
+  "sourceVerification": {
+    "researchCardCount": 25,
+    "researchUniqueUrlCount": 25,
+    "frontmatterOfficialSourceCount": 25,
+    "frontmatterUniqueUrlCount": 25,
+    "researchFrontmatterSetDifference": 0,
+    "communitySourcesUsedAsEvidence": false,
+    "preciseVersionContract": "PASS; frontmatter appliesTo values match the frozen research cards",
+    "directUrlCheck": "PASS; all 25 unique official targets returned HTTP 200 and research/frontmatter IDs and URL order matched"
+  },
+  "projectEvidence": {
+    "itemCount": 8,
+    "observedCount": 5,
+    "adaptedCount": 0,
+    "correctedCount": 0,
+    "rejectedCount": 3,
+    "projectEvidenceSetDifference": 0,
+    "currentDefectClaimedFromFrozenEvidence": false,
+    "boundary": "Representative paths and symbols came only from the frozen Phase 2 matrix; rejected risks remain teaching boundaries, not claims that the current project is defective"
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "researchLineCount": 361,
+    "lineCount": 1398,
+    "lineBudget": "PASS; single-course exception reviewed because the frozen topic joins routing, SQL, transaction, observation and Java 8/25 boundaries",
+    "independentKnowledgePointHeadings": 15,
+    "knowledgePointSevenPartCoverage": "15/15",
+    "pitfallCount": 10,
+    "pitfallNinePartCoverage": "10/10",
+    "orderedListLineBreaks": "PASS; rendered ordered-list items occupy distinct rows",
+    "officialSourceCount": 25,
+    "projectEvidenceCount": 8,
+    "javaCodeBlockCount": 21,
+    "javaMethodComments": "PASS",
+    "sourceHeadingAbsent": true,
+    "securitySection": "PASS",
+    "contentCheck": "CONTENT_CHECK_PASS knowledge=15 fields=15/15 pitfalls=10 sources=25 projectEvidence=8 javaBlocks=21",
+    "completeExampleContract": "PASS; ShardBoundaryExample was re-extracted from the current Markdown after final repairs",
+    "currentBodyShaBinding": "PASS; final course body SHA-256 is bound in artifacts"
+  },
+  "javaVerification": {
+    "temporaryFixtureRoot": "/tmp/java-advanced-07-feedback.G0Fua6",
+    "temporaryAssetsCleaned": true,
+    "cleanupVerifiedWithFinalAbsenceChecks": true,
+    "cases": [
+      {
+        "name": "Documented sharding and SQL boundary example",
+        "runtime": "Java 25",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "SHARD_BOUNDARY_PASS single=EAST multi=2 broadcast=2 rejected=true keysBound=true bound=true partial=true timeoutObserved=true"
+      },
+      {
+        "name": "Documented sharding and SQL boundary example",
+        "runtime": "Java 8",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "SHARD_BOUNDARY_PASS single=EAST multi=2 broadcast=2 rejected=true keysBound=true bound=true partial=true timeoutObserved=true"
+      },
+      {
+        "name": "Negative sharding boundary runner",
+        "runtime": "Java 25 and Java 8",
+        "exitCode": 0,
+        "runsPerRuntime": 2,
+        "summary": "SHARD_BOUNDARY_NEGATIVE_PASS invalidKey=true missingKey=true bound=true identifier=true"
+      },
+      {
+        "name": "Modern MyBatis-Plus dynamic-table parser boundary",
+        "runtime": "Java 25 / MyBatis 3.5.19 / MyBatis-Spring 4.0.0 / MyBatis-Plus 3.5.17 / Maven 3.9.12",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "MODERN_TABLE_PARSER_PASS table=orders_east literalUntouched=true"
+      },
+      {
+        "name": "Legacy MyBatis-Plus dynamic-table parser boundary",
+        "runtime": "Java 8 / MyBatis 3.5.19 / MyBatis-Spring 2.1.2 / MyBatis-Plus 3.4.2 / Maven 3.9.12",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "LEGACY_TABLE_PARSER_PASS table=orders_west literalUntouched=true"
+      }
+    ],
+    "negativeControls": [
+      "non-positive shard key rejects",
+      "missing shard key rejects without SQL targets",
+      "broadcast requires explicit authorization",
+      "MULTI preserves 42 to EAST and 43 to WEST bindings",
+      "same-target keys remain associated with one target",
+      "broadcast SQL never binds tenantId",
+      "WEST timeout remains visible in per-target failureReason",
+      "unknown SQL identifier is rejected",
+      "parser leaves string literals untouched"
+    ]
+  },
+  "verification": [
+    {
+      "command": "npx --yes vite-node /tmp/java-advanced-07-feedback.G0Fua6/content-check.ts",
+      "exitCode": 0,
+      "summary": "CONTENT_CHECK_PASS knowledge=15 fields=15/15 pitfalls=10 sources=25 projectEvidence=8 javaBlocks=21"
+    },
+    {
+      "command": "Java module and global Catalog cold-start checks (three consecutive runs)",
+      "exitCode": 0,
+      "summary": "JAVA_MODULE_COLD_PASS and CATALOG_COLD_PASS on all runs; basics=18 intermediate=17 advancedAvailable=7 advancedPlanned=9 currentLoadable=true nextLoader=false"
+    },
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check && npm run lint && npm run format:check && npm run test:unit && npm run test:e2e",
+      "exitCode": 0,
+      "summary": "PASS on current repository quality gates"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "PASS; 1529 modules transformed and database-sharding-and-sql-boundaries chunk emitted at 61.54 kB"
+    },
+    {
+      "command": "scoped current-course git diff --check",
+      "exitCode": 0,
+      "summary": "PASS; unrelated existing workspace changes remain outside this course scope"
+    },
+    {
+      "command": "curl official source URLs",
+      "exitCode": 0,
+      "summary": "SOURCE_URL_CHECK cards=25 urls=25 unique=25 failed=0"
+    }
+  ],
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "session": "java-advanced-07",
+    "baseUrl": "http://127.0.0.1:4186/",
+    "targetPath": "/backend/java/core/learn/database-sharding-and-sql-boundaries",
+    "temporaryScreenshots": [
+      "/tmp/java-advanced-07-feedback.G0Fua6/browser/desktop-top.png",
+      "/tmp/java-advanced-07-feedback.G0Fua6/browser/desktop-pitfall.png",
+      "/tmp/java-advanced-07-feedback.G0Fua6/browser/desktop-bottom.png",
+      "/tmp/java-advanced-07-feedback.G0Fua6/browser/mobile-top.png",
+      "/tmp/java-advanced-07-feedback.G0Fua6/browser/mobile-pitfall.png",
+      "/tmp/java-advanced-07-feedback.G0Fua6/browser/mobile-bottom.png"
+    ],
+    "desktop": {
+      "viewport": "1440x900",
+      "targetPageStatus": 200,
+      "documentClientWidth": 1440,
+      "documentScrollWidth": 1440,
+      "articleClientWidth": 900,
+      "articleScrollWidth": 900,
+      "articleClientHeight": 766,
+      "articleScrollHeight": 31806,
+      "knowledgePointCount": 15,
+      "pitfallCount": 10,
+      "officialSourceCount": 25,
+      "uniqueOfficialSourceCount": 25,
+      "projectEvidenceCount": 8,
+      "routeOutputVisible": true,
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "non200Requests": 0,
+      "requestCount": 35,
+      "pitfallLayout": "all 10 error/correct pairs share a row, remain inside the viewport and do not overlap",
+      "atBottom": true
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "targetPageStatus": 200,
+      "documentClientWidth": 390,
+      "documentScrollWidth": 390,
+      "articleClientWidth": 358,
+      "articleScrollWidth": 358,
+      "knowledgePointCount": 15,
+      "pitfallCount": 10,
+      "officialSourceCount": 25,
+      "uniqueOfficialSourceCount": 25,
+      "projectEvidenceCount": 8,
+      "routeOutputVisible": true,
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "non200Requests": 0,
+      "requestCount": 35,
+      "pitfallLayout": "all 10 error/correct pairs stack vertically, remain inside the viewport and do not overlap",
+      "atBottom": true
+    },
+    "manualScreenshotReview": "PASS; top, pitfall and bottom screenshots show no incoherent overlap or page-level horizontal overflow; code remains inside its scroll boundary and mobile bottom content is reachable"
+  },
+  "manifestRegression": {
+    "basicsAvailable": 18,
+    "intermediateAvailable": 17,
+    "advancedAvailable": 7,
+    "advancedPlanned": 9,
+    "currentEntryLoadable": true,
+    "futurePlannedEntriesHaveNoLoader": true,
+    "nextCourseId": "backend.java.learn.advanced.http-clients-and-integration-resilience",
+    "nextCourseStatus": "planned",
+    "nextCourseLoader": false,
+    "finalColdStartRuns": 3,
+    "finalColdStartErrors": 0,
+    "finalColdStartPending": false
+  },
+  "review": {
+    "standards": "PASS / 0 finding",
+    "spec": "PASS / 0 finding",
+    "initialFindingCount": 5,
+    "remainingFindingCount": 0,
+    "independentReviewRounds": 3,
+    "finalIndependentConfirmationPending": false,
+    "finalIndependentConfirmedAt": "2026-08-11T13:07:33+08:00",
+    "confirmation": "Final published-state review confirmed precise legacy versions, artifact SHA bindings, build and browser evidence, cleanup boundary and stop boundary with zero findings"
+  },
+  "temporaryAssetCleanup": {
+    "pending": false,
+    "verifiedAt": "2026-08-11T13:07:33+08:00",
+    "temporaryRoots": [
+      "/tmp/java-advanced-07-feedback.G0Fua6"
+    ],
+    "playwrightSessions": [
+      "java-advanced-07"
+    ],
+    "playwrightSessionsClosed": true,
+    "previewPort": 4186,
+    "previewStopped": true,
+    "removedFileCount": 794,
+    "remainingPathCount": 0
+  },
+  "stopBoundary": "Close advanced course 7 only; do not research, draft, register or load advanced course 8 http-clients-and-integration-resilience, Reference, project practice or other stages"
+}

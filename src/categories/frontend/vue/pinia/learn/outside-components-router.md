@@ -67,7 +67,7 @@ recap:
 前置：请先完成 L01-L09，并掌握 Vue Router 的创建、memory history 和全局导航守卫。
 :::
 
-## 定义可以提前，调用必须等上下文
+## 一、定义可以提前，调用必须等上下文
 
 `defineStore()` 只创建 StoreDefinition，可以在模块加载时定义；真正的 `useStore()` 需要明确 Pinia。单 SPA 通常在 `app.use(pinia)` 后依赖 active fallback，但模块评估顺序可能早于 plugin 安装，多个 app 或 SSR 也不能把 mutable active Pinia 当作隔离协议。
 
@@ -80,7 +80,7 @@ router.beforeEach((to) => {
 })
 ~~~~
 
-## 显式、注入与 active fallback
+## 二、显式、注入与 active fallback
 
 | 入口 | 适用场景 | 边界 |
 | --- | --- | --- |
@@ -94,13 +94,13 @@ router.beforeEach((to) => {
 Router guard 负责允许或重定向，认证 Store 负责认证 state/action。不要把宿主 Router 实例塞进 Store，也不要依赖进程级 active Pinia 隔离 SSR 请求。
 :::
 
-## 独立 memory router 实验
+## 三、独立 memory router 实验
 
 :::demo{id="vue.pinia.learn.intermediate.outside-components-router.pinia-outside-component-context-lab-demo" playground="true"}
 在独立 mini-app 的 guard 内延迟取得 Store，并保持宿主 URL 与 Pinia 不变
 :::
 
-## 练习与观察
+## 四、练习与观察
 
 :::steps
 ### 1. 访问受保护页
@@ -120,7 +120,7 @@ Router guard 负责允许或重定向，认证 Store 负责认证 state/action�
 确认浏览器 URL 和宿主 active Pinia 全程不变。
 :::
 
-## 源码与测试推导
+## 五、源码与测试推导
 
 :::steps
 ### 1. install 同时 active 与 provide
@@ -152,7 +152,7 @@ outside-component 文档把 useStore 放在 beforeEach callback 内，消除 imp
 memory router 只证明浏览器内独立 app seam，不替代真实 SSR/hydration。
 :::
 
-## 易错使用提示
+## 六、易错使用提示
 
 :::pitfalls
 ### 把 defineStore 与 useStore 混为一谈

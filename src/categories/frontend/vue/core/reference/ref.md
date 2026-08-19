@@ -41,7 +41,7 @@ anchors:
 
 # ref()
 
-## 概述
+## 一、概述
 
 ref() 接受一个内部值，返回一个响应式、可更改的 ref 对象。它只有一个属性 `.value`，指向该内部值。对 `.value` 的读取会被追踪（track），对 `.value` 的写入会触发相关副作用（trigger）——这就是 Vue 响应式的最小单元。
 
@@ -53,7 +53,7 @@ interface Ref<T> {
 }
 ~~~~
 
-## 基础用法
+## 二、基础用法
 
 通过 `.value` 读取和修改值。在 `<script setup>` 中声明的顶层 ref，在模板中使用时会自动解包，不需要写 `.value`。
 
@@ -71,7 +71,7 @@ console.log(count.value) // 1
 基础计数器：模板中顶层 ref 自动解包，事件处理器中修改 .value 触发更新
 :::
 
-## 深层响应性
+## 三、深层响应性
 
 如果把一个对象赋值给 ref，这个对象会通过 `reactive()` 转为深层响应式对象。嵌套多深的属性修改都会被追踪；对象中嵌套的 ref 也会被自动解包。若不需要深层响应，可改用 `shallowRef()`（只追踪 `.value` 本身的替换）。
 
@@ -79,7 +79,7 @@ console.log(count.value) // 1
 对象 ref：修改嵌套属性 user.value.address.city 同样触发视图更新
 :::
 
-## 模板解包规则
+## 四、模板解包规则
 
 ref 在模板中的自动解包有明确的边界，只有"顶层属性"才解包。三条规则：1）模板渲染上下文的顶层 ref 自动解包；2）表达式中的非顶层 ref（如 `object.id`）不解包，参与运算会得到错误结果；3）例外——文本插值 `{{ }}` 的最终求值结果若是 ref，会被解包显示。
 
@@ -87,7 +87,7 @@ ref 在模板中的自动解包有明确的边界，只有"顶层属性"才解�
 三条解包规则的现场对照
 :::
 
-## 易错使用提示
+## 五、易错使用提示
 
 :::pitfalls
 ### 在脚本中省略 `.value`
@@ -216,13 +216,13 @@ const map = reactive(new Map([['count', ref(0)]]))
 console.log(map.get('count').value) // 需要 .value
 ~~~~
 
-## 响应式原理
+## 六、响应式原理
 
 :::principle{id="vue.core.reference.reactivity.ref.ref-reactivity"}
 ref 的响应式基于 getter/setter 拦截：读取 .value 时收集依赖（track），写入 .value 时触发依赖（trigger）。
 :::
 
-## 最小源码实现
+## 七、最小源码实现
 
 ref() 在源码中就是一个带 getter/setter 的 `RefImpl` 类。核心只有三件事：持有一个 `Dep`（订阅者集合）；`get value` 时调用 `dep.track()` 把"当前正在运行的副作用"登记为订阅者；`set value` 时先用 `Object.is` 比较新旧值（`hasChanged`），值真的变了才 `dep.trigger()` 通知所有订阅者重新运行。对象值会经 `toReactive()` 转为 reactive 代理，这就是深层响应性的来源。
 
@@ -265,7 +265,7 @@ export function ref(value?: unknown) {
 "当前活跃副作用"由全局变量 activeSub 维护：组件渲染函数、watchEffect 等在运行前把自己设为 activeSub，期间读到的每个 ref/属性都会把它记入自己的 Dep——这就是自动依赖收集的全部秘密。
 :::
 
-## 与 reactive 对比
+## 八、与 reactive 对比
 
 | 特性 | ref() | reactive() |
 | --- | --- | --- |

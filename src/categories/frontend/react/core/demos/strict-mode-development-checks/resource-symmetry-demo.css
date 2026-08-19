@@ -1,0 +1,226 @@
+.strict-mode-demo {
+  min-width: 0;
+  padding: 24px;
+  background: #f5f7f6;
+  color: #26312d;
+}
+
+.strict-mode-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  min-width: 0;
+  margin: 0 -6px;
+}
+
+.strict-mode-heading > div {
+  min-width: 0;
+  margin: 0 6px;
+}
+
+.strict-mode-heading p,
+.strict-mode-heading h2,
+.strict-mode-heading span,
+.strict-mode-panel > span,
+.strict-mode-panel h3,
+.strict-mode-result {
+  margin: 0;
+}
+
+.strict-mode-heading p {
+  color: #995011;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.strict-mode-heading h2 {
+  margin-top: 7px;
+  color: #202a26;
+  font-size: 1.35rem;
+  line-height: 1.3;
+}
+
+.strict-mode-heading span {
+  display: block;
+  margin-top: 8px;
+  color: #59645f;
+  line-height: 1.55;
+}
+
+.strict-mode-heading button,
+.strict-mode-panel button {
+  min-height: 42px;
+  padding: 9px 13px;
+  border: 1px solid #52615b;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #24312c;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.strict-mode-heading button {
+  flex: 0 0 auto;
+  margin: 0 6px;
+}
+
+.strict-mode-heading button:hover,
+.strict-mode-panel button:hover {
+  background: #eef2f0;
+}
+
+.strict-mode-heading button:focus-visible,
+.strict-mode-panel button:focus-visible,
+.strict-mode-panel select:focus-visible {
+  outline: 3px solid #f0a365;
+  outline-offset: 2px;
+}
+
+.strict-mode-probe {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  margin: 20px -6px -12px;
+}
+
+.strict-mode-panel {
+  flex: 1 1 280px;
+  min-width: 0;
+  margin: 0 6px 12px;
+  padding: 18px;
+  border: 1px solid #d5dbd8;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.strict-mode-panel > span {
+  display: block;
+  color: #59645f;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.strict-mode-panel h3 {
+  min-height: 2.8em;
+  margin-top: 6px;
+  color: #29332f;
+  font-size: 1.05rem;
+  line-height: 1.4;
+}
+
+.strict-mode-story-list {
+  min-height: 96px;
+  padding: 0;
+  margin: 14px 0 0;
+  list-style: none;
+}
+
+.strict-mode-story-list li {
+  display: inline-block;
+  padding: 7px 9px;
+  margin: 0 6px 7px 0;
+  border: 1px solid #d4d9d7;
+  border-radius: 5px;
+  background: #f7f8f7;
+  color: #3c4943;
+  font-size: 0.88rem;
+}
+
+.strict-mode-panel label {
+  display: block;
+  margin-top: 14px;
+  color: #4a5751;
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.strict-mode-panel select {
+  width: 100%;
+  min-height: 42px;
+  padding: 8px 10px;
+  margin-top: 6px;
+  border: 1px solid #84908a;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #26312d;
+  font: inherit;
+}
+
+.strict-mode-metrics {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  margin: 12px -4px 4px;
+}
+
+.strict-mode-metrics > div {
+  flex: 1 1 82px;
+  min-width: 0;
+  margin: 0 4px 8px;
+  padding: 10px;
+  border-left: 3px solid #a55b1c;
+  background: #f8f4ef;
+}
+
+.strict-mode-metrics dt {
+  color: #626b67;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.strict-mode-metrics dd {
+  margin: 4px 0 0;
+  color: #823f0b;
+  font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.strict-mode-panel button {
+  width: 100%;
+  margin-top: 4px;
+  border-color: #1a6650;
+  background: #1a6650;
+  color: #ffffff;
+}
+
+.strict-mode-panel button:hover {
+  background: #155540;
+}
+
+.strict-mode-result {
+  min-height: 64px;
+  padding: 12px 14px;
+  margin-top: 4px;
+  border-left: 4px solid #a53c31;
+  background: #fbf0ef;
+  color: #71332d;
+  line-height: 1.5;
+}
+
+.strict-mode-result.is-balanced {
+  border-left-color: #1b6b52;
+  background: #edf6f2;
+  color: #255c49;
+}
+
+@media (max-width: 560px) {
+  .strict-mode-demo {
+    padding: 18px;
+  }
+
+  .strict-mode-heading {
+    display: block;
+  }
+
+  .strict-mode-heading button {
+    width: calc(100% - 12px);
+    margin-top: 14px;
+  }
+
+  .strict-mode-panel h3 {
+    min-height: 0;
+  }
+}

@@ -1,0 +1,381 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.basics.arrays-and-varargs",
+  "batchId": "phase-4-arrays-and-varargs",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-06T10:50:27Z",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "89378a4fcd620c433f879c7a492104721cde7d6f07fa51936b78b2cb6dadfb7b",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "stagedLessonChanges": false
+  },
+  "sourceRepository": {
+    "path": "/Users/jian/Desktop/work/TDH/dzzz/dzzz-app",
+    "head": "167ca8aa91ca3a6b101246964ef4fddec3d21da0",
+    "statusShort": "",
+    "readOnly": true
+  },
+  "phase2Freeze": {
+    "courseCoverageMatrixSha256": "04d858896d07e975d3ab50796494873f09bd0ddf4b1a8b1ea87bd75cdd101d38",
+    "researchStatus": "not-started",
+    "exampleStatus": "not-started",
+    "courseStatus": "planned",
+    "phase4StateRecordedOnlyInThisSignoff": true,
+    "knownFrozenArtifactMismatch": {
+      "artifact": "docs/backend/java/audit/course-coverage-matrix.md",
+      "officialSha256": "b7fd50ffabbcf8a198802e907cef769ac969a71e4e14c40038f4aaaed09d91ad",
+      "recomputedExpectedSha256": "c4283551b4f37081097551957d3b4e1ea44922e0a1bb5865be2c5cc18faa6021",
+      "difference": "仅首部两处：正式文件使用 <br>，生成器预期使用 Markdown 行尾双空格；冻结 JSON、manifest、源码 HEAD 和库存身份未漂移。",
+      "introducedByThisLesson": false,
+      "action": "保留冻结文件并记录；不修改 Phase 2 产物或 tooling。"
+    }
+  },
+  "versions": {
+    "verifiedAt": "2026-08-06",
+    "modern": {
+      "java": "25",
+      "runtime": "Eclipse Temurin 25.0.3+9 LTS"
+    },
+    "legacy": {
+      "java": "8",
+      "runtime": "Eclipse Temurin 8u492-b09",
+      "springBootBackground": "2.3.12.RELEASE"
+    }
+  },
+  "sourceDiscovery": {
+    "method": "Tavily 仅用于发现直接页面，随后逐页核对 Oracle、JLS、Dev.java 和 OpenJDK 正文",
+    "communitySourcesUsedAsEvidence": false,
+    "projectEvidenceBoundary": "冻结矩阵的 sourceCapabilityIds 与 projectEvidence 均为空；本批不读取、运行或修改 dzzz-app 源码",
+    "directUrls": [
+      "https://openjdk.org/projects/jdk/25/",
+      "https://www.oracle.com/java/technologies/java-se-support-roadmap.html",
+      "https://docs.oracle.com/javase/specs/jls/se25/html/jls-4.html",
+      "https://docs.oracle.com/javase/specs/jls/se25/html/jls-8.html",
+      "https://docs.oracle.com/javase/specs/jls/se25/html/jls-10.html",
+      "https://docs.oracle.com/javase/specs/jls/se25/html/jls-15.html",
+      "https://dev.java/learn/language-basics/arrays",
+      "https://dev.java/learn/classes-objects/calling-methods-constructors",
+      "https://docs.oracle.com/javase/specs/jls/se8/html/jls-4.html",
+      "https://docs.oracle.com/javase/specs/jls/se8/html/jls-8.html",
+      "https://docs.oracle.com/javase/specs/jls/se8/html/jls-10.html",
+      "https://docs.oracle.com/javase/specs/jls/se8/html/jls-15.html"
+    ]
+  },
+  "docker": {
+    "engine": "Docker 29.6.1",
+    "feedbackSource": "从课程 Markdown 的 如何验证 代码块提取同一 bash 反馈环，经 stdin 交给固定 RepoDigest 容器执行",
+    "classOutput": "临时 /tmp 目录，shell trap 使用 find -depth -delete 清理",
+    "images": [
+      {
+        "role": "modern",
+        "requestedTag": "eclipse-temurin:25-jdk",
+        "digest": "sha256:12e44624adee6808a36d962717e1656e0afeeeff5a100f9cb00e0136513558f0"
+      },
+      {
+        "role": "legacy",
+        "requestedTag": "eclipse-temurin:8-jdk",
+        "digest": "sha256:c8b86f2c0a9bd6cc1b7fabc5d1a097501a166eea7cad3b2764e90e96178bea9b"
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/basics/arrays-and-varargs.md",
+      "sha256": "2a468b2841d72938c4937f197af4bf656d4eff27e06b32f9474476c0b7e38575"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/arrays-and-varargs.md",
+      "sha256": "b3a514e6d9c79673a5e6911320d05f6563659d91f6b7f83ac6fb09f9d6f60b1c"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "d2abea21352a92131ee06f5a96f0366667c27256873eade2a8c2ed1a3e934d00"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "6b389aee20754f29bf6d4fa5c533445a920459cd358b3c0e9f905f619177a3c3"
+    },
+    {
+      "path": "docs/backend/java/dzzz-app-course-plan.md",
+      "sha256": "b8deb2b71cf76ff05704bc50b04c6a3c00d198b95e1a0c2d6d36834fd1186dfa"
+    }
+  ],
+  "selfHashPolicy": "signoff 文件不记录自身哈希，避免递归自引用；artifacts 中其余最终文件逐一绑定 SHA-256",
+  "changedFiles": [
+    "docs/research/backend/java/basics/arrays-and-varargs.md",
+    "src/categories/backend/java/core/learn/arrays-and-varargs.md",
+    "src/categories/backend/java/core/entry-manifest.ts",
+    "src/categories/backend/java/core/backend-java-track.ts",
+    "docs/backend/java/audit/reviews/phase-4-arrays-and-varargs-signoff.json",
+    "docs/backend/java/dzzz-app-course-plan.md"
+  ],
+  "priorClosedJavaAssets": {
+    "protected": true,
+    "summary": "第一至第五批研究、课程与 signoff 保持原样，不归入第六批 changedFiles。"
+  },
+  "concurrentWorkspaceAssets": {
+    "protected": true,
+    "attribution": "frontend TypeScript 与 HeadingBlock 资产由并行工作产生，不属于本批 changedFiles；全量校验和构建在包含这些资产的当前工作区上执行。",
+    "paths": [
+      "docs/frontend/IT学习站前端规范.md",
+      "docs/frontend/IT学习站前端路线计划.md",
+      "docs/frontend/coverage-matrices/TypeScript官方覆盖矩阵.md",
+      "docs/frontend/plans/typescript/T0-官方调研与实施冻结.md",
+      "docs/frontend/plans/typescript/T3-1-官方事实核验.md",
+      "docs/frontend/plans/typescript/T3-2-官方事实核验.md",
+      "docs/frontend/plans/typescript/TA-1-官方事实核验.md",
+      "src/categories/frontend/engineering/typescript/entry-manifest.ts",
+      "src/categories/frontend/engineering/typescript/manifest.ts",
+      "src/categories/frontend/engineering/typescript/typescript-track.ts",
+      "src/categories/frontend/engineering/typescript/learn/declaration-files.md",
+      "src/categories/frontend/engineering/typescript/learn/framework-type-integration.md",
+      "src/categories/frontend/engineering/typescript/learn/infer-and-distribution.md",
+      "src/categories/frontend/engineering/typescript/learn/library-author-boundaries.md",
+      "src/categories/frontend/engineering/typescript/learn/package-exports.md",
+      "src/categories/frontend/engineering/typescript/learn/tsconfig-layering.md",
+      "src/categories/frontend/engineering/typescript/learn/type-design.md",
+      "src/categories/frontend/engineering/typescript/learn/type-performance.md",
+      "src/categories/frontend/engineering/typescript/reference/",
+      "src/categories/frontend/engineering/typescript/typescript-reference-index.ts",
+      "src/categories/frontend/engineering/typescript/typescript-reference.ts",
+      "src/common/ui/blocks/HeadingBlock.vue"
+    ]
+  },
+  "baselineVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 1,
+      "summary": "既有冻结 Markdown 确定性字节 mismatch；未修改冻结文件或 tooling。"
+    },
+    {
+      "command": "node docs/backend/java/audit/tooling/course-coverage-matrix-validator.mjs",
+      "exitCode": 1,
+      "summary": "既有 frozen course-coverage-matrix.md signoff SHA mismatch；JSON/manifest/source identity 未漂移。"
+    },
+    {
+      "command": "npm run type-check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run format:check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run test:unit",
+      "exitCode": 0,
+      "summary": "No test files found; configured empty test directory is valid"
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "summary": "No persistent E2E test files; command passed with --pass-with-no-tests"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "1071 modules transformed; existing >500 kB catalog chunk warning only"
+    },
+    {
+      "command": "git diff --check && git diff --cached --check",
+      "exitCode": 0,
+      "summary": "passed; no staged lesson changes"
+    },
+    {
+      "command": "git -C /Users/jian/Desktop/work/TDH/dzzz status --short -- dzzz-app",
+      "exitCode": 0,
+      "summary": "empty; source repository remained read-only"
+    }
+  ],
+  "javaVerification": {
+    "command": "extract course section 如何验证 and pipe the same bash feedback ring to docker run --rm -i <fixed RepoDigest> bash -euxo pipefail",
+    "exitCode": 0,
+    "sharedOutput": "arrays|length=3|default=0|alias=6|ends=4,8|literal=3|rows=2:1:2|many=3/10|none=0/0",
+    "cases": [
+      {
+        "name": "Java 25 positive compile/run",
+        "exitCode": 0,
+        "stdout": "arrays|length=3|default=0|alias=6|ends=4,8|literal=3|rows=2:1:2|many=3/10|none=0/0"
+      },
+      {
+        "name": "Java 8 positive compile/run",
+        "exitCode": 0,
+        "stdout": "arrays|length=3|default=0|alias=6|ends=4,8|literal=3|rows=2:1:2|many=3/10|none=0/0"
+      },
+      {
+        "name": "array index out of bounds",
+        "java25RunExit": 1,
+        "java8RunExit": 1,
+        "stdoutEmpty": true,
+        "stderrContains": "java.lang.ArrayIndexOutOfBoundsException"
+      },
+      {
+        "name": "varargs not last",
+        "java25CompileExit": 1,
+        "java8CompileExit": 1,
+        "diagnosticTextBound": false
+      },
+      {
+        "name": "more than one varargs declaration",
+        "java25CompileExit": 1,
+        "java8CompileExit": 1,
+        "diagnosticTextBound": false
+      }
+    ]
+  },
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "session": "java-batch6",
+    "baseUrl": "http://127.0.0.1:4173/",
+    "targetPath": "/backend/java/core/learn/arrays-and-varargs",
+    "desktop": {
+      "viewport": "1440x1000",
+      "documentScrollWidth": 1440,
+      "title": "数组、可变参数与索引边界",
+      "officialSourceCount": 12,
+      "searchTerm": "varargs",
+      "searchResultCount": 1,
+      "previousEntryId": "backend.java.learn.basics.methods-parameters-and-scope",
+      "nextLink": false,
+      "initialProgress": "0 / 6",
+      "completedProgress": "1 / 6"
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "documentScrollWidth": 390,
+      "completionButtonAfterReload": "取消完成",
+      "localStorageContainsEntryId": true,
+      "codeBlockCount": 11,
+      "longCodeBlocksContainedByHorizontalScroll": true,
+      "constrainedLongCodeBlockCount": 9,
+      "codeContainerOverflowX": "auto",
+      "codeContainerClientWidth": 356
+    },
+    "console": {
+      "errors": 0,
+      "warnings": 0
+    },
+    "sessionClosed": true,
+    "sessionArtifactsCleaned": true
+  },
+  "reviews": {
+    "standards": {
+      "status": "PASS",
+      "findingCount": 0
+    },
+    "spec": {
+      "status": "PASS",
+      "findingCount": 0
+    },
+    "smellBaseline": "PASS / 0 finding",
+    "fixedPoint": "HEAD 203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb plus current scoped uncommitted batch-6 files; independent gpt-5.6-sol xhigh remediation re-review"
+  },
+  "beginnerContentReverification": {
+    "verifiedAt": "2026-08-07",
+    "courseArtifact": {
+      "path": "src/categories/backend/java/core/learn/arrays-and-varargs.md",
+      "sha256": "6a051ec2ba152ced8573bea85a9a0d8bc8f8f20774d39a395c14997a3824a78c"
+    },
+    "content": "PASS; exactly one 从零跟着做, usage, pitfalls, verification, one exercise and runnable code",
+    "sources": "PASS; source type, appliesTo and claims shown only in the official-source regions; 正文无来源详情",
+    "browser": "PASS; 1440px and 390px routes, 36/36 HTTP 200, no horizontal overflow or browser errors",
+    "root": "PASS; knowledge-path, type-check, lint, format and diff checks"
+  },
+  "phaseBReverification": {
+    "batchId": "B-06",
+    "status": "implementation-complete / lesson-passed",
+    "verifiedAt": "2026-08-14",
+    "historicalEvidencePreserved": true,
+    "courseContract": {
+      "title": "数组、可变参数与索引边界",
+      "estimatedMinutes": 60,
+      "prerequisites": ["B-05"],
+      "path": "/backend/java/core/learn/arrays-and-varargs"
+    },
+    "currentArtifacts": [
+      {
+        "path": "docs/research/backend/java/basics/arrays-and-varargs.md",
+        "sha256": "a0a9d7dbddbce037933d3ee81bf59437c52415ad63017256f7011bcf6eca9902"
+      },
+      {
+        "path": "src/categories/backend/java/core/learn/arrays-and-varargs.md",
+        "sha256": "b40a477208ba78efe52f921766e1a963b0a12b9d0b5b2f7e9e19094d13f1feed"
+      }
+    ],
+    "runtimeProtection": {
+      "trackChanged": false,
+      "trackSha256": "10f44a4f0582f4236032c39a209302b1f0fd6db1251b86b059db3e51e95fb57a",
+      "loaderChanged": false,
+      "loaderSha256": "9226427b5a9606fe12e9265b5a082f991cbda7b0ba0fdcef756cd58f26ad2dad"
+    },
+    "research": {
+      "status": "PASS",
+      "discovery": "Tavily",
+      "finalEvidence": "14 个 OpenJDK、Oracle、JLS 与 Dev.java 官方直接 URL；搜索摘要未作为结论证据",
+      "modernBaseline": "Java 25 LTS",
+      "legacyBaseline": "Java 8",
+      "scopeBoundary": "数组类型、创建、初始化、默认值、length、索引边界、索引循环、增强 for、数组引用与别名、不规则数组、varargs 声明与调用；不进入数组协变、泛型数组、反射、集合、类设计或框架"
+    },
+    "javaFeedbackLoop": {
+      "environment": "Docker 29.6.1; Eclipse Temurin 25.0.3+9 LTS and 8u492-b09",
+      "source": "从最终课程 Markdown AST 提取唯一 bash 反馈环，以只读 bind mount 交给固定 digest 容器执行",
+      "classOutput": "容器内一次性 /tmp 目录，shell trap 使用 find -depth -delete 清理",
+      "status": "PASS",
+      "java25": "JAVA25_ARRAYS_VARARGS_PASS",
+      "java8": "JAVA8_ARRAYS_VARARGS_PASS",
+      "sharedOutput": "arrays|length=3|default=0|alias=6|ends=4,8|literal=3|traversal=18|rows=2:1:2|many=3/10|none=0/0|array=3/10",
+      "negativeRuntime": "索引等于 length 时 Java 25/8 均非零退出并命中 ArrayIndexOutOfBoundsException",
+      "negativeCompilation": "varargs 非末位、两个 varargs 以及 int... / int[] 同名签名在 Java 25/8 均非零退出并命中对应错误类别",
+      "finalMarker": "ARRAYS_VARARGS_FEEDBACK_PASS"
+    },
+    "qualityGates": {
+      "knowledgePath": "PASS; 167 source items, 64 course nodes, 114 dependency edges",
+      "typeCheck": "PASS",
+      "lint": "PASS",
+      "formatCheck": "PASS",
+      "unit": "PASS; no persistent unit tests",
+      "e2e": "PASS; no persistent E2E tests",
+      "build": "PASS; 1717 modules transformed; existing large-chunk and plugin-timing warnings only",
+      "diffCheck": "PASS for B-06 allowed paths in cached and unstaged views; unrelated workspace assets preserved"
+    },
+    "browserVerification": {
+      "server": "production preview",
+      "viewports": ["1440x900", "390x844"],
+      "httpStatus": 200,
+      "orderedStepCount": 7,
+      "officialSourceCount": 14,
+      "previousEntryId": "backend.java.learn.basics.methods-parameters-and-scope",
+      "nextEntryId": "backend.java.learn.basics.classes-objects-and-immutability",
+      "mobileCourseInfo": "PASS; expanded details show 60 minutes and 2026-08-14 verification date",
+      "requiredContentAssertions": "PASS; seven frozen topics, exact shared output, one index runtime failure and three targeted varargs compile failures",
+      "horizontalOverflow": false,
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "badResponses": 0
+    },
+    "independentReview": {
+      "reviewer": "b06_final_review",
+      "standards": "PASS / 0 finding",
+      "spec": "PASS / 0 finding",
+      "reviewedResearchSha256": "a0a9d7dbddbce037933d3ee81bf59437c52415ad63017256f7011bcf6eca9902",
+      "reviewedCourseSha256": "b40a477208ba78efe52f921766e1a963b0a12b9d0b5b2f7e9e19094d13f1feed"
+    },
+    "verificationBoundary": {
+      "temporaryAssets": "签核后关闭 Playwright 和 preview，并删除 B-06 /tmp 一次性验证目录；仓库不保留测试、截图或浏览器输出",
+      "nextCourse": "B-06 关闭前未读取或研究 B-07 正文"
+    }
+  },
+  "stopBoundary": "Phase B 的 B-06 已关闭；下一批只允许 B-07 classes-objects-and-immutability，不得跳到 B-08，不得进入 Phase C、D、E。"
+}

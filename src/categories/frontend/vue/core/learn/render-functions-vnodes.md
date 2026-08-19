@@ -76,11 +76,11 @@ recap:
 
 # 渲染函数与虚拟节点
 
-## 正文大纲
+## 一、正文大纲
 
 上一课通过自定义指令进入 DOM 生命周期，本课转向 Vue 的渲染输出。学习重点不是把模板逐行翻译成 h()，而是先判断何时确实需要 JavaScript 控制结构，再把每轮输出、组件插槽和节点身份表达准确。最后用 keyed 子组件重排验证：VNode 位置会改变，业务状态不应跟着位置错位。
 
-## 模板优先，渲染函数是下沉边界
+## 二、模板优先，渲染函数是下沉边界
 
 | 需求 | 首选能力 | 判断依据 |
 | --- | --- | --- |
@@ -94,7 +94,7 @@ recap:
 渲染函数不是模板的性能捷径。模板可获得静态提升和 patch flag 等编译优化；当模板仍然易读时，手写 h() 只会增加 type、children、事件和 slot 协议的维护成本。
 :::
 
-## 第一枚 VNode 是描述，不是真实 DOM
+## 三、第一枚 VNode 是描述，不是真实 DOM
 
 h() 返回的是当前界面的 VNode 描述，renderer 再据此创建或更新真实 DOM。type 表达节点种类，props 表达属性和事件，children 表达子内容；不要读取 VNode 私有字段来判断页面结果。
 
@@ -105,7 +105,7 @@ const article = h('article', { class: 'lesson-card' }, [
 ])
 ~~~~
 
-## h() 的三个位置承担不同协议
+## 四、h() 的三个位置承担不同协议
 
 | 参数 | 可表达内容 | 关键边界 |
 | --- | --- | --- |
@@ -115,7 +115,7 @@ const article = h('article', { class: 'lesson-card' }, [
 
 两参数调用存在明确歧义规则：普通对象位于第二参数时按 props 解释，单个 VNode 才按 child 解释。需要传组件 slots 对象时，应保留第三参数位置。
 
-## setup 返回 render closure
+## 五、setup 返回 render closure
 
 setup() 通常只执行一次。Vue 只有在它返回函数时，才把该函数安装为组件 render。响应式值应在 render 执行期间读取：依赖变化后 Vue 会再次调用 render，并为本轮界面创建新的 VNode 树。
 
@@ -146,7 +146,7 @@ export default defineComponent({
 渲染函数必须保持可重复执行。不要在 render 中发请求、启动 timer 或修改它正在读取的状态；副作用仍应放在事件、watch 或生命周期中。
 :::
 
-## 组件 type 与事件 props 都要显式表达
+## 六、组件 type 与事件 props 都要显式表达
 
 渲染已导入组件时直接把组件定义传给 h()。只有必须依赖注册名时，才在 setup 或 render 上下文使用 resolveComponent()。事件通过 onXxx prop 传递；once、capture、passive 可作为事件选项后缀，prevent、stop、self 与按键行为则通过 withModifiers() 或 withKeys() 包装。
 
@@ -164,7 +164,7 @@ h('form', { onSubmit: withModifiers(saveLesson, ['prevent']) }, children)
 h('button', { onClickOnceCapture: saveLesson }, '只保存一次')
 ~~~~
 
-## 组件 children 使用惰性 slot 函数
+## 七、组件 children 使用惰性 slot 函数
 
 默认 slot 可以直接传函数，具名 slots 对象位于第三参数，因此没有组件 props 时也要用 null 占住第二参数。slot 值保持函数，让子组件决定何时求值，并让内容中的响应式依赖归属正确的渲染上下文。
 
@@ -182,7 +182,7 @@ h(LessonPanel, null, {
 })
 ~~~~
 
-## 每个位置都要创建唯一 VNode
+## 八、每个位置都要创建唯一 VNode
 
 VNode 是一次渲染输出，不是组件定义或可重复使用的静态描述。它会在 patch 中关联真实元素、组件实例和内部标记。相同界面片段应通过工厂为每个位置创建新 VNode；不要在一棵树的多个位置复用同一对象，也不要跨 render 缓存动态 VNode。
 
@@ -195,7 +195,7 @@ function createBadge() {
 return () => h('div', [createBadge(), createBadge()])
 ~~~~
 
-## type 与 key 共同表达同级节点身份
+## 九、type 与 key 共同表达同级节点身份
 
 Vue 3.5.40 只有在 type 与 key 都相等时，才把前后两枚 VNode 视作可以继续 patch 的同一节点。key 因此不只是消除列表警告：当子组件持有输入、焦点或生命周期状态时，稳定业务 key 告诉 renderer 应移动哪个实例，而不是让旧实例按新位置错配。
 
@@ -210,7 +210,7 @@ Vue 3.5.40 只有在 type 与 key 都相等时，才把前后两枚 VNode 视作
 key 只需在同一组 siblings 中唯一，但必须稳定。不要为了“强制刷新”给整个动态区域设置随机 key；真正需要重置状态时，应在明确边界上有意更换一个可解释的 key。
 :::
 
-## VNode 辅助函数各自只解决一个边界
+## 十、VNode 辅助函数各自只解决一个边界
 
 | API | 适用场景 | 不能替代 |
 | --- | --- | --- |
@@ -236,7 +236,7 @@ function decorateChild(child: unknown) {
 cloneVNode() 会保留并重新计算 VNode 专用字段，附加 props 也有专门合并语义。仍需显式审查 key 与 ref：克隆不是任意改写身份或重复挂载同一 ref 的捷径。
 :::
 
-## 易错使用提示
+## 十一、易错使用提示
 
 :::pitfalls
 ### 用渲染函数重写一个普通静态模板
@@ -482,7 +482,7 @@ const renderItem = (item: Course) =>
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 从 Vue 3.5.40 源码推导适用场景
+## 十二、从 Vue 3.5.40 源码推导适用场景
 
 :::steps
 ### h() 只归一化参数
@@ -522,7 +522,7 @@ resolveComponent() 和 resolveDirective() 可使用当前 rendering instance 或
 shape flag、children 规范化和 keyed diff 步骤是 Vue 3.5.40 的实现证据。可以据此解释当前行为，但不要读取 VNode 私有字段或把内部算法顺序写进业务契约。
 :::
 
-## 动手验证：状态跟随业务身份
+## 十三、动手验证：状态跟随业务身份
 
 :::demo{id="vue.core.learn.advanced.render-functions-vnodes.vnode-identity-lab-demo" playground="true"}
 在 h() 创建的 keyed 子组件中写入本地笔记，再重排列表并观察状态仍跟随业务 ID

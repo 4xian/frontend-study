@@ -144,11 +144,39 @@ export interface ReferenceIndexGroupManifest {
   sections: ReferenceIndexSectionManifest[]
 }
 
+export type ReferenceObservationStatus =
+  | 'navigation'
+  | 'deprecated'
+  | 'unsupported'
+  | 'experimental'
+  | 'cli-only'
+  | 'historical'
+  | 'observation'
+  | 'restricted'
+  | 'deferred'
+  | 'prerelease'
+
+export interface ReferenceObservationItem {
+  readonly id: string
+  readonly name: string
+  readonly officialUrl?: string
+  readonly note?: string
+}
+
+export interface ReferenceObservationScope {
+  readonly id: string
+  readonly title: string
+  readonly status: ReferenceObservationStatus
+  readonly count: number
+  readonly items?: readonly ReferenceObservationItem[]
+}
+
 export interface ReferenceIndexManifest {
   appliesTo: string
   verifiedAt: string
   groups: ReferenceIndexGroupManifest[]
   searchItems?: ReferenceSearchItemManifest[]
+  observationScopes?: readonly ReferenceObservationScope[]
 }
 
 export interface ReferenceOverviewItem extends ReferenceIndexItemManifest {

@@ -236,6 +236,111 @@
       "summary": "empty"
     }
   ],
+  "migrationReverification": {
+    "status": "verification-complete / independent-review-passed",
+    "verifiedAt": "2026-08-07T02:51:21Z",
+    "historicalEvidencePreserved": true,
+    "courseRepository": {
+      "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+      "dirtyWorkspaceProtected": true,
+      "stagedLessonChanges": false
+    },
+    "currentArtifacts": [
+      {
+        "path": "docs/research/backend/java/basics/development-environment-and-runtime.md",
+        "sha256": "d103742399f505c4b747fda6d8b0f6ab7fab1cbda99510cb5e09aba3d71670f0"
+      },
+      {
+        "path": "src/categories/backend/java/core/learn/development-environment-and-runtime.md",
+        "sha256": "2b721fd17858a09f88ec5f64cbd095aeb4182abd2802e4e40cdb346e5350e05f"
+      },
+      {
+        "path": "src/categories/backend/java/core/entry-manifest.ts",
+        "sha256": "2844172a9f03f5f37eb98361446f4d76e5b4c1a61a9216040e410cd82b1a92fe"
+      },
+      {
+        "path": "src/categories/backend/java/core/backend-java-track.ts",
+        "sha256": "a6d062784c82ffb33378f7ca33b070bda4f76b4f2bc3023892346697e9d503c3"
+      },
+      {
+        "path": "docs/backend/java/dzzz-app-course-plan.md",
+        "sha256": "35783758d76d11b96e5cc2aae4f15d9c49ecf9ad041f48dcc08bd43960a3f3fc"
+      }
+    ],
+    "runtime": {
+      "courseId": "backend.java.learn.basics.development-environment-and-runtime",
+      "path": "/backend/java/core/learn/development-environment-and-runtime",
+      "catalogMetaRegistered": true,
+      "contentEntryLoaderRegistered": true,
+      "lazyLoadPassed": true
+    },
+    "sourceRepository": {
+      "head": "167ca8aa91ca3a6b101246964ef4fddec3d21da0",
+      "statusShort": "",
+      "readOnly": true,
+      "projectExecuted": false,
+      "projectModified": false
+    },
+    "javaVerification": {
+      "command": "zsh -f /tmp/vue3-java-first.KPNfuc/verify.sh",
+      "exitCode": 0,
+      "sharedOutput": "java-first|java25=true|java8=true|source8-rejected=true|major69-rejected=true|release8=true",
+      "java25CompileRun": "PASS",
+      "java8CompileRun": "PASS",
+      "java8SourceFileLaunchRejected": true,
+      "java8RejectedJava25Major69": true,
+      "java25Release8RanOnJava8": true,
+      "temporaryAssetsCleaned": true
+    },
+    "browserVerification": {
+      "tool": "Playwright CLI",
+      "baseUrl": "http://127.0.0.1:4189/",
+      "desktop": {
+        "viewport": "1440x900",
+        "documentClientWidth": 1440,
+        "documentScrollWidth": 1440,
+        "horizontalOverflow": false,
+        "title": "开发环境、JDK 与 Java 运行过程",
+        "codeBlockCount": 12
+      },
+      "mobile": {
+        "viewport": "390x844",
+        "documentClientWidth": 390,
+        "documentScrollWidth": 390,
+        "horizontalOverflow": false,
+        "codeBlockCount": 12
+      },
+      "basicCourseLinkCount": 18,
+      "previousLink": false,
+      "nextEntryId": "backend.java.learn.basics.packages-imports-and-source-structure",
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "finalBasicStageTraversal": {
+        "mobileRouteCount": 18,
+        "mobileViewport": "390x844",
+        "http200Count": 18,
+        "horizontalOverflowCount": 0,
+        "navigationFailureCount": 0,
+        "desktopSpotChecks": 3
+      }
+    },
+    "rootVerification": {
+      "knowledgePath": "PASS; 167 source items, 64 course nodes, 114 dependency edges",
+      "typeCheck": "PASS",
+      "lint": "PASS",
+      "formatCheck": "PASS",
+      "unit": "PASS; no persistent unit tests",
+      "e2e": "PASS; no persistent E2E tests",
+      "build": "PASS; 1214 modules transformed; existing large-chunk warning only",
+      "diffCheck": "PASS"
+    },
+    "review": {
+      "standards": "PASS",
+      "standardsFindings": 0,
+      "spec": "PASS",
+      "specFindings": 0
+    }
+  },
   "parallelWorkAttribution": {
     "protectedFilesModifiedByThisLesson": false,
     "observedChange": "src/content/catalog/typescript-t2-1.spec.ts appeared during implementation and initially expected four available intermediate TypeScript lessons before the parallel manifest was updated",
@@ -253,5 +358,102 @@
     "status": "green-with-recorded-intermittent-e2e-retry",
     "details": "全量 E2E 首轮有两个非本课 Vue 用例失败；两项 focused 复跑和随后完整 56 项复跑均通过。未修改对应 Vue 测试或实现。"
   },
-  "stopBoundary": "第一课完成并关闭；等待用户确认下一批；不开始第二课，不进入 Phase 5"
+  "beginnerContentReverification": {
+    "verifiedAt": "2026-08-07",
+    "courseArtifact": {
+      "path": "src/categories/backend/java/core/learn/development-environment-and-runtime.md",
+      "sha256": "8f5e0f36f5c2fba49c88bc67ae4fd4a3ac4c3e677604dc9ee52e205f9982def0"
+    },
+    "content": "PASS; exactly one 从零跟着做, usage, pitfalls, verification, one exercise and runnable code",
+    "sources": "PASS; source type, appliesTo and claims shown only in the official-source regions; 正文无来源详情",
+    "browser": "PASS; 1440px and 390px routes, 36/36 HTTP 200, no horizontal overflow or browser errors",
+    "root": "PASS; knowledge-path, type-check, lint, format and diff checks"
+  },
+  "phaseBReverification": {
+    "batchId": "B-01",
+    "status": "implementation-complete / lesson-passed",
+    "verifiedAt": "2026-08-14",
+    "historicalEvidencePreserved": true,
+    "courseContract": {
+      "title": "开发环境、终端、IDE、JDK 与 Java 运行过程",
+      "estimatedMinutes": 75,
+      "prerequisites": [],
+      "path": "/backend/java/core/learn/development-environment-and-runtime"
+    },
+    "currentArtifacts": [
+      {
+        "path": "docs/research/backend/java/basics/development-environment-and-runtime.md",
+        "sha256": "16baf705d09fcf9e210dc8c865bfff6eddd40eba208d9971682ddf9e656f0d9b"
+      },
+      {
+        "path": "src/categories/backend/java/core/learn/development-environment-and-runtime.md",
+        "sha256": "64c073501c33a30fc4e59081c2769140b932203f4bd8bb2363899408803a03ec"
+      }
+    ],
+    "runtimeProtection": {
+      "trackChanged": false,
+      "trackSha256": "10f44a4f0582f4236032c39a209302b1f0fd6db1251b86b059db3e51e95fb57a",
+      "loaderChanged": false,
+      "loaderSha256": "9226427b5a9606fe12e9265b5a082f991cbda7b0ba0fdcef756cd58f26ad2dad"
+    },
+    "research": {
+      "status": "PASS",
+      "discovery": "Tavily",
+      "finalEvidence": "19 个官方直接 URL；搜索摘要未作为结论证据",
+      "modernBaseline": "Java 25 LTS",
+      "legacyBaseline": "Java 8"
+    },
+    "javaFeedbackLoop": {
+      "environment": "Docker 29.6.1; Eclipse Temurin 25.0.3+9 LTS and 8u492-b09",
+      "sourceMount": "read-only bind mount",
+      "classOutput": "一次性 /tmp 目录",
+      "status": "PASS",
+      "cases": [
+        "Java 25 编译与运行成功",
+        "Java 8 编译与运行成功",
+        "错误工作目录退出码为 2，恢复目录后成功",
+        "缺失 classpath 退出码为 1，显式 classpath 后成功",
+        "Java 8 source-file launch 退出码为 1",
+        "Java 8 拒绝 major 69 class file，退出码为 1",
+        "javac --release 8 产物在真实 Java 8 中运行成功"
+      ],
+      "stdout": "后端课程运行成功"
+    },
+    "qualityGates": {
+      "knowledgePath": "PASS",
+      "typeCheck": "PASS",
+      "lint": "PASS",
+      "formatCheck": "PASS",
+      "unit": "PASS",
+      "e2e": "PASS",
+      "build": "PASS",
+      "diffCheck": "PASS"
+    },
+    "browserVerification": {
+      "server": "production preview",
+      "resultSha256": "184fb7e66a356412e10203516bbb660e8a953d10d200979ba64b6b3878981bb7",
+      "viewports": ["1440x900", "390x844"],
+      "httpStatus": 200,
+      "orderedStepCount": 9,
+      "officialSourceCount": 19,
+      "missingOfficialSources": 0,
+      "horizontalOverflow": false,
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "nextEntryId": "backend.java.learn.basics.packages-imports-and-source-structure"
+    },
+    "independentReview": {
+      "reviewer": "phase_a_freeze_review",
+      "standards": "PASS / 0 finding",
+      "spec": "PASS / 0 finding",
+      "reviewedCourseSha256": "64c073501c33a30fc4e59081c2769140b932203f4bd8bb2363899408803a03ec"
+    },
+    "verificationBoundary": {
+      "windows": "官方 PowerShell 与 JDK 安装合同已核对，未在 Windows GUI 实测",
+      "ide": "IntelliJ 配置字段与预期结果已核对，未执行 IDE GUI 自动化",
+      "temporaryAssets": "签核后删除 /tmp 一次性验证目录；仓库不保留测试、截图或浏览器输出"
+    }
+  },
+  "stopBoundary": "Phase B 的 B-01 已关闭；下一批只允许 B-02 packages-imports-and-source-structure，不得跳到 B-03，不得进入 Phase C、D、E。"
 }

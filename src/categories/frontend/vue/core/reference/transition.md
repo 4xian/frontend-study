@@ -62,11 +62,11 @@ anchors:
 
 # &lt;Transition&gt; / &lt;TransitionGroup&gt;
 
-## 概述
+## 一、概述
 
 `<Transition>` 在唯一子元素或组件因 `v-if`、`v-show`、动态组件或特殊 `key` 变化而进入、离开时，按约定时机添加和移除 CSS 类。它不渲染额外 DOM；`name` 决定类名前缀，默认前缀是 `v`。`<TransitionGroup>` 则把同一套进入、离开能力扩展到列表，并额外处理列表项的位置移动。
 
-## 类型签名与核心 props
+## 二、类型签名与核心 props
 
 | prop | 类型 | 作用 |
 | --- | --- | --- |
@@ -86,7 +86,7 @@ anchors:
 `mode="out-in"` 会等待旧节点离开后再插入新节点，适合互斥视图切换。JavaScript 钩子也可以接入动画库；配合 `:css="false"` 时，应由钩子明确通知 Vue 动画已经完成。
 :::
 
-## 六个过渡类
+## 三、六个过渡类
 
 进入与离开各有 from、active、to 三个阶段。active 类覆盖整个过渡过程，通常负责声明 `transition` 或 `animation`；from 和 to 类描述两端状态。
 
@@ -111,7 +111,7 @@ anchors:
 }
 ~~~~
 
-## TransitionGroup：列表过渡
+## 四、TransitionGroup：列表过渡
 
 `<TransitionGroup>` 可以包含多个子元素，但每个子元素必须有唯一且稳定的 `key`。它没有 `mode` prop，默认渲染为 Fragment，只有传入 `tag` 才生成包裹元素。列表项因插入、删除或重排而改变位置时，Vue 用 FLIP 技术计算位移，并通过 `moveClass`（默认是 `name-move`）触发移动过渡。
 
@@ -137,7 +137,7 @@ anchors:
 </style>
 ~~~~
 
-## 易错使用提示
+## 五、易错使用提示
 
 :::pitfalls
 ### 在一个 Transition 中放多个并列元素或列表项
@@ -315,7 +315,7 @@ function animateLeave(element: Element, done: () => void) {
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 最小源码实现
+## 六、最小源码实现
 
 `BaseTransition` 负责 vnode 层的进入、离开调度，runtime-dom 的 `resolveTransitionProps()` 则把 DOM 相关 props 翻译成操作 CSS 类的钩子。进入前添加 from 与 active，经过两次 `requestAnimationFrame` 后切换到 to，最后等待结束事件或显式时长并清理类；离开流程对称，真实移除动作会等待 `done()`。
 

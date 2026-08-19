@@ -80,7 +80,7 @@ recap:
 前置：请先完成 L01-L13，尤其要理解 Setup Store scope、订阅归属、显式 Pinia、plugin cleanup 与 hydration 证据边界。
 :::
 
-## 组件、Store 与 Pinia 是三层寿命
+## 一、组件、Store 与 Pinia 是三层寿命
 
 | 操作 | 公开可观察结果 | 不要推导 |
 | --- | --- | --- |
@@ -95,7 +95,7 @@ recap:
 `$dispose()` 不删除 root state。dispose 后可用旧引用做一次受控 mutation，证明旧订阅已经停止；随后应放弃旧引用，由 `useStore(pinia)` 重建，或直接销毁整个 Pinia。
 :::
 
-## HMR 需要真实 Store Module 边界
+## 二、HMR 需要真实 Store Module 边界
 
 ~~~~ts
 import { acceptHMRUpdate, defineStore } from 'pinia'
@@ -111,7 +111,7 @@ if (import.meta.hot) {
 
 必须由真实 Vite watcher 发现文件变更，再经 module graph、WebSocket 与 accept boundary 把新 module 交给 Pinia。手工调用 helper callback 只能形成 unit model，不能证明浏览器里的 Store 保留了 state。生产分支返回 no-op，HMR 也不能替代 persistence schema migration。
 
-## ID 稳定，Shape 不等于通用 Deep Merge
+## 三、ID 稳定，Shape 不等于通用 Deep Merge
 
 | 变化 | Pinia 4.0.2 固定行为 | 维护策略 |
 | --- | --- | --- |
@@ -123,7 +123,7 @@ if (import.meta.hot) {
 
 Store ID 是 HMR identity，必须保持稳定。固定 helper 会先从新 module exports 中筛选当前 Pinia 已认识的 Store ID，再处理 identity；ID 不匹配可能跳过更新，也可能进入 invalidation，不能写成“改 ID 必然保留”或“改 ID 必然 reload”。Array、Map、Set、ref、reactive 与 plain object 也不能归纳成一种递归合并。
 
-## Devtools 能力需要真实 Client 证据
+## 四、Devtools 能力需要真实 Client 证据
 
 | 能力 | 最低真实证据 | 当前 P05 状态 |
 | --- | --- | --- |
@@ -135,13 +135,13 @@ Store ID 是 HMR identity，必须保持稳定。固定 helper 会先从新 modu
 
 页面自己展示 state、固定说明文字或截图，都不能证明 Devtools inspector/timeline 收到了事件。Devtools 是开发客户端集成，不是生产页面需要调用的一组内部 API。
 
-## Store Lifecycle 维护实验
+## 五、Store Lifecycle 维护实验
 
 :::demo{id="vue.pinia.learn.advanced.hmr-devtools-maintenance.pinia-store-lifecycle-maintenance-lab-demo" playground="true"}
 在独立 Pinia 与 mini-app 中观察 consumer 卸载、$dispose、重建 identity/state 与 disposePinia
 :::
 
-## 练习与观察
+## 六、练习与观察
 
 :::steps
 ### 1. 建立基线
@@ -165,7 +165,7 @@ Store ID 是 HMR identity，必须保持稳定。固定 helper 会先从新 modu
 确认公开 root state 变为 `{}`，实例标记不可复用，只有重置实验仍可操作。
 :::
 
-## 源码与测试推导
+## 七、源码与测试推导
 
 :::steps
 ### 1. $dispose 停止 Store Scope
@@ -201,7 +201,7 @@ Issue #2611 与固定测试覆盖运行期新增 optional property。
 runtime 能力说明不能替代真实 client 的 inspector、timeline 与编辑记录。
 :::
 
-## 易错使用提示
+## 八、易错使用提示
 
 :::pitfalls
 ### 组件卸载等同 Store Dispose

@@ -53,7 +53,7 @@ recap:
 
 # 路由数据获取
 
-## 先决定导航何时提交
+## 一、先决定导航何时提交
 
 Vue Router 官方把导航后取数和导航前取数都定义为有效选择。差别不是哪个 API 更高级，而是用户何时看到新 URL、新页面和 loading：导航后先提交路由，由目标页面取数；导航前由守卫等待，请求完成前仍停留在旧页面。
 
@@ -65,7 +65,7 @@ Vue Router 官方把导航后取数和导航前取数都定义为有效选择。
 | 取消 | 参数 watcher 失效或组件卸载 | 新导航使旧 prefetch 失效 |
 | 适用场景 | 页面结构可先显示 | 必要数据就绪后才能进入 |
 
-## 导航后：精确侦听请求身份
+## 二、导航后：精确侦听请求身份
 
 从 /users/1 到 /users/2 时，同一 route record 通常复用组件实例，onMounted 不会重新运行。页面应在 setup 中只侦听决定请求身份的 params/query 字段，并用 immediate 统一首次进入与后续更新。
 
@@ -100,7 +100,7 @@ watch(
 
 cleanup 提供取消入口，但写回前仍要比较 active token 和当前 route id。Abort 只能通知支持 signal 的 adapter 停止工作；身份检查才是“旧结果绝不覆盖新页面”的最终保证。
 
-## 导航前：在 beforeResolve 等待并明确结算
+## 三、导航前：在 beforeResolve 等待并明确结算
 
 beforeResolve 位于异步路由组件和组件进入守卫之后、导航确认之前。它适合统一实现“数据成功才进入”，但它是全局守卫，必须先筛选明确的 route name 或 meta。pending/error 也必须由目标组件之外的 app shell 显示。
 
@@ -132,7 +132,7 @@ router.beforeResolve(async (to) => {
 
 每条异步分支都必须结算：成功放行，业务失败 return false，重定向返回 location，意外错误抛出。Router 会识别旧导航已被新导航取消，却不会替业务 Promise 调用 abort。
 
-## 用受控请求观察两种时序
+## 四、用受控请求观察两种时序
 
 下面的 mini-app 不发真实网络请求，也不使用定时器。每次导航创建可手动完成的 deferred request：导航后模式会立即切路由并显示局部 loading，快速切换 id 会 abort 旧请求；导航前模式会保持旧路由并显示全局 pending，直到当前请求完成才提交。
 
@@ -140,7 +140,7 @@ router.beforeResolve(async (to) => {
 手动控制请求完成顺序，对比导航提交时机与 latest-wins 责任
 :::
 
-## 易错使用提示
+## 五、易错使用提示
 
 :::pitfalls
 ### 把一种取数策略写成唯一正确答案
@@ -372,7 +372,7 @@ import { DataLoaderPlugin } from 'vue-router/experimental'
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 从源码推导适用场景
+## 六、从源码推导适用场景
 
 :::steps
 ### 1. beforeResolve 是确认前最后一段守卫队列

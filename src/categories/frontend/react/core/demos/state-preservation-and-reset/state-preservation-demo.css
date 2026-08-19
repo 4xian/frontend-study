@@ -1,0 +1,295 @@
+.state-reset-demo,
+.state-reset-demo * {
+  box-sizing: border-box;
+}
+
+.state-reset-demo {
+  width: 100%;
+  min-width: 0;
+  color: var(--color-text);
+}
+
+.state-reset-heading {
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.state-reset-heading p,
+.state-reset-observation header p,
+.state-reset-kicker {
+  margin: 0;
+  color: #176b5b;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.state-reset-heading h2,
+.state-reset-observation h3,
+.state-reset-editor h4 {
+  margin: var(--space-2) 0 0;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.state-reset-heading h2 {
+  font-size: 1.25rem;
+}
+
+.state-reset-heading span {
+  display: block;
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.state-reset-observation {
+  padding: var(--space-5) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.state-reset-observation:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.state-reset-observation h3 {
+  font-size: 1rem;
+}
+
+.state-reset-stage {
+  min-width: 0;
+  margin-top: var(--space-3);
+}
+
+.state-reset-stage--single {
+  max-width: 360px;
+}
+
+.state-reset-stage--parallel,
+.state-reset-editor-columns {
+  display: flex;
+  align-items: stretch;
+}
+
+.state-reset-slot,
+.state-reset-editor {
+  flex: 1 1 0;
+  min-width: 0;
+  margin-right: 8px;
+}
+
+.state-reset-slot:last-child,
+.state-reset-editor:last-child {
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+.state-reset-score,
+.state-reset-editor {
+  min-width: 0;
+  height: 100%;
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+}
+
+.state-reset-score {
+  border-top: 3px solid #176b5b;
+}
+
+.state-reset-score--calm {
+  border-top-color: #9a6700;
+}
+
+.state-reset-score output {
+  display: block;
+  min-height: 1.5em;
+  margin-top: var(--space-2);
+  font-size: 1.35rem;
+  font-weight: 750;
+  line-height: 1.2;
+}
+
+.state-reset-score button,
+.state-reset-actions button,
+.state-reset-switcher-actions button {
+  min-width: 0;
+  min-height: 40px;
+  margin: 0 8px 0 0;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+  font: inherit;
+  font-weight: 700;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+.state-reset-score button {
+  width: 100%;
+  margin-top: var(--space-3);
+  border-color: #8aa49e;
+  background: #f1f8f6;
+  color: #174d42;
+}
+
+.state-reset-score button:hover,
+.state-reset-actions button:hover,
+.state-reset-switcher-actions button:hover,
+.state-reset-switcher-actions button.is-selected {
+  border-color: #176b5b;
+  background: #e7f3f0;
+}
+
+.state-reset-score button:focus-visible,
+.state-reset-actions button:focus-visible,
+.state-reset-switcher-actions button:focus-visible,
+.state-reset-field input:focus-visible,
+.state-reset-field textarea:focus-visible {
+  outline: 3px solid #80c7ba;
+  outline-offset: 2px;
+}
+
+.state-reset-actions,
+.state-reset-switcher,
+.state-reset-switcher-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.state-reset-actions {
+  margin-top: var(--space-3);
+}
+
+.state-reset-actions span,
+.state-reset-switcher > span {
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+.state-reset-ancestor {
+  min-width: 0;
+  padding: var(--space-3);
+  border-left: 3px solid #9a6700;
+  background: var(--color-bg-subtle);
+}
+
+.state-reset-field {
+  display: block;
+  min-width: 0;
+  margin-top: var(--space-3);
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.state-reset-field:first-child {
+  margin-top: 0;
+}
+
+.state-reset-field span {
+  display: block;
+  margin-bottom: var(--space-2);
+}
+
+.state-reset-field input,
+.state-reset-field textarea {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+  font: inherit;
+  resize: vertical;
+}
+
+.state-reset-field input {
+  min-height: 42px;
+}
+
+.state-reset-switcher {
+  margin-top: var(--space-3);
+}
+
+.state-reset-switcher > span {
+  margin-right: var(--space-3);
+  font-weight: 700;
+}
+
+.state-reset-switcher-actions button:last-child,
+.state-reset-actions button:last-child {
+  margin-right: 0;
+}
+
+.state-reset-editor-columns {
+  margin-top: var(--space-4);
+}
+
+.state-reset-editor {
+  border-color: #dfe3e8;
+  background: #fafbfc;
+}
+
+.state-reset-editor--reset {
+  border-color: #8bc7b9;
+  background: #f5fbf9;
+}
+
+.state-reset-editor h4 {
+  font-size: 1.1rem;
+}
+
+.state-reset-editor output {
+  display: block;
+  margin-top: var(--space-3);
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+}
+
+@media (max-width: 560px) {
+  .state-reset-stage--parallel,
+  .state-reset-editor-columns {
+    display: block;
+  }
+
+  .state-reset-slot,
+  .state-reset-editor {
+    margin: 0 0 var(--space-3);
+  }
+
+  .state-reset-slot:last-child,
+  .state-reset-editor:last-child {
+    margin: 0;
+  }
+
+  .state-reset-actions,
+  .state-reset-switcher,
+  .state-reset-switcher-actions {
+    display: block;
+  }
+
+  .state-reset-actions button,
+  .state-reset-switcher-actions button {
+    width: 100%;
+    margin: 0 0 var(--space-2);
+  }
+
+  .state-reset-actions span {
+    display: block;
+    margin-top: var(--space-2);
+  }
+
+  .state-reset-switcher > span {
+    display: block;
+    margin: 0 0 var(--space-2);
+  }
+}

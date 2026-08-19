@@ -56,7 +56,7 @@ anchors:
 
 # Vue 自定义元素 API 速查
 
-## defineCustomElement()
+## 一、defineCustomElement()
 
 `defineCustomElement()` 接受与 `defineComponent()` 相近的组件定义或 setup 函数，但返回的是 `HTMLElement` 子类构造器，不会自动向浏览器注册标签。调用方仍需用 `customElements.define()` 把构造器绑定到包含连字符的标签名。使用 SFC 时还要启用 custom element 模式，使组件样式编译为可注入的 `styles` 字符串。
 
@@ -81,7 +81,7 @@ customElements.define('status-badge', StatusBadge)
 返回的构造器也可通过 `new StatusBadge({ active: true })` 创建实例，但自定义元素通常仍应先注册，再由 HTML、`document.createElement()` 或框架模板按标签名创建。
 :::
 
-## useHost()
+## 二、useHost()
 
 `useHost()` 自 Vue 3.5 起返回当前 Vue 自定义元素的宿主元素，也就是页面中的自定义标签本身。它依赖活动组件实例上的 custom element 关联，只应在 `defineCustomElement()` 组件的同步 `setup()` 上下文调用；普通 Vue 组件、模块顶层或延迟回调中会得到 `null`，开发环境还会给出警告。
 
@@ -98,7 +98,7 @@ const HostAwareElement = defineCustomElement({
 })
 ~~~~
 
-## useShadowRoot()
+## 三、useShadowRoot()
 
 `useShadowRoot()` 自 Vue 3.5 起读取当前宿主的 `shadowRoot`。默认配置下它返回 Vue 创建的开放 shadow root；当组件设置 `shadowRoot: false` 时返回 `null`。它与 `useHost()` 具有相同的 setup 上下文限制，且只提供访问能力，不负责清理调用方创建的 observer、listener 或其他资源。
 
@@ -117,7 +117,7 @@ const ShadowAwareElement = defineCustomElement({
 })
 ~~~~
 
-## this.$host
+## 四、this.$host
 
 `this.$host` 是 Vue 3.5 提供给 Options API 与 render 上下文的宿主引用，语义与 `useHost()` 对齐。它指向包裹组件输出的自定义元素，而 `this.$el` 指向当前组件渲染出的根节点；两者不能互换。普通组件没有 custom element 关联时，`this.$host` 为 `null`。
 
@@ -136,7 +136,7 @@ const OptionsElement = defineCustomElement({
 })
 ~~~~
 
-## 3.5+ 配置选项
+## 五、3.5+ 配置选项
 
 除既有的 `styles` 外，Vue 3.5 为自定义元素公开了 `configureApp`、`shadowRoot` 与 `nonce`。这些选项可写在组件定义中，也可作为 `defineCustomElement()` 的第二个参数传入。每个宿主实例都会创建自己的 Vue app；`configureApp` 在挂载前配置该实例，不能把它当成整个页面共享的一次性应用初始化。
 
@@ -160,7 +160,7 @@ const ServiceElement = defineCustomElement(ServicePanel, {
 customElements.define('service-panel', ServiceElement)
 ~~~~
 
-## 易错使用提示
+## 六、易错使用提示
 
 :::pitfalls
 ### 把构造器创建当成浏览器注册
@@ -342,7 +342,7 @@ const PanelElement = defineCustomElement(Panel, {
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 七、源码推导与适用场景
 
 :::steps
 ### 1. 返回值是原生元素构造器而不是 Vue app

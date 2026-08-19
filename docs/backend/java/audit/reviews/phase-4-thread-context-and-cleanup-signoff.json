@@ -1,0 +1,275 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.advanced.thread-context-and-cleanup",
+  "batchId": "phase-4-thread-context-and-cleanup",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-10T13:59:55+08:00",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "stagingPerformedThisBatch": false,
+    "existingStagedAndUnstagedStatePreserved": true
+  },
+  "sourceRepository": {
+    "path": "/Users/jian/Desktop/work/TDH/dzzz/dzzz-app",
+    "readOnly": true,
+    "projectExecuted": false,
+    "projectModified": false,
+    "accessBoundary": "Frozen Phase 2 evidence only; no batch-specific project access"
+  },
+  "phase2Freeze": {
+    "researchStatus": "not-started",
+    "exampleStatus": "not-started",
+    "courseStatus": "planned",
+    "phase4StateRecordedOnlyInThisSignoff": true,
+    "knowledgePath": {
+      "sourceItems": 167,
+      "courseNodes": 64,
+      "dependencyEdges": 114,
+      "gateStatus": "passed"
+    }
+  },
+  "versions": {
+    "verifiedAt": "2026-08-10",
+    "modern": {
+      "java": "25",
+      "springFramework": "7.0.8",
+      "maven": "3.9.12"
+    },
+    "legacy": {
+      "java": "8",
+      "springBoot": "2.3.12.RELEASE",
+      "springFramework": "5.2.15.RELEASE",
+      "maven": "3.9.12"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/advanced/thread-context-and-cleanup.md",
+      "sha256": "0d95e5cb7ae15b142635d7571c299ad203be6d19ec6fdbcaec39c484fc8ac37c"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/thread-context-and-cleanup.md",
+      "sha256": "bb17eb6cd7ef3b138d0c768545db76c05f7eb1bcea81706cf9138850ec931b41"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "1d6e08adc33a45fbfdc44e27cdcf99f8122d0c5f7229022a5f5181fe0f188bb0"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "fce095d0db6766ee12463f3f32a8ab36770bf02bec1ada221785bd1c1bc7e3ad"
+    }
+  ],
+  "sourceVerification": {
+    "researchCardCount": 19,
+    "researchUniqueUrlCount": 19,
+    "frontmatterOfficialSourceCount": 19,
+    "frontmatterUniqueUrlCount": 19,
+    "researchFrontmatterSetDifference": 0,
+    "communitySourcesUsedAsEvidence": false,
+    "directUrlCheck": "PASS; all 19 official targets returned HTTP 200 and research/frontmatter IDs and URL order matched"
+  },
+  "projectEvidence": {
+    "itemCount": 6,
+    "observedCount": 6,
+    "correctedCount": 0,
+    "rejectedCount": 0,
+    "projectEvidenceSetDifference": 0,
+    "currentDefectClaimedFromFrozenEvidence": false,
+    "boundary": "Representative paths and symbols came only from the frozen Phase 2 matrix; DzzzAspect is JAVA-RISK-032, while ThreadHandler is adjacent JAVA-RISK-031 and excluded from this course count"
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "lineCount": 1079,
+    "lineBudget": "PASS; reviewed as an approximately 1000-line single-course exception",
+    "independentKnowledgePointHeadings": 15,
+    "knowledgePointSevenPartCoverage": "15/15",
+    "pitfallCount": 10,
+    "pitfallNinePartCoverage": "10/10",
+    "orderedListLineBreaks": "PASS; rendered ordered-list items occupy distinct rows",
+    "officialSourceCount": 19,
+    "projectEvidenceCount": 6,
+    "javaCodeBlockCount": 36,
+    "javaMethodComments": "PASS",
+    "sourceHeadingAbsent": true,
+    "securitySection": "PASS",
+    "contentCheck": "PASS; knowledge=15 pitfalls=10 sources=19 projectEvidence=6 javaBlocks=36",
+    "fixedTeachingOrder": "PASS; explicit carrier -> ThreadLocal -> worker contamination -> finally restore/remove -> InheritableThreadLocal"
+  },
+  "javaVerification": {
+    "temporaryFixtureRoot": "/tmp/java-advanced-03-feedback.zl7g5C",
+    "temporaryAssetsCleaned": true,
+    "cleanupVerifiedWithFinalAbsenceChecks": true,
+    "cases": [
+      {
+        "name": "Modern Spring thread-context feedback loop",
+        "runtime": "Spring Framework 7.0.8 / Java 25 / Maven 3.9.12",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "THREAD_CONTEXT_PASS propagated=tenant-a cleanup=null cause=IllegalStateException terminated=true"
+      },
+      {
+        "name": "Legacy Spring thread-context feedback loop",
+        "runtime": "Spring Framework 5.2.15.RELEASE / Java 8 / Maven 3.9.12",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "THREAD_CONTEXT_PASS propagated=tenant-a cleanup=null cause=IllegalStateException terminated=true"
+      },
+      {
+        "name": "Worker contamination negative control",
+        "runtime": "Java 25 and Java 8",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "Each runtime reproduced leaked=tenant-a on the second task"
+      },
+      {
+        "name": "ScopedValue bounded-context feedback loop",
+        "runtime": "Java 25",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "SCOPED_VALUE_PASS inside=tenant-a outsideBound=false workerBound=false"
+      },
+      {
+        "name": "ScopedValue Java 8 compatibility boundary",
+        "runtime": "Java 8",
+        "exitCode": 1,
+        "expectedFailure": true,
+        "summary": "Java 8 compiler rejected the Java 25 ScopedValue API"
+      }
+    ],
+    "negativeControls": [
+      "worker ThreadLocal contamination",
+      "ScopedValue reference on Java 8"
+    ]
+  },
+  "verification": [
+    {
+      "command": "node /tmp/java-advanced-03-feedback.zl7g5C/content-check.mjs",
+      "exitCode": 0,
+      "summary": "CONTENT_PASS knowledge=15 pitfalls=10 sources=19 projectEvidence=6 javaBlocks=36"
+    },
+    {
+      "command": "scoped Catalog cold start check (three consecutive runs)",
+      "exitCode": 0,
+      "summary": "CATALOG_COLD_PASS on all runs; basics=18 intermediate=17 advancedAvailable=3 advancedPlanned=13 currentLoadable=true nextLoader=false blocks=113"
+    },
+    {
+      "command": "Phase 2 knowledge-path check",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check && npm run lint && npm run format:check && npm run test:unit && npm run test:e2e",
+      "exitCode": 0,
+      "summary": "PASS on the current repository quality gates"
+    },
+    {
+      "command": "scoped Vite SSR build for Java Core",
+      "exitCode": 0,
+      "summary": "PASS; 80 modules and thread-context-and-cleanup-AWAhT2SH.js emitted"
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0,
+      "summary": "PASS"
+    },
+    {
+      "command": "full catalog/build",
+      "exitCode": 1,
+      "summary": "BLOCKED by unrelated parallel React reducer-purity.md: pitfalls does not support AST node list; this is recorded separately and is not attributed to the current Java course"
+    }
+  ],
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "session": "java-advanced-03-scoped",
+    "baseUrl": "http://127.0.0.1:4223/",
+    "targetPath": "/backend/java/core/learn/thread-context-and-cleanup",
+    "temporaryScreenshots": [
+      "/tmp/java-advanced-03-browser.RRTtxN/desktop-1440x900-top.png",
+      "/tmp/java-advanced-03-browser.RRTtxN/desktop-compare.png",
+      "/tmp/java-advanced-03-browser.RRTtxN/mobile-390x844-top.png",
+      "/tmp/java-advanced-03-browser.RRTtxN/mobile-compare.png",
+      "/tmp/java-advanced-03-browser.RRTtxN/mobile-project-evidence.png",
+      "/tmp/java-advanced-03-browser.RRTtxN/mobile-official-sources.png"
+    ],
+    "desktop": {
+      "viewport": "1440x900",
+      "targetPageStatus": 200,
+      "documentClientWidth": 1440,
+      "documentScrollWidth": 1440,
+      "knowledgePointCount": 15,
+      "pitfallCount": 10,
+      "officialSourceCount": 19,
+      "projectEvidenceCount": 6,
+      "compareSides": 2,
+      "compareOutput": "leaked=tenant-a",
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "failedRequests": 0,
+      "non200Requests": 0,
+      "requestCount": 308
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "targetPageStatus": 200,
+      "documentClientWidth": 390,
+      "documentScrollWidth": 390,
+      "knowledgePointCount": 15,
+      "pitfallCount": 10,
+      "officialSourceCount": 19,
+      "projectEvidenceCount": 6,
+      "compareSides": 2,
+      "compareLayout": "vertical",
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "failedRequests": 0,
+      "non200Requests": 0,
+      "requestCount": 308
+    },
+    "manualScreenshotReview": "PASS; no incoherent overlap, and code overflow remains inside its own scroll container"
+  },
+  "manifestRegression": {
+    "basicsAvailable": 18,
+    "intermediateAvailable": 17,
+    "advancedAvailable": 3,
+    "advancedPlanned": 13,
+    "currentEntryLoadable": true,
+    "futurePlannedEntriesHaveNoLoader": true,
+    "nextCourseId": "backend.java.learn.advanced.events-async-scheduling-and-retry",
+    "nextCourseStatus": "planned",
+    "nextCourseLoader": false,
+    "finalColdStartRuns": 3,
+    "finalColdStartErrors": 0,
+    "finalColdStartPending": false
+  },
+  "review": {
+    "standards": "PASS / 0 finding",
+    "spec": "PASS / 0 finding",
+    "findingCount": 0,
+    "independentReviewRounds": 4,
+    "finalIndependentConfirmationPending": false,
+    "finalIndependentConfirmedAt": "2026-08-10T14:02:35+08:00",
+    "confirmation": "Exact snapshot review rechecked the four bound assets, official URL/status set, project evidence, teaching order, shutdown waiting, Java 25/8 boundary, and the hard stop before course 4"
+  },
+  "temporaryAssetCleanup": {
+    "pending": false,
+    "verifiedAt": "2026-08-10T14:02:35+08:00",
+    "temporaryRoots": [
+      "/tmp/java-advanced-03-feedback.zl7g5C",
+      "/tmp/java-advanced-03-browser.RRTtxN"
+    ],
+    "playwrightSessions": ["java-advanced-03-scoped"],
+    "playwrightSessionsClosed": true,
+    "previewPort": 4223,
+    "previewStopped": true,
+    "remainingPathCount": 0
+  },
+  "temporaryAssetsCleaned": true,
+  "stopBoundary": "Close advanced course 3 only; do not research, draft, register or load advanced course 4 events-async-scheduling-and-retry, Reference, project practice or other stages"
+}

@@ -22,7 +22,7 @@ export const vueCoreAdvancedReferenceGroup: ReferenceIndexGroupManifest = {
         'quick',
         'available',
         entryIds.customElements,
-        'definecustomelement',
+        '一definecustomelement',
       ],
       [
         'use-host',
@@ -31,7 +31,7 @@ export const vueCoreAdvancedReferenceGroup: ReferenceIndexGroupManifest = {
         'quick',
         'available',
         entryIds.customElements,
-        'usehost',
+        '二usehost',
       ],
       [
         'use-shadow-root',
@@ -40,7 +40,7 @@ export const vueCoreAdvancedReferenceGroup: ReferenceIndexGroupManifest = {
         'quick',
         'available',
         entryIds.customElements,
-        'useshadowroot',
+        '三useshadowroot',
       ],
       [
         'host',
@@ -49,7 +49,7 @@ export const vueCoreAdvancedReferenceGroup: ReferenceIndexGroupManifest = {
         'quick',
         'available',
         entryIds.customElements,
-        'thishost',
+        '四thishost',
       ],
     ]),
     referenceSection('render-function', '渲染函数', [
@@ -61,7 +61,7 @@ export const vueCoreAdvancedReferenceGroup: ReferenceIndexGroupManifest = {
         'merged',
         'available',
         entryIds.renderFunction,
-        'mergeprops',
+        '四mergeprops',
       ],
       [
         'clone-vnode',
@@ -70,7 +70,7 @@ export const vueCoreAdvancedReferenceGroup: ReferenceIndexGroupManifest = {
         'merged',
         'available',
         entryIds.renderFunction,
-        'clonevnode',
+        '五clonevnode',
       ],
       [
         'is-vnode',
@@ -79,7 +79,7 @@ export const vueCoreAdvancedReferenceGroup: ReferenceIndexGroupManifest = {
         'merged',
         'available',
         entryIds.renderFunction,
-        'isvnode',
+        '六isvnode',
       ],
       [
         'resolve-component',
@@ -88,7 +88,7 @@ export const vueCoreAdvancedReferenceGroup: ReferenceIndexGroupManifest = {
         'merged',
         'available',
         entryIds.renderFunction,
-        '元素与组件',
+        '二元素与组件',
       ],
       [
         'resolve-directive',
@@ -97,7 +97,7 @@ export const vueCoreAdvancedReferenceGroup: ReferenceIndexGroupManifest = {
         'merged',
         'available',
         entryIds.renderFunction,
-        'resolvedirective',
+        '七resolvedirective',
       ],
       [
         'with-directives',
@@ -106,7 +106,7 @@ export const vueCoreAdvancedReferenceGroup: ReferenceIndexGroupManifest = {
         'merged',
         'available',
         entryIds.renderFunction,
-        'withdirectives',
+        '八withdirectives',
       ],
       [
         'with-modifiers',
@@ -115,7 +115,7 @@ export const vueCoreAdvancedReferenceGroup: ReferenceIndexGroupManifest = {
         'merged',
         'available',
         entryIds.renderFunction,
-        '插槽与事件',
+        '三插槽与事件',
       ],
     ]),
     referenceSection('ssr', '服务端渲染', [
@@ -126,7 +126,7 @@ export const vueCoreAdvancedReferenceGroup: ReferenceIndexGroupManifest = {
         'quick',
         'available',
         entryIds.serverRendering,
-        'rendertostring',
+        '一rendertostring',
       ],
       [
         'render-to-node-stream',
@@ -135,7 +135,7 @@ export const vueCoreAdvancedReferenceGroup: ReferenceIndexGroupManifest = {
         'quick',
         'available',
         entryIds.serverRendering,
-        'rendertonodestream',
+        '二rendertonodestream',
       ],
       [
         'pipe-to-node-writable',
@@ -144,7 +144,7 @@ export const vueCoreAdvancedReferenceGroup: ReferenceIndexGroupManifest = {
         'quick',
         'available',
         entryIds.serverRendering,
-        'pipetonodewritable',
+        '三pipetonodewritable',
       ],
       [
         'render-to-web-stream',
@@ -153,7 +153,7 @@ export const vueCoreAdvancedReferenceGroup: ReferenceIndexGroupManifest = {
         'quick',
         'available',
         entryIds.serverRendering,
-        'rendertowebstream',
+        '四rendertowebstream',
       ],
       [
         'pipe-to-web-writable',
@@ -162,7 +162,7 @@ export const vueCoreAdvancedReferenceGroup: ReferenceIndexGroupManifest = {
         'quick',
         'available',
         entryIds.serverRendering,
-        'pipetowebwritable',
+        '五pipetowebwritable',
       ],
       [
         'render-to-simple-stream',
@@ -171,7 +171,7 @@ export const vueCoreAdvancedReferenceGroup: ReferenceIndexGroupManifest = {
         'quick',
         'available',
         entryIds.serverRendering,
-        'rendertosimplestream',
+        '六rendertosimplestream',
       ],
       [
         'use-ssr-context',
@@ -180,7 +180,7 @@ export const vueCoreAdvancedReferenceGroup: ReferenceIndexGroupManifest = {
         'quick',
         'available',
         entryIds.serverRendering,
-        'usessrcontext',
+        '七usessrcontext',
       ],
       [
         'data-allow-mismatch',
@@ -189,7 +189,7 @@ export const vueCoreAdvancedReferenceGroup: ReferenceIndexGroupManifest = {
         'quick',
         'available',
         entryIds.serverRendering,
-        'data-allow-mismatch',
+        '八data-allow-mismatch',
       ],
     ]),
     referenceSection('utility-types', 'TypeScript 工具类型', [
@@ -200,7 +200,7 @@ export const vueCoreAdvancedReferenceGroup: ReferenceIndexGroupManifest = {
         'quick',
         'available',
         entryIds.utilityTypes,
-        'proptypet',
+        '一proptypet',
       ],
       [
         'maybe-ref',
@@ -209,7 +209,7 @@ export const vueCoreAdvancedReferenceGroup: ReferenceIndexGroupManifest = {
         'quick',
         'available',
         entryIds.utilityTypes,
-        'maybereft',
+        '二maybereft',
       ],
       [
         'maybe-ref-or-getter',
@@ -218,7 +218,7 @@ export const vueCoreAdvancedReferenceGroup: ReferenceIndexGroupManifest = {
         'quick',
         'available',
         entryIds.utilityTypes,
-        'maybereforgettert',
+        '三maybereforgettert',
       ],
       [
         'extract-prop-types',
@@ -227,7 +227,7 @@ export const vueCoreAdvancedReferenceGroup: ReferenceIndexGroupManifest = {
         'quick',
         'available',
         entryIds.utilityTypes,
-        'extractproptypest',
+        '四extractproptypest',
       ],
       [
         'extract-public-prop-types',
@@ -236,7 +236,7 @@ export const vueCoreAdvancedReferenceGroup: ReferenceIndexGroupManifest = {
         'quick',
         'available',
         entryIds.utilityTypes,
-        'extractpublicproptypest',
+        '五extractpublicproptypest',
       ],
       [
         'component-custom-properties',
@@ -245,7 +245,7 @@ export const vueCoreAdvancedReferenceGroup: ReferenceIndexGroupManifest = {
         'quick',
         'available',
         entryIds.utilityTypes,
-        'componentcustomproperties',
+        '六componentcustomproperties',
       ],
       [
         'component-custom-options',
@@ -254,7 +254,7 @@ export const vueCoreAdvancedReferenceGroup: ReferenceIndexGroupManifest = {
         'quick',
         'available',
         entryIds.utilityTypes,
-        'componentcustomoptions',
+        '七componentcustomoptions',
       ],
       [
         'component-custom-props',
@@ -263,7 +263,7 @@ export const vueCoreAdvancedReferenceGroup: ReferenceIndexGroupManifest = {
         'quick',
         'available',
         entryIds.utilityTypes,
-        'componentcustomprops',
+        '八componentcustomprops',
       ],
       [
         'css-properties',
@@ -272,7 +272,7 @@ export const vueCoreAdvancedReferenceGroup: ReferenceIndexGroupManifest = {
         'quick',
         'available',
         entryIds.utilityTypes,
-        'cssproperties',
+        '九cssproperties',
       ],
     ]),
     referenceSection('custom-renderer', '自定义渲染', [
@@ -283,7 +283,7 @@ export const vueCoreAdvancedReferenceGroup: ReferenceIndexGroupManifest = {
         'quick',
         'available',
         entryIds.customRenderer,
-        'createrenderer',
+        '一createrenderer',
       ],
     ]),
     referenceSection('compile-time-flags', '编译时标志', [
@@ -294,7 +294,7 @@ export const vueCoreAdvancedReferenceGroup: ReferenceIndexGroupManifest = {
         'quick',
         'available',
         entryIds.compileTimeFlags,
-        '__vue_options_api__',
+        '二__vue_options_api__',
       ],
       [
         'prod-devtools',
@@ -303,7 +303,7 @@ export const vueCoreAdvancedReferenceGroup: ReferenceIndexGroupManifest = {
         'quick',
         'available',
         entryIds.compileTimeFlags,
-        '__vue_prod_devtools__',
+        '三__vue_prod_devtools__',
       ],
       [
         'prod-hydration-mismatch-details',
@@ -312,7 +312,7 @@ export const vueCoreAdvancedReferenceGroup: ReferenceIndexGroupManifest = {
         'quick',
         'available',
         entryIds.compileTimeFlags,
-        '__vue_prod_hydration_mismatch_details__',
+        '四__vue_prod_hydration_mismatch_details__',
       ],
     ]),
   ],

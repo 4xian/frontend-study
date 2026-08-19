@@ -66,7 +66,7 @@ anchors:
 
 # Options API：其他杂项选项
 
-## 概述
+## 一、概述
 
 这四个选项补充组件身份、attribute 落点和模板资源解析规则：`name` 为组件建立运行时名称契约，`inheritAttrs` 控制未被 props 或 emits 消费的 attributes 是否自动透传，`components` 与 `directives` 则只在当前组件的渲染上下文注册局部资源。它们不会改变组件状态，也不等同于应用级注册。
 
@@ -77,7 +77,7 @@ anchors:
 | `components` | 注册当前组件可解析的局部组件 | 不会自动传给后代 |
 | `directives` | 注册当前组件可解析的局部指令 | 注册名不含 `v-` |
 
-## name
+## 二、name
 
 `name` 用于组件自身递归引用、Devtools、警告栈以及 `<KeepAlive>` 的 `include` / `exclude` 匹配。SFC 可以从文件名推导名称，Vue 3.2.34+ 的 `<script setup>` 组件也会生成推导名；显式 `name` 会覆盖推导结果。导入变量名或 `components` 的注册 key 只决定当前模板如何找到组件，不会自动改写组件自身名称。需要跨文件重命名保持缓存筛选稳定时，应显式声明 `name`。
 
@@ -106,7 +106,7 @@ export default {
 文件名推导适合普通显示名称；递归自引用或 KeepAlive 筛选一旦成为稳定行为，应把显式 `name` 与筛选值一起维护。
 :::
 
-## inheritAttrs
+## 三、inheritAttrs
 
 `inheritAttrs` 默认为 `true`。父级传入但未被当前组件 props 或 emits 消费的 `class`、`style`、`id`、ARIA attributes 和监听器，会自动合并到可透传的单一根元素或组件。这个默认行为只负责选择根节点，并不知道包装组件中哪个后代才是真正的语义目标。
 
@@ -129,7 +129,7 @@ export default {
 `inheritAttrs: false` 不是“禁止父级传入 attribute”。`$attrs` 仍包含未消费数据，组件作者必须明确是否以及在哪里转发；多根组件尤其不能依赖自动选择。
 :::
 
-## components
+## 四、components
 
 `components` 是注册名到组件定义的映射，只供当前组件的模板或 render 上下文解析。运行时先检查当前实例的局部表，再检查应用级全局表；局部同名注册会遮蔽全局资源。解析会依次尝试原始名称、camelCase 和 PascalCase，但推荐用 PascalCase 注册和书写组件，以便与原生 HTML 元素区分。
 
@@ -151,7 +151,7 @@ export default {
 
 局部注册不会沿组件树向下继承；如果 `CourseSummary` 的模板还要使用另一个组件，它必须自己导入并注册。`<script setup>` 中的导入组件由编译器直接暴露给模板，不需要再写 `components`，但这不会扩大其作用域。
 
-## directives
+## 五、directives
 
 `directives` 是注册名到指令定义的映射，作用域同样只限当前组件。Options 注册 key 使用不带 `v-` 的名称，例如 `focus` 对应模板中的 `v-focus`。解析局部表失败后才会查应用级全局指令，并兼容原始名称、camelCase 和 PascalCase。自定义指令适合必须直接操作底层 DOM 的能力；能用组件、属性或声明式模板表达的逻辑应优先使用这些机制。
 
@@ -178,7 +178,7 @@ export default {
 
 指令应用在组件标签上时最终依赖组件根节点；多根组件没有唯一根元素，Vue 会给出警告且指令行为可能被忽略。需要精确控制 DOM 时，把指令放在明确的原生元素上。
 
-## 易错使用提示
+## 六、易错使用提示
 
 :::pitfalls
 ### 把导入别名、注册名和组件 name 当成同一标识
@@ -345,7 +345,7 @@ export default {
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 七、源码推导与适用场景
 
 :::steps
 ### 1. 组件名称区分显式声明与编译器推导

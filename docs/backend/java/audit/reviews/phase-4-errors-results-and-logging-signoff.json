@@ -1,0 +1,245 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.intermediate.errors-results-and-logging",
+  "batchId": "phase-c-i13-errors-results-and-logging",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-16T02:06:37+08:00",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "phase": "Phase C",
+  "phaseCAdmission": {
+    "status": "PASS",
+    "predecessorCourseId": "backend.java.learn.intermediate.spring-boot-mysql-mybatis-persistence-bridge",
+    "predecessorSignoffPath": "docs/backend/java/audit/reviews/phase-4-spring-boot-mysql-mybatis-persistence-bridge-signoff.json",
+    "predecessorSignoffSha256": "d3d44ee38deef6a0b9c6e4cd8d0045e645c50e7ceec5b7f7cf32d44f4f79e6a6",
+    "phaseCProgressBeforeBatch": "12/20",
+    "trackChangeRequired": false,
+    "loaderChangeRequired": false
+  },
+  "phaseCProgress": "13/20",
+  "phaseAFreeze": {
+    "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+    "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81",
+    "designation": "I-13 / 必修、扩展复用",
+    "title": "错误合同、Problem Details 与结构化日志",
+    "estimatedMinutes": 150,
+    "prerequisite": "backend.java.learn.intermediate.spring-boot-mysql-mybatis-persistence-bridge",
+    "stableIdReused": "backend.java.learn.intermediate.errors-results-and-logging",
+    "slugReused": "errors-results-and-logging",
+    "urlPreserved": "/backend/java/core/learn/errors-results-and-logging",
+    "frozenSuccessor": "backend.java.learn.intermediate.testing-with-junit-and-mocks"
+  },
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "newStagingPerformedThisBatch": false,
+    "existingIndexPreserved": true,
+    "unrelatedWorkspaceChangesPreserved": true
+  },
+  "versions": {
+    "verifiedAt": "2026-08-16",
+    "modern": {
+      "java": "25",
+      "runtime": "Eclipse Temurin 25.0.3+9 LTS",
+      "springBoot": "4.1.0",
+      "springFramework": "7.0.8",
+      "slf4j": "2.0.18",
+      "logback": "1.5.34"
+    },
+    "legacy": {
+      "java": "8",
+      "runtime": "Eclipse Temurin 8u492-b09",
+      "springBoot": "2.3.12.RELEASE",
+      "springFramework": "5.2.15.RELEASE",
+      "slf4j": "1.7.30",
+      "logback": "1.2.3"
+    }
+  },
+  "sourceDiscovery": {
+    "method": "Tavily 因本批用量上限未返回结果，按仓库路由用 Exa 定位缺失的 JLS 章节；最终结论全部回到 Oracle、Spring、SLF4J、Logback、RFC Editor、OWASP 与 MITRE CWE 一手页面核验",
+    "researchDirectSourceCount": 27,
+    "researchHttp200Count": 27,
+    "researchHttpFailureCount": 0,
+    "lessonOfficialSourceCardCount": 27,
+    "lessonAndResearchSourceMapsMatch": true,
+    "communitySourcesUsedAsEvidence": false
+  },
+  "research": {
+    "scope": "I-13 only",
+    "phaseAContractAlignment": "PASS",
+    "officialUrlCount": 27,
+    "logbackArchiveCorrection": "PASS; Logback 1.1.7 rolling evidence uses the official news-archive.html page",
+    "sealedInterfaceEvidence": "PASS; JLS 25 section 9.1.4 directly supports the permits contract",
+    "stopBoundaryAlignment": "PASS; the successor lesson body and research were not read or modified before I-13 closure",
+    "researchSha256": "2070e66caea3792ba6b3656f65852ed587dd199c25b5b0c0e8feda46d0f7d3bb"
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/intermediate/errors-results-and-logging.md",
+      "sha256": "2070e66caea3792ba6b3656f65852ed587dd199c25b5b0c0e8feda46d0f7d3bb"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/errors-results-and-logging.md",
+      "sha256": "b4c89e14493429fa7ed792e64b61a59e11f3ec22d5704bd2e8d6541ea6b648a9"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "4c49ec0207e877d4abd0c2531360b893ddd532a164f1438ea47bcf143f8a1aac"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "a98375b0c98d2e104ffd6b4acfb12127e705bb015976882bf86f1e58d6473829"
+    },
+    {
+      "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+      "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81"
+    },
+    {
+      "path": "docs/backend/java/audit/phase-2-knowledge-path-manifest.json",
+      "sha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407"
+    }
+  ],
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "researchLineCount": 622,
+    "lessonLineCount": 1803,
+    "rootH2Count": 17,
+    "rootH2ChineseNumbering": "PASS; 一 through 十七 continuous",
+    "independentKnowledgePointHeadings": 24,
+    "knowledgePointSevenPartCoverage": "24/24",
+    "zeroStartProcedureStepHeadings": 8,
+    "codeBlockCount": 48,
+    "exerciseCount": 1,
+    "officialSourceCount": 27,
+    "pitfallCount": 5,
+    "pitfallRequiredFieldCoverage": "5/5",
+    "sourceHeadingAbsent": true,
+    "currentCodeFenceSha256": "04b11c74fe1bea427752cd45ea28ada38869b863a69d7b70fe5be813c8388eb4",
+    "indexBaselineCodeFenceSha256": "04b11c74fe1bea427752cd45ea28ada38869b863a69d7b70fe5be813c8388eb4",
+    "codeFenceContentChangedThisBatch": false
+  },
+  "javaVerification": {
+    "riskClassification": "Phase C changes only metadata, numbering, pitfall fields and official source cards; all Java and configuration code fences are byte-identical to the previously fully verified implementation",
+    "priorFullFeedbackSignoffIndexSha256": "aaa63a6d3a3b8e195ab86053cce0583d5cf549b29465ae0221c584d2c587de60",
+    "priorModernFeedback": "PASS; Java 25 / Spring Boot 4.1.0 verified 400, 404, 409, 422 and 500, ProblemDetail redaction, one ERROR with Throwable, MDC cleanup, malicious correlation ID handling, structured JSON and rolling",
+    "priorLegacyFeedback": "PASS; Java 8 / Spring Boot 2.3.12.RELEASE verified five status cases, ApiError, classic parameterized logging, MDC cleanup and rolling",
+    "currentTargetedFeedbackRuntime": "Eclipse Temurin 25.0.3+9 LTS JShell in an auto-removed container",
+    "currentTargetedFeedbackOutput": "I13_FEEDBACK_PASS|results=mutually-exclusive|statuses=400,404,409,422,500|redaction=safe|correlation=validated",
+    "currentTargetedFeedbackExitCode": 0,
+    "temporaryFixtureFilesCreated": false,
+    "containerAutoRemoved": true
+  },
+  "engineeringVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes and 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check",
+      "exitCode": 0,
+      "summary": "passed directly and again as part of the final production build"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run test:unit",
+      "exitCode": 0,
+      "summary": "No persistent unit files; configured empty directory passed"
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "summary": "No persistent E2E files; configured empty directory passed"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "PASS; 1778 modules transformed and the errors-results-and-logging production chunk was emitted"
+    },
+    {
+      "command": "npx prettier --check <I-13 research and lesson> && git diff --check -- <I-13 research and lesson>",
+      "exitCode": 0,
+      "summary": "targeted formatting and whitespace checks passed"
+    }
+  ],
+  "repositoryFormatBoundary": {
+    "command": "npm run format:check",
+    "exitCode": 1,
+    "i13ScopedGate": "PASS",
+    "unrelatedBlockingFiles": [
+      "src/categories/frontend/engineering/vite/vite-reference-index.ts",
+      "src/categories/frontend/vue/core/vue-core-options-reference-index.ts",
+      "src/categories/frontend/vue/core/vue-core-reference-index.ts",
+      "src/categories/frontend/vue/core/vue-core-sfc-reference-index.ts"
+    ],
+    "unrelatedFilesModified": false
+  },
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "session": "java-i13-final",
+    "baseUrl": "http://127.0.0.1:4193/",
+    "targetPath": "/backend/java/core/learn/errors-results-and-logging",
+    "productionPreviewUsed": true,
+    "sessionsClosed": true,
+    "previewServerStopped": true,
+    "desktop": {
+      "viewport": "1440x900",
+      "horizontalOverflow": false,
+      "knowledgePointCount": 24,
+      "pitfallCount": 5,
+      "rootHeadingCount": 17,
+      "officialSourceCount": 27,
+      "exerciseVisible": true
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "horizontalOverflow": false,
+      "knowledgePointCount": 24,
+      "pitfallCount": 5,
+      "rootHeadingCount": 17,
+      "officialSourceCount": 27,
+      "exerciseVisible": true
+    },
+    "title": "错误合同、Problem Details 与结构化日志",
+    "previousEntryId": "backend.java.learn.intermediate.spring-boot-mysql-mybatis-persistence-bridge",
+    "frozenNextEntryId": "backend.java.learn.intermediate.testing-with-junit-and-mocks",
+    "completionStatePersistedAfterReload": true,
+    "completionStateRestoredToIncomplete": true,
+    "consoleErrors": 0,
+    "pageErrors": 0,
+    "latestProductionReloadResponseCount": 35,
+    "failedRequests": 0,
+    "nonSuccessfulResponses": 0,
+    "visualInspection": "PASS; desktop and mobile screenshots show the title, prerequisite, learning outcomes and content without overlap, clipping or page overflow",
+    "temporaryScreenshotsCleaned": true,
+    "cleanupCheck": "PASS; exact I-13 browser files, java-i13-final session and port 4193 listener no longer exist"
+  },
+  "review": {
+    "reviewer": "independent combined Standards and Spec reviewer",
+    "riskClassification": "I-13 extends a reused error and logging lesson with a frozen Spring Web route, Problem Details evidence and revised teaching structure while preserving the verified code",
+    "independentReviewRequired": true,
+    "reviewedLessonSha256": "b4c89e14493429fa7ed792e64b61a59e11f3ec22d5704bd2e8d6541ea6b648a9",
+    "reviewedResearchSha256": "2070e66caea3792ba6b3656f65852ed587dd199c25b5b0c0e8feda46d0f7d3bb",
+    "standards": "PASS / 0 finding",
+    "spec": "PASS / 0 finding",
+    "highestSeverity": "none",
+    "reviewWorkspaceModified": false,
+    "reviewStopBoundary": "reviewer did not read or implement the successor lesson"
+  },
+  "cleanup": {
+    "javaTemporaryFilesAbsent": true,
+    "browserTemporaryFilesAbsent": true,
+    "browserSessionClosed": true,
+    "previewListenerAbsent": true,
+    "unrelatedBrowserSessionsPreserved": true
+  },
+  "selfHashPolicy": "signoff file does not record its own SHA-256; artifacts bind only stable external batch outputs",
+  "stopBoundary": "Phase C I-13 is closed at 13/20. The only next authorized batch is I-14 (backend.java.learn.intermediate.testing-with-junit-and-mocks); no I-14 lesson or research was read or modified before this signoff. Phase D remains unauthorized until the Phase C total Gate closes."
+}

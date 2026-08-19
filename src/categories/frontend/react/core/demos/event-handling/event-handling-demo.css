@@ -1,0 +1,122 @@
+.event-handling-demo {
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+}
+
+.event-handling-demo-heading p,
+.event-handling-demo-heading h2,
+.event-handling-demo-intro,
+.event-handling-demo-notes {
+  margin: 0;
+}
+
+.event-handling-demo-heading p {
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.event-handling-demo-heading h2 {
+  margin-top: var(--space-1);
+  font-size: 1.05rem;
+}
+
+.event-handling-demo-intro {
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+
+.event-handling-demo-stage {
+  margin-top: var(--space-3);
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid #2f6f9f;
+  background: var(--color-bg);
+}
+
+.event-handling-demo-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0 -5px -10px;
+}
+
+.event-handling-demo-action,
+.event-handling-demo-link {
+  min-height: 38px;
+  margin: 0 5px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xs);
+  font: inherit;
+  font-size: 0.84rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.event-handling-demo-action {
+  padding: 0 var(--space-3);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+}
+
+.event-handling-demo-action[data-mode='stop'] {
+  border-color: #b44a44;
+  color: #9b342f;
+}
+
+.event-handling-demo-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 var(--space-3);
+  background: #edf6ee;
+  color: #24612d;
+  text-decoration: none;
+}
+
+.event-handling-demo-action:hover,
+.event-handling-demo-link:hover {
+  border-color: var(--color-accent);
+}
+
+.event-handling-demo-action:focus-visible,
+.event-handling-demo-link:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 32%, transparent);
+  outline-offset: 2px;
+}
+
+.event-handling-demo-notes {
+  margin-top: var(--space-3);
+  padding-left: 1.25rem;
+}
+
+.event-handling-demo-notes li {
+  color: var(--color-text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.65;
+}
+
+.event-handling-demo-notes li + li {
+  margin-top: var(--space-1);
+}
+
+@media (max-width: 520px) {
+  .event-handling-demo-actions {
+    display: block;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .event-handling-demo-action,
+  .event-handling-demo-link {
+    width: 100%;
+    justify-content: center;
+    margin-right: 0;
+    margin-left: 0;
+  }
+}

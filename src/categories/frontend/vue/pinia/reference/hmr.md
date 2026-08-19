@@ -57,7 +57,7 @@ anchors:
 
 # Vite Store HMR 接入
 
-## 概述
+## 一、概述
 
 `acceptHMRUpdate()` 把一个 StoreDefinition 接入 Vite hot lifecycle，使开发期编辑 state、getters 或 actions 时尽量保留已经运行的 Store state。它不是 production migration，也不替代持久化 schema upgrade。
 
@@ -65,11 +65,11 @@ anchors:
 签名中的 `_GettersTree` 与 `_ActionsTree` 只是公开函数声明的内部泛型约束。应用只使用 `acceptHMRUpdate()`、`defineStore()` 返回值和 Vite 的 `import.meta.hot`。
 :::
 
-## Accept HMR Update
+## 二、Accept HMR Update
 
 helper 接收初始 Store definition 与当前 hot context，返回交给 Vite accept 的 callback。开发期 callback 从 `hot.data.pinia` 或 initial definition 取得 Pinia，把它保存回 `hot.data`，再遍历新模块 exports；只有形如 StoreDefinition 且 registry 已有对应 id 的 export 才会更新。
 
-## Vite 接入与 Production 边界
+## 三、Vite 接入与 Production 边界
 
 ~~~~ts
 import { acceptHMRUpdate, defineStore } from 'pinia'
@@ -85,7 +85,7 @@ if (import.meta.hot) {
 
 官方接法把 guard 放在 Store definition 文件旁。固定 runtime 在 production 直接返回 no-op callback，因此 HMR 不会在正式升级、持久化数据迁移或 SSR 恢复时执行。
 
-## Store Identity 与 Shape 更新
+## 四、Store Identity 与 Shape 更新
 
 Store ID 是 HMR identity，必须保持稳定。固定流程先按新 `$id` 查询 registry，再比较 initial id；改名可能导致更新被跳过，命中特定条件时也可能触发 invalidation，不能概括成“总保留”或“总 reload”。
 
@@ -98,7 +98,7 @@ Store ID 是 HMR identity，必须保持稳定。固定流程先按新 `$id` 查
 
 Options Store 的 nested plain object 按新 definition shape 合并同名旧值；Setup Store 的 ref object 保留旧运行值。应用只依赖 Pinia 的公开 HMR helper，不复制 internal migration，也不调用 `_hotUpdate` 或读取 `_s/_pinia`。
 
-## 订阅连续性与证据状态
+## 五、订阅连续性与证据状态
 
 | 能力 | Pinia 4.0.2 官方测试状态 | 应用策略 |
 | --- | --- | --- |
@@ -107,7 +107,7 @@ Options Store 的 nested plain object 按新 definition shape 合并同名旧值
 
 成员更新测试通过不能推出两类 observer 会跨更新继续工作。本页未触发真实 Vite file update，也未验证 module graph、file event、accept 或 invalidation；真实 HMR 与订阅连续性证据均为 `Deferred/not-run`。Devtools client 是相邻但不同的能力，普通 DOM 状态、callback unit model 或截图都不能替代它。
 
-## 易错使用提示
+## 六、易错使用提示
 
 :::pitfalls
 ### 只定义 Store 而不注册 accept
@@ -295,7 +295,7 @@ acceptHMRUpdate(useStore, fakeHot)(newModule)
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 七、源码推导与适用场景
 
 :::steps
 ### 1. Helper 只属于开发期

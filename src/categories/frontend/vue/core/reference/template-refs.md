@@ -47,11 +47,11 @@ anchors:
 
 # 模板引用 useTemplateRef()
 
-## 概述
+## 一、概述
 
 声明式渲染已经覆盖大多数 DOM 操作，但聚焦输入框、测量元素、接入第三方库或调用子组件公开方法时仍需直接引用目标。模板的 `ref` 特殊 attribute 加在普通元素上得到 DOM 元素，加在组件上得到组件公开实例。Vue 3.5+ 使用 `useTemplateRef()` 按模板 ref 名称取得响应式引用。
 
-## 基础用法与可用时机
+## 二、基础用法与可用时机
 
 `useTemplateRef()` 的参数必须与模板中的字符串 ref 值匹配。引用在 setup 初次执行时为 null，目标实际挂载后才会赋值；目标受 `v-if` 控制、已经卸载或异步组件尚未解析时仍可能为 null，因此每次使用都要考虑空值。服务端渲染没有浏览器 DOM，onMounted 也不会在服务端执行，DOM 操作必须留在客户端挂载阶段。
 
@@ -75,7 +75,7 @@ onMounted(() => {
 对照 setup 与 mounted 时的引用值，并通过 DOM 引用聚焦输入框
 :::
 
-## 易错使用提示
+## 三、易错使用提示
 
 :::pitfalls
 ### 在挂载前或条件卸载后直接访问模板引用
@@ -235,7 +235,7 @@ onMounted(() => child.value?.reset())
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## v-for 中的引用
+## 四、v-for 中的引用
 
 Vue 3.5+ 中，字符串 ref 位于 `v-for` 内时，useTemplateRef 的值是元素或组件实例数组。数组在目标挂载后填充，但官方不保证其顺序与源数组一致，不能靠同一索引建立业务对应关系；需要对应关系时使用稳定 key 或函数引用自行记录。列表项卸载时，渲染器从数组移除对应引用，而不是把整个引用统一写成 null。
 
@@ -255,7 +255,7 @@ onMounted(() => console.log(itemRefs.value))
 </template>
 ~~~~
 
-## 函数模板引用
+## 五、函数模板引用
 
 `ref` 也可通过动态绑定接收函数。该函数在组件更新时收到元素或组件实例，目标卸载时再次收到 null，适合按业务 key 保存列表引用或完全控制存储位置。回调可能重复执行，不应在其中创建无法配对清理的副作用。
 
@@ -277,7 +277,7 @@ function setItemRef(id: string, element: Element | null) {
 </template>
 ~~~~
 
-## 组件引用与 defineExpose
+## 六、组件引用与 defineExpose
 
 组件 ref 得到的是公开实例。使用 `<script setup>` 的子组件默认不暴露其内部绑定，必须通过 `defineExpose()` 明确公开；defineExpose 必须在任何 await 之前调用，否则 await 之后才暴露的成员无法被父组件访问。公开对象中的 ref 会像普通组件实例属性一样自动解包，例如暴露 `ref(2)` 后父组件读到的是数字 2。优先使用 props 和 emit，只有它们不适合命令式操作时才使用组件引用。
 
@@ -296,7 +296,7 @@ defineExpose({ count, reset }) // 必须位于任何 await 之前
 </script>
 ~~~~
 
-## 最小源码实现
+## 七、最小源码实现
 
 useTemplateRef 创建一个 `shallowRef(null)`，再在当前实例的 refs 对象上定义同名 getter/setter。渲染器给普通字符串 ref 赋元素或组件实例时，值经 setter 流入 shallowRef；普通目标卸载或动态 ref 名称变化时写入 null。`v-for` 的 ref&#95;for 分支则维护数组，卸载单项时从数组移除。函数 ref 不写入实例 refs，而是由渲染器直接调用，并在卸载时传入 null。
 
@@ -323,7 +323,7 @@ export function useTemplateRef<T>(key: string) {
 // 函数 ref          -> ref(null)
 ~~~~
 
-## 3.5 之前的写法
+## 八、3.5 之前的写法
 
 Vue 3.5 之前尚无 useTemplateRef，需要声明一个与模板 ref attribute 同名的 ref，并在非 `<script setup>` 的 setup 中返回它。useTemplateRef 用显式 key 取代变量命名约定，旧写法仍保持兼容。
 

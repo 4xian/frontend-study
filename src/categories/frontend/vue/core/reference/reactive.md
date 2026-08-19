@@ -43,7 +43,7 @@ anchors:
 
 # reactive()
 
-## 概述
+## 一、概述
 
 reactive() 返回一个对象的响应式代理。与 ref 不同，它不需要 `.value`，直接读写属性即可：属性读取被 Proxy 的 get 拦截并追踪（track），属性写入被 set 拦截并触发更新（trigger）。官方建议只操作代理版本，不要保留对原始对象的引用。
 
@@ -51,7 +51,7 @@ reactive() 返回一个对象的响应式代理。与 ref 不同，它不需要 
 function reactive<T extends object>(target: T): UnwrapNestedRefs<T>
 ~~~~
 
-## 基础用法与深层响应
+## 二、基础用法与深层响应
 
 转换是深层的：嵌套多深的对象属性都会被转为响应式，修改 `state.user.address.city` 与修改 `state.count` 一样能触发视图更新。若只需追踪顶层属性，可改用 `shallowReactive()`。
 
@@ -66,7 +66,7 @@ state.count++ // 直接读写属性，无需 .value
 基础用法 + 深层响应：修改顶层 count 与深层 user.address.city 都会触发更新
 :::
 
-## 代理与原始对象不相等
+## 三、代理与原始对象不相等
 
 reactive() 返回的是原始对象的 Proxy 代理，两者并不相等（`proxy === raw` 为 `false`）。修改原始对象不会触发更新。最佳实践是只使用代理版本，丢弃原始对象引用。
 
@@ -80,7 +80,7 @@ const proxy = reactive(raw)
 console.log(proxy === raw) // false
 ~~~~
 
-## 局限性
+## 四、局限性
 
 reactive() 有三条局限：1）只对对象类型有效（对象、数组、Map/Set 等集合类型），不能持有 `string`、`number`、`boolean` 等原始值；2）用新对象替换整个 reactive 变量会丢失响应连接——Vue 追踪的是属性访问，替换引用后原对象不再被追踪；3）解构原始值属性、或把属性单独传入函数时，得到的是普通值，与源对象断开响应连接。
 
@@ -104,7 +104,7 @@ callSomeFunction(state.count)
 解构断开响应连接的现场对照：修改解构副本不影响 state，也不触发更新
 :::
 
-## 易错使用提示
+## 五、易错使用提示
 
 :::pitfalls
 ### 用 `reactive()` 包装基本类型
@@ -244,7 +244,7 @@ console.log(toRaw(state) === raw) // true
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## ref 属性的自动解包
+## 六、ref 属性的自动解包
 
 作为 reactive 对象属性的 ref 会自动解包：访问 `obj.count` 无需 `.value`，且与原 ref 双向同步。例外：ref 在 reactive 数组或 Map 等原生集合类型中不会解包。
 
@@ -261,13 +261,13 @@ count.value++ // 同步到 obj.count → 2
 obj.count++ // 也同步回 count ref → 3
 ~~~~
 
-## 响应式原理
+## 七、响应式原理
 
 :::principle{id="vue.core.reference.reactivity.reactive.reactive-proxy"}
 reactive 的响应式基于 Proxy 拦截：get 拦截中调用 track() 收集依赖，set 拦截中调用 trigger() 触发更新。
 :::
 
-## 最小源码实现
+## 八、最小源码实现
 
 reactive() 的核心是 `new Proxy(target, handlers)`。get 拦截里做三件事：`track(target, key)` 按「对象 → 属性 → Dep」登记依赖；若属性值是 ref 则自动解包；若属性值是对象则惰性递归——此刻才对嵌套对象调用 reactive()，而不是创建时一次性深遍历。set 拦截里先 `Reflect.set` 完成赋值，再按"新增属性"或"值变化"调用 `trigger(target, key)`。依赖存放在全局 `targetMap: WeakMap<object, Map<key, Dep>>` 中，对象被回收时依赖记录随之释放。
 
@@ -329,7 +329,7 @@ function trigger(target: object, key: unknown) {
 「惰性递归」是 Proxy 方案对 Vue2 Object.defineProperty 方案的关键改进之一：Vue2 初始化时递归遍历整个对象定义 getter/setter，Vue3 只在属性真正被读取时才代理嵌套对象，大对象的初始化开销大幅降低；且 Proxy 能拦截新增/删除属性与数组索引写入，Vue2 需要 $set 辅助。
 :::
 
-## 与 ref 对比
+## 九、与 ref 对比
 
 | 特性 | reactive() | ref() |
 | --- | --- | --- |

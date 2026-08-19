@@ -44,11 +44,11 @@ anchors:
 
 # 组合式函数 Composables
 
-## 概述
+## 一、概述
 
 组合式函数（composable）不是一项独立的运行时 API，而是用组合式 API 封装和复用有状态逻辑的约定。它可以在普通函数中组合 ref、computed、watch 和生命周期钩子，让调用方清楚看到状态来源，也避免 mixin 容易出现的属性来源不明与命名冲突。
 
-## 命名与基本结构
+## 二、命名与基本结构
 
 组合式函数通常采用 use 前缀和驼峰命名，例如 useMouse。依赖组件生命周期或实例上下文的组合式函数，应在 setup 或 `<script setup>` 的同步执行阶段调用。每次调用通常创建一份独立状态；若需要显式共享状态，应单独设计共享存储及其所有权边界。
 
@@ -78,7 +78,7 @@ const { x, y } = useMouse()
 useMouse 跟随组件生命周期工作，两次 useCounter 调用各自持有独立状态
 :::
 
-## 返回值约定
+## 三、返回值约定
 
 官方建议组合式函数返回一个包含多个 ref 的普通对象。调用方解构该对象后，拿到的仍是 ref，和函数内部状态保持响应式连接。若直接返回 reactive 代理并解构，原始类型属性只会复制出当前值，之后不再跟随代理变化。
 
@@ -88,7 +88,7 @@ useMouse 跟随组件生命周期工作，两次 useCounter 调用各自持有�
 | 返回值 | 装有 ref 的普通对象 | 解构后仍保留响应式连接 |
 | 输入值 | MaybeRefOrGetter + toValue() | 统一读取普通值、ref 或 getter 的当前值 |
 
-## 响应式输入
+## 四、响应式输入
 
 `toValue()` 自 Vue 3.3 起可以把普通值、ref 或 getter 规范化为当前值，但它本身不会创建侦听器。若输入变化后需要重新执行逻辑，应在 watchEffect 的同步执行段中调用 toValue，或用 watch 显式侦听；普通值没有后续响应式变化可追踪。
 
@@ -111,7 +111,7 @@ export function useFetch(url: MaybeRefOrGetter<string>) {
 }
 ~~~~
 
-## 易错使用提示
+## 五、易错使用提示
 
 :::pitfalls
 ### 在失去组件实例上下文后调用依赖生命周期的 composable
@@ -262,7 +262,7 @@ app.provide(currentUserKey, createCurrentUserState())
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 与其他复用方式的分工
+## 六、与其他复用方式的分工
 
 | 方式 | 复用对象 | 典型用途 |
 | --- | --- | --- |
@@ -271,6 +271,6 @@ app.provide(currentUserKey, createCurrentUserState())
 | 自定义指令 | 必须直接操作元素的逻辑 | v-focus、v-reveal |
 | 工具函数 | 无状态计算 | formatDate、debounce |
 
-## 运行机制
+## 七、运行机制
 
 组合式函数没有独立的运行时实现：它只是普通函数，实际行为来自内部调用的响应式 API 和生命周期 API。组件 setup 同步执行时，Vue 以当前组件作用域收集 computed 与 watcher 等响应式 effect，并在组件卸载时停止它们；事件监听、计时器和请求等外部副作用仍需显式清理。

@@ -51,7 +51,7 @@ recap:
 
 # 命名视图与路由 Props
 
-## 命名视图表达同一层的多个区域
+## 一、命名视图表达同一层的多个区域
 
 嵌套路由是父子 record 在不同 RouterView depth 上逐层渲染；命名视图则让同一条 record 在同一 depth 同时填入多个 outlet。没有 name 的 RouterView 名为 default，其他 outlet 通过字符串 name 与 record.components 的 key 对应。
 
@@ -74,7 +74,7 @@ const routes = [{
 }]
 ~~~~
 
-## 路由 Props 把 URL 输入停在组件边界外
+## 二、路由 Props 把 URL 输入停在组件边界外
 
 组件直接读取 useRoute() 或 $route 时，它只能在特定路由上工作。record.props 可以先把 params、query 或静态配置整理为普通 Props，路由组件因此能像普通组件一样复用和测试。
 
@@ -86,7 +86,7 @@ const routes = [{
 
 function 模式应保持无状态：它根据新 route 纯转换 Props，不在内部发请求或依赖不受 route 变化驱动的外部可变状态。需要组件内反应式状态时，使用包装组件明确承接。
 
-## 不同 outlet 可以使用不同 Props 契约
+## 三、不同 outlet 可以使用不同 Props 契约
 
 多视图 record 可以用一个 boolean 把同一模式应用到所有视图；当各区域的输入契约不同时，props 对象则以视图名为 key 分别配置。例如 default 直接接收 params，sidebar 把 query 转为稳定字符串，helper 接收静态显示模式。
 
@@ -105,7 +105,7 @@ function 模式应保持无状态：它根据新 route 纯转换 Props，不在�
 }
 ~~~~
 
-## 在隔离 Demo 中观察三个视图边界
+## 四、在隔离 Demo 中观察三个视图边界
 
 下面的 mini-app 在同一 depth 渲染 default、sidebar 和 helper 三个真实 RouterView。切换 teamId 和 filter 后，sidebar 与 helper 只显示自己声明的 Props；default 视图可在 Props 组件和直接读取 useRoute() 的耦合组件之间切换，对比两种边界。
 
@@ -113,7 +113,7 @@ function 模式应保持无状态：它根据新 route 纯转换 Props，不在�
 用三个同层 outlet 对比 boolean、function 和 object Props 模式
 :::
 
-## 易错使用提示
+## 五、易错使用提示
 
 :::pitfalls
 ### 多视图记录仍使用 component
@@ -297,7 +297,7 @@ const props = defineProps<{ teamId: string }>()
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 从源码推导适用场景
+## 六、从源码推导适用场景
 
 :::steps
 ### 1. default 也是显式视图名

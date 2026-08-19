@@ -64,7 +64,7 @@ recap:
 
 # Attributes 透传
 
-## 正文大纲
+## 一、正文大纲
 
 上一课已经用插槽明确内容与出口的所有权。本课继续处理组件边界：父组件传入、却没有被当前组件声明为 Prop 或 Emits 监听器的 key，会成为透传 attributes。目标不是把所有值机械转发，而是先分类，再把它们交给语义正确的元素或根组件。
 
@@ -81,7 +81,7 @@ recap:
 本课只讲有状态 SFC、&lt;script setup lang="ts"&gt; 与 Composition API。组件 v-model、函数组件的特殊规则、渲染函数和组件库透传框架留在后续课程。
 :::
 
-## 先按是否被声明消费分类
+## 二、先按是否被声明消费分类
 
 fallthrough attribute 的判断发生在当前组件边界：匹配 defineProps() 的 key 进入 props，匹配 defineEmits() 的监听器由组件事件契约消费；剩余普通 attribute、class、style 和监听器进入 $attrs。声明不仅补充 TypeScript 类型，也会改变运行时分流。
 
@@ -113,7 +113,7 @@ defineEmits<{ inspect: [] }>()
 “未声明”只针对当前组件。attribute 继续到下一层组件后，还会根据下一层的 props 与 emits 再分类一次。
 :::
 
-## 单元素根节点自动继承
+## 三、单元素根节点自动继承
 
 有状态组件渲染单个元素根节点时，透传 attributes 默认合并到这个根元素。Vue 不会根据 id、ARIA 或事件语义寻找“最像目标”的后代元素；它只处理最终根节点。
 
@@ -147,7 +147,7 @@ function recordLocalClick(): void {
 <ActionButton @click="recordParentClick" />
 ~~~~
 
-## 包装组件必须选择语义落点
+## 四、包装组件必须选择语义落点
 
 包装按钮若以 div 为唯一根节点，父级 id、ARIA、class 和 click 默认都会落到 div。若调用方的 attributes 描述的是真实按钮，应关闭自动继承，再把完整 $attrs 对象只绑定到按钮。
 
@@ -169,7 +169,7 @@ inheritAttrs: false 只关闭“自动加到根节点”，不会清空 $attrs�
 观察 props/emits 消费、原始 attrs 键和 class、style、listener 的定向合并
 :::
 
-## $attrs、useAttrs 与原始键名
+## 五、$attrs、useAttrs 与原始键名
 
 模板中直接使用 $attrs；脚本确实需要读取透传集合时使用 useAttrs()。未声明 attributes 保留原始键名，data-course-id 要写 attrs['data-course-id']；@click 在对象中对应 onClick。不要套用 prop 的 kebab-to-camel 归一化规则。
 
@@ -185,7 +185,7 @@ onUpdated(() => {
 
 useAttrs() 返回的对象内容会随组件更新保持最新，但官方明确说明它出于性能考虑不是响应式对象。watch(() =&gt; attrs.foo) 不能建立可靠依赖；需要响应式业务逻辑时，把该值升级为明确 prop。只需更新后做副作用时，可在 onUpdated() 中读取最新 attrs。
 
-## 单组件根与多根节点
+## 六、单组件根与多根节点
 
 当唯一根节点本身是组件时，当前层没有消费的 attrs 会继续转发给根组件。下一层若把某个 key 声明为 prop，它就在下一层被消费，只有下一层显式绑定后才会进入 DOM。
 
@@ -215,7 +215,7 @@ const props = defineProps<{ disabled?: boolean }>()
 </template>
 ~~~~
 
-## 未声明同名 emit 的重复路径
+## 七、未声明同名 emit 的重复路径
 
 若组件手动 emit('click') 却没有声明 click，父级 onClick 仍可能留在 $attrs 并透传到根按钮。同一次原生点击先直接触发根按钮上的父 listener，本地 handler 又 emit click 再触发一次父 listener，于是形成两条同名路径。
 
@@ -243,7 +243,7 @@ const emit = defineEmits<{ click: [event: MouseEvent] }>()
 未声明 emits 不等于一定触发两次。只有同名 listener 同时经根 DOM 透传与组件手动 emit 两条路径到达父级时，才会出现重复风险。
 :::
 
-## 易错使用提示
+## 八、易错使用提示
 
 :::pitfalls
 ### 把父级传入的所有 key 都当成 $attrs
@@ -478,7 +478,7 @@ const props = defineProps<{ disabled?: boolean }>()
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 从 Vue 3.5.40 源码与官方测试推导
+## 九、从 Vue 3.5.40 源码与官方测试推导
 
 以下五点分别陈述固定版本的实现事实和本课程推导。实现细节帮助解释 Vue 3.5.40 的可观察行为，但不会扩大官方公共 API。
 
@@ -584,6 +584,6 @@ function inspect(): void {
 - [ ] 组件发出同名原生事件时完整声明 emits
 - [ ] 不会把 Vue 3.5.40 内部合并结构写成公共承诺
 
-## 完成本课后的判断顺序
+## 十、完成本课后的判断顺序
 
 先检查当前组件的 Props 与 Emits 声明，把剩余 key 视为 $attrs；再确认当前根是元素、组件还是多根，并判断默认根是否就是语义目标。包装或多根组件要关闭或绕过自动继承，只在一个明确目标上 v-bind="$attrs"。脚本读取时保留原始键名，不用 watch 追踪 attrs。最后检查是否存在未声明同名 emit 与原生 listener 的双路径。

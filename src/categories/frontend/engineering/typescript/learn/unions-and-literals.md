@@ -13,7 +13,7 @@ tags:
   - 字面量类型
   - 判别联合
   - never
-appliesTo: TypeScript 7.0.2（宿主 fixture：6.0.3）
+appliesTo: TypeScript 7.0.2
 verifiedAt: 2026-08-05
 sources:
   - title: "TypeScript Handbook: Everyday Types"
@@ -51,11 +51,11 @@ recap:
 
 # 联合与字面量
 
-## 为什么需要
+## 一、为什么需要
 
 状态值如果只是 string，拼写错误和不支持的状态都会进入系统。联合与字面量把允许的值写进合同；对象联合再通过共同字段表达不同状态，让每个分支只读取自己拥有的数据。
 
-## 核心概念和最小模型
+## 二、核心概念和最小模型
 
 ~~~~ts
 type RequestState =
@@ -90,25 +90,30 @@ describeState({ status: 'success', data: ['TypeScript'] })
 
 联合 `A | B` 描述“值来自 A 或 B”，所以未收窄时只能使用 A 与 B 的共同能力。字面量把允许集合缩小到具体值；判别联合让 status 等共同字段成为分支选择器。
 
-## 从值集合到可维护分支
+## 三、知识点详解
 
-:::steps
-### 先列出真实状态
+### 1. 联合类型
 
-把业务允许的有限值写成 literal union，不要先用 string 再靠注释补充“实际上只有几种”。
+**它是什么：** 联合类型使用 `|` 表示一个值可以属于多个候选类型，例如 `string | number`。
 
-### 为不同数据建立对象分支
+**它有什么用：** 它能准确描述函数确实支持的多种输入或状态，而不必退回 `any`。
 
-每个分支保留自己的字段，并使用一个共同 literal 字段作为 discriminant。
+**怎么使用：** 写出所有允许成员，并在执行成员专属操作前通过条件判断收窄。
 
-### 在分支处收窄
+~~~~ts
+/** 把字符串或数字课程标识转换为文本。 */
+function normalizeId(id: string | number): string {
+  return typeof id === 'number' ? String(id) : id
+}
+~~~~
 
-比较 discriminant 后，编译器会把联合缩小到对应对象，错误字段访问会被阻止。
+### 2. 字面量类型
 
-### 让新增状态产生反馈
+**它是什么：** 字面量类型把值限制为某个具体字符串、数字或布尔值；多个字面量组成有限值集合。
 
-把最终状态交给 never 检查；未来增加分支时，未更新的 switch 会在编译期暴露。
-:::
+**它有什么用：** 页面模式、请求方法和业务状态不再是任意 `string`，拼写错误会在编译期暴露。
+
+**怎么使用：** 从业务真实允许的值建立 literal union，并让变量、参数或对象字段使用这个联合。
 
 ~~~~ts
 type Mode = 'view' | 'edit'
@@ -118,11 +123,66 @@ mode = 'edit'
 export { mode }
 ~~~~
 
-## 配套编译 fixture
+### 3. 判别联合
 
-临时编译正例验证 literal 状态、判别联合和穷尽分支；负例把未声明的状态字符串赋给 `RequestState["status"]`，固定 TS2322。验证资产只在 `/tmp` 使用并在结束后删除。
+**它是什么：** 判别联合是一组对象联合，每个对象都包含同名但值不同的字面量字段，例如 `status`。
 
-## 易错使用提示
+**它有什么用：** 它能让每个状态拥有自己的数据，并避免用大量可选字段组合出不合法状态。
+
+**怎么使用：** 为每个分支定义共同判别字段，在 `if` 或 `switch` 中比较该字段后访问分支专属成员。
+
+~~~~ts
+type LoadState =
+  | { status: 'loading' }
+  | { status: 'success'; title: string }
+  | { status: 'failure'; error: Error }
+
+/** 根据加载状态返回可显示文本。 */
+function getStateText(state: LoadState): string {
+  if (state.status === 'success') return state.title
+  if (state.status === 'failure') return state.error.message
+  return '加载中'
+}
+~~~~
+
+### 4. 穷尽检查
+
+**它是什么：** 穷尽检查把所有已知分支排除后剩余的值赋给 `never`，证明没有遗漏成员。
+
+**它有什么用：** 联合新增状态时，旧的 `switch` 会立即报错，提醒维护者补上处理逻辑。
+
+**怎么使用：** 在 `switch` 的 `default` 分支调用接收 `never` 的函数，或直接把剩余值赋给 `never`。
+
+~~~~ts
+/** 报告没有被处理的联合成员。 */
+function assertNever(value: never): never {
+  throw new Error(`未处理状态：${String(value)}`)
+}
+~~~~
+
+## 四、动手实践：用判别联合描述完整状态机
+
+不要把所有字段都做成可选项。让每个状态只携带自己真正拥有的数据：
+
+~~~~ts
+type RequestState =
+  | { status: 'idle' }
+  | { status: 'loading'; startedAt: number }
+  | { status: 'success'; data: string[] }
+  | { status: 'error'; message: string }
+
+function messageOf(state: RequestState): string {
+  switch (state.status) {
+    case 'idle': return '尚未请求'
+    case 'loading': return `开始于 ${state.startedAt}`
+    case 'success': return `共 ${state.data.length} 条`
+    case 'error': return state.message
+  }
+}
+~~~~
+
+新增 cancelled 分支并观察 switch 中的变化，再尝试让 idle 携带 data。通过这些改动体会“非法状态不可表示”比在运行时反复判断可选字段更可靠。
+## 五、易错使用提示
 
 :::pitfalls
 ### 把有限状态放宽成 string
@@ -237,20 +297,20 @@ function label(status: Status): string {
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 原理与适用场景
+## 六、工作原理与适用边界
 
 :::steps
 ### 联合描述值，不保证分支
 
-官方事实：联合只保留所有成员共有的事实。课程推导：先写最小公共合同，再用检查取得分支证据。边界：类型联合不会在运行时验证外部字符串。
+**工作原理：** 联合只保留所有成员共有的事实。**实践建议：** 先写最小公共合同，再用检查取得分支证据。**使用边界：** 类型联合不会在运行时验证外部字符串。
 
 ### 字面量是协议的一部分
 
-官方事实：literal type 可组合为有限集合，判别字段可收窄对象联合。课程推导：网络消息和 UI 状态适合使用 discriminant。边界：状态集合变化时必须同步更新生产者与消费者。
+**工作原理：** literal type 可组合为有限集合，判别字段可收窄对象联合。**实践建议：** 网络消息和 UI 状态适合使用 discriminant。**使用边界：** 状态集合变化时必须同步更新生产者与消费者。
 
 ### never 是维护反馈
 
-官方事实：穷尽收窄后剩余类型为 never。课程推导：把 never 放在边界函数中可以让新增状态触发编译反馈。边界：它不能替代运行时对未知输入的校验。
+**工作原理：** 穷尽收窄后剩余类型为 never。**实践建议：** 把 never 放在边界函数中可以让新增状态触发编译反馈。**使用边界：** 它不能替代运行时对未知输入的校验。
 :::
 
 :::exercise
@@ -258,9 +318,45 @@ function label(status: Status): string {
 
 **要求：** 定义 todo、doing、done 三个状态，其中 done 才拥有 completedAt。写一个按 discriminant 返回文字的函数，再添加一个未声明状态的负例。
 
-**验收：** 正例严格编译通过，负例产生 TS2322，并能说明为什么 completedAt 不应写成所有分支的可选字段。
+**完成标准：** 正例严格编译通过，负例产生 TS2322，并能说明为什么 completedAt 不应写成所有分支的可选字段。
 :::
 
-## 总结与下一课
+## 七、本节小结
 
 用 literal union 写有限值，用 discriminant 连接状态和数据，用 never 守住穷尽分支。下一课“类型收窄”会把这些合同交给 typeof、in、instanceof 和 type predicate。
+
+:::code-details{title="查看本节完整示例"}
+~~~~ts
+type CourseLevel = 'beginner' | 'intermediate' | 'advanced'
+type LoadState =
+  | { status: 'idle' }
+  | { status: 'loading'; requestId: string }
+  | { status: 'success'; title: string }
+  | { status: 'error'; message: string }
+
+/** 在新增联合成员时让编译器指出未处理分支。 */
+function assertNever(value: never): never {
+  throw new Error(`未处理状态：${JSON.stringify(value)}`)
+}
+
+/** 根据判别字段安全读取各分支数据。 */
+function renderState(state: LoadState): string {
+  switch (state.status) {
+    case 'idle':
+      return '等待加载'
+    case 'loading':
+      return `加载中：${state.requestId}`
+    case 'success':
+      return `课程：${state.title}`
+    case 'error':
+      return `失败：${state.message}`
+    default:
+      return assertNever(state)
+  }
+}
+
+const level: CourseLevel = 'advanced'
+const state: LoadState = { status: 'success', title: '联合与字面量' }
+console.log(level, renderState(state))
+~~~~
+:::

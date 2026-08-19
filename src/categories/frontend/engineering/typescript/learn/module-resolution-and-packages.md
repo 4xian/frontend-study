@@ -16,7 +16,7 @@ tags:
   - package.json
   - exports
   - "@types"
-appliesTo: TypeScript 7.0.2（宿主 fixture：6.0.3）
+appliesTo: TypeScript 7.0.2
 verifiedAt: 2026-08-05
 sources:
   - title: "TypeScript Modules Reference: Theory"
@@ -68,11 +68,11 @@ recap:
 
 # 模块解析与第三方类型
 
-## 为什么需要
+## 一、为什么需要
 
 import 语句只给出说明符，真正如何找到文件由运行它的 host 决定。TypeScript 必须用 module 与 moduleResolution 模拟相同规则，否则编辑器能找到的类型可能与 Node 或 bundler 实际加载的入口不同。
 
-## 核心概念和最小模型
+## 二、核心概念和最小模型
 
 ~~~~json
 {
@@ -87,25 +87,34 @@ import 语句只给出说明符，真正如何找到文件由运行它的 host �
 
 bundler 模式适合由 Vite 等 bundler 处理输出的应用：它理解 package.json imports/exports，又允许 bundler 常见的无扩展名相对导入。直接交给现代 Node 运行的代码则应选 node16 或 nodenext，并与 module 选项配套。
 
-## 从说明符追到声明文件
+## 三、知识点详解
 
-:::steps
-### 先确定最终 host
+### 1. moduleResolution
 
-应用由 bundler、Node 还是其他运行环境加载，决定应该模拟哪套解析算法。
+**它是什么：** `moduleResolution` 决定 TypeScript 如何把 `import` 说明符解析成源码或声明文件。
 
-### 检查包公开入口
+**它有什么用：** 类型检查器需要模拟最终加载工具的规则，否则编辑器通过的路径可能在运行时失败，或反过来。
 
-支持的模式会遵守 exports；types 条件可把公共入口直接指向 .d.ts 声明。
+**怎么使用：** bundler 应用通常使用 `Bundler`；Node ESM/CJS 发布验证使用与目标 Node 规则匹配的
+`NodeNext`，并让 `module` 选项与之协调。
 
-### 区分 bundled 与外置类型
+~~~~json
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true
+  }
+}
+~~~~
 
-包可自带 types/typings；没有 bundled declarations 时，再查找同名 @types 包。
+### 2. package.json 的 exports
 
-### 用 trace 解释而非猜测
+**它是什么：** `exports` 声明包允许消费者导入的根入口和子路径，并可按条件选择不同文件。
 
-traceResolution 显示候选与最终结果，测试只冻结模式、说明符和相对命中路径。
-:::
+**它有什么用：** 包可以公开稳定入口、封装内部目录，并让运行文件和类型声明保持一一对应。
+
+**怎么使用：** 为每个公开路径写出条件对象，把 `types` 放在对应运行条件之前；未列出的内部路径应视为私有。
 
 ~~~~json
 {
@@ -121,11 +130,57 @@ traceResolution 显示候选与最终结果，测试只冻结模式、说明符�
 
 这里根入口的 types 条件把类型检查器引到 types/index.d.ts。若 exports 只公开根入口，typed-package/internal 等未公开子路径仍应失败；源码文件存在并不等于包允许消费者导入。
 
-## 配套模块解析 fixture
+### 3. bundled declarations 与 @types
 
-临时模块解析目录包含两个本地伪包：正例从 exports.types 命中 typed-package 声明，并回退到 @types/legacy-package；负例访问未由 exports 公开的子路径，固定 TS2307。trace 摘要固定 Bundler 模式与两个最终 .d.ts 相对路径，不锁完整英文日志。验证目录位于 `/tmp`，结束后删除。
+**它们是什么：** 包自带的 `.d.ts` 属于 bundled declarations；没有自带声明的 JavaScript 包可以由
+独立的 `@types/package-name` 提供类型。
 
-## 易错使用提示
+**它们有什么用：** 调用方能够获得第三方库的公开合同，而不必为每次使用手写声明。
+
+**怎么使用：** 先检查包自己的 `types`、`typings` 或 `exports.types`；确实没有声明时再安装匹配版本的
+`@types` 包。
+
+~~~~json
+{
+  "dependencies": {
+    "library-with-types": "1.0.0"
+  },
+  "devDependencies": {
+    "@types/legacy-library": "1.0.0"
+  }
+}
+~~~~
+
+### 4. traceResolution
+
+**它是什么：** `--traceResolution` 输出 TypeScript 尝试过的候选路径、条件和最终命中结果。
+
+**它有什么用：** 出现“找不到模块”或命中错误声明时，可以用证据定位问题，而不是反复猜测路径别名。
+
+**怎么使用：** 对具体 `tsconfig` 运行追踪，搜索目标说明符并检查最终解析路径；只记录与问题相关的几行。
+
+~~~~text
+npx tsc -p tsconfig.json --traceResolution
+~~~~
+
+## 四、动手实践：追踪一个包导入命中了哪里
+
+先在 tsconfig 中选择与现代打包器一致的解析模式，再让编译器打印解析过程。
+
+~~~~json
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "noEmit": true,
+    "traceResolution": true
+  }
+}
+~~~~
+
+在源码中分别导入一个自带 types 的依赖和一个通过 `@types` 提供声明的依赖，运行 `npx tsc -p tsconfig.json`。从日志中找到 package.json、exports 条件和最终声明文件；如果深层子路径被 exports 拒绝，应改用公开入口，而不是用 paths 绕过包边界。
+## 五、易错使用提示
 
 :::pitfalls
 ### 脱离 host 选择模式
@@ -217,30 +272,64 @@ import { course } from 'typed-package'
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 原理与适用场景
+## 六、工作原理与适用边界
 
 :::steps
 ### 解析规则由 host 定义
 
-官方事实：TypeScript 模拟运行 host 的查找行为。课程推导：先确定部署链再配置编译器。边界：没有适用于所有项目的唯一模式。
+**工作原理：** TypeScript 模拟运行 host 的查找行为。**实践建议：** 先确定部署链再配置编译器。**使用边界：** 没有适用于所有项目的唯一模式。
 
 ### 声明文件描述运行库
 
-官方事实：.d.ts 为 JavaScript 提供静态类型。课程推导：优先消费包自带声明，缺失时再查 @types。边界：声明不会创建运行实现。
+**工作原理：** .d.ts 为 JavaScript 提供静态类型。**实践建议：** 优先消费包自带声明，缺失时再查 @types。**使用边界：** 声明不会创建运行实现。
 
 ### exports 定义公共包面
 
-官方事实：支持的模式遵守 exports 与 types 条件。课程推导：只从公开入口消费包。边界：内部文件存在不代表可导入。
+**工作原理：** 支持的模式遵守 exports 与 types 条件。**实践建议：** 只从公开入口消费包。**使用边界：** 内部文件存在不代表可导入。
 :::
 
 :::exercise
 ### 追踪两个第三方类型入口
 
-**要求：** 运行模块解析 fixture，分别找出自带 types 的包与 @types 回退包命中的声明路径，再保留未公开子路径负例。
+**要求：** 运行模块解析示例，分别找出自带 types 的包与 @types 回退包命中的声明路径，再保留未公开子路径负例。
 
-**验收：** 正例 exit 0，trace 摘要包含两个冻结相对路径，未公开子路径产生 TS2307。
+**完成标准：** 正例 exit 0，trace 摘要包含两个冻结相对路径，未公开子路径产生 TS2307。
 :::
 
-## 总结与下一课
+## 七、本节小结
 
 模块解析必须模拟最终 host，包的 exports 和声明入口共同定义可消费边界。下一课会处理模块或其他外部边界抛出的 unknown 错误，并用 never 证明状态已穷尽。
+
+:::code-details{title="查看本节完整配置"}
+~~~~text
+// node_modules/course-kit/package.json
+{
+  "name": "course-kit",
+  "type": "module",
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
+    "./testing": { "types": "./dist/testing.d.ts", "import": "./dist/testing.js" }
+  }
+}
+
+// tsconfig.json：让 TypeScript 模拟 Node ESM host
+{
+  "compilerOptions": {
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "traceResolution": false
+  },
+  "include": ["src/**/*.ts"]
+}
+
+// src/main.ts：声明随包发布，因此不需要另装 @types/course-kit
+import { defineCourse } from 'course-kit'
+import { createSampleCourse } from 'course-kit/testing'
+console.log(defineCourse(createSampleCourse()))
+
+// 只在排查时打开解析轨迹，并搜索目标说明符
+npx tsc --noEmit --traceResolution > resolution.log
+// 在日志中定位：Resolving module 'course-kit'
+~~~~
+:::

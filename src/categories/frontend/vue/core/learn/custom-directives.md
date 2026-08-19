@@ -67,7 +67,7 @@ recap:
 
 # 自定义指令
 
-## 正文大纲
+## 一、正文大纲
 
 上一课建立了组件错误链，本课进入 Vue 的 DOM 扩展边界。自定义指令不是另一种组件，也不是另一种组合式函数：它只负责把必须直接接触某个真实元素的行为绑定到该元素的挂载、更新和卸载流程。课程先做工具选择，再学习钩子与资源所有权，最后用源码解释更新和 SSR 边界。
 
@@ -82,7 +82,7 @@ recap:
 先证明“必须直接操作真实元素”，再创建指令。业务状态、请求、权限和跨组件通信仍应留在组件、store 或组合式函数中；指令只接收结果并维护 DOM 资源。
 :::
 
-## 从局部指令开始，再决定是否全局注册
+## 二、从局部指令开始，再决定是否全局注册
 
 &lt;script setup&gt; 中以 v 开头的驼峰变量会成为同一模板可用的局部指令，例如 vFocus 对应 v-focus。局部定义让依赖与使用位置相邻，适合作为默认选择。只有整个应用都需要且语义稳定的基础设施，才在 mount 前通过 app.directive() 注册；全局注册属于当前 app，不会自动进入另一个 createApp() 实例。
 
@@ -131,7 +131,7 @@ app.mount('#app')
 全局注册减少了 import，却隐藏了组件依赖。团队级基础指令可全局安装；只在一个功能内使用的指令应保持局部，并在需要复用时从普通 TypeScript 模块导出指令对象。
 :::
 
-## 七个钩子跟随宿主元素的 patch 生命周期
+## 三、七个钩子跟随宿主元素的 patch 生命周期
 
 所有钩子都可选。created 发生在元素 attribute 和事件监听器应用前；beforeMount 发生在插入父节点前；mounted 发生在父组件及其子节点挂载后。更新阶段由 beforeUpdate 与 updated 包围宿主 patch，卸载阶段由 beforeUnmount 与 unmounted 包围移除过程。选择最晚但仍满足需求的钩子，可以减少时序假设。
 
@@ -149,7 +149,7 @@ app.mount('#app')
 指令钩子类似组件生命周期，但不是组件钩子的别名。它们围绕宿主元素 patch 执行；created 中不能假设 attribute、listener、父节点或布局都已就绪。
 :::
 
-## binding 是本轮调用的只读快照
+## 四、binding 是本轮调用的只读快照
 
 完整钩子形状是 hook(element, binding, vnode, prevVnode)。binding.value 是当前表达式结果，oldValue 是更新前结果，arg 是冒号参数，modifiers 是点修饰符集合，instance 是使用该指令的组件公开实例，dir 是当前指令定义。vnode 表示当前元素，prevVnode 只在更新钩子中提供上一轮 VNode。动态参数会随渲染更新。除 element 外，官方要求把其余参数视为只读；不要向 binding、vnode、prevVnode 或 instance 塞入资源句柄。
 
@@ -177,7 +177,7 @@ const vTooltip = {
 value 与 oldValue 可以相等，arg 也可能独立变化。若一个指令同时依赖 value、arg 和 modifiers，更新判断必须覆盖真正影响 DOM 的全部输入，不能只比较 value。
 :::
 
-## updated 不是绑定值 watcher
+## 五、updated 不是绑定值 watcher
 
 只要带指令的宿主进入更新流程，beforeUpdate 和 updated 就可能运行，即使绑定值没有变化。updated 应设计为幂等同步器：先比较本轮输入与 oldValue，再决定是否写 DOM；复杂对象若原地修改，新旧引用可能相同，业务层应优先生成新的不可变配置，而不是在指令里做昂贵深比较。
 
@@ -198,7 +198,7 @@ const vChart = {
 | 原地修改 value 深层字段 | 新旧引用可能相同 | 上游创建新配置，明确变更边界 |
 | 每次 updated 重建资源 | 重复监听与状态丢失 | 资源只建一次，更新其配置 |
 
-## 资源由宿主元素拥有，并在卸载时释放
+## 六、资源由宿主元素拥有，并在卸载时释放
 
 listener、observer 和第三方实例需要跨多个钩子存活。binding 每轮都会重新创建，不能承担资源容器；真实元素在这一段生命周期中保持稳定，适合作为 WeakMap 键。mounted 创建一次资源，updated 只更新配置，unmounted 用同一引用释放并删除记录。
 
@@ -237,7 +237,7 @@ const vResize = {
 若 updated 需要使用最新回调，不要让 mounted 创建的 listener 永远闭包旧 binding。资源记录中保存可更新的当前配置，listener 每次触发时从记录读取最新值。
 :::
 
-## 函数简写只适合无清理的对称行为
+## 七、函数简写只适合无清理的对称行为
 
 函数形式会被 Vue 归一化为同一个 mounted 和 updated 钩子，不会自动成为 created、beforeUnmount 或 unmounted。只有两个阶段逻辑完全相同，而且没有跨钩子资源时才使用简写。只要涉及清理、SSR 或不同更新策略，就使用对象形式。
 
@@ -260,7 +260,7 @@ const vEscape = {
 }
 ~~~~
 
-## 组件根和 SSR 是两条独立边界
+## 八、组件根和 SSR 是两条独立边界
 
 官方不推荐把自定义指令用在组件上。组件 VNode 的指令会落到组件根元素，而不是组件实例；根节点变化会改变目标，多根、文本或 Teleport 根没有可依赖的唯一元素。更稳定的契约是让子组件接收 prop，再由子组件把指令绑定到明确的真实元素。
 
@@ -287,7 +287,7 @@ const vIdentity = {
 }
 ~~~~
 
-## 易错使用提示
+## 九、易错使用提示
 
 :::pitfalls
 ### 用指令承载本可声明式表达的界面逻辑
@@ -527,7 +527,7 @@ const vId = {
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 从源码推导适用场景
+## 十、从源码推导适用场景
 
 :::steps
 ### 函数简写只有两个阶段
@@ -559,7 +559,7 @@ server renderer 只在对象指令提供 getSSRProps 时合并返回值。它不
 vnode.dirs、currentRenderingInstance、暂停追踪和 binding 数组位置都是固定版本实现事实，不是业务代码可访问的公共接口。生产代码只依赖 Directive 类型、公开钩子参数和自己的资源记录。
 :::
 
-## 在快捷键指令实验台验证资源所有权
+## 十一、在快捷键指令实验台验证资源所有权
 
 唯一 Demo 在 mounted 为目标安装一份 window 键盘监听，updated 只替换当前快捷键配置，unmounted 移除同一监听。无关状态更新会调用 updated，却不会增加 DOM 写入；切换绑定值后 oldValue 与 value 清晰可见；移除目标后快捷键不再触发，恢复目标只重新建立一份资源。
 
@@ -567,7 +567,7 @@ vnode.dirs、currentRenderingInstance、暂停追踪和 binding 数组位置都�
 比较无关更新与绑定更新，并验证快捷键 listener 在卸载后被释放
 :::
 
-## 练习与回顾
+## 十二、练习与回顾
 
 :::exercise
 ### 为第三方 DOM 插件划分生命周期

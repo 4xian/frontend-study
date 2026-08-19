@@ -3,7 +3,7 @@
 import { computed, ref, watchEffect } from 'vue'
 import { highlight } from './highlighter'
 
-const props = defineProps<{ code: string; lang: string }>()
+const props = defineProps<{ code: string; lang: string; collapsible?: boolean }>()
 
 /** 默认折叠的行数阈值 */
 const FOLD_LINES = 30
@@ -22,7 +22,7 @@ const trimmedCode = computed(() => props.code.replace(/\n+$/, ''))
 const lineCount = computed(() => trimmedCode.value.split('\n').length)
 
 /** 是否需要折叠 */
-const foldable = computed(() => lineCount.value > FOLD_LINES)
+const foldable = computed(() => props.collapsible !== false && lineCount.value > FOLD_LINES)
 
 // 源码或语言变化时重新高亮
 watchEffect(async () => {

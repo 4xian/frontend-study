@@ -1,0 +1,276 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.intermediate.spring-boot-mysql-mybatis-persistence-bridge",
+  "batchId": "phase-c-i12-spring-boot-mysql-mybatis-persistence-bridge",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-16T01:35:11+08:00",
+  "phase": "Phase C",
+  "phaseCProgress": "12/20",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "newStagingPerformedThisBatch": false,
+    "existingIndexPreserved": true,
+    "unrelatedWorkspaceChangesPreserved": true
+  },
+  "phaseAFreeze": {
+    "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+    "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81",
+    "designation": "I-12 / 必修、桥接、新增",
+    "title": "Spring Boot、MySQL 与 MyBatis 最小持久化闭环",
+    "estimatedMinutes": 150,
+    "prerequisite": "backend.java.learn.intermediate.layers-dto-and-service-boundaries",
+    "stableIdAdded": "backend.java.learn.intermediate.spring-boot-mysql-mybatis-persistence-bridge",
+    "slugAdded": "spring-boot-mysql-mybatis-persistence-bridge",
+    "urlAdded": "/backend/java/core/learn/spring-boot-mysql-mybatis-persistence-bridge",
+    "frozenSuccessor": "backend.java.learn.intermediate.errors-results-and-logging"
+  },
+  "phaseCAdmission": {
+    "status": "PASS",
+    "predecessorCourseId": "backend.java.learn.intermediate.layers-dto-and-service-boundaries",
+    "predecessorSignoffPath": "docs/backend/java/audit/reviews/phase-4-layers-dto-and-service-boundaries-signoff.json",
+    "predecessorSignoffSha256": "a455e1a7a27068f1c8dd8feadc32791295d6229a9f86f2e489c5578f38377a12",
+    "phaseCProgressBeforeBatch": "11/20",
+    "trackChangeRequired": true,
+    "loaderChangeRequired": true
+  },
+  "versions": {
+    "verifiedAt": "2026-08-16",
+    "modern": {
+      "java": "25",
+      "runtime": "Eclipse Temurin 25.0.3+9 LTS",
+      "springBoot": "4.1.0",
+      "springFramework": "7.0.8",
+      "mybatisStarter": "4.1.0",
+      "mybatisSpring": "4.1.0",
+      "mybatis": "3.5.19",
+      "flyway": "12.4.0",
+      "mysqlConnectorJ": "9.7.0",
+      "mysql": "8.4.11"
+    },
+    "legacy": {
+      "java": "8",
+      "runtime": "Eclipse Temurin 8u492-b09",
+      "springBoot": "2.3.12.RELEASE",
+      "springFramework": "5.2.15.RELEASE",
+      "mybatisStarter": "2.1.4",
+      "mybatis": "3.5.6",
+      "mybatisSpring": "2.0.6",
+      "flyway": "6.4.4",
+      "mysqlConnectorJ": "8.0.25"
+    }
+  },
+  "sourceDiscovery": {
+    "method": "Tavily 用于首批官方候选；额度耗尽后按仓库顺位切到 Exa，最终结论均回到 Oracle、Spring、MyBatis、MySQL、Flyway、Maven Central 与 OWASP 一手页面核验",
+    "researchDirectSourceCount": 39,
+    "researchHttp200Count": 39,
+    "researchHttpFailureCount": 0,
+    "lessonOfficialSourceCardCount": 27,
+    "communitySourcesUsedAsEvidence": false
+  },
+  "research": {
+    "scope": "I-12 only",
+    "phaseAContractAlignment": "PASS",
+    "bridgeBoundary": "PASS; one tasks table, one V1 migration, external DataSource, MyBatis CRUD, transaction commit and rollback, real MySQL verification",
+    "excludedScope": "PASS; no JOIN, dynamic SQL, MyBatis-Plus, index tuning, locks, backup, sharding or database specialty expansion",
+    "officialUrlCount": 39,
+    "stopBoundaryAlignment": "PASS; I-13 lesson and research were not read or modified before I-12 closure",
+    "researchSha256": "a757fa9c1984ae5a9f43ecc01f00f65d5b412778c2ed8737566f308887843f1f"
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/intermediate/spring-boot-mysql-mybatis-persistence-bridge.md",
+      "sha256": "a757fa9c1984ae5a9f43ecc01f00f65d5b412778c2ed8737566f308887843f1f"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/spring-boot-mysql-mybatis-persistence-bridge.md",
+      "sha256": "f3a235df0accfcc3459ec115ba5a9f226cb945d44adbf73566ab3c96df79ccce"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "4c49ec0207e877d4abd0c2531360b893ddd532a164f1438ea47bcf143f8a1aac"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "a98375b0c98d2e104ffd6b4acfb12127e705bb015976882bf86f1e58d6473829"
+    },
+    {
+      "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+      "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81"
+    },
+    {
+      "path": "docs/backend/java/audit/phase-2-knowledge-path-manifest.json",
+      "sha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407"
+    }
+  ],
+  "engineeringVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check",
+      "exitCode": 0,
+      "summary": "passed directly and again as part of the final production build"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "summary": "passed on the final I-12 snapshot"
+    },
+    {
+      "command": "npm run test:unit",
+      "exitCode": 0,
+      "summary": "No persistent unit files; configured empty directory passed"
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "summary": "No persistent E2E files; configured empty directory passed"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "PASS on the final reviewed snapshot; 1778 modules transformed and the I-12 independent chunk emitted"
+    },
+    {
+      "command": "npx prettier --check <I-12 research and lesson> and git diff --check -- <I-12 research and lesson>",
+      "exitCode": 0,
+      "summary": "targeted formatting and whitespace checks passed after the final reviewer repairs"
+    }
+  ],
+  "repositoryFormatBoundary": {
+    "command": "npm run format:check",
+    "exitCode": 1,
+    "i12ScopedGate": "PASS",
+    "unrelatedBlockingFiles": [
+      "src/categories/frontend/engineering/vite/vite-reference-index.ts",
+      "src/categories/frontend/vue/core/vue-core-options-reference-index.ts",
+      "src/categories/frontend/vue/core/vue-core-reference-index.ts",
+      "src/categories/frontend/vue/core/vue-core-sfc-reference-index.ts"
+    ],
+    "unrelatedFilesModified": false
+  },
+  "javaVerification": {
+    "modernFixturePath": "/tmp/java-i12-repair.z2S55B",
+    "legacyFixturePath": "/tmp/java-i12-repair-legacy",
+    "mysqlImage": "mysql@sha256:b3b90af2a6552ae30c266fdb7d5dd55f3afb72404bb78d37fe8a23eb857fd3fb",
+    "mysqlRuntime": "MySQL 8.4.11",
+    "modernCompile": "PASS; Java examples extracted from the final lesson compiled under Temurin 25",
+    "legacyCompile": "PASS under Temurin 8; compiled classfile major version 52",
+    "feedbackOutputs": [
+      "transaction|commitCount=1|rollbackCount=0|exception=IllegalStateException",
+      "crud|create=201|read=200|update=200|status=DONE|delete=204|missing=404|remaining=0",
+      "constraint|first=201|duplicate=500|duplicateCount=1|recovered=201",
+      "migration|versionSuccess=1:1",
+      "connection|badHostExit=nonzero|http=000|recovered=200"
+    ],
+    "repairRerun": "PASS; after adding utf8mb4 to the independent MySQL client read, the same complete MySQL feedback loop passed",
+    "shellFailureSemantics": "PASS; create, read, CRUD and constraint blocks use set -e so failed assertions exit non-zero",
+    "temporaryAssetsCleaned": true,
+    "cleanupCommands": [
+      "find /tmp/java-i12-repair.z2S55B -depth -delete",
+      "find /tmp/java-i12-repair-m2 -depth -delete",
+      "find /tmp/java-i12-repair-legacy -depth -delete",
+      "find /tmp/java-i12-repair-run.zsh -depth -delete"
+    ],
+    "cleanupCheck": "PASS; exact fixture paths, java-i12 containers and network, and port 18082 listener no longer exist"
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "adapter": "PASS",
+    "researchLineCount": 540,
+    "lessonLineCount": 2368,
+    "rootH2Count": 16,
+    "rootH2ChineseNumbering": "PASS; 一 through 十六 continuous",
+    "independentKnowledgePointHeadings": 15,
+    "knowledgePointSevenPartCoverage": "15/15",
+    "knowledgePointWhenToUseCoverage": "15/15",
+    "knowledgePointCommonMistakeCoverage": "15/15",
+    "zeroStartProcedureStepHeadings": 8,
+    "howToUseStepHeadings": 4,
+    "verificationSubheadingCount": 4,
+    "codeBlockCount": 75,
+    "exerciseCount": 1,
+    "officialSourceCount": 27,
+    "pitfallCount": 9,
+    "pitfallPhenomenonCoverage": "9/9",
+    "pitfallRequiredFieldCoverage": "9/9",
+    "javaMethodComments": "PASS; final Repository overrides use complete Chinese Javadoc",
+    "singleTableAndMigrationBoundary": "PASS"
+  },
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "session": "java-i12-final",
+    "baseUrl": "http://127.0.0.1:4182/",
+    "targetPath": "/backend/java/core/learn/spring-boot-mysql-mybatis-persistence-bridge",
+    "productionPreviewUsed": true,
+    "sessionsClosed": true,
+    "previewServerStopped": true,
+    "desktop": {
+      "viewport": "1440x900",
+      "horizontalOverflow": false,
+      "knowledgePointCount": 15,
+      "officialSourceCount": 27,
+      "exerciseVisible": true
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "horizontalOverflow": false,
+      "pitfallPhenomenonCount": 9,
+      "officialSourceCount": 27,
+      "exerciseVisible": true
+    },
+    "title": "Spring Boot、MySQL 与 MyBatis 最小持久化闭环",
+    "previousEntryId": "backend.java.learn.intermediate.layers-dto-and-service-boundaries",
+    "frozenNextEntryId": "backend.java.learn.intermediate.errors-results-and-logging",
+    "completionStatePersistedAfterReload": true,
+    "completionStateRestoredToIncomplete": true,
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "pageErrors": 0,
+    "latestProductionReloadResponseCount": 35,
+    "failedRequests": 0,
+    "nonSuccessfulResponses": 0,
+    "visualInspection": "PASS; desktop and mobile screenshots show the title, knowledge content, pitfalls, sources, completion control and adjacent lessons without clipping or page overflow",
+    "temporaryScreenshotsCleaned": true,
+    "cleanupCommand": "find /tmp/java-i12-browser.r021wV -depth -delete",
+    "cleanupCheck": "PASS; exact browser artifact path, java-i12-final session and preview listener no longer exist"
+  },
+  "review": {
+    "reviewer": "independent Standards and Spec reviewer",
+    "riskClassification": "I-12 adds a new bridge lesson with real MySQL, migration, CRUD, transaction, failure and dual-version teaching contracts",
+    "independentReviewRequired": true,
+    "reviewedLessonSha256": "f3a235df0accfcc3459ec115ba5a9f226cb945d44adbf73566ab3c96df79ccce",
+    "reviewedResearchSha256": "a757fa9c1984ae5a9f43ecc01f00f65d5b412778c2ed8737566f308887843f1f",
+    "standards": "PASS / 0 finding",
+    "spec": "PASS / 0 finding",
+    "highestSeverity": "none",
+    "resolvedFindings": [
+      "all 15 knowledge points now state when to use, scope boundaries and a common mistake",
+      "all Java methods in lesson and research examples use Chinese Javadoc",
+      "all nine pitfalls expose an explicit phenomenon field",
+      "curl response files stay inside the exact temporary work directory",
+      "CRUD and constraint commands fail non-zero when assertions fail",
+      "TaskNotFoundException stays independent from Spring Web and the Controller maps it to 404",
+      "MySQL image is pinned to the verified 8.4.11 digest",
+      "security evidence includes MySQL Security Guidelines and OWASP Secrets Management",
+      "MyBatis evidence warns that untrusted string substitution can cause SQL injection",
+      "stable output summaries match automatically asserted HTTP, JSON and database fields",
+      "independent MySQL reads use utf8mb4 for Chinese fixture text",
+      "five Repository overrides use complete Chinese Javadoc",
+      "all four independent curl verification blocks use set -e"
+    ],
+    "postRepairTargetedReview": "PASS; Standards PASS / 0 finding and Spec PASS / 0 finding",
+    "reviewWorkspaceModified": false,
+    "reviewStopBoundary": "reviewer did not read or implement I-13"
+  },
+  "stopBoundary": "Phase C I-12 is closed at 12/20. The only next authorized batch is I-13 (backend.java.learn.intermediate.errors-results-and-logging); no I-13 research or implementation was performed before this signoff. Phase D remains unauthorized until the Phase C total Gate closes.",
+  "selfHashPolicy": "signoff file does not record its own SHA-256; artifacts bind only stable external batch outputs"
+}

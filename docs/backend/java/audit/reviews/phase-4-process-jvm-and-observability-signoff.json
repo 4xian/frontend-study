@@ -1,0 +1,301 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.advanced.process-jvm-and-observability",
+  "batchId": "phase-4-process-jvm-and-observability",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-13T13:33:14+08:00",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "stagingPerformedThisBatch": false,
+    "existingStagedAndUnstagedStatePreserved": true
+  },
+  "sourceRepository": {
+    "path": "/Users/jian/Desktop/work/TDH/dzzz/dzzz-app",
+    "readOnly": true,
+    "projectExecuted": false,
+    "projectModified": false,
+    "accessBoundary": "Frozen Phase 2 evidence only; no batch-specific project access"
+  },
+  "phase2Freeze": {
+    "researchStatus": "not-started",
+    "exampleStatus": "not-started",
+    "courseStatus": "planned",
+    "phase4StateRecordedOnlyInThisSignoff": true,
+    "sequence": 600,
+    "prerequisites": [
+      "backend.java.learn.basics.io-files-and-resource-ownership",
+      "backend.java.learn.intermediate.errors-results-and-logging"
+    ],
+    "sourceCapabilityIds": [
+      "JAVA-STDLIB-018",
+      "JAVA-STDLIB-030",
+      "JAVA-STDLIB-031",
+      "JAVA-RISK-029"
+    ],
+    "knowledgePath": {
+      "sourceItems": 167,
+      "courseNodes": 64,
+      "dependencyEdges": 114,
+      "representativeProjectCallPaths": 8,
+      "gateStatus": "passed"
+    }
+  },
+  "versions": {
+    "verifiedAt": "2026-08-13",
+    "modern": {
+      "java": "25",
+      "springBoot": "4.1.0",
+      "springFramework": "7.0.8",
+      "micrometer": "1.17.0",
+      "jmh": "1.37"
+    },
+    "legacy": {
+      "java": "8",
+      "springBoot": "2.3.12.RELEASE",
+      "springFramework": "5.2.15.RELEASE"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/advanced/process-jvm-and-observability.md",
+      "sha256": "c7bdc2bd369425751d95d37c827bb28629bb4ea7204f2400fd124dea24c116ca"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/process-jvm-and-observability.md",
+      "sha256": "07524302399f3c2464d43b437f9399ae334864be3ced5c1a57c3899e34b9372a"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "86df924a442600bbb7d5f674a93545db80e464f5826266969f474871a47f9042"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "ca077c82f0bf2adfe800f07951a6b765d317a6435721836051267017d73bab4b"
+    }
+  ],
+  "sourceVerification": {
+    "researchCardCount": 28,
+    "researchUniqueUrlCount": 28,
+    "frontmatterOfficialSourceCount": 28,
+    "frontmatterUniqueUrlCount": 28,
+    "researchFrontmatterSetDifference": 0,
+    "communitySourcesUsedAsEvidence": false,
+    "preciseVersionContract": "PASS; fixed Java, Spring Boot 4.1.0, Spring Framework 7.0.8, Micrometer 1.17.0 and JMH 1.37 sources match the frontmatter appliesTo values",
+    "directUrlCheck": "PASS; all 28 final official targets returned HTTP 200, with HEAD and retry used for large fixed-tag GitHub pages whose full bodies exceeded the initial 40-second transfer window"
+  },
+  "projectEvidence": {
+    "researchItemCount": 9,
+    "researchObservedCount": 4,
+    "researchRejectedCount": 5,
+    "courseItemCount": 4,
+    "courseObservedCount": 4,
+    "courseRejectedCount": 0,
+    "currentDefectClaimedFromFrozenEvidence": false,
+    "boundary": "The course body contains only the four observed frozen Phase 2 items; five rejected items remain solely in the research audit record"
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "researchLineCount": 474,
+    "lineCount": 1519,
+    "lineBudget": "PASS; independently reviewed single-course exception because the frozen lesson joins external process supervision, bounded dual-stream I/O, deadline cleanup, JVM global state, JMX, JFR and application observability with 14 mandatory pitfalls",
+    "independentKnowledgePointHeadings": 14,
+    "knowledgePointSevenPartCoverage": "14/14 (98/98 fields)",
+    "pitfallCount": 14,
+    "pitfallNinePartCoverage": "14/14 (126/126 fields)",
+    "officialSourceCount": 28,
+    "projectEvidenceCount": 4,
+    "javaCodeBlockCount": 28,
+    "javaMethodComments": "PASS",
+    "sourceHeadingAbsent": true,
+    "securitySection": "PASS; command injection is directly supported by CWE-78 and ProcessBuilder is not presented as automatic input validation",
+    "contentCheck": "CONTENT_CHECK_PASS knowledge=14 fields=98/98 pitfalls=14 fields=126/126 sources=28 projectEvidence=4-observed/0-rejected javaBlocks=28",
+    "completeExampleContract": "PASS; ProcessJvmObservabilityExample was re-extracted from final Markdown with SHA-256 257ba0098ecf33942aa231b080813c629d85fdd447b4787dc005d846584ecc6f",
+    "currentBodyShaBinding": "PASS; final course body SHA-256 is bound in artifacts"
+  },
+  "javaVerification": {
+    "temporaryFixtureRoot": "/tmp/java-advanced-11-final.CWRoqm",
+    "temporaryAssetsCleaned": true,
+    "cleanupVerifiedWithFinalAbsenceChecks": true,
+    "cases": [
+      {
+        "name": "Documented process supervision, bounded capture and JVM snapshot example",
+        "runtime": "Homebrew OpenJDK 25.0.4",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "PROCESS_JVM_OBSERVABILITY_PASS",
+        "finalRerun": true
+      },
+      {
+        "name": "Documented process supervision, bounded capture and JVM snapshot example",
+        "runtime": "Eclipse Temurin 1.8.0_492-b09",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "PROCESS_JVM_OBSERVABILITY_PASS",
+        "finalRerun": false,
+        "boundary": "Completed on the same final extracted Java SHA before final research-Gate checkboxes changed; Java 8 was no longer locatable for the final rerun"
+      },
+      {
+        "name": "Zero-budget structured-timeout probe",
+        "runtime": "Homebrew OpenJDK 25.0.4",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "ZERO_BUDGET_DEADLINE_PASS elapsedMillis=15 and 10",
+        "finalRerun": true
+      },
+      {
+        "name": "Zero-budget structured-timeout probe",
+        "runtime": "Eclipse Temurin 1.8.0_492-b09",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "ZERO_BUDGET_DEADLINE_PASS within 0-13 ms",
+        "finalRerun": false,
+        "boundary": "Completed on the same final extracted Java SHA before final research-Gate checkboxes changed"
+      }
+    ],
+    "negativeControls": [
+      "zero budget returns a structured timeout before process start",
+      "stdin reaches EOF and stdout and stderr drain concurrently without deadlock",
+      "both captures truncate at their explicit byte budgets",
+      "one absolute deadline covers operation, grace, force, collectors, interrupt handling and cleanup",
+      "timeout does not silently leave an ignored root process",
+      "exit code, timeout, residual process, duration and both captures remain distinct result fields",
+      "JVM snapshots expose supported low-sensitivity values rather than entire properties or environments"
+    ]
+  },
+  "verification": [
+    {
+      "command": "Java 25.0.4 and Temurin 8u492 current Markdown extraction checks",
+      "exitCode": 0,
+      "summary": "PASS; both runtimes compiled source SHA 257ba0098ecf33942aa231b080813c629d85fdd447b4787dc005d846584ecc6f and ran ProcessJvmObservabilityExample twice"
+    },
+    {
+      "command": "Zero-budget structured-timeout probes",
+      "exitCode": 0,
+      "summary": "PASS; both runtimes returned structured timeouts twice without process start, and Java 25 was rerun after final research-Gate checkbox changes"
+    },
+    {
+      "command": "Content check and Catalog cold-start check (three independent Vite servers)",
+      "exitCode": 0,
+      "summary": "PASS; content contract matched and all three Catalog runs reported advancedAvailable=11 advancedPlanned=5 currentLoadable=true nextStatus=planned nextLoader=false"
+    },
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges and 8 representative project call paths"
+    },
+    {
+      "command": "npm run type-check && npm run lint && npm run format:check && npm run test:unit && npm run test:e2e",
+      "exitCode": 0,
+      "summary": "PASS; unit and E2E directories contained no persistent test files and exited 0"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "PASS; 1582 modules transformed and process-jvm-and-observability chunk emitted at 71.80 kB"
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0,
+      "summary": "PASS; unrelated existing workspace changes remain outside this course scope"
+    },
+    {
+      "command": "curl final official source URLs",
+      "exitCode": 0,
+      "summary": "PASS; all 28 final official targets returned HTTP 200"
+    }
+  ],
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "session": "java-advanced-11-final",
+    "baseUrl": "http://127.0.0.1:4211/",
+    "targetPath": "/backend/java/core/learn/process-jvm-and-observability",
+    "temporaryScreenshotsRemoved": true,
+    "desktop": {
+      "viewport": "1440x900",
+      "targetPageStatus": 200,
+      "documentClientWidth": 1440,
+      "documentScrollWidth": 1440,
+      "articleClientWidth": 900,
+      "articleScrollWidth": 900,
+      "articleClientHeight": 766,
+      "articleScrollHeight": 34737,
+      "articleScrollTopAtBottom": 33971,
+      "pitfallCount": 14,
+      "officialSourceCount": 28,
+      "finalSummaryVisible": true,
+      "completionControlVisible": true,
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "failedRequests": 0,
+      "non200Requests": 0,
+      "atBottom": true
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "targetPageStatus": 200,
+      "documentClientWidth": 390,
+      "documentScrollWidth": 390,
+      "documentScrollHeight": 50691,
+      "documentScrollYAtBottom": 49847,
+      "articleClientWidth": 358,
+      "articleScrollWidth": 358,
+      "articleHeight": 50521,
+      "pitfallCount": 14,
+      "officialSourceCount": 28,
+      "completionControlVisible": true,
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "failedRequests": 0,
+      "non200Requests": 0,
+      "atBottom": true
+    },
+    "manualReview": "PASS; desktop and mobile bottom screenshots show no incoherent overlap, clipping or page-level horizontal overflow, and the completion control and preceding course link remain reachable"
+  },
+  "manifestRegression": {
+    "basicsAvailable": 18,
+    "intermediateAvailable": 17,
+    "advancedAvailable": 11,
+    "advancedPlanned": 5,
+    "currentEntryLoadable": true,
+    "futurePlannedEntriesHaveNoLoader": true,
+    "nextCourseId": "backend.java.learn.advanced.authentication-authorization-and-jwt",
+    "nextCourseStatus": "planned",
+    "nextCourseLoader": false,
+    "nextCourseResearchAbsent": true,
+    "nextCourseBodyAbsent": true,
+    "finalColdStartRuns": 3,
+    "finalColdStartErrors": 0,
+    "finalColdStartPending": false
+  },
+  "review": {
+    "reviewer": "/root/advanced_11_review",
+    "standards": "PASS / 0 finding",
+    "spec": "PASS / 0 finding",
+    "initialFindingCount": 4,
+    "remainingFindingCount": 0,
+    "independentReviewRounds": 2,
+    "finalIndependentConfirmationPending": false,
+    "artifactDriftAfterReview": false,
+    "confirmation": "Final frozen-state review confirmed precise versions, fixed-tag sources, 4 observed and 0 rejected course evidence, CWE-78 security support, one absolute process deadline, zero-budget structured timeout, unchanged artifact SHA and the next-course boundary"
+  },
+  "temporaryAssetCleanup": {
+    "pending": false,
+    "verifiedAt": "2026-08-13T13:44:47+08:00",
+    "temporaryPath": "/tmp/java-advanced-11-final.CWRoqm",
+    "removedTemporaryFileCount": 10,
+    "removedPlaywrightArtifactCount": 8,
+    "remainingTargetCount": 0,
+    "finalPlaywrightSession": "java-advanced-11-final",
+    "finalPlaywrightSessionClosed": true,
+    "preservedOutOfCleanupScopeSessions": ["default", "java-advanced-08"],
+    "previewPort": 4211,
+    "previewStopped": true
+  },
+  "stopBoundary": "Close advanced course 11 only and stop; do not research, draft, register or load advanced course 12 authentication-authorization-and-jwt, Reference, project practice or other stages"
+}

@@ -49,11 +49,11 @@ anchors:
 
 # 组件 Props 与 defineProps()
 
-## 概述
+## 一、概述
 
 `defineProps()` 是仅用于 `<script setup>` 的编译器宏，不需要导入，并会在编译时被移除。它声明组件公开接收的 props，让 Vue 能把已声明输入与透传 attributes 分开处理，同时为脚本和模板提供类型信息。运行时声明与纯类型声明二选一，不能在同一次调用中混用。
 
-## 声明形式与默认值
+## 二、声明形式与默认值
 
 运行时对象声明可直接配置 `type`、`required`、`default` 和 `validator`；TypeScript 项目也可用泛型声明，由编译器尽力生成等价的运行时 props。宏参数会被提升到模块作用域，因此不能引用 setup 中声明的局部变量，但可以引用导入的绑定。Vue 3.5 中，类型声明配合响应式解构可直接使用 JavaScript 默认值；继续整体持有 props 时则可使用 `withDefaults()`。
 
@@ -73,7 +73,7 @@ interface Props {
 const { title = '未命名', labels = [] } = defineProps<Props>()
 ~~~~
 
-## 3.5 响应式解构
+## 三、3.5 响应式解构
 
 Vue 3.5+ 会在同一个 `<script setup>` 块内，把从 `defineProps()` 解构出的变量访问改写为对应的 `props.xxx`，因此它们可被 `watchEffect`、computed 和模板追踪。但变量传给普通函数时仍是当前值：`watch(foo, ...)` 等价于把值交给 watch，并不是合法的响应式来源；需要持续追踪时传 `() => foo`。
 
@@ -89,7 +89,7 @@ watch(() => count, (nextCount) => {
 })
 ~~~~
 
-## 单向数据流
+## 四、单向数据流
 
 父组件更新时，新 prop 会向下刷新到子组件；子组件不能给 prop 绑定重新赋值。若 prop 只是本地状态的初始值，应显式复制到 ref，并接受它与后续父值断开；若要从输入值派生展示结果，应使用 computed；若要请求父组件更新，应发出事件。对象和数组 prop 的嵌套成员仍可因共享引用而被子组件修改，但这会隐式改变父状态，除非父子紧密耦合，否则也应通过事件交还所有者处理。
 
@@ -97,7 +97,7 @@ watch(() => count, (nextCount) => {
 父组件更新 prop 会同步到子组件，子组件直接给顶层 prop 赋值则被拒绝
 :::
 
-## 运行时校验与转换
+## 五、运行时校验与转换
 
 运行时对象声明会在开发构建中检查类型、必填项和自定义 validator；失败时输出警告，不应把它当作生产环境的数据清洗或安全边界。default 在解析后的 prop 值为 undefined 时生效，对象和数组默认值在运行时声明或 `withDefaults()` 中应由工厂函数返回，避免多个组件实例共享可变引用。Boolean prop 还遵循类似原生布尔 attribute 的转换规则；与 String 联合声明时，构造器顺序会影响空字符串的转换结果。
 
@@ -115,7 +115,7 @@ const props = defineProps({
 })
 ~~~~
 
-## 易错使用提示
+## 六、易错使用提示
 
 :::pitfalls
 ### 在子组件中直接修改 prop
@@ -243,7 +243,7 @@ const props = withDefaults(defineProps<{ labels?: string[] }>(), {
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 最小源码实现
+## 七、最小源码实现
 
 编译器记录运行时或类型 props 声明，禁止同一次调用混用两种形式，并把 3.5 的解构变量访问改写成 `__props.key`。运行时 `initProps()` 再将 vnode 上的输入按声明分流到 props 与 attrs，解析 Boolean 和 default，状态组件中的 props 容器使用 `shallowReactive`。调用 `setup()` 时，开发模式把这个容器作为 `shallowReadonly(instance.props)` 传入，所以脚本侧既能追踪父级的顶层更新，又不能给顶层 prop 重新赋值。
 

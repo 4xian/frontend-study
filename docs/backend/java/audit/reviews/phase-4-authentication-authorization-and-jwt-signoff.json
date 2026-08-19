@@ -1,0 +1,308 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.advanced.authentication-authorization-and-jwt",
+  "batchId": "phase-4-authentication-authorization-and-jwt",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-13T16:55:44+08:00",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "stagingPerformedThisBatch": false,
+    "existingStagedAndUnstagedStatePreserved": true
+  },
+  "sourceRepository": {
+    "path": "/Users/jian/Desktop/work/TDH/dzzz/dzzz-app",
+    "readOnly": true,
+    "projectExecuted": false,
+    "projectModified": false,
+    "accessBoundary": "Frozen Phase 2 evidence only; no batch-specific project access"
+  },
+  "phase2Freeze": {
+    "researchStatus": "not-started",
+    "exampleStatus": "not-started",
+    "courseStatus": "planned",
+    "phase4StateRecordedOnlyInThisSignoff": true,
+    "sequence": 610,
+    "prerequisites": [
+      "backend.java.learn.intermediate.spring-mvc-and-servlet-boundaries",
+      "backend.java.learn.intermediate.errors-results-and-logging"
+    ],
+    "sourceCapabilityIds": [
+      "JAVA-ENGINEERING-025",
+      "JAVA-FRAMEWORK-032",
+      "JAVA-RISK-017",
+      "JAVA-RISK-018"
+    ],
+    "knowledgePath": {
+      "sourceItems": 167,
+      "courseNodes": 64,
+      "dependencyEdges": 114,
+      "representativeProjectCallPaths": 8,
+      "gateStatus": "passed"
+    }
+  },
+  "versions": {
+    "verifiedAt": "2026-08-13",
+    "modern": {
+      "java": "25",
+      "runtime": "Temurin 25.0.4+7",
+      "springBoot": "4.1.0",
+      "springFramework": "7.0.8",
+      "springSecurity": "7.1.0",
+      "auth0JavaJwt": "4.6.0"
+    },
+    "legacy": {
+      "java": "8",
+      "runtime": "Zulu 1.8.0_502-b07",
+      "springBoot": "2.3.12.RELEASE",
+      "springFramework": "5.2.15.RELEASE",
+      "springSecurity": "5.3.9.RELEASE"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/advanced/authentication-authorization-and-jwt.md",
+      "sha256": "1ec19dff6b03536827f502d7f4e87cdda90352ec408543b20bf0fff16f9a5a8b"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/authentication-authorization-and-jwt.md",
+      "sha256": "d570d0dcd066e8d40888ac9db1666604c64e3e5be652b95c295c9e87bc771bfd"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "530e138d3832daf2d9f1bf70309c3d9f6a939f82871b9ac296274c3611b047f0"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "e4f1e8facab518185986d9e4eea009e9fc151fc801960e0755dec9d4717394d6"
+    }
+  ],
+  "sourceVerification": {
+    "researchCardCount": 29,
+    "researchUniqueUrlCount": 29,
+    "frontmatterOfficialSourceCount": 29,
+    "frontmatterUniqueUrlCount": 29,
+    "researchFrontmatterSetDifference": 0,
+    "communitySourcesUsedAsEvidence": false,
+    "preciseVersionContract": "PASS; Java, Spring Boot, Spring Framework, Spring Security and Auth0 java-jwt versions match the frozen research cards",
+    "directUrlCheck": "PASS; all 29 unique official targets were reachable during research, and final research/frontmatter URL sets match exactly"
+  },
+  "projectEvidence": {
+    "researchItemCount": 16,
+    "researchObservedCount": 6,
+    "researchRejectedCount": 10,
+    "courseItemCount": 6,
+    "courseObservedCount": 6,
+    "courseRejectedCount": 0,
+    "currentDefectClaimedFromFrozenEvidence": false,
+    "boundary": "The course body contains only six observed frozen Phase 2 items; ten rejected risk items remain solely in the research audit record"
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "researchLineCount": 500,
+    "lineCount": 1381,
+    "lineBudget": "PASS; independently reviewed single-course exception because the frozen lesson joins authentication, request and resource authorization, security context, browser credential boundaries and the JWT lifecycle",
+    "independentKnowledgePointHeadings": 14,
+    "knowledgePointSevenPartCoverage": "14/14",
+    "pitfallCount": 14,
+    "pitfallNinePartCoverage": "14/14",
+    "pitfallSourceIdCount": 23,
+    "pitfallSourceIdResolution": "PASS; every referenced source ID exists in frontmatter",
+    "officialSourceCount": 29,
+    "projectEvidenceCount": 6,
+    "javaCodeBlockCount": 45,
+    "javaMethodComments": "PASS",
+    "compareBlockCount": 1,
+    "exerciseBlockCount": 1,
+    "sourceHeadingAbsent": true,
+    "securitySection": "PASS; resource authorization, fail-closed JWT validation, key trust, revocation and credential-safe logging are supported by direct standards",
+    "contentCheck": "PASS; knowledge=14 pitfalls=14 sources=29 projectEvidence=6-observed/0-rejected compare=1 exercise=1",
+    "catalogBlockCount": 185,
+    "completeExampleSha256": "7414286b3a38f30c6f244d2580271e539c439316c16090595730ef0f465f1d75",
+    "completeExampleContract": "PASS; AuthenticationAuthorizationJwtExample was re-extracted from final Markdown and matched the compiled Java 25/8 fixture byte-for-byte",
+    "currentBodyShaBinding": "PASS; final course body SHA-256 is bound in artifacts"
+  },
+  "javaVerification": {
+    "temporaryFixtureRoot": "/tmp/java-advanced-12-runtime.i0j45P",
+    "temporaryAssetsCleaned": true,
+    "cleanupVerifiedWithFinalAbsenceChecks": true,
+    "cases": [
+      {
+        "name": "Documented JWT validation and owner-aware authorization example",
+        "runtime": "Temurin 25.0.4+7",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "AUTHORIZATION_JWT_PASS allowed=1 forbidden=1 expired=1 tampered=1"
+      },
+      {
+        "name": "Documented JWT validation and owner-aware authorization example",
+        "runtime": "Zulu 1.8.0_502-b07",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "AUTHORIZATION_JWT_PASS allowed=1 forbidden=1 expired=1 tampered=1"
+      }
+    ],
+    "negativeControls": [
+      "same-role cross-owner resource access is forbidden",
+      "expired token is rejected before resource authorization",
+      "tampered signature is rejected before claims are trusted",
+      "valid token for the matching owner and tenant is allowed",
+      "verification uses a fixed algorithm, issuer, audience, type and time contract",
+      "failure output does not disclose token or key material"
+    ]
+  },
+  "verification": [
+    {
+      "command": "Java 25 and Java 8 current Markdown extraction checks",
+      "exitCode": 0,
+      "summary": "PASS; both runtimes compiled the final extracted source and ran AuthenticationAuthorizationJwtExample twice"
+    },
+    {
+      "command": "Content and Catalog cold-start check (three consecutive runs)",
+      "exitCode": 0,
+      "summary": "CATALOG_COLD_PASS on all runs; advancedAvailable=12 advancedPlanned=4 currentLoadable=true currentBlocks=185 nextStatus=planned nextLoader=false"
+    },
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges and 8 representative project call paths"
+    },
+    {
+      "command": "npm run type-check && npm run lint && npm run format:check && npm run test:unit && npm run test:e2e",
+      "exitCode": 0,
+      "summary": "PASS; unit and E2E directories contained no persistent test files and exited 0"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "PASS; 1589 modules transformed and authentication-authorization-and-jwt chunk emitted at 62.42 kB"
+    },
+    {
+      "command": "final research/frontmatter source-set check",
+      "exitCode": 0,
+      "summary": "SOURCE_SET_PASS researchCards=29 frontmatterSources=29 uniqueUrls=29 setDifference=0"
+    },
+    {
+      "command": "scoped current-course git diff --check",
+      "exitCode": 0,
+      "summary": "PASS; both untracked course documents produced zero whitespace-error output, and unrelated workspace changes remain outside this course scope"
+    }
+  ],
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "session": "java-advanced-12-final",
+    "baseUrl": "http://127.0.0.1:4328/",
+    "targetPath": "/backend/java/core/learn/authentication-authorization-and-jwt",
+    "temporaryScreenshotsRemoved": true,
+    "responsiveSourceRendering": "PASS; desktop context and mobile body each expose one visible 29-item source list while the alternate responsive container is hidden",
+    "desktop": {
+      "viewport": "1440x900",
+      "targetPageStatus": 200,
+      "documentClientWidth": 1440,
+      "documentScrollWidth": 1440,
+      "articleClientWidth": 900,
+      "articleScrollWidth": 900,
+      "articleClientHeight": 766,
+      "articleScrollHeight": 32054,
+      "articleScrollTopAtBottom": 31288,
+      "pitfallCount": 14,
+      "visibleOfficialSourceCount": 29,
+      "finalSummaryVisible": true,
+      "completionControlVisible": true,
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "non200Requests": 0,
+      "atBottom": true
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "targetPageStatus": 200,
+      "documentClientWidth": 390,
+      "documentScrollWidth": 390,
+      "documentScrollHeight": 45987,
+      "documentScrollYAtBottom": 45143,
+      "articleClientWidth": 358,
+      "articleScrollWidth": 358,
+      "articleHeight": 45817,
+      "pitfallCount": 14,
+      "visibleOfficialSourceCount": 29,
+      "completionControlVisible": true,
+      "previousEntryVisible": true,
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "non200Requests": 0,
+      "atBottom": true
+    },
+    "manualReview": "PASS; desktop and mobile bottom screenshots show no incoherent overlap, clipping or page-level horizontal overflow, and the completion control and previous-course link remain reachable"
+  },
+  "manifestRegression": {
+    "basicsAvailable": 18,
+    "intermediateAvailable": 17,
+    "advancedAvailable": 12,
+    "advancedPlanned": 4,
+    "currentEntryLoadable": true,
+    "currentEntryLoaderCount": 1,
+    "futurePlannedEntriesHaveNoLoader": true,
+    "nextCourseId": "backend.java.learn.advanced.cryptography-secrets-and-license-verification",
+    "nextCourseStatus": "planned",
+    "nextCourseLoader": false,
+    "nextCourseResearchAbsent": true,
+    "nextCourseBodyAbsent": true,
+    "finalColdStartRuns": 3,
+    "finalColdStartErrors": 0,
+    "finalColdStartPending": false
+  },
+  "review": {
+    "reviewer": "/root/advanced_12_review",
+    "standards": "PASS / 0 finding",
+    "spec": "PASS / 0 finding",
+    "initialFindingCount": 2,
+    "remainingFindingCount": 0,
+    "independentReviewRounds": 3,
+    "finalIndependentConfirmationPending": false,
+    "artifactDriftAfterReview": false,
+    "confirmation": "Final frozen-state review confirmed 29/29 official sources, 14 knowledge points, all 14 nine-field pitfalls with 23 resolvable source IDs, method comments, parsed compare/exercise blocks, final artifact SHA values and the next-course boundary"
+  },
+  "temporaryAssetCleanup": {
+    "pending": false,
+    "verifiedAt": "2026-08-13T16:55:44+08:00",
+    "temporaryTargets": [
+      "/tmp/java-advanced-12-runtime.i0j45P",
+      "/tmp/java-advanced-12-runtime.kbRj0X",
+      "/tmp/java-advanced-12-body-diffcheck.kanFq4",
+      "/tmp/java-advanced-12-body-final-diffcheck.FtYGEZ",
+      "/tmp/java-advanced-12-build.log",
+      "/tmp/java-advanced-12-catalog-check.mjs",
+      "/tmp/java-advanced-12-current-example.java",
+      "/tmp/java-advanced-12-desktop-bottom.png",
+      "/tmp/java-advanced-12-mobile-bottom.png",
+      "/tmp/java-advanced-12-research-diffcheck.fei8mI",
+      "/tmp/java-advanced-12-body-final-check.out",
+      "/tmp/java-advanced-12-research-final-check.out"
+    ],
+    "removedTemporaryTargetCount": 12,
+    "removedPlaywrightArtifactCount": 10,
+    "remainingTargetCount": 0,
+    "finalPlaywrightSession": "java-advanced-12-final",
+    "finalPlaywrightSessionClosed": true,
+    "preservedOutOfCleanupScopeServices": [
+      "127.0.0.1:4191",
+      "127.0.0.1:4317",
+      "127.0.0.1:4329",
+      "127.0.0.1:5173"
+    ],
+    "previewPort": 4328,
+    "previewStopped": true,
+    "absenceCheck": "CLEANUP_ABSENCE_PASS tempTargets=12 playwrightArtifacts=10 port4328=closed"
+  },
+  "stopBoundary": "Close advanced course 12 only and stop; do not research, draft, register or load advanced course 13 cryptography-secrets-and-license-verification, Reference, project practice or other stages"
+}

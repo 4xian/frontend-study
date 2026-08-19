@@ -1,0 +1,195 @@
+.effect-dependencies-demo {
+  padding: 24px;
+  border: 1px solid #c9d4cf;
+  border-radius: 8px;
+  background: #f7faf8;
+  color: #1f2925;
+}
+
+.effect-dependencies-demo-heading {
+  margin-bottom: 22px;
+}
+
+.effect-dependencies-demo-heading p,
+.effect-dependencies-demo-heading h2,
+.effect-dependencies-demo-heading span {
+  margin: 0;
+}
+
+.effect-dependencies-demo-heading p {
+  color: #9b4f24;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.effect-dependencies-demo-heading h2 {
+  margin-top: 6px;
+  font-size: 1.3rem;
+  line-height: 1.35;
+}
+
+.effect-dependencies-demo-heading span {
+  display: block;
+  margin-top: 8px;
+  color: #52625b;
+  line-height: 1.55;
+}
+
+.effect-dependencies-demo-controls {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -6px;
+}
+
+.effect-dependencies-demo-controls label {
+  display: flex;
+  min-width: 150px;
+  flex: 1 1 160px;
+  flex-direction: column;
+  margin: 6px;
+}
+
+.effect-dependencies-demo-controls span {
+  margin-bottom: 6px;
+  color: #45554e;
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.effect-dependencies-demo-controls select,
+.effect-dependencies-demo-controls input {
+  width: 100%;
+  min-height: 42px;
+  padding: 8px 10px;
+  border: 1px solid #aebdb6;
+  border-radius: 6px;
+  background: #fff;
+  color: inherit;
+  font: inherit;
+}
+
+.effect-dependencies-demo-note-field {
+  flex-basis: 230px;
+}
+
+.effect-dependencies-demo-flow {
+  display: flex;
+  align-items: stretch;
+  margin-top: 22px;
+}
+
+.effect-dependencies-demo-flow > section {
+  min-width: 0;
+  flex: 1 1 0;
+  padding: 16px;
+  border: 1px solid #d2dbd7;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.effect-dependencies-demo-flow > span {
+  display: flex;
+  align-items: center;
+  margin: 0 12px;
+  color: #9b4f24;
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.effect-dependencies-demo-flow section > span,
+.effect-dependencies-demo-flow strong,
+.effect-dependencies-demo-flow small {
+  display: block;
+}
+
+.effect-dependencies-demo-flow section > span {
+  color: #607169;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.effect-dependencies-demo-flow strong {
+  margin-top: 8px;
+  overflow-wrap: anywhere;
+  color: #263d34;
+  font-size: 1rem;
+}
+
+.effect-dependencies-demo-flow small {
+  margin-top: 8px;
+  color: #65756e;
+  line-height: 1.45;
+}
+
+.effect-dependencies-demo-result {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-left: 4px solid #2e7d62;
+  background: #e9f3ef;
+}
+
+.effect-dependencies-demo-result span {
+  margin-right: 10px;
+  color: #51645c;
+}
+
+.effect-dependencies-demo-result strong {
+  margin-right: auto;
+  color: #176449;
+  font-size: 1.25rem;
+}
+
+.effect-dependencies-demo-result code {
+  margin-left: 12px;
+  overflow-wrap: anywhere;
+  color: #74411f;
+}
+
+.effect-dependencies-demo > button {
+  min-height: 42px;
+  margin-top: 18px;
+  padding: 9px 16px;
+  border: 0;
+  border-radius: 6px;
+  background: #263d34;
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.effect-dependencies-demo > button:hover {
+  background: #172a23;
+}
+
+.effect-dependencies-demo > button:focus-visible,
+.effect-dependencies-demo-controls select:focus-visible,
+.effect-dependencies-demo-controls input:focus-visible {
+  outline: 3px solid #d08445;
+  outline-offset: 2px;
+}
+
+@media (max-width: 560px) {
+  .effect-dependencies-demo {
+    padding: 18px;
+  }
+
+  .effect-dependencies-demo-flow {
+    display: block;
+  }
+
+  .effect-dependencies-demo-flow > span {
+    justify-content: center;
+    margin: 8px 0;
+    transform: rotate(90deg);
+  }
+
+  .effect-dependencies-demo-result code {
+    width: 100%;
+    margin-top: 8px;
+    margin-left: 0;
+  }
+}

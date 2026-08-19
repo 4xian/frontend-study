@@ -57,7 +57,7 @@ anchors:
 
 # 服务端渲染 API 速查
 
-## renderToString()
+## 一、renderToString()
 
 `renderToString()` 把 `App` 或 `VNode` 完整渲染为 `Promise<string>`，适合需要先得到整段 HTML 再组装响应的入口。第二参数是当前渲染的 SSR context；组件可以读取它，Teleport 输出也会在渲染结束后写入 `context.teleports`，不会自动拼进主字符串。
 
@@ -86,7 +86,7 @@ export async function renderPage() {
 `context.teleports` 以 Teleport 目标选择器为键。HTML 模板必须把对应内容放进真实目标容器；只发送 `renderToString()` 的返回值会遗漏传送内容。context 还可能承载请求数据，因此应按请求新建。
 :::
 
-## renderToNodeStream()
+## 二、renderToNodeStream()
 
 `renderToNodeStream()` 返回 Node.js `Readable`，可直接 `.pipe()` 到 HTTP response。它只适用于 `vue/server-renderer` 的 CommonJS build；ESM build 不包含创建 Node Readable 所需的 Node 绑定，会抛错，此时应改用已有 Node Writable 的 `pipeToNodeWritable()`。
 
@@ -97,7 +97,7 @@ import { renderToNodeStream } from 'vue/server-renderer'
 renderToNodeStream(app, context).pipe(response)
 ~~~~
 
-## pipeToNodeWritable()
+## 三、pipeToNodeWritable()
 
 `pipeToNodeWritable()` 接收调用方已经持有的 Node.js `Writable`，不要求 renderer 自己构造 Readable，因此是 Node ESM 入口的选择。Vue 会把字符串块交给 `writable.write()`，完成时调用 `writable.end()`，渲染失败时调用 `writable.destroy(error)`；函数本身返回 `void`。
 
@@ -108,7 +108,7 @@ import { pipeToNodeWritable } from 'vue/server-renderer'
 pipeToNodeWritable(app, context, response)
 ~~~~
 
-## renderToWebStream()
+## 四、renderToWebStream()
 
 `renderToWebStream()` 返回 Web `ReadableStream`，适合能够直接用 stream 构造 `Response` 的 Web runtime。Vue 3.5.40 会读取全局 `ReadableStream` 构造器，并用 `TextEncoder` 把 HTML 字符串编码为字节；环境即使支持 Web Streams，只要没有全局暴露该构造器，也不能调用这个 API。
 
@@ -123,7 +123,7 @@ export function renderResponse() {
 }
 ~~~~
 
-## pipeToWebWritable()
+## 五、pipeToWebWritable()
 
 `pipeToWebWritable()` 接收现成的 Web `WritableStream`，适合没有全局 `ReadableStream`、但能提供 `TransformStream` 或其他 Web Writable 的环境。实现会取得 writer，在可用时等待 `writer.ready`，写入编码后的字节，并在完成时关闭 writer；它与 Node Writable 不是同一套协议。
 
@@ -138,7 +138,7 @@ export function renderResponse() {
 }
 ~~~~
 
-## renderToSimpleStream()
+## 六、renderToSimpleStream()
 
 `renderToSimpleStream()` 是平台无关的最低层适配入口。调用方只需提供 `push(chunk)` 与 `destroy(error)`：字符串 chunk 表示正文，`push(null)` 是唯一完成信号，`destroy(error)` 是失败信号。它不替应用选择 HTTP、Node 或 Web stream，也不会替自定义 sink 定义资源释放方式。
 
@@ -163,7 +163,7 @@ renderToSimpleStream(app, context, {
 })
 ~~~~
 
-## useSSRContext()
+## 七、useSSRContext()
 
 `useSSRContext<T>()` 读取当前 server renderer 注入的同一个 context，常用于组件在渲染期间登记 head 元数据或请求级信息。它只在 SSR 渲染上下文中有意义；客户端或没有 server renderer provider 的调用会得到 `undefined`，开发环境还会警告，因此必须放在 SSR-only 分支中。
 
@@ -182,7 +182,7 @@ if (import.meta.env.SSR) {
 </script>
 ~~~~
 
-## data-allow-mismatch
+## 八、data-allow-mismatch
 
 `data-allow-mismatch` 是 Vue 3.5+ 的特殊 attribute，用于抑制已知且不可避免的 hydration mismatch 警告。值可为 `text`、`children`、`class`、`style` 或 `attribute`，也可用逗号组合；省略值会允许所有类型。它只抑制匹配类别的警告，不会让两端数据一致，也不会关闭 Vue 后续的 DOM 检查、接管或调和。
 
@@ -196,7 +196,7 @@ if (import.meta.env.SSR) {
 优先修复随机数、时区、浏览器状态或无效 HTML 导致的两端差异。只有业务确认差异不可避免，并能精确限定类别时才添加该 attribute；不要用空值把整个子树的真实 SSR 缺陷静音。
 :::
 
-## 运行环境选择
+## 九、运行环境选择
 
 | 目标输出 | 环境前提 | 首选 API | 完成与错误通道 |
 | --- | --- | --- | --- |
@@ -209,7 +209,7 @@ if (import.meta.env.SSR) {
 
 这四类输出路径共享 `App | VNode`、请求级 context 和相同的组件渲染语义，但不能只按“是否流式”选择。先确认运行时提供的是 Node stream 还是 Web Streams，再确认构建格式与全局构造器，最后决定让 Vue 创建 Readable，还是把现有 Writable 交给 Vue。
 
-## 易错使用提示
+## 十、易错使用提示
 
 :::pitfalls
 ### 只返回主字符串，遗漏 context 中的 Teleport
@@ -395,7 +395,7 @@ if (import.meta.env.SSR) {
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 十一、源码推导与适用场景
 
 :::steps
 ### 1. SSR context 通过应用 provide 进入组件树

@@ -4,14 +4,14 @@
 > 语言基线：TypeScript `7.0.2`
 > 源码：`typescript/v7.0.2` / `2bd066d87f5bafd315be9f40889d0a60b9e58e0b`
 > 文档：`TypeScript-Website` / `c8170c35bda4811c9516cbb69c39241ae4beb6d9`
-> 状态：课程 `16/24`，稳定 Reference `0/200 planned`，T2-2 已完成，等待用户确认 T3-1
+> 状态：Gate T 已通过；课程 `24/24`，稳定 Reference `199/199 available`、`0 planned`，11 个观察范围已登记，GT-1 已完成
 
 ## 1. 统计口径
 
 “官方项”是固定官方快照中的主题页或具名配置/类型键，不等于站内文件数。多个紧密相关官方项可以由
 一个 `merged` 页面和独立 heading 承接；`quick` 也必须可搜索、可深链并有官方来源。
 
-稳定分母为 `200`：
+稳定分母为 `199`：
 
 | 稳定集合 | 官方键数 | 计算规则 |
 | --- | ---: | --- |
@@ -21,8 +21,8 @@
 | Declaration Files | 15 | 8 个理论/指南 + 7 个 `.d.ts` template |
 | Modules Reference | 5 | 排除 diagram 辅助文件 |
 | Project Config | 6 | 固定目录全部 6 页 |
-| TSConfig | 124 | 137 个路径键 - 9 个 legacy-only - 2 个 7.0 unsupported - 2 个 legacy experimental |
-| **合计** | **200** | `16 + 12 + 22 + 15 + 5 + 6 + 124` |
+| TSConfig | 123 | 137 个路径键 - 9 个 legacy-only - 3 个 7.0 unsupported - 2 个 legacy experimental |
+| **合计** | **199** | `16 + 12 + 22 + 15 + 5 + 6 + 123` |
 
 每个键在实现时记录 `officialKey`、官方 URL、`detail | merged | quick`、状态、`appliesTo`、
 `verifiedAt` 和真实 target。稳定、观察与受限集合不相加成一个完成率。
@@ -132,7 +132,7 @@ TypeScript `7.0.2`，核验日期 2026-08-05。
 | [Configuring Watch](https://www.typescriptlang.org/docs/handbook/configuring-watch.html) | `config.watch` | `merged` |
 | [Compiler Options in MSBuild](https://www.typescriptlang.org/docs/handbook/compiler-options-in-msbuild.html) | `config.msbuild` | `quick` |
 
-## 8. TSConfig：124 个稳定路径键
+## 8. TSConfig：123 个稳定路径键
 
 固定 Website 快照含 135 个顶层 option Markdown 和 2 个 Type Acquisition 子项，共 137 个路径键。
 TypeScript 7.0.2 `tsc --help --all` 暴露 137 个唯一 CLI 名称；两侧交集为 118 个顶层名称。另有 8 个合法
@@ -143,9 +143,9 @@ TypeScript 7.0.2 `tsc --help --all` 暴露 137 个唯一 CLI 名称；两侧交�
 ```text
 137 Website paths
 - 9 Website-only legacy keys
-- 2 options unsupported by TypeScript 7.0
+- 3 options unsupported by TypeScript 7.0
 - 2 legacy experimental decorator keys
-= 124 stable TSConfig paths
+= 123 stable TSConfig paths
 ```
 
 官方 URL 规则：普通 key 使用 `https://www.typescriptlang.org/tsconfig/<key>.html`；顶层
@@ -172,7 +172,7 @@ moduleDetection, moduleResolution, moduleSuffixes, newLine, noCheck, noEmit, noE
 noEmitOnError, noErrorTruncation, noFallthroughCasesInSwitch, noImplicitAny, noImplicitOverride,
 noImplicitReturns, noImplicitThis, noLib, noPropertyAccessFromIndexSignature, noResolve,
 noUncheckedIndexedAccess, noUncheckedSideEffectImports, noUnusedLocals, noUnusedParameters, outDir,
-outFile, paths, plugins, preserveConstEnums, preserveSymlinks, preserveWatchOutput, pretty,
+paths, plugins, preserveConstEnums, preserveSymlinks, preserveWatchOutput, pretty,
 reactNamespace, references, removeComments, resolveJsonModule, resolvePackageJsonExports,
 resolvePackageJsonImports, rewriteRelativeImportExtensions, rootDir, rootDirs, skipDefaultLibCheck,
 skipLibCheck, sourceMap, sourceRoot, stopBuildOnErrors, strict, strictBindCallApply,
@@ -190,14 +190,14 @@ useUnknownInCatchVariables, verbatimModuleSyntax, verbose, watchDirectory, watch
 
 ## 9. 观察、受限与历史范围
 
-这些范围必须在 index 中登记，但不计入稳定 `200` 分母。
+这些范围必须在 index 中登记，但不计入稳定 `199` 分母。
 
 | 范围 | 数量/项 | 状态与处理 |
 | --- | --- | --- |
 | Handbook landing/navigation | 2 | `The Handbook`、`Creating Types from Types`；navigation，不建重复正文 |
 | General Reference | 2 | `Advanced Types` 为 deprecated；[Decorators](https://www.typescriptlang.org/docs/handbook/decorators.html) 为 legacy experimental |
 | Website-only legacy TSConfig | 9 | `charset`、`importsNotUsedAsValues`、`keyofStringsOnly`、`noImplicitUseStrict`、`noStrictGenericChecks`、`out`、`preserveValueImports`、`suppressExcessPropertyErrors`、`suppressImplicitAnyIndexErrors`；deprecated/removed quick |
-| 7.0 unsupported options | 2 | `baseUrl`、`downlevelIteration`；迁移 quick，不进入稳定 option |
+| 7.0 unsupported options | 3 | `baseUrl`、`downlevelIteration`、`outFile`；迁移 quick，不进入稳定 option |
 | Legacy decorator options | 2 | `experimentalDecorators`、`emitDecoratorMetadata`；experimental/legacy |
 | 7.0 CLI-only | 19 | `all`、`build`、`builders`、`checkers`、`deduplicatePackages`、`dry`、`help`、`ignoreConfig`、`init`、`listFilesOnly`、`pprofDir`、`project`、`quiet`、`showConfig`、`singleThreaded`、`stableTypeOrdering`、`version`、`watch`、`watchInterval`；按 tooling quick/experimental 登记 |
 | Release Notes | 48 页 | 1.1、1.3 至 6.0；历史索引，不计稳定 Reference；7.0 使用正式发布文章 |
@@ -224,7 +224,7 @@ useUnknownInCatchVariables, verbatimModuleSyntax, verbose, watchDirectory, watch
 
 ## 11. 双向差集与维护
 
-TA manifest 必须保存与本文同名的 200 个稳定 `officialKey`。每批运行：
+TA manifest 必须保存与本文同名的 199 个稳定 `officialKey`。每批运行：
 
 ```text
 officialStable - manifestKeys = []
@@ -234,4 +234,4 @@ realEntryAnchors - declaredTargets = []
 ```
 
 官方新版本发布时先建立独立维护计划，重新固定源码与 Website commit，再比较路径、状态和值级差异。
-不得直接改总数。Gate T 关闭后，本文件只保留最终统计、固定版本和维护规则；T0 临时计划按规范删除。
+不得直接改总数。本文件只保留 Gate T 最终统计、固定版本和维护规则。

@@ -1,0 +1,354 @@
+.use-deferred-value-stale-content-demo {
+  color: #172033;
+  background: #f7f8fb;
+  border: 1px solid #d8deea;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.deferred-value-heading {
+  padding: 24px;
+  color: #ffffff;
+  background: #263653;
+}
+
+.deferred-value-heading p,
+.deferred-value-heading h2,
+.deferred-value-heading span {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.deferred-value-heading p {
+  color: #b9e6d3;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.deferred-value-heading h2 {
+  margin-top: 8px;
+  font-size: 24px;
+  line-height: 1.3;
+}
+
+.deferred-value-heading span {
+  display: block;
+  margin-top: 10px;
+  color: #dce4f2;
+  line-height: 1.7;
+}
+
+.deferred-value-experiment {
+  padding: 20px;
+}
+
+.deferred-value-controls {
+  display: flex;
+  align-items: flex-end;
+  margin: -6px;
+}
+
+.deferred-value-controls label {
+  flex: 1 1 280px;
+  min-width: 0;
+  margin: 6px;
+}
+
+.deferred-value-controls label span,
+.deferred-value-controls label input {
+  display: block;
+  width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.deferred-value-controls label span {
+  color: #5e687e;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.deferred-value-controls label input {
+  min-height: 42px;
+  margin-top: 7px;
+  padding: 8px 11px;
+  color: #172033;
+  font: inherit;
+  line-height: 1.4;
+  background: #ffffff;
+  border: 1px solid #aeb8ca;
+  border-radius: 6px;
+}
+
+.deferred-value-controls label input:focus-visible {
+  outline: 3px solid #57b99a;
+  outline-offset: 2px;
+}
+
+.deferred-value-actions {
+  display: flex;
+  flex: 2 1 520px;
+  flex-wrap: wrap;
+  align-items: stretch;
+  margin: 0;
+}
+
+.deferred-value-actions button {
+  min-height: 42px;
+  margin: 6px;
+  padding: 9px 14px;
+  color: #ffffff;
+  font: inherit;
+  font-weight: 700;
+  line-height: 1.35;
+  background: #245d4c;
+  border: 1px solid #245d4c;
+  border-radius: 6px;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+.deferred-value-actions button.is-secondary {
+  color: #203a70;
+  background: #e9eefb;
+  border-color: #aebddd;
+}
+
+.deferred-value-actions button.is-release {
+  color: #5b3a08;
+  background: #fff1c9;
+  border-color: #e1bf68;
+}
+
+.deferred-value-actions button.is-quiet {
+  color: #465168;
+  background: #ffffff;
+  border-color: #bac2d1;
+}
+
+.deferred-value-actions button:focus-visible {
+  outline: 3px solid #57b99a;
+  outline-offset: 2px;
+}
+
+.deferred-value-actions button:disabled {
+  color: #737b89;
+  background: #e6e8ed;
+  border-color: #cbd0d8;
+  cursor: not-allowed;
+}
+
+.deferred-value-status {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 15px -5px -5px;
+}
+
+.deferred-value-status > div {
+  flex: 1 1 190px;
+  min-width: 0;
+  margin: 5px;
+  padding: 14px;
+  background: #ffffff;
+  border: 1px solid #d8deea;
+  border-radius: 6px;
+}
+
+.deferred-value-status > div.is-stale {
+  background: #fff7e8;
+  border-color: #dfba70;
+}
+
+.deferred-value-status > div.is-synced {
+  background: #edf7f2;
+  border-color: #9bc6b5;
+}
+
+.deferred-value-status span,
+.deferred-value-status strong {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.deferred-value-status span {
+  color: #677086;
+  font-size: 13px;
+}
+
+.deferred-value-status strong {
+  margin-top: 6px;
+  color: #172033;
+  line-height: 1.45;
+}
+
+.deferred-results-panel {
+  margin-top: 20px;
+  padding: 20px;
+  background: #ffffff;
+  border: 1px solid #cbd4e1;
+  border-left: 4px solid #397d69;
+  border-radius: 7px;
+}
+
+.deferred-results-panel.is-stale {
+  border-left-color: #c27335;
+}
+
+.deferred-results-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.deferred-results-heading > div {
+  min-width: 0;
+  margin-right: 16px;
+}
+
+.deferred-results-heading span,
+.deferred-results-heading h3,
+.deferred-results-heading output {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.deferred-results-heading span {
+  color: #667086;
+  font-size: 13px;
+}
+
+.deferred-results-heading h3 {
+  margin-top: 4px;
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+.deferred-results-heading output {
+  flex: 0 1 auto;
+  padding: 6px 9px;
+  color: #65401e;
+  font-weight: 700;
+  line-height: 1.4;
+  background: #fff1d8;
+  border-radius: 5px;
+}
+
+.deferred-results-list header {
+  display: flex;
+  align-items: baseline;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid #e1e6ee;
+}
+
+.deferred-results-list header span {
+  flex: 0 0 auto;
+  margin-right: 10px;
+  color: #667086;
+}
+
+.deferred-results-list header strong {
+  min-width: 0;
+  color: #1f4f43;
+  overflow-wrap: anywhere;
+}
+
+.deferred-results-list ul {
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.deferred-results-list li {
+  margin-top: 9px;
+  padding: 12px 14px;
+  background: #f7f8fb;
+  border: 1px solid #e0e5ed;
+  border-radius: 6px;
+}
+
+.deferred-results-list li strong,
+.deferred-results-list li span {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.deferred-results-list li span {
+  margin-top: 5px;
+  color: #4a5468;
+  line-height: 1.65;
+}
+
+.deferred-results-empty,
+.deferred-results-fallback {
+  margin: 14px 0 0;
+  padding: 14px;
+  color: #4a5468;
+  line-height: 1.65;
+  background: #f7f8fb;
+  border: 1px dashed #bdc7d7;
+  border-radius: 6px;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 760px) {
+  .deferred-value-controls {
+    display: block;
+    margin: 0;
+  }
+
+  .deferred-value-controls label {
+    display: block;
+    margin: 0;
+  }
+
+  .deferred-value-actions {
+    display: block;
+    margin-top: 12px;
+  }
+
+  .deferred-value-actions button {
+    width: 100%;
+    margin: 8px 0 0;
+  }
+
+  .deferred-value-actions button:first-child {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .deferred-value-heading,
+  .deferred-value-experiment {
+    padding: 16px;
+  }
+
+  .deferred-value-status {
+    display: block;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .deferred-value-status > div {
+    width: auto;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .deferred-results-panel {
+    padding: 16px;
+  }
+
+  .deferred-results-heading {
+    display: block;
+  }
+
+  .deferred-results-heading > div {
+    margin-right: 0;
+  }
+
+  .deferred-results-heading output {
+    display: block;
+    margin-top: 10px;
+  }
+}

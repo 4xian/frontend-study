@@ -1,0 +1,498 @@
+.lab-concurrent-search-workspace-demo {
+  color: #26343a;
+  background: #f7faf8;
+}
+
+.concurrent-search-heading {
+  padding: 20px;
+  border: 1px solid #c8d8d1;
+  border-radius: 6px;
+  background: #eef7f1;
+}
+
+.concurrent-search-heading p,
+.concurrent-search-heading h2,
+.concurrent-search-heading span {
+  margin: 0;
+}
+
+.concurrent-search-heading p {
+  color: #1c6c5b;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.concurrent-search-heading h2 {
+  margin-top: 6px;
+  color: #183f3a;
+  font-size: 1.35rem;
+  line-height: 1.3;
+}
+
+.concurrent-search-heading span {
+  display: block;
+  margin-top: 8px;
+  color: #526661;
+  line-height: 1.6;
+}
+
+.concurrent-search-workspace {
+  margin-top: 14px;
+}
+
+.concurrent-search-controls,
+.concurrent-search-main,
+.concurrent-search-observations,
+.concurrent-search-status,
+.concurrent-detail-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+}
+
+.concurrent-search-controls {
+  align-items: end;
+}
+
+.concurrent-search-controls > *,
+.concurrent-search-status > div,
+.concurrent-detail-metrics > div,
+.concurrent-search-observations > section {
+  min-width: 0;
+  margin: 5px;
+}
+
+.concurrent-search-controls label {
+  flex: 1 1 240px;
+}
+
+.concurrent-search-controls label span,
+.concurrent-detail-draft span {
+  display: block;
+  margin-bottom: 5px;
+  color: #4a5b57;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.concurrent-search-controls input,
+.concurrent-detail-draft textarea {
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid #aebfba;
+  border-radius: 5px;
+  background: #ffffff;
+  color: #24353a;
+  font: inherit;
+}
+
+.concurrent-search-controls input {
+  min-height: 42px;
+  padding: 8px 10px;
+}
+
+.concurrent-search-controls input:focus,
+.concurrent-detail-draft textarea:focus {
+  border-color: #226c61;
+  outline: 3px solid #c4e8dc;
+  outline-offset: 1px;
+}
+
+.concurrent-search-controls button,
+.concurrent-detail-toolbar button,
+.concurrent-detail-card button,
+.concurrent-detail-area > button,
+.concurrent-search-observations button {
+  min-height: 40px;
+  padding: 8px 12px;
+  border: 1px solid #1e6559;
+  border-radius: 5px;
+  background: #226c61;
+  color: #ffffff;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.concurrent-search-controls button:hover:not(:disabled),
+.concurrent-detail-toolbar button:hover:not(:disabled),
+.concurrent-detail-card button:hover:not(:disabled),
+.concurrent-detail-area > button:hover:not(:disabled),
+.concurrent-search-observations button:hover:not(:disabled) {
+  background: #174e45;
+}
+
+.concurrent-search-controls button:disabled,
+.concurrent-detail-toolbar button:disabled,
+.concurrent-detail-card button:disabled,
+.concurrent-detail-area > button:disabled,
+.concurrent-search-observations button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.concurrent-search-controls button.is-release,
+.concurrent-detail-area > button.is-release {
+  border-color: #b56c27;
+  background: #c47b31;
+}
+
+.concurrent-search-controls button.is-release:hover:not(:disabled),
+.concurrent-detail-area > button.is-release:hover:not(:disabled) {
+  background: #985b20;
+}
+
+.concurrent-search-controls button.is-quiet,
+.concurrent-search-observations button.is-quiet {
+  border-color: #9aa9a4;
+  background: #ffffff;
+  color: #4e5f5b;
+}
+
+.concurrent-search-controls button.is-quiet:hover:not(:disabled),
+.concurrent-search-observations button.is-quiet:hover:not(:disabled) {
+  background: #e9f0ed;
+}
+
+.concurrent-search-status {
+  margin-top: 14px;
+}
+
+.concurrent-search-status > div {
+  flex: 1 1 150px;
+  padding: 11px 12px;
+  border-left: 3px solid #398375;
+  background: #ffffff;
+  box-shadow: 0 1px 0 #dfe9e4;
+}
+
+.concurrent-search-status > div.is-stale {
+  border-left-color: #bd762e;
+  background: #fff8ee;
+}
+
+.concurrent-search-status > div.is-synced {
+  border-left-color: #2a7f6d;
+}
+
+.concurrent-search-status span,
+.concurrent-search-status strong {
+  display: block;
+}
+
+.concurrent-search-status span {
+  color: #6a7975;
+  font-size: 0.78rem;
+}
+
+.concurrent-search-status strong {
+  margin-top: 4px;
+  overflow-wrap: anywhere;
+  color: #274d46;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.concurrent-search-status .is-stale strong {
+  color: #8a541f;
+}
+
+.concurrent-search-main {
+  align-items: stretch;
+  margin-top: 14px;
+}
+
+.concurrent-results-panel,
+.concurrent-detail-area {
+  flex: 1 1 340px;
+  min-width: 0;
+  margin: 5px;
+  padding: 16px;
+  border: 1px solid #c9d8d3;
+  border-radius: 6px;
+  background: #ffffff;
+}
+
+.concurrent-results-panel {
+  border-top: 4px solid #3d7b9e;
+}
+
+.concurrent-results-panel.is-stale {
+  border-top-color: #c27d32;
+}
+
+.concurrent-detail-area {
+  border-top: 4px solid #2f806e;
+}
+
+.concurrent-results-heading,
+.concurrent-detail-toolbar,
+.concurrent-search-observations section > header,
+.concurrent-detail-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.concurrent-results-heading span,
+.concurrent-detail-toolbar span,
+.concurrent-search-observations section > header span,
+.concurrent-detail-heading span {
+  color: #6a7975;
+  font-size: 0.78rem;
+}
+
+.concurrent-results-heading h3,
+.concurrent-detail-heading h3 {
+  margin: 4px 0 0;
+  color: #254c54;
+  font-size: 1.08rem;
+  line-height: 1.35;
+}
+
+.concurrent-results-heading output,
+.concurrent-detail-heading output {
+  max-width: 45%;
+  color: #5f706b;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  text-align: right;
+}
+
+.concurrent-results-list ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.concurrent-results-list li + li {
+  margin-top: 8px;
+}
+
+.concurrent-results-list li button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #c6d8d3;
+  border-radius: 5px;
+  background: #f7fbf9;
+  color: #2a4a46;
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.concurrent-results-list li button:hover:not(:disabled) {
+  border-color: #3a8877;
+  background: #edf8f3;
+}
+
+.concurrent-results-list li button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.concurrent-results-list strong,
+.concurrent-results-list span,
+.concurrent-results-list small {
+  display: block;
+}
+
+.concurrent-results-list strong {
+  color: #245c57;
+  font-size: 0.98rem;
+}
+
+.concurrent-results-list span {
+  margin-top: 5px;
+  color: #586a65;
+  line-height: 1.5;
+}
+
+.concurrent-results-list small {
+  margin-top: 7px;
+  color: #8b5d26;
+  font-size: 0.76rem;
+}
+
+.concurrent-results-empty,
+.concurrent-results-fallback,
+.concurrent-detail-note,
+.concurrent-search-observations p {
+  margin: 0;
+  color: #5a6b66;
+  line-height: 1.6;
+}
+
+.concurrent-results-empty,
+.concurrent-results-fallback {
+  padding: 14px;
+  border-left: 4px solid #4c81a1;
+  background: #f1f7fb;
+}
+
+.concurrent-detail-toolbar {
+  align-items: center;
+}
+
+.concurrent-detail-toolbar strong {
+  display: block;
+  margin-top: 4px;
+  color: #246f62;
+  font-size: 1rem;
+}
+
+.concurrent-detail-toolbar button.is-detail,
+.concurrent-detail-card button.is-detail {
+  border-color: #2f6f94;
+  background: #3d7b9e;
+}
+
+.concurrent-detail-toolbar button.is-detail:hover:not(:disabled),
+.concurrent-detail-card button.is-detail:hover:not(:disabled) {
+  background: #2d607d;
+}
+
+.concurrent-detail-area > button {
+  margin-top: 12px;
+}
+
+.concurrent-detail-card {
+  margin-top: 14px;
+  padding: 15px;
+  border: 1px solid #b7d4cb;
+  border-radius: 5px;
+  background: #f1faf6;
+}
+
+.concurrent-detail-card > p {
+  margin: 0;
+  color: #506560;
+  line-height: 1.6;
+}
+
+.concurrent-detail-metrics {
+  margin-top: 10px;
+}
+
+.concurrent-detail-metrics > div {
+  flex: 1 1 130px;
+  padding: 10px;
+  border: 1px solid #c8ddd6;
+  border-radius: 4px;
+  background: #ffffff;
+}
+
+.concurrent-detail-metrics span,
+.concurrent-detail-metrics strong {
+  display: block;
+}
+
+.concurrent-detail-metrics span {
+  color: #687b75;
+  font-size: 0.76rem;
+}
+
+.concurrent-detail-metrics strong {
+  margin-top: 4px;
+  overflow-wrap: anywhere;
+  color: #246253;
+  font-size: 0.9rem;
+}
+
+.concurrent-detail-draft {
+  display: block;
+  margin-top: 12px;
+}
+
+.concurrent-detail-draft textarea {
+  display: block;
+  min-height: 92px;
+  padding: 9px;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.concurrent-detail-card button {
+  margin-top: 12px;
+}
+
+.concurrent-search-observations {
+  margin-top: 14px;
+}
+
+.concurrent-search-observations > section {
+  flex: 1 1 300px;
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid #d0dcd8;
+  border-radius: 5px;
+  background: #ffffff;
+}
+
+.concurrent-search-observations section > header {
+  align-items: center;
+}
+
+.concurrent-search-observations section > header strong {
+  color: #28675c;
+  font-size: 0.84rem;
+}
+
+.concurrent-search-observations ol {
+  min-height: 52px;
+  margin: 0;
+  padding-left: 22px;
+  color: #52645f;
+}
+
+.concurrent-search-observations li + li {
+  margin-top: 4px;
+}
+
+.concurrent-search-observations section > header button {
+  min-height: 34px;
+  padding: 6px 9px;
+  font-size: 0.78rem;
+}
+
+.concurrent-search-observations p {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 620px) {
+  .concurrent-search-heading,
+  .concurrent-results-panel,
+  .concurrent-detail-area {
+    padding: 13px;
+  }
+
+  .concurrent-search-controls > button {
+    flex: 1 1 135px;
+  }
+
+  .concurrent-results-heading,
+  .concurrent-detail-heading {
+    display: block;
+  }
+
+  .concurrent-results-heading output,
+  .concurrent-detail-heading output {
+    display: block;
+    max-width: none;
+    margin-top: 6px;
+    text-align: left;
+  }
+
+  .concurrent-detail-toolbar {
+    align-items: flex-start;
+  }
+
+  .concurrent-detail-toolbar button {
+    max-width: 46%;
+    white-space: normal;
+  }
+}

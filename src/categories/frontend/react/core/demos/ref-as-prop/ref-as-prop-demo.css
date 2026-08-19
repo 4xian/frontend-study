@@ -1,0 +1,203 @@
+.ref-as-prop-demo {
+  width: 100%;
+  padding: var(--space-4);
+  box-sizing: border-box;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+}
+
+.ref-as-prop-demo-heading p,
+.ref-as-prop-demo-heading h2,
+.ref-as-prop-demo-heading span {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.ref-as-prop-demo-heading p {
+  color: #087f5b;
+  font-size: 0.74rem;
+  font-weight: 800;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.ref-as-prop-demo-heading h2 {
+  margin-top: var(--space-1);
+  font-size: 1.1rem;
+  line-height: 1.35;
+}
+
+.ref-as-prop-demo-heading span {
+  display: block;
+  margin-top: var(--space-1);
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.ref-as-prop-demo-fields {
+  display: flex;
+  flex-wrap: wrap;
+  margin: var(--space-4) -5px 0;
+}
+
+.ref-as-prop-demo-path {
+  flex: 1 1 230px;
+  min-width: 0;
+  padding: var(--space-3);
+  margin: 0 5px 10px;
+  box-sizing: border-box;
+  border: 1px solid var(--color-border);
+  border-left: 3px solid #15a06d;
+  border-radius: var(--radius-xs);
+  background: var(--color-bg);
+}
+
+.ref-as-prop-demo-path[data-path='swallowed'] {
+  border-left-color: #d97706;
+}
+
+.ref-as-prop-demo-path > strong {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+.ref-as-prop-demo-field,
+.ref-as-prop-demo-field span,
+.ref-as-prop-demo-field small {
+  display: block;
+}
+
+.ref-as-prop-demo-field span,
+.ref-as-prop-demo-field small {
+  overflow-wrap: anywhere;
+}
+
+.ref-as-prop-demo-field span {
+  color: var(--color-text-secondary);
+  font-size: 0.76rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.ref-as-prop-demo-field input {
+  width: 100%;
+  min-width: 0;
+  min-height: 42px;
+  padding: var(--space-2) var(--space-3);
+  margin-top: var(--space-2);
+  box-sizing: border-box;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xs);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.86rem;
+  line-height: 1.4;
+}
+
+.ref-as-prop-demo-field input:focus-visible {
+  border-color: var(--color-accent);
+  outline: 2px solid color-mix(in srgb, var(--color-accent) 32%, transparent);
+  outline-offset: 2px;
+}
+
+.ref-as-prop-demo-field small {
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: 0.74rem;
+  line-height: 1.45;
+}
+
+.ref-as-prop-demo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  margin: var(--space-2) -5px 0;
+}
+
+.ref-as-prop-demo-actions button {
+  min-height: 42px;
+  padding: var(--space-2) var(--space-3);
+  margin: 0 5px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xs);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.35;
+  cursor: pointer;
+}
+
+.ref-as-prop-demo-actions button:hover,
+.ref-as-prop-demo-actions button:focus-visible {
+  border-color: var(--color-accent);
+}
+
+.ref-as-prop-demo-result {
+  min-height: 142px;
+  padding: var(--space-3);
+  box-sizing: border-box;
+  border: 1px solid var(--color-border);
+  border-left: 3px solid #15a06d;
+  border-radius: var(--radius-xs);
+  background: var(--color-bg-subtle);
+}
+
+.ref-as-prop-demo-result span,
+.ref-as-prop-demo-result strong,
+.ref-as-prop-demo-result p,
+.ref-as-prop-demo-result code {
+  display: block;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.ref-as-prop-demo-result span {
+  color: var(--color-text-secondary);
+  font-size: 0.74rem;
+  line-height: 1.4;
+}
+
+.ref-as-prop-demo-result strong {
+  margin-top: var(--space-1);
+  font-size: 0.98rem;
+  line-height: 1.45;
+}
+
+.ref-as-prop-demo-result p {
+  margin-top: var(--space-1);
+  color: var(--color-text-secondary);
+  font-size: 0.8rem;
+  line-height: 1.55;
+}
+
+.ref-as-prop-demo-result code {
+  padding: var(--space-2);
+  margin-top: var(--space-2);
+  border-radius: var(--radius-xs);
+  background: var(--color-bg);
+  color: #087f5b;
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+@media (max-width: 520px) {
+  .ref-as-prop-demo {
+    padding: var(--space-3);
+  }
+
+  .ref-as-prop-demo-path {
+    flex-basis: 100%;
+  }
+
+  .ref-as-prop-demo-actions button {
+    flex: 1 1 150px;
+  }
+}

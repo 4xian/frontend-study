@@ -1,0 +1,210 @@
+.update-model-demo {
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+}
+
+.update-model-heading p,
+.update-model-heading h2,
+.update-model-heading span,
+.update-model-values,
+.update-model-phases,
+.update-model-rules {
+  margin: 0;
+}
+
+.update-model-heading p {
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.update-model-heading h2 {
+  margin-top: var(--space-1);
+  font-size: 1.08rem;
+  line-height: 1.4;
+}
+
+.update-model-heading span {
+  display: block;
+  margin-top: var(--space-1);
+  color: var(--color-text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.6;
+}
+
+.update-model-values {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  margin: var(--space-3) -5px 0;
+}
+
+.update-model-values > div {
+  flex: 1 1 180px;
+  min-width: 0;
+  padding: var(--space-3);
+  margin: 0 5px 10px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.update-model-values span,
+.update-model-values output,
+.update-model-values strong {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.update-model-values span {
+  color: var(--color-text-secondary);
+  font-size: 0.76rem;
+}
+
+.update-model-values output,
+.update-model-values strong {
+  margin-top: var(--space-1);
+  color: var(--color-text);
+  font-size: 1.45rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.update-model-actions {
+  display: flex;
+  flex-wrap: wrap;
+  margin: var(--space-2) -5px -10px;
+}
+
+.update-model-actions button {
+  min-height: 42px;
+  padding: 8px var(--space-3);
+  margin: 0 5px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xs);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.update-model-actions button:hover:not(:disabled),
+.update-model-actions button:focus-visible {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+
+.update-model-actions button:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--color-accent) 32%, transparent);
+  outline-offset: 2px;
+}
+
+.update-model-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.update-model-phases {
+  margin-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+}
+
+.update-model-phases > div {
+  display: flex;
+  align-items: flex-start;
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.update-model-phases dt {
+  flex: 0 0 76px;
+  font-weight: 700;
+}
+
+.update-model-phases dd {
+  min-width: 0;
+  margin: 0 0 0 var(--space-3);
+  color: var(--color-text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.update-model-rules {
+  display: flex;
+  flex-wrap: wrap;
+  margin: var(--space-3) -5px -5px;
+}
+
+.update-model-rules > div {
+  box-sizing: border-box;
+  width: calc(50% - 10px);
+  min-width: 0;
+  padding: var(--space-3);
+  margin: 5px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xs);
+  background: var(--color-bg);
+}
+
+.update-model-rules dt {
+  font-weight: 700;
+}
+
+.update-model-rules dd {
+  margin: var(--space-1) 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 620px) {
+  .update-model-values {
+    display: block;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .update-model-values > div {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .update-model-actions {
+    display: block;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .update-model-actions button {
+    display: block;
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .update-model-phases > div,
+  .update-model-rules {
+    display: block;
+  }
+
+  .update-model-phases dd {
+    margin: var(--space-1) 0 0;
+  }
+
+  .update-model-rules {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .update-model-rules > div {
+    width: 100%;
+    margin: 10px 0 0;
+  }
+}

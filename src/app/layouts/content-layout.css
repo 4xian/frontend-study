@@ -137,6 +137,7 @@
   font-size: var(--font-size-title);
   font-weight: 600;
   line-height: 1.08;
+  overflow-wrap: anywhere;
 }
 
 .entry-summary {
@@ -343,11 +344,6 @@
   .mobile-sources {
     display: block;
   }
-
-  .navigation-trigger {
-    position: sticky;
-    top: calc(var(--header-height) + 58px + var(--space-2));
-  }
 }
 
 @media (max-width: 820px) {
@@ -365,7 +361,7 @@
   }
 
   .entry-header h1 {
-    font-size: 44px;
+    font-size: 42px;
   }
 
   .entry-summary {

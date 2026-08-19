@@ -84,7 +84,7 @@ recap:
 前置：请先完成 L01-L12 和 Vue Core 的 SSR 与 Hydration。本课只运行 Pinia 4.0.2 的 SPA 内存 seam，不创建 SSR server/client 双入口。
 :::
 
-## 请求级 Pinia 是隔离边界
+## 一、请求级 Pinia 是隔离边界
 
 SSR 服务进程会复用模块。模块级 Pinia singleton 会让一个请求写入的用户状态有机会被下一个请求读到，因此宿主必须为每次 request 调用 app factory。组件外的 router、service 或 serverPrefetch 路径还应把本请求 Pinia 显式传给 useStore(pinia)，不能依赖进程级 active fallback。
 
@@ -109,7 +109,7 @@ export async function renderRequest() {
 以上代码只说明官方顺序，省略了 URL、router ready、数据权限、错误边界和安全序列化。本课 Demo 不执行 createSSRApp() 或 renderToString()，因此不能把两个内存 Pinia 称为真实 HTTP request。
 :::
 
-## Root State 不是传输与安全 API
+## 二、Root State 不是传输与安全 API
 
 pinia.state.value 是服务端渲染后取得状态的公开入口，也是客户端恢复入口。Pinia 不负责选择可公开字段、序列化、HTML context escaping、CSP、payload 校验或 parser 配对，这些都属于 SSR 宿主。
 
@@ -126,7 +126,7 @@ pinia.state.value 是服务端渲染后取得状态的公开入口，也是客�
 Pinia 官方推荐 SSR 环境考虑 devalue，但本仓库没有安装它。JSON-compatible fixture 的 stringify/parse 只能证明内存 round-trip，不能证明把结果原样放进 script 是安全的。
 :::
 
-## 首个 useStore 是恢复顺序检查点
+## 三、首个 useStore 是恢复顺序检查点
 
 :::steps
 ### 1. 创建客户端 App 与 Pinia
@@ -172,7 +172,7 @@ store.count === store.$state.count
 
 固定 4.0.2 的 Options Store 会在创建时对当时存在的 root state 建立 refs。若先创建 Store，再整体替换 root，direct property 仍连接旧对象，而 $state getter 和 pinia.state.value 已读取新 root；数值分叉正是错误顺序的可运行反例。
 
-## Setup Store 先创建，再逐项决定是否水合
+## 四、Setup Store 先创建，再逐项决定是否水合
 
 Setup Store 必须执行 setup。固定 4.0.2 会把 initial state 写入普通顶层 ref，对顶层 reactive object 递归合并；若 shouldHydrate(property) 为 false，则保留客户端 setup 创建的值。最后这些属性仍会连接回 root state。
 
@@ -205,13 +205,13 @@ const store = useSessionStore(pinia)
 | 序列化排除 | skipHydrate 不会自动排除字段 |
 | 嵌套标记 | 固定官方测试仍为 skipped，不承诺递归支持 |
 
-## Pinia SSR 与 Hydration 顺序实验
+## 五、Pinia SSR 与 Hydration 顺序实验
 
 :::demo{id="vue.pinia.learn.advanced.ssr-hydration.pinia-ssr-hydration-model-lab-demo" playground="true"}
 对照 request A/B、客户端恢复前后顺序，以及 Setup Store 普通 ref/skipHydrate
 :::
 
-## 练习与观察
+## 六、练习与观察
 
 :::steps
 ### 1. 修改 Request A
@@ -231,7 +231,7 @@ const store = useSessionStore(pinia)
 普通 ref 采用 server fixture，skipHydrate ref 保留 client fixture。
 :::
 
-## 证据边界
+## 七、证据边界
 
 | 能力 | 本课证据 | 状态 |
 | --- | --- | --- |
@@ -243,7 +243,7 @@ const store = useSessionStore(pinia)
 | 安全 HTML 注入、XSS、CSP | 无 serializer package/HTML response | Deferred/not-installed |
 | 浏览器 Vue hydration/mismatch | 无 server HTML + client hydrate 双入口 | Deferred/not-run |
 
-## 源码与测试推导
+## 八、源码与测试推导
 
 :::steps
 ### 1. createPinia 创建独立容器
@@ -275,7 +275,7 @@ nested case 在固定 state.spec.ts 仍为 skipped，不能扩成递归保证。
 上游测试不等于本项目已验证 HTML 注入、CSP 或浏览器 hydration。
 :::
 
-## 易错使用提示
+## 九、易错使用提示
 
 :::pitfalls
 ### 服务端共享模块级 Pinia

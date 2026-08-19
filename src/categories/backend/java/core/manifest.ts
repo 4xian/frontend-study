@@ -4,8 +4,8 @@ import { javaCoreContentEntries } from './entry-manifest'
 
 export const javaCoreModuleManifest: CategoryModuleManifest = {
   id: 'core',
-  title: 'Java 核心',
-  summary: '从 Java 运行基础逐步进入 Web、数据、工程与安全边界。',
+  title: 'Spring Boot Web',
+  summary: '从 Java 常用基础逐步掌握 Spring Boot Web 项目的开发、测试与交付。',
   entries: javaCoreContentEntries,
   learningTrack: backendJavaTrackManifest,
   demos: [],

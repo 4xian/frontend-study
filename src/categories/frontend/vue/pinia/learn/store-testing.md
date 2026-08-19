@@ -70,7 +70,7 @@ recap:
 前置：请先完成 L01-L11，并具备 Vitest 基础。本课不会安装 @pinia/testing，也不会在 production Demo 中伪造它。
 :::
 
-## 业务测试从 Fresh Pinia 开始
+## 一、业务测试从 Fresh Pinia 开始
 
 `defineStore()` 只是 useStore factory；真正 Store 需要 Pinia。业务逻辑 case 应先 `setActivePinia(createPinia())`，再从默认 state 出发调用公开 action，最后观察 state、getter 和返回值。普通 Pinia 不会 stub actions。
 
@@ -90,11 +90,11 @@ it('执行真实 action', () => {
 
 第二个 case 必须创建 Pinia B。即使 Store ID 相同，B 也应从 factory 默认值开始；否则测试共享了 root state、registry 或 effect scope。结束时 dispose 测试拥有的 Pinia，并恢复原 active Pinia。
 
-## 外部协作者只在真实边界替换
+## 二、外部协作者只在真实边界替换
 
 若 action 依赖 API client，可用 `vi.fn(implementation)` 或 `vi.spyOn()` 替换这个外部边界。带实现的 spy 会记录调用并执行实现；空 `vi.fn()` 返回 `undefined`。这不等于 Testing Pinia 自动包装全部 Store actions。
 
-## Plugin Case 需要 Fake App
+## 三、Plugin Case 需要 Fake App
 
 普通 Pinia 在安装前把 plugin 留在队列。只做 `setActivePinia(createPinia().use(plugin))` 不会进入正常 plugin 创建链；测试应先 `pinia.use(plugin)`，再 `app.use(pinia)`，最后创建 Store。空 app 不需要挂 DOM，它只提供安装上下文。
 
@@ -113,7 +113,7 @@ expect(store.pluginField).toBe('ready')
 fake app 只解决安装 context，不会自动清理 plugin 创建的 subscriptions、window listeners 或 Pinia effect scope；所有者仍要显式释放。
 :::
 
-## @pinia/testing 的固定能力边界
+## 四、@pinia/testing 的固定能力边界
 
 `createTestingPinia()` 来自独立 `@pinia/testing` package，不是 `pinia` 根入口。固定 commit 对应 2.0.1，但当前项目没有安装，因此下表全部是 Deferred/not-installed，不能写成本地测试通过。
 
@@ -130,17 +130,17 @@ fake app 只解决安装 context，不会自动清理 plugin 创建的 subscript
 
 本站不保留 Vitest 配置或测试 runner。若在独立的临时验证中使用 Vitest，应显式导入 `vi` 并传 `createSpy: vi.fn`，不要依赖 globals。真实 app plugins 应放进 `createTestingPinia({ plugins })`，不能在 testing Pinia 建好后再期待普通 `.use()` 追补 Store。
 
-## 不要让 Stub 反向塑造 Store
+## 五、不要让 Stub 反向塑造 Store
 
 Testing Pinia 替换的是 Store 实例上的 action。Setup Store 的局部 action 若通过闭包直接调用另一个局部 action，会绕过实例替换；Options Store 的 `this.otherAction()` 则经过实例。不要只为 stub 方便而扭曲生产结构，优先确认是否真的需要隔离，或直接测试真实 action。
 
-## Store 测试语义实验
+## 六、Store 测试语义实验
 
 :::demo{id="vue.pinia.learn.advanced.store-testing.pinia-testing-semantics-lab-demo" playground="true"}
 运行 fresh Pinia 真实 action、第二实例隔离、fake-app plugin 与未安装 app 反例
 :::
 
-## 练习与观察
+## 七、练习与观察
 
 :::steps
 ### 1. 运行真实 Case A
@@ -160,7 +160,7 @@ Testing Pinia 替换的是 Store 实例上的 action。Setup Store 的局部 act
 只设 active Pinia 时确认 runs=0，Store 没有扩展字段。
 :::
 
-## 源码与测试推导
+## 八、源码与测试推导
 
 :::steps
 ### 1. 官方业务单测使用普通 Pinia
@@ -196,7 +196,7 @@ testing cookbook 在 beforeEach 创建并 active 新 Pinia，再直接断言 act
 固定 guide 与测试说明替换实例 action 不会改写闭包局部调用。
 :::
 
-## 易错使用提示
+## 九、易错使用提示
 
 :::pitfalls
 ### 脱离 Pinia 调用 useStore

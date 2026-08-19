@@ -63,13 +63,13 @@ anchors:
 
 # Options API：组合选项
 
-## 概述
+## 一、概述
 
 组合选项解决两类问题：provide / inject 沿组件祖先链传递依赖，mixins / extends 按 Options 合并策略复用组件定义。前者不是任意组件间的全局状态通道，后者也不是 JavaScript 类继承。四个选项都保留 Options API 的公共实例 this、初始化次序与冲突规则；组合式 API 页面只用于对照，不会替代这些契约。
 
 实例创建时，inject 先于 methods、data、computed 与 watch 解析，因此这些选项可以读取已注入的属性；provide 则在实例状态建立后求值，可以读取当前实例。extends 先合并，随后按数组顺序合并 mixins，最后应用组件自身选项，但不同种类选项使用不同策略，不能统一理解为“后者覆盖前者”。
 
-## provide
+## 二、provide
 
 `provide` 接受对象或返回对象的普通函数。静态对象适合不依赖实例的常量；需要读取 data、computed 或 methods 时，应使用能接收公共实例 `this` 的普通函数。运行时通过 `Reflect.ownKeys()` 注册返回对象，所以字符串 key 与 Symbol key 都有效。
 
@@ -101,7 +101,7 @@ export default {
 }
 ~~~~
 
-## inject
+## 三、inject
 
 `inject` 的数组形式表示“本地属性名与注入 key 同名”，不能配置别名或默认值。对象形式的对象 key 是当前实例上的本地属性名，`from` 才是提供方 key；省略 `from` 时，Vue 用本地名查找。字符串和 Symbol 都可以作为来源 key。
 
@@ -133,7 +133,7 @@ export default {
 }
 ~~~~
 
-## mixins
+## 四、mixins
 
 `mixins` 接受组件选项数组并按数组顺序合并，适合维护仍采用 Options API 的局部遗留复用。生命周期钩子会组成有序数组，mixin 钩子先于组件自身钩子；methods、computed、components 与 directives 等对象选项按 key 合并，后来源覆盖同名 key；data 与 provide 则组合成逐实例求值的函数。
 
@@ -166,7 +166,7 @@ export default {
 }
 ~~~~
 
-## extends
+## 五、extends
 
 `extends` 接受一个组件选项对象，语义上表示当前组件继承一份基组件选项。运行时先递归合并 extends，再合并 mixins，最后合并组件自身，因此它同样遵循每种选项各自的合并策略，而不是复制一个完整实例或建立 JavaScript 原型继承。
 
@@ -201,7 +201,7 @@ export default {
 }
 ~~~~
 
-## 易错使用提示
+## 六、易错使用提示
 
 :::pitfalls
 ### 用箭头函数声明需要 this 的 provide
@@ -448,7 +448,7 @@ export default {
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 七、源码推导与适用场景
 
 :::steps
 ### 1. 合并结果按组件类型缓存

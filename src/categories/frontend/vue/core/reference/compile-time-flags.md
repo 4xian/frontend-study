@@ -53,7 +53,7 @@ anchors:
 
 # Vue 编译时标志速查
 
-## 编译时标志是什么
+## 一、编译时标志是什么
 
 Vue 的三个公开编译时标志不是运行时 API，而是 `esm-bundler` 构建留给 bundler 静态替换的全局布尔标识。构建工具把它们替换成字面量后，压缩器才能通过 tree-shaking 删除不可达分支。Vue 在未显式配置时仍会回退到默认值，但生产构建应使用明确的静态配置。
 
@@ -67,7 +67,7 @@ Vue 的三个公开编译时标志不是运行时 API，而是 `esm-bundler` 构
 `@vitejs/plugin-vue` 会提供默认值。即使默认行为符合预期，也要区分“插件提供默认替换”和“应用运行后修改变量”：只有前者发生在构建期，能够参与 tree-shaking。
 :::
 
-## &#95;&#95;VUE&#95;OPTIONS&#95;API&#95;&#95;
+## 二、&#95;&#95;VUE&#95;OPTIONS&#95;API&#95;&#95;
 
 `__VUE_OPTIONS_API__` 默认是 `true`。设为 `false` 会裁剪 `applyOptions()`、应用级 mixin 和部分选项合并路径，从而减少纯 Composition API 构建的体积。它是整个 Vue runtime 的构建级选择，不是单个组件开关；本地组件、插件和第三方依赖只要仍使用 Options API，就必须保持启用。
 
@@ -75,11 +75,11 @@ Vue 的三个公开编译时标志不是运行时 API，而是 `esm-bundler` 构
 只检查应用源码是否使用 `<script setup>` 不足以关闭 Options API。发布前还要审计组件库、插件、mixin、extends 和运行时 template 等依赖路径，并用同一生产产物回归。
 :::
 
-## &#95;&#95;VUE&#95;PROD&#95;DEVTOOLS&#95;&#95;
+## 三、&#95;&#95;VUE&#95;PROD&#95;DEVTOOLS&#95;&#95;
 
 `__VUE_PROD_DEVTOOLS__` 默认是 `false`。设为 `true` 会让生产构建保留 Devtools hook、组件生命周期事件和额外调试元数据，因此会增加体积。它只开启生产 Devtools 支持，不会把生产构建变成开发模式，也不会恢复所有 `__DEV__` 警告，更不能替代错误监控和性能遥测。
 
-## &#95;&#95;VUE&#95;PROD&#95;HYDRATION&#95;MISMATCH&#95;DETAILS&#95;&#95;
+## 四、&#95;&#95;VUE&#95;PROD&#95;HYDRATION&#95;MISMATCH&#95;DETAILS&#95;&#95;
 
 `__VUE_PROD_HYDRATION_MISMATCH_DETAILS__` 自 Vue 3.4 起可用，默认是 `false`。设为 `true` 会在生产客户端 hydration 中保留更详细的节点、文本、class、style 与 attribute mismatch 检查和警告，同时增加产物体积。它不启用 SSR、不改变服务端输出，也不会修复差异。
 
@@ -87,7 +87,7 @@ Vue 的三个公开编译时标志不是运行时 API，而是 `esm-bundler` 构
 关闭该标志不代表 mismatch 消失：Vue 仍可能输出概括性的生产错误并继续 DOM 调和。3.5 的 `data-allow-mismatch` 是对特定不可避免差异的声明式容忍，也不是这个诊断标志的别名。
 :::
 
-## 构建配置边界
+## 五、构建配置边界
 
 三个标志只对 `vue(.runtime).esm-bundler.js` 生效。Vue 固定构建配置在 bundler ESM 输出中保留外部 `__VUE_*` 标识，在 global、esm-browser 和 CJS 等其他输出中直接硬编码 `true / false / false`。配置前要先确认实际解析的 Vue distribution，不能把同一段 bundler 配置套到 CDN 或外置 CJS Vue。
 
@@ -110,7 +110,7 @@ export default defineConfig({
 | `vue(.runtime).global.js` | 否 | 不能通过页面运行时全局赋值覆盖 |
 | `vue.cjs(.prod).js` | 否 | 外置到 Node 时使用预构建默认分支 |
 
-## 易错使用提示
+## 六、易错使用提示
 
 :::pitfalls
 ### 把编译时标志当成运行时环境变量
@@ -239,7 +239,7 @@ __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: 'false'
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 七、源码推导与适用场景
 
 :::steps
 ### 构建格式决定标志入口

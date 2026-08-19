@@ -60,7 +60,7 @@ recap:
 前置：请先完成 L01-L05，并理解 Vue 的 ref、computed、watch 与组合式函数。
 :::
 
-## 返回值形态就是 Store 契约
+## 一、返回值形态就是 Store 契约
 
 Setup Store 的定义函数运行在 Pinia 管理的 effect scope 中。Pinia 扫描返回对象：ref/reactive 归为 state，computed 归为 getter，function 归为 action。普通 primitive 或 plain object 只是普通公开属性，不进入 `$state`。
 
@@ -72,7 +72,7 @@ Setup Store 的定义函数运行在 Pinia 管理的 effect scope 中。Pinia �
 | ref(() =&gt; {}) | state；payload 恰好是 function | 是 |
 | 普通 primitive / plain object | 普通公开属性 | 否 |
 
-## 返回全部 state，并手写 reset
+## 二、返回全部 state，并手写 reset
 
 所有希望由 Pinia 管理的响应式 state 都必须返回。隐藏 ref 或把返回 state 包成 readonly，会让 Pinia 无法完整处理 SSR、Devtools 和插件。Options Store 能重跑 `state()` 工厂，Setup Store 没有这个统一入口，因此必须自行声明并返回 `$reset()`。
 
@@ -101,17 +101,17 @@ export const useSearchStore = defineStore('search', () => {
 Setup Store 可以使用 inject() 或 useRoute()，但不要把 route 或注入上下文本身作为 Store state 返回。P02 只说明 SSR 风险，不把当前 SPA 当作真实 hydration 证据。
 :::
 
-## Store scope 不属于任一消费组件
+## 三、Store scope 不属于任一消费组件
 
 Setup Store 内同步创建的 watcher 由 Store effect scope 收集。卸载一个使用该 Store 的组件不会停止 watcher，也不会删除 Store。`store.$dispose()` 才会停止该 scope 并从 registry 移除实例，但保留 root state；整个隔离 Pinia 不再使用时再调用 `disposePinia()`。
 
-## 对照映射、reset 与 dispose 边界
+## 四、对照映射、reset 与 dispose 边界
 
 :::demo{id="vue.pinia.learn.intermediate.setup-stores.pinia-setup-store-contract-lab-demo" playground="true"}
 卸载消费组件后继续修改 Setup Store，再显式 dispose 并观察 watcher
 :::
 
-## 源码与测试推导
+## 五、源码与测试推导
 
 :::steps
 ### 1. 返回对象是分类入口
@@ -131,7 +131,7 @@ Setup Store 内同步创建的 watcher 由 Store effect scope 收集。卸载一
 `$dispose()` 调用 `scope.stop()` 并移除 registry 实例，没有删除 root state，因此旧 Store 引用仍能改值，但内部 watcher 已停止。
 :::
 
-## 易错使用提示
+## 六、易错使用提示
 
 :::pitfalls
 ### 把 Setup Store 当作纯语法替换

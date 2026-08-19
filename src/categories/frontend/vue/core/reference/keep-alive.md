@@ -50,7 +50,7 @@ anchors:
 
 # &lt;KeepAlive&gt;
 
-## 概述
+## 一、概述
 
 动态组件切换时，默认会卸载旧组件并挂载新组件，旧实例的局部状态随之丢失。`<KeepAlive>` 包裹唯一活动子组件后，切走的实例会进入停用状态并保存在缓存中，切回时恢复同一个实例，而不是重新创建。
 
@@ -64,7 +64,7 @@ anchors:
 对比 KeepAlive 缓存与普通动态组件切换时内部计数是否保留
 :::
 
-## include / exclude / max
+## 二、include / exclude / max
 
 `include` 与 `exclude` 按组件自身的 `name` 匹配缓存范围，支持逗号分隔字符串、正则表达式和数组。`<script setup>` 单文件组件可从文件名推断名称，也可以用 `defineOptions({ name })` 明确设置。`max` 是缓存实例上限，超过后按 LRU 顺序卸载最久未访问的实例。
 
@@ -85,7 +85,7 @@ anchors:
 </KeepAlive>
 ~~~~
 
-## onActivated / onDeactivated
+## 三、onActivated / onDeactivated
 
 缓存树首次挂载以及每次从缓存插回 DOM 后，会调用 `onActivated()`；实例移入缓存以及最终卸载时，会调用 `onDeactivated()`。因此，可见时启动、隐藏时暂停的轮询、订阅和播放器控制应覆盖这对生命周期，而不能只依赖挂载与卸载。
 
@@ -99,7 +99,7 @@ onActivated(startPolling)
 onDeactivated(stopPolling)
 ~~~~
 
-## 缓存身份与淘汰
+## 四、缓存身份与淘汰
 
 Vue 3.5.40 使用 vnode 的显式 `key` 作为缓存键；没有 `key` 时使用组件类型。稳定 key 可以区分同一组件类型的不同实例，持续变化的 key 则会制造新的缓存项。命中缓存时，Vue 复用已保存的组件实例并刷新其 LRU 顺序；未命中时，在组件完成渲染后保存其子树。
 
@@ -107,7 +107,7 @@ Vue 3.5.40 使用 vnode 的显式 `key` 作为缓存键；没有 `key` 时使用
 KeepAlive 保存的是组件实例和 DOM 子树，不是业务数据的持久化方案。有限缓存可能被 `max` 淘汰，需要长期保存的草稿或查询条件应放到组件外部状态。
 :::
 
-## 易错使用提示
+## 五、易错使用提示
 
 :::pitfalls
 ### 用路由名或标签名配置 include / exclude
@@ -251,7 +251,7 @@ onDeactivated(stopPolling)
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 最小源码实现
+## 六、最小源码实现
 
 `KeepAlive` 用 `Map<key, vnode>` 保存缓存，用 `Set` 的插入顺序维护 LRU。渲染器获得 `activate` 与 `deactivate` 两个方法：停用时把组件 DOM 移进隐藏容器而非卸载，激活时再移回真实容器。渲染阶段只记录 `pendingCacheKey`，等 mounted/updated 后才把已经渲染完成的子树写入缓存；命中时则复用缓存 vnode 的组件实例和 DOM。
 

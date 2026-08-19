@@ -1,0 +1,71 @@
+.children-demo {
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+}
+
+.children-demo-heading p {
+  margin: 0 0 var(--space-1);
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.children-demo-heading h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.children-demo-panels {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  margin: var(--space-3) -6px 0;
+}
+
+.children-demo-panel {
+  flex: 1 1 250px;
+  min-width: 0;
+  margin: 0 6px 12px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.children-demo-panel-heading,
+.children-demo-panel-body,
+.children-demo-panel-footer {
+  padding: var(--space-3);
+}
+
+.children-demo-panel-heading {
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-accent);
+  font-size: 0.8rem;
+}
+
+.children-demo-panel-body h3,
+.children-demo-panel-body p,
+.children-demo-preview p {
+  overflow-wrap: anywhere;
+  margin: 0;
+}
+
+.children-demo-panel-body p,
+.children-demo-preview p {
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+}
+
+.children-demo-panel-footer {
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+}
+
+@media (max-width: 520px) {
+  .children-demo-panel {
+    flex-basis: 100%;
+  }
+}

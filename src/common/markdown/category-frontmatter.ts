@@ -7,6 +7,7 @@ const stableId = nonEmptyString.regex(/^[a-z0-9]+(?:[.-][a-z0-9]+)*$/)
 const httpUrl = z.url().refine((value) => ['http:', 'https:'].includes(new URL(value).protocol), {
   message: '只允许 HTTP(S) URL',
 })
+const sourceOrigin = z.enum(['official', 'community'])
 const sourceType = z.enum([
   'specification',
   'api-doc',
@@ -23,6 +24,7 @@ const source = z.strictObject({
   id: kebabId.optional(),
   title: nonEmptyString,
   url: httpUrl,
+  sourceOrigin: sourceOrigin.optional(),
   sourceType: sourceType.optional(),
   appliesTo: nonEmptyString.optional(),
   claims: z.array(nonEmptyString).optional(),

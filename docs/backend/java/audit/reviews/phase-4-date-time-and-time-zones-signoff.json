@@ -1,0 +1,473 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.basics.date-time-and-time-zones",
+  "batchId": "phase-4-date-time-and-time-zones",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "phase": "Phase B",
+  "phaseBProgress": "17/21",
+  "phaseBReverification": {
+    "recordedAt": "2026-08-14T23:56:08Z",
+    "contract": {
+      "title": "日期时间、时区与 legacy Date 映射",
+      "url": "/backend/java/core/learn/date-time-and-time-zones",
+      "durationMinutes": 90,
+      "prerequisites": ["backend.java.learn.basics.null-optional-and-failure-semantics"],
+      "requiredTopics": [
+        "Instant、LocalDate、LocalDateTime、OffsetDateTime 与 ZonedDateTime 的语义选择",
+        "ZoneId、ZoneOffset 与 DST gap/overlap 的业务合同",
+        "DateTimeFormatter、Locale 与严格解析",
+        "Clock 固定当前时间及 Date/Instant 迁移边界",
+        "Java 25/8 兼容反馈环"
+      ]
+    },
+    "phaseAFrozenPlan": {
+      "path": "docs/backend/java/spring-boot-web-curriculum-phase-a-freeze.md",
+      "sha256": "77375bb3fe8a06aae3c19f377320064fb3b8d3fc8bf7ca5857524da2c935fc81",
+      "previousCourse": "backend.java.learn.basics.null-optional-and-failure-semantics",
+      "nextCourse": "backend.java.learn.basics.io-files-and-resource-ownership",
+      "nextCourseStarted": false,
+      "phaseBStopBoundary": "B-17 关闭后才允许读取 B-18；B-21 基础 Gate 关闭后立即停止，不进入 Phase C。"
+    },
+    "sourceReverification": {
+      "method": "复用既有 Tavily 调研，并回到 Java SE 25/8 java.time、Date、SimpleDateFormat 与 Dev.java 官方正文核验",
+      "communitySourcesUsedAsEvidence": false,
+      "verifiedAt": "2026-08-15",
+      "researchUniqueUrls": 14,
+      "lessonOfficialLinks": 14,
+      "httpStatus": "14/14 全部返回 200"
+    },
+    "routeIdentity": {
+      "stableIdPreserved": true,
+      "stableUrlPreserved": true,
+      "trackPosition": 17,
+      "trackStatus": "available",
+      "loaderSlug": "date-time-and-time-zones",
+      "trackChangedInThisBatch": false,
+      "loaderChangedInThisBatch": false
+    },
+    "artifacts": [
+      {
+        "path": "docs/research/backend/java/basics/date-time-and-time-zones.md",
+        "sha256": "55eb8549ca31c99c6520fff591a3669698fbe74391128359631663b1d3b8eeee"
+      },
+      {
+        "path": "src/categories/backend/java/core/learn/date-time-and-time-zones.md",
+        "sha256": "1fcf81bf055845c365d8853fc953da8cd60de1fe64e246435f123371b6f50336"
+      },
+      {
+        "path": "src/categories/backend/java/core/backend-java-track.ts",
+        "sha256": "dcb7a04baa824bd0d1106bea799715b042fde27812d21f31678160f28c8efd42"
+      },
+      {
+        "path": "src/categories/backend/java/core/entry-manifest.ts",
+        "sha256": "4385da9b31d862fdc4184d6fae0130eaf43d2b3e9c7f08d4d55a7818dd05eb76"
+      },
+      {
+        "path": "docs/backend/java/audit/phase-2-knowledge-path-manifest.json",
+        "sha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407"
+      }
+    ],
+    "baselineVerification": [
+      {
+        "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+        "exitCode": 0,
+        "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+      },
+      { "command": "npm run type-check", "exitCode": 0, "summary": "passed" },
+      { "command": "npm run lint", "exitCode": 0, "summary": "passed" },
+      { "command": "npm run format:check", "exitCode": 0, "summary": "passed" },
+      {
+        "command": "npm run test:unit",
+        "exitCode": 0,
+        "summary": "empty configured unit directory is valid"
+      },
+      {
+        "command": "npm run test:e2e",
+        "exitCode": 0,
+        "summary": "empty configured E2E directory is valid"
+      },
+      {
+        "command": "npm run build",
+        "exitCode": 0,
+        "summary": "passed; 1731 modules transformed; existing catalog chunk and plugin timing warnings only"
+      },
+      {
+        "command": "git diff --check -- <B-17 paths> && git diff --cached --check -- <B-17 paths>",
+        "exitCode": 0,
+        "summary": "passed"
+      }
+    ],
+    "javaVerification": {
+      "command": "extract the 如何验证 bash block from the final lesson and execute it with zsh -f",
+      "exitCode": 0,
+      "sharedStableOutput": "time|instant=2025-03-30T00:30:00Z|paris=2025-03-30T01:30+01:00|shanghai=2025-03-30T08:30+08:00|localDiff=true|gap=2025-03-30T03:30+02:00|overlap=2:+02:00|date=2024-02-29:true|legacy=2025-03-30T00:30:00.123Z:true",
+      "versions": ["Eclipse Temurin 25.0.3+9 LTS", "Eclipse Temurin 8u492-b09"],
+      "temporaryAssets": {
+        "location": "host and container /tmp",
+        "cleanupMethod": "shell trap with find -depth -delete",
+        "cleanupStatus": "complete"
+      }
+    },
+    "browserVerification": {
+      "tool": "Playwright CLI",
+      "session": "b17",
+      "sessionClosed": true,
+      "baseUrl": "http://127.0.0.1:4173/",
+      "targetPath": "/backend/java/core/learn/date-time-and-time-zones",
+      "desktop": {
+        "viewport": "1440x900",
+        "documentClientWidth": 1440,
+        "documentScrollWidth": 1440,
+        "horizontalOverflow": false,
+        "title": "日期时间、时区与 legacy Date 映射",
+        "codeBlockCount": 23,
+        "officialSourceUniqueUrlCount": 14,
+        "durationText": "约 90 分钟",
+        "previousPath": "/backend/java/core/learn/null-optional-and-failure-semantics",
+        "nextPath": "/backend/java/core/learn/io-files-and-resource-ownership",
+        "searchTerm": "日期时间、时区与 legacy Date 映射",
+        "searchResultCount": 1
+      },
+      "mobile": {
+        "viewport": "390x844",
+        "documentClientWidth": 390,
+        "documentScrollWidth": 390,
+        "horizontalOverflow": false,
+        "codeBlockCount": 23
+      },
+      "completionButtonTextAfterReload": "取消完成",
+      "progressPersistedAfterReload": true,
+      "console": { "errors": 0, "warnings": 0 },
+      "productionRequests": { "count": 175, "allSuccessful": true, "statuses": [200, 304] }
+    },
+    "review": {
+      "riskClassification": "复用课程的路线前置、时长和签核状态修正",
+      "independentReviewRequired": false,
+      "priorFullReview": "PASS / 0 finding",
+      "currentVerification": "Java 25/8 反馈、完整工程 Gate、官方链接和生产浏览器验证通过"
+    },
+    "workspaceProtection": {
+      "dirtyWorkspaceProtected": true,
+      "unrelatedChangesPreserved": true,
+      "statusSnapshotSha256": "f47c872f32a10f8d1d995cacc27de9e2f25a02de9c3e5eb381f9ba792d1c2388",
+      "scopedStagedAndUnstagedDiffCheck": "PASS"
+    },
+    "changedFiles": [
+      "docs/research/backend/java/basics/date-time-and-time-zones.md",
+      "src/categories/backend/java/core/learn/date-time-and-time-zones.md",
+      "docs/backend/java/audit/reviews/phase-4-date-time-and-time-zones-signoff.json"
+    ]
+  },
+  "recordedAt": "2026-08-07T00:48:10Z",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "stagedBatchSpecificChanges": false,
+    "sharedManifestStagingPreserved": true
+  },
+  "sourceRepository": {
+    "path": "/Users/jian/Desktop/work/TDH/dzzz/dzzz-app",
+    "head": "167ca8aa91ca3a6b101246964ef4fddec3d21da0",
+    "statusShort": "",
+    "readOnly": true
+  },
+  "phase2Freeze": {
+    "courseCoverageMatrixJsonSha256": "04d858896d07e975d3ab50796494873f09bd0ddf4b1a8b1ea87bd75cdd101d38",
+    "courseCoverageMatrixSha256": "b7fd50ffabbcf8a198802e907cef769ac969a71e4e14c40038f4aaaed09d91ad",
+    "researchStatus": "not-started",
+    "exampleStatus": "not-started",
+    "courseStatus": "planned",
+    "phase4StateRecordedOnlyInThisSignoff": true,
+    "admissionGate": "PASS",
+    "counts": {
+      "sourceItems": 167,
+      "courseNodes": 64,
+      "dependencyEdges": 114
+    }
+  },
+  "versions": {
+    "verifiedAt": "2026-08-07",
+    "modern": {
+      "java": "25",
+      "runtime": "Eclipse Temurin 25.0.3+9 LTS"
+    },
+    "legacy": {
+      "java": "8",
+      "runtime": "Eclipse Temurin 8u492-b09",
+      "springBootBackground": "2.3.12.RELEASE"
+    }
+  },
+  "sourceDiscovery": {
+    "method": "既有研究记录使用 Tavily 发现直接页面；签核前再以 Oracle 与 Dev.java 直接 URL 实时核对，14 个页面均返回 HTTP 200",
+    "communitySourcesUsedAsEvidence": false,
+    "projectEvidenceBoundary": "JAVA-STDLIB-010/011/012 的 5/2/2 项能力只作为 observed，重叠文件不相加；不读取当前 dzzz-app 源码。",
+    "directUrls": [
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/package-summary.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/time/package-summary.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/ZoneId.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/time/ZoneId.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/ZonedDateTime.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/time/ZonedDateTime.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/format/DateTimeFormatter.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/time/Clock.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/time/Clock.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/Date.html",
+      "https://docs.oracle.com/javase/8/docs/api/java/util/Date.html",
+      "https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/text/SimpleDateFormat.html",
+      "https://dev.java/learn/date-time"
+    ]
+  },
+  "projectEvidence": [
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/GenAuthorization.java",
+      "symbol": "com.tdh.bdzz.util.GenAuthorization",
+      "usage": "observed",
+      "sha256": "79ebf095a63f1c1a97573d32ebbf93d234247298cfdc793f038b962e58d1bd7c",
+      "inventoryMatched": true
+    },
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/CompareDateUtils.java",
+      "symbol": "com.tdh.bdzz.util.CompareDateUtils",
+      "usage": "observed",
+      "sha256": "3780b737f374adcf4b507075e14b035c3740b4a2e2fc3eaa0a3f44ffd849ca68",
+      "inventoryMatched": true
+    },
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/util/DateUtil.java",
+      "symbol": "com.tdh.bdzz.util.DateUtil",
+      "usage": "observed",
+      "sha256": "15d3d7fe6df96c1b39b2d5c031e1dfe1ac61bb5c55f7f113bd9dc91c22f8f79d",
+      "inventoryMatched": true
+    },
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/HeaderRequestInterceptor.java",
+      "symbol": "com.tdh.bdzz.config.HeaderRequestInterceptor",
+      "usage": "observed",
+      "sha256": "c196b496017b54c8ebe172492bfbbb15505babb1cf1520a16f039167f392d86c",
+      "inventoryMatched": true
+    },
+    {
+      "path": "dzzz-app/src/main/java/com/tdh/bdzz/config/AppStarter.java",
+      "symbol": "com.tdh.bdzz.config.AppStarter",
+      "usage": "observed",
+      "sha256": "9e0147da7946cf71b41e535bbf3d113b23a5b41328ee42637557ad2016f48a4e",
+      "inventoryMatched": true
+    }
+  ],
+  "docker": {
+    "engine": "Docker 29.6.1",
+    "feedbackSource": "从课程 Markdown 的如何验证 bash 代码块解析并提取同一反馈环，经 stdin 交给固定 RepoDigest 容器执行",
+    "classOutput": "容器内 /tmp 的 mktemp 目录，shell trap 使用 find -depth -delete 清理",
+    "images": [
+      {
+        "role": "modern",
+        "requestedTag": "eclipse-temurin:25-jdk",
+        "digest": "sha256:12e44624adee6808a36d962717e1656e0afeeeff5a100f9cb00e0136513558f0"
+      },
+      {
+        "role": "legacy",
+        "requestedTag": "eclipse-temurin:8-jdk",
+        "digest": "sha256:c8b86f2c0a9bd6cc1b7fabc5d1a097501a166eea7cad3b2764e90e96178bea9b"
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/basics/date-time-and-time-zones.md",
+      "sha256": "e2a4ca9bf985816090cf493ac40b3a225ea6cb76c3d9785e158118687eaa6529"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/date-time-and-time-zones.md",
+      "sha256": "f46ef07788225e6001059285e5af2fb3d1255fc8637205094730be22fd04e7b7"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "0cedfa9c7c503171b3b196939e3aa2fb40c177dd12618210129bdc0c6ca511eb"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "68549e9fd8acf19f3ef8cde264268069e632e7fc75fe698e60ef63da98c99bd1"
+    },
+    {
+      "path": "docs/backend/java/dzzz-app-course-plan.md",
+      "sha256": "8048b8e16ebc9b6814ac94ec473d45f8cec63783c9c121799a08a2aa21587c11"
+    }
+  ],
+  "selfHashPolicy": "signoff 文件不记录自身 SHA-256；artifacts 只绑定 signoff 外可稳定计算的本批课程产物。",
+  "baselineVerification": [
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges"
+    },
+    {
+      "command": "npm run type-check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run format:check",
+      "exitCode": 0,
+      "summary": "passed"
+    },
+    {
+      "command": "npm run test:unit",
+      "exitCode": 0,
+      "summary": "No test files found; configured empty test directory is valid"
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "summary": "No persistent E2E test files; command passed with --pass-with-no-tests"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "passed; 1210 modules transformed; existing >500 kB catalog chunk warning only"
+    },
+    {
+      "command": "git diff --check && git diff --cached --check",
+      "exitCode": 0,
+      "summary": "passed; no new staging performed"
+    },
+    {
+      "command": "git -C /Users/jian/Desktop/work/TDH/dzzz status --short -- dzzz-app",
+      "exitCode": 0,
+      "summary": "empty; source repository remained read-only"
+    }
+  ],
+  "javaVerification": {
+    "command": "parse 如何验证 bash block from src/categories/backend/java/core/learn/date-time-and-time-zones.md and pipe to zsh -f",
+    "exitCode": 0,
+    "sharedOutput": "time|instant=2025-03-30T00:30:00Z|paris=2025-03-30T01:30+01:00|shanghai=2025-03-30T08:30+08:00|localDiff=true|gap=2025-03-30T03:30+02:00|overlap=2:+02:00|date=2024-02-29:true|legacy=2025-03-30T00:30:00.123Z:true",
+    "cases": [
+      {
+        "name": "Java 25 shared compile/run",
+        "exitCode": 0
+      },
+      {
+        "name": "Java 8 shared compile/run",
+        "exitCode": 0
+      },
+      {
+        "name": "fixed Clock and cross-zone rendering",
+        "assertions": "same Instant; Paris and Shanghai local fields differ"
+      },
+      {
+        "name": "DST and strict parsing boundaries",
+        "assertions": "Paris gap adjusts to 03:30+02:00; overlap has two offsets; invalid leap day rejected"
+      },
+      {
+        "name": "Date precision boundary",
+        "assertions": "Instant round trip preserves milliseconds and truncates finer precision"
+      }
+    ],
+    "temporaryAssetsCleaned": true
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "adapter": "PASS",
+    "blockCount": 68,
+    "exerciseContract": "要求、验收、参考答案三字段完整",
+    "javaMethodComments": "PASS",
+    "initialFailure": "plain local-time literals such as 02:30 were parsed by remark-directive as textDirective nodes",
+    "repair": "wrapped all affected date-time literals in inline code and reran AST plus the original Vite SSR feedback to PASS"
+  },
+  "catalogVerification": {
+    "method": "fresh Vite middleware SSR 加载真实 entry-manifest、track 和目标 content-entry",
+    "exitCode": 0,
+    "registeredEntries": 16,
+    "availableEntries": 16,
+    "targetId": "backend.java.learn.basics.date-time-and-time-zones",
+    "projectEvidenceCount": 5,
+    "blockCount": 68
+  },
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "baseUrl": "http://127.0.0.1:4175/",
+    "targetPath": "/backend/java/core/learn/date-time-and-time-zones",
+    "desktop": {
+      "viewport": "1440x900",
+      "documentClientWidth": 1440,
+      "documentScrollWidth": 1440,
+      "horizontalOverflow": false,
+      "title": "日期时间、时区与 legacy Date 映射",
+      "codeBlockCount": 21,
+      "searchTerm": "ZonedDateTime",
+      "targetVisibleInSearch": true
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "documentClientWidth": 390,
+      "documentScrollWidth": 390,
+      "horizontalOverflow": false,
+      "codeBlockCount": 21
+    },
+    "console": {
+      "errors": 0,
+      "warnings": 0,
+      "pageErrors": 0
+    },
+    "progressPersistedAfterReload": true,
+    "completionButtonTextAfterReload": "取消完成",
+    "browserProgressRestoredAfterVerification": true,
+    "targetPageStatus": 200,
+    "targetLazyChunkStatus": 200,
+    "cachedTargetLazyChunkStatusAfterReload": 304,
+    "existingPlaywrightOutputProtected": true,
+    "newTopLevelBrowserArtifactDirectoryCreated": false
+  },
+  "changedFiles": [
+    "docs/research/backend/java/basics/date-time-and-time-zones.md",
+    "src/categories/backend/java/core/learn/date-time-and-time-zones.md",
+    "src/categories/backend/java/core/entry-manifest.ts",
+    "src/categories/backend/java/core/backend-java-track.ts",
+    "docs/backend/java/audit/reviews/phase-4-date-time-and-time-zones-signoff.json",
+    "docs/backend/java/dzzz-app-course-plan.md"
+  ],
+  "priorClosedJavaAssets": {
+    "protected": true,
+    "summary": "第一至第十五批研究、课程与 signoff 保持原样，不归入第十六批课程产物。"
+  },
+  "concurrentWorkspaceAssets": {
+    "protected": true,
+    "attribution": "frontend TypeScript、Vite、Vue、frontend 文档、HeadingBlock 与 ContentEntryPage 资产由并行工作产生，不属于本批 changedFiles；根级校验在包含这些资产的当前工作区上执行。",
+    "preSignoffStatusSnapshotSha256": "eaf7d3fbc551e06d0975deda286db49714999dae53af6c9f57ae35f0e1eec4ae",
+    "paths": [
+      "docs/frontend/",
+      "src/app/pages/ContentEntryPage.vue",
+      "src/categories/frontend/engineering/",
+      "src/categories/frontend/vue/",
+      "src/common/ui/blocks/HeadingBlock.vue"
+    ]
+  },
+  "review": {
+    "standards": "PASS",
+    "standardsFindings": 0,
+    "spec": "PASS",
+    "specFindings": 0
+  },
+  "beginnerContentReverification": {
+    "verifiedAt": "2026-08-07",
+    "courseArtifact": {
+      "path": "src/categories/backend/java/core/learn/date-time-and-time-zones.md",
+      "sha256": "f779d42dc9bfe9361ca3fd0008faa18ff28c27010a9a8699494738ddefe13fdd"
+    },
+    "content": "PASS; exactly one 从零跟着做, usage, pitfalls, verification, one exercise and runnable code",
+    "sources": "PASS; source type, appliesTo and claims shown only in the official-source regions; 正文无来源详情",
+    "browser": "PASS; 1440px and 390px routes, 36/36 HTTP 200, no horizontal overflow or browser errors",
+    "root": "PASS; knowledge-path, type-check, lint, format and diff checks"
+  },
+  "stopBoundary": "Phase B 的 B-17 已关闭；下一批只允许 B-18 io-files-and-resource-ownership，不得跳到 B-19，不得进入 Phase C、D、E。B-21 基础 Gate 关闭后立即停止。"
+}

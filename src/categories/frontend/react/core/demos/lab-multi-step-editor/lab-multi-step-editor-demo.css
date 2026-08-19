@@ -1,0 +1,409 @@
+.multi-step-editor-demo {
+  padding: 24px;
+  border: 1px solid #d5dbe2;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #20262d;
+}
+
+.multi-step-editor-demo-heading > p,
+.multi-step-editor-toolbar > div > p,
+.multi-step-editor-workspace-heading p,
+.multi-step-editor-section-heading > p,
+.multi-step-editor-completion-label {
+  margin: 0;
+  color: #176b5b;
+  font-size: 0.78rem;
+  font-weight: 750;
+  text-transform: uppercase;
+}
+
+.multi-step-editor-demo-heading h2,
+.multi-step-editor-toolbar h2,
+.multi-step-editor-workspace-heading h2,
+.multi-step-editor-section-heading h3,
+.multi-step-editor-completion h3 {
+  margin: 7px 0 0;
+  overflow-wrap: anywhere;
+  line-height: 1.35;
+}
+
+.multi-step-editor-demo-heading h2 {
+  font-size: 1.4rem;
+}
+
+.multi-step-editor-toolbar h2,
+.multi-step-editor-workspace-heading h2 {
+  font-size: 1.08rem;
+}
+
+.multi-step-editor-section-heading h3,
+.multi-step-editor-completion h3 {
+  font-size: 1.15rem;
+}
+
+.multi-step-editor-demo-heading > span,
+.multi-step-editor-toolbar > div > span {
+  display: block;
+  margin-top: 7px;
+  overflow-wrap: anywhere;
+  color: #606a75;
+  line-height: 1.6;
+}
+
+.multi-step-editor-toolbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 18px;
+  margin-top: 20px;
+  border: 1px solid #dce1e7;
+  border-radius: 6px;
+  background: #f7f9fa;
+}
+
+.multi-step-editor-toolbar > div:first-child {
+  min-width: 0;
+  margin-right: 20px;
+}
+
+.multi-step-editor-template-actions {
+  display: flex;
+  flex: 0 1 auto;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  margin: -4px;
+}
+
+.multi-step-editor-template-actions button,
+.multi-step-editor-actions button,
+.multi-step-editor-completion button {
+  min-height: 42px;
+  padding: 8px 12px;
+  border: 1px solid #8794a0;
+  border-radius: 5px;
+  background: #ffffff;
+  color: #26313b;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.multi-step-editor-template-actions button {
+  margin: 4px;
+}
+
+.multi-step-editor-template-actions button[aria-pressed='true'] {
+  border-color: #176b5b;
+  background: #e9f5f1;
+  color: #124f44;
+  box-shadow: inset 0 0 0 1px #176b5b;
+}
+
+.multi-step-editor-template-actions .is-reload {
+  border-color: #9f6a3b;
+  color: #7a451f;
+}
+
+.multi-step-editor-workspace {
+  margin-top: 18px;
+  border: 1px solid #cfd6de;
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+.multi-step-editor-workspace-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  border-bottom: 1px solid #dce1e7;
+  background: #ffffff;
+}
+
+.multi-step-editor-workspace-heading > div {
+  min-width: 0;
+  margin-right: 18px;
+}
+
+.multi-step-editor-workspace-heading output {
+  flex: 0 0 auto;
+  color: #4f5964;
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.multi-step-editor-steps {
+  padding: 14px 14px 10px;
+  border-bottom: 1px solid #dce1e7;
+  background: #f7f9fa;
+}
+
+.multi-step-editor-steps ol {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: -4px;
+  list-style: none;
+}
+
+.multi-step-editor-steps li {
+  box-sizing: border-box;
+  flex: 1 1 150px;
+  min-width: 0;
+  padding: 4px;
+}
+
+.multi-step-editor-steps button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 56px;
+  padding: 8px 10px;
+  border: 1px solid #bac3cc;
+  border-radius: 5px;
+  background: #ffffff;
+  color: #303a44;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.multi-step-editor-steps button[aria-current='step'] {
+  border-color: #176b5b;
+  box-shadow: inset 3px 0 0 #176b5b;
+}
+
+.multi-step-editor-steps button:disabled {
+  border-color: #d4d8dd;
+  background: #eceff2;
+  color: #747d87;
+  cursor: not-allowed;
+}
+
+.multi-step-editor-step-number {
+  display: inline-flex;
+  flex: 0 0 30px;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  margin-right: 9px;
+  border: 1px solid #93a0ac;
+  border-radius: 50%;
+  font-size: 0.82rem;
+  font-weight: 750;
+}
+
+.multi-step-editor-step-copy {
+  display: block;
+  min-width: 0;
+}
+
+.multi-step-editor-step-copy strong,
+.multi-step-editor-step-copy small {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.multi-step-editor-step-copy small {
+  margin-top: 3px;
+  color: inherit;
+  font-size: 0.72rem;
+}
+
+.multi-step-editor-panel,
+.multi-step-editor-completion {
+  padding: 22px;
+}
+
+.multi-step-editor-field-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 8px -7px -14px;
+}
+
+.multi-step-editor-field-row .multi-step-editor-field {
+  box-sizing: border-box;
+  flex: 1 1 230px;
+  min-width: 0;
+  padding: 0 7px;
+  margin-bottom: 14px;
+}
+
+.multi-step-editor-field {
+  margin-top: 16px;
+}
+
+.multi-step-editor-field > label {
+  display: block;
+  margin-bottom: 6px;
+  overflow-wrap: anywhere;
+  color: #36424e;
+  font-size: 0.88rem;
+  font-weight: 750;
+}
+
+.multi-step-editor-field > input,
+.multi-step-editor-field > select,
+.multi-step-editor-field > textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  padding: 10px 11px;
+  border: 1px solid #aab4bf;
+  border-radius: 5px;
+  background: #ffffff;
+  color: #202932;
+  font: inherit;
+}
+
+.multi-step-editor-field > input,
+.multi-step-editor-field > select {
+  min-height: 42px;
+}
+
+.multi-step-editor-field > textarea {
+  min-height: 126px;
+  resize: vertical;
+}
+
+.multi-step-editor-field > p {
+  margin: 6px 0 0;
+  overflow-wrap: anywhere;
+  color: #626c77;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.multi-step-editor-summary {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px -6px -6px;
+}
+
+.multi-step-editor-summary > div {
+  box-sizing: border-box;
+  flex: 1 1 180px;
+  min-width: 0;
+  padding: 12px;
+  margin: 6px;
+  border: 1px solid #d9dfe5;
+  border-radius: 5px;
+  background: #f8fafb;
+}
+
+.multi-step-editor-summary > div.is-wide {
+  flex-basis: calc(100% - 12px);
+}
+
+.multi-step-editor-summary dt {
+  color: #176b5b;
+  font-size: 0.78rem;
+  font-weight: 750;
+}
+
+.multi-step-editor-summary dd {
+  margin: 5px 0 0;
+  overflow-wrap: anywhere;
+  color: #28333d;
+  line-height: 1.6;
+}
+
+.multi-step-editor-actions {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 22px 20px;
+  border-top: 1px solid #e1e5e9;
+}
+
+.multi-step-editor-actions button:first-child {
+  margin-right: 12px;
+}
+
+.multi-step-editor-actions button.is-primary,
+.multi-step-editor-completion button {
+  border-color: #176b5b;
+  background: #176b5b;
+  color: #ffffff;
+}
+
+.multi-step-editor-actions button:disabled {
+  border-color: #b7bdc4;
+  background: #e3e6e9;
+  color: #69727c;
+  cursor: not-allowed;
+}
+
+.multi-step-editor-completion {
+  background: #f8fafb;
+}
+
+.multi-step-editor-completion button {
+  margin-top: 16px;
+}
+
+.multi-step-editor-template-actions button:focus-visible,
+.multi-step-editor-steps button:focus-visible,
+.multi-step-editor-field input:focus-visible,
+.multi-step-editor-field select:focus-visible,
+.multi-step-editor-field textarea:focus-visible,
+.multi-step-editor-actions button:focus-visible,
+.multi-step-editor-completion button:focus-visible {
+  outline: 3px solid #78c4b6;
+  outline-offset: 2px;
+}
+
+@media (max-width: 680px) {
+  .multi-step-editor-demo {
+    padding: 16px;
+  }
+
+  .multi-step-editor-toolbar,
+  .multi-step-editor-workspace-heading {
+    display: block;
+  }
+
+  .multi-step-editor-toolbar > div:first-child,
+  .multi-step-editor-workspace-heading > div {
+    margin-right: 0;
+  }
+
+  .multi-step-editor-template-actions {
+    justify-content: flex-start;
+    margin-top: 12px;
+  }
+
+  .multi-step-editor-workspace-heading output {
+    display: block;
+    margin-top: 10px;
+  }
+
+  .multi-step-editor-steps li {
+    flex-basis: 100%;
+  }
+
+  .multi-step-editor-panel,
+  .multi-step-editor-completion {
+    padding: 18px;
+  }
+
+  .multi-step-editor-summary > div {
+    flex-basis: 100%;
+  }
+
+  .multi-step-editor-actions {
+    align-items: stretch;
+    flex-direction: column-reverse;
+    padding: 14px 18px 18px;
+  }
+
+  .multi-step-editor-actions button {
+    width: 100%;
+  }
+
+  .multi-step-editor-actions button:first-child {
+    margin-top: 10px;
+    margin-right: 0;
+  }
+}

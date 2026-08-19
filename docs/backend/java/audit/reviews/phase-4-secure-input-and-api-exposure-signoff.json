@@ -1,0 +1,273 @@
+{
+  "schemaVersion": 1,
+  "courseId": "backend.java.learn.advanced.secure-input-and-api-exposure",
+  "batchId": "phase-4-secure-input-and-api-exposure",
+  "status": "implementation-complete",
+  "gateStatus": "lesson-passed",
+  "finalStatus": "implementation-complete / lesson-passed",
+  "recordedAt": "2026-08-14T01:15:53+08:00",
+  "snapshotId": "dzzz-app-20260803-179e722831ab",
+  "analysisId": "dzzz-app-analysis-20260803-958d37cf1be1",
+  "phase2ManifestSha256": "0ec2c99702ff54e06db84f62db6732559dcfa96e252c53d0b7e1fabda3ad5407",
+  "courseRepository": {
+    "head": "203f0dbf9116bc86cc17f715eb0e3ce05fa9e9bb",
+    "dirtyWorkspaceProtected": true,
+    "stagingPerformedThisBatch": false,
+    "existingStagedAndUnstagedStatePreserved": true
+  },
+  "sourceRepository": {
+    "path": "/Users/jian/Desktop/work/TDH/dzzz/dzzz-app",
+    "readOnly": true,
+    "projectExecuted": false,
+    "projectModified": false,
+    "accessBoundary": "Frozen Phase 2 evidence only; no batch-specific project access"
+  },
+  "phase2Freeze": {
+    "researchStatus": "not-started",
+    "exampleStatus": "not-started",
+    "courseStatus": "planned",
+    "phase4StateRecordedOnlyInThisSignoff": true,
+    "sequence": 630,
+    "prerequisites": [
+      "backend.java.learn.intermediate.bean-validation-and-input-contracts",
+      "backend.java.learn.advanced.authentication-authorization-and-jwt"
+    ],
+    "sourceCapabilityIds": ["JAVA-RISK-023", "JAVA-RISK-024"],
+    "knowledgePath": {
+      "sourceItems": 167,
+      "courseNodes": 64,
+      "dependencyEdges": 114,
+      "representativeProjectCallPaths": 8,
+      "gateStatus": "passed"
+    }
+  },
+  "versions": {
+    "verifiedAt": "2026-08-14",
+    "modern": {
+      "java": "25",
+      "runtime": "Temurin 25.0.3+9",
+      "springBoot": "4.1.0",
+      "springFramework": "7.0.8",
+      "springSecurity": "7.1.0",
+      "jakartaServlet": "6.2"
+    },
+    "legacy": {
+      "java": "8",
+      "runtime": "Temurin 1.8.0_492-b09",
+      "springBoot": "2.3.12.RELEASE",
+      "springFramework": "5.2.15.RELEASE",
+      "springSecurity": "5.3.9.RELEASE",
+      "servletPackage": "javax.servlet"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "docs/research/backend/java/advanced/secure-input-and-api-exposure.md",
+      "sha256": "fb6ed00bf17dec881a2188df07ab04aaaa5dab9ae762dda4b5d3712a10be899b"
+    },
+    {
+      "path": "src/categories/backend/java/core/learn/secure-input-and-api-exposure.md",
+      "sha256": "7cff42819b6b3e15b5eba76f01ed98b01a0a44e2d9b2432f70ec982e2d2cd8cd"
+    },
+    {
+      "path": "src/categories/backend/java/core/entry-manifest.ts",
+      "sha256": "3eca77b0a02d0c636b98c3a8f6e1a8b9391b32b75d66005af7ff723f82e73690"
+    },
+    {
+      "path": "src/categories/backend/java/core/backend-java-track.ts",
+      "sha256": "e4674e2494ff92572a50a4b4f7923fcce651f40c470a471b1b52fcb69a457121"
+    }
+  ],
+  "sourceVerification": {
+    "researchCardCount": 20,
+    "researchUniqueUrlCount": 20,
+    "frontmatterOfficialSourceCount": 20,
+    "frontmatterUniqueUrlCount": 20,
+    "researchFrontmatterSetDifference": 0,
+    "communitySourcesUsedAsEvidence": false,
+    "preciseVersionContract": "PASS; Java, Spring Boot, Spring Framework, Spring Security and Servlet baselines match the frozen research cards",
+    "directUrlCheck": "PASS; all 20 unique official targets were reachable during research, and final research/frontmatter URL sets match exactly"
+  },
+  "projectEvidence": {
+    "researchItemCount": 10,
+    "researchUniqueFileCount": 9,
+    "researchObservedCount": 0,
+    "researchRejectedCount": 10,
+    "courseItemCount": 9,
+    "courseObservedCount": 0,
+    "courseRejectedCount": 9,
+    "currentDefectClaimedFromFrozenEvidence": false,
+    "boundary": "All frozen project evidence remains rejected; the course does not claim that the frozen implementation is currently exploitable or recommended"
+  },
+  "markdownVerification": {
+    "frontmatter": "PASS",
+    "researchLineCount": 274,
+    "lineCount": 1273,
+    "lineBudget": "PASS; independently reviewed single-course exception because the frozen lesson joins input contracts, filter dispatch, CORS, view registries, API docs and Actuator exposure",
+    "independentKnowledgePointHeadings": 14,
+    "knowledgePointSevenPartCoverage": "14/14",
+    "pitfallCount": 14,
+    "pitfallNinePartCoverage": "14/14",
+    "officialSourceCount": 20,
+    "projectEvidenceCount": 9,
+    "sourceHeadingAbsent": true,
+    "securitySection": "PASS; input, SQL, filter, CORS, view, docs and management exposure use fail-closed and source-backed contracts",
+    "contentCheck": "PASS; knowledge=14 additionalHeadings3=2 pitfalls=14 sources=20 projectEvidence=0-observed/9-rejected",
+    "catalogBlockCount": 170,
+    "completeExampleSha256": "c042f92cf30e3c1bcd977f99d8d81bb3df41f569c1582c65ee065d1bd9ae0457",
+    "completeExampleContract": "PASS; SecureInputExposureExample was re-extracted from final behavioral Markdown and matched the compiled Java 25/8 fixture byte-for-byte",
+    "currentBodyShaBinding": "PASS; final course body SHA-256 is bound after the post-review Javadoc-only correction"
+  },
+  "javaVerification": {
+    "temporaryFixtureRoot": "/tmp/java-advanced-14-runtime.*",
+    "temporaryAssetsCleaned": true,
+    "cleanupVerifiedWithFinalAbsenceChecks": true,
+    "cases": [
+      {
+        "name": "Documented secure input, filter, CORS, view and exposure example",
+        "runtime": "Temurin 25.0.3+9",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "SECURE_INPUT_EXPOSURE_PASS preserved=1 blacklistRejected=1 chainOnce=1 corsRejected=1 viewRejected=1 docsOff=1"
+      },
+      {
+        "name": "Documented secure input, filter, CORS, view and exposure example",
+        "runtime": "Temurin 1.8.0_492-b09",
+        "exitCode": 0,
+        "runs": 2,
+        "summary": "SECURE_INPUT_EXPOSURE_PASS preserved=1 blacklistRejected=1 chainOnce=1 corsRejected=1 viewRejected=1 docsOff=1"
+      }
+    ],
+    "negativeControls": [
+      "unknown business field and unknown SQL identifier are rejected while dangerous but legal text is preserved",
+      "SQL uses a placeholder with the business value stored only as a separate binding",
+      "rejected, accepted and failing filter paths assert cumulative downstream counts 0, 1 and 2",
+      "preflight does not call business logic, trusted actual request calls once, and rejected CORS paths do not increment",
+      "path, protocol and ordinary unknown view IDs are rejected",
+      "docs generation, docs UI and management exposure each fail the production-closed contract when enabled alone"
+    ]
+  },
+  "verification": [
+    {
+      "command": "Java 25 and Java 8 current Markdown extraction checks",
+      "exitCode": 0,
+      "summary": "PASS; both runtimes compiled the extracted source and ran SecureInputExposureExample twice"
+    },
+    {
+      "command": "Content and Catalog cold-start check (three consecutive runs)",
+      "exitCode": 0,
+      "summary": "CONTENT_CATALOG_PASS on all runs; advancedAvailable=14 advancedPlanned=2 currentLoadable=true currentLoaderCount=1 currentBlocks=170 pitfalls=14 nextStatus=planned nextLoader=false"
+    },
+    {
+      "command": "npm --prefix docs/backend/java/audit/tooling run check:course:knowledge-path",
+      "exitCode": 0,
+      "summary": "PASS; 167 source items, 64 course nodes, 114 dependency edges and 8 representative project call paths"
+    },
+    {
+      "command": "npm run type-check && npm run lint && npm run format:check && npm run test:unit && npm run test:e2e",
+      "exitCode": 0,
+      "summary": "PASS; root quality gates completed without persistent course test assets"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "summary": "PASS; 1620 modules transformed and secure-input-and-api-exposure chunk emitted at 57.89 kB"
+    },
+    {
+      "command": "scoped current-course git diff --check and Prettier checks",
+      "exitCode": 0,
+      "summary": "PASS; course documents, registration changes and final Javadoc-only correction have no whitespace or formatting errors"
+    }
+  ],
+  "browserVerification": {
+    "tool": "Playwright CLI",
+    "session": "java-advanced-14-final",
+    "baseUrl": "http://127.0.0.1:4333/",
+    "targetPath": "/backend/java/core/learn/secure-input-and-api-exposure",
+    "temporaryScreenshotsRemoved": true,
+    "responsiveSourceRendering": "PASS; desktop and mobile each expose the 20-item official source list in the appropriate responsive location",
+    "desktop": {
+      "viewport": "1440x900",
+      "targetPageStatus": 200,
+      "documentClientWidth": 1440,
+      "documentScrollWidth": 1440,
+      "articleClientWidth": 900,
+      "articleScrollWidth": 900,
+      "articleScrollHeight": 30600,
+      "pitfallCount": 14,
+      "visibleOfficialSourceCount": 20,
+      "completionControlVisible": true,
+      "previousEntryVisible": true,
+      "nextEntryLinkCount": 0,
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "non200Requests": 0
+    },
+    "mobile": {
+      "viewport": "390x844",
+      "targetPageStatus": 200,
+      "documentClientWidth": 390,
+      "documentScrollWidth": 390,
+      "documentScrollHeight": 43165,
+      "articleClientWidth": 358,
+      "articleScrollWidth": 358,
+      "pitfallCount": 14,
+      "visibleOfficialSourceCount": 20,
+      "completionControlVisible": true,
+      "previousEntryVisible": true,
+      "nextEntryLinkCount": 0,
+      "consoleErrors": 0,
+      "pageErrors": 0,
+      "failedRequests": 0,
+      "non200Requests": 0
+    },
+    "manualReview": "PASS; desktop first and final screens plus the mobile full-page screenshot show no incoherent overlap, clipping or page-level horizontal overflow"
+  },
+  "manifestRegression": {
+    "basicsAvailable": 18,
+    "intermediateAvailable": 17,
+    "advancedAvailable": 14,
+    "advancedPlanned": 2,
+    "currentEntryLoadable": true,
+    "currentEntryLoaderCount": 1,
+    "futurePlannedEntriesHaveNoLoader": true,
+    "nextCourseId": "backend.java.learn.advanced.chains-registries-and-state-machines",
+    "nextCourseStatus": "planned",
+    "nextCourseLoader": false,
+    "nextCourseResearchAbsent": true,
+    "nextCourseBodyAbsent": true,
+    "nextCourseSignoffAbsent": true,
+    "finalColdStartRuns": 3,
+    "finalColdStartErrors": 0,
+    "finalColdStartPending": false
+  },
+  "review": {
+    "reviewer": "/root/advanced_14_final_review",
+    "standards": "PASS / 0 finding after one Javadoc-only mechanical closure",
+    "spec": "PASS / 0 finding",
+    "initialStandardsFindingCount": 2,
+    "initialSpecFindingCount": 4,
+    "finalIndependentStandardsFindingCount": 1,
+    "finalIndependentSpecFindingCount": 0,
+    "remainingStandardsFindingCount": 0,
+    "remainingSpecFindingCount": 0,
+    "independentReviewRounds": 2,
+    "artifactDriftAfterReview": true,
+    "postReviewChange": "One Chinese Javadoc line was added above the blocked() error-example method; no executable code, metadata or behavior changed",
+    "postReviewVerification": "PASS; Prettier, scoped diff check and method-comment context scan closed the sole low-severity Standards finding without another review, following the user's simple-change rule"
+  },
+  "temporaryAssetCleanup": {
+    "pending": false,
+    "verifiedAt": "2026-08-14T01:15:53+08:00",
+    "temporaryTargetPattern": "/tmp/java-advanced-14*",
+    "remainingTargetCount": 0,
+    "removedPlaywrightArtifacts": true,
+    "finalPlaywrightSession": "java-advanced-14-final",
+    "finalPlaywrightSessionClosed": true,
+    "previewPort": 4333,
+    "previewStopped": true,
+    "absenceCheck": "CLEANUP_ABSENCE_PASS java-advanced-14 temporary targets absent and port 4333 closed"
+  },
+  "stopBoundary": "Advanced course 14 is closed. Only after this signoff may advanced course 15 chains-registries-and-state-machines begin; do not pre-create course 16, Reference, project practice or other stages"
+}

@@ -727,8 +727,8 @@ function buildCourseMarkdown(matrix) {
   const lines = [
     '# `dzzz-app` Java 课程覆盖矩阵',
     '',
-    `> 冻结快照：\`${matrix.snapshotId}\`  `,
-    `> Phase 2 状态：\`completed\`  `,
+    `> 冻结快照：\`${matrix.snapshotId}\`<br>`,
+    `> Phase 2 状态：\`completed\`<br>`,
     `> Gate 2：\`${matrix.gateStatus}\``,
     '',
     '本目录冻结知识点、顺序、来源映射和 Phase 4 来源计划，不表示研究正文、课程正文或项目示例已经开始。现代实践位于主线；Java 8、Spring Boot 2.3.12.RELEASE 仅作为 legacy 补充。',

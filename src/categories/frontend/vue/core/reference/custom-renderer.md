@@ -45,7 +45,7 @@ anchors:
 
 # Vue 自定义渲染器 API 速查
 
-## createRenderer()
+## 一、createRenderer()
 
 `createRenderer(hostOptions)` 把 Vue runtime-core 的组件、响应式更新和 VNode patch 算法连接到目标平台。Vue 不直接操作 HostNode，而是把创建、插入、删除、文本、属性与树关系全部委托给 host operations。返回值只有底层 `render` 和绑定同一渲染器的 `createApp`；它不会把目标平台自动变成 DOM，也不会替平台实现节点语义。
 
@@ -53,7 +53,7 @@ anchors:
 自定义渲染器通常应封装成平台包，并从该包导出 `render`、`createApp` 和所需的 `@vue/runtime-core` API。业务组件不应直接依赖 host 节点细节。
 :::
 
-## Host operations 契约
+## 二、Host operations 契约
 
 最小契约需要创建 element、text、comment，按 anchor 插入或移动节点，删除节点，分别更新文本节点与元素文本，更新属性，并准确返回 parent 与 next sibling。可选能力包括 querySelector、scope id、节点克隆和静态内容插入；只有平台确实支持对应语义时才应提供。下面的内存树示例展示核心关系，不代表 DOM、Canvas 或终端的完整生产实现。
 
@@ -149,7 +149,7 @@ export const { render, createApp } = createRenderer<HostNode, HostElement>(hostO
 | 属性 | `patchProp` | 处理旧值、新值、删除与平台特有类型 |
 | 遍历 | `parentNode / nextSibling` | 为替换、Fragment、组件与移动提供真实关系 |
 
-## 返回的 render 与 createApp
+## 三、返回的 render 与 createApp
 
 `render(vnode, container)` 是低层根渲染入口：首次调用挂载，后续调用依据 container 保存的旧 VNode 做 patch，传入 `null` 则卸载旧树。`createApp(rootComponent)` 使用同一个 render 生成标准应用实例，提供 plugin、provide、全局组件和 unmount 等应用能力。两者是不同层级的入口，不应同时接管同一个 container。
 
@@ -168,7 +168,7 @@ app.mount(appContainer)
 app.unmount()
 ~~~~
 
-## Hydration 能力边界
+## 四、Hydration 能力边界
 
 普通 `createRenderer()` 返回的公开 `Renderer` 只有 `render` 与 `createApp`，没有 `hydrate`。固定源码把 hydration 放在单独的 `createHydrationRenderer()` 路径，并只有该路径向内部传入 hydration functions。即使目标容器已经有节点，普通 renderer 也不会自动把它们认作服务端输出；不能据此宣称自定义平台支持 hydration。
 
@@ -176,7 +176,7 @@ app.unmount()
 hydration 需要服务器输出协议、可遍历的既有节点、mismatch 处理和专用 renderer 协同。本页只记录 `createRenderer()` 的公开契约，不提供或承诺自定义 hydration 实现。
 :::
 
-## 易错使用提示
+## 五、易错使用提示
 
 :::pitfalls
 ### 省略 parentNode 或 nextSibling 的真实关系
@@ -338,7 +338,7 @@ renderer.createApp(App).mount(emptyContainer)
 **验证方式：** 对照正确写法验证结果。
 :::
 
-## 源码推导与适用场景
+## 六、源码推导与适用场景
 
 :::steps
 ### 1. runtime-core 不直接触碰 HostNode
