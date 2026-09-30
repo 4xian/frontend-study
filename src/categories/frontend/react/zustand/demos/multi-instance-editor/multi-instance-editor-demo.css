@@ -1,0 +1,119 @@
+.multi-editor-demo {
+  min-width: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+}
+
+.multi-editor-heading p,
+.multi-editor-heading h2,
+.multi-editor-heading span {
+  overflow-wrap: anywhere;
+}
+
+.multi-editor-heading p {
+  margin: 0 0 var(--space-1);
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.multi-editor-heading h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.multi-editor-heading span {
+  display: block;
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+}
+
+.multi-editor-panes,
+.multi-editor-actions {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.multi-editor-panes {
+  margin: var(--space-4) -4px 0;
+}
+
+.multi-editor-pane {
+  box-sizing: border-box;
+  flex: 1 1 240px;
+  min-width: 0;
+  margin: 0 4px 8px;
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+}
+
+.multi-editor-pane h3 {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.multi-editor-pane p {
+  margin: var(--space-3) 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+}
+
+.multi-editor-pane strong {
+  margin-left: var(--space-2);
+  color: var(--color-success, #2f855a);
+}
+
+.multi-editor-actions {
+  margin: var(--space-3) -4px 0;
+}
+
+.multi-editor-actions button {
+  box-sizing: border-box;
+  min-height: 38px;
+  margin: 0 4px 8px;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  background: var(--color-bg);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.multi-editor-actions button:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+
+.multi-editor-actions button:active {
+  transform: scale(0.97);
+}
+
+.multi-editor-actions button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .multi-editor-actions button {
+    transition: none;
+  }
+
+  .multi-editor-actions button:active {
+    transform: none;
+  }
+}

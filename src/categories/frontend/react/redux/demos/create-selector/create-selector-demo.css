@@ -1,0 +1,236 @@
+.create-selector-demo {
+  min-width: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+}
+
+.create-selector-header,
+.create-selector-controls,
+.create-selector-metrics,
+.create-selector-comparison,
+.create-selector-result-heading,
+.create-selector-summary,
+.create-selector-results li {
+  display: flex;
+}
+
+.create-selector-header,
+.create-selector-result-heading,
+.create-selector-results li {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.create-selector-header > div {
+  min-width: 0;
+}
+
+.create-selector-header p,
+.create-selector-result-heading span,
+.create-selector-metric dt,
+.create-selector-metric span,
+.create-selector-comparison span,
+.create-selector-summary dt {
+  color: var(--color-text-secondary);
+}
+
+.create-selector-header p,
+.create-selector-result-heading span,
+.create-selector-metric dt,
+.create-selector-comparison span,
+.create-selector-summary dt {
+  font-size: 0.72rem;
+}
+
+.create-selector-header h2,
+.create-selector-result-heading h3 {
+  margin: 4px 0 0;
+}
+
+.create-selector-header h2 {
+  font-size: 1.08rem;
+}
+
+.create-selector-header > div > span {
+  display: block;
+  margin-top: 5px;
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+}
+
+.create-selector-header > strong {
+  max-width: 190px;
+  padding: 5px 8px;
+  margin-left: var(--space-3);
+  border: 1px solid color-mix(in srgb, var(--color-accent) 40%, var(--color-border));
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--color-accent) 8%, var(--color-bg));
+  color: var(--color-accent);
+  font-size: 0.76rem;
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+
+.create-selector-controls,
+.create-selector-metrics {
+  flex-wrap: wrap;
+  margin: var(--space-4) -4px 0;
+}
+
+.create-selector-controls button {
+  min-height: 38px;
+  padding: 7px 11px;
+  margin: 4px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.create-selector-controls button:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.create-selector-controls button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.create-selector-metrics {
+  padding: 0;
+}
+
+.create-selector-metric {
+  flex: 1 1 160px;
+  min-width: 0;
+  padding: 10px;
+  margin: 4px;
+  border-left: 3px solid var(--color-accent);
+  background: var(--color-bg);
+}
+
+.create-selector-metric dd {
+  margin: 5px 0 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.create-selector-metric span {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--font-family-mono);
+  font-size: 0.68rem;
+  overflow-wrap: anywhere;
+}
+
+.create-selector-comparison {
+  flex-wrap: wrap;
+  margin-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.create-selector-comparison > div {
+  flex: 1 1 180px;
+  min-width: 0;
+  padding: 11px 0;
+  margin-right: var(--space-4);
+}
+
+.create-selector-comparison strong,
+.create-selector-comparison span {
+  display: block;
+}
+
+.create-selector-comparison strong {
+  margin-top: 4px;
+  font-size: 0.84rem;
+  overflow-wrap: anywhere;
+}
+
+.create-selector-results {
+  margin-top: var(--space-4);
+}
+
+.create-selector-result-heading h3 {
+  font-size: 0.94rem;
+}
+
+.create-selector-result-heading output {
+  margin-left: var(--space-3);
+  color: var(--color-accent);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.create-selector-results ul {
+  padding: 0;
+  margin: var(--space-3) 0 0;
+  list-style: none;
+}
+
+.create-selector-results li {
+  min-width: 0;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.create-selector-results li span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.create-selector-results li strong {
+  margin-left: var(--space-3);
+  color: var(--color-text-secondary);
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.create-selector-summary {
+  flex-wrap: wrap;
+  margin: var(--space-3) -4px 0;
+}
+
+.create-selector-summary > div {
+  flex: 1 1 180px;
+  min-width: 0;
+  padding: 9px;
+  margin: 4px;
+  background: color-mix(in srgb, var(--color-success) 8%, var(--color-bg));
+}
+
+.create-selector-summary dd {
+  margin: 4px 0 0;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 560px) {
+  .create-selector-demo {
+    padding: var(--space-3);
+  }
+
+  .create-selector-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .create-selector-header > strong {
+    max-width: 100%;
+    margin: var(--space-3) 0 0;
+    text-align: left;
+  }
+
+  .create-selector-controls button {
+    flex: 1 1 140px;
+  }
+
+  .create-selector-comparison > div {
+    margin-right: 0;
+  }
+}

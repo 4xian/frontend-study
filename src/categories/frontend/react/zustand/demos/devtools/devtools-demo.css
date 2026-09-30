@@ -1,0 +1,146 @@
+.devtools-demo {
+  min-width: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+}
+
+.devtools-heading p,
+.devtools-heading h2,
+.devtools-heading span,
+.devtools-ticks {
+  overflow-wrap: anywhere;
+}
+
+.devtools-heading p {
+  margin: 0 0 var(--space-1);
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.devtools-heading h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.devtools-heading span {
+  display: block;
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+}
+
+.devtools-ticks {
+  margin: var(--space-4) 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+}
+
+.devtools-ticks strong {
+  margin-left: var(--space-2);
+  color: var(--color-accent);
+}
+
+.devtools-panels,
+.devtools-actions {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.devtools-panels {
+  margin: var(--space-4) -4px 0;
+}
+
+.devtools-panel {
+  box-sizing: border-box;
+  flex: 1 1 160px;
+  min-width: 0;
+  margin: 0 4px 8px;
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+}
+
+.devtools-panel span {
+  color: var(--color-text-secondary);
+  font-size: 0.74rem;
+}
+
+.devtools-panel strong {
+  display: block;
+  margin-top: var(--space-2);
+  overflow-wrap: anywhere;
+  color: var(--color-success, #2f855a);
+  font-size: 1.05rem;
+}
+
+.devtools-panel p {
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.78rem;
+}
+
+.devtools-panel b {
+  color: var(--color-accent);
+}
+
+.devtools-log-panel pre {
+  margin: var(--space-2) 0 0;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  color: var(--color-text);
+  font-size: 0.74rem;
+}
+
+.devtools-actions {
+  margin: var(--space-4) -4px 0;
+}
+
+.devtools-actions button {
+  box-sizing: border-box;
+  min-height: 38px;
+  margin: 0 4px 8px;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  background: var(--color-bg);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.devtools-actions button:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+
+.devtools-actions button:active {
+  transform: scale(0.97);
+}
+
+.devtools-actions button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .devtools-actions button {
+    transition: none;
+  }
+
+  .devtools-actions button:active {
+    transform: none;
+  }
+}

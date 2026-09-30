@@ -1,0 +1,194 @@
+.programmatic-navigation-demo {
+  min-width: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-secondary);
+  color: var(--color-text);
+}
+
+.programmatic-navigation-screen,
+.programmatic-navigation-heading,
+.programmatic-navigation-location,
+.programmatic-navigation-controls {
+  min-width: 0;
+}
+
+.programmatic-navigation-heading {
+  padding: var(--space-4);
+  border-left: 4px solid var(--color-accent);
+  background: var(--color-bg);
+}
+
+.programmatic-navigation-heading p,
+.programmatic-navigation-heading h2,
+.programmatic-navigation-heading span {
+  overflow-wrap: anywhere;
+}
+
+.programmatic-navigation-heading p {
+  margin: 0;
+  color: var(--color-accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.programmatic-navigation-heading h2 {
+  margin: var(--space-1) 0 0;
+  font-size: 1.08rem;
+}
+
+.programmatic-navigation-heading span {
+  display: block;
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+.programmatic-navigation-location,
+.programmatic-navigation-controls {
+  padding: var(--space-4);
+  margin-top: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+}
+
+.programmatic-navigation-location > div > p,
+.programmatic-navigation-location > div > h3,
+.programmatic-navigation-location > code,
+.programmatic-navigation-location > span,
+.programmatic-navigation-controls > h3,
+.programmatic-navigation-screen > footer {
+  overflow-wrap: anywhere;
+}
+
+.programmatic-navigation-location > div > p {
+  margin: 0;
+  color: var(--color-success, #16803c);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.programmatic-navigation-location > div > h3,
+.programmatic-navigation-controls > h3 {
+  margin: var(--space-1) 0 0;
+  font-size: 0.96rem;
+}
+
+.programmatic-navigation-location > code {
+  display: block;
+  padding: 10px 12px;
+  margin-top: var(--space-3);
+  border-left: 3px solid var(--color-success, #16803c);
+  background: var(--color-bg-secondary);
+  color: var(--color-accent);
+  font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.82rem;
+  font-weight: 750;
+  line-height: 1.55;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.programmatic-navigation-location > span {
+  display: block;
+  margin-top: var(--space-3);
+  color: var(--color-text-secondary);
+  font-size: 0.78rem;
+  line-height: 1.6;
+}
+
+.programmatic-navigation-controls > div {
+  display: flex;
+  flex-wrap: wrap;
+  margin: var(--space-3) -4px -8px;
+}
+
+.programmatic-navigation-controls button {
+  box-sizing: border-box;
+  min-width: 168px;
+  min-height: 42px;
+  flex: 1 1 42%;
+  padding: 9px 12px;
+  margin: 0 4px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-secondary);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 750;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.programmatic-navigation-controls button:hover {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+.programmatic-navigation-controls button:active {
+  transform: translateY(0);
+}
+
+.programmatic-navigation-controls button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.programmatic-navigation-screen > footer {
+  padding: var(--space-3);
+  margin-top: var(--space-4);
+  border-left: 3px solid var(--color-warning, #b45309);
+  background: var(--color-bg);
+  color: var(--color-text-secondary);
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .programmatic-navigation-controls button {
+    transition: none;
+  }
+
+  .programmatic-navigation-controls button:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .programmatic-navigation-demo {
+    padding: var(--space-3);
+  }
+
+  .programmatic-navigation-heading,
+  .programmatic-navigation-location,
+  .programmatic-navigation-controls {
+    padding: var(--space-3);
+  }
+
+  .programmatic-navigation-controls > div {
+    display: block;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .programmatic-navigation-controls button {
+    width: 100%;
+    min-width: 0;
+    margin-right: 0;
+    margin-left: 0;
+  }
+}

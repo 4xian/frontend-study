@@ -1,0 +1,137 @@
+.middleware-demo {
+  min-width: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+}
+
+.middleware-heading p,
+.middleware-heading h2,
+.middleware-heading span,
+.middleware-status,
+.middleware-count {
+  overflow-wrap: anywhere;
+}
+
+.middleware-heading p {
+  margin: 0 0 var(--space-1);
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.middleware-heading h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.middleware-heading span {
+  display: block;
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+}
+
+.middleware-status {
+  margin: var(--space-4) 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+}
+
+.middleware-status strong,
+.middleware-count strong {
+  margin-left: var(--space-2);
+  margin-right: var(--space-3);
+  color: var(--color-success, #2f855a);
+}
+
+.middleware-panes,
+.middleware-actions {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.middleware-panes {
+  margin: var(--space-4) -4px 0;
+}
+
+.middleware-pane {
+  box-sizing: border-box;
+  flex: 1 1 220px;
+  min-width: 0;
+  margin: 0 4px 8px;
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+}
+
+.middleware-pane h3 {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.middleware-count {
+  margin: var(--space-3) 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+}
+
+.middleware-pane pre {
+  margin: var(--space-2) 0 0;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  color: var(--color-text);
+  font-size: 0.74rem;
+}
+
+.middleware-actions {
+  margin: var(--space-4) -4px 0;
+}
+
+.middleware-actions button {
+  box-sizing: border-box;
+  min-height: 38px;
+  margin: 0 4px 8px;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  background: var(--color-bg);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.middleware-actions button:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+
+.middleware-actions button:active {
+  transform: scale(0.97);
+}
+
+.middleware-actions button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .middleware-actions button {
+    transition: none;
+  }
+
+  .middleware-actions button:active {
+    transform: none;
+  }
+}

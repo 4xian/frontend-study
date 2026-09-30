@@ -1,0 +1,214 @@
+.state-ownership-demo {
+  min-width: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+}
+
+.state-ownership-heading span,
+.state-ownership-heading h2,
+.state-ownership-heading p {
+  overflow-wrap: anywhere;
+}
+
+.state-ownership-heading span {
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.state-ownership-heading h2 {
+  margin: var(--space-1) 0 0;
+  font-size: 1.05rem;
+}
+
+.state-ownership-heading p {
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+}
+
+.state-ownership-controls,
+.state-ownership-panels,
+.state-ownership-legend {
+  margin-top: var(--space-4);
+}
+
+.state-ownership-controls {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -4px;
+  margin-left: -4px;
+}
+
+.state-ownership-controls button,
+.state-ownership-local-footer button {
+  min-height: 40px;
+  margin: 0 4px 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-sm);
+  background: var(--color-accent);
+  color: #fff;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.state-ownership-controls button:focus-visible,
+.state-ownership-local-footer button:focus-visible,
+.state-ownership-local textarea:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.state-ownership-controls button:active,
+.state-ownership-local-footer button:active {
+  opacity: 0.8;
+}
+
+.state-ownership-panels {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -4px;
+  margin-left: -4px;
+}
+
+.state-ownership-panel {
+  min-width: 0;
+  flex: 1 1 260px;
+  margin: 0 4px 8px;
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.state-ownership-panel-heading span,
+.state-ownership-panel-heading strong,
+.state-ownership-panel dt,
+.state-ownership-panel dd,
+.state-ownership-legend strong,
+.state-ownership-legend li {
+  overflow-wrap: anywhere;
+}
+
+.state-ownership-panel-heading span {
+  display: block;
+  color: var(--color-text-secondary);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.state-ownership-panel-heading strong {
+  display: block;
+  margin-top: var(--space-1);
+  font-size: 0.95rem;
+}
+
+.state-ownership-values {
+  margin: var(--space-3) 0 0;
+}
+
+.state-ownership-values div + div {
+  margin-top: var(--space-2);
+}
+
+.state-ownership-panel dt {
+  color: var(--color-text-secondary);
+  font-size: 0.78rem;
+}
+
+.state-ownership-panel dd {
+  margin: 2px 0 0;
+  color: var(--color-accent);
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.state-ownership-local label {
+  display: block;
+  margin-top: var(--space-3);
+  color: var(--color-text-secondary);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.state-ownership-local textarea {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  min-height: 88px;
+  margin-top: var(--space-2);
+  padding: 8px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-secondary);
+  color: var(--color-text);
+  font: inherit;
+  resize: vertical;
+}
+
+.state-ownership-local-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-2);
+}
+
+.state-ownership-local-footer span {
+  margin: 0 8px 8px 0;
+  color: var(--color-text-secondary);
+  font-size: 0.78rem;
+}
+
+.state-ownership-local-footer button {
+  margin-right: 0;
+}
+
+.state-ownership-legend {
+  padding: var(--space-3);
+  border-left: 3px solid var(--color-accent);
+  background: var(--color-bg);
+}
+
+.state-ownership-legend ul {
+  margin: var(--space-2) 0 0;
+  padding-left: 1.1rem;
+}
+
+.state-ownership-legend li + li {
+  margin-top: var(--space-1);
+}
+
+.state-ownership-legend li {
+  color: var(--color-text-secondary);
+  font-size: 0.78rem;
+}
+
+.state-ownership-legend b {
+  margin-right: 6px;
+  color: var(--color-text);
+}
+
+@media (max-width: 480px) {
+  .state-ownership-demo {
+    padding: var(--space-3);
+  }
+
+  .state-ownership-controls button {
+    box-sizing: border-box;
+    width: calc(100% - 8px);
+  }
+
+  .state-ownership-local-footer {
+    display: block;
+  }
+
+  .state-ownership-local-footer button {
+    width: 100%;
+    margin-right: 0;
+  }
+}

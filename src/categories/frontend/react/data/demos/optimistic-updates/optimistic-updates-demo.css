@@ -1,0 +1,175 @@
+.optimistic-updates-demo {
+  min-width: 0;
+  max-width: 100%;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+}
+
+.optimistic-updates-demo *,
+.optimistic-updates-demo *::before,
+.optimistic-updates-demo *::after {
+  box-sizing: border-box;
+}
+
+.optimistic-updates-header span,
+.optimistic-updates-header h2,
+.optimistic-updates-header p,
+.optimistic-updates-metrics span,
+.optimistic-updates-metrics strong,
+.optimistic-updates-message,
+.optimistic-updates-card,
+.optimistic-updates-card h3,
+.optimistic-updates-card p,
+.optimistic-updates-card li {
+  overflow-wrap: anywhere;
+}
+
+.optimistic-updates-header span {
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.optimistic-updates-header h2 {
+  margin: var(--space-1) 0 0;
+  font-size: 1.08rem;
+}
+
+.optimistic-updates-header p {
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.optimistic-updates-metrics,
+.optimistic-updates-actions,
+.optimistic-updates-columns {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -4px;
+  margin-left: -4px;
+}
+
+.optimistic-updates-metrics {
+  margin-top: var(--space-4);
+}
+
+.optimistic-updates-metrics > div {
+  flex: 1 1 140px;
+  min-width: 0;
+  margin: 0 4px 8px;
+  padding: 10px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.optimistic-updates-metrics span,
+.optimistic-updates-metrics strong {
+  display: block;
+}
+
+.optimistic-updates-metrics span {
+  color: var(--color-text-secondary);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.optimistic-updates-metrics strong {
+  margin-top: 4px;
+  color: var(--color-accent);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.optimistic-updates-actions {
+  margin-top: 4px;
+}
+
+.optimistic-updates-actions button {
+  min-height: 38px;
+  margin: 0 4px 8px;
+  padding: 7px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  background: var(--color-bg);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.optimistic-updates-actions button[data-kind='primary'] {
+  color: var(--color-bg);
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.optimistic-updates-actions button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.optimistic-updates-actions button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.optimistic-updates-columns {
+  margin-top: 4px;
+}
+
+.optimistic-updates-card {
+  flex: 1 1 220px;
+  min-width: 0;
+  margin: 0 4px 8px;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.optimistic-updates-card h3 {
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+.optimistic-updates-card p,
+.optimistic-updates-card ul {
+  margin: 8px 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.optimistic-updates-card ul {
+  padding: 0 0 0 1.2em;
+}
+
+.optimistic-updates-message {
+  margin: 8px 0 0;
+  padding: 10px;
+  border-left: 3px solid var(--color-accent);
+  color: var(--color-text);
+  background: var(--color-bg-secondary);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 480px) {
+  .optimistic-updates-demo {
+    padding: var(--space-3);
+  }
+
+  .optimistic-updates-metrics > div,
+  .optimistic-updates-card,
+  .optimistic-updates-actions button {
+    flex-basis: 100%;
+  }
+
+  .optimistic-updates-actions button {
+    width: calc(100% - 8px);
+  }
+}

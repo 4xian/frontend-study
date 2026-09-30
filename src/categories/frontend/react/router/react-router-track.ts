@@ -1,0 +1,301 @@
+import type { LearningTrackManifest } from '@/common/catalog/types'
+
+export const reactRouterTrackManifest: LearningTrackManifest = {
+  stages: [
+    {
+      id: 'basics',
+      title: '基础课程',
+      summary: '从 Data Router 入口开始，建立匹配、导航、嵌套与 URL 状态的基础模型。',
+      categories: [
+        {
+          id: 'routing-foundations',
+          title: '路由基础',
+          summary: '理解 Data Router 的启动链，并逐步掌握客户端 URL 与界面的对应关系。',
+          topics: ['Data Mode', '路由配置', '匹配', '导航', 'URL 状态'],
+          entries: [
+            {
+              id: 'react.router.learn.basics.data-router-introduction',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.basics.route-objects',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.basics.route-matching',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.basics.link-navigation',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.basics.nav-link-state',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.basics.nested-routes-and-outlet',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.basics.layout-routes',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.basics.index-routes',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.basics.dynamic-segments',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.basics.optional-segments-and-splats',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.basics.route-params',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.basics.query-params-and-url-state',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.basics.programmatic-navigation',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.basics.location-and-history-state',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.basics.lab-multi-page-course-center',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.basics.lab-nested-documentation-center',
+              status: 'available',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'intermediate',
+      title: '中级课程',
+      summary: '围绕 Data Router 建立加载、提交、等待、错误与路由数据协作能力。',
+      categories: [
+        {
+          id: 'route-data',
+          title: '路由数据',
+          summary: '让 route 在渲染前准备数据，并把结果交给对应组件消费。',
+          topics: [
+            'loader',
+            'LoaderFunctionArgs',
+            'useLoaderData',
+            'useRouteLoaderData',
+            'useMatches',
+            '路由数据',
+            'action',
+            'ActionFunctionArgs',
+            'FormData',
+            '数据提交',
+            'useFetcher',
+            'fetcher.Form',
+            'fetcher.load',
+            '局部数据交互',
+            '导航选择',
+            'Form 与 Fetcher',
+            'Revalidation',
+            'useRevalidator',
+            'shouldRevalidate',
+            'Route Error Boundary',
+            'useRouteError',
+            'isRouteErrorResponse',
+            'middleware',
+            'MiddlewareFunction',
+            'createContext',
+            '鉴权路由',
+            '401',
+            '403',
+            'handle',
+            '路由元数据',
+            '面包屑',
+            'route.lazy',
+            'LazyRouteFunction',
+            'route module',
+            'code splitting',
+          ],
+          entries: [
+            {
+              id: 'react.router.learn.intermediate.loader-data-loading',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.intermediate.loader-requests-and-redirects',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.intermediate.route-data-reading-and-sharing',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.intermediate.navigation-pending-ui',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.intermediate.action-data-submission',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.intermediate.form-navigation-form',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.intermediate.action-results-and-form-validation',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.intermediate.fetcher',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.intermediate.form-fetcher-choice',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.intermediate.revalidation',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.intermediate.route-error-boundary',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.intermediate.auth-route-boundary',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.intermediate.route-metadata-and-breadcrumbs',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.intermediate.lazy-routes',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.intermediate.lab-content-management-workspace',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.intermediate.lab-auth-admin-workspace',
+              status: 'available',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'advanced',
+      title: '高级课程',
+      summary: '处理高反馈、高并发与生产部署中的路由交互、状态和恢复边界。',
+      categories: [
+        {
+          id: 'production-routing',
+          title: '生产级路由交互',
+          summary: '从可预测的局部交互开始，逐步建立复杂路由系统的正确性与交付能力。',
+          topics: [
+            'Optimistic UI',
+            'fetcher.formData',
+            '乐观更新',
+            '失败回滚',
+            '导航并发',
+            'AbortSignal',
+            'request.signal',
+            '请求取消',
+            'Race Condition',
+            '并发 revalidation',
+            'fresh response',
+            'stale response',
+            '服务端竞态',
+            '状态所有权',
+            'URL 状态',
+            'loader data',
+            'navigation state',
+            'Fetcher state',
+            '局部 UI state',
+            'dataStrategy',
+            'DataStrategyFunction',
+            'DataStrategyMatch',
+            'DataStrategyResult',
+            'shouldCallHandler',
+            'shouldRevalidateArgs',
+            'match.resolve',
+            'fetcherKey',
+            '动态路由发现',
+            'patchRoutesOnNavigation',
+            'PatchRoutesOnNavigationFunction',
+            '部分匹配',
+            'Fog of War',
+            'ScrollRestoration',
+            'useScrollRestoration',
+            'restoreScrollPosition',
+            'preventScrollReset',
+            'getKey',
+            'storageKey',
+            'scrollY',
+            'sessionStorage',
+            'history.scrollRestoration',
+            'hash scrolling',
+            'useBlocker',
+            'BlockerFunction',
+            'Blocker',
+            'unblocked',
+            'blocked',
+            'proceeding',
+            'blocker.location',
+            'blocker.proceed',
+            'blocker.reset',
+            '导航阻止',
+            '未保存草稿',
+          ],
+          entries: [
+            {
+              id: 'react.router.learn.advanced.optimistic-ui',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.advanced.navigation-concurrency-and-cancellation',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.advanced.race-conditions',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.advanced.route-state-ownership',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.advanced.custom-data-strategy',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.advanced.dynamic-route-discovery',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.advanced.scroll-restoration',
+              status: 'available',
+            },
+            {
+              id: 'react.router.learn.advanced.navigation-blocking',
+              status: 'available',
+            },
+          ],
+        },
+      ],
+    },
+  ],
+}

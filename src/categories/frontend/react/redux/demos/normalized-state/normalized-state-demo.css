@@ -1,0 +1,237 @@
+.normalized-state-demo {
+  color: #18212f;
+  background: #f7f9fc;
+  border: 1px solid #dce3ec;
+  border-radius: 8px;
+  padding: 24px;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+.normalized-state-demo__heading {
+  border-bottom: 1px solid #dce3ec;
+  padding-bottom: 18px;
+}
+
+.normalized-state-demo__heading p {
+  color: #4375b5;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0;
+  margin: 0 0 8px;
+  text-transform: uppercase;
+}
+
+.normalized-state-demo__heading h2 {
+  font-size: 26px;
+  line-height: 1.2;
+  margin: 0 0 8px;
+}
+
+.normalized-state-demo__heading span {
+  color: #5d6b7d;
+  display: block;
+  line-height: 1.6;
+}
+
+.normalized-state-demo__status {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 18px -8px 0;
+}
+
+.normalized-state-demo__status div {
+  background: #ffffff;
+  border: 1px solid #dce3ec;
+  border-radius: 6px;
+  display: flex;
+  flex: 1 1 140px;
+  flex-direction: column;
+  margin: 0 8px 8px;
+  padding: 12px 14px;
+}
+
+.normalized-state-demo__status span {
+  color: #66758a;
+  font-size: 12px;
+}
+
+.normalized-state-demo__status strong {
+  color: #1f4d7a;
+  font-size: 24px;
+  line-height: 1.2;
+  margin-top: 4px;
+}
+
+.normalized-state-demo__workspace {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 12px -6px 0;
+}
+
+.normalized-state-demo__panel {
+  background: #ffffff;
+  border: 1px solid #dce3ec;
+  border-radius: 6px;
+  flex: 1 1 280px;
+  margin: 0 6px 12px;
+  min-width: 0;
+  padding: 16px;
+}
+
+.normalized-state-demo__panel h3,
+.normalized-state-demo__state h3 {
+  font-size: 15px;
+  margin: 0 0 6px;
+}
+
+.normalized-state-demo__panel p {
+  color: #66758a;
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0 0 12px;
+}
+
+.normalized-state-demo__book-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.normalized-state-demo__book-list button {
+  align-items: flex-start;
+  background: #fbfcfe;
+  border: 1px solid #e0e6ee;
+  border-radius: 5px;
+  color: #18212f;
+  display: flex;
+  flex-direction: column;
+  margin-top: 7px;
+  padding: 9px 11px;
+  text-align: left;
+}
+
+.normalized-state-demo__book-list button:first-child {
+  margin-top: 0;
+}
+
+.normalized-state-demo__book-list button:hover,
+.normalized-state-demo__book-list button.is-selected {
+  background: #edf5ff;
+  border-color: #6d9ed3;
+}
+
+.normalized-state-demo__book-list span {
+  color: #66758a;
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+.normalized-state-demo__details {
+  margin: 0;
+}
+
+.normalized-state-demo__details div {
+  border-top: 1px solid #edf0f4;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  padding-top: 8px;
+}
+
+.normalized-state-demo__details div:first-child {
+  border-top: 0;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.normalized-state-demo__details dt {
+  color: #66758a;
+  font-size: 12px;
+}
+
+.normalized-state-demo__details dd {
+  font-size: 13px;
+  margin: 0 0 0 12px;
+  text-align: right;
+}
+
+.normalized-state-demo__controls {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -4px 14px;
+}
+
+.normalized-state-demo__controls input,
+.normalized-state-demo__controls button {
+  border: 1px solid #cbd5e1;
+  border-radius: 5px;
+  font: inherit;
+  margin: 4px;
+  min-height: 36px;
+  padding: 7px 10px;
+}
+
+.normalized-state-demo__controls input {
+  flex: 1 1 180px;
+  min-width: 0;
+}
+
+.normalized-state-demo__controls button {
+  background: #ffffff;
+  color: #244566;
+  cursor: pointer;
+}
+
+.normalized-state-demo__controls button:hover {
+  background: #edf5ff;
+  border-color: #6d9ed3;
+}
+
+.normalized-state-demo__state {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -6px;
+}
+
+.normalized-state-demo__state > div {
+  background: #1f2937;
+  border-radius: 6px;
+  color: #e5edf7;
+  flex: 1 1 280px;
+  margin: 0 6px 12px;
+  min-width: 0;
+  padding: 14px;
+}
+
+.normalized-state-demo__state h3 {
+  color: #a9c7e7;
+}
+
+.normalized-state-demo__state code,
+.normalized-state-demo__state pre {
+  display: block;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px;
+  line-height: 1.55;
+  margin: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+@media (max-width: 560px) {
+  .normalized-state-demo {
+    padding: 16px;
+  }
+
+  .normalized-state-demo__details div {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .normalized-state-demo__details dd {
+    margin: 3px 0 0;
+    text-align: left;
+  }
+}

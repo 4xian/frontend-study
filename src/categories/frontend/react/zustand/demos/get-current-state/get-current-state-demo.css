@@ -1,0 +1,160 @@
+.get-state-demo {
+  min-width: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+}
+
+.get-state-heading p,
+.get-state-heading h2,
+.get-state-heading span {
+  overflow-wrap: anywhere;
+}
+
+.get-state-heading p {
+  margin: 0 0 var(--space-1);
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.get-state-heading h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.get-state-heading span {
+  display: block;
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+}
+
+.get-state-status,
+.get-state-values,
+.get-state-controls,
+.get-state-actions {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.get-state-status {
+  align-items: baseline;
+  margin-top: var(--space-4);
+  padding: var(--space-3);
+  border-left: 3px solid var(--color-accent);
+  background: var(--color-bg);
+}
+
+.get-state-status span,
+.get-state-values span,
+.get-state-field > span {
+  color: var(--color-text-secondary);
+  font-size: 0.74rem;
+}
+
+.get-state-status strong {
+  min-width: 0;
+  margin-left: var(--space-2);
+  overflow-wrap: anywhere;
+  color: var(--color-accent);
+  font-size: 0.86rem;
+}
+
+.get-state-values {
+  margin: var(--space-4) -4px 0;
+}
+
+.get-state-values > div {
+  box-sizing: border-box;
+  flex: 1 1 140px;
+  min-width: 0;
+  margin: 0 4px 8px;
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+}
+
+.get-state-values strong {
+  display: block;
+  margin-top: var(--space-2);
+  overflow-wrap: anywhere;
+  color: var(--color-success, #2f855a);
+  font-size: 1.05rem;
+}
+
+.get-state-controls,
+.get-state-actions {
+  margin: var(--space-4) -4px 0;
+}
+
+.get-state-field {
+  box-sizing: border-box;
+  flex: 1 1 190px;
+  min-width: 0;
+  margin: 0 4px 8px;
+}
+
+.get-state-field > span {
+  display: block;
+  margin-bottom: var(--space-2);
+  overflow-wrap: anywhere;
+}
+
+.get-state-field input,
+.get-state-actions button {
+  box-sizing: border-box;
+  min-height: 38px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  background: var(--color-bg);
+  font: inherit;
+}
+
+.get-state-field input {
+  width: 100%;
+  padding: 0 var(--space-2);
+}
+
+.get-state-actions button {
+  margin: 0 4px 8px;
+  padding: 0 var(--space-3);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.get-state-actions button:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+
+.get-state-actions button:active {
+  transform: scale(0.97);
+}
+
+.get-state-field input:focus-visible,
+.get-state-actions button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .get-state-actions button {
+    transition: none;
+  }
+
+  .get-state-actions button:active {
+    transform: none;
+  }
+}

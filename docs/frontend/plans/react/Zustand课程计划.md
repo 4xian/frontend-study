@@ -30,48 +30,48 @@ Store Factory、多实例及 SSR/hydration 统一放在高级阶段，不与 Rea
 
 ## 3. 基础课程
 
-- [ ] 01. 客户端状态与 Zustand
-- [ ] 02. 第一个 Store
-- [ ] 03. State 与 Action
-- [ ] 04. set 状态更新
-- [ ] 05. get 当前状态
-- [ ] 06. 组件订阅
-- [ ] 07. Selector
-- [ ] 08. 对象与数组更新
-- [ ] 09. TypeScript Store
-- [ ] 10. 状态所有权
-- [ ] 11. 实战：任务筛选器
-- [ ] 12. 实战：购物车状态
+- [x] 01. 客户端状态与 Zustand
+- [x] 02. 第一个 Store
+- [x] 03. State 与 Action
+- [x] 04. set 状态更新
+- [x] 05. get 当前状态
+- [x] 06. 组件订阅
+- [x] 07. Selector
+- [x] 08. 对象与数组更新
+- [x] 09. TypeScript Store
+- [x] 10. 状态所有权
+- [x] 11. 实战：任务筛选器
+- [x] 12. 实战：购物车状态
 
 ## 4. 中级课程
 
-- [ ] 01. 原子 Selector
-- [ ] 02. Selector 结果稳定性
-- [ ] 03. useShallow
-- [ ] 04. 派生状态
-- [ ] 05. 异步 Action
-- [ ] 06. 状态重置
-- [ ] 07. persist 持久化
-- [ ] 08. DevTools 调试
-- [ ] 09. subscribe 订阅
-- [ ] 10. Slices Pattern
-- [ ] 11. 实战：偏好设置中心
-- [ ] 12. 实战：内容管理工作区
+- [x] 01. 原子 Selector
+- [x] 02. Selector 结果稳定性
+- [x] 03. useShallow
+- [x] 04. 派生状态
+- [x] 05. 异步 Action
+- [x] 06. 状态重置
+- [x] 07. persist 持久化
+- [x] 08. DevTools 调试
+- [x] 09. subscribe 订阅
+- [x] 10. Slices Pattern
+- [x] 11. 实战：偏好设置中心
+- [x] 12. 实战：内容管理工作区
 
 ## 5. 高级课程
 
-- [ ] 01. Vanilla Store
-- [ ] 02. Context 作用域
-- [ ] 03. Store Factory 与多实例
-- [ ] 04. Zustand 高级 TypeScript
-- [ ] 05. subscribeWithSelector
-- [ ] 06. 中间件组合
-- [ ] 07. Immer Middleware
-- [ ] 08. 持久化版本迁移
-- [ ] 09. Zustand 测试
-- [ ] 10. SSR 与 Hydration
-- [ ] 11. 实战：多实例编辑器
-- [ ] 12. 实战：生产级客户端状态平台
+- [x] 01. Vanilla Store
+- [x] 02. Context 作用域
+- [x] 03. Store Factory 与多实例
+- [x] 04. Zustand 高级 TypeScript
+- [x] 05. subscribeWithSelector
+- [x] 06. 中间件组合
+- [x] 07. Immer Middleware
+- [x] 08. 持久化版本迁移
+- [x] 09. Zustand 测试
+- [x] 10. SSR 与 Hydration
+- [x] 11. 实战：多实例编辑器
+- [x] 12. 实战：生产级客户端状态平台
 
 ## 6. 范围边界
 

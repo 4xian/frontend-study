@@ -9,6 +9,20 @@ import type { CategoryScope, ContentType, DomainId, SearchHit } from '@/common/c
 
 const route = useRoute()
 const searchOpen = ref(false)
+const searchIndexVersion = ref(0)
+
+/** 打开搜索并在需要时加载延迟搜索索引。 */
+function openSearch(): void {
+  searchOpen.value = true
+  void learningCatalog
+    .prepareSearch()
+    .then(() => {
+      searchIndexVersion.value += 1
+    })
+    .catch(() => {
+      searchIndexVersion.value += 1
+    })
+}
 
 /** 从当前最终路由生成站内搜索范围。 */
 const searchScope = computed<CategoryScope | undefined>(() => {
@@ -32,11 +46,13 @@ const moduleNavigation = computed(() => {
 
 /** 在当前技术目录范围内搜索。 */
 function searchCatalog(query: string): SearchHit[] {
+  void searchIndexVersion.value
   return learningCatalog.search(query, searchScope.value)
 }
 
 /** 将搜索范围扩展到整个技术中心。 */
 function searchAllCatalog(query: string): SearchHit[] {
+  void searchIndexVersion.value
   return learningCatalog.search(query)
 }
 </script>
@@ -44,13 +60,13 @@ function searchAllCatalog(query: string): SearchHit[] {
 <template>
   <div class="content-shell">
     <a class="skip-link" href="#main-content">跳到正文</a>
-    <AppHeader @open-search="searchOpen = true" />
+    <AppHeader @open-search="openSearch" />
     <SearchDialog
       :open="searchOpen"
       :provider="searchCatalog"
       :global-provider="searchAllCatalog"
       @close="searchOpen = false"
-      @open="searchOpen = true"
+      @open="openSearch"
     />
     <main id="main-content" class="shell-main">
       <ModuleNavigationBar v-if="moduleNavigation" :navigation="moduleNavigation" />

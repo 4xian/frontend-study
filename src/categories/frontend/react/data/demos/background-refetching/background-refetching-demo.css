@@ -1,0 +1,219 @@
+.background-refetch-panel {
+  min-width: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+}
+
+.background-refetch-panel *,
+.background-refetch-panel *::before,
+.background-refetch-panel *::after {
+  box-sizing: border-box;
+}
+
+.background-refetch-header span,
+.background-refetch-header h2,
+.background-refetch-header p,
+.background-refetch-settings span,
+.background-refetch-metrics span,
+.background-refetch-metrics strong,
+.background-refetch-observer span,
+.background-refetch-observer strong,
+.background-refetch-observer small,
+.background-refetch-message,
+.background-refetch-result span,
+.background-refetch-result strong,
+.background-refetch-actions button {
+  overflow-wrap: anywhere;
+}
+
+.background-refetch-header span {
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.background-refetch-header h2 {
+  margin: var(--space-1) 0 0;
+  font-size: 1.08rem;
+}
+
+.background-refetch-header p {
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.background-refetch-settings,
+.background-refetch-metrics,
+.background-refetch-observers,
+.background-refetch-actions {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -4px;
+  margin-left: -4px;
+}
+
+.background-refetch-settings {
+  margin-top: var(--space-4);
+}
+
+.background-refetch-settings label {
+  display: inline-flex;
+  align-items: center;
+  min-width: 0;
+  margin: 0 4px 8px;
+  padding: 8px 10px;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  background: var(--color-bg);
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.background-refetch-settings input {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  margin: 0 7px 0 0;
+  accent-color: var(--color-accent);
+}
+
+.background-refetch-metrics {
+  margin-top: 4px;
+}
+
+.background-refetch-metrics > div,
+.background-refetch-observer {
+  flex: 1 1 145px;
+  min-width: 0;
+  margin: 0 4px 8px;
+  padding: 10px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.background-refetch-metrics span,
+.background-refetch-metrics strong,
+.background-refetch-observer span,
+.background-refetch-observer strong,
+.background-refetch-observer small {
+  display: block;
+}
+
+.background-refetch-metrics span,
+.background-refetch-observer span {
+  color: var(--color-text-secondary);
+  font-size: 0.74rem;
+}
+
+.background-refetch-metrics strong,
+.background-refetch-observer strong {
+  margin-top: 4px;
+  color: var(--color-accent);
+  font-size: 0.86rem;
+}
+
+.background-refetch-observer small {
+  margin-top: 5px;
+  color: var(--color-text-secondary);
+  font-size: 0.74rem;
+  line-height: 1.4;
+}
+
+.background-refetch-observers {
+  margin-top: 4px;
+}
+
+.background-refetch-message {
+  margin: 4px 0 0;
+  padding: 10px;
+  border-left: 3px solid var(--color-accent);
+  color: var(--color-text);
+  background: var(--color-bg);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.background-refetch-message[role='alert'] {
+  border-left-color: var(--color-danger);
+}
+
+.background-refetch-result {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  margin-top: 8px;
+  padding: 12px;
+  border: 1px solid var(--color-accent);
+  background: var(--color-bg);
+}
+
+.background-refetch-result strong {
+  margin-right: 10px;
+  color: var(--color-accent);
+  font-size: 0.86rem;
+}
+
+.background-refetch-result span {
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+}
+
+.background-refetch-actions {
+  margin-top: 8px;
+}
+
+.background-refetch-actions button {
+  min-height: 38px;
+  margin: 0 4px 8px;
+  padding: 7px 10px;
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-sm);
+  color: var(--color-bg);
+  background: var(--color-accent);
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.background-refetch-actions button:hover:not(:disabled) {
+  filter: brightness(0.92);
+}
+
+.background-refetch-actions button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.background-refetch-actions button:focus-visible,
+.background-refetch-settings label:has(input:focus-visible) {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+  .background-refetch-panel {
+    padding: var(--space-3);
+  }
+
+  .background-refetch-settings label,
+  .background-refetch-metrics > div,
+  .background-refetch-observer,
+  .background-refetch-actions button {
+    flex-basis: 100%;
+  }
+
+  .background-refetch-result {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .background-refetch-result strong {
+    margin-right: 0;
+    margin-bottom: 4px;
+  }
+}

@@ -78,13 +78,9 @@ export const backendJavaTrackManifest: LearningTrackManifest = {
         {
           id: 'language-runtime',
           title: '语言与运行基础',
-          summary: '理解源码如何组织和运行，并掌握值、控制流、方法、数组与字符串。',
-          topics: ['源码结构', '类型与控制流', '方法、数组与字符串'],
+          summary: '掌握控制流、方法、数组与字符串，并理解这些能力如何组织程序行为。',
+          topics: ['类型与控制流', '方法、数组与字符串'],
           entries: [
-            {
-              id: 'backend.java.learn.basics.packages-imports-and-source-structure',
-              status: 'available',
-            },
             {
               id: 'backend.java.learn.basics.control-flow',
               status: 'available',
@@ -118,16 +114,15 @@ export const backendJavaTrackManifest: LearningTrackManifest = {
         {
           id: 'object-model',
           title: '对象与类型建模',
-          summary: '用对象、抽象类型和元数据建立可维护的 Java 合同。',
+          summary: '用对象、抽象类型、泛型和数据合同建立可维护的 Java 模型。',
           topics: [
             '类与对象',
             '构造方法与 this',
             '封装与访问控制',
             'static 与 final',
-            '枚举与注解',
+            '枚举',
             '抽象与多态',
-            'Object 合同',
-            '异常与泛型',
+            'Object、record 与泛型',
           ],
           entries: [
             {
@@ -180,14 +175,6 @@ export const backendJavaTrackManifest: LearningTrackManifest = {
             },
             {
               id: 'backend.java.learn.basics.generics-and-type-safety',
-              status: 'available',
-            },
-            {
-              id: 'backend.java.learn.basics.debugging-stack-traces-and-javadoc',
-              status: 'available',
-            },
-            {
-              id: 'backend.java.learn.basics.annotations-and-metadata',
               status: 'available',
             },
           ],
@@ -295,24 +282,12 @@ export const backendJavaTrackManifest: LearningTrackManifest = {
             },
           ],
         },
-        {
-          id: 'build-model',
-          title: '项目与构建模型',
-          summary: '理解 Java 项目的构建模型，并建立第一条自动化测试反馈环。',
-          topics: ['Maven', '依赖管理', '多模块结构', 'JUnit 测试'],
-          entries: [
-            {
-              id: 'backend.java.learn.basics.first-automated-test-with-junit',
-              status: 'available',
-            },
-          ],
-        },
       ],
     },
     {
       id: 'intermediate',
       title: '中级课程',
-      summary: '从数据与协议进入分层、测试、Spring Web 和持久化。',
+      summary: '使用 Spring Boot 构建、持久化、测试并交付 Web API。',
       categories: [
         {
           id: 'spring-boot-rest-api',
@@ -328,6 +303,9 @@ export const backendJavaTrackManifest: LearningTrackManifest = {
             '响应与状态码',
             '参数校验',
             '统一接口响应',
+            '文件上传与下载',
+            '跨域与前端联调',
+            'OpenAPI 与 Swagger UI',
           ],
           entries: [
             {
@@ -366,58 +344,146 @@ export const backendJavaTrackManifest: LearningTrackManifest = {
               id: 'backend.java.learn.intermediate.unified-api-response',
               status: 'available',
             },
+            {
+              id: 'backend.java.learn.intermediate.global-exception-handling',
+              status: 'available',
+            },
+            {
+              id: 'backend.java.learn.intermediate.user-and-team-api-project',
+              status: 'available',
+            },
+            {
+              id: 'backend.java.learn.intermediate.file-upload-and-download',
+              status: 'available',
+            },
+            {
+              id: 'backend.java.learn.intermediate.cors-and-frontend-integration',
+              status: 'available',
+            },
+            {
+              id: 'backend.java.learn.intermediate.openapi-documentation-and-api-integration',
+              status: 'available',
+            },
+            {
+              id: 'backend.java.learn.intermediate.project-and-task-api-project',
+              status: 'available',
+            },
           ],
         },
         {
-          id: 'data-and-protocols',
-          title: '数据与协议基础',
-          summary: '用稳定的数据合同连接集合处理、HTTP 与关系数据。',
+          id: 'mysql-and-mybatis',
+          title: 'MySQL 与 MyBatis',
+          summary: '从关系数据建模开始，逐步建立 SQL、迁移、映射、分页和事务能力。',
           topics: [
-            'Stream',
-            '标识与分页',
-            'JSON',
-            'HTTP',
-            'Spring Boot Web API',
-            'Bean Validation',
-            'SQL',
+            '关系数据建模',
+            'SQL 查询',
+            '数据库迁移',
+            'MyBatis 配置',
+            '查询映射',
+            '写入与动态 SQL',
+            '用户与团队持久化',
+            'MyBatis-Plus',
+            '分页与筛选',
+            '事务',
+            '项目与任务持久化',
           ],
           entries: [
             {
-              id: 'backend.java.learn.intermediate.identifiers-equality-and-pagination',
+              id: 'backend.java.learn.intermediate.relational-data-and-sql-foundations',
               status: 'available',
             },
             {
-              id: 'backend.java.learn.intermediate.bean-validation-and-input-contracts',
+              id: 'backend.java.learn.intermediate.sql-queries',
+              status: 'available',
+            },
+            {
+              id: 'backend.java.learn.intermediate.database-migrations',
+              status: 'available',
+            },
+            {
+              id: 'backend.java.learn.intermediate.mybatis-and-mybatis-plus',
+              status: 'available',
+            },
+            {
+              id: 'backend.java.learn.intermediate.mybatis-query-mapping',
+              status: 'available',
+            },
+            {
+              id: 'backend.java.learn.intermediate.mybatis-write-and-dynamic-sql',
+              status: 'available',
+            },
+            {
+              id: 'backend.java.learn.intermediate.user-and-team-persistence-project',
+              status: 'available',
+            },
+            {
+              id: 'backend.java.learn.intermediate.mybatis-plus',
+              status: 'available',
+            },
+            {
+              id: 'backend.java.learn.intermediate.mybatis-plus-pagination-and-filtering',
+              status: 'available',
+            },
+            {
+              id: 'backend.java.learn.intermediate.database-transactions',
+              status: 'available',
+            },
+            {
+              id: 'backend.java.learn.intermediate.project-and-task-persistence-project',
               status: 'available',
             },
           ],
         },
         {
-          id: 'architecture-and-feedback',
-          title: '分层与反馈环',
-          summary: '建立职责清晰的业务边界、错误合同和可重复测试。',
-          topics: [
-            '分层架构',
-            'DTO',
-            'MySQL 持久化',
-            '错误与日志',
-            'JUnit 与 Mockito',
-            'Controller 测试',
-            'OpenAPI',
-          ],
+          id: 'redis-web-capabilities',
+          title: 'Redis 与 Web 常用能力',
+          summary:
+            '先建立 Redis 连接与字符串状态边界，再学习缓存生命周期、验证码、接口幂等与任务查询缓存实战。',
+          topics: ['Redis Web 集成', '缓存读取', '缓存失效', '验证码', '接口幂等', '任务查询缓存'],
           entries: [
             {
-              id: 'backend.java.learn.intermediate.layers-dto-and-service-boundaries',
+              id: 'backend.java.learn.intermediate.redis-web-integration',
               status: 'available',
             },
             {
-              id: 'backend.java.learn.intermediate.spring-boot-mysql-mybatis-persistence-bridge',
+              id: 'backend.java.learn.intermediate.cache-reading',
               status: 'available',
             },
             {
-              id: 'backend.java.learn.intermediate.errors-results-and-logging',
+              id: 'backend.java.learn.intermediate.cache-invalidation',
               status: 'available',
             },
+            {
+              id: 'backend.java.learn.intermediate.verification-code',
+              status: 'available',
+            },
+            {
+              id: 'backend.java.learn.intermediate.api-idempotency',
+              status: 'available',
+            },
+            {
+              id: 'backend.java.learn.intermediate.task-query-cache-project',
+              status: 'available',
+            },
+          ],
+        },
+        {
+          id: 'testing-security-and-delivery',
+          title: '测试、安全与交付',
+          summary: '在数据库与缓存主线完成后，建立测试、安全、运行与交付能力。',
+          topics: [
+            '单元测试',
+            'MockMvc 接口测试',
+            '集成测试',
+            '密码与登录',
+            'JWT 认证',
+            '角色与权限',
+            '日志与可观测性',
+            '健康检查与优雅停机',
+            '应用打包',
+            '容器化部署',
+          ],
+          entries: [
             {
               id: 'backend.java.learn.intermediate.testing-with-junit-and-mocks',
               status: 'available',
@@ -427,43 +493,39 @@ export const backendJavaTrackManifest: LearningTrackManifest = {
               status: 'available',
             },
             {
-              id: 'backend.java.learn.intermediate.openapi-documentation-and-api-integration',
-              status: 'available',
-            },
-          ],
-        },
-        {
-          id: 'model-and-service-design',
-          title: '模型与服务设计',
-          summary: '连接生成代码、业务协作模式和领域建模。',
-          topics: ['Lombok', '服务模式', '领域值'],
-          entries: [
-            {
-              id: 'backend.java.learn.intermediate.lombok-and-generated-contracts',
+              id: 'backend.java.learn.intermediate.integration-testing-with-spring-boot',
               status: 'available',
             },
             {
-              id: 'backend.java.learn.intermediate.service-design-patterns',
+              id: 'backend.java.learn.intermediate.password-and-login',
               status: 'available',
             },
             {
-              id: 'backend.java.learn.intermediate.domain-values-trees-and-mapping',
-              status: 'available',
-            },
-          ],
-        },
-        {
-          id: 'database-specialty-candidates',
-          title: '数据库专项迁移候选',
-          summary: '保留旧稳定页面与 URL；完整内容将在数据库独立专项重新冻结。',
-          topics: ['SQL', 'MyBatis'],
-          entries: [
-            {
-              id: 'backend.java.learn.intermediate.relational-data-and-sql-foundations',
+              id: 'backend.java.learn.intermediate.jwt-authentication',
               status: 'available',
             },
             {
-              id: 'backend.java.learn.intermediate.mybatis-and-mybatis-plus',
+              id: 'backend.java.learn.intermediate.roles-and-permissions',
+              status: 'available',
+            },
+            {
+              id: 'backend.java.learn.intermediate.logging-and-observability',
+              status: 'available',
+            },
+            {
+              id: 'backend.java.learn.intermediate.health-checks-and-graceful-shutdown',
+              status: 'available',
+            },
+            {
+              id: 'backend.java.learn.intermediate.application-packaging',
+              status: 'available',
+            },
+            {
+              id: 'backend.java.learn.intermediate.containerized-deployment',
+              status: 'available',
+            },
+            {
+              id: 'backend.java.learn.intermediate.testing-and-delivery-check',
               status: 'available',
             },
           ],
@@ -473,48 +535,27 @@ export const backendJavaTrackManifest: LearningTrackManifest = {
     {
       id: 'advanced',
       title: '高级课程',
-      summary: '处理并发、集成、资源、安全和现代化迁移边界。',
+      summary: '完成外部服务、异步、消息、并发与 TeamFlow 交付能力。',
       categories: [
         {
-          id: 'cross-cutting-and-concurrency',
-          title: '横切与并发状态',
-          summary: '显式管理代理、线程、上下文、异步任务与缓存一致性。',
-          topics: ['反射与 AOP', '并发与锁', '线程上下文', '异步与重试', '缓存'],
-          entries: [
-            {
-              id: 'backend.java.learn.advanced.reflection-aop-and-cross-cutting-contracts',
-              status: 'available',
-            },
-            {
-              id: 'backend.java.learn.advanced.concurrency-locks-and-shared-state',
-              status: 'available',
-            },
-            {
-              id: 'backend.java.learn.advanced.thread-context-and-cleanup',
-              status: 'available',
-            },
-            {
-              id: 'backend.java.learn.advanced.events-async-scheduling-and-retry',
-              status: 'available',
-            },
-            {
-              id: 'backend.java.learn.advanced.cache-and-consistency',
-              status: 'available',
-            },
+          id: 'advanced-web-and-graduation',
+          title: '高级 Web 与结课',
+          summary: '从外部服务集成开始，继续建立异步、消息、并发与完整交付能力。',
+          topics: [
+            '外部 HTTP 调用',
+            'HTTP 客户端配置',
+            '异步任务',
+            '定时任务',
+            '消息队列边界',
+            'RabbitMQ 消息收发',
+            '可靠消费与消费幂等',
+            '并发更新与一致性',
+            '异步通知链路',
+            'TeamFlow 完整交付',
           ],
-        },
-        {
-          id: 'integration-and-resources',
-          title: '集成与资源生命周期',
-          summary: '为实时通信、数据、网络、文件和进程资源建立可验证边界。',
-          topics: ['WebSocket', '数据分片', 'HTTP 客户端', '文件与流', 'JVM 可观测性'],
           entries: [
             {
-              id: 'backend.java.learn.advanced.websocket-and-realtime-lifecycle',
-              status: 'available',
-            },
-            {
-              id: 'backend.java.learn.advanced.database-sharding-and-sql-boundaries',
+              id: 'backend.java.learn.advanced.external-http-calls',
               status: 'available',
             },
             {
@@ -522,51 +563,35 @@ export const backendJavaTrackManifest: LearningTrackManifest = {
               status: 'available',
             },
             {
-              id: 'backend.java.learn.advanced.file-storage-and-archive-boundaries',
+              id: 'backend.java.learn.advanced.events-async-scheduling-and-retry',
               status: 'available',
             },
             {
-              id: 'backend.java.learn.advanced.binary-streams-media-and-backpressure',
+              id: 'backend.java.learn.advanced.scheduled-tasks',
               status: 'available',
             },
             {
-              id: 'backend.java.learn.advanced.process-jvm-and-observability',
-              status: 'available',
-            },
-          ],
-        },
-        {
-          id: 'application-security',
-          title: '应用安全边界',
-          summary: '从资源授权、不可信输入和秘密管理建立现代安全主线。',
-          topics: ['认证与授权', 'JWT', '密码学与秘密', '输入与 API 暴露'],
-          entries: [
-            {
-              id: 'backend.java.learn.advanced.authentication-authorization-and-jwt',
+              id: 'backend.java.learn.advanced.message-queue-boundaries',
               status: 'available',
             },
             {
-              id: 'backend.java.learn.advanced.cryptography-secrets-and-license-verification',
+              id: 'backend.java.learn.advanced.rabbitmq-message-send-receive',
               status: 'available',
             },
             {
-              id: 'backend.java.learn.advanced.secure-input-and-api-exposure',
-              status: 'available',
-            },
-          ],
-        },
-        {
-          id: 'architecture-modernization',
-          title: '架构协作与现代化',
-          summary: '组织复杂协作流程，并隔离 legacy 版本与迁移风险。',
-          topics: ['责任链与注册表', '工厂与状态机', 'Legacy 隔离', '现代化迁移'],
-          entries: [
-            {
-              id: 'backend.java.learn.advanced.chains-registries-and-state-machines',
+              id: 'backend.java.learn.advanced.reliable-consumption-and-idempotency',
               status: 'available',
             },
             {
-              id: 'backend.java.learn.advanced.legacy-isolation-and-modernization',
+              id: 'backend.java.learn.advanced.concurrent-updates-and-consistency',
+              status: 'available',
+            },
+            {
+              id: 'backend.java.learn.advanced.async-notification-pipeline',
+              status: 'available',
+            },
+            {
+              id: 'backend.java.learn.advanced.teamflow-complete-delivery',
               status: 'available',
             },
           ],

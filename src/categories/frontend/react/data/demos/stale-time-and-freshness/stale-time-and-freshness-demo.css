@@ -1,0 +1,214 @@
+.stale-time-panel {
+  min-width: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+}
+
+.stale-time-panel *,
+.stale-time-panel *::before,
+.stale-time-panel *::after {
+  box-sizing: border-box;
+}
+
+.stale-time-header span,
+.stale-time-header h2,
+.stale-time-header p,
+.stale-time-policy-description,
+.stale-time-metrics span,
+.stale-time-metrics strong,
+.stale-time-window,
+.stale-time-message,
+.stale-time-result,
+.stale-time-actions button {
+  overflow-wrap: anywhere;
+}
+
+.stale-time-header span {
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.stale-time-header h2 {
+  margin: var(--space-1) 0 0;
+  font-size: 1.08rem;
+}
+
+.stale-time-header p {
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.stale-time-policy-picker,
+.stale-time-actions,
+.stale-time-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -4px;
+  margin-right: -4px;
+}
+
+.stale-time-policy-picker {
+  margin-top: var(--space-4);
+}
+
+.stale-time-policy-picker button {
+  min-height: 38px;
+  margin: 0 4px 8px;
+  padding: 7px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  background: var(--color-bg);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.stale-time-policy-picker button.is-selected {
+  border-color: var(--color-accent);
+  color: var(--color-bg);
+  background: var(--color-accent);
+}
+
+.stale-time-policy-picker button:disabled,
+.stale-time-actions button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.stale-time-policy-picker button:hover:not(:disabled),
+.stale-time-actions button:hover:not(:disabled) {
+  filter: brightness(0.92);
+}
+
+.stale-time-policy-picker button:focus-visible,
+.stale-time-actions button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.stale-time-policy-description {
+  margin: 0 0 var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.stale-time-metrics {
+  margin-top: var(--space-2);
+}
+
+.stale-time-metrics > div {
+  flex: 1 1 120px;
+  min-width: 0;
+  margin: 0 4px 8px;
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.stale-time-metrics span,
+.stale-time-metrics strong {
+  display: block;
+}
+
+.stale-time-metrics span {
+  color: var(--color-text-secondary);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.stale-time-metrics strong {
+  margin-top: 4px;
+  color: var(--color-accent);
+  font-size: 0.94rem;
+}
+
+.stale-time-metrics strong.is-stale {
+  color: var(--color-danger, #b54747);
+}
+
+.stale-time-metrics strong.is-fresh {
+  color: var(--color-success, #2e7d5b);
+}
+
+.stale-time-window {
+  flex: 1 1 100%;
+  margin: 0 4px;
+  padding: var(--space-3);
+  border-left: 3px solid var(--color-accent);
+  color: var(--color-text);
+  background: var(--color-bg);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.stale-time-message,
+.stale-time-result {
+  margin: var(--space-2) 0 0;
+  padding: var(--space-3);
+  background: var(--color-bg);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.stale-time-message[role='alert'] {
+  border-left: 3px solid var(--color-danger, #b54747);
+}
+
+.stale-time-result {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  border-left: 3px solid var(--color-accent);
+}
+
+.stale-time-result strong {
+  margin-right: 8px;
+  color: var(--color-accent);
+}
+
+.stale-time-actions {
+  margin-top: var(--space-3);
+}
+
+.stale-time-actions button {
+  min-height: 38px;
+  margin: 0 4px 8px;
+  padding: 7px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  background: var(--color-bg);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.stale-time-actions button:first-child {
+  border-color: var(--color-accent);
+  color: var(--color-bg);
+  background: var(--color-accent);
+}
+
+@media (max-width: 480px) {
+  .stale-time-panel {
+    padding: var(--space-3);
+  }
+
+  .stale-time-policy-picker button,
+  .stale-time-actions button {
+    flex: 1 1 100%;
+  }
+
+  .stale-time-metrics > div {
+    flex-basis: 100%;
+  }
+}

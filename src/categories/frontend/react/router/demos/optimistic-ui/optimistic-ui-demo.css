@@ -1,0 +1,176 @@
+.optimistic-ui-demo {
+  min-height: 500px;
+  padding: 22px;
+  color: #183046;
+  border: 1px solid #d5e0e8;
+  border-radius: 16px;
+  background: #f5f8fb;
+}
+
+.optimistic-ui-header,
+.optimistic-ui-observer,
+.optimistic-ui-task-list li,
+.optimistic-ui-task-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.optimistic-ui-header {
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.optimistic-ui-eyebrow {
+  margin: 0;
+  color: #6a4fb3;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.optimistic-ui-header h2 {
+  margin: 4px 0 8px;
+}
+
+.optimistic-ui-header span,
+.optimistic-ui-note {
+  line-height: 1.6;
+}
+
+.optimistic-ui-demo button {
+  border: 0;
+  border-radius: 8px;
+  padding: 9px 13px;
+  color: #fff;
+  background: #315f90;
+  font: inherit;
+  cursor: pointer;
+}
+
+.optimistic-ui-demo button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.optimistic-ui-reset {
+  margin-top: 8px;
+}
+
+.optimistic-ui-observer {
+  margin: 0 -7px 18px;
+  padding: 10px 12px;
+  border: 1px solid #d5e0e8;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.optimistic-ui-observer > * {
+  margin: 7px;
+}
+
+.optimistic-ui-observer span {
+  color: #647383;
+  font-size: 0.82rem;
+}
+
+.optimistic-ui-failure-toggle {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.optimistic-ui-failure-toggle input {
+  width: 18px;
+  height: 18px;
+  margin: 0 8px 0 0;
+  accent-color: #6a4fb3;
+}
+
+.optimistic-ui-task-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.optimistic-ui-task-list li {
+  align-items: flex-start;
+  margin-top: 10px;
+  padding: 14px 0;
+  border-top: 1px solid #dfe7ed;
+}
+
+.optimistic-ui-task-copy {
+  min-width: 200px;
+  flex: 1 1 280px;
+}
+
+.optimistic-ui-task-copy strong,
+.optimistic-ui-task-copy span,
+.optimistic-ui-task-copy small {
+  display: block;
+}
+
+.optimistic-ui-task-copy span,
+.optimistic-ui-task-copy small {
+  margin-top: 5px;
+  color: #647383;
+  font-size: 0.9rem;
+}
+
+.optimistic-ui-task-list li.is-done .optimistic-ui-task-copy strong {
+  color: #34724d;
+  text-decoration: line-through;
+}
+
+.optimistic-ui-task-form {
+  margin: 0 0 0 12px;
+}
+
+.optimistic-ui-task-list small {
+  flex-basis: 100%;
+  margin-top: 8px;
+}
+
+.optimistic-ui-success {
+  color: #34724d;
+}
+
+.optimistic-ui-error {
+  color: #9c3a2d;
+}
+
+.optimistic-ui-note {
+  margin: 18px 0 0;
+  color: #647383;
+  font-size: 0.9rem;
+}
+
+.optimistic-ui-demo button:focus-visible,
+.optimistic-ui-demo input:focus-visible {
+  outline: 3px solid #e8a33b;
+  outline-offset: 3px;
+}
+
+@media (max-width: 620px) {
+  .optimistic-ui-demo {
+    padding: 16px;
+  }
+
+  .optimistic-ui-header > div {
+    flex-basis: 100%;
+  }
+
+  .optimistic-ui-task-form {
+    margin: 12px 0 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .optimistic-ui-demo * {
+    scroll-behavior: auto;
+    transition: none;
+  }
+}

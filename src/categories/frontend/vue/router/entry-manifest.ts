@@ -1,214 +1,186 @@
 import type { CategoryContentEntryManifest } from '@/common/catalog'
-
-import { meta as learnCompositionProgrammaticNavigationMeta } from './learn/composition-programmatic-navigation.md?catalog-meta'
-import { meta as learnDynamicRoutingRouterLinkMeta } from './learn/dynamic-routing-router-link.md?catalog-meta'
-import { meta as learnLazyLoadingMeta } from './learn/lazy-loading.md?catalog-meta'
-import { meta as learnMetaNavigationGuardsMeta } from './learn/meta-navigation-guards.md?catalog-meta'
-import { meta as learnNamedRoutesRedirectsAliasesMeta } from './learn/named-routes-redirects-aliases.md?catalog-meta'
-import { meta as learnNamedViewsRoutePropsMeta } from './learn/named-views-route-props.md?catalog-meta'
-import { meta as learnNavigationFailuresMeta } from './learn/navigation-failures.md?catalog-meta'
-import { meta as learnNestedRoutesMeta } from './learn/nested-routes.md?catalog-meta'
-import { meta as learnRouteDataFetchingMeta } from './learn/route-data-fetching.md?catalog-meta'
-import { meta as learnRouteParamsQueryMatchingMeta } from './learn/route-params-query-matching.md?catalog-meta'
-import { meta as learnRouterLinkViewActiveMeta } from './learn/router-link-view-active.md?catalog-meta'
-import { meta as learnRouterViewSlotsTransitionsMeta } from './learn/router-view-slots-transitions.md?catalog-meta'
-import { meta as learnScrollHistoryDeploymentMeta } from './learn/scroll-history-deployment.md?catalog-meta'
-import { meta as learnSetupFirstRouterMeta } from './learn/setup-first-router.md?catalog-meta'
-import { meta as learnTypedFileBasedRoutingMeta } from './learn/typed-file-based-routing.md?catalog-meta'
-import { meta as referenceCreateRouterMeta } from './reference/create-router.md?catalog-meta'
-import { meta as referenceFailuresMeta } from './reference/failures.md?catalog-meta'
-import { meta as referenceGuardsMeta } from './reference/guards.md?catalog-meta'
-import { meta as referenceHistoryMeta } from './reference/history.md?catalog-meta'
-import { meta as referenceInjectionKeysMeta } from './reference/injection-keys.md?catalog-meta'
-import { meta as referenceMatcherMeta } from './reference/matcher.md?catalog-meta'
-import { meta as referenceNavigationMeta } from './reference/navigation.md?catalog-meta'
-import { meta as referenceOverviewMeta } from './reference/overview.md?catalog-meta'
-import { meta as referenceParamsQueryMeta } from './reference/params-query.md?catalog-meta'
-import { meta as referenceRouteLocationsMeta } from './reference/route-locations.md?catalog-meta'
-import { meta as referenceRouteMapMeta } from './reference/route-map.md?catalog-meta'
-import { meta as referenceRouteRecordsMeta } from './reference/route-records.md?catalog-meta'
-import { meta as referenceRouterInstanceMeta } from './reference/router-instance.md?catalog-meta'
-import { meta as referenceRouterLinkMeta } from './reference/router-link.md?catalog-meta'
-import { meta as referenceRouterViewMeta } from './reference/router-view.md?catalog-meta'
-import { meta as referenceUnpluginMeta } from './reference/unplugin.md?catalog-meta'
-import { meta as referenceVirtualModulesMeta } from './reference/virtual-modules.md?catalog-meta'
-import { meta as referenceVolarMigrationMeta } from './reference/volar-migration.md?catalog-meta'
-import { meta as referenceWatchlistMeta } from './reference/watchlist.md?catalog-meta'
+import { getContentMeta } from 'virtual:content-catalog-meta'
 
 export const vueRouterContentEntries: CategoryContentEntryManifest[] = [
   {
     slug: 'composition-programmatic-navigation',
-    meta: learnCompositionProgrammaticNavigationMeta,
+    meta: getContentMeta(
+      'src/categories/frontend/vue/router/learn/composition-programmatic-navigation.md',
+    ),
     load: async () =>
       (await import('./learn/composition-programmatic-navigation.md?content-entry')).default,
   },
   {
     slug: 'dynamic-routing-router-link',
-    meta: learnDynamicRoutingRouterLinkMeta,
+    meta: getContentMeta('src/categories/frontend/vue/router/learn/dynamic-routing-router-link.md'),
     load: async () =>
       (await import('./learn/dynamic-routing-router-link.md?content-entry')).default,
   },
   {
     slug: 'lazy-loading',
-    meta: learnLazyLoadingMeta,
+    meta: getContentMeta('src/categories/frontend/vue/router/learn/lazy-loading.md'),
     load: async () => (await import('./learn/lazy-loading.md?content-entry')).default,
   },
   {
     slug: 'meta-navigation-guards',
-    meta: learnMetaNavigationGuardsMeta,
+    meta: getContentMeta('src/categories/frontend/vue/router/learn/meta-navigation-guards.md'),
     load: async () => (await import('./learn/meta-navigation-guards.md?content-entry')).default,
   },
   {
     slug: 'named-routes-redirects-aliases',
-    meta: learnNamedRoutesRedirectsAliasesMeta,
+    meta: getContentMeta(
+      'src/categories/frontend/vue/router/learn/named-routes-redirects-aliases.md',
+    ),
     load: async () =>
       (await import('./learn/named-routes-redirects-aliases.md?content-entry')).default,
   },
   {
     slug: 'named-views-route-props',
-    meta: learnNamedViewsRoutePropsMeta,
+    meta: getContentMeta('src/categories/frontend/vue/router/learn/named-views-route-props.md'),
     load: async () => (await import('./learn/named-views-route-props.md?content-entry')).default,
   },
   {
     slug: 'navigation-failures',
-    meta: learnNavigationFailuresMeta,
+    meta: getContentMeta('src/categories/frontend/vue/router/learn/navigation-failures.md'),
     load: async () => (await import('./learn/navigation-failures.md?content-entry')).default,
   },
   {
     slug: 'nested-routes',
-    meta: learnNestedRoutesMeta,
+    meta: getContentMeta('src/categories/frontend/vue/router/learn/nested-routes.md'),
     load: async () => (await import('./learn/nested-routes.md?content-entry')).default,
   },
   {
     slug: 'route-data-fetching',
-    meta: learnRouteDataFetchingMeta,
+    meta: getContentMeta('src/categories/frontend/vue/router/learn/route-data-fetching.md'),
     load: async () => (await import('./learn/route-data-fetching.md?content-entry')).default,
   },
   {
     slug: 'route-params-query-matching',
-    meta: learnRouteParamsQueryMatchingMeta,
+    meta: getContentMeta('src/categories/frontend/vue/router/learn/route-params-query-matching.md'),
     load: async () =>
       (await import('./learn/route-params-query-matching.md?content-entry')).default,
   },
   {
     slug: 'router-link-view-active',
-    meta: learnRouterLinkViewActiveMeta,
+    meta: getContentMeta('src/categories/frontend/vue/router/learn/router-link-view-active.md'),
     load: async () => (await import('./learn/router-link-view-active.md?content-entry')).default,
   },
   {
     slug: 'router-view-slots-transitions',
-    meta: learnRouterViewSlotsTransitionsMeta,
+    meta: getContentMeta(
+      'src/categories/frontend/vue/router/learn/router-view-slots-transitions.md',
+    ),
     load: async () =>
       (await import('./learn/router-view-slots-transitions.md?content-entry')).default,
   },
   {
     slug: 'scroll-history-deployment',
-    meta: learnScrollHistoryDeploymentMeta,
+    meta: getContentMeta('src/categories/frontend/vue/router/learn/scroll-history-deployment.md'),
     load: async () => (await import('./learn/scroll-history-deployment.md?content-entry')).default,
   },
   {
     slug: 'setup-first-router',
-    meta: learnSetupFirstRouterMeta,
+    meta: getContentMeta('src/categories/frontend/vue/router/learn/setup-first-router.md'),
     load: async () => (await import('./learn/setup-first-router.md?content-entry')).default,
   },
   {
     slug: 'typed-file-based-routing',
-    meta: learnTypedFileBasedRoutingMeta,
+    meta: getContentMeta('src/categories/frontend/vue/router/learn/typed-file-based-routing.md'),
     load: async () => (await import('./learn/typed-file-based-routing.md?content-entry')).default,
   },
   {
     slug: 'create-router',
-    meta: referenceCreateRouterMeta,
+    meta: getContentMeta('src/categories/frontend/vue/router/reference/create-router.md'),
     load: async () => (await import('./reference/create-router.md?content-entry')).default,
   },
   {
     slug: 'failures',
-    meta: referenceFailuresMeta,
+    meta: getContentMeta('src/categories/frontend/vue/router/reference/failures.md'),
     load: async () => (await import('./reference/failures.md?content-entry')).default,
   },
   {
     slug: 'guards',
-    meta: referenceGuardsMeta,
+    meta: getContentMeta('src/categories/frontend/vue/router/reference/guards.md'),
     load: async () => (await import('./reference/guards.md?content-entry')).default,
   },
   {
     slug: 'history',
-    meta: referenceHistoryMeta,
+    meta: getContentMeta('src/categories/frontend/vue/router/reference/history.md'),
     load: async () => (await import('./reference/history.md?content-entry')).default,
   },
   {
     slug: 'injection-keys',
-    meta: referenceInjectionKeysMeta,
+    meta: getContentMeta('src/categories/frontend/vue/router/reference/injection-keys.md'),
     load: async () => (await import('./reference/injection-keys.md?content-entry')).default,
   },
   {
     slug: 'matcher',
-    meta: referenceMatcherMeta,
+    meta: getContentMeta('src/categories/frontend/vue/router/reference/matcher.md'),
     load: async () => (await import('./reference/matcher.md?content-entry')).default,
   },
   {
     slug: 'navigation',
-    meta: referenceNavigationMeta,
+    meta: getContentMeta('src/categories/frontend/vue/router/reference/navigation.md'),
     load: async () => (await import('./reference/navigation.md?content-entry')).default,
   },
   {
     slug: 'overview',
-    meta: referenceOverviewMeta,
+    meta: getContentMeta('src/categories/frontend/vue/router/reference/overview.md'),
     load: async () => (await import('./reference/overview.md?content-entry')).default,
   },
   {
     slug: 'params-query',
-    meta: referenceParamsQueryMeta,
+    meta: getContentMeta('src/categories/frontend/vue/router/reference/params-query.md'),
     load: async () => (await import('./reference/params-query.md?content-entry')).default,
   },
   {
     slug: 'route-locations',
-    meta: referenceRouteLocationsMeta,
+    meta: getContentMeta('src/categories/frontend/vue/router/reference/route-locations.md'),
     load: async () => (await import('./reference/route-locations.md?content-entry')).default,
   },
   {
     slug: 'route-map',
-    meta: referenceRouteMapMeta,
+    meta: getContentMeta('src/categories/frontend/vue/router/reference/route-map.md'),
     load: async () => (await import('./reference/route-map.md?content-entry')).default,
   },
   {
     slug: 'route-records',
-    meta: referenceRouteRecordsMeta,
+    meta: getContentMeta('src/categories/frontend/vue/router/reference/route-records.md'),
     load: async () => (await import('./reference/route-records.md?content-entry')).default,
   },
   {
     slug: 'router-instance',
-    meta: referenceRouterInstanceMeta,
+    meta: getContentMeta('src/categories/frontend/vue/router/reference/router-instance.md'),
     load: async () => (await import('./reference/router-instance.md?content-entry')).default,
   },
   {
     slug: 'router-link',
-    meta: referenceRouterLinkMeta,
+    meta: getContentMeta('src/categories/frontend/vue/router/reference/router-link.md'),
     load: async () => (await import('./reference/router-link.md?content-entry')).default,
   },
   {
     slug: 'router-view',
-    meta: referenceRouterViewMeta,
+    meta: getContentMeta('src/categories/frontend/vue/router/reference/router-view.md'),
     load: async () => (await import('./reference/router-view.md?content-entry')).default,
   },
   {
     slug: 'unplugin',
-    meta: referenceUnpluginMeta,
+    meta: getContentMeta('src/categories/frontend/vue/router/reference/unplugin.md'),
     load: async () => (await import('./reference/unplugin.md?content-entry')).default,
   },
   {
     slug: 'virtual-modules',
-    meta: referenceVirtualModulesMeta,
+    meta: getContentMeta('src/categories/frontend/vue/router/reference/virtual-modules.md'),
     load: async () => (await import('./reference/virtual-modules.md?content-entry')).default,
   },
   {
     slug: 'volar-migration',
-    meta: referenceVolarMigrationMeta,
+    meta: getContentMeta('src/categories/frontend/vue/router/reference/volar-migration.md'),
     load: async () => (await import('./reference/volar-migration.md?content-entry')).default,
   },
   {
     slug: 'watchlist',
-    meta: referenceWatchlistMeta,
+    meta: getContentMeta('src/categories/frontend/vue/router/reference/watchlist.md'),
     load: async () => (await import('./reference/watchlist.md?content-entry')).default,
   },
 ]

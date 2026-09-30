@@ -1,9 +1,11 @@
-import type { ContentEntry, ContentMeta, LessonMeta, ReferenceMeta } from '@/common/content'
+import type { ContentEntry } from '@/common/content'
 import { buildContentPath, buildModulePath, buildTechnologyPath } from './category-path'
 import type {
   CatalogEntryNode,
+  CatalogContentMeta,
   CatalogDemo,
   CatalogNode,
+  CatalogSearchRecord,
   CatalogSource,
   CategoryContentEntryManifest,
   CategoryModuleManifest,
@@ -43,13 +45,13 @@ interface ModuleRecord {
 }
 
 /** 返回条目类型对应的公开内容类型。 */
-function getContentType(meta: ContentMeta): ContentType {
+function getContentType(meta: CatalogContentMeta): ContentType {
   return meta.type === 'lesson' ? 'learn' : 'reference'
 }
 
 /** 返回条目在模块 manifest 中的阶段或参考分组。 */
-function getEntryGroup(meta: ContentMeta): string {
-  return meta.type === 'lesson' ? (meta as LessonMeta).stage : (meta as ReferenceMeta).group
+function getEntryGroup(meta: CatalogContentMeta): string {
+  return meta.type === 'lesson' ? meta.stage! : meta.group!
 }
 
 /** 判断目录标识是否符合小写 kebab-case 约束。 */
@@ -144,7 +146,7 @@ function toEntryNeighbor(
 }
 
 /** 判断正文是否位于指定技术目录范围内。 */
-function matchesScope(meta: ContentMeta, scope: CategoryScope): boolean {
+function matchesScope(meta: CatalogContentMeta, scope: CategoryScope): boolean {
   return (
     (!scope.domain || meta.domain === scope.domain) &&
     (!scope.technology || meta.technology === scope.technology) &&
@@ -154,24 +156,9 @@ function matchesScope(meta: ContentMeta, scope: CategoryScope): boolean {
   )
 }
 
-/** 返回轻量元数据中允许进入搜索的全部文本。 */
-function getMetaSearchValues(meta: ContentMeta): string[] {
-  const anchors = meta.type === 'reference' ? ((meta as ReferenceMeta).anchors ?? []) : []
-  const sourceValues = meta.sources.flatMap((source) => [
-    source.title,
-    source.appliesTo ?? '',
-    ...(source.claims ?? []),
-  ])
-  return [
-    meta.title,
-    meta.summary,
-    ...meta.tags,
-    ...anchors,
-    ...sourceValues,
-    ...Object.values(meta.modernBaseline ?? {}),
-    ...Object.values(meta.legacyBaseline ?? {}),
-    ...(meta.projectEvidence ?? []).map((evidence) => evidence.symbol),
-  ]
+/** 返回首屏元数据中允许同步搜索的基础文本。 */
+function getCatalogMetaSearchValues(meta: CatalogContentMeta): string[] {
+  return [meta.title, meta.summary]
 }
 
 /** 将课程规划条目解析为模块总览公开节点。 */
@@ -358,7 +345,7 @@ function validateReferenceTarget(
   target: { entryId: string; anchor?: string },
   technology: CategoryTechnologyManifest,
   module: CategoryModuleManifest,
-  metaById: Map<string, ContentMeta>,
+  metaById: Map<string, CatalogContentMeta>,
 ): void {
   const meta = metaById.get(target.entryId)
   if (
@@ -370,7 +357,7 @@ function validateReferenceTarget(
   ) {
     throw new Error(`Reference 索引目标不存在或跨模块：${itemId}`)
   }
-  if (target.anchor && !(meta as ReferenceMeta).headingIds.includes(target.anchor)) {
+  if (target.anchor && !(meta.headingIds ?? []).includes(target.anchor)) {
     throw new Error(`Reference 索引锚点不存在：${itemId}#${target.anchor}`)
   }
 }
@@ -394,6 +381,8 @@ export function createLearningCatalog(source: CatalogSource): LearningCatalog {
   const metas = contentEntries.map((entry) => entry.meta)
   const metaById = new Map(metas.map((meta) => [meta.id, meta]))
   const metaByPath = new Map(contentEntries.map((entry) => [getEntryPath(entry), entry.meta]))
+  let searchIndex: Map<string, CatalogSearchRecord> | undefined
+  let searchIndexPromise: Promise<void> | undefined
 
   /** 返回指定身份的正式模块记录。 */
   function findModule(scope: ModuleScope): ModuleRecord | undefined {
@@ -559,12 +548,12 @@ export function createLearningCatalog(source: CatalogSource): LearningCatalog {
   }
 
   /** 按稳定 ID 返回轻量元数据。 */
-  function getEntry(id: string): ContentMeta | undefined {
+  function getEntry(id: string): CatalogContentMeta | undefined {
     return metaById.get(id)
   }
 
   /** 按完整详情路径返回轻量元数据。 */
-  function getEntryByPath(path: string): ContentMeta | undefined {
+  function getEntryByPath(path: string): CatalogContentMeta | undefined {
     return metaByPath.get(path)
   }
 
@@ -573,6 +562,20 @@ export function createLearningCatalog(source: CatalogSource): LearningCatalog {
     const entry = contentById.get(id)
     if (!entry) throw new Error(`内容不存在：${id}`)
     return entry.load()
+  }
+
+  /** 在搜索弹层打开时懒加载完整搜索字段，并复用并发请求。 */
+  async function prepareSearch(): Promise<void> {
+    if (searchIndex) return
+    searchIndexPromise ??= import('virtual:content-search-index')
+      .then(({ contentSearchIndex }) => {
+        searchIndex = new Map(Object.entries(contentSearchIndex))
+      })
+      .catch((error) => {
+        searchIndexPromise = undefined
+        throw error
+      })
+    await searchIndexPromise
   }
 
   /** 使用轻量元数据与 Reference 索引搜索当前技术范围。 */
@@ -640,8 +643,8 @@ export function createLearningCatalog(source: CatalogSource): LearningCatalog {
       .filter(
         (meta) =>
           !normalizedQuery ||
-          getMetaSearchValues(meta).some((value) =>
-            value.toLocaleLowerCase().includes(normalizedQuery),
+          [...getCatalogMetaSearchValues(meta), ...(searchIndex?.get(meta.id)?.values ?? [])].some(
+            (value) => value.toLocaleLowerCase().includes(normalizedQuery),
           ),
       )
       .map<SearchHit>((meta) => ({
@@ -689,6 +692,7 @@ export function createLearningCatalog(source: CatalogSource): LearningCatalog {
     getEntryByPath,
     loadEntry,
     search,
+    prepareSearch,
     getNeighbors,
   }
 }

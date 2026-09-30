@@ -1,0 +1,384 @@
+.route-error-boundary-demo {
+  width: 100%;
+  min-width: 0;
+  color: #172033;
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+}
+
+.route-error-boundary-shell,
+.route-error-boundary-root-fallback {
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid #d8dee9;
+  border-radius: 8px;
+  background: #f7f9fc;
+}
+
+.route-error-boundary-heading,
+.route-error-boundary-panel-heading,
+.route-error-boundary-report-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.route-error-boundary-heading > div,
+.route-error-boundary-panel-heading > div,
+.route-error-boundary-report-heading > div {
+  min-width: 0;
+}
+
+.route-error-boundary-heading p,
+.route-error-boundary-panel-heading p,
+.route-error-boundary-report-heading p,
+.route-error-boundary-home > p {
+  margin: 0 0 4px;
+  color: #0f766e;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.route-error-boundary-heading h2,
+.route-error-boundary-panel-heading h3,
+.route-error-boundary-report-heading h3,
+.route-error-boundary-home h3 {
+  margin: 0;
+  color: #111827;
+  font-size: 18px;
+  line-height: 1.3;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+
+.route-error-boundary-heading span,
+.route-error-boundary-home span {
+  display: block;
+  margin-top: 6px;
+  color: #526078;
+  font-size: 13px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.route-error-boundary-reset,
+.route-error-boundary-report button,
+.route-error-boundary-actions button {
+  min-height: 40px;
+  padding: 8px 12px;
+  border: 1px solid #0f766e;
+  border-radius: 6px;
+  color: #ffffff;
+  background: #0f766e;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.route-error-boundary-reset {
+  flex: 0 0 auto;
+  margin-left: 16px;
+  border-color: #64748b;
+  color: #334155;
+  background: #ffffff;
+}
+
+.route-error-boundary-reset:hover:not(:disabled),
+.route-error-boundary-report button:hover:not(:disabled),
+.route-error-boundary-actions button:hover:not(:disabled) {
+  border-color: #164e63;
+  color: #ffffff;
+  background: #164e63;
+}
+
+.route-error-boundary-reset:focus-visible,
+.route-error-boundary-report button:focus-visible,
+.route-error-boundary-actions button:focus-visible,
+.route-error-boundary-nav a:focus-visible {
+  outline: 3px solid #f4b942;
+  outline-offset: 2px;
+}
+
+.route-error-boundary-reset:disabled,
+.route-error-boundary-report button:disabled,
+.route-error-boundary-actions button:disabled {
+  border-color: #94a3b8;
+  color: #ffffff;
+  background: #64748b;
+  cursor: wait;
+}
+
+.route-error-boundary-observer,
+.route-error-boundary-error-details,
+.route-error-boundary-report dl {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  min-width: 0;
+  margin: 16px -5px -10px;
+}
+
+.route-error-boundary-observer > div,
+.route-error-boundary-error-details > div,
+.route-error-boundary-report dl > div {
+  min-width: 138px;
+  flex: 1 1 0;
+  margin: 0 5px 10px;
+  padding: 10px 11px;
+  border: 1px solid #dce3ec;
+  border-radius: 6px;
+  background: #ffffff;
+}
+
+.route-error-boundary-observer dt,
+.route-error-boundary-error-details dt,
+.route-error-boundary-report dt {
+  margin-bottom: 4px;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 750;
+  text-transform: uppercase;
+}
+
+.route-error-boundary-observer dd,
+.route-error-boundary-error-details dd,
+.route-error-boundary-report dd {
+  margin: 0;
+  color: #172033;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.route-error-boundary-nav {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  margin: 18px -4px -8px;
+}
+
+.route-error-boundary-nav a {
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 4px 8px;
+  padding: 7px 11px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  color: #334155;
+  background: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: center;
+  text-decoration: none;
+}
+
+.route-error-boundary-nav a:hover:not([aria-disabled='true']) {
+  border-color: #0f766e;
+  color: #0f766e;
+}
+
+.route-error-boundary-nav a.active {
+  border-color: #0f766e;
+  color: #ffffff;
+  background: #0f766e;
+}
+
+.route-error-boundary-nav a[aria-disabled='true'] {
+  border-color: #cbd5e1;
+  color: #64748b;
+  background: #e2e8f0;
+  cursor: wait;
+}
+
+.route-error-boundary-outlet {
+  min-width: 0;
+  margin-top: 16px;
+}
+
+.route-error-boundary-home,
+.route-error-boundary-report,
+.route-error-boundary-panel {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid #d8dee9;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.route-error-boundary-home {
+  border-left: 4px solid #0f766e;
+}
+
+.route-error-boundary-report-heading > strong,
+.route-error-boundary-panel-heading > strong {
+  flex: 0 1 auto;
+  max-width: 46%;
+  margin-left: 14px;
+  padding: 5px 8px;
+  border-radius: 5px;
+  color: #1f2937;
+  background: #e8edf4;
+  font-size: 12px;
+  line-height: 1.35;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.route-error-boundary-report form {
+  margin-top: 16px;
+}
+
+.route-error-boundary-panel {
+  border-color: #e7a7a7;
+  border-left: 4px solid #b42318;
+  background: #fffafa;
+}
+
+.route-error-boundary-panel-heading p {
+  color: #b42318;
+}
+
+.route-error-boundary-panel-heading > strong {
+  color: #8a1c13;
+  background: #fee4e2;
+}
+
+.route-error-boundary-error-details > div {
+  border-color: #ead1d1;
+}
+
+.route-error-boundary-message {
+  margin: 16px 0 0;
+  padding: 11px 12px;
+  border-left: 3px solid #b42318;
+  color: #7a271a;
+  background: #fff1f0;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.route-error-boundary-retry-state {
+  margin: 12px 0 0;
+  color: #526078;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+}
+
+.route-error-boundary-retry-state strong {
+  color: #172033;
+}
+
+.route-error-boundary-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 14px -4px -8px;
+}
+
+.route-error-boundary-actions button {
+  margin: 0 4px 8px;
+}
+
+.route-error-boundary-actions button:first-child:not(:last-child) {
+  border-color: #b42318;
+  background: #b42318;
+}
+
+.route-error-boundary-root-fallback {
+  border-color: #e7a7a7;
+  background: #f7f9fc;
+}
+
+@media (max-width: 640px) {
+  .route-error-boundary-shell,
+  .route-error-boundary-root-fallback {
+    padding: 13px;
+  }
+
+  .route-error-boundary-heading,
+  .route-error-boundary-panel-heading,
+  .route-error-boundary-report-heading {
+    display: block;
+  }
+
+  .route-error-boundary-reset {
+    width: 100%;
+    margin: 12px 0 0;
+  }
+
+  .route-error-boundary-report-heading > strong,
+  .route-error-boundary-panel-heading > strong {
+    display: inline-block;
+    max-width: 100%;
+    margin: 9px 0 0;
+    text-align: left;
+  }
+
+  .route-error-boundary-observer,
+  .route-error-boundary-error-details,
+  .route-error-boundary-report dl {
+    display: block;
+    margin: 14px 0 0;
+  }
+
+  .route-error-boundary-observer > div,
+  .route-error-boundary-error-details > div,
+  .route-error-boundary-report dl > div {
+    width: 100%;
+    min-width: 0;
+    margin: 0 0 8px;
+  }
+
+  .route-error-boundary-nav {
+    margin-top: 14px;
+  }
+
+  .route-error-boundary-nav a {
+    flex: 1 1 calc(50% - 8px);
+    min-width: 128px;
+  }
+
+  .route-error-boundary-home,
+  .route-error-boundary-report,
+  .route-error-boundary-panel {
+    padding: 13px;
+  }
+
+  .route-error-boundary-actions {
+    display: block;
+    margin: 14px 0 0;
+  }
+
+  .route-error-boundary-actions button {
+    width: 100%;
+    margin: 0 0 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-error-boundary-demo *,
+  .route-error-boundary-demo *::before,
+  .route-error-boundary-demo *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

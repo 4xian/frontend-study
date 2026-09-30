@@ -66,19 +66,27 @@ src/
     │   │   ├── manifest.ts
     │   │   ├── core/
     │   │   │   ├── manifest.ts
+    │   │   │   ├── entry-manifest.ts
     │   │   │   ├── learn/
     │   │   │   ├── reference/
     │   │   │   └── demos/
     │   │   ├── router/
+    │   │   │   ├── manifest.ts
+    │   │   │   └── entry-manifest.ts
     │   │   └── pinia/
+    │   │       ├── manifest.ts
+    │   │       └── entry-manifest.ts
     │   └── engineering/
     │       ├── manifest.ts
     │       └── typescript/
+    │           ├── manifest.ts
+    │           └── entry-manifest.ts
     └── backend/
         └── java/
             ├── manifest.ts
             └── core/
                 ├── manifest.ts
+                ├── entry-manifest.ts
                 └── learn/
 ```
 
@@ -131,11 +139,17 @@ Markdown 只允许受控语法和 directive。任意 HTML、未知 directive、�
 Manifest 分两级维护：
 
 - Technology `manifest.ts`：技术名称、摘要、模块顺序和正式可见状态。
-- Module `manifest.ts`：课程、Reference、Demo、学习顺序、分组、关联、loader 和正文路径 slug。
+- Module `manifest.ts`：模块名称、摘要、Track、Demo 和 Reference manifest 的装配。
+- Module `entry-manifest.ts`：课程与 Reference 条目、学习顺序、分组、关联、正文路径 slug 和正文 loader。
 
 `categories/manifest.ts` 只汇总已经正式实施的 Technology manifest。`common/catalog`
 提供类型、校验、搜索、相邻条目和路径生成能力，并通过参数接收 manifests；它不能反向 import
 具体类别。最终由 `app` 完成 Catalog 实例装配。
+
+Markdown Catalog 元数据由 Vite Markdown 插件从各 Module 的显式 `entry-manifest.ts` 聚合为统一虚拟
+索引。索引只包含轻量元数据和 Reference 标题锚点；正文仍通过条目的动态 loader 按需加载。开发和生产
+共享同一索引结构、Catalog interface 和正文 loader 语义，生产构建额外完整解析所有正式登记正文，运行
+时不会因为构建校验而预加载全部正文。
 
 Catalog 是菜单、总览、搜索、前后篇、进度和正文加载的唯一外部接口。页面不得依赖目录遍历、
 文件名排序、`import.meta.glob` 细节或某个技术的专用 manifest。

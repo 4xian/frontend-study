@@ -1,0 +1,59 @@
+services:
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: teamflow
+      MYSQL_USER: teamflow
+      MYSQL_PASSWORD: local-teamflow-pass
+      MYSQL_ROOT_PASSWORD: local-root-pass
+    healthcheck:
+      test: ['CMD-SHELL', 'mysqladmin ping -h 127.0.0.1 -uroot -p$${MYSQL_ROOT_PASSWORD}']
+      interval: 3s
+      timeout: 3s
+      retries: 30
+
+  redis:
+    image: redis:8-alpine
+    command: ['redis-server', '--requirepass', 'local-redis-pass']
+    healthcheck:
+      test: ['CMD', 'redis-cli', '-a', 'local-redis-pass', '--no-auth-warning', 'PING']
+      interval: 3s
+      timeout: 3s
+      retries: 30
+
+  rabbitmq:
+    image: rabbitmq:4-management-alpine
+    environment:
+      RABBITMQ_DEFAULT_USER: teamflow
+      RABBITMQ_DEFAULT_PASS: local-rabbit-pass
+    healthcheck:
+      test: ['CMD', 'rabbitmq-diagnostics', '-q', 'ping']
+      interval: 3s
+      timeout: 5s
+      retries: 30
+
+  teamflow:
+    image: ${TEAMFLOW_IMAGE:?TEAMFLOW_IMAGE is required}
+    ports:
+      - '${TEAMFLOW_PORT:?TEAMFLOW_PORT is required}:8080'
+    environment:
+      TEAMFLOW_DB_URL: jdbc:mysql://mysql:3306/teamflow?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      TEAMFLOW_DB_USER: teamflow
+      TEAMFLOW_DB_PASSWORD: local-teamflow-pass
+      TEAMFLOW_REDIS_HOST: redis
+      TEAMFLOW_REDIS_PASSWORD: local-redis-pass
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_USERNAME: teamflow
+      SPRING_RABBITMQ_PASSWORD: local-rabbit-pass
+      TEAMFLOW_JWT_SECRET: local-teamflow-delivery-secret-key-2026
+      TEAMFLOW_PARTNER_BASE_URL: ${TEAMFLOW_PARTNER_BASE_URL:-http://host.docker.internal:18090}
+      TEAMFLOW_CORS_ALLOWED_ORIGINS: ${TEAMFLOW_CORS_ALLOWED_ORIGINS:-http://localhost:5173,http://127.0.0.1:5173}
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy

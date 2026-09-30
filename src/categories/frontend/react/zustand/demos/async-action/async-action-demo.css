@@ -1,0 +1,138 @@
+.async-action-demo {
+  min-width: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+}
+
+.async-action-heading p,
+.async-action-heading h2,
+.async-action-heading span,
+.async-action-ticks {
+  overflow-wrap: anywhere;
+}
+
+.async-action-heading p {
+  margin: 0 0 var(--space-1);
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.async-action-heading h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.async-action-heading span {
+  display: block;
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+}
+
+.async-action-ticks {
+  margin: var(--space-4) 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+}
+
+.async-action-ticks strong {
+  margin-left: var(--space-2);
+  color: var(--color-accent);
+}
+
+.async-action-panels,
+.async-action-actions {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.async-action-panels {
+  margin: var(--space-4) -4px 0;
+}
+
+.async-action-panel {
+  box-sizing: border-box;
+  flex: 1 1 160px;
+  min-width: 0;
+  margin: 0 4px 8px;
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+}
+
+.async-action-panel span {
+  color: var(--color-text-secondary);
+  font-size: 0.74rem;
+}
+
+.async-action-panel strong {
+  display: block;
+  margin-top: var(--space-2);
+  overflow-wrap: anywhere;
+  color: var(--color-success, #2f855a);
+  font-size: 1.05rem;
+}
+
+.async-action-panel p {
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.78rem;
+}
+
+.async-action-panel b {
+  color: var(--color-accent);
+}
+
+.async-action-actions {
+  margin: var(--space-4) -4px 0;
+}
+
+.async-action-actions button {
+  box-sizing: border-box;
+  min-height: 38px;
+  margin: 0 4px 8px;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  background: var(--color-bg);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.async-action-actions button:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+
+.async-action-actions button:active {
+  transform: scale(0.97);
+}
+
+.async-action-actions button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .async-action-actions button {
+    transition: none;
+  }
+
+  .async-action-actions button:active {
+    transform: none;
+  }
+}

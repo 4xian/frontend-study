@@ -1,0 +1,218 @@
+.gc-lifecycle-panel {
+  min-width: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+}
+
+.gc-lifecycle-panel *,
+.gc-lifecycle-panel *::before,
+.gc-lifecycle-panel *::after {
+  box-sizing: border-box;
+}
+
+.gc-lifecycle-header span,
+.gc-lifecycle-header h2,
+.gc-lifecycle-header p,
+.gc-lifecycle-policy-description,
+.gc-lifecycle-metrics span,
+.gc-lifecycle-metrics strong,
+.gc-lifecycle-countdown,
+.gc-lifecycle-observer,
+.gc-lifecycle-observer p,
+.gc-lifecycle-inactive-panel,
+.gc-lifecycle-actions button,
+.gc-lifecycle-policy-picker button {
+  overflow-wrap: anywhere;
+}
+
+.gc-lifecycle-header span {
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.gc-lifecycle-header h2 {
+  margin: var(--space-1) 0 0;
+  font-size: 1.08rem;
+}
+
+.gc-lifecycle-header p {
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.gc-lifecycle-policy-picker,
+.gc-lifecycle-metrics,
+.gc-lifecycle-actions {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -4px;
+  margin-right: -4px;
+}
+
+.gc-lifecycle-policy-picker {
+  margin-top: var(--space-4);
+}
+
+.gc-lifecycle-policy-picker button,
+.gc-lifecycle-actions button,
+.gc-lifecycle-inactive-panel button,
+.gc-lifecycle-observer button {
+  min-height: 38px;
+  margin: 0 4px 8px;
+  padding: 7px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  background: var(--color-bg);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.gc-lifecycle-policy-picker button.is-selected,
+.gc-lifecycle-actions button:first-child,
+.gc-lifecycle-inactive-panel button {
+  border-color: var(--color-accent);
+  color: var(--color-bg);
+  background: var(--color-accent);
+}
+
+.gc-lifecycle-policy-picker button:hover:not(:disabled),
+.gc-lifecycle-actions button:hover:not(:disabled),
+.gc-lifecycle-inactive-panel button:hover:not(:disabled),
+.gc-lifecycle-observer button:hover:not(:disabled) {
+  filter: brightness(0.92);
+}
+
+.gc-lifecycle-policy-picker button:focus-visible,
+.gc-lifecycle-actions button:focus-visible,
+.gc-lifecycle-inactive-panel button:focus-visible,
+.gc-lifecycle-observer button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.gc-lifecycle-policy-description {
+  margin: 0 0 var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.gc-lifecycle-metrics {
+  margin-top: var(--space-2);
+}
+
+.gc-lifecycle-metrics > div {
+  flex: 1 1 145px;
+  min-width: 0;
+  margin: 0 4px 8px;
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.gc-lifecycle-metrics span,
+.gc-lifecycle-metrics strong {
+  display: block;
+}
+
+.gc-lifecycle-metrics span {
+  color: var(--color-text-secondary);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.gc-lifecycle-metrics strong {
+  margin-top: 4px;
+  color: var(--color-accent);
+  font-size: 0.88rem;
+}
+
+.gc-lifecycle-countdown {
+  margin: var(--space-2) 0 0;
+  padding: var(--space-3);
+  border-left: 3px solid var(--color-accent);
+  color: var(--color-text);
+  background: var(--color-bg);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.gc-lifecycle-observer,
+.gc-lifecycle-inactive-panel {
+  margin-top: var(--space-2);
+  padding: var(--space-3);
+  background: var(--color-bg);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.gc-lifecycle-observer-loading {
+  border-left: 3px solid var(--color-accent);
+}
+
+.gc-lifecycle-data {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+.gc-lifecycle-data span {
+  width: 100%;
+  color: var(--color-text-secondary);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.gc-lifecycle-data strong {
+  margin-right: 8px;
+  color: var(--color-accent);
+  font-size: 1rem;
+}
+
+.gc-lifecycle-data p {
+  margin: 0;
+}
+
+.gc-lifecycle-query-state {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: 0.76rem;
+}
+
+.gc-lifecycle-query-state span {
+  margin-right: 12px;
+}
+
+.gc-lifecycle-actions {
+  margin-top: var(--space-3);
+}
+
+.gc-lifecycle-inactive-panel p {
+  margin: 0 0 var(--space-2);
+}
+
+@media (max-width: 480px) {
+  .gc-lifecycle-panel {
+    padding: var(--space-3);
+  }
+
+  .gc-lifecycle-policy-picker button,
+  .gc-lifecycle-actions button,
+  .gc-lifecycle-inactive-panel button {
+    flex: 1 1 100%;
+  }
+
+  .gc-lifecycle-metrics > div {
+    flex-basis: 100%;
+  }
+}

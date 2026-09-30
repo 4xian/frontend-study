@@ -1,0 +1,354 @@
+.route-metadata-demo {
+  width: 100%;
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  color: #172033;
+  background: #f8fafc;
+  box-sizing: border-box;
+}
+
+.route-metadata-demo *,
+.route-metadata-demo *::before,
+.route-metadata-demo *::after {
+  box-sizing: border-box;
+}
+
+.route-metadata-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  min-width: 0;
+  padding-bottom: 18px;
+  border-bottom: 1px solid #dbe3ec;
+}
+
+.route-metadata-header > div {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.route-metadata-header p,
+.route-metadata-section-heading p,
+.route-metadata-card > p,
+.route-metadata-project-heading p {
+  margin: 0;
+  color: #7c3aed;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.route-metadata-header h2 {
+  margin: 4px 0 0;
+  color: #172033;
+  font-size: 24px;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.route-metadata-header span {
+  display: block;
+  margin-top: 6px;
+  color: #526176;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.route-metadata-header > code {
+  max-width: 42%;
+  flex: 0 1 auto;
+  margin-left: 20px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  color: #5b21b6;
+  background: #ede9fe;
+  font-size: 12px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.route-metadata-shortcuts,
+.route-metadata-project-links {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 12px -4px -4px;
+}
+
+.route-metadata-shortcuts a,
+.route-metadata-project-links a {
+  display: inline-flex;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  margin: 4px;
+  padding: 8px 12px;
+  border: 1px solid #b9c5d3;
+  border-radius: 6px;
+  color: #334155;
+  background: #ffffff;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.4;
+  text-align: center;
+  text-decoration: none;
+}
+
+.route-metadata-shortcuts a:hover,
+.route-metadata-project-links a:hover {
+  border-color: #7c3aed;
+  color: #5b21b6;
+}
+
+.route-metadata-shortcuts a:focus-visible,
+.route-metadata-project-links a:focus-visible,
+.route-metadata-breadcrumbs a:focus-visible {
+  outline: 3px solid #f4b942;
+  outline-offset: 2px;
+}
+
+.route-metadata-breadcrumbs {
+  min-width: 0;
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-left: 4px solid #7c3aed;
+  background: #f5f3ff;
+}
+
+.route-metadata-breadcrumbs ol {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  min-width: 0;
+  margin: -4px;
+  padding: 0;
+  list-style: none;
+}
+
+.route-metadata-breadcrumbs li {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  margin: 4px;
+  color: #526176;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.route-metadata-breadcrumbs li + li::before {
+  margin-right: 8px;
+  color: #8b5cf6;
+  content: '/';
+}
+
+.route-metadata-breadcrumbs a {
+  color: #5b21b6;
+  font-weight: 650;
+  overflow-wrap: anywhere;
+}
+
+.route-metadata-breadcrumbs [aria-current='page'] {
+  color: #172033;
+  font-weight: 750;
+  overflow-wrap: anywhere;
+}
+
+.route-metadata-matches {
+  min-width: 0;
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid #cad5e2;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.route-metadata-section-heading,
+.route-metadata-project-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.route-metadata-section-heading > div,
+.route-metadata-project-heading > div {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.route-metadata-section-heading h3,
+.route-metadata-project-heading h3,
+.route-metadata-card > h3 {
+  margin: 3px 0 0;
+  color: #172033;
+  font-size: 18px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.route-metadata-section-heading > strong,
+.route-metadata-project-heading > strong {
+  flex: 0 0 auto;
+  margin-left: 12px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  color: #5b21b6;
+  background: #ede9fe;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.route-metadata-matches > ol {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  min-width: 0;
+  margin: 10px -4px -4px;
+  padding: 0;
+  list-style: none;
+}
+
+.route-metadata-matches li {
+  min-width: 150px;
+  flex: 1 1 180px;
+  margin: 4px;
+  padding: 10px;
+  border: 1px solid #ddd6fe;
+  border-radius: 6px;
+  background: #faf9ff;
+}
+
+.route-metadata-matches code,
+.route-metadata-matches span,
+.route-metadata-matches small {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.route-metadata-matches code {
+  color: #5b21b6;
+  font-size: 12px;
+}
+
+.route-metadata-matches span {
+  margin-top: 5px;
+  color: #334155;
+  font-size: 12px;
+}
+
+.route-metadata-matches small {
+  margin-top: 5px;
+  color: #64748b;
+  font-size: 11px;
+}
+
+.route-metadata-content {
+  min-width: 0;
+  margin-top: 16px;
+}
+
+.route-metadata-card {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid #cad5e2;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.route-metadata-card > span,
+.route-metadata-card > section p {
+  display: block;
+  margin-top: 8px;
+  color: #526176;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.route-metadata-card dl {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  margin: 12px -4px -4px;
+}
+
+.route-metadata-card dl > div {
+  min-width: 140px;
+  flex: 1 1 180px;
+  margin: 4px;
+  padding: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: #f8fafc;
+}
+
+.route-metadata-card dt {
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.route-metadata-card dd {
+  margin: 4px 0 0;
+  color: #172033;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.route-metadata-project-outlet {
+  min-width: 0;
+  margin-top: 14px;
+  padding: 14px;
+  border-left: 4px solid #c4b5fd;
+  background: #faf9ff;
+}
+
+.route-metadata-project-outlet h4 {
+  margin: 0;
+  color: #172033;
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.route-metadata-project-outlet p {
+  margin: 6px 0 0;
+  color: #526176;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 640px) {
+  .route-metadata-demo {
+    padding: 14px;
+  }
+
+  .route-metadata-header,
+  .route-metadata-section-heading,
+  .route-metadata-project-heading {
+    display: block;
+  }
+
+  .route-metadata-header > code {
+    display: block;
+    max-width: none;
+    margin: 12px 0 0;
+  }
+
+  .route-metadata-section-heading > strong,
+  .route-metadata-project-heading > strong {
+    display: inline-block;
+    margin: 10px 0 0;
+  }
+
+  .route-metadata-matches li,
+  .route-metadata-card dl > div {
+    flex-basis: 100%;
+  }
+}

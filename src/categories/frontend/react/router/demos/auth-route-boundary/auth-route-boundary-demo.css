@@ -1,0 +1,158 @@
+.auth-route-boundary-demo {
+  color: #183046;
+  background: #f5f8fb;
+  border: 1px solid #d5e0e8;
+  border-radius: 18px;
+  padding: 22px;
+}
+
+.auth-route-boundary-header,
+.auth-route-boundary-observer,
+.auth-route-boundary-data,
+.auth-route-boundary-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.auth-route-boundary-header {
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.auth-route-boundary-header h2,
+.auth-route-boundary-card h3 {
+  margin: 4px 0 8px;
+}
+
+.auth-route-boundary-header span,
+.auth-route-boundary-card p {
+  line-height: 1.6;
+}
+
+.auth-route-boundary-eyebrow {
+  margin: 0;
+  color: #6a4fb3;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.auth-route-boundary-header button,
+.auth-route-boundary-card button {
+  border: 0;
+  border-radius: 9px;
+  padding: 9px 13px;
+  color: #fff;
+  background: #315f90;
+  font: inherit;
+  cursor: pointer;
+}
+
+.auth-route-boundary-expire {
+  margin-top: 12px;
+  margin-bottom: 18px;
+}
+
+.auth-route-boundary-action-note {
+  margin: 10px 0 0;
+  color: #647383;
+  font-size: 0.88rem;
+}
+
+.auth-route-boundary-observer,
+.auth-route-boundary-data {
+  margin: 0 -8px 18px;
+}
+
+.auth-route-boundary-observer > div,
+.auth-route-boundary-data > div {
+  min-width: 150px;
+  margin: 8px;
+  padding: 10px 12px;
+  border: 1px solid #d5e0e8;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.auth-route-boundary-observer dt,
+.auth-route-boundary-data dt {
+  color: #647383;
+  font-size: 0.78rem;
+}
+
+.auth-route-boundary-observer dd,
+.auth-route-boundary-data dd {
+  margin: 4px 0 0;
+  font-weight: 700;
+}
+
+.auth-route-boundary-content {
+  max-width: 720px;
+}
+
+.auth-route-boundary-card {
+  padding: 18px;
+  border: 1px solid #d5e0e8;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.auth-route-boundary-card strong {
+  color: #9c3a2d;
+}
+
+.auth-route-boundary-form label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 14px;
+  font-weight: 700;
+}
+
+.auth-route-boundary-form select {
+  margin-top: 6px;
+  padding: 9px;
+  border: 1px solid #b8c7d3;
+  border-radius: 8px;
+  font: inherit;
+}
+
+.auth-route-boundary-links {
+  margin: 18px -6px;
+}
+
+.auth-route-boundary-links a {
+  margin: 6px;
+  color: #315f90;
+  font-weight: 700;
+}
+
+.auth-route-boundary-demo button:focus-visible,
+.auth-route-boundary-demo a:focus-visible,
+.auth-route-boundary-demo select:focus-visible {
+  outline: 3px solid #e8a33b;
+  outline-offset: 3px;
+}
+
+@media (max-width: 620px) {
+  .auth-route-boundary-demo {
+    padding: 16px;
+  }
+
+  .auth-route-boundary-header button {
+    margin-top: 14px;
+  }
+
+  .auth-route-boundary-observer > div,
+  .auth-route-boundary-data > div {
+    flex: 1 1 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-route-boundary-demo * {
+    scroll-behavior: auto;
+    transition: none;
+  }
+}

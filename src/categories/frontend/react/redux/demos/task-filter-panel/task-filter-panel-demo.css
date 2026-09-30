@@ -1,0 +1,148 @@
+.task-filter-panel {
+  min-width: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+}
+
+.task-filter-header {
+  display: flex;
+  min-width: 0;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.task-filter-header span {
+  color: var(--color-text-secondary);
+  font-size: 0.75rem;
+}
+
+.task-filter-header h2 {
+  margin: 4px 0 0;
+  font-size: 1.05rem;
+}
+
+.task-filter-header strong {
+  margin-left: var(--space-3);
+  color: var(--color-accent);
+  font-size: 0.78rem;
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+
+.task-filter-controls {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: var(--space-4);
+}
+
+.task-filter-controls button {
+  min-height: 40px;
+  margin: 0 var(--space-2) var(--space-2) 0;
+  padding: 7px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  color: var(--color-text);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.8rem;
+}
+
+.task-filter-controls button.is-active {
+  border-color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 10%, var(--color-bg));
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.task-filter-list {
+  margin: var(--space-3) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.task-filter-list li {
+  margin-top: 8px;
+}
+
+.task-filter-list li:first-child {
+  margin-top: 0;
+}
+
+.task-filter-list li > button {
+  display: flex;
+  width: 100%;
+  min-height: 44px;
+  align-items: center;
+  padding: 9px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  color: var(--color-text);
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+}
+
+.task-filter-list li > button[aria-pressed='true'] {
+  border-color: var(--color-success);
+  background: color-mix(in srgb, var(--color-success) 9%, var(--color-bg));
+}
+
+.task-filter-list li > button span {
+  flex: 0 0 56px;
+  color: var(--color-accent);
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+.task-filter-list li > button strong {
+  min-width: 0;
+  margin-left: var(--space-2);
+  overflow-wrap: anywhere;
+  font-size: 0.82rem;
+}
+
+.task-filter-empty {
+  padding: var(--space-4);
+  border: 1px dashed var(--color-border);
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+.task-filter-reset {
+  min-height: 40px;
+  margin-top: var(--space-3);
+  padding: 8px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  color: var(--color-text);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.task-filter-panel button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+  .task-filter-panel {
+    padding: var(--space-3);
+  }
+
+  .task-filter-header {
+    display: block;
+  }
+
+  .task-filter-header strong {
+    display: block;
+    margin: var(--space-2) 0 0;
+    text-align: left;
+  }
+}

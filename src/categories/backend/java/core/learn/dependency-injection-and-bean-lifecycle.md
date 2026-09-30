@@ -1629,3 +1629,8 @@ public final class DirectConstructionCheck {
 - 一个实现可以直接注入；没有实现会缺 Bean；多个实现必须用唯一 `@Primary` 或 `@Qualifier` 选择。
 - TeamFlow 的完整程序证明了默认候选和限定候选分别如何输出，普通 Java 直接构造也能复用同一服务。
 - JDK 25 / Boot 4.1.0 与 Java 8 / Boot 2.3.12.RELEASE 的注入源码相同，版本切换时要同时核对 POM、IDEA 和终端 JDK。
+
+## 累计项目衔接
+
+累计项目中的 Controller、应用服务、查询适配器和安全配置全部使用构造器注入；现代版与 Java 8 版保持相同
+依赖方向，只在框架 API 确有代际差异时分开实现。独立课程工程仍用于观察候选选择和生命周期，不承担累计业务。

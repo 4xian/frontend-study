@@ -1,0 +1,115 @@
+.server-state-demo {
+  min-width: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+}
+
+.server-state-heading span,
+.server-state-heading h2,
+.server-state-heading p,
+.server-state-list strong,
+.server-state-list span,
+.server-state-message {
+  overflow-wrap: anywhere;
+}
+
+.server-state-heading span {
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.server-state-heading h2 {
+  margin: var(--space-1) 0 0;
+  font-size: 1.05rem;
+}
+
+.server-state-heading p {
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+}
+
+.server-state-filter {
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--space-4);
+  color: var(--color-text-secondary);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.server-state-filter select {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 40px;
+  margin-top: 4px;
+  padding: 6px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: inherit;
+}
+
+.server-state-filter select:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.server-state-message {
+  margin: var(--space-4) 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.86rem;
+}
+
+.server-state-error {
+  color: var(--color-danger);
+}
+
+.server-state-list {
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.server-state-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-top: 8px;
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.server-state-list li:first-child {
+  margin-top: 0;
+}
+
+.server-state-list strong {
+  margin-right: 8px;
+}
+
+.server-state-list span {
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+}
+
+@media (max-width: 480px) {
+  .server-state-demo {
+    padding: var(--space-3);
+  }
+
+  .server-state-list li {
+    display: block;
+  }
+
+  .server-state-list span {
+    display: block;
+    margin-top: 4px;
+  }
+}

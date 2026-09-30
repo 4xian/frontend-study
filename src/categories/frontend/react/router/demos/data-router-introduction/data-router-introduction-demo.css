@@ -1,0 +1,97 @@
+.data-router-demo {
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+}
+
+.data-router-demo-heading p {
+  margin: 0 0 var(--space-1);
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.data-router-demo-heading h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.data-router-demo-flow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: var(--space-3) -4px 0;
+}
+
+.data-router-demo-flow > * {
+  margin: 0 4px 8px;
+}
+
+.data-router-demo-flow code,
+.data-router-demo-flow span {
+  max-width: 100%;
+  padding: 4px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  font-size: 0.8rem;
+  overflow-wrap: anywhere;
+}
+
+.data-router-demo-flow strong {
+  color: var(--color-accent);
+}
+
+.data-router-demo-viewport {
+  min-width: 0;
+  margin-top: var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+}
+
+.data-router-demo-page {
+  padding: var(--space-4);
+}
+
+.data-router-demo-page span,
+.data-router-demo-page code,
+.data-router-demo-page h3,
+.data-router-demo-page p {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.data-router-demo-page span {
+  color: var(--color-text-secondary);
+  font-size: 0.75rem;
+}
+
+.data-router-demo-page code {
+  margin-top: var(--space-1);
+  color: var(--color-accent);
+  font-weight: 800;
+}
+
+.data-router-demo-page h3 {
+  margin: var(--space-3) 0 0;
+  font-size: 1rem;
+}
+
+.data-router-demo-page p,
+.data-router-demo-note {
+  color: var(--color-text-secondary);
+}
+
+.data-router-demo-page p {
+  margin: var(--space-2) 0 0;
+}
+
+.data-router-demo-note {
+  margin: var(--space-3) 0 0;
+  font-size: 0.8rem;
+  overflow-wrap: anywhere;
+}

@@ -1,10 +1,20 @@
 <script setup lang="ts">
-defineProps<{
+import { computed } from 'vue'
+import type { CodeExample } from '@/common/content'
+import CodeBlock from '@/common/ui/CodeBlock.vue'
+
+const props = defineProps<{
   title: string
   instructions: string
   acceptance?: string
-  answer?: string
+  answer?: string | CodeExample
 }>()
+
+/** 读取文字形式的练习参考答案。 */
+const answerText = computed(() => (typeof props.answer === 'string' ? props.answer : undefined))
+
+/** 读取代码形式的练习参考答案。 */
+const answerCode = computed(() => (typeof props.answer === 'object' ? props.answer : undefined))
 </script>
 
 <template>
@@ -17,7 +27,8 @@ defineProps<{
     </div>
     <details v-if="answer" class="exercise-answer">
       <summary>查看参考答案</summary>
-      <p>{{ answer }}</p>
+      <p v-if="answerText">{{ answerText }}</p>
+      <CodeBlock v-else-if="answerCode" :code="answerCode.content" :lang="answerCode.lang" />
     </details>
   </section>
 </template>
@@ -40,6 +51,12 @@ defineProps<{
 .exercise-acceptance,
 .exercise-answer {
   margin-top: var(--space-3);
+}
+
+.exercise > p,
+.exercise-acceptance p,
+.exercise-answer p {
+  overflow-wrap: anywhere;
 }
 
 .exercise-acceptance {

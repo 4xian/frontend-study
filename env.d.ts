@@ -9,7 +9,19 @@ declare module '*.md?content-entry' {
 }
 
 declare module '*.md?catalog-meta' {
-  import type { ContentMeta } from '@/common/content'
+  import type { CatalogContentMeta } from '@/common/catalog'
 
-  export const meta: ContentMeta
+  export const meta: CatalogContentMeta
+}
+
+declare module 'virtual:content-catalog-meta' {
+  import type { CatalogContentMeta } from '@/common/catalog'
+
+  export function getContentMeta(path: string): CatalogContentMeta
+}
+
+declare module 'virtual:content-search-index' {
+  import type { CatalogSearchRecord } from '@/common/catalog'
+
+  export const contentSearchIndex: Record<string, CatalogSearchRecord>
 }

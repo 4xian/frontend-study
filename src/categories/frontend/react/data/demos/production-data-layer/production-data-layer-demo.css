@@ -1,0 +1,164 @@
+.production-data-layer-demo {
+  min-width: 0;
+  max-width: 100%;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+}
+
+.production-data-layer-demo *,
+.production-data-layer-demo *::before,
+.production-data-layer-demo *::after {
+  box-sizing: border-box;
+}
+
+.production-data-layer-header span,
+.production-data-layer-header h2,
+.production-data-layer-header p,
+.production-data-layer-metrics span,
+.production-data-layer-metrics strong,
+.production-data-layer-message,
+.production-data-layer-card,
+.production-data-layer-card h3,
+.production-data-layer-card p {
+  overflow-wrap: anywhere;
+}
+
+.production-data-layer-header span {
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.production-data-layer-header h2 {
+  margin: var(--space-1) 0 0;
+  font-size: 1.08rem;
+}
+
+.production-data-layer-header p {
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.production-data-layer-metrics,
+.production-data-layer-actions,
+.production-data-layer-columns {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -4px;
+  margin-left: -4px;
+}
+
+.production-data-layer-metrics {
+  margin-top: var(--space-4);
+}
+
+.production-data-layer-metrics > div {
+  flex: 1 1 140px;
+  min-width: 0;
+  margin: 0 4px 8px;
+  padding: 10px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.production-data-layer-metrics span,
+.production-data-layer-metrics strong {
+  display: block;
+}
+
+.production-data-layer-metrics span {
+  color: var(--color-text-secondary);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.production-data-layer-metrics strong {
+  margin-top: 4px;
+  color: var(--color-accent);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.production-data-layer-actions {
+  margin-top: 4px;
+}
+
+.production-data-layer-actions button {
+  min-height: 38px;
+  margin: 0 4px 8px;
+  padding: 7px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  background: var(--color-bg);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.production-data-layer-actions button[data-kind='primary'] {
+  color: var(--color-bg);
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.production-data-layer-actions button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.production-data-layer-columns {
+  margin-top: 4px;
+}
+
+.production-data-layer-card {
+  flex: 1 1 220px;
+  min-width: 0;
+  margin: 0 4px 8px;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.production-data-layer-card h3 {
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+.production-data-layer-card p {
+  margin: 8px 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.production-data-layer-message {
+  margin: 8px 0 0;
+  padding: 10px;
+  border-left: 3px solid var(--color-accent);
+  color: var(--color-text);
+  background: var(--color-bg-secondary);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 480px) {
+  .production-data-layer-demo {
+    padding: var(--space-3);
+  }
+
+  .production-data-layer-metrics > div,
+  .production-data-layer-card,
+  .production-data-layer-actions button {
+    flex-basis: 100%;
+  }
+
+  .production-data-layer-actions button {
+    width: calc(100% - 8px);
+  }
+}

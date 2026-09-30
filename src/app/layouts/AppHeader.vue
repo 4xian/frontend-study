@@ -347,7 +347,7 @@ onBeforeUnmount(() => {
     <div class="header-content">
       <RouterLink to="/" class="logo" @focus="closeMenus" @click="closeMenusAfterNavigation">
         <span class="logo-mark">IT</span>
-        <span class="logo-text">IT 学习站</span>
+        <!-- <span class="logo-text">IT 学习站</span> -->
       </RouterLink>
 
       <nav class="domain-nav" aria-label="主导航">

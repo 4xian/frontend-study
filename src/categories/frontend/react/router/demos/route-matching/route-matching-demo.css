@@ -1,0 +1,218 @@
+.route-matching-demo {
+  min-width: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+}
+
+.route-matching-heading p,
+.route-matching-heading h2,
+.route-matching-heading span {
+  overflow-wrap: anywhere;
+}
+
+.route-matching-heading p {
+  margin: 0 0 var(--space-1);
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.route-matching-heading h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.route-matching-heading span {
+  display: block;
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+}
+
+.route-matching-controls,
+.route-matching-routes,
+.route-matching-result {
+  margin-top: var(--space-4);
+}
+
+.route-matching-controls label {
+  display: block;
+  margin-bottom: var(--space-1);
+  color: var(--color-text-secondary);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.route-matching-controls input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 40px;
+  padding: 8px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: inherit;
+  font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace;
+}
+
+.route-matching-controls input:focus-visible,
+.route-matching-presets button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.route-matching-presets {
+  display: flex;
+  flex-wrap: wrap;
+  margin: var(--space-2) -4px 0;
+}
+
+.route-matching-presets button {
+  min-height: 34px;
+  margin: 0 4px 8px;
+  padding: 6px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  color: var(--color-text-secondary);
+  font: inherit;
+  font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.route-matching-presets button[aria-pressed='true'] {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+
+.route-matching-routes,
+.route-matching-result {
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+}
+
+.route-matching-routes h3,
+.route-matching-result h3 {
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+.route-matching-routes ul,
+.route-matching-matches {
+  margin: var(--space-2) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.route-matching-routes ul {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -4px;
+  margin-left: -4px;
+}
+
+.route-matching-routes li {
+  min-width: 132px;
+  margin: 0 4px 8px;
+  padding: 8px 10px;
+  border-left: 3px solid var(--color-accent);
+  background: var(--color-bg-secondary);
+}
+
+.route-matching-routes code,
+.route-matching-routes span,
+.route-matching-routes strong {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.route-matching-routes span,
+.route-matching-routes strong {
+  margin-top: 4px;
+  font-size: 0.72rem;
+}
+
+.route-matching-routes span {
+  color: var(--color-text-secondary);
+}
+
+.route-matching-routes strong {
+  color: var(--color-warning, #9a6700);
+}
+
+.route-matching-result-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.route-matching-result-heading strong {
+  margin-left: var(--space-3);
+  color: var(--color-accent);
+  font-size: 0.8rem;
+}
+
+.route-matching-empty {
+  margin: var(--space-3) 0 0;
+  color: var(--color-text-secondary);
+  overflow-wrap: anywhere;
+}
+
+.route-matching-matches li + li {
+  margin-top: var(--space-2);
+}
+
+.route-matching-matches dl {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -4px;
+}
+
+.route-matching-matches dl div {
+  min-width: 132px;
+  margin: 0 4px 8px;
+  padding: 8px 10px;
+  background: var(--color-bg-secondary);
+}
+
+.route-matching-matches dt {
+  color: var(--color-text-secondary);
+  font-size: 0.72rem;
+}
+
+.route-matching-matches dd {
+  margin: 4px 0 0;
+  color: var(--color-accent);
+  font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 480px) {
+  .route-matching-demo {
+    padding: var(--space-3);
+  }
+
+  .route-matching-result-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .route-matching-result-heading strong {
+    margin: var(--space-1) 0 0;
+  }
+
+  .route-matching-routes li,
+  .route-matching-matches dl div {
+    box-sizing: border-box;
+    width: calc(100% - 8px);
+  }
+}

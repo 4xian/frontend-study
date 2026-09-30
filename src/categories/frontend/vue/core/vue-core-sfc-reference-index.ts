@@ -65,7 +65,15 @@ export const vueCoreSfcReferenceGroup: ReferenceIndexGroupManifest = {
         entryIds.scriptSetup,
         '一基本语法',
       ],
-      ['reactivity', '响应式', 'reactivity', 'merged', 'available', entryIds.scriptSetup, '二响应式'],
+      [
+        'reactivity',
+        '响应式',
+        'reactivity',
+        'merged',
+        'available',
+        entryIds.scriptSetup,
+        '二响应式',
+      ],
       [
         'using-components',
         '使用组件',
@@ -167,7 +175,15 @@ export const vueCoreSfcReferenceGroup: ReferenceIndexGroupManifest = {
         '十导入语句',
       ],
       ['generics', '泛型', 'generics', 'merged', 'available', entryIds.scriptSetup, '十一泛型'],
-      ['restrictions', '限制', 'restrictions', 'merged', 'available', entryIds.scriptSetup, '十二限制'],
+      [
+        'restrictions',
+        '限制',
+        'restrictions',
+        'merged',
+        'available',
+        entryIds.scriptSetup,
+        '十二限制',
+      ],
     ]),
     referenceSection('sfc-css-features', 'CSS 功能', [
       [

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dev.teamflow.persistence.TeamFlowMapper">
+  <resultMap id="project" type="dev.teamflow.persistence.TeamFlowRows$ProjectRow">
+    <constructor>
+      <arg column="id" javaType="string" />
+      <arg column="team_id" javaType="string" />
+      <arg column="name" javaType="string" />
+    </constructor>
+  </resultMap>
+  <resultMap id="task" type="dev.teamflow.persistence.TeamFlowRows$TaskRow">
+    <constructor>
+      <arg column="id" javaType="string" />
+      <arg column="project_id" javaType="string" />
+      <arg column="title" javaType="string" />
+      <arg column="due_at" javaType="string" />
+      <arg column="assignee" javaType="string" />
+      <arg column="status" javaType="string" />
+      <arg column="version" javaType="_long" />
+    </constructor>
+  </resultMap>
+  <resultMap id="delivery" type="dev.teamflow.persistence.TeamFlowRows$DeliveryRow">
+    <constructor>
+      <arg column="event_id" javaType="string" />
+      <arg column="status" javaType="string" />
+      <arg column="attempts" javaType="_int" />
+      <arg column="notification_count" javaType="_int" />
+    </constructor>
+  </resultMap>
+  <resultMap id="user" type="dev.teamflow.persistence.TeamFlowRows$UserRow">
+    <constructor>
+      <arg column="id" javaType="string" />
+      <arg column="display_name" javaType="string" />
+      <arg column="email" javaType="string" />
+    </constructor>
+  </resultMap>
+  <resultMap id="team" type="dev.teamflow.persistence.TeamFlowRows$TeamRow">
+    <constructor>
+      <arg column="id" javaType="string" />
+      <arg column="name" javaType="string" />
+    </constructor>
+  </resultMap>
+  <resultMap id="member" type="dev.teamflow.persistence.TeamFlowRows$MemberRow">
+    <constructor>
+      <arg column="id" javaType="string" />
+      <arg column="user_id" javaType="string" />
+      <arg column="display_name" javaType="string" />
+      <arg column="role" javaType="string" />
+    </constructor>
+  </resultMap>
+  <resultMap id="outbox" type="dev.teamflow.persistence.TeamFlowRows$OutboxRow">
+    <constructor>
+      <arg column="event_id" javaType="string" />
+      <arg column="task_id" javaType="string" />
+    </constructor>
+  </resultMap>
+
+  <select id="countProjects" resultType="long">SELECT COUNT(*) FROM project</select>
+  <select id="listProjects" resultMap="project">
+    SELECT id, team_id, name FROM project ORDER BY id LIMIT #{pageSize} OFFSET #{offset}
+  </select>
+  <select id="countAccessibleProjects" resultType="long">
+    SELECT COUNT(*)
+    FROM project p JOIN team_member m ON m.team_id = p.team_id
+    WHERE m.user_id = #{userId}
+  </select>
+  <select id="listAccessibleProjects" resultMap="project">
+    SELECT p.id, p.team_id, p.name
+    FROM project p JOIN team_member m ON m.team_id = p.team_id
+    WHERE m.user_id = #{userId}
+    ORDER BY p.id LIMIT #{pageSize} OFFSET #{offset}
+  </select>
+  <select id="findProject" resultMap="project">
+    SELECT id, team_id, name FROM project WHERE id = #{projectId}
+  </select>
+  <insert id="insertProject">
+    INSERT INTO project (id, team_id, name) VALUES (#{id}, #{teamId}, #{name})
+  </insert>
+
+  <select id="countTasks" resultType="long">
+    SELECT COUNT(*) FROM task
+    WHERE project_id = #{projectId}
+    <if test="status != null">AND status = #{status}</if>
+  </select>
+  <select id="listTasks" resultMap="task">
+    SELECT id, project_id, title, due_at, assignee, status, version
+    FROM task
+    WHERE project_id = #{projectId}
+    <if test="status != null">AND status = #{status}</if>
+    ORDER BY id LIMIT #{pageSize} OFFSET #{offset}
+  </select>
+  <delete id="deleteTask">
+    DELETE FROM task WHERE id = #{taskId} AND project_id = #{projectId}
+  </delete>
+  <select id="countProject" resultType="long">
+    SELECT COUNT(*) FROM project WHERE id = #{projectId}
+  </select>
+  <select id="countProjectAccess" resultType="long">
+    SELECT COUNT(*)
+    FROM project p JOIN team_member m ON m.team_id = p.team_id
+    WHERE p.id = #{projectId} AND m.user_id = #{userId}
+  </select>
+  <select id="findTask" resultMap="task">
+    SELECT id, project_id, title, due_at, assignee, status, version
+    FROM task WHERE id = #{taskId} AND project_id = #{projectId}
+  </select>
+  <select id="findDelivery" resultMap="delivery">
+    SELECT o.event_id, o.status, o.attempts,
+      (SELECT COUNT(*) FROM notification n WHERE n.event_id = o.event_id) AS notification_count
+    FROM notification_outbox o JOIN task t ON t.id = o.task_id
+    WHERE o.task_id = #{taskId} AND t.project_id = #{projectId}
+  </select>
+
+  <select id="countUsers" resultType="long">SELECT COUNT(*) FROM teamflow_user</select>
+  <select id="listUsers" resultMap="user">
+    SELECT id, display_name, email FROM teamflow_user ORDER BY id LIMIT #{pageSize} OFFSET #{offset}
+  </select>
+  <select id="findUser" resultMap="user">
+    SELECT id, display_name, email FROM teamflow_user WHERE id = #{userId}
+  </select>
+  <select id="findUserByEmail" resultMap="user">
+    SELECT id, display_name, email FROM teamflow_user WHERE LOWER(email) = LOWER(#{email})
+  </select>
+  <insert id="insertUser">
+    INSERT INTO teamflow_user (id, display_name, email) VALUES (#{id}, #{displayName}, #{email})
+  </insert>
+
+  <select id="countTeams" resultType="long">SELECT COUNT(*) FROM team</select>
+  <select id="listTeams" resultMap="team">
+    SELECT id, name FROM team ORDER BY id LIMIT #{pageSize} OFFSET #{offset}
+  </select>
+  <select id="findTeam" resultMap="team">SELECT id, name FROM team WHERE id = #{teamId}</select>
+  <select id="countTeamAccess" resultType="long">
+    SELECT COUNT(*) FROM team_member WHERE team_id = #{teamId} AND user_id = #{userId}
+  </select>
+  <insert id="insertTeam">INSERT INTO team (id, name) VALUES (#{id}, #{name})</insert>
+
+  <select id="countMembers" resultType="long">
+    SELECT COUNT(*) FROM team_member WHERE team_id = #{teamId}
+  </select>
+  <select id="listMembers" resultMap="member">
+    SELECT m.id, m.user_id, u.display_name, m.role
+    FROM team_member m JOIN teamflow_user u ON u.id = m.user_id
+    WHERE m.team_id = #{teamId}
+    ORDER BY m.id LIMIT #{pageSize} OFFSET #{offset}
+  </select>
+  <select id="findMember" resultMap="member">
+    SELECT m.id, m.user_id, u.display_name, m.role
+    FROM team_member m JOIN teamflow_user u ON u.id = m.user_id
+    WHERE m.team_id = #{teamId} AND m.id = #{memberId}
+  </select>
+  <select id="findMemberByUser" resultMap="member">
+    SELECT m.id, m.user_id, u.display_name, m.role
+    FROM team_member m JOIN teamflow_user u ON u.id = m.user_id
+    WHERE m.team_id = #{teamId} AND m.user_id = #{userId}
+  </select>
+  <insert id="insertMember">
+    INSERT INTO team_member (id, team_id, user_id, role)
+    VALUES (#{id}, #{teamId}, #{userId}, #{role})
+  </insert>
+  <delete id="deleteMember">
+    DELETE FROM team_member WHERE team_id = #{teamId} AND id = #{memberId}
+  </delete>
+  <select id="listProjectIdsByTeam" resultType="string">
+    SELECT id FROM project WHERE team_id = #{teamId} ORDER BY id
+  </select>
+  <select id="listTaskIdsByProject" resultType="string">
+    SELECT id FROM task WHERE project_id = #{projectId} ORDER BY id
+  </select>
+
+  <select id="lockNextDirectoryId" resultType="long">
+    SELECT next_value FROM directory_sequence WHERE resource_type = #{resourceType} FOR UPDATE
+  </select>
+  <update id="advanceDirectoryId">
+    UPDATE directory_sequence SET next_value = next_value + 1
+    WHERE resource_type = #{resourceType}
+  </update>
+
+  <insert id="insertTask">
+    INSERT INTO task (id, project_id, title, due_at, assignee, status, version)
+    VALUES (#{id}, #{projectId}, #{title}, #{dueAt}, #{assignee}, 'IN_PROGRESS', 0)
+  </insert>
+  <update id="completeTask">
+    UPDATE task SET status = 'DONE', version = version + 1
+    WHERE id = #{taskId} AND project_id = #{projectId}
+      AND status = 'IN_PROGRESS' AND version = #{version}
+  </update>
+  <insert id="insertOutbox">
+    INSERT INTO notification_outbox (event_id, task_id, event_type, status, attempts)
+    VALUES (#{eventId}, #{taskId}, 'TaskCompleted', 'NEW', 0)
+  </insert>
+  <select id="listPendingOutbox" resultMap="outbox">
+    SELECT event_id, task_id FROM notification_outbox
+    WHERE status IN ('NEW', 'RETRY_WAIT') ORDER BY event_id LIMIT 10
+  </select>
+  <update id="markOutboxPublished">
+    UPDATE notification_outbox SET status = 'PUBLISHED' WHERE event_id = #{eventId}
+  </update>
+  <update id="markOutboxRetry">
+    UPDATE notification_outbox SET status = 'RETRY_WAIT', attempts = attempts + 1
+    WHERE event_id = #{eventId}
+  </update>
+  <update id="markOutboxDead">
+    UPDATE notification_outbox SET status = 'DEAD', last_error = #{failureReason}
+    WHERE event_id = #{eventId}
+  </update>
+  <select id="findOutboxAttempts" resultType="int">
+    SELECT attempts FROM notification_outbox WHERE event_id = #{eventId}
+  </select>
+  <insert id="insertInbox">
+    INSERT INTO notification_inbox (event_id) VALUES (#{eventId})
+  </insert>
+  <insert id="insertNotification">
+    INSERT INTO notification (event_id, task_id, message)
+    VALUES (#{eventId}, #{taskId}, #{message})
+  </insert>
+</mapper>

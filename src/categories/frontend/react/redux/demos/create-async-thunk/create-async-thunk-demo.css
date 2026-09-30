@@ -1,0 +1,201 @@
+.create-async-thunk-demo {
+  min-width: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+}
+
+.create-async-thunk-demo__heading p,
+.create-async-thunk-demo__heading h2,
+.create-async-thunk-demo__heading span {
+  overflow-wrap: anywhere;
+}
+
+.create-async-thunk-demo__heading p {
+  margin: 0 0 var(--space-1);
+  color: var(--color-accent);
+  font-size: var(--font-size-xs);
+  font-weight: 800;
+}
+
+.create-async-thunk-demo__heading h2 {
+  margin: 0;
+  font-size: var(--font-size-md);
+}
+
+.create-async-thunk-demo__heading span {
+  display: block;
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.create-async-thunk-demo__types {
+  margin-top: var(--space-4);
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.create-async-thunk-demo__types h3 {
+  margin: 0;
+  font-size: var(--font-size-base);
+}
+
+.create-async-thunk-demo__types ol {
+  margin: var(--space-2) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.create-async-thunk-demo__types li {
+  display: flex;
+  align-items: baseline;
+  min-width: 0;
+  margin-top: var(--space-2);
+}
+
+.create-async-thunk-demo__types span {
+  flex: 0 0 48px;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+}
+
+.create-async-thunk-demo__types code {
+  min-width: 0;
+  margin-left: var(--space-2);
+  color: var(--color-accent);
+  font-size: var(--font-size-sm);
+  overflow-wrap: anywhere;
+}
+
+.create-async-thunk-demo__input {
+  margin-top: var(--space-3);
+}
+
+.create-async-thunk-demo__input label {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+}
+
+.create-async-thunk-demo__input input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 42px;
+  margin-top: var(--space-2);
+  padding: 8px 10px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: inherit;
+}
+
+.create-async-thunk-demo__input input:focus-visible,
+.create-async-thunk-demo__controls button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.create-async-thunk-demo__controls,
+.create-async-thunk-demo__results {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -4px;
+  margin-left: -4px;
+}
+
+.create-async-thunk-demo__controls {
+  margin-top: var(--space-3);
+}
+
+.create-async-thunk-demo__controls button {
+  min-height: 40px;
+  margin: 0 4px 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+  font: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.create-async-thunk-demo__controls .create-async-thunk-demo__primary {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.create-async-thunk-demo__controls button:disabled,
+.create-async-thunk-demo__input input:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+.create-async-thunk-demo__status {
+  min-height: 22px;
+  margin: var(--space-2) 0 0;
+  color: var(--color-accent);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.create-async-thunk-demo__results {
+  margin-top: var(--space-3);
+}
+
+.create-async-thunk-demo__results > div {
+  box-sizing: border-box;
+  flex: 1 1 220px;
+  min-width: 0;
+  min-height: 92px;
+  margin: 0 4px 8px;
+  padding: var(--space-3);
+  border-left: 3px solid var(--color-accent);
+  background: var(--color-bg-sunken);
+}
+
+.create-async-thunk-demo__results dt {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+}
+
+.create-async-thunk-demo__results dd {
+  margin: var(--space-2) 0 0;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 480px) {
+  .create-async-thunk-demo {
+    padding: var(--space-3);
+  }
+
+  .create-async-thunk-demo__types li {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .create-async-thunk-demo__types code {
+    margin-top: var(--space-1);
+    margin-left: 0;
+  }
+
+  .create-async-thunk-demo__controls button {
+    box-sizing: border-box;
+    width: calc(100% - 8px);
+  }
+
+  .create-async-thunk-demo__results > div {
+    flex-basis: calc(100% - 8px);
+  }
+}

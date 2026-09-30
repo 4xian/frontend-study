@@ -1,0 +1,255 @@
+.create-slice-demo {
+  min-width: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+}
+
+.create-slice-heading p,
+.create-slice-heading h2,
+.create-slice-heading span {
+  overflow-wrap: anywhere;
+}
+
+.create-slice-heading p {
+  margin: 0 0 var(--space-1);
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.create-slice-heading h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.create-slice-heading span {
+  display: block;
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+}
+
+.create-slice-config,
+.create-slice-actions-map,
+.create-slice-state,
+.create-slice-last-action,
+.create-slice-controls {
+  margin-top: var(--space-4);
+}
+
+.create-slice-config {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3);
+  border-left: 3px solid var(--color-accent);
+  background: var(--color-bg);
+}
+
+.create-slice-config div,
+.create-slice-config span,
+.create-slice-config strong {
+  min-width: 0;
+}
+
+.create-slice-config span,
+.create-slice-config strong {
+  display: block;
+}
+
+.create-slice-config span,
+.create-slice-actions-map span,
+.create-slice-last-action span,
+.create-slice-controls label span {
+  color: var(--color-text-secondary);
+  font-size: 0.74rem;
+}
+
+.create-slice-config strong {
+  margin-top: 3px;
+  font-size: 0.92rem;
+}
+
+.create-slice-config code {
+  max-width: 66%;
+  margin-left: var(--space-3);
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  overflow-wrap: anywhere;
+  text-align: right;
+}
+
+.create-slice-actions-map {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -4px;
+  margin-left: -4px;
+}
+
+.create-slice-actions-map > div {
+  box-sizing: border-box;
+  flex: 1 1 150px;
+  min-width: 0;
+  margin: 0 4px 8px;
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+}
+
+.create-slice-actions-map span,
+.create-slice-actions-map code {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.create-slice-actions-map code {
+  margin-top: var(--space-2);
+  color: var(--color-accent);
+  font-size: 0.76rem;
+}
+
+.create-slice-state {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3);
+  border: 1px solid var(--color-success, #2f855a);
+  background: var(--color-bg);
+}
+
+.create-slice-state span,
+.create-slice-state strong {
+  overflow-wrap: anywhere;
+}
+
+.create-slice-state span {
+  color: var(--color-text-secondary);
+  font-size: 0.78rem;
+}
+
+.create-slice-state strong {
+  margin-left: var(--space-3);
+  color: var(--color-success, #2f855a);
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.create-slice-last-action {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -4px;
+  margin-left: -4px;
+}
+
+.create-slice-last-action > div {
+  box-sizing: border-box;
+  flex: 1 1 180px;
+  min-width: 0;
+  margin: 0 4px 8px;
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+}
+
+.create-slice-last-action span,
+.create-slice-last-action code {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.create-slice-last-action code {
+  margin-top: var(--space-2);
+  color: var(--color-accent);
+  font-size: 0.8rem;
+}
+
+.create-slice-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-right: -4px;
+  margin-left: -4px;
+}
+
+.create-slice-controls button,
+.create-slice-controls label {
+  margin: 0 4px 8px;
+}
+
+.create-slice-controls button {
+  min-height: 40px;
+  padding: 8px 12px;
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-sm);
+  background: var(--color-accent);
+  color: #fff;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.create-slice-controls button:focus-visible,
+.create-slice-controls input:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.create-slice-controls button:active {
+  opacity: 0.8;
+}
+
+.create-slice-controls label {
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 0 8px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+}
+
+.create-slice-controls input {
+  width: 72px;
+  margin-left: 8px;
+  border: 0;
+  background: transparent;
+  color: var(--color-text);
+  font: inherit;
+}
+
+@media (max-width: 480px) {
+  .create-slice-demo {
+    padding: var(--space-3);
+  }
+
+  .create-slice-config {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .create-slice-config code {
+    max-width: none;
+    margin-top: var(--space-2);
+    margin-left: 0;
+    text-align: left;
+  }
+
+  .create-slice-controls button,
+  .create-slice-controls label {
+    box-sizing: border-box;
+    width: calc(100% - 8px);
+  }
+
+  .create-slice-controls label {
+    justify-content: space-between;
+  }
+
+  .create-slice-controls input {
+    flex: 1 1 auto;
+  }
+}

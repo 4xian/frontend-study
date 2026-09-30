@@ -1,0 +1,164 @@
+.suspense-query-demo {
+  min-width: 0;
+  max-width: 100%;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+}
+
+.suspense-query-demo *,
+.suspense-query-demo *::before,
+.suspense-query-demo *::after {
+  box-sizing: border-box;
+}
+
+.suspense-query-header span,
+.suspense-query-header h2,
+.suspense-query-header p,
+.suspense-query-metrics span,
+.suspense-query-metrics strong,
+.suspense-query-message,
+.suspense-query-card,
+.suspense-query-card h3,
+.suspense-query-card p {
+  overflow-wrap: anywhere;
+}
+
+.suspense-query-header span {
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.suspense-query-header h2 {
+  margin: var(--space-1) 0 0;
+  font-size: 1.08rem;
+}
+
+.suspense-query-header p {
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.suspense-query-metrics,
+.suspense-query-actions,
+.suspense-query-columns {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -4px;
+  margin-left: -4px;
+}
+
+.suspense-query-metrics {
+  margin-top: var(--space-4);
+}
+
+.suspense-query-metrics > div {
+  flex: 1 1 140px;
+  min-width: 0;
+  margin: 0 4px 8px;
+  padding: 10px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.suspense-query-metrics span,
+.suspense-query-metrics strong {
+  display: block;
+}
+
+.suspense-query-metrics span {
+  color: var(--color-text-secondary);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.suspense-query-metrics strong {
+  margin-top: 4px;
+  color: var(--color-accent);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.suspense-query-actions {
+  margin-top: 4px;
+}
+
+.suspense-query-actions button {
+  min-height: 38px;
+  margin: 0 4px 8px;
+  padding: 7px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  background: var(--color-bg);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.suspense-query-actions button[data-kind='primary'] {
+  color: var(--color-bg);
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.suspense-query-actions button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.suspense-query-columns {
+  margin-top: 4px;
+}
+
+.suspense-query-card {
+  flex: 1 1 220px;
+  min-width: 0;
+  margin: 0 4px 8px;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.suspense-query-card h3 {
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+.suspense-query-card p {
+  margin: 8px 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.suspense-query-message {
+  margin: 8px 0 0;
+  padding: 10px;
+  border-left: 3px solid var(--color-accent);
+  color: var(--color-text);
+  background: var(--color-bg-secondary);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 480px) {
+  .suspense-query-demo {
+    padding: var(--space-3);
+  }
+
+  .suspense-query-metrics > div,
+  .suspense-query-card,
+  .suspense-query-actions button {
+    flex-basis: 100%;
+  }
+
+  .suspense-query-actions button {
+    width: calc(100% - 8px);
+  }
+}

@@ -1,1227 +1,1129 @@
 ---
 id: backend.java.learn.advanced.events-async-scheduling-and-retry
 type: lesson
-title: 事件、异步执行、调度与重试
-summary: 为事件、异步任务、周期调度和有限重试建立线程、事务、失败与生命周期合同
+title: 异步任务
+summary: 使用 @Async 与具名执行器提交后台任务，观察成功和失败，并守住代理、线程上下文与关闭边界
 domain: backend
 technology: java
 module: core
 stage: advanced
 level: advanced
-estimatedMinutes: 240
-objectives:
-  - 能证明 Spring 事件的执行线程由 multicaster 与 listener 配置决定，而不是由发布方法或包名决定。
-  - 能为 @Async 任务选择命名有界执行器，并显式观察 Future、void 异常、取消和关闭结果。
-  - 能区分 fixedRate、fixedDelay 与 cron，设计时区、重入、单飞和任务状态边界。
-  - 能只对瞬态失败做有限退避重试，并把幂等、事务尝试和耗尽恢复纳入同一合同。
-  - 能区分 Spring Framework 7 resilience 与 Java 8 / Spring Retry 1.2.5 的 API 和次数语义。
+estimatedMinutes: 190
 prerequisites:
-  - backend.java.learn.advanced.concurrency-locks-and-shared-state
-  - backend.java.learn.intermediate.transactions-and-idempotency
+  - backend.java.learn.advanced.http-clients-and-integration-resilience
+objectives:
+  - 能区分同步方法返回、异步任务提交和异步任务完成三个不同时间点。
+  - 能使用 @EnableAsync、独立 Spring Bean 和 @Async 建立真实的代理调用边界。
+  - 能通过 @Async 的 value 明确选择具名 ThreadPoolTaskExecutor，而不依赖默认候选推断。
+  - 能使用 CompletableFuture 观察正常结果和原始失败，并为等待设置有限超时。
+  - 能说明 void 异步方法无法向调用方返回异常，并使用 AsyncUncaughtExceptionHandler 集中观测。
+  - 能解释 ThreadLocal 与命令式事务为何不会自动传播到工作线程，并显式传递业务输入。
+  - 能把执行器交给 Spring 容器管理，并区分完成剩余任务与关闭等待上限。
+  - 能在 Java 8 兼容线保持相同的代理和执行合同，并正确替代 failedFuture。
+recap:
+  - '@Async 表示把一次代理方法调用提交给执行器，不承诺任务一定成功、重试或在事务提交后执行。'
+  - 默认代理模式只拦截经过 Spring 代理的外部调用，同类自调用仍在当前线程同步执行。
+  - '@Async 方法可以接收任意参数，但只能返回 void 或 Future 系列；业务入口优先返回 CompletableFuture。'
+  - 具名业务执行器让线程名称、生命周期和使用者保持明确，不与 applicationTaskExecutor 的 Web 职责混淆。
+  - Future 正常返回只代表业务成功；异常完成、等待超时和提交被拒绝是不同结果，必须分别处理。
+  - ThreadLocal 与命令式事务绑定当前线程，工作线程需要的业务 ID 应作为不可变参数显式传入。
+  - waitForTasksToCompleteOnShutdown 决定是否完成剩余任务，awaitTerminationSeconds 决定容器最多等待多久。
+  - Java 8 已支持 CompletableFuture；没有 failedFuture 时可创建实例并调用 completeExceptionally。
+related:
   - backend.java.learn.intermediate.dependency-injection-and-bean-lifecycle
-related: []
 tags:
-  - ApplicationEventPublisher
-  - EventListener
-  - TransactionalEventListener
+  - Java
+  - Spring Boot
+  - 异步任务
+  - EnableAsync
   - Async
   - CompletableFuture
   - ThreadPoolTaskExecutor
-  - Scheduled
-  - fixedRate
-  - fixedDelay
-  - cron
-  - Retryable
-  - RetryTemplate
-  - 幂等
-  - 失败观测
-appliesTo: Java 25 / Spring Framework 7.0.8 主线；项目补充适用于 Java 8 / Spring Boot 2.3.12.RELEASE / Spring Framework 5.2.15.RELEASE / Spring Retry 1.2.5.RELEASE
-modernBaseline:
-  java: '25'
-  springFramework: 7.0.8
-  springRetry: Framework 7 core resilience
-legacyBaseline:
-  java: '8'
-  springBoot: 2.3.12.RELEASE
-  springFramework: 5.2.15.RELEASE
-  springRetry: 1.2.5.RELEASE
-verifiedAt: 2026-08-10
+  - 代理
+  - ThreadLocal
+  - 优雅关闭
+appliesTo: JDK 25 / Spring Boot 4.1.1 / Spring Framework 7.0.9 主线；Java 8 / Spring Boot 2.3.12.RELEASE / Spring Framework 5.2.15.RELEASE 兼容线
+verifiedAt: 2026-08-30
 sources:
-  - id: spring7-event-publisher
-    title: Spring Framework 7.0.8 ApplicationEventPublisher Javadoc
-    url: https://docs.spring.io/spring-framework/docs/7.0.8/javadoc-api/org/springframework/context/ApplicationEventPublisher.html
-    sourceType: api-doc
-    appliesTo: Spring Framework 7.0.8
-    claims:
-      - 发布只是交给 multicaster，不承诺同步、异步或立即执行
-      - 阻塞工作应由监听器显式交给异步执行边界
-  - id: spring7-simple-multicaster
-    title: Spring Framework 7.0.8 SimpleApplicationEventMulticaster Javadoc
-    url: https://docs.spring.io/spring-framework/docs/7.0.8/javadoc-api/org/springframework/context/event/SimpleApplicationEventMulticaster.html
-    sourceType: api-doc
-    appliesTo: Spring Framework 7.0.8
-    claims:
-      - 默认使用发布线程同步调用监听器
-      - 设置 executor 后不会自动传播发布者事务和线程上下文
-  - id: spring7-event-listener
-    title: Spring Framework 7.0.8 EventListener Javadoc
-    url: https://docs.spring.io/spring-framework/docs/7.0.8/javadoc-api/org/springframework/context/event/EventListener.html
-    sourceType: api-doc
-    appliesTo: Spring Framework 7.0.8
-    claims:
-      - 异步监听器异常不会传播给发布者
-      - 异步监听器不能依赖返回值发布后续事件
-  - id: spring7-transactional-event-listener
-    title: Spring Framework 7.0.8 TransactionalEventListener Javadoc
-    url: https://docs.spring.io/spring-framework/docs/7.0.8/javadoc-api/org/springframework/transaction/event/TransactionalEventListener.html
-    sourceType: api-doc
-    appliesTo: Spring Framework 7.0.8
-    claims:
-      - 默认阶段是 AFTER_COMMIT，无事务时默认不执行
-      - 提交后的新写入需要显式的新事务边界
-  - id: spring7-events-reference
-    title: Spring Framework 7.0.8 Application Events Reference
-    url: https://docs.spring.io/spring-framework/reference/core/beans/context-introduction.html#context-functionality-events
-    sourceType: official-reference
-    appliesTo: Spring Framework 7.0.8
-    claims:
-      - 应用事件用于同一 ApplicationContext 内的解耦通知
-  - id: spring7-transaction-events-reference
-    title: Spring Framework 7.0.8 Transaction-bound Events Reference
-    url: https://docs.spring.io/spring-framework/reference/data-access/transaction/event.html
-    sourceType: official-reference
-    appliesTo: Spring Framework 7.0.8
-    claims:
-      - 事务事件按提交、回滚或完成阶段绑定处理
-  - id: spring7-scheduling-reference
-    title: Spring Framework 7.0.8 Task Execution and Scheduling
+  - id: spring-task-execution-reference
+    title: Spring Framework Task Execution and Scheduling
     url: https://docs.spring.io/spring-framework/reference/integration/scheduling.html
+    sourceOrigin: official
     sourceType: official-reference
-    appliesTo: Spring Framework 7.0.8
+    appliesTo: Spring Framework 7.0.x
     claims:
-      - TaskExecutor 与 TaskScheduler 分别抽象异步执行和未来调度
-      - 默认 proxy advice 不拦截同类自调用
-  - id: spring7-async
-    title: Spring Framework 7.0.8 Async Javadoc
-    url: https://docs.spring.io/spring-framework/docs/7.0.8/javadoc-api/org/springframework/scheduling/annotation/Async.html
+      - TaskExecutor 抽象负责接收任务，@Async 可以把方法调用提交给指定执行器。
+      - ThreadPoolTaskExecutor 由 Spring 生命周期管理并支持优雅关闭。
+  - id: spring-async-javadoc
+    title: Spring Framework 7.0.9 Async Javadoc
+    url: https://docs.spring.io/spring-framework/docs/7.0.9/javadoc-api/org/springframework/scheduling/annotation/Async.html
+    sourceOrigin: official
     sourceType: api-doc
-    appliesTo: Spring Framework 7.0.8
+    appliesTo: Spring Framework 7.0.9
     claims:
-      - 返回类型只能是 void 或 Future 兼容类型
-      - value 可以选择命名 executor
-  - id: spring7-enable-async
-    title: Spring Framework 7.0.8 EnableAsync Javadoc
-    url: https://docs.spring.io/spring-framework/docs/7.0.8/javadoc-api/org/springframework/scheduling/annotation/EnableAsync.html
+      - 异步方法参数类型不限，返回类型只能是 void 或 Future 系列。
+      - value 可以按 qualifier 或 Bean 名选择具体执行器。
+      - 目标方法返回临时 Future，代理向调用方返回真正承载异步结果的 Future。
+  - id: spring-enable-async-javadoc
+    title: Spring Framework 7.0.9 EnableAsync Javadoc
+    url: https://docs.spring.io/spring-framework/docs/7.0.9/javadoc-api/org/springframework/scheduling/annotation/EnableAsync.html
+    sourceOrigin: official
     sourceType: api-doc
-    appliesTo: Spring Framework 7.0.8
+    appliesTo: Spring Framework 7.0.9
     claims:
-      - 可通过 AsyncConfigurer 提供 executor 与 void 异常处理器
-  - id: spring7-async-error-handler
-    title: Spring Framework 7.0.8 AsyncUncaughtExceptionHandler Javadoc
-    url: https://docs.spring.io/spring-framework/docs/7.0.8/javadoc-api/org/springframework/aop/interceptor/AsyncUncaughtExceptionHandler.html
+      - EnableAsync 开启注解驱动的异步方法执行。
+      - 默认代理模式只拦截经过代理的调用，同类内部调用不会被拦截。
+      - void 方法的异常不能返回给调用方，可通过 AsyncConfigurer 自定义处理器。
+  - id: spring-async-configurer
+    title: Spring Framework 7.0.9 AsyncConfigurer Javadoc
+    url: https://docs.spring.io/spring-framework/docs/7.0.9/javadoc-api/org/springframework/scheduling/annotation/AsyncConfigurer.html
+    sourceOrigin: official
     sourceType: api-doc
-    appliesTo: Spring Framework 7.0.8
+    appliesTo: Spring Framework 7.0.9
     claims:
-      - void 异步方法的未捕获异常需要专门处理
-  - id: spring7-scheduled
-    title: Spring Framework 7.0.8 Scheduled Javadoc
-    url: https://docs.spring.io/spring-framework/docs/7.0.8/javadoc-api/org/springframework/scheduling/annotation/Scheduled.html
+      - AsyncConfigurer 可以定制默认执行器与 void 异步方法的未捕获异常处理器。
+  - id: spring-async-uncaught-handler
+    title: Spring Framework 7.0.9 AsyncUncaughtExceptionHandler Javadoc
+    url: https://docs.spring.io/spring-framework/docs/7.0.9/javadoc-api/org/springframework/aop/interceptor/AsyncUncaughtExceptionHandler.html
+    sourceOrigin: official
     sourceType: api-doc
-    appliesTo: Spring Framework 7.0.8
+    appliesTo: Spring Framework 7.0.9
     claims:
-      - fixedRate、fixedDelay 与 cron 三选一并且方法不能有参数
-      - zone 指定 cron 时区，重复声明可能重叠
-  - id: spring7-thread-pool-task-executor
-    title: Spring Framework 7.0.8 ThreadPoolTaskExecutor Javadoc
-    url: https://docs.spring.io/spring-framework/docs/7.0.8/javadoc-api/org/springframework/scheduling/concurrent/ThreadPoolTaskExecutor.html
+      - void 异步方法的处理器可以取得异常、目标方法和方法参数。
+  - id: spring-executor-shutdown
+    title: Spring Framework 7.0.9 ExecutorConfigurationSupport Javadoc
+    url: https://docs.spring.io/spring-framework/docs/7.0.9/javadoc-api/org/springframework/scheduling/concurrent/ExecutorConfigurationSupport.html
+    sourceOrigin: official
     sourceType: api-doc
-    appliesTo: Spring Framework 7.0.8
+    appliesTo: Spring Framework 7.0.9
     claims:
-      - 默认 core 为 1 且 max 和 queue 都近似无界
-      - 有界容量和拒绝策略必须显式配置
-  - id: spring7-resilience
-    title: Spring Framework 7.0.8 Resilience Reference
-    url: https://docs.spring.io/spring-framework/reference/core/resilience.html
+      - waitForTasksToCompleteOnShutdown 决定关闭时是否继续完成运行中和队列中的任务。
+      - awaitTerminationSeconds 决定容器关闭时等待执行器终止的最长时间。
+  - id: spring-transactional-thread-boundary
+    title: Spring Framework 7.0.9 Transactional Javadoc
+    url: https://docs.spring.io/spring-framework/docs/7.0.9/javadoc-api/org/springframework/transaction/annotation/Transactional.html
+    sourceOrigin: official
+    sourceType: api-doc
+    appliesTo: Spring Framework 7.0.9
+    claims:
+      - 命令式事务绑定当前执行线程，不会传播到方法内新启动的线程。
+  - id: spring-boot-task-execution
+    title: Spring Boot 4.1 Task Execution and Scheduling
+    url: https://docs.spring.io/spring-boot/4.1/reference/features/task-execution-and-scheduling.html
+    sourceOrigin: official
     sourceType: official-reference
-    appliesTo: Spring Framework 7.0.8
+    appliesTo: Spring Boot 4.1.x
     claims:
-      - Framework 7 核心提供 Retryable 与 RetryTemplate
-      - 重试耗尽后传播最后一次原始异常并发布重试事件
-  - id: spring7-resilience-retryable
-    title: Spring Framework 7.0.8 Resilience Retryable Javadoc
-    url: https://docs.spring.io/spring-framework/docs/7.0.8/javadoc-api/org/springframework/resilience/annotation/Retryable.html
+      - 没有自定义 Executor 时，Spring Boot 自动配置 AsyncTaskExecutor。
+      - Java 21 以上启用虚拟线程后，自动配置执行器的具体实现会变化。
+      - applicationTaskExecutor 还可能服务于 MVC、WebFlux 等框架集成。
+  - id: java-25-completable-future
+    title: Java SE 25 CompletableFuture API
+    url: https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/CompletableFuture.html
+    sourceOrigin: official
     sourceType: api-doc
-    appliesTo: Spring Framework 7.0.8
+    appliesTo: Java SE 25
     claims:
-      - maxRetries 不包含初次调用
-      - delay、jitter、multiplier 与 maxDelay 共同限定退避
-  - id: spring5-simple-multicaster
-    title: Spring Framework 5.2.15 SimpleApplicationEventMulticaster Javadoc
-    url: https://docs.spring.io/spring-framework/docs/5.2.15.RELEASE/javadoc-api/org/springframework/context/event/SimpleApplicationEventMulticaster.html
+      - CompletableFuture 可以正常完成、异常完成并通过带超时的 get 取得结果。
+      - failedFuture 可以创建已经异常完成的 CompletableFuture。
+  - id: java-25-thread-local
+    title: Java SE 25 ThreadLocal API
+    url: https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/ThreadLocal.html
+    sourceOrigin: official
     sourceType: api-doc
-    appliesTo: Spring Framework 5.2.15.RELEASE
+    appliesTo: Java SE 25
     claims:
-      - 旧线同样默认在发布线程同步执行
-  - id: spring5-event-listener
-    title: Spring Framework 5.2.15 EventListener Javadoc
-    url: https://docs.spring.io/spring-framework/docs/5.2.15.RELEASE/javadoc-api/org/springframework/context/event/EventListener.html
-    sourceType: api-doc
-    appliesTo: Spring Framework 5.2.15.RELEASE
-    claims:
-      - 异步 listener 失败不回传且不能靠返回值继续发布
-  - id: spring5-transactional-event-listener
-    title: Spring Framework 5.2.15 TransactionalEventListener Javadoc
-    url: https://docs.spring.io/spring-framework/docs/5.2.15.RELEASE/javadoc-api/org/springframework/transaction/event/TransactionalEventListener.html
-    sourceType: api-doc
-    appliesTo: Spring Framework 5.2.15.RELEASE
-    claims:
-      - 旧线默认 AFTER_COMMIT 且无事务时默认不执行
-  - id: spring5-scheduling-reference
-    title: Spring Framework 5.2.15 Task Execution and Scheduling
-    url: https://docs.spring.io/spring-framework/docs/5.2.15.RELEASE/spring-framework-reference/integration.html#scheduling
-    sourceType: official-reference
-    appliesTo: Spring Framework 5.2.15.RELEASE
-    claims:
-      - 旧线提供 TaskExecutor、TaskScheduler、Async 与 Scheduled
-  - id: spring5-async
+      - 每个线程访问自己的线程局部变量副本。
+  - id: spring-legacy-async
     title: Spring Framework 5.2.15 Async Javadoc
     url: https://docs.spring.io/spring-framework/docs/5.2.15.RELEASE/javadoc-api/org/springframework/scheduling/annotation/Async.html
+    sourceOrigin: official
     sourceType: api-doc
     appliesTo: Spring Framework 5.2.15.RELEASE
     claims:
-      - 旧线支持 void、Future、ListenableFuture 与 CompletableFuture
-  - id: spring5-enable-async
+      - Java 8 兼容线同样支持 void、Future 与 CompletableFuture 返回类型和具名执行器。
+  - id: spring-legacy-enable-async
     title: Spring Framework 5.2.15 EnableAsync Javadoc
     url: https://docs.spring.io/spring-framework/docs/5.2.15.RELEASE/javadoc-api/org/springframework/scheduling/annotation/EnableAsync.html
+    sourceOrigin: official
     sourceType: api-doc
     appliesTo: Spring Framework 5.2.15.RELEASE
     claims:
-      - 旧线默认也是 proxy advice 并支持 AsyncConfigurer
-  - id: spring5-scheduled
-    title: Spring Framework 5.2.15 Scheduled Javadoc
-    url: https://docs.spring.io/spring-framework/docs/5.2.15.RELEASE/javadoc-api/org/springframework/scheduling/annotation/Scheduled.html
+      - Java 8 兼容线具有相同的默认代理、自调用和 void 异常处理边界。
+  - id: spring-legacy-executor-shutdown
+    title: Spring Framework 5.2.15 ExecutorConfigurationSupport Javadoc
+    url: https://docs.spring.io/spring-framework/docs/5.2.15.RELEASE/javadoc-api/org/springframework/scheduling/concurrent/ExecutorConfigurationSupport.html
+    sourceOrigin: official
     sourceType: api-doc
     appliesTo: Spring Framework 5.2.15.RELEASE
     claims:
-      - 旧线任务无参数且返回值被忽略
-  - id: boot2312-dependency-versions
-    title: Spring Boot 2.3.12 Managed Dependency Versions
-    url: https://docs.spring.io/spring-boot/docs/2.3.12.RELEASE/reference/html/appendix-dependency-versions.html
+      - Java 8 兼容线同样支持完成剩余任务和有限等待终止。
+  - id: spring-legacy-transactional
+    title: Spring Framework 5.2.15 Transactional Javadoc
+    url: https://docs.spring.io/spring-framework/docs/5.2.15.RELEASE/javadoc-api/org/springframework/transaction/annotation/Transactional.html
+    sourceOrigin: official
+    sourceType: api-doc
+    appliesTo: Spring Framework 5.2.15.RELEASE
+    claims:
+      - Java 8 兼容线的命令式事务同样绑定当前线程且不传播到新线程。
+  - id: spring-boot-legacy-task-execution
+    title: Spring Boot 2.3.12 Task Execution and Scheduling
+    url: https://docs.spring.io/spring-boot/docs/2.3.12.RELEASE/reference/html/spring-boot-features.html#boot-features-task-execution-scheduling
+    sourceOrigin: official
     sourceType: official-reference
     appliesTo: Spring Boot 2.3.12.RELEASE
     claims:
-      - Boot 2.3.12 管理 Spring Retry 1.2.5.RELEASE
-  - id: spring-retry-latest-release
-    title: Spring Retry 2.0.13 Release
-    url: https://github.com/spring-attic/spring-retry/releases/tag/v2.0.13
-    sourceType: release-note
-    appliesTo: Spring Retry 2.0.13
-    claims:
-      - 2.0.13 是 2026-08-10 可核验的最新稳定标签
-  - id: spring-retry-status
-    title: Spring Retry Archived Project README
-    url: https://github.com/spring-attic/spring-retry/blob/main/README.md
-    sourceType: official-reference
-    appliesTo: Spring Retry archived main
-    claims:
-      - 项目已归档并由 Spring Framework 7 resilience 取代
-  - id: spring-retry-legacy-pom
-    title: Spring Retry 1.2.5 POM
-    url: https://github.com/spring-attic/spring-retry/blob/1.2.5/pom.xml
-    sourceType: source-code
-    appliesTo: Spring Retry 1.2.5.RELEASE
-    claims:
-      - 归档 tag 确认 artifact 版本和旧线编译基线
-  - id: spring-retry-legacy-retryable
-    title: Spring Retry 1.2.5 Retryable Source
-    url: https://github.com/spring-attic/spring-retry/blob/1.2.5/src/main/java/org/springframework/retry/annotation/Retryable.java
-    sourceType: source-code
-    appliesTo: Spring Retry 1.2.5.RELEASE
-    claims:
-      - maxAttempts 包含初次调用且默认是 3
-  - id: spring-retry-legacy-recover
-    title: Spring Retry 1.2.5 Recover Source
-    url: https://github.com/spring-attic/spring-retry/blob/1.2.5/src/main/java/org/springframework/retry/annotation/Recover.java
-    sourceType: source-code
-    appliesTo: Spring Retry 1.2.5.RELEASE
-    claims:
-      - Recover 方法处理匹配类型的耗尽恢复
-  - id: java25-executor-service
-    title: Java SE 25 ExecutorService API
-    url: https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/ExecutorService.html
-    sourceType: api-doc
-    appliesTo: Java 25
-    claims:
-      - shutdown、shutdownNow 与 awaitTermination 定义协作关闭
-      - close 会有序关闭并等待终止
-  - id: java8-executor-service
-    title: Java SE 8 ExecutorService API
-    url: https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ExecutorService.html
-    sourceType: api-doc
-    appliesTo: Java 8
-    claims:
-      - Java 8 使用 shutdown 与 awaitTermination 且没有 close
-  - id: java25-future
-    title: Java SE 25 Future API
-    url: https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/Future.html
-    sourceType: api-doc
-    appliesTo: Java 25
-    claims:
-      - get 暴露取消、中断、超时和执行异常
-      - Java 25 增加即时状态读取方法
-  - id: java8-future
-    title: Java SE 8 Future API
-    url: https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/Future.html
-    sourceType: api-doc
-    appliesTo: Java 8
-    claims:
-      - Java 8 通过 get 观察异步结果与 ExecutionException
-  - id: java25-completable-future
-    title: Java SE 25 CompletableFuture API
-    url: https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/CompletableFuture.html
-    sourceType: api-doc
-    appliesTo: Java 25
-    claims:
-      - async 方法未指定 executor 时使用默认异步设施
-      - handle 与 exceptionally 可以恢复失败
-  - id: java8-completable-future
+      - Java 8 兼容线没有自定义 Executor 时会自动配置 ThreadPoolTaskExecutor。
+  - id: java-8-completable-future
     title: Java SE 8 CompletableFuture API
     url: https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html
+    sourceOrigin: official
     sourceType: api-doc
-    appliesTo: Java 8
+    appliesTo: Java SE 8
     claims:
-      - Java 8 已有显式 executor 和终端失败处理能力
-  - id: java25-scheduled-executor-service
-    title: Java SE 25 ScheduledExecutorService API
-    url: https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/ScheduledExecutorService.html
-    sourceType: api-doc
-    appliesTo: Java 25
-    claims:
-      - fixedRate 按启动节拍而 fixedDelay 按上次结束计时
-      - 周期执行抛异常会抑制后续执行
-  - id: java8-scheduled-executor-service
-    title: Java SE 8 ScheduledExecutorService API
-    url: https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/ScheduledExecutorService.html
-    sourceType: api-doc
-    appliesTo: Java 8
-    claims:
-      - Java 8 保留相同的 fixedRate、fixedDelay 与取消合同
-  - id: java25-thread
-    title: Java SE 25 Thread API
-    url: https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Thread.html
-    sourceType: api-doc
-    appliesTo: Java 25
-    claims:
-      - sleep 只暂停当前线程且不会表达可取消调度
-  - id: java8-thread
-    title: Java SE 8 Thread API
-    url: https://docs.oracle.com/javase/8/docs/api/java/lang/Thread.html
-    sourceType: api-doc
-    appliesTo: Java 8
-    claims:
-      - sleep 不释放 monitor 且可能被中断
-  - id: jls25-records
-    title: Java Language Specification 25 Record Classes
-    url: https://docs.oracle.com/javase/specs/jls/se25/html/jls-8.html#jls-8.10
-    sourceType: specification
-    appliesTo: Java 25
-    claims:
-      - record 组件是浅层 final 而不是可变对象的深拷贝
-  - id: jls8-classes
-    title: Java Language Specification 8 Classes
-    url: https://docs.oracle.com/javase/specs/jls/se8/html/jls-8.html
-    sourceType: specification
-    appliesTo: Java 8
-    claims:
-      - Java 8 没有 record 并需用 final 字段表达不可变快照
-projectEvidence:
-  - file: dzzz-app/src/main/java/com/tdh/bdzz/config/ThreadPoolConfig.java
-    symbol: com.tdh.bdzz.config.ThreadPoolConfig
-    usage: observed
-  - file: dzzz-app/src/main/java/com/tdh/bdzz/context/event/EventPublisher.java
-    symbol: com.tdh.bdzz.context.event.EventPublisher
-    usage: observed
-  - file: dzzz-app/src/main/java/com/tdh/bdzz/service/impl/MessageServiceImpl.java
-    symbol: com.tdh.bdzz.service.impl.MessageServiceImpl
-    usage: observed
-  - file: dzzz-app/src/main/java/com/tdh/bdzz/listener/DataReportListener.java
-    symbol: com.tdh.bdzz.listener.DataReportListener
-    usage: observed
-  - file: dzzz-app/src/main/java/com/tdh/bdzz/timer/ClearExpiredDataTask.java
-    symbol: com.tdh.bdzz.timer.ClearExpiredDataTask
-    usage: observed
-  - file: dzzz-app/src/main/java/com/tdh/bdzz/handler/ThreadHandler.java
-    symbol: com.tdh.bdzz.handler.ThreadHandler
-    usage: corrected
-  - file: dzzz-app/src/main/java/com/tdh/bdzz/context/event/DataReportEvent.java
-    symbol: com.tdh.bdzz.context.event.DataReportEvent
-    usage: corrected
-  - file: dzzz-app/src/main/java/com/tdh/bdzz/factories/flv/ConverterFactories.java
-    symbol: com.tdh.bdzz.factories.flv.ConverterFactories
-    usage: corrected
+      - Java 8 已支持 completedFuture、completeExceptionally 和带超时的 get。
+      - Java 8 没有 failedFuture。
 ---
 
-# 事件、异步执行、调度与重试
+# 异步任务
 
-## 为什么需要学习
+同步方法只有一条直接时间线：调用者进入方法，方法完成或抛出异常，然后调用者继续执行。异步任务多了一个
+提交边界。调用者先把工作交给执行器并取得句柄，真正的业务方法可能稍后才在另一个线程开始，成功或失败也
+会在更晚的时间出现。
 
-事件、`@Async`、`@Scheduled` 和重试解决的是四个不同问题：通知、换线程、按时间触发和再次尝试。把它们堆在
-一个方法上，不会自动得到正确的事务、上下文或失败处理。可靠设计必须逐条回答：代码在哪个线程执行、数据在哪个
-事务可见、失败由谁观察、任务是否会重入、重试是否重放副作用，以及应用关闭时谁停止接收并等待任务。
+本课使用 Spring `@Async` 建立这条边界，并把每个结果都变成可观察事实。定时触发属于下一课；事件、重试、
+消息队列和可靠投递解决的是其他问题，不会在这里混入异步方法调用。
 
-## 学习目标
+## 一、把方法调用拆成提交与完成
 
-- 能用线程名和执行器配置证明事件同步或异步，而不是根据类名猜测。
-- 能为每个异步入口返回可观察结果，处理异常、取消、超时和关闭。
-- 能为调度任务选择正确时间模型，并显式处理时区、重叠和多实例。
-- 能把一次 retry attempt 与一个事务边界对齐，限制次数、退避和总耗时。
-- 能在现代 Spring 7 与项目 Java 8 兼容线之间保持清晰的包名和次数语义。
+### 1. 返回 Future 不等于业务已经完成
 
-## 前置术语
+普通调用的返回值就是本次执行结果；`@Async` 调用返回的是未来结果的句柄。三个时间点必须分开：
 
-publisher 发布领域内已经发生的事实，multicaster 决定把事件交给哪些 listener 以及在哪个 executor 执行。
-executor 负责接收任务和管理 worker；scheduler 负责决定任务未来何时进入执行器。attempt 是一次真实调用，retry
-是失败后再创建 attempt 的策略。幂等键用于识别同一业务动作，恢复路径负责在重试耗尽后留下可处理结果。
+| 时间点 | 发生的事情 | 调用方能够确认什么 |
+| --- | --- | --- |
+| 提交前 | 仍在调用线程准备参数 | 还没有异步任务 |
+| 代理返回 | 任务已经交给执行器 | 只确认取得了 Future，或提交当场失败 |
+| Future 完成 | 工作线程结束业务方法 | 读取正常结果，或观察异常完成 |
 
-## 零基础知识点详解
-
-每个知识点都按“是什么、作用、场景、步骤、最小示例、结果、误区”展开。示例只证明当前合同；实际容量、超时和
-重试预算必须根据下游配额、任务耗时与业务容忍度测量。
-
-### 先分开事件、异步、调度和重试四条边界
-
-**是什么：** 四条边界分别回答通知谁、在哪执行、何时执行和失败后是否再试。**作用：** 让线程、事务和失败所有权
-可审计。**场景：** 订单提交后生成报表、定时扫描待处理任务、调用临时不可用的下游。
-
-**步骤：** 先写稳定业务键；记录触发来源；选择执行器；定义 attempt；最后为成功、失败和耗尽记录状态。
+下面的调用拿到 `future` 后可以继续做其他工作，不能据此把通知标记成已经发送：
 
 ```java
-public record TaskCommand(String taskId, String reportId, int attempt) {
-    /** 创建下一次尝试的不可变命令。 */
-    public TaskCommand nextAttempt() {
-        return new TaskCommand(taskId, reportId, attempt + 1);
-    }
-}
+CompletableFuture<NotificationResult> future = notificationService.send("task-42", false);
+System.out.println("futureReturned=" + (future != null));
 ```
 
-**结果：** 同一任务跨事件、队列和重试仍可用 `taskId` 关联。**误区：** 把四种注解叠在同一方法上，却没有定义
-执行顺序、失败归属与幂等键。
+`@Async` 只负责调用交接。它不承诺任务一定执行、不自动重试，也不表示任务会等调用方事务提交后才开始。
 
-### 应用事件默认在发布线程同步执行
+### 2. EnableAsync 安装异步方法处理器
 
-**是什么：** `SimpleApplicationEventMulticaster` 默认使用同步执行器。**作用：** 让发布者能在同一调用栈观察
-普通 listener 的完成或异常。**场景：** 同一上下文内的轻量通知。
-
-**步骤：** 记录发布线程；listener 再记录线程；不配置 executor 时断言两者相同；配置后重新验证。
+Spring 容器需要先开启注解驱动的异步处理：
 
 ```java
-public final class ThreadProbeListener {
-    private String listenerThread;
-
-    /** 记录监听器实际运行线程。 */
-    public void onReportReady(ReportReady event) {
-        listenerThread = Thread.currentThread().getName();
-    }
-
-    /** 返回最近一次监听线程。 */
-    public String listenerThread() {
-        return listenerThread;
-    }
-}
-```
-
-**结果：** 是否异步由 multicaster 或 `@Async` 的真实配置证明。**误区：** 看到 `listener` 包、`publishEvent` 或
-事件类就宣称已经异步。
-
-### 事件载荷必须是发布时的不可变快照
-
-**是什么：** 事件载荷表示已经发生的事实，而不是共享中的可变工作区。**作用：** 防止不同线程看到发布后的修改。
-**场景：** 异步 listener、延迟处理和多个 listener 并行读取。
-
-**步骤：** 只保留必要字段；复制集合；不暴露 setter；发布后不再修改原始对象。
-
-```java
-import java.util.List;
-
-public record ReportReady(String reportId, List<String> recipients) {
-    /** 防御性复制可变集合。 */
-    public ReportReady {
-        recipients = List.copyOf(recipients);
-    }
-}
-```
-
-**结果：** 每个 listener 观察到相同快照。**误区：** `record` 只让组件引用浅层 final，传入可变集合并不会自动
-深拷贝。
-
-### EventListener 的返回值与异步失败有明确限制
-
-**是什么：** 同步 `@EventListener` 可以用返回值发布后续事件，但异步 listener 不支持该返回路径，异常也不会
-回到发布者。**作用：** 避免把提交成功误判为处理成功。**场景：** listener 需要触发后续通知或可能失败。
-
-**步骤：** 异步 listener 显式注入 publisher；使用命名 executor；失败写日志、指标和任务状态；不要只依赖调用方。
-
-```java
-public final class ReportListener {
-    private final ApplicationEventPublisher publisher;
-
-    /** 注入显式的后续事件发布器。 */
-    public ReportListener(ApplicationEventPublisher publisher) {
-        this.publisher = publisher;
-    }
-
-    /** 完成异步处理后显式发布下一事件。 */
-    @Async("reportExecutor")
-    public void onReportReady(ReportReady event) {
-        publisher.publishEvent(new DeliveryRequested(event.reportId()));
-    }
-}
-```
-
-**结果：** 后续事件和失败观测都有明确入口。**误区：** 认为异步 listener 的返回对象会被框架自动继续发布。
-
-### TransactionalEventListener 绑定事务阶段而不等于异步
-
-**是什么：** `@TransactionalEventListener` 把处理时机绑定到提交、回滚或完成阶段。**作用：** 防止事务尚未提交时
-读取未稳定结果。**场景：** 提交成功后发送通知或创建独立后续命令。
-
-**步骤：** 选择 phase；决定无事务时是否 fallback；需要写库时调用带新事务的独立 bean；单独定义失败恢复。
-
-```java
-public final class ReportCommittedListener {
-    private final DeliveryCommandService commands;
-
-    /** 注入拥有独立事务的命令服务。 */
-    public ReportCommittedListener(DeliveryCommandService commands) {
-        this.commands = commands;
-    }
-
-    /** 提交后创建独立的投递命令。 */
-    @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
-    public void onCommitted(ReportReady event) {
-        commands.createInNewTransaction(event.reportId());
-    }
-}
-```
-
-**结果：** 原事务提交与后续写入不会混成一个模糊边界。**误区：** `AFTER_COMMIT` 时资源可能仍可访问，但继续写入
-不会自动形成可提交的新事务。
-
-### 受管有界执行器定义容量和背压
-
-**是什么：** `ThreadPoolTaskExecutor` 是由 Spring 生命周期管理的执行器。**作用：** 集中声明线程数、队列、命名、
-拒绝和关闭。**场景：** 报表、文件转换和外部集成等隔离工作负载。
-
-**步骤：** 按测量设置 core/max；使用有限 queue；命名线程；选择可见的拒绝策略；等待已提交任务关闭。
-
-```java
-@Configuration
-public class AsyncInfrastructure {
-    /** 创建报表专用的有界执行器。 */
-    @Bean("reportExecutor")
-    ThreadPoolTaskExecutor reportExecutor() {
-        var executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(4);
-        executor.setMaxPoolSize(8);
-        executor.setQueueCapacity(100);
-        executor.setThreadNamePrefix("report-");
-        executor.setRejectedExecutionHandler(new ThreadPoolExecutor.AbortPolicy());
-        executor.setWaitForTasksToCompleteOnShutdown(true);
-        executor.setAwaitTerminationSeconds(30);
-        return executor;
-    }
-}
-```
-
-**结果：** 过载会成为可观察失败，而不是无限堆积。**误区：** 默认 queue 近似无界，此时调大 `maxPoolSize` 不会按
-直觉解决积压。
-
-### Async 依赖代理并应选择命名执行器
-
-**是什么：** `@Async` 默认由 Spring 代理拦截外部调用并提交任务。**作用：** 把业务入口与受管 executor 连接。
-**场景：** 调用方不需要占用当前线程等待结果。
-
-**步骤：** 在独立 bean 暴露入口；外部调用代理；用 `value` 选择 executor；禁止 `this.method()` 自调用。
-
-```java
-public class ReportGenerator {
-    /** 在报表执行器中生成结果。 */
-    @Async("reportExecutor")
-    public CompletableFuture<String> generate(String reportId) {
-        return CompletableFuture.completedFuture("ready:" + reportId);
-    }
-}
-
-public class ReportFacade {
-    private final ReportGenerator generator;
-
-    /** 注入经过容器代理的异步服务。 */
-    public ReportFacade(ReportGenerator generator) {
-        this.generator = generator;
-    }
-
-    /** 通过外部 bean 边界提交任务。 */
-    public CompletableFuture<String> submit(String reportId) {
-        return generator.generate(reportId);
-    }
-}
-```
-
-**结果：** 线程名、队列和失败策略都可归属到 `reportExecutor`。**误区：** 类内自调用不经过默认 proxy advice，方法
-仍在当前线程执行。
-
-`void` 异步方法没有 Future 可以让调用方观察，因此还必须在异步配置中提供异常处理器：
-
-```java
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @EnableAsync
-public class AsyncFailureConfiguration implements AsyncConfigurer {
-    private final Executor reportExecutor;
-    private final AsyncFailureRecorder recorder;
+public class AsyncConfiguration {
+}
+```
 
-    /** 注入报表执行器和异步失败记录器。 */
-    public AsyncFailureConfiguration(
-        @Qualifier("reportExecutor") Executor reportExecutor,
-        AsyncFailureRecorder recorder
-    ) {
-        this.reportExecutor = reportExecutor;
-        this.recorder = recorder;
+`@EnableAsync` 注册处理 `@Async` 的基础设施。只有由 Spring 容器创建并经过后处理的 Bean 才能获得这项能力；
+手工 `new TaskNotificationService()` 得到的普通对象没有 Spring 代理，注解不会自行创建线程。
+
+### 3. 默认代理只拦截外部调用
+
+默认 `AdviceMode.PROXY` 需要调用先经过代理。把异步入口放在独立 Bean，并从另一个 Bean 或容器取得的引用调用，
+会经过代理：
+
+```java
+@Service
+public class TaskNotificationService {
+
+    /** 在具名执行器中发送任务通知。 */
+    @Async("notificationExecutor")
+    public CompletableFuture<String> send(String taskId) {
+        return CompletableFuture.completedFuture(Thread.currentThread().getName());
     }
+}
+```
 
-    /** 为 @Async 选择命名执行器。 */
-    @Override
-    public Executor getAsyncExecutor() {
-        return reportExecutor;
+同一个对象内部使用 `this.send(...)` 时，调用没有离开目标对象，也没有再次经过代理，因此仍在当前线程执行：
+
+```java
+/** 演示不会经过代理的同类内部调用。 */
+public CompletableFuture<String> sendInternally(String taskId) {
+    return this.send(taskId);
+}
+```
+
+修复方式不是给方法再加一次注解，而是让同步编排与异步执行属于不同 Spring Bean，再从外部调用异步 Bean。
+
+## 二、让具名执行器拥有任务
+
+### 1. value 把方法绑定到明确的 Bean
+
+`@Async("notificationExecutor")` 中的值是执行器 qualifier 或 Bean 名。显式命名能回答“谁执行这类任务”，也
+避免多个执行器存在时依赖默认候选推断：
+
+```java
+/** 创建只处理通知任务的具名执行器。 */
+@Bean("notificationExecutor")
+public ThreadPoolTaskExecutor notificationExecutor() {
+    ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+    executor.setCorePoolSize(2);
+    executor.setMaxPoolSize(2);
+    executor.setQueueCapacity(4);
+    executor.setThreadNamePrefix("notify-");
+    return executor;
+}
+```
+
+这里的小容量只为让本地示例容易观察，不是生产容量公式。真实容量要根据任务耗时、到达速率、下游限制和
+压测结果决定，不能复制示例数字。
+
+### 2. 业务执行器不要冒充 Web 执行器
+
+Spring Boot 在没有自定义执行器时可以自动配置 `AsyncTaskExecutor`。`applicationTaskExecutor` 这个特殊名字还
+可能被 Spring MVC、WebFlux 等框架集成使用。业务通知任务使用单独的 `notificationExecutor`，可以避免 Web
+异步请求与后台任务无意共享同一职责。
+
+Boot 4.1 在 Java 21 以上开启 `spring.threads.virtual.enabled=true` 时，自动配置执行器的实现还会变化。因此
+不要把“Boot 当前默认是什么线程池”当作业务合同。本课显式选择执行器，也不展开虚拟线程或容量规划。
+
+### 3. 提交也可能在业务执行前失败
+
+Future 只会在提交成功后返回。执行器已经关闭或没有能力接收任务时，代理调用本身就可能抛出任务拒绝异常，
+此时没有 Future 可以等待。提交失败、Future 异常完成和等待超时是三个不同阶段：
+
+```text
+调用代理
+  -> 提交失败：调用处直接得到异常
+  -> 提交成功：取得 Future
+       -> 正常完成：Future 中有结果
+       -> 异常完成：Future 中有原始失败
+       -> 仍未完成：有限等待可以超时，但任务未必停止
+```
+
+本课只要求识别这些状态。队列规划、拒绝策略选择和动态调参需要结合完整系统负载，不在这里用一个固定答案
+替代工程验证。
+
+## 三、用 CompletableFuture 观察终态
+
+### 1. 方法签名必须保留 Future 合同
+
+`@Async` 方法参数类型不限，返回类型只能是 `void` 或 Future 系列。业务调用方需要结果或失败信息时，优先
+声明 `CompletableFuture<T>`：
+
+```java
+/** 异步生成可观察的通知结果。 */
+@Async("notificationExecutor")
+public CompletableFuture<NotificationResult> send(String taskId, boolean fail) {
+    if (fail) {
+        throw new IllegalStateException("notification failed: " + taskId);
     }
+    NotificationResult result = new NotificationResult(
+            taskId,
+            "SENT",
+            Thread.currentThread().getName(),
+            RequestContext.currentRequestId());
+    return CompletableFuture.completedFuture(result);
+}
+```
 
-    /** 记录 void 异步方法的未捕获异常。 */
+目标方法返回的 `completedFuture` 是为了满足方法签名并交出本次方法结果。调用方拿到的是代理创建的异步
+Future；不要在方法内部再调用没有指定执行器的 `supplyAsync`，否则会多出一套默认执行器和上下文边界。
+
+### 2. 有限等待同时处理成功与失败
+
+`get(2, TimeUnit.SECONDS)` 最多等待两秒。正常完成时返回结果；业务方法抛错时抛出 `ExecutionException`，
+其 cause 是原始失败；超时只表示等待预算用完，不代表工作线程已经停止：
+
+```java
+try {
+    NotificationResult result = future.get(2, TimeUnit.SECONDS);
+    System.out.println("status=" + result.status());
+} catch (ExecutionException exception) {
+    Throwable cause = exception.getCause();
+    System.out.println("failureCause=" + cause.getClass().getSimpleName());
+} catch (InterruptedException exception) {
+    Thread.currentThread().interrupt();
+    throw new IllegalStateException("waiting thread interrupted", exception);
+} catch (TimeoutException exception) {
+    throw new IllegalStateException("notification did not finish in time", exception);
+}
+```
+
+中断表示当前等待线程被要求停止协作，捕获后应恢复中断标记。超时后的取消、补偿或状态查询要由业务合同决定，
+不能把一个等待超时直接写成“任务已失败并停止”。
+
+### 3. void 失败需要独立处理器
+
+真正不需要调用方结果的入口可以返回 `void`，但它没有 Future 传回异常。`AsyncConfigurer` 可以集中安装
+`AsyncUncaughtExceptionHandler`：
+
+```java
+@Configuration(proxyBeanMethods = false)
+@EnableAsync
+public class AsyncConfiguration implements AsyncConfigurer {
+
+    /** 记录无法通过 Future 返回的 void 异步异常。 */
     @Override
     public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
-        return (error, method, parameters) -> recorder.record(method.getName(), parameters, error);
-    }
-}
-
-public class ReportNotifier {
-    /** 提交一个失败也必须可追踪的通知任务。 */
-    @Async("reportExecutor")
-    public void notify(String reportId) {
-        throw new IllegalStateException("delivery failed: " + reportId);
+        return (exception, method, parameters) -> System.out.println(
+                "voidFailure=" + method.getName() + ":"
+                        + exception.getClass().getSimpleName());
     }
 }
 ```
 
-`notify` 抛出的异常会进入记录器，调用方仍可通过任务 ID 查询失败。**误区：** 只写 `@Async void` 并不会让异常自动
-回传给发布者，也不会替代业务状态记录。
+默认处理并不是绝对静默，Spring 会记录这类异常；自定义处理器可以把方法名、参数标识和异常交给应用已有的
+日志或监控边界。只要调用方需要确认成功，仍应返回 `CompletableFuture`，而不是依赖日志猜测结果。
 
-### Future 和 CompletableFuture 必须有终端观测
+## 四、显式传递工作线程所需信息
 
-**是什么：** Future 是异步结果、失败、取消和等待的句柄。**作用：** 让调用方区分“已提交”和“已成功”。**场景：**
-需要回执、组合多个异步步骤或在超时后取消。
+### 1. ThreadLocal 每个线程各有一份
 
-**步骤：** 保存句柄；设置超时；展开 cause；恢复中断；为 CompletableFuture 添加终端处理。
+`ThreadLocal` 值属于设置它的线程。请求线程写入 `request-7` 后，执行器中的 `notify-1` 是另一个线程，读取
+同一个 `ThreadLocal` 对象通常得到自己的初始值：
 
 ```java
-public final class FutureObserver {
-    /** 把异步失败转换成可追踪结果。 */
-    static CompletableFuture<String> observe(CompletableFuture<String> stage, String taskId) {
-        // callback 同时观察成功和失败并保留任务标识。
-        return stage.handle((value, error) ->
-            error == null ? value : "failed:" + taskId + ":" + error.getClass().getSimpleName()
-        );
+RequestContext.setRequestId("request-7");
+CompletableFuture<NotificationResult> future =
+        notificationService.send("task-42", false);
+```
+
+任务真正需要的 `taskId` 已作为参数传入，因此不依赖请求线程仍然存在。用户 ID、租户 ID 等业务输入也应经过
+校验后进入明确的不可变命令，而不是让后台任务任意读取调用线程的临时状态。
+
+MDC 或 trace 等技术上下文确实需要跨线程时，可以为指定执行器使用受控的 `TaskDecorator`；捕获哪些字段、
+何时恢复和清理都必须明确。直接复制所有 `ThreadLocal` 会扩大秘密数据和过期上下文的传播范围。
+
+### 2. 调用方事务不会跟随到工作线程
+
+命令式 `@Transactional` 事务绑定当前线程。调用方在请求线程开启的事务不会因为参数传给 `@Async` 方法，就
+自动出现在工作线程中：
+
+```java
+/** 更新任务状态，并把通知调用提交到独立异步边界。 */
+@Transactional
+public void updateAndNotify(long taskId) {
+    taskRepository.updateStatus(taskId, "DONE");
+    notificationService.send(Long.toString(taskId), false);
+}
+```
+
+上面代码不能证明异步任务一定在提交后运行，也不能证明它能读取调用方尚未提交的数据。异步任务若需要自己的
+数据库事务，应在工作线程执行的业务 Bean 中建立独立事务边界；何时提交后再触发属于事件或可靠消息设计，
+不由 `@Async` 自动解决。
+
+### 3. 任务输入在提交前形成快照
+
+异步方法可能晚于调用处执行。传入可变集合后继续修改，会让工作线程看到不稳定数据。优先传递不可变值对象，
+或在提交前复制本次任务需要的字段：
+
+```java
+public record NotificationCommand(long taskId, long userId, String requestId) {
+}
+
+NotificationCommand command = new NotificationCommand(taskId, userId, requestId);
+notificationService.send(command);
+```
+
+Java 8 没有 record，可使用字段为 `final` 的普通类表达同一份固定输入；这只是数据对象写法差异，不改变异步
+代理、线程或 Future 合同。这里的异步入口接收完整命令对象；后面的最小可运行工程只需要任务编号，所以保留
+`send(String, boolean)` 这条更小的教学签名。
+
+在 TeamFlow 中，本课能力位于任务状态更新后的通知调用边界：业务 Service 提交已经固定的通知输入，调用方
+通过 Future 观察成功或失败，容器负责执行器关闭。`@Async` 不保证事务提交后触发或可靠投递，这两项责任留给
+后续异步通知链路实战补齐。
+
+## 五、运行一条完整异步通知链
+
+### 1. 建立非 Web Spring Boot 工程
+
+创建目录 `async-task-demo`，使用 JDK 25 作为 Project SDK、模块 SDK 和 Maven Runner JRE。`pom.xml` 只需要
+Spring Boot 基础 starter：
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>4.1.1</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>example</groupId>
+    <artifactId>async-task-demo</artifactId>
+    <version>1.0.0</version>
+
+    <properties>
+        <java.version>25</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+```
+
+创建 `src/main/resources/application.properties`，关闭与本课无关的启动输出：
+
+```properties
+spring.main.web-application-type=none
+spring.main.banner-mode=off
+logging.level.root=ERROR
+```
+
+### 2. 配置具名执行器与 void 失败观测
+
+创建 `src/main/java/example/async/AsyncConfiguration.java`：
+
+```java
+package example.async;
+
+import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.AsyncConfigurer;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
+
+@Configuration(proxyBeanMethods = false)
+@EnableAsync
+public class AsyncConfiguration implements AsyncConfigurer {
+
+    /** 创建只属于通知任务的受管执行器。 */
+    @Bean("notificationExecutor")
+    public ThreadPoolTaskExecutor notificationExecutor() {
+        ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+        executor.setCorePoolSize(2);
+        executor.setMaxPoolSize(2);
+        executor.setQueueCapacity(4);
+        executor.setThreadNamePrefix("notify-");
+        executor.setWaitForTasksToCompleteOnShutdown(true);
+        executor.setAwaitTerminationSeconds(5);
+        return executor;
+    }
+
+    /** 把 void 异步方法的未捕获异常交给统一观测入口。 */
+    @Override
+    public AsyncUncaughtExceptionHandler getAsyncUncaughtExceptionHandler() {
+        return (exception, method, parameters) -> System.out.println(
+                "voidFailure=" + method.getName() + ":"
+                        + exception.getClass().getSimpleName());
     }
 }
 ```
 
-**结果：** 每条链都有可查询的终态。**误区：** `isDone()` 只表示完成，不表示成功；无 executor 的 `*Async` 还会
-进入默认共享设施。
+`setWaitForTasksToCompleteOnShutdown(true)` 允许关闭时继续完成运行中和队列中的任务；
+`setAwaitTerminationSeconds(5)` 让容器最多等待五秒。前者决定是否排空剩余工作，后者限制关闭阻塞时间，
+不能把其中任意一个描述成两项职责都已完成。
 
-### 异步线程不会继承事务和任意 ThreadLocal
+### 3. 定义结果与最小线程上下文
 
-**是什么：** 事务与线程上下文通常绑定当前线程，换 worker 后不会自动存在。**作用：** 防止把请求线程状态误当成
-任务输入。**场景：** `@Async` 方法访问数据库、租户、用户或 trace。
-
-**步骤：** 捕获最小不可变参数；任务内建立新事务；需要的上下文在 worker 设置；`finally` 恢复或清理。
+创建 `src/main/java/example/async/NotificationResult.java`：
 
 ```java
-public record DeliveryCommand(String taskId, String tenantId, String reportId) {
-}
+package example.async;
 
-public class DeliveryWorker {
-    /** 在异步线程自己的事务中处理命令。 */
-    @Async("deliveryExecutor")
-    @Transactional
-    public CompletableFuture<Void> deliver(DeliveryCommand command) {
-        persistAttempt(command.taskId(), command.tenantId(), command.reportId());
-        return CompletableFuture.completedFuture(null);
+public record NotificationResult(
+        String taskId,
+        String status,
+        String threadName,
+        String requestContext) {
+}
+```
+
+创建 `src/main/java/example/async/RequestContext.java`：
+
+```java
+package example.async;
+
+public final class RequestContext {
+
+    private static final ThreadLocal<String> REQUEST_ID = new ThreadLocal<>();
+
+    /** 禁止创建只提供静态线程上下文方法的工具类实例。 */
+    private RequestContext() {
+    }
+
+    /** 保存当前线程的请求编号。 */
+    public static void setRequestId(String requestId) {
+        REQUEST_ID.set(requestId);
+    }
+
+    /** 读取当前线程自己的请求编号。 */
+    public static String currentRequestId() {
+        return REQUEST_ID.get();
+    }
+
+    /** 清理当前线程的请求编号。 */
+    public static void clear() {
+        REQUEST_ID.remove();
     }
 }
 ```
 
-**结果：** 数据库提交与上下文清理都属于 worker 的调用边界。**误区：** 认为调用方事务会跨线程传播，或把 Servlet
-request、连接对象放入任务载荷。
+`RequestContext` 只用于证明线程边界，不是建议在业务代码中建立全局状态。主程序会在调用线程写入值，工作线程
+则读取不到；真正需要的任务编号继续通过参数传递。
 
-### fixedRate 和 fixedDelay 使用不同时间轴
+### 4. 在独立 Bean 中实现异步方法
 
-**是什么：** fixedRate 从计划启动节拍计算，fixedDelay 从上次结束后计算。**作用：** 为节拍任务和非重叠轮询选择
-正确语义。**场景：** 固定采样与外部系统轮询。
-
-**步骤：** 画出开始/结束时间；选择模式；记录实际延迟；为超时和取消定义状态。
+创建 `src/main/java/example/async/TaskNotificationService.java`：
 
 ```java
-public class PollingTasks {
-    /** 上一次轮询结束五秒后再开始。 */
-    @Scheduled(fixedDelayString = "${poll.delay:PT5S}")
-    public void poll() {
-        fetchNextBatch();
+package example.async;
+
+import java.util.concurrent.CompletableFuture;
+
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Service;
+
+@Service
+public class TaskNotificationService {
+
+    /** 在具名执行器中发送通知，并返回可观察结果。 */
+    @Async("notificationExecutor")
+    public CompletableFuture<NotificationResult> send(String taskId, boolean fail) {
+        pauseBriefly();
+        if (fail) {
+            throw new IllegalStateException("notification failed: " + taskId);
+        }
+
+        NotificationResult result = new NotificationResult(
+                taskId,
+                "SENT",
+                Thread.currentThread().getName(),
+                RequestContext.currentRequestId());
+        return CompletableFuture.completedFuture(result);
     }
 
-    /** 按一分钟启动节拍采样。 */
-    @Scheduled(fixedRateString = "${sample.rate:PT1M}")
-    public void sample() {
-        recordQueueDepth();
-    }
-}
-```
-
-**结果：** 轮询不会把处理耗时误算成下一次等待。**误区：** fixedRate 不是“无论如何并发补跑”；标准库同一个周期
-任务不会与自己并发，但迟到执行仍需观测。
-
-### cron 必须显式时区、开关和重叠策略
-
-**是什么：** cron 按日历和时区计算触发时间。**作用：** 表达每日、每周等业务时间。**场景：** 每日结算、法定时区
-报表和运维窗口。
-
-**步骤：** 写 `zone`；把表达式外置；用 `-` 关闭；记录夏令时决定；为重复声明和多实例定义单飞方案。
-
-```java
-public class DailyReportTask {
-    /** 按上海时区执行，可用横线配置关闭。 */
-    @Scheduled(cron = "${report.cron:-}", zone = "Asia/Shanghai")
-    public void createDailyReport() {
-        // callback 在获得租约后生成报表。
-        runWithLease("daily-report", this::generate);
+    /** 演示同类内部调用不会再次经过异步代理。 */
+    public CompletableFuture<NotificationResult> sendInternally(String taskId) {
+        return this.send(taskId, false);
     }
 
-    /** 生成当天报表。 */
-    private void generate() {
-        // 真实实现使用稳定业务日期作为幂等键。
-    }
-}
-```
-
-**结果：** 服务器时区变化不会悄悄改变业务时间。**误区：** 单 JVM 默认 scheduler 不代表集群全局唯一；同一方法
-重复 `@Scheduled` 还可能产生重叠触发。
-
-### 周期任务必须记录执行状态并处理顶层失败
-
-**是什么：** 任务状态至少包含计划、开始、成功、失败、取消和耗尽。**作用：** 防止一次异常让周期执行静默停止。
-**场景：** 批处理、清理、同步与后台轮询。
-
-**步骤：** 进入时写 running；顶层捕获异常；写 failed 和 cause；交由告警或恢复；只在成功后写完成游标。
-
-```java
-public final class ObservedTask {
-    private final TaskStateRepository states;
-
-    /** 注入任务状态仓库。 */
-    public ObservedTask(TaskStateRepository states) {
-        this.states = states;
+    /** 制造一个交给 AsyncUncaughtExceptionHandler 的 void 失败。 */
+    @Async("notificationExecutor")
+    public void failWithoutFuture(String taskId) {
+        throw new IllegalArgumentException("void notification failed: " + taskId);
     }
 
-    /** 执行并记录任务终态。 */
-    public void run(String taskId, Runnable work) {
-        states.running(taskId);
+    /** 用短暂停顿让提交与完成的先后关系稳定可见。 */
+    private static void pauseBriefly() {
         try {
-            work.run();
-            states.succeeded(taskId);
-        } catch (RuntimeException error) {
-            states.failed(taskId, error);
-            throw error;
+            Thread.sleep(150);
+        } catch (InterruptedException exception) {
+            Thread.currentThread().interrupt();
+            throw new IllegalStateException("notification interrupted", exception);
         }
     }
 }
 ```
 
-**结果：** 即使调度器不再触发，也能从状态和告警发现。**误区：** 在任务内部吞掉异常后继续推进游标，会把失败数据
-伪装成成功。
+`sendInternally` 是刻意保留的反例。它调用同一个对象的 `send`，因此等待发生在调用线程，返回结果也记录
+`main`；从 Spring 容器取得 `TaskNotificationService` 后直接调用 `send` 才会进入 `notify-` 线程。
 
-### 重试只接受可分类的瞬态失败和有限预算
+### 5. 从容器外部调用并观察所有结果
 
-**是什么：** retry policy 决定哪些异常可以再试、最多几次和总共多久。**作用：** 给短暂故障恢复机会，同时限制
-资源占用。**场景：** 短暂网络断开、可恢复锁竞争或下游临时不可用。
-
-**步骤：** includes 白名单；excludes 确定性错误；写次数；设置 delay、multiplier、jitter、maxDelay 和 timeout。
+创建 `src/main/java/example/async/AsyncTaskApplication.java`：
 
 ```java
-public class RemoteReportClient {
-    /** 对瞬态异常执行最多两次额外重试。 */
-    @org.springframework.resilience.annotation.Retryable(
-        includes = TransientRemoteException.class,
-        maxRetries = 2,
-        delay = 200,
-        multiplier = 2,
-        maxDelay = 1000
-    )
-    public Report fetch(String reportId) {
-        return callRemote(reportId);
+package example.async;
+
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+
+import org.springframework.boot.Banner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
+
+@SpringBootApplication
+public class AsyncTaskApplication {
+
+    /** 启动非 Web 容器并观察代理、Future、异常与线程上下文。 */
+    public static void main(String[] args) {
+        SpringApplication application = new SpringApplication(AsyncTaskApplication.class);
+        application.setBannerMode(Banner.Mode.OFF);
+
+        try (ConfigurableApplicationContext context = application.run(args)) {
+            TaskNotificationService service = context.getBean(TaskNotificationService.class);
+            String callerThread = Thread.currentThread().getName();
+
+            RequestContext.setRequestId("request-7");
+            try {
+                CompletableFuture<NotificationResult> success = service.send("task-42", false);
+                System.out.println("returnedBeforeDone=" + !success.isDone());
+
+                CompletableFuture<NotificationResult> failure = service.send("task-99", true);
+                NotificationResult internal = await(service.sendInternally("task-internal"));
+                NotificationResult result = await(success);
+
+                System.out.println("callerThread=" + callerThread);
+                System.out.println("workerThread=" + result.threadName());
+                System.out.println("differentThread="
+                        + !callerThread.equals(result.threadName()));
+                System.out.println("status=" + result.status());
+                System.out.println("workerRequestContext=" + result.requestContext());
+                System.out.println("explicitTaskId=" + result.taskId());
+                System.out.println("selfInvocationThread=" + internal.threadName());
+                System.out.println("failureCause=" + failureCause(failure));
+            } finally {
+                RequestContext.clear();
+            }
+
+            service.failWithoutFuture("task-void");
+        }
+    }
+
+    /** 在有限时间内取得正常异步结果。 */
+    private static NotificationResult await(
+            CompletableFuture<NotificationResult> future) {
+        try {
+            return future.get(2, TimeUnit.SECONDS);
+        } catch (InterruptedException exception) {
+            Thread.currentThread().interrupt();
+            throw new IllegalStateException("waiting thread interrupted", exception);
+        } catch (ExecutionException exception) {
+            throw new IllegalStateException("expected a successful result", exception.getCause());
+        } catch (TimeoutException exception) {
+            throw new IllegalStateException("notification did not finish in time", exception);
+        }
+    }
+
+    /** 在有限时间内取得异常完成的原始失败类型。 */
+    private static String failureCause(
+            CompletableFuture<NotificationResult> future) {
+        try {
+            future.get(2, TimeUnit.SECONDS);
+            return "NONE";
+        } catch (InterruptedException exception) {
+            Thread.currentThread().interrupt();
+            throw new IllegalStateException("waiting thread interrupted", exception);
+        } catch (ExecutionException exception) {
+            return exception.getCause().getClass().getSimpleName();
+        } catch (TimeoutException exception) {
+            throw new IllegalStateException("failure did not arrive in time", exception);
+        }
     }
 }
 ```
 
-**结果：** 总调用次数最多是三次，延迟有上限。**误区：** 参数错误、权限拒绝和代码缺陷不会因重复调用变正确。
+在工程根目录执行：
 
-### 每次重试都要幂等并拥有独立事务尝试
+```bash
+mvn -q spring-boot:run
+```
 
-**是什么：** 重试会重放方法内的所有副作用。**作用：** 防止重复扣款、重复消息和在 rollback-only 事务中继续操作。
-**场景：** 写库后调用下游、消费事件或提交外部命令。
+预期输出中的两个工作线程编号可能互换，但线程前缀和其余结果稳定：
 
-**步骤：** 使用稳定幂等键；先占用唯一记录；每次 attempt 新开事务；成功写终态；耗尽进入恢复或人工队列。
+```text
+returnedBeforeDone=true
+callerThread=main
+workerThread=notify-1
+differentThread=true
+status=SENT
+workerRequestContext=null
+explicitTaskId=task-42
+selfInvocationThread=main
+failureCause=IllegalStateException
+voidFailure=failWithoutFuture:IllegalArgumentException
+```
+
+`workerRequestContext=null` 证明调用线程的 `ThreadLocal` 没有自动传播；`explicitTaskId=task-42` 证明业务输入
+不依赖该上下文。try-with-resources 最终关闭 Spring 容器，执行器按配置完成已提交任务并在等待上限内终止。
+
+## 六、Java 8 兼容线保持同一合同
+
+### 1. 只替换真实不兼容部分
+
+在独立目录 `async-task-demo-java8` 中使用 Java 8、Spring Boot 2.3.12.RELEASE。把 POM 的版本属性改为：
+
+```xml
+<parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.3.12.RELEASE</version>
+    <relativePath/>
+</parent>
+
+<properties>
+    <java.version>8</java.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+</properties>
+```
+
+前一节的配置、Service、主程序、ThreadLocal 辅助类和 `application.properties` 都是 Java 8 可用写法，可以
+原样保留。只有 record 数据类需要替换。创建普通的 `NotificationResult.java`：
 
 ```java
-public final class IdempotentDelivery {
-    private final AttemptService attempts;
+package example.async;
 
-    /** 注入按次开启事务的服务。 */
-    public IdempotentDelivery(AttemptService attempts) {
-        this.attempts = attempts;
+public final class NotificationResult {
+
+    private final String taskId;
+    private final String status;
+    private final String threadName;
+    private final String requestContext;
+
+    /** 保存本示例需要读取的固定通知结果。 */
+    public NotificationResult(
+            String taskId,
+            String status,
+            String threadName,
+            String requestContext) {
+        this.taskId = taskId;
+        this.status = status;
+        this.threadName = threadName;
+        this.requestContext = requestContext;
     }
 
-    /** 用稳定键执行一次可重放尝试。 */
-    public DeliveryResult attempt(String taskId, String reportId) {
-        return attempts.runInNewTransaction(taskId, reportId);
+    /** 返回任务编号。 */
+    public String taskId() {
+        return taskId;
+    }
+
+    /** 返回通知状态。 */
+    public String status() {
+        return status;
+    }
+
+    /** 返回实际执行线程名。 */
+    public String threadName() {
+        return threadName;
+    }
+
+    /** 返回工作线程自己的请求上下文。 */
+    public String requestContext() {
+        return requestContext;
     }
 }
 ```
 
-**结果：** 上一次失败回滚后，下一 attempt 不复用已失效事务。**误区：** 在一个被标记 rollback-only 的大事务内部
-循环重试，最终仍会整体回滚。
+这个普通类只承载本示例读取的固定字段，不宣称完整等价于 record 的对象合同。用 Java 8 执行同一条
+`mvn -q spring-boot:run`，应得到相同的代理、线程、Future、异常和关闭结果。
 
-### 重试耗尽必须进入显式恢复路径
+### 2. failedFuture 是真实 API 差异
 
-**是什么：** recovery 是有限重试仍失败后的业务终态。**作用：** 让失败可查询、可补偿、可人工处理。**场景：**
-下游长时间不可用或数据需要人工修复。
-
-**步骤：** 保留 taskId 和最后 cause；写 exhausted；创建补偿/死信记录；告警；禁止返回伪成功。
+JDK 25 可以创建已经异常完成的 Future：
 
 ```java
-public final class RecoveryService {
-    private final FailedTaskRepository failedTasks;
-
-    /** 注入失败任务仓库。 */
-    public RecoveryService(FailedTaskRepository failedTasks) {
-        this.failedTasks = failedTasks;
-    }
-
-    /** 记录耗尽并返回可识别失败。 */
-    public DeliveryResult exhausted(String taskId, RuntimeException cause) {
-        failedTasks.record(taskId, cause.getClass().getName());
-        return DeliveryResult.failed(taskId);
-    }
-}
+return CompletableFuture.failedFuture(new IllegalStateException("failed"));
 ```
 
-**结果：** 运维可以按任务标识恢复，而不是翻找零散日志。**误区：** “已经打印最后一次异常”不等于业务恢复完成。
-
-### Framework 7 与 Spring Retry 1.2.5 不能混用次数语义
-
-**是什么：** 现代线使用 Framework 7 `org.springframework.resilience`，旧线使用归档 Spring Retry
-`org.springframework.retry`。**作用：** 防止迁移时包名和调用次数偏一。**场景：** 同时维护现代示例和 Java 8 项目。
-
-**步骤：** 标明依赖线；现代 `maxRetries` 只数额外次数；旧线 `maxAttempts` 包含初次调用；分别验证总调用次数。
+Java 8 没有 `failedFuture`。确实需要构造这种结果时，创建实例后显式完成：
 
 ```java
-public class LegacyRemoteClient {
-    /** Java 8 兼容线总共最多调用三次。 */
-    @org.springframework.retry.annotation.Retryable(
-        value = TransientRemoteException.class,
-        maxAttempts = 3
-    )
-    public Report fetch(String reportId) {
-        return callRemote(reportId);
-    }
-
-    /** 旧线耗尽后记录恢复结果。 */
-    @org.springframework.retry.annotation.Recover
-    public Report recover(TransientRemoteException error, String reportId) {
-        return Report.failed(reportId, error.getMessage());
-    }
-}
+CompletableFuture<String> failed = new CompletableFuture<>();
+failed.completeExceptionally(new IllegalStateException("failed"));
+return failed;
 ```
 
-**结果：** 两条线都最多调用三次，但配置名称和包完全不同。**误区：** Spring Retry 最新稳定标签虽是 2.0.13，项目
-已经归档；现代新项目应使用 Framework 7 resilience，而不是继续引入该第三方项目。
+本课主示例在 `@Async` 目标方法中直接抛异常，代理返回的 Future 会记录这次失败，所以两条版本线不需要为
+失败路径写两套逻辑。两版都支持 `completedFuture`、带超时的 `get`、具名执行器和 void 异常处理器。
 
-## 现代版本中的正确用法
+## 七、集中排除异步边界错误
 
-现代主线优先使用 Framework 7 核心 resilience、命名有界 executor 和不可变事件。事件负责通知，不负责隐藏事务；
-异步入口返回 `CompletableFuture` 并有终端处理；调度器只触发短入口，真实工作用稳定 `taskId` 进入任务服务；retry
-只包住瞬态远程操作，每次尝试的事务与幂等记录可独立验证。
-
-## 基本语法与核心接口
-
-| 能力 | 核心接口或注解 | 必须回答的问题 |
-| --- | --- | --- |
-| 事件 | `ApplicationEventPublisher`、`@EventListener` | 哪个 multicaster、哪个线程、异常回到谁 |
-| 事务事件 | `@TransactionalEventListener` | 哪个 phase、无事务是否执行、后续写入用哪个事务 |
-| 异步 | `@Async`、`TaskExecutor`、`Future` | 是否经过代理、用哪个 executor、谁观察终态 |
-| 调度 | `@Scheduled`、`TaskScheduler` | rate/delay/cron、zone、重叠、取消和多实例 |
-| 重试 | `@Retryable`、`RetryTemplate` | 哪些异常、次数、总耗时、幂等和耗尽恢复 |
-
-## 从零跟着做
-
-1. 为业务动作创建包含 `taskId` 与幂等键的不可变 command。
-2. 在原事务内完成核心写入，只发布已经发生的事实。
-3. 用事务事件 listener 在正确 phase 创建后续命令，不在提交后的旧事务继续写。
-4. 通过独立 bean 的 `@Async("namedExecutor")` 提交，并保留 Future。
-5. 为 executor 配置有限 queue、命名、拒绝、指标和关闭等待。
-6. 调度只负责按 fixedDelay、fixedRate 或 cron 产生 command，并显式写 zone。
-7. retry 只围绕瞬态调用，限定次数、退避、总时长和每次独立事务。
-8. 对成功、失败、取消、拒绝、超时和耗尽分别断言任务状态。
-
-## 如何使用
-
-先从同步事件开始，通过线程名证明合同；只有 listener 确实阻塞发布者且业务允许最终一致时，才引入异步边界。
-调度任务先画时间线再选模式。重试先列可重试异常白名单，再写幂等键与恢复动作；顺序反过来通常会隐藏副作用。
-
-## 适用与不适用场景
-
-应用事件适合同一进程内组件通知，不是持久消息或跨服务交付保证。`@Async` 适合可隔离的后台工作，不适合需要
-立即确认的强一致调用。`@Scheduled` 适合单应用触发入口，多实例唯一性需要额外租约或协调。retry 适合瞬态失败，
-不适合数据校验、权限拒绝、schema 不匹配或无限等待。
-
-## 当前项目补充
-
-冻结矩阵确认项目存在事件、异步、调度、执行器和 Spring Retry 使用；代表路径只用于说明课程为何必要。风险条目
-属于 `corrected` 证据：它们提示必须验证发布线程、载荷可变性、事务传播、Future 失败、`sleep` 和调度开关，不能
-据此断言冻结源码中的某个具体方法现在必然存在缺陷，更不能把旧写法复制为推荐方案。
-
-## Java 8 / Spring Boot 2.3 兼容写法
-
-Java 8 没有 record、`ExecutorService.close()` 或 Framework 7 resilience。事件快照使用 final 字段和防御性复制；
-执行器用 `shutdown`、两次 `awaitTermination` 与协作中断；重试使用 Boot 管理的 Spring Retry
-`1.2.5.RELEASE`，通过 `@EnableRetry`、`@Retryable(maxAttempts = 3)` 和 `@Recover` 表达总共三次调用。
-
-```java
-public final class Java8ReportReady {
-    private final String reportId;
-    private final List<String> recipients;
-
-    /** 创建 Java 8 兼容的不可变事件快照。 */
-    public Java8ReportReady(String reportId, List<String> recipients) {
-        this.reportId = reportId;
-        this.recipients = Collections.unmodifiableList(new ArrayList<>(recipients));
-    }
-
-    /** 返回报表标识。 */
-    public String getReportId() {
-        return reportId;
-    }
-
-    /** 返回不可变收件人列表。 */
-    public List<String> getRecipients() {
-        return recipients;
-    }
-}
-```
-
-## 新旧版本差异
-
-| 主题 | Java 25 / Spring 7.0.8 | Java 8 / Spring 5.2.15 / Boot 2.3.12 |
-| --- | --- | --- |
-| 不可变载荷 | record 加组件防御性复制 | final 字段、无 setter、防御性复制 |
-| 事件默认线程 | multicaster 默认同步 | 同样默认同步 |
-| 事务事件 | 支持 thread-bound 与 reactive transaction | 只讲 thread-bound PlatformTransactionManager |
-| 调度返回 | 可支持 reactive Publisher | 返回值被忽略，通常 void |
-| 执行器关闭 | 可用 `close()` 等待终止 | `shutdown` + `awaitTermination` |
-| Retry 包 | `org.springframework.resilience` | `org.springframework.retry` 1.2.5 |
-| Retry 次数 | `maxRetries` 不含初次调用 | `maxAttempts` 包含初次调用 |
-
-## 易错点
+下面六类错误会让代码看似使用了 `@Async`，实际却没有可靠的线程、结果或生命周期合同。
 
 :::pitfalls
-### 错误：把发布事件当成天然异步
+### 在同一个对象内调用异步方法
 
-**触发条件：** 调用 `publishEvent` 后直接声称 listener 在后台线程执行。
+**触发条件：** 一个方法使用 `this.send(...)` 调用同类中标注 `@Async` 的方法。
 
-**原因：** 执行线程由 multicaster 和 listener 配置决定，默认是发布线程。
+**原因：** 默认代理只拦截经过 Spring 代理的外部调用，同类内部调用没有重新进入代理。
 
-**后果：** 重 listener 阻塞事务或请求线程，延迟和异常归属被误判。
+**后果：** 工作在调用线程同步执行，耗时和 ThreadLocal 行为都与预期不同。
 
 **错误示例：**
 
 ```java
-publisher.publishEvent(event); // 假定这里已经异步。
+/** 演示同类内部调用无法经过异步代理。 */
+public CompletableFuture<NotificationResult> submit(String taskId) {
+    return this.send(taskId, false);
+}
 ```
 
 **正确写法：**
 
 ```java
-String publisherThread = Thread.currentThread().getName();
-publisher.publishEvent(event);
-assertEquals(publisherThread, listener.listenerThread());
+public final class NotificationFacade {
+    private final TaskNotificationService service;
+
+    /** 注入真正的异步 Spring Bean。 */
+    public NotificationFacade(TaskNotificationService service) {
+        this.service = service;
+    }
+
+    /** 从另一个 Bean 经过代理调用异步入口。 */
+    public CompletableFuture<NotificationResult> submit(String taskId) {
+        return service.send(taskId, false);
+    }
+}
 ```
 
-**验证方式：** 分别在默认 multicaster 和显式 executor 下记录线程名。影响版本：Spring 7/5.2；来源：
-`spring7-event-publisher`、`spring7-simple-multicaster`、`spring5-simple-multicaster`。
+**影响版本：** Spring Framework 7.0.9 与 5.2.15.RELEASE 的默认代理模式。
 
-### 错误：发布后继续修改事件载荷
+**验证方式：** 分别输出调用线程和方法线程；错误版线程相同，跨 Bean 代理调用进入具名执行器线程。
 
-**触发条件：** 事件持有可变列表，发布者随后增删元素。
+### 给异步方法声明普通业务返回类型
 
-**原因：** record 或 final 只固定引用，不会深拷贝集合。
+**触发条件：** 把 `@Async` 方法声明为 `String send(...)`，希望代理稍后再填充字符串。
 
-**后果：** 异步 listener 看到不稳定或越权数据。
+**原因：** 异步方法只能返回 `void` 或 Future 系列，普通返回值无法表达尚未完成的结果。
+
+**后果：** Spring 在调用时拒绝无效返回类型，调用方也没有合法的终态句柄。
 
 **错误示例：**
 
 ```java
-ReportReady event = new ReportReady(id, mutableRecipients);
-publisher.publishEvent(event);
-mutableRecipients.clear();
+/** 演示异步方法不能返回普通业务类型。 */
+@Async("notificationExecutor")
+public String send(String taskId) {
+    return "SENT";
+}
 ```
 
 **正确写法：**
 
 ```java
-ReportReady event = new ReportReady(id, List.copyOf(mutableRecipients));
-publisher.publishEvent(event);
+/** 使用 Future 表达尚未完成的异步结果。 */
+@Async("notificationExecutor")
+public CompletableFuture<String> send(String taskId) {
+    return CompletableFuture.completedFuture("SENT");
+}
 ```
 
-**验证方式：** 发布后修改原列表，断言 listener 快照不变。影响版本：Java 25/8；来源：`jls25-records`、
-`jls8-classes`。
+**影响版本：** Spring Framework 7.0.9 与 5.2.15.RELEASE。
 
-### 错误：把 AFTER_COMMIT 中的写入当作原事务提交内容
+**验证方式：** 从容器取得 Bean 后调用两版方法；错误版报告无效异步返回类型，正确版返回可读取的 Future。
 
-**触发条件：** 事务 listener 在提交后直接继续写库。
+### 丢弃 Future 后仍把提交当成成功
 
-**原因：** 原事务已经提交，仍可访问资源不表示后续写入会再次提交。
+**触发条件：** 调用返回 Future 的方法后不保存句柄，立即把业务状态写成完成。
 
-**后果：** 通知记录或任务状态没有持久化。
+**原因：** 代理返回只代表任务已经提交，真正的成功或失败仍在 Future 中。
+
+**后果：** 后台失败没有对应状态，调用方可能向用户报告并不存在的成功。
 
 **错误示例：**
 
 ```java
-/** 提交后直接写入，错误地复用事务资源。 */
-@TransactionalEventListener
-void onReady(ReportReady event) { repository.save(next(event)); }
+notificationService.send(taskId, false);
+taskRepository.markNotificationSent(taskId);
 ```
 
 **正确写法：**
 
 ```java
-/** 提交后委托给拥有新事务的服务。 */
-@TransactionalEventListener
-void onReady(ReportReady event) { commandService.createInNewTransaction(event.reportId()); }
+CompletableFuture<NotificationResult> future =
+        notificationService.send(taskId, false);
+NotificationResult result = future.get(2, TimeUnit.SECONDS);
+System.out.println(result.status());
 ```
 
-**验证方式：** 提交后从新连接读取后续记录。影响版本：Spring 7/5.2；来源：
-`spring7-transactional-event-listener`、`spring5-transactional-event-listener`。
+**影响版本：** Java 25、Java 8 与本课两条 Spring 版本线。
 
-### 错误：用 this 调用 Async 方法
+**验证方式：** 让异步方法确定抛错；错误版仍执行完成标记，正确版从 ExecutionException 的 cause 观察失败。
 
-**触发条件：** 同类方法调用 `this.generate()`。
+### 在 Async 方法内再次使用默认 supplyAsync
 
-**原因：** 默认 proxy advice 只拦截经过代理的外部调用。
+**触发条件：** `@Async("notificationExecutor")` 方法内部又调用无 Executor 参数的 `supplyAsync`。
 
-**后果：** 工作仍在请求线程执行，超时和事务边界与预期不同。
+**原因：** 外层已经切换到具名执行器，内层无参 `supplyAsync` 又把工作提交给 CompletableFuture 默认执行器。
+
+**后果：** 实际业务离开 `notificationExecutor`，线程命名、上下文和关闭责任再次变得不明确。
 
 **错误示例：**
 
 ```java
-this.generate(reportId);
+/** 演示无参 supplyAsync 会再次切换到默认执行器。 */
+@Async("notificationExecutor")
+public CompletableFuture<String> send(String taskId) {
+    return CompletableFuture.supplyAsync(() -> Thread.currentThread().getName());
+}
 ```
 
 **正确写法：**
 
 ```java
-reportGenerator.generate(reportId);
+/** 直接返回当前异步线程已经产生的结果。 */
+@Async("notificationExecutor")
+public CompletableFuture<String> send(String taskId) {
+    return CompletableFuture.completedFuture(Thread.currentThread().getName());
+}
 ```
 
-**验证方式：** 记录调用线程与 `report-` worker 线程。影响版本：Spring 7/5.2；来源：
-`spring7-scheduling-reference`、`spring5-scheduling-reference`。
+**影响版本：** Java 25、Java 8 与本课两条 Spring 版本线。
 
-### 错误：忽略 void 异步异常或未观察 Future
+**验证方式：** 输出线程名；错误版可能出现公共池线程，正确版稳定使用 `notificationExecutor` 的前缀。
 
-**触发条件：** 提交后丢弃返回值，或使用 `@Async void` 却没有异常处理器。
+### 假定请求上下文与事务会自动传播
 
-**原因：** 异步失败不会自动回到原调用栈。
+**触发条件：** 工作线程只从 ThreadLocal 或调用方事务读取任务所需的用户、租户或尚未提交数据。
 
-**后果：** 业务失败只剩一条日志，调用方继续报告成功。
+**原因：** ThreadLocal 与命令式事务都绑定当前线程，执行器线程拥有不同的线程状态。
+
+**后果：** 后台任务读到 null、旧上下文或看不到调用方未提交的数据，行为随执行时机变化。
 
 **错误示例：**
 
 ```java
-generator.generate(reportId);
+/** 演示工作线程不能直接读取调用线程的请求上下文。 */
+@Async("notificationExecutor")
+public CompletableFuture<String> send() {
+    return CompletableFuture.completedFuture(RequestContext.currentRequestId());
+}
 ```
 
 **正确写法：**
 
 ```java
-CompletableFuture<String> result = generator.generate(reportId);
-// callback 记录异步终态。
-result.whenComplete((value, error) -> taskState.finish(reportId, value, error));
+/** 显式接收工作线程真正需要的任务与请求编号。 */
+@Async("notificationExecutor")
+public CompletableFuture<String> send(String taskId, String requestId) {
+    return CompletableFuture.completedFuture(taskId + ":" + requestId);
+}
 ```
 
-**验证方式：** 让任务抛异常，分别断言 Future cause 与 void handler。影响版本：Java 25/8、Spring 7/5.2；来源：
-`spring7-async-error-handler`、`java25-completable-future`、`java8-completable-future`。
+**影响版本：** Java 25、Java 8、Spring Framework 7.0.9 与 5.2.15.RELEASE。
 
-### 错误：依赖默认无界执行器配置
+**验证方式：** 在调用线程设置 ThreadLocal 后执行两版代码；错误版工作线程读不到值，正确版始终取得显式参数。
 
-**触发条件：** 只声明 `new ThreadPoolTaskExecutor()`，不设置 queue 与 max。
+### 关闭容器时没有定义剩余任务边界
 
-**原因：** 默认 core 为 1，max 与 queue 近似无界。
+**触发条件：** 手工创建执行器且不关闭，或关闭 Spring 容器时没有决定是否完成队列中的任务和最多等待多久。
 
-**后果：** 积压持续占内存，过载没有及时反馈。
+**原因：** 任务 owner 与关闭合同缺失，应用退出时只能依赖线程实现和外部强制终止时机。
+
+**后果：** 本地程序可能不退出，部署停止时也可能丢弃已接受任务或无限拖延关闭。
 
 **错误示例：**
 
 ```java
 ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
 executor.initialize();
+executor.execute(this::sendNow);
 ```
 
 **正确写法：**
 
 ```java
-executor.setCorePoolSize(4);
-executor.setMaxPoolSize(8);
-executor.setQueueCapacity(100);
-executor.setRejectedExecutionHandler(new ThreadPoolExecutor.AbortPolicy());
+/** 创建由 Spring 管理并具有明确关闭合同的执行器。 */
+@Bean("notificationExecutor")
+public ThreadPoolTaskExecutor notificationExecutor() {
+    ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+    executor.setWaitForTasksToCompleteOnShutdown(true);
+    executor.setAwaitTerminationSeconds(5);
+    return executor;
+}
 ```
 
-**验证方式：** 用栅栏占满 worker 与 queue，断言下一任务被显式拒绝。影响版本：Spring 7/5.2；来源：
-`spring7-thread-pool-task-executor`。
+**影响版本：** Spring Framework 7.0.9 与 5.2.15.RELEASE。
 
-### 错误：混淆 fixedRate 与 fixedDelay
-
-**触发条件：** 希望每次完成后等待，却配置 fixedRate。
-
-**原因：** fixedRate 按启动节拍，fixedDelay 从上次结束计时。
-
-**后果：** 慢任务完成后几乎立即再次执行，持续压迫下游。
-
-**错误示例：**
-
-```java
-/** 用错误的启动节拍执行慢轮询。 */
-@Scheduled(fixedRate = 5000)
-void poll() { fetchSlowRemote(); }
-```
-
-**正确写法：**
-
-```java
-/** 在上次完成后等待再轮询。 */
-@Scheduled(fixedDelay = 5000)
-void poll() { fetchSlowRemote(); }
-```
-
-**验证方式：** 记录连续开始与结束时间，比较两种时间轴。影响版本：Java 25/8、Spring 7/5.2；来源：
-`java25-scheduled-executor-service`、`java8-scheduled-executor-service`、`spring7-scheduled`。
-
-### 错误：用 sleep 表达调度或重试退避
-
-**触发条件：** worker 捕获异常后直接 `Thread.sleep`。
-
-**原因：** sleep 占用当前线程，不表达 `ScheduledFuture` 取消、统一预算或关闭。
-
-**后果：** 执行器容量被阻塞，中断和停机响应变慢。
-
-**错误示例：**
-
-```java
-catch (TransientRemoteException error) { Thread.sleep(1000); }
-```
-
-**正确写法：**
-
-```java
-/** 让框架按有限预算和退避执行瞬态调用。 */
-@Retryable(includes = TransientRemoteException.class, maxRetries = 2, delay = 1000)
-Report callRemote() { return client.fetch(); }
-```
-
-**验证方式：** 取消等待中的任务并断言不再占用业务 worker。影响版本：Java 25/8；来源：`java25-thread`、
-`java8-thread`、`spring7-resilience`。
-
-### 错误：对确定性失败无限重试
-
-**触发条件：** 捕获所有异常并不断再次调用。
-
-**原因：** 校验、权限、schema 和代码错误不会随时间自行恢复。
-
-**后果：** 重复副作用、下游放大和线程长期占用。
-
-**错误示例：**
-
-```java
-while (true) { callRemote(); }
-```
-
-**正确写法：**
-
-```java
-/** 只对瞬态异常执行两次额外重试。 */
-@Retryable(includes = TransientRemoteException.class, maxRetries = 2)
-Report callRemote() { return client.fetch(); }
-```
-
-**验证方式：** 瞬态异常最多三次，参数异常只调用一次。影响版本：Spring 7；来源：
-`spring7-resilience-retryable`。
-
-### 错误：把 maxRetries 与 maxAttempts 当成同一计数
-
-**触发条件：** 迁移时把数值 3 原样复制到另一个包。
-
-**原因：** Framework 7 `maxRetries` 不含初次调用，Spring Retry `maxAttempts` 包含初次调用。
-
-**后果：** 实际调用次数从三次变成四次，超出下游配额和事务预算。
-
-**错误示例：**
-
-```java
-@org.springframework.resilience.annotation.Retryable(maxRetries = 3)
-```
-
-**正确写法：**
-
-```java
-@org.springframework.resilience.annotation.Retryable(maxRetries = 2)
-```
-
-**验证方式：** 用原子计数器断言现代线和旧线都恰好总调用三次。影响版本：Spring 7 / Spring Retry 1.2.5；来源：
-`spring7-resilience-retryable`、`spring-retry-legacy-retryable`。
+**验证方式：** 提交一个短任务后关闭 ApplicationContext；正确版在五秒上限内完成任务并结束执行器。
 :::
 
-## 安全与性能边界
+## 八、练习：统一观察一批通知结果
 
-事件与任务只携带最小不可变标识，不携带密码、Servlet request、数据库连接或可变权限对象。executor 容量必须受
-下游限流和内存约束；`CallerRunsPolicy` 会把压力转移给提交线程，不能未经评估用于 Web 请求。重试要有总时长、
-最大退避和 jitter，避免多个实例同步冲击下游。任务状态和日志不得泄露事件载荷中的敏感字段。
+:::exercise
+### 为三个异步任务生成确定结果
 
-## 如何验证
+**要求：** 在完整示例工程中打开并修改 `AsyncTaskApplication.java`。依次提交 `task-101`、`task-102` 和 `task-103`，其中只有 `task-102` 传入失败标记。必须保存每个 Future，使用两秒有限等待，把正常结果转换为 `任务号=状态`，把异常结果转换为 `任务号=原始异常类型`；不得修改 `TaskNotificationService`，也不得在异步方法内增加重试或另一层 `supplyAsync`。
 
-1. 默认事件与显式异步事件各记录线程名，并断言载荷快照不变。
-2. 外部代理调用进入命名 executor，类内自调用作为负对照保持当前线程。
-3. Future 任务故意失败，断言 `ExecutionException`/`CompletionException` cause 与终端状态。
-4. `void` 任务故意抛异常，断言 `AsyncUncaughtExceptionHandler` 收到方法名、参数和原始 cause。
-5. 有界 executor 占满后断言拒绝，取消后恢复中断，关闭后等待终止。
-6. fixedRate 与 fixedDelay 各运行至少三次，比较开始/结束时间；取消后不再增加计数。
-7. 瞬态异常按预算恢复，确定性异常不重试，耗尽进入可查询 recovery。
-8. Java 25 与 Java 8 fixture 各连续运行两次；所有临时文件仅保存在 `/tmp` 并在结束后确认不存在。
+**验收：** 程序依次输出 `task-101=SENT`、`task-102=IllegalStateException` 和 `task-103=SENT`，随后关闭 Spring 容器。Java 8 兼容工程使用同一份主类。
+:::
 
-## 练习
+参考实现完整替换已有的 `AsyncTaskApplication.java`，其余文件保持第五节的实现：
 
-### 练习：设计一个可恢复的日报任务
+```java
+package example.async;
 
-为“每天凌晨 2 点生成报表并投递外部系统”设计 command、事件、cron zone、命名 executor、任务状态、幂等键、
-瞬态异常白名单、三次总调用预算和耗尽恢复。
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
-验收标准：能说明原事务何时提交、listener 在哪个线程、每次 attempt 的事务边界、重复触发如何单飞、取消与关闭
-如何完成，以及 Java 8 兼容线为何使用 `maxAttempts = 3` 而现代线使用 `maxRetries = 2`。
+import org.springframework.boot.Banner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ConfigurableApplicationContext;
 
-## 本节小结
+@SpringBootApplication
+public class AsyncTaskApplication {
 
-事件只负责通知，multicaster 决定线程；异步只负责换执行边界，Future 和异常处理器负责终态；调度只负责时间，
-任务状态和单飞负责重入；重试只处理瞬态失败，幂等、独立事务和 recovery 负责副作用。把这四条边界分别验证，
-才能得到可观察、可取消、可关闭且可恢复的后台工作流。
+    /** 启动容器并依次观察三个异步任务的终态。 */
+    public static void main(String[] args) {
+        SpringApplication application = new SpringApplication(AsyncTaskApplication.class);
+        application.setBannerMode(Banner.Mode.OFF);
+
+        try (ConfigurableApplicationContext context = application.run(args)) {
+            TaskNotificationService service = context.getBean(TaskNotificationService.class);
+
+            CompletableFuture<NotificationResult> first = service.send("task-101", false);
+            CompletableFuture<NotificationResult> second = service.send("task-102", true);
+            CompletableFuture<NotificationResult> third = service.send("task-103", false);
+
+            printOutcome("task-101", first);
+            printOutcome("task-102", second);
+            printOutcome("task-103", third);
+        }
+    }
+
+    /** 在有限时间内把正常结果或原始异常转换成一行输出。 */
+    private static void printOutcome(
+            String taskId,
+            CompletableFuture<NotificationResult> future) {
+        try {
+            NotificationResult result = future.get(2, TimeUnit.SECONDS);
+            System.out.println(taskId + "=" + result.status());
+        } catch (InterruptedException exception) {
+            Thread.currentThread().interrupt();
+            throw new IllegalStateException("waiting thread interrupted", exception);
+        } catch (ExecutionException exception) {
+            System.out.println(taskId + "="
+                    + exception.getCause().getClass().getSimpleName());
+        } catch (TimeoutException exception) {
+            throw new IllegalStateException(taskId + " did not finish in time", exception);
+        }
+    }
+}
+```
+
+执行：
+
+```bash
+mvn -q spring-boot:run
+```
+
+预期输出为：
+
+```text
+task-101=SENT
+task-102=IllegalStateException
+task-103=SENT
+```
+
+三个调用都先返回 Future，练习只是在调用方依次观察终态。第二个结果来自 Future 的异常完成，不是同步提交
+失败；第三个任务仍能正常执行，说明一个业务任务失败不等于执行器或后续任务自动停止。

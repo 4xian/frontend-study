@@ -1,8 +1,8 @@
 ---
 id: backend.java.learn.intermediate.controller-testing-mockmvc-and-test-slices
 type: lesson
-title: Controller 测试、MockMvc 与测试切片
-summary: 使用 MVC 测试切片验证请求映射、输入校验、响应与错误合同，并把业务依赖隔离为测试替身
+title: MockMvc 接口测试
+summary: 在不启动真实端口和数据库的情况下验证 Spring MVC 的映射、绑定、校验、响应和错误合同
 domain: backend
 technology: java
 module: core
@@ -12,557 +12,596 @@ estimatedMinutes: 150
 prerequisites:
   - backend.java.learn.intermediate.testing-with-junit-and-mocks
 objectives:
-  - 能说明 Controller 测试与 Service 单元测试、完整应用集成测试的边界。
-  - 能使用 WebMvcTest、MockMvc 与 MockitoBean 建立现代 MVC 测试切片。
-  - 能构造路径变量、查询参数和 JSON 请求，并断言状态、媒体类型、响应头与 JSON 字段。
-  - 能证明请求体校验失败时不会调用 Service。
-  - 能把 Service 结果或异常驱动为稳定的 Problem Details 响应。
-  - 能识别 Security 过滤链、standalone setup 与完整应用测试的适用边界。
-  - 能把现代测试写法映射到 Boot 2.3 的 WebMvcTest 与 MockBean 兼容写法。
+  - 能区分 MockMvc MVC 测试、Service 单元测试和完整应用集成测试的可验证边界。
+  - 能用 WebMvcTest、MockMvc 和 MockitoBean 建立只加载 Web 层的测试切片。
+  - 能构造路径变量、查询参数和 JSON 请求，并断言状态、媒体类型、响应头和 JSON 字段。
+  - 能证明请求体校验失败时不会调用 Service，并识别分页参数转换失败发生在协作者调用之前。
+  - 能让 ControllerAdvice 把业务异常和校验异常转换为稳定的 Problem Details 响应。
+  - 能判断 Security 过滤链、standaloneSetup 和 SpringBootTest 何时属于当前测试边界。
+  - 能把 Boot 4.1 的 MockitoBean、jakarta.validation 与 Jackson 3 写法映射到 Boot 2.3 的兼容写法。
 recap:
-  - Controller 测试验证 HTTP adapter 合同，不重复证明 Service 内部算法。
-  - MockMvc 运行 Spring MVC 的 mock Servlet 链路，不监听真实端口。
-  - WebMvcTest 只加载 MVC 切片，Controller 的业务依赖必须显式提供测试替身。
-  - 现代线使用 MockitoBean，Boot 2.3 兼容线使用 MockBean，包名不能混用。
-  - 响应至少按合同断言 status、content type、header 和公开 JSON 字段。
-  - 校验失败不仅要断言 400，还要证明 Service 从未被调用。
-  - Advice 必须能被测试切片发现，才能验证业务异常到 Problem Details 的映射。
-  - Security 在 classpath 时仍属于请求边界，不应为了让测试变绿而无条件关闭过滤器。
+  - MockMvc 执行真实 Spring MVC 请求处理，但使用 mock request/response，不建立真实 TCP 连接。
+  - WebMvcTest 只加载 MVC 相关组件，Controller 的 Service 协作者必须显式提供测试替身。
+  - 请求测试先断言公开 HTTP 合同，再验证必要的 Service 调用或禁止调用。
+  - '@Valid 和分页参数转换失败都可能在 Service 之前终止请求；路径变量则应验证绑定后的资源身份。'
+  - ControllerAdvice 是否进入切片，决定异常到 Problem Details 的映射能否被验证。
+  - Boot 4.1 使用 MockitoBean 与 jakarta.validation；Boot 2.3 使用 MockBean 与 javax.validation。
+  - Security 存在时，过滤链和 CSRF 是请求边界的一部分，不能无条件关闭 filters 追求绿色。
 related: []
 tags:
   - Java
   - Spring MVC
-  - Controller 测试
   - MockMvc
   - WebMvcTest
-  - MockitoBean
-  - MockBean
+  - Controller 测试
   - 测试切片
-appliesTo: Java 25、Spring Boot 4.1.0、Spring Framework 7.0.8、JUnit 6.0.3、Mockito 5.23.0 主线；Java 8、Spring Boot 2.3.12.RELEASE、Spring Framework 5.2.15.RELEASE、JUnit 5.6.3、Mockito 3.3.3 兼容补充
-modernBaseline:
-  java: '25'
-  springBoot: 4.1.0
-  springFramework: 7.0.8
-  junit: 6.0.3
-  mockito: 5.23.0
-legacyBaseline:
-  java: '8'
-  springBoot: 2.3.12.RELEASE
-  springFramework: 5.2.15.RELEASE
-  junit: 5.6.3
-  mockito: 3.3.3
-verifiedAt: 2026-08-16
+  - Problem Details
+  - 请求校验
+appliesTo: Java 25、Spring Boot 4.1.1、Spring Framework 7.0.9、JUnit 6.0.3、Mockito 5.23.0 主线；Java 8、Spring Boot 2.3.12.RELEASE、Spring Framework 5.2.15.RELEASE、JUnit 5.6.3、Mockito 3.3.3 兼容补充
+verifiedAt: 2026-08-26
 sources:
-  - id: boot-410-system
-    title: Spring Boot 4.1 System Requirements
+  - id: boot-411-system-requirements
+    title: Spring Boot 4.1.1 System Requirements
     url: https://docs.spring.io/spring-boot/4.1/system-requirements.html
+    sourceOrigin: official
     sourceType: official-reference
-    appliesTo: Spring Boot 4.1.0
+    appliesTo: Spring Boot 4.1.1
     claims:
-      - Spring Boot 4.1.0 支持 Java 17 至 26，并要求 Spring Framework 7.0.8 或以上
-  - id: boot-410-dependencies
-    title: Spring Boot 4.1.0 Dependency Management
-    url: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-dependencies/4.1.0/spring-boot-dependencies-4.1.0.pom
+      - Spring Boot 4.1.1 要求 Java 17 至 26，并要求 Spring Framework 7.0.9 或以上
+  - id: boot-411-dependencies
+    title: Spring Boot 4.1.1 Dependency Management
+    url: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-dependencies/4.1.1/spring-boot-dependencies-4.1.1.pom
+    sourceOrigin: official
     sourceType: source-code
-    appliesTo: Spring Boot 4.1.0
+    appliesTo: Spring Boot 4.1.1
     claims:
-      - 管理 Spring Framework 7.0.8、JUnit 6.0.3 与 Mockito 5.23.0
-  - id: boot-410-webmvc-test
-    title: Spring Boot 4.1 WebMvcTest API
+      - Boot 4.1.1 管理 Spring Framework 7.0.9、Spring Security 7.1.1、JUnit 6.0.3 与 Mockito 5.23.0
+  - id: boot-411-webmvc-test
+    title: Spring Boot 4.1.1 WebMvcTest API
     url: https://docs.spring.io/spring-boot/4.1/api/java/org/springframework/boot/webmvc/test/autoconfigure/WebMvcTest.html
+    sourceOrigin: official
     sourceType: api-doc
-    appliesTo: Spring Boot 4.1.0
+    appliesTo: Spring Boot 4.1.1
     claims:
-      - WebMvcTest 限定 MVC 组件并自动配置 MockMvc
-      - 指定 Controller 可缩小测试切片范围
-  - id: boot-410-webmvc-test-starter
-    title: Spring Boot 4.1 Web MVC Test Starter POM
-    url: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-webmvc-test/4.1.0/spring-boot-starter-webmvc-test-4.1.0.pom
+      - WebMvcTest 聚焦 Spring MVC 组件并自动配置 MockMvc
+      - WebMvcTest 默认会纳入 MVC 相关组件、ControllerAdvice、安全过滤链和 MockMvc 支持
+      - 完整应用配置应使用 SpringBootTest 与 AutoConfigureMockMvc，而不是 WebMvcTest
+  - id: boot-411-webmvc-test-starter
+    title: Spring Boot 4.1.1 Web MVC Test Starter POM
+    url: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-webmvc-test/4.1.1/spring-boot-starter-webmvc-test-4.1.1.pom
+    sourceOrigin: official
     sourceType: source-code
-    appliesTo: Spring Boot 4.1.0
+    appliesTo: Spring Boot 4.1.1
     claims:
       - 现代 MVC 测试使用 spring-boot-starter-webmvc-test
-  - id: boot-410-webmvc-starter
-    title: Spring Boot 4.1 Web MVC Starter POM
-    url: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-starter-webmvc/4.1.0/spring-boot-starter-webmvc-4.1.0.pom
-    sourceType: source-code
-    appliesTo: Spring Boot 4.1.0
-    claims:
-      - MVC starter 引入 Jackson 3 starter，映射器使用 tools.jackson 包
-  - id: spring-mockmvc
-    title: Spring Framework MockMvc
+      - 测试 starter 由 Boot BOM 管理版本，不应在课程示例中手工拼接 JUnit 和 Mockito 版本
+  - id: spring-70-mockmvc
+    title: Spring Framework 7.0 MockMvc
     url: https://docs.spring.io/spring-framework/reference/7.0/testing/mockmvc.html
+    sourceOrigin: official
     sourceType: official-reference
-    appliesTo: Spring Framework 7.0.8
+    appliesTo: Spring Framework 7.0.9
     claims:
-      - MockMvc 通过 mock request 和 response 执行完整 Spring MVC 请求处理
-      - MockMvc 不启动真实服务器
-  - id: spring-mockmvc-requests
-    title: Spring Framework MockMvc Requests
+      - MockMvc 执行完整 Spring MVC 请求处理，但使用 mock request 和 response 替代运行中的服务器
+  - id: spring-70-mockmvc-requests
+    title: Spring Framework 7.0 Performing Requests
     url: https://docs.spring.io/spring-framework/reference/7.0/testing/mockmvc/hamcrest/requests.html
+    sourceOrigin: official
     sourceType: official-reference
-    appliesTo: Spring Framework 7.0.8
+    appliesTo: Spring Framework 7.0.9
     claims:
-      - 请求构造器支持 method、path、query、header、content type 与 body
-  - id: spring-mockmvc-expectations
-    title: Spring Framework MockMvc Expectations
+      - 请求构造器支持 HTTP method、路径变量、query parameter、header、content type 和 body
+  - id: spring-70-mockmvc-expectations
+    title: Spring Framework 7.0 Defining Expectations
     url: https://docs.spring.io/spring-framework/reference/7.0/testing/mockmvc/hamcrest/expectations.html
+    sourceOrigin: official
     sourceType: official-reference
-    appliesTo: Spring Framework 7.0.8
+    appliesTo: Spring Framework 7.0.9
     claims:
-      - 结果匹配器可断言 status、header、content 与 jsonPath
-  - id: spring-mockitobean
-    title: Spring Framework MockitoBean
+      - MockMvc 结果匹配器可以断言 status、header、content、jsonPath 和多个同时成立的期望
+      - standaloneSetup 是比 WebMvcTest 更窄的手工 MVC 边界
+  - id: spring-70-mockito-bean
+    title: Spring Framework 7.0 MockitoBean
     url: https://docs.spring.io/spring-framework/reference/7.0/testing/annotations/integration-spring/annotation-mockitobean.html
+    sourceOrigin: official
     sourceType: official-reference
-    appliesTo: Spring Framework 7.0.8
+    appliesTo: Spring Framework 7.0.9
     claims:
-      - MockitoBean 用 Mockito mock 覆盖测试 ApplicationContext 中的 bean
-  - id: spring-requestbody-validation
-    title: Spring MVC RequestBody
+      - MockitoBean 在测试 ApplicationContext 中创建或覆盖 Mockito mock
+  - id: spring-70-requestbody-validation
+    title: Spring Framework 7.0 RequestBody Validation
     url: https://docs.spring.io/spring-framework/reference/7.0/web/webmvc/mvc-controller/ann-methods/requestbody.html
+    sourceOrigin: official
     sourceType: official-reference
-    appliesTo: Spring Framework 7.0.8
+    appliesTo: Spring Framework 7.0.9
     claims:
-      - RequestBody 与 Valid 组合会触发 Bean Validation，默认校验失败形成 400
-  - id: spring-exceptionhandler
-    title: Spring MVC Exceptions
+      - RequestBody 与 Valid 组合会触发 Bean Validation
+      - 请求体校验失败会在 Controller 调用协作者之前结束请求
+  - id: spring-70-exception-handler
+    title: Spring Framework 7.0 ExceptionHandler
     url: https://docs.spring.io/spring-framework/reference/7.0/web/webmvc/mvc-controller/ann-exceptionhandler.html
+    sourceOrigin: official
     sourceType: official-reference
-    appliesTo: Spring Framework 7.0.8
+    appliesTo: Spring Framework 7.0.9
     claims:
-      - ExceptionHandler 与 ControllerAdvice 可集中映射 Controller 异常
-  - id: spring-problemdetail
-    title: Spring Framework ProblemDetail API
-    url: https://docs.spring.io/spring-framework/docs/7.0.8/javadoc-api/org/springframework/http/ProblemDetail.html
+      - ExceptionHandler 与 ControllerAdvice 可以集中处理 Controller 抛出的异常
+  - id: spring-70-problem-detail
+    title: Spring Framework 7.0 ProblemDetail API
+    url: https://docs.spring.io/spring-framework/docs/7.0.9/javadoc-api/org/springframework/http/ProblemDetail.html
+    sourceOrigin: official
     sourceType: api-doc
-    appliesTo: Spring Framework 7.0.8
+    appliesTo: Spring Framework 7.0.9
     claims:
-      - ProblemDetail 提供标准错误字段与扩展 properties
-  - id: security-mockmvc
-    title: Spring Security MockMvc Setup
-    url: https://docs.spring.io/spring-security/reference/7.1/servlet/test/mockmvc/setup.html
+      - ProblemDetail 提供 status、type、title、detail、instance 和扩展 properties 等错误字段
+  - id: security-71-mockmvc-setup
+    title: Spring Security 7.1 Setting Up MockMvc
+    url: https://docs.spring.io/spring-security/reference/servlet/test/mockmvc/setup.html
+    sourceOrigin: official
     sourceType: official-reference
-    appliesTo: Spring Security 7.1.0
+    appliesTo: Spring Security 7.1.1
     claims:
-      - 存在 Spring Security 时应把安全过滤链纳入 MockMvc 请求边界
+      - springSecurity 将 SecurityFilterChain 接入 MockMvc
+      - Security 测试支持提供 csrf 等请求后处理器
+  - id: security-71-csrf
+    title: Spring Security 7.1 CSRF Testing
+    url: https://docs.spring.io/spring-security/reference/servlet/exploits/csrf.html
+    sourceOrigin: official
+    sourceType: security-standard
+    appliesTo: Spring Security 7.1.1
+    claims:
+      - 启用 CSRF 时缺少或无效 token 的写请求会被过滤链拒绝
   - id: boot-2312-dependencies
     title: Spring Boot 2.3.12 Dependency Management
     url: https://repo.maven.apache.org/maven2/org/springframework/boot/spring-boot-dependencies/2.3.12.RELEASE/spring-boot-dependencies-2.3.12.RELEASE.pom
+    sourceOrigin: official
     sourceType: source-code
     appliesTo: Spring Boot 2.3.12.RELEASE
     claims:
-      - Boot 2.3.12 管理 JUnit Jupiter 5.6.3 与 Mockito 3.3.3
+      - Boot 2.3.12 管理 Spring Framework 5.2.15、JUnit Jupiter 5.6.3 与 Mockito 3.3.3
   - id: boot-2312-webmvc-test
     title: Spring Boot 2.3.12 WebMvcTest API
     url: https://docs.spring.io/spring-boot/docs/2.3.12.RELEASE/api/org/springframework/boot/test/autoconfigure/web/servlet/WebMvcTest.html
+    sourceOrigin: official
     sourceType: api-doc
     appliesTo: Spring Boot 2.3.12.RELEASE
     claims:
-      - 旧线 WebMvcTest 位于 test.autoconfigure.web.servlet 包
+      - 旧线 WebMvcTest 位于 org.springframework.boot.test.autoconfigure.web.servlet 包
+      - 旧线 WebMvcTest 通过 MockBean 提供 Controller 的协作者
   - id: boot-2312-mockbean
     title: Spring Boot 2.3.12 MockBean API
     url: https://docs.spring.io/spring-boot/docs/2.3.12.RELEASE/api/org/springframework/boot/test/mock/mockito/MockBean.html
+    sourceOrigin: official
     sourceType: api-doc
     appliesTo: Spring Boot 2.3.12.RELEASE
     claims:
-      - 旧线使用 MockBean 在 ApplicationContext 中添加或替换 Mockito mock
+      - MockBean 会在 ApplicationContext 中添加或替换 Mockito mock
   - id: spring-5215-mockmvc
     title: Spring Framework 5.2.15 MockMvc
     url: https://docs.spring.io/spring-framework/docs/5.2.15.RELEASE/spring-framework-reference/testing.html#spring-mvc-test-framework
+    sourceOrigin: official
     sourceType: official-reference
     appliesTo: Spring Framework 5.2.15.RELEASE
     claims:
       - Spring 5.2.15 提供 MockMvc 请求构造与结果断言反馈环
-projectEvidence:
-  - file: dzzz-app/src/main/java/com/tdh/bdzz/controller/BaseOuterController.java
-    symbol: com.tdh.bdzz.controller.BaseOuterController
-    usage: observed
-  - file: dzzz-app/src/main/java/com/tdh/bdzz/exception/ArgumentNotValidException.java
-    symbol: com.tdh.bdzz.exception.ArgumentNotValidException
-    usage: observed
-  - file: dzzz-app/src/main/java/com/tdh/bdzz/config/SpringMvcConfig.java
-    symbol: com.tdh.bdzz.config.SpringMvcConfig
-    usage: observed
 ---
 
-# Controller 测试、MockMvc 与测试切片
+# MockMvc 接口测试
 
-## 一、为什么需要学习
+Service 单元测试证明业务分支，但客户端真正看到的是 HTTP method、URI、状态码、响应头和 JSON。Controller
+可能因为注解路径、参数转换、`@Valid`、消息转换或异常处理配置错误，让一个正确的 Service 结果变成错误的
+接口响应。本课把边界放在 Spring MVC：请求经过 DispatcherServlet 的映射、绑定、校验、Controller 调用、
+消息转换和 advice，但不打开真实端口，也不连接数据库。
 
-浏览器或客户端调用接口时，真正看到的是 HTTP 方法、URL、状态码、响应头和 JSON，而不是 Service
-方法名。即使 Service 单元测试全部通过，Controller 仍可能把路径写错、漏掉 `@Valid`、返回错误状态码，
-或者没有把异常交给统一 advice。
+完整示例分别提供 Boot 4.1.1/Java 25 与 Boot 2.3.12.RELEASE/Java 8 两个独立工程。两条工程的
+`@WebMvcTest`、测试替身、校验 API 和 JSON 库不会混用；现代线使用 `@MockitoBean` 与 Jackson 3，兼容线使用
+`@MockBean` 与 Jackson 2。
 
-本课把反馈环放在 HTTP adapter：真实运行 Spring MVC 的映射、参数解析、校验、消息转换与异常处理，
-同时用 Mockito 替代 Service。这样失败时能明确判断问题位于 Web 合同，而不需要启动服务器或数据库。
+本课给 TeamFlow 增加的不是新生产端点，而是已冻结项目内任务 API 的 MVC 回归边界：分页查询、按项目和任务 ID
+查询、创建任务、请求校验、参数转换和业务异常都由 Controller slice 测试保护。本课复用
+`/api/v1/projects/{projectId}/tasks` 与 `/api/v1/projects/{projectId}/tasks/{taskId}`，任务响应保持已有的
+`id`、`projectId`、`title`、`status`、`dueAt`、`assignee` 六字段，创建请求保持 `title`、`dueAt`、`assignee`
+三字段；不会另造数值 ID 或简化响应外壳。错误响应也沿用既有的 `type`、`title`、`status`、`detail`、`instance`、
+`code`、`traceId`、`errors` 合同。本课只用 mock Service 验证这些 HTTP 边界，不提前实现数据库、认证或完整项目
+业务规则。
 
-## 二、学习目标
+## 一、确定这类测试真正证明什么
 
-- 能分清 Controller 测试、Service 单元测试和完整应用集成测试。
-- 能从零建立 `@WebMvcTest`、`MockMvc` 与 `@MockitoBean` 反馈环。
-- 能验证 GET、POST、路径变量、查询参数、JSON、状态码、响应头和响应体。
-- 能验证输入校验、404/409 错误映射以及无效请求不会进入 Service。
-- 能识别 Boot 4 与 Boot 2.3 的注解包名差异。
+### 1. Controller 是 HTTP adapter
 
-## 三、前置术语
+Controller 的职责是把 HTTP 输入转换成用例参数，再把用例结果转换成协议响应。MockMvc 测试因此关注公开的
+HTTP 合同：方法、路径、参数、请求体、状态、媒体类型、响应头和 JSON 字段。它不应该反射读取 Controller
+私有字段，也不应该把 Service 内部算法重新复制一遍。
 
-- **Controller：** 把 HTTP 请求转换为用例调用，再把结果转换为 HTTP 响应的 adapter。
-- **Servlet：** Java Web 的请求、响应与过滤链模型；MockMvc 使用 mock Servlet 对象运行 MVC。
-- **测试切片：** 只加载某类组件及相关自动配置的测试上下文。
-- **测试替身：** 在测试中代替真实协作者的对象；本课用 Mockito mock 代替 Service。
-- **matcher：** 对可观察结果提出条件的断言组件，例如状态必须是 200。
-- **Problem Details：** 结构化 HTTP 错误格式；本课只验证 I-13 已冻结的错误合同。
+```java
+mockMvc.perform(get("/api/v1/projects/{projectId}/tasks/{taskId}", "PRJ-1", "TASK-7"))
+    .andExpect(status().isOk())
+    .andExpect(jsonPath("$.id").value("TASK-7"))
+    .andExpect(jsonPath("$.projectId").value("PRJ-1"));
+```
 
-## 四、零基础知识点详解
+请求能匹配、Controller 能调用协作者并生成 JSON 时，这条断言证明的是 MVC adapter 合同；`TaskService` 如何
+访问仓储仍由上一课的单元测试负责。
 
-### 1. Controller 测试：验证 HTTP adapter 合同
+### 2. MockMvc 不等于真实网络端到端
 
-- **它是什么：** 直接向 Controller 所在的 MVC 边界发送模拟 HTTP 请求，并观察协议结果的测试。
-- **有什么作用：** 它能发现映射、绑定、校验、序列化和状态码错误，而不会重复验证 Service 算法。
-- **什么时候使用：** Controller 新增端点、修改 DTO、响应状态或 advice 映射时使用。
-- **怎么使用：** 先安排 Service 返回值，再执行 MockMvc 请求，最后断言响应并验证 Service 调用。
-- **最小示例：** `mockMvc.perform(get("/tasks/7")).andExpect(status().isOk());`
-- **运行结果：** 请求匹配端点且 Controller 正常返回时测试通过；路径或状态不一致时 matcher 报错。
-- **常见误区：** 只验证 Controller 方法的 Java 返回值，会绕过真实的 MVC 映射和消息转换。
+MockMvc 使用 mock request 和 response 执行 Spring MVC 的请求处理，不监听 TCP 端口。因此它能验证映射、参数
+绑定、消息转换和异常解析，但不能证明反向代理、TLS、真实 Servlet 容器、端口暴露或部署网络配置。
 
-### 2. MockMvc：不监听端口的 MVC 反馈环
+完整应用 Bean 装配与真实基础设施应使用后续集成测试。即使 MockMvc 测试通过，也不能把它描述成“接口已在真实
+服务器上联调成功”。
 
-- **它是什么：** Spring Test 提供的 MVC 测试入口，使用 mock request 和 response 执行请求处理。
-- **有什么作用：** 它保留 DispatcherServlet 之后的 MVC 行为，同时避免启动嵌入式服务器。
-- **什么时候使用：** 需要快速验证请求映射、参数绑定、消息转换和异常解析时使用。
-- **怎么使用：** 注入 `MockMvc`，调用 `perform`，再用一个或多个 `andExpect` 断言结果。
-- **最小示例：** `mockMvc.perform(get("/tasks/7")).andExpect(jsonPath("$.id").value(7));`
-- **运行结果：** Spring MVC 生成 mock 响应；没有真实 TCP 连接，也没有随机服务器端口。
-- **常见误区：** 把 MockMvc 测试写成“真实接口测试”，会夸大它对网络和部署配置的覆盖。
+### 3. 三种测试边界不能混为一谈
 
-### 3. WebMvcTest：只加载目标 MVC 切片
+| 边界 | 主要对象 | 反馈内容 | 本课位置 |
+| --- | --- | --- | --- |
+| Service 单元测试 | 真实 Service + mock 协作者 | 业务分支和结果合同 | 上一课 |
+| MVC 测试切片 | MVC 上下文 + MockMvc + mock Service | 映射、绑定、校验、响应和 advice | 本课 |
+| 完整应用集成测试 | 完整 Spring 上下文和真实基础设施 | Bean 装配、数据库、事务、端口和跨层协作 | 后续课程 |
 
-- **它是什么：** Spring Boot 的测试注解，用于限定 Controller 和 MVC 相关组件。
-- **有什么作用：** 它缩小 ApplicationContext，减少无关配置，并让失败更接近 Web 边界。
-- **什么时候使用：** 单独验证一个或少量 Controller，不需要真实数据库和完整应用 Bean 时使用。
-- **怎么使用：** 在测试类标注 `@WebMvcTest(TaskController.class)`，再提供 Controller 的协作者。
-- **最小示例：** `@WebMvcTest(TaskController.class)`
-- **运行结果：** 目标 Controller、MVC 基础设施和符合切片规则的组件进入上下文，普通 Service 不会自动进入。
-- **常见误区：** 认为“Spring 上下文已启动”就等于完整应用已被验证；slice 只覆盖被准入的部分。
+选择边界时先问“失败应该定位到哪一层”。如果问题是 `@RequestBody` 没有被校验，切片比 Service 单元测试更
+合适；如果问题是 MySQL 约束是否真的回滚，则不能停在本课。
 
-### 4. MockitoBean：为现代切片提供 Service 替身
+## 二、让 WebMvcTest 形成可解释的切片
 
-- **它是什么：** Spring Test 在测试 ApplicationContext 中用 Mockito mock 覆盖 bean 的注解。
-- **有什么作用：** 它满足 Controller 构造器依赖，并让测试精确安排业务结果和异常。
-- **什么时候使用：** Boot 4 / Framework 7 的 MVC slice 需要隔离 Service、仓储或外部网关时使用。
-- **怎么使用：** 在测试字段上标注 `@MockitoBean`，字段类型必须与 Controller 依赖一致。
-- **最小示例：** `@MockitoBean private TaskService taskService;`
-- **运行结果：** 上下文能创建 Controller；调用端点时，Service 行为由 Mockito stub 决定。
-- **常见误区：** 漏掉替身会使上下文因缺少 bean 失败，这不是 Controller 路由返回 404。
+### 1. WebMvcTest 只加载 MVC 相关组件
 
-### 5. MockBean：Boot 2.3 的兼容注解
+`@WebMvcTest(TaskController.class)` 选择目标 Controller，并自动配置 MVC 基础设施和 MockMvc。它不会把普通
+Service、Repository 或数据库客户端自动当作真实 Bean 全部加载进来。这样测试上下文更小，失败也更接近 Web
+边界。
 
-- **它是什么：** Boot 2.3 提供的旧测试注解，也会向上下文添加或替换 Mockito mock。
-- **有什么作用：** 它让 Java 8 / Boot 2.3 项目保持同样的 MVC slice 隔离思路。
-- **什么时候使用：** 只在旧线 `org.springframework.boot.test.mock.mockito.MockBean` 中使用。
-- **怎么使用：** 旧测试使用旧 `WebMvcTest` 包名并在 Service 字段标注 `@MockBean`。
-- **最小示例：** `@MockBean private TaskService taskService;`
-- **运行结果：** Boot 2.3 上下文获得 Service mock；测试仍通过 MockMvc 发送模拟请求。
-- **常见误区：** 把现代 `@MockitoBean` import 复制到 Boot 2.3，会在编译阶段找不到类型。
-
-### 6. perform：构造并执行一次请求
-
-- **它是什么：** `MockMvc` 接受请求构造器并执行 MVC 请求处理的入口。
-- **有什么作用：** 它把 HTTP method、URI、header 和 body 组成一个可重复请求。
-- **什么时候使用：** 每一条 Controller 行为测试都从一次明确的 `perform` 开始。
-- **怎么使用：** 选择 `get`、`post` 等构造器，补齐路径和请求数据，再连接 matcher。
-- **最小示例：** `mockMvc.perform(post("/tasks").contentType(APPLICATION_JSON).content(json));`
-- **运行结果：** 返回 `ResultActions`，可继续追加多个断言或调试输出。
-- **常见误区：** 忘记 content type 会让 JSON 请求走不到预期消息转换器。
-
-### 7. GET 路径变量：同时验证映射与类型转换
-
-- **它是什么：** URL 路径中的动态片段，例如 `/tasks/7` 的 `7`。
-- **有什么作用：** 测试可证明路径模板命中、文本被转换为目标 Java 类型，并传给 Service。
-- **什么时候使用：** 读取、更新或删除某个稳定资源 ID 的端点。
-- **怎么使用：** 构造包含 ID 的 URL，stub 相同 ID 的 Service 返回值，再验证 JSON 和调用参数。
-- **最小示例：** `verify(taskService).findById(7L);`
-- **运行结果：** 合法数字进入 Controller；无法转换的文本通常在调用 Service 前形成 400。
-- **常见误区：** 只断言 200 而不验证 Service 参数，可能漏掉错误的路径变量绑定。
-
-### 8. 查询参数：覆盖默认值和类型失败
-
-- **它是什么：** URI 问号后的键值，例如 `?page=1&size=20`。
-- **有什么作用：** 它验证参数名、默认值、类型转换和边界校验是否符合公开合同。
-- **什么时候使用：** 分页、筛选和排序等不属于资源身份的输入。
-- **怎么使用：** 用 `param` 添加值；分别测试省略、合法值与无法转换的值。
-- **最小示例：** `mockMvc.perform(get("/tasks").param("limit", "5"));`
-- **运行结果：** 省略时使用 20，合法值 5 传入 Controller；`limit=abc` 形成 400 且不进入 Service。
-- **常见误区：** 只测试显式合法值，会漏掉默认值与输入错误合同。
-
-### 9. POST JSON：完整表达 method、URI 和 body
-
-- **它是什么：** 使用 POST 方法和 JSON body 创建资源的模拟请求。
-- **有什么作用：** 它共同验证路由、消息转换、DTO 绑定、校验和创建响应。
-- **什么时候使用：** 创建命令或其他以 JSON 作为请求体的端点。
-- **怎么使用：** 选择 `post`、设置 `application/json`、提供 JSON，再安排 Service 结果。
-- **最小示例：** `post("/tasks").contentType(APPLICATION_JSON).content("{\"title\":\"学习 MockMvc\"}")`
-- **运行结果：** JSON 结构正确时绑定为请求 DTO；语法错误时通常在 Controller 调用前返回 400。
-- **常见误区：** 只传 body 而不声明媒体类型，会把消息转换器选择问题误判为业务失败。
-
-### 10. ObjectMapper：从真实 DTO 生成 JSON
-
-- **它是什么：** Spring MVC 使用的 Jackson 对象映射器，也可在测试中序列化请求 DTO。
-- **有什么作用：** 它减少手工 JSON 的引号和字段拼写错误，让测试输入更接近真实 DTO。
-- **什么时候使用：** body 字段较多、存在嵌套对象，或字段名由 Jackson 规则控制时使用。
-- **怎么使用：** 注入切片中的 `ObjectMapper`，调用 `writeValueAsString` 后传给 `content`。
-- **最小示例：** `String json = objectMapper.writeValueAsString(new CreateTaskRequest("学习 MockMvc"));`
-- **运行结果：** 得到可作为请求体的 JSON；MVC 再把它反序列化为新的请求 DTO。
-- **常见误区：** 把同一个 Java 对象直接交给 Controller 方法，会绕过 JSON 消息转换。
-
-### 11. status matcher：先证明 HTTP 语义
-
-- **它是什么：** 对 mock 响应状态码的断言，例如 200、201、400 或 404。
-- **有什么作用：** 状态码供客户端决定成功、重试或纠正输入，不能只靠 body 文案判断。
-- **什么时候使用：** 每个 Controller 测试都应有明确状态断言。
-- **怎么使用：** 根据端点合同选择 `isOk`、`isCreated`、`isBadRequest` 等 matcher。
-- **最小示例：** `andExpect(status().isCreated())`
-- **运行结果：** 实际状态与合同一致时通过；即使 body 正确，状态错误也会失败。
-- **常见误区：** 只断言 JSON 字段，会放过“错误 body 配上 200”的协议缺陷。
-
-### 12. content type matcher：验证消息转换结果
-
-- **它是什么：** 对响应 `Content-Type` 的断言。
-- **有什么作用：** 它证明响应由预期消息转换器写出，客户端可按正确格式解析。
-- **什么时候使用：** JSON 成功响应和 Problem Details 错误响应。
-- **怎么使用：** 普通 JSON 用兼容 JSON matcher，Problem Details 用对应媒体类型 matcher。
-- **最小示例：** `andExpect(content().contentTypeCompatibleWith(APPLICATION_JSON))`
-- **运行结果：** 含 charset 等兼容参数不会造成脆弱失败；错误媒体类型会被发现。
-- **常见误区：** 把 content type 当作请求端 accept；两者位于不同方向。
-
-### 13. jsonPath：按公开字段断言 JSON
-
-- **它是什么：** 使用 JSONPath 表达式选择响应 JSON 中的字段。
-- **有什么作用：** 它断言客户端可观察的数据，而不绑定 JSON 文本的空白和字段顺序。
-- **什么时候使用：** 响应对象、数组、嵌套字段或 Problem Details 扩展字段。
-- **怎么使用：** 从根符号 `$` 开始选择字段，再用 `value` 或存在性 matcher 断言。
-- **最小示例：** `andExpect(jsonPath("$.title").value("学习 MockMvc"))`
-- **运行结果：** 字段存在且值匹配时通过；其他无关字段顺序变化不会影响测试。
-- **常见误区：** 用整段 JSON 字符串相等比较，会把格式化差异误报为合同变化。
-
-### 14. header matcher：验证 Location 等元数据
-
-- **它是什么：** 对响应头名称和值提出断言。
-- **有什么作用：** 创建资源时，`Location` 告诉客户端新资源地址；它和 body 一样属于公开合同。
-- **什么时候使用：** 201 创建、缓存 ETag、下载文件名或其他已冻结响应头。
-- **怎么使用：** 先断言状态，再用 `header().string` 检查精确或模式值。
-- **最小示例：** `andExpect(header().string("Location", "/tasks/8"))`
-- **运行结果：** Controller 设置正确 URI 时通过；只有 201 而缺少 Location 时失败。
-- **常见误区：** 验证实现内部 URI builder，却没有验证最终响应头。
-
-### 15. Valid：在进入 Service 前触发输入校验
-
-- **它是什么：** Controller 参数上的 `@Valid` 请求 Spring MVC 对绑定后的 DTO 执行 Bean Validation。
-- **有什么作用：** 它阻止空标题等结构无效输入越过 HTTP 边界。
-- **什么时候使用：** 请求 DTO 已声明 `@NotBlank`、`@Size` 等约束时。
-- **怎么使用：** 请求参数同时使用 `@RequestBody` 与 `@Valid`，测试发送违反约束的 JSON。
-- **最小示例：** `public ResponseEntity<TaskResponse> create(@Valid @RequestBody CreateTaskRequest request)`
-- **运行结果：** 空标题形成 400；Controller 方法体和 Service 都不会执行。
-- **常见误区：** DTO 有约束但 Controller 漏掉 `@Valid`，会让无效输入继续进入业务层。
-
-### 16. never：证明失败请求没有越界
-
-- **它是什么：** Mockito 的次数验证，表示某个调用在本测试中应发生零次。
-- **有什么作用：** 它把“返回 400”与“没有产生业务副作用”同时写入验收条件。
-- **什么时候使用：** 绑定失败、校验失败或认证失败必须在 Service 前终止时。
-- **怎么使用：** 完成响应断言后，使用 `verify(taskService, never())` 验证目标方法。
-- **最小示例：** `verify(taskService, never()).create(any());`
-- **运行结果：** Service 未被调用时通过；即使响应后来被改成 400，偷偷发生的调用也会使测试失败。
-- **常见误区：** 只写 `verifyNoInteractions` 可能把与当前合同无关的未来协作也锁死。
-
-### 17. ControllerAdvice：确认默认发现与显式选择边界
-
-- **它是什么：** `@WebMvcTest` 默认过滤规则包含扫描范围内的 `@ControllerAdvice`。
-- **有什么作用：** 它让 Service 异常经过真实异常解析器转换为公开错误响应。
-- **什么时候使用：** 同包 advice 先验证默认发现；位于扫描范围外或被过滤器排除时再显式选择。
-- **怎么使用：** 保持 `@WebMvcTest(TaskController.class)`，安排 Service 抛异常并断言 advice 响应。
-- **最小示例：** `when(taskService.findById(99L)).thenThrow(new TaskNotFoundException(99L));`
-- **运行结果：** 同 package 的 advice 无需 `@Import` 即可把异常处理为 404 Problem Details。
-- **常见误区：** 把普通 Service 不会自动进入 slice，误写成同包 advice 也必须 `@Import`。
-
-### 18. Problem Details：同时断言状态、类型和安全字段
-
-- **它是什么：** Spring `ProblemDetail` 表达的标准化 HTTP 错误响应。
-- **有什么作用：** 它让客户端稳定读取状态、标题、详情和扩展错误码。
-- **什么时候使用：** I-13 已冻结的 4xx/5xx 映射需要在 Web 边界回归时。
-- **怎么使用：** 断言 HTTP status、`application/problem+json`、标准字段和允许公开的扩展字段。
-- **最小示例：** `andExpect(jsonPath("$.code").value("TASK_NOT_FOUND"))`
-- **运行结果：** 404 响应包含安全、稳定字段；内部异常类名与堆栈不应出现在 body。
-- **常见误区：** 只断言 detail 文案，会把可变的人类文本误当成稳定机器合同。
-
-### 19. 用 mock 驱动 Service 结果和异常
-
-- **它是什么：** 使用 `when(...).thenReturn(...)` 或 `thenThrow(...)` 安排协作者行为。
-- **有什么作用：** 它让每条 Controller 路径独立、确定，不连接数据库或外部系统。
-- **什么时候使用：** 成功、缺失、冲突等业务结果已经由前置课程定义时。
-- **怎么使用：** 只 stub 当前测试会发生的调用，再通过 HTTP 断言观察映射结果。
-- **最小示例：** `when(taskService.create(any())).thenReturn(new TaskResponse(8L, "学习 MockMvc"));`
-- **运行结果：** Controller 收到固定业务结果，测试只判断其 HTTP 表达是否正确。
-- **常见误区：** 在 MVC slice 中启动真实仓储，会把测试范围扩张成不完整的集成测试。
-
-### 20. 404、409、422 与 500：只测试既有映射
-
-- **它是什么：** 不同失败语义对应的 HTTP 状态分支。
-- **有什么作用：** 测试能阻止错误合同在重构后退化成统一 200 或统一 500。
-- **什么时候使用：** 业务与错误课程已经冻结了明确异常到状态码映射时。
-- **怎么使用：** 每条测试只安排一个已知异常，并断言对应 status 和稳定错误码。
-- **最小示例：** `andExpect(status().isConflict())`
-- **运行结果：** 已冻结分支得到精确响应；未知异常仍由通用 500 策略处理。
-- **常见误区：** 在 Controller 测试里发明新的业务分类，会让测试替代需求设计。
-
-### 21. andDo print：只用于诊断
-
-- **它是什么：** 把模拟请求、handler 和响应打印到测试输出的结果处理器。
-- **有什么作用：** matcher 失败时，它帮助观察实际状态、header 和 body。
-- **什么时候使用：** 本地排查失败或临时建立反馈环时按需添加。
-- **怎么使用：** 在 `perform` 后连接 `andDo(print())`，定位后仍保留真正的 matcher。
-- **最小示例：** `mockMvc.perform(get("/tasks/7")).andDo(print()).andExpect(status().isOk());`
-- **运行结果：** 控制台显示请求响应详情；测试成功与否仍由断言决定。
-- **常见误区：** 看到输出“看起来正确”就删除断言，会使自动回归失去判断标准。
-
-### 22. standalone setup：更窄的纯 MVC 边界
-
-- **它是什么：** 直接注册 Controller 构建 MockMvc，而不创建 Boot 测试切片。
-- **有什么作用：** 它提供更快、更显式的 MVC 单元边界，适合极小的独立 Controller。
-- **什么时候使用：** 不需要 Boot 自动配置、转换器和过滤链，只验证手工注册组件时。
-- **怎么使用：** 调用 `standaloneSetup(controller)`，并显式注册 advice、转换器等依赖。
-- **最小示例：** `MockMvcBuilders.standaloneSetup(controller).setControllerAdvice(advice).build();`
-- **运行结果：** 只运行手工提供的 MVC 配置；遗漏的组件不会由 Boot 自动补齐。
-- **常见误区：** 把 standalone 通过等同于 `@WebMvcTest` 或生产 MVC 配置通过。
-
-### 23. Security 过滤链：不能默认关闭的请求边界
-
-- **它是什么：** Spring Security 在 DispatcherServlet 前处理认证、授权与 CSRF 的 Servlet filters。
-- **有什么作用：** 它决定请求是否能到达 Controller，是真实 HTTP 边界的一部分。
-- **什么时候使用：** 项目 classpath 和配置中存在 Spring Security 时。
-- **怎么使用：** 引入官方 security-test 支持，按合同构造身份、权限和 CSRF；A-07 再系统展开。
-- **最小示例：** `mockMvc.perform(post("/tasks").with(csrf()).contentType(APPLICATION_JSON).content(json))`
-- **运行结果：** 请求按真实安全合同得到成功、401 或 403；不会因跳过 filters 而产生假阳性。
-- **常见误区：** 为了让测试变绿全局关闭 filters，会绕过生产请求首先经过的控制。
-
-### 24. 四条路径：闭合 Controller 最小反馈环
-
-- **它是什么：** 成功、校验失败、资源缺失和业务冲突四类代表性路径。
-- **有什么作用：** 它以较少测试覆盖映射、输入、成功响应和主要错误映射。
-- **什么时候使用：** 发布一个包含创建和查询的 Controller 前。
-- **怎么使用：** 每条测试只聚焦一个原因，复用必要 fixture，并连续运行确认无状态泄漏。
-- **最小示例：** `GET 200；POST 201；POST 空标题 400；GET 缺失 404；POST 重复标题 409`。
-- **运行结果：** 四条路径数量和结果在重复执行时一致，Service mock 在每个测试后由框架重置。
-- **常见误区：** 用一条超长测试串联所有请求，会让前一步失败污染后续判断。
-
-## 五、现代版本中的正确用法
-
-现代主线使用 Java 25、Boot 4.1.0 与 Framework 7.0.8。MVC 应用依赖
-`spring-boot-starter-webmvc`，校验依赖 `spring-boot-starter-validation`，MVC 测试依赖使用
-test scope 的 `spring-boot-starter-webmvc-test`。版本由 Boot BOM 管理，不单独覆盖 JUnit 或 Mockito。
-
-测试类只指定目标 Controller；同扫描范围的错误 advice 会按 `@WebMvcTest` 默认过滤规则进入切片。
-`@MockitoBean` 来自 Spring Test：
-
-~~~java
-import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
-import org.springframework.test.web.servlet.MockMvc;
-
+```java
 @WebMvcTest(TaskController.class)
 class TaskControllerTest {
+    @Autowired
+    private MockMvc mockMvc;
+}
+```
+
+Boot 4.1 的 WebMvcTest 默认也会处理 MVC 过滤范围内的 `@ControllerAdvice`、消息转换器、过滤器和安全相关
+组件。它不是“只加载一个类”的反射工具，而是一个经过筛选的 Spring MVC ApplicationContext。
+
+### 2. MockitoBean 交出 Controller 的协作者
+
+Controller 仍然是上下文中的真实对象，Service 则由 `@MockitoBean` 提供 Mockito mock。缺少这个替身时，常见
+结果是 ApplicationContext 在请求执行前因为无法满足构造器依赖而启动失败。
+
+```java
+@WebMvcTest(TaskController.class)
+class TaskControllerTest {
+    @Autowired
+    private MockMvc mockMvc;
+
     @MockitoBean
     private TaskService taskService;
 }
-~~~
+```
 
-这段配置有三个可观察边界：
+每条测试就地安排当前路径会用到的 Service 返回值或异常。不要把所有端点的 stub 放进 `@BeforeEach`，否则
+严格 Mockito 配置下会产生无关准备，也会让读者看不出请求前提。
 
-1. 只有 `TaskController` 是本测试明确选择的 Controller。
-2. `TaskService` 是上下文中的 Mockito mock，不会访问数据库。
-3. 同 package 的 `ApiExceptionHandler` 被默认发现，404/409 可按公开合同断言。
+### 3. Advice 的发现与显式导入
 
-如果 advice 位于应用扫描范围外，或测试主动排除了它，再使用 `@Import(ApiExceptionHandler.class)`
-显式选择；不要把这个条件写成所有 MVC slice 的固定模板。
+`@ControllerAdvice` 属于 MVC 测试切片可发现的组件。若 `ApiExceptionHandler` 在应用扫描范围内，通常不需要
+额外 `@Import`；若它位于扫描范围外，或测试明确排除了它，才使用 `@Import(ApiExceptionHandler.class)`。
 
-## 六、核心接口与断言链
+这个边界需要通过真实请求验证，而不是看到 advice 类存在就假设 404/409 一定会变成目标 JSON。切片测试的
+价值正在于确认“当前上下文实际发现了哪些 Web 组件”。
 
-一条完整 MockMvc 测试遵循 Arrange、Act、Assert：
+## 三、从请求构造到响应断言
 
-~~~java
-/**
- * 查询存在任务时返回公开 JSON。
- */
-@Test
-void shouldReturnTaskWhenTaskExists() throws Exception {
-    when(taskService.findById(7L)).thenReturn(new TaskResponse(7L, "学习 MockMvc"));
+### 1. perform 是一次完整的请求反馈
 
-    mockMvc.perform(get("/tasks/{id}", 7L))
-        .andExpect(status().isOk())
-        .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-        .andExpect(jsonPath("$.id").value(7))
-        .andExpect(jsonPath("$.title").value("学习 MockMvc"));
+`MockMvc.perform` 接收 `RequestBuilder`，执行请求并返回 `ResultActions`。请求构造器可以表达 method、URI、
+路径变量、查询参数、header、content type 和 body。
 
-    verify(taskService).findById(7L);
+```java
+mockMvc.perform(
+        post("/api/v1/projects/{projectId}/tasks", "PRJ-1")
+            .contentType(MediaType.APPLICATION_JSON)
+            .accept(MediaType.APPLICATION_JSON)
+            .content("{\"title\":\"学习 MockMvc\"}")
+    )
+    .andExpect(status().isCreated());
+```
+
+JSON body 应与 `contentType` 同时出现，否则 Controller 可能无法选择正确的消息转换器。`accept` 表达调用者
+希望接收的媒体类型，不能用它替代请求 body 的 `contentType`。
+
+### 2. 路径变量和查询参数都要经过真实绑定
+
+路径变量负责资源身份，查询参数负责筛选或分页。不要直接调用 `taskController.findById("PRJ-1", "TASK-7")` 来代替 MockMvc，
+因为那会跳过 `@GetMapping` 和 `@PathVariable` 的真实绑定。
+
+```java
+mockMvc.perform(get("/api/v1/projects/{projectId}/tasks/{taskId}", "PRJ-1", "TASK-7"))
+    .andExpect(status().isOk());
+
+mockMvc.perform(get("/api/v1/projects/{projectId}/tasks", "PRJ-1").param("pageSize", "5"))
+    .andExpect(status().isOk());
+```
+
+如果 `pageSize` 是 `int` 而请求传入 `abc`，Spring MVC 会在 Controller 方法执行前报告参数转换失败。此时
+Service 不应该被调用，这也是一条需要显式验证的边界。
+
+### 3. 先断言协议骨架，再断言公开字段
+
+响应断言按稳定性从外到内排列：先 status，再 content type，再 header，最后用 `jsonPath` 检查公开 JSON 字段。
+`contentTypeCompatibleWith` 适合允许 charset 等兼容参数；完整字符串比较只有在 charset 本身是合同的一部分时
+才使用。
+
+```java
+mockMvc.perform(get("/api/v1/projects/{projectId}/tasks/{taskId}", "PRJ-1", "TASK-7"))
+    .andExpect(status().isOk())
+    .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+    .andExpect(jsonPath("$.id").value(7))
+    .andExpect(jsonPath("$.title").value("学习 MockMvc"));
+```
+
+创建资源还应检查 `Location`，因为它是客户端继续访问新资源的协议元数据：
+
+```java
+mockMvc.perform(post("/api/v1/projects/{projectId}/tasks", "PRJ-1")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content("{\"title\":\"学习 MockMvc\"}"))
+    .andExpect(status().isCreated())
+    .andExpect(header().string("Location", "/api/v1/projects/PRJ-1/tasks/TASK-8"));
+```
+
+### 4. 多个断言应共同表达一条合同
+
+Spring Framework 提供 `andExpectAll`，可以在同一请求上收集多个失败。它适合 status、media type 和两个字段
+共同组成一条响应合同；不要把互不相关的请求塞进同一个测试方法。
+
+```java
+mockMvc.perform(get("/api/v1/projects/{projectId}/tasks/{taskId}", "PRJ-1", "TASK-7"))
+    .andExpectAll(
+        status().isOk(),
+        content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON),
+        jsonPath("$.id").value("TASK-7")
+    );
+```
+
+## 四、让校验和转换失败停在正确边界
+
+### 1. @Valid 把请求体校验放在 Service 之前
+
+`@Valid @RequestBody` 会先让消息转换器生成 DTO，再执行 Bean Validation。约束失败时 Spring MVC 处理校验异常，
+Controller 方法体不会继续调用 Service。
+
+```java
+/** 校验通过后创建任务并返回新资源。 */
+@PostMapping
+public ResponseEntity<TaskResponse> create(
+    @PathVariable String projectId,
+    @Valid @RequestBody CreateTaskRequest request
+) {
+    TaskResponse created = taskService.create(projectId, request);
+    return ResponseEntity.created(URI.create(
+        "/api/v1/projects/" + projectId + "/tasks/" + created.id())).body(created);
 }
-~~~
+```
 
-Arrange 只安排当前路径需要的 Service 行为；Act 只有一次请求；Assert 同时检查协议结果和必要的协作者
-调用。不要通过反射读取 Controller 私有字段，也不要断言 Spring 内部 handler 实现细节。
+对应测试不能只断言 400，还要验证 `taskService.create(...)` 为 `never()`。这样才能证明拒绝发生在 HTTP adapter
+边界，而不是 Service 接到空标题后恰好返回某个错误。
 
-## 七、从零跟着做
+### 2. 路径和查询参数转换也可能提前失败
 
-下面建立一个只含任务列表、单项查询和创建的最小工程。所有文件使用同一 package
-`example.controller`；测试不会启动真实端口，也不连接数据库。先确认 B-19 已准备 Maven 与 Java 25，
-再从一个可精确清理的临时目录开始：
+`@PathVariable String taskId` 与 `@RequestParam int pageSize` 分别承担资源身份和分页大小。当前 TeamFlow 合同的
+任务 ID 是字符串，不会触发数值转换；`pageSize` 收到 `not-a-number` 时，类型转换才会在 Controller 方法调用前失败。
+对于这种参数转换测试，不需要安排 Service 返回值，只需要断言 400 并验证对应方法没有被调用。
 
-~~~bash
-mvn -version
-java -version
-course_dir="$(mktemp -d /tmp/controller-slice.XXXXXX)"
-cd "$course_dir"
-mkdir -p src/main/java/example/controller src/test/java/example/controller
-pwd
-~~~
+```java
+mockMvc.perform(get("/api/v1/projects/{projectId}/tasks", "PRJ-1")
+        .param("pageSize", "not-a-number"))
+    .andExpect(status().isBadRequest());
 
-若 `mvn -version` 或 `java -version` 失败，先回到 B-19 修复环境，不要继续复制文件。后续代码分别写入：
+verify(taskService, never()).findAll(anyString(), any(), anyInt(), anyString());
+```
 
-| 文件 | 作用 |
-| --- | --- |
-| `pom.xml` | Maven 依赖与 Java 版本 |
-| `src/main/java/example/controller/TaskApplication.java` | Boot 应用入口 |
-| `src/main/java/example/controller/CreateTaskRequest.java` | 创建请求 DTO |
-| `src/main/java/example/controller/TaskResponse.java` | 公开响应 DTO |
-| `src/main/java/example/controller/TaskService.java` | Controller 的业务协作者合同 |
-| `src/main/java/example/controller/TaskController.java` | 列表、单项查询与创建端点 |
-| `src/main/java/example/controller/TaskNotFoundException.java` | 资源缺失异常 |
-| `src/main/java/example/controller/DuplicateTaskException.java` | 标题冲突异常 |
-| `src/main/java/example/controller/ApiExceptionHandler.java` | 同包错误映射 advice |
-| `src/test/java/example/controller/TaskControllerTest.java` | 八条 MVC slice 测试 |
+### 3. 缺失字段、空字符串和错误 JSON 不是同一个输入
 
-按下面的有序步骤完成整个反馈环：
+`{}`、`{\"title\":\"\"}`、`{\"title\":\" \"}` 和非法 JSON 可能分别触发不同的校验或消息转换路径。课程只需
+覆盖当前 DTO 合同要求的代表性输入，但不能用一个空字符串测试声称所有解析失败都已经验证。
 
-1. 创建 Maven 工程。
-2. 添加应用入口和 Web 合同。
-3. 添加 Controller 和错误映射。
-4. 添加八条 MVC slice 测试。
-5. 运行测试、读取结果并清理临时目录。
+完整示例选择空白标题；练习补充分页参数类型错误。需要产品级字段错误列表时，应在 advice 合同中增加稳定的
+字段名和错误码，再按字段级 JSON 断言，不要依赖框架默认的长 detail 文案。
 
-### 创建 Maven 工程
+## 五、用 Advice 验证稳定错误合同
 
-`pom.xml` 使用 Boot parent 管理依赖版本：
+### 1. 业务异常由 ControllerAdvice 统一映射
 
-~~~xml
+Controller 可以让 `TaskNotFoundException` 或 `DuplicateTaskException` 冒泡，再由 `@RestControllerAdvice` 统一
+转成 `ProblemDetail`。测试通过 Service mock 抛出异常，直接观察最终 HTTP 响应。
+
+```java
+when(taskService.findById("PRJ-1", "TASK-99"))
+    .thenThrow(new TaskNotFoundException("PRJ-1", "TASK-99"));
+
+mockMvc.perform(get("/api/v1/projects/{projectId}/tasks/{taskId}", "PRJ-1", "TASK-99"))
+    .andExpect(status().isNotFound())
+    .andExpect(content().contentType(MediaType.APPLICATION_PROBLEM_JSON))
+    .andExpect(jsonPath("$.type").value("https://api.teamflow.example/problems/task-not-found"))
+    .andExpect(jsonPath("$.status").value(404))
+    .andExpect(jsonPath("$.instance").value("/api/v1/projects/PRJ-1/tasks/TASK-99"))
+    .andExpect(jsonPath("$.code").value("TASK_NOT_FOUND"))
+    .andExpect(jsonPath("$.traceId").value("demo-trace-id"))
+    .andExpect(jsonPath("$.errors").isEmpty());
+```
+
+这里的测试没有启动真实 Service，因此只证明异常已经经过 MVC 的异常解析和 advice 映射；异常本身何时产生由
+上一课的 Service 测试或后续集成测试负责。
+
+### 2. ProblemDetail 只暴露安全字段
+
+ProblemDetail 标准字段包含 status、type、title、detail、instance，应用还可以用 properties 放置稳定的错误码、
+traceId 和 errors。测试应断言既有合同中的公开字段，不要把异常类名、堆栈、SQL 或内部路径写入响应。
+
+```java
+ProblemDetail problem = ProblemDetail.forStatusAndDetail(
+    HttpStatus.NOT_FOUND,
+    "请求的任务不存在"
+);
+problem.setTitle("任务不存在");
+problem.setType(URI.create("https://api.teamflow.example/problems/task-not-found"));
+problem.setInstance(URI.create("/api/v1/projects/PRJ-1/tasks/TASK-99"));
+problem.setProperty("code", "TASK_NOT_FOUND");
+problem.setProperty("traceId", "demo-trace-id");
+problem.setProperty("errors", List.of());
+```
+
+### 3. 校验异常也应有稳定的最小映射
+
+如果应用需要统一错误格式，advice 可以把 `MethodArgumentNotValidException` 映射为 400 ProblemDetail，并在
+properties 中写入 `code` 和字段错误列表。正文示例只保留一个字段错误，避免把框架内部 `BindingResult` 结构
+直接暴露给客户端。
+
+```java
+import java.util.Map;
+
+/** 把请求体校验失败转换为本课的既有错误合同。 */
+@ExceptionHandler(MethodArgumentNotValidException.class)
+public ResponseEntity<ProblemDetail> handleValidation(
+    MethodArgumentNotValidException failure
+) {
+    ProblemDetail problem = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
+    problem.setTitle("请求参数无效");
+    problem.setProperty("code", "INVALID_REQUEST");
+    problem.setDetail("请求体字段未通过校验");
+    problem.setType(URI.create("https://api.teamflow.example/problems/validation-failed"));
+    problem.setInstance(URI.create("/api/v1/projects/PRJ-1/tasks"));
+    problem.setProperty("traceId", "demo-trace-id");
+    problem.setProperty("errors", List.of(Map.of(
+        "field", "title", "code", "NOT_BLANK", "message", "任务标题不能为空")));
+    return ResponseEntity.badRequest()
+        .contentType(MediaType.APPLICATION_PROBLEM_JSON)
+        .body(problem);
+}
+```
+
+## 六、安全过滤链、standaloneSetup 与完整测试
+
+### 1. Security 在 classpath 时是请求边界的一部分
+
+Boot 的 WebMvcTest 默认会自动配置 Spring Security 相关能力。如果应用包含 SecurityFilterChain，未认证请求或
+缺少 CSRF token 的写请求可能在到达 Controller 前返回 401、403。测试不应为了让状态码变成 200 而无条件使用
+`@AutoConfigureMockMvc(addFilters = false)`。
+
+需要验证安全边界时，把过滤链接入 MockMvc，并使用 Security 测试支持提供身份或 CSRF：
+
+```java
+mockMvc.perform(
+        post("/api/v1/projects/{projectId}/tasks", "PRJ-1")
+            .with(csrf())
+            .with(user("reader"))
+            .contentType(MediaType.APPLICATION_JSON)
+            .content("{\"title\":\"学习 MockMvc\"}")
+    )
+    .andExpect(status().isCreated());
+```
+
+这段代码只有在工程包含 `spring-security-test` 和相应安全配置时才成立；本课完整工程不引入 Security，避免
+把认证授权提前扩展成独立课程。安全规则、角色和登录流程留给后续认证课程。
+
+### 2. standaloneSetup 是更窄的手工边界
+
+`MockMvcBuilders.standaloneSetup(controller)` 不启动 Spring ApplicationContext，适合快速验证一个 Controller
+和手工注册的 converter、validator 或 advice。它不会自动反映 `@WebMvcTest` 的组件扫描、Boot 自动配置或安全
+过滤链。
+
+```java
+MockMvc mvc = MockMvcBuilders
+    .standaloneSetup(new TaskController(taskService))
+    .setControllerAdvice(new ApiExceptionHandler())
+    .build();
+```
+
+当问题是“注解和 MVC 组件在 Spring 上下文中能否协同工作”时，应使用 WebMvcTest；当问题是单个 Controller 的
+最小映射行为且不需要 Spring 配置时，standaloneSetup 才更合适。
+
+### 3. SpringBootTest 加载完整应用配置
+
+如果要同时验证完整 Bean 装配和 MockMvc，可以使用 `@SpringBootTest` 配合 `@AutoConfigureMockMvc`。这会扩大
+反馈范围，也可能连接数据库、读取外部配置和触发安全规则，不应拿它替代本课的快速切片。
+
+## 七、Boot 4.1 与 Boot 2.3 的两条版本线
+
+### 1. 现代线使用 Boot BOM 和新测试 starter
+
+本课完整工程使用 Boot 4.1.1 parent，`spring-boot-starter-webmvc-test` 只放在 test scope。Boot BOM 管理
+Spring Framework 7.0.9、JUnit 6.0.3 和 Mockito 5.23.0；不在 POM 中重复声明这些版本。
+
+现代 import 的关键位置如下：
+
+```java
+import jakarta.validation.Valid;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import tools.jackson.databind.ObjectMapper;
+```
+
+Boot 4.1.1 的 Jackson 3 starter 使用 `tools.jackson` 包。它与 Boot 2.3 的 `com.fasterxml.jackson` 包不是同一条
+import 线，不能只切换 JDK 后继续复用完整 import。
+
+### 2. Boot 2.3 使用旧切片和 MockBean
+
+Boot 2.3.12 的 WebMvcTest 位于旧包路径，协作者注解是 Boot 自己提供的 `@MockBean`：
+
+```java
+import javax.validation.Valid;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+@WebMvcTest(TaskController.class)
+public class TaskControllerTest {
+    @MockBean
+    private TaskService taskService;
+}
+```
+
+Spring Framework 5.2 没有现代 `ProblemDetail`。旧项目应使用本课的 `ApiProblem` Bean，在 JSON 中保持
+`type`、`title`、`status`、`detail`、`instance`、`code`、`traceId`、`errors` 八个既有字段；只替换
+`javax.validation`、`@MockBean` 和 Jackson 2 的 import，不要把 `jakarta.validation` 或现代类型混入 Boot 2.3。
+
+### 3. 两条线必须分别运行
+
+现代测试必须在 Java 25 与 Boot 4.1.1 依赖图中运行；兼容测试必须在真实 Java 8 runtime 与 Boot 2.3.12 依赖图中
+运行。只用 Java 25 的 `--release 8` 编译，不能证明 Spring 5.2、JUnit 5.6.3 和 Mockito 3.3.3 在 Java 8 上真的
+能启动。
+
+## 八、完整工程与运行结果
+
+### 1. 建立最小 Maven 工程
+
+下面的完整工程只验证 MVC adapter，不启动端口、不连接数据库，也不引入 Security。文件结构如下：
+
+```text
+controller-slice/
+  pom.xml
+  src/main/java/example/controller/TaskApplication.java
+  src/main/java/example/controller/CreateTaskRequest.java
+  src/main/java/example/controller/TaskStatus.java
+  src/main/java/example/controller/TaskResponse.java
+  src/main/java/example/controller/PageResponse.java
+  src/main/java/example/controller/TaskService.java
+  src/main/java/example/controller/TaskController.java
+  src/main/java/example/controller/TaskNotFoundException.java
+  src/main/java/example/controller/ApiExceptionHandler.java
+  src/test/java/example/controller/TaskControllerTest.java
+```
+
+`pom.xml`：
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>4.1.0</version>
+    <version>4.1.1</version>
     <relativePath/>
   </parent>
   <groupId>example</groupId>
@@ -587,13 +626,13 @@ pwd
     </dependency>
   </dependencies>
 </project>
-~~~
+```
 
-### 添加应用入口和 Web 合同
+### 2. 定义 DTO、Service 和 Controller
 
-文件：`src/main/java/example/controller/TaskApplication.java`
+`TaskApplication.java`：
 
-~~~java
+```java
 package example.controller;
 
 import org.springframework.boot.SpringApplication;
@@ -601,70 +640,86 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class TaskApplication {
-    /**
-     * 启动示例应用。
-     */
+    /** 启动示例 Spring Boot 应用。 */
     public static void main(String[] args) {
         SpringApplication.run(TaskApplication.class, args);
     }
 }
-~~~
+```
 
-文件：`src/main/java/example/controller/CreateTaskRequest.java`
+`TaskStatus.java`：
 
-~~~java
+```java
+package example.controller;
+
+public enum TaskStatus { TODO, DONE }
+```
+
+`CreateTaskRequest.java`：
+
+```java
 package example.controller;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
-public record CreateTaskRequest(@NotBlank String title) {
-}
-~~~
+public record CreateTaskRequest(
+    @NotBlank @Size(max = 120) String title,
+    @NotBlank @Size(max = 40) String dueAt,
+    @NotBlank @Size(max = 40) String assignee
+) {}
+```
 
-文件：`src/main/java/example/controller/TaskResponse.java`
+`TaskResponse.java`：
 
-~~~java
+```java
 package example.controller;
 
-public record TaskResponse(long id, String title) {
-}
-~~~
+public record TaskResponse(
+    String id,
+    String projectId,
+    String title,
+    TaskStatus status,
+    String dueAt,
+    String assignee
+) {}
+```
 
-文件：`src/main/java/example/controller/TaskService.java`
+`PageResponse.java`：
 
-~~~java
+```java
+package example.controller;
+
+import java.util.List;
+
+public record PageResponse<T>(List<T> items, String nextPageToken) {}
+```
+
+`TaskService.java`：
+
+```java
 package example.controller;
 
 import java.util.List;
 
 public interface TaskService {
-    /**
-     * 按数量上限列出任务。
-     */
-    List<TaskResponse> findAll(int limit);
+    /** 按项目、状态和分页参数查询任务。 */
+    PageResponse<TaskResponse> findAll(String projectId, TaskStatus status, int pageSize, String pageToken);
 
-    /**
-     * 按 ID 查询任务。
-     */
-    TaskResponse findById(long id);
+    /** 按项目和任务 ID 查询任务。 */
+    TaskResponse findById(String projectId, String taskId);
 
-    /**
-     * 创建任务。
-     */
-    TaskResponse create(CreateTaskRequest request);
+    /** 在项目下创建任务。 */
+    TaskResponse create(String projectId, CreateTaskRequest request);
 }
-~~~
+```
 
-### 添加 Controller 和错误映射
+`TaskController.java`：
 
-文件：`src/main/java/example/controller/TaskController.java`
-
-~~~java
+```java
 package example.controller;
 
 import java.net.URI;
-import java.util.List;
-
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -676,139 +731,140 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/tasks")
+@RequestMapping("/api/v1/projects/{projectId}/tasks")
 public class TaskController {
     private final TaskService taskService;
 
-    /**
-     * 创建任务入口。
-     */
+    /** 注入任务业务协作者。 */
     public TaskController(TaskService taskService) {
         this.taskService = taskService;
     }
 
-    /**
-     * 按数量上限列出任务。
-     */
+    /** 按项目、状态和分页参数返回任务列表。 */
     @GetMapping
-    public List<TaskResponse> findAll(
-        @RequestParam(defaultValue = "20") int limit
+    public PageResponse<TaskResponse> findAll(
+        @PathVariable String projectId,
+        @RequestParam(required = false) TaskStatus status,
+        @RequestParam(defaultValue = "20") int pageSize,
+        @RequestParam(required = false) String pageToken
     ) {
-        return taskService.findAll(limit);
+        return taskService.findAll(projectId, status, pageSize, pageToken);
     }
 
-    /**
-     * 查询一个任务。
-     */
-    @GetMapping("/{id}")
-    public TaskResponse findById(@PathVariable long id) {
-        return taskService.findById(id);
+    /** 按项目和路径 ID 返回一个任务。 */
+    @GetMapping("/{taskId}")
+    public TaskResponse findById(
+        @PathVariable String projectId,
+        @PathVariable String taskId
+    ) {
+        return taskService.findById(projectId, taskId);
     }
 
-    /**
-     * 创建任务并返回新资源地址。
-     */
+    /** 创建项目任务并返回新资源地址。 */
     @PostMapping
     public ResponseEntity<TaskResponse> create(
+        @PathVariable String projectId,
         @Valid @RequestBody CreateTaskRequest request
     ) {
-        TaskResponse created = taskService.create(request);
+        TaskResponse created = taskService.create(projectId, request);
         return ResponseEntity
-            .created(URI.create("/tasks/" + created.id()))
+            .created(URI.create("/api/v1/projects/" + projectId + "/tasks/" + created.id()))
             .body(created);
     }
 }
-~~~
+```
 
-文件：`src/main/java/example/controller/TaskNotFoundException.java`
+### 3. 定义业务异常和 ProblemDetail advice
 
-~~~java
+`TaskNotFoundException.java`：
+
+```java
 package example.controller;
 
 public final class TaskNotFoundException extends RuntimeException {
-    /**
-     * 创建资源缺失异常。
-     */
-    public TaskNotFoundException(long id) {
-        super("task not found: " + id);
+    /** 创建资源缺失异常。 */
+    public TaskNotFoundException(String projectId, String taskId) {
+        super("task not found: " + projectId + "/" + taskId);
     }
 }
-~~~
+```
 
-文件：`src/main/java/example/controller/DuplicateTaskException.java`
+`ApiExceptionHandler.java`：
 
-~~~java
+```java
 package example.controller;
 
-public final class DuplicateTaskException extends RuntimeException {
-    /**
-     * 创建任务冲突异常。
-     */
-    public DuplicateTaskException() {
-        super("task title already exists");
-    }
-}
-~~~
-
-文件：`src/main/java/example/controller/ApiExceptionHandler.java`
-
-~~~java
-package example.controller;
+import java.net.URI;
+import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import jakarta.servlet.http.HttpServletRequest;
+
+record FieldProblem(String field, String code, String message) {}
 
 @RestControllerAdvice
 public class ApiExceptionHandler {
-    /**
-     * 把资源缺失转换为安全的 404 错误合同。
-     */
+    /** 把资源缺失转换为稳定的 404 错误合同。 */
     @ExceptionHandler(TaskNotFoundException.class)
-    public ResponseEntity<ProblemDetail> handleNotFound() {
+    public ResponseEntity<ProblemDetail> handleNotFound(
+        TaskNotFoundException failure,
+        HttpServletRequest request
+    ) {
         ProblemDetail problem = ProblemDetail.forStatusAndDetail(
             HttpStatus.NOT_FOUND,
             "请求的任务不存在"
         );
+        problem.setType(URI.create("https://api.teamflow.example/problems/task-not-found"));
         problem.setTitle("任务不存在");
+        problem.setInstance(URI.create(request.getRequestURI()));
         problem.setProperty("code", "TASK_NOT_FOUND");
+        problem.setProperty("traceId", "demo-trace-id");
+        problem.setProperty("errors", List.of());
         return ResponseEntity
             .status(HttpStatus.NOT_FOUND)
             .contentType(MediaType.APPLICATION_PROBLEM_JSON)
             .body(problem);
     }
 
-    /**
-     * 把重复任务转换为 409 错误合同。
-     */
-    @ExceptionHandler(DuplicateTaskException.class)
-    public ResponseEntity<ProblemDetail> handleConflict() {
-        ProblemDetail problem = ProblemDetail.forStatusAndDetail(
-            HttpStatus.CONFLICT,
-            "任务标题已经存在"
-        );
-        problem.setTitle("任务冲突");
-        problem.setProperty("code", "TASK_ALREADY_EXISTS");
+    /** 把请求体校验失败转换为稳定的 400 错误合同。 */
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ProblemDetail> handleValidation(
+        MethodArgumentNotValidException failure,
+        HttpServletRequest request
+    ) {
+        ProblemDetail problem = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
+        problem.setType(URI.create("https://api.teamflow.example/problems/validation-failed"));
+        problem.setTitle("请求参数无效");
+        problem.setDetail("请求体字段未通过校验");
+        problem.setInstance(URI.create(request.getRequestURI()));
+        problem.setProperty("code", "INVALID_REQUEST");
+        problem.setProperty("traceId", "demo-trace-id");
+        problem.setProperty("errors", List.of(new FieldProblem("title", "NOT_BLANK", "任务标题不能为空")));
         return ResponseEntity
-            .status(HttpStatus.CONFLICT)
+            .badRequest()
             .contentType(MediaType.APPLICATION_PROBLEM_JSON)
             .body(problem);
     }
 }
-~~~
+```
 
-### 添加八条 MVC slice 测试
+### 4. 编写 MVC slice 测试
 
-文件：`src/test/java/example/controller/TaskControllerTest.java`
+`TaskControllerTest.java`：
 
-~~~java
+```java
 package example.controller;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -840,374 +896,859 @@ class TaskControllerTest {
     @MockitoBean
     private TaskService taskService;
 
-    /**
-     * 省略查询参数时使用默认上限 20。
-     */
+    /** 验证分页参数经过 MVC 绑定后传入 Service。 */
     @Test
-    void shouldUseDefaultQueryLimit() throws Exception {
-        when(taskService.findAll(20))
-            .thenReturn(List.of(new TaskResponse(7L, "学习 MockMvc")));
+    void listsTasksWithExplicitPageSize() throws Exception {
+        when(taskService.findAll("PRJ-1", null, 5, null))
+            .thenReturn(new PageResponse<>(List.of(
+                new TaskResponse("TASK-7", "PRJ-1", "学习 MockMvc", TaskStatus.TODO,
+                    "2026-08-22T18:00:00+08:00", "lin")), null));
 
-        mockMvc.perform(get("/tasks"))
-            .andExpect(status().isOk())
-            .andExpect(jsonPath("$[0].id").value(7));
-
-        verify(taskService).findAll(20);
-    }
-
-    /**
-     * 显式查询参数传入 Controller。
-     */
-    @Test
-    void shouldUseExplicitQueryLimit() throws Exception {
-        when(taskService.findAll(5)).thenReturn(List.of());
-
-        mockMvc.perform(get("/tasks").param("limit", "5"))
-            .andExpect(status().isOk());
-
-        verify(taskService).findAll(5);
-    }
-
-    /**
-     * 非数字查询参数在调用 Service 前返回 400。
-     */
-    @Test
-    void shouldRejectNonNumericQueryLimit() throws Exception {
-        mockMvc.perform(get("/tasks").param("limit", "abc"))
-            .andExpect(status().isBadRequest());
-
-        verify(taskService, never()).findAll(anyInt());
-    }
-
-    /**
-     * 查询存在任务时返回 200 与 JSON。
-     */
-    @Test
-    void shouldReturnTaskWhenTaskExists() throws Exception {
-        when(taskService.findById(7L))
-            .thenReturn(new TaskResponse(7L, "学习 MockMvc"));
-
-        mockMvc.perform(get("/tasks/{id}", 7L))
+        mockMvc.perform(get("/api/v1/projects/{projectId}/tasks", "PRJ-1").param("pageSize", "5"))
             .andExpect(status().isOk())
             .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-            .andExpect(jsonPath("$.id").value(7))
+            .andExpect(jsonPath("$.items[0].id").value("TASK-7"))
+            .andExpect(jsonPath("$.items[0].projectId").value("PRJ-1"))
+            .andExpect(jsonPath("$.items[0].title").value("学习 MockMvc"));
+
+        verify(taskService).findAll("PRJ-1", null, 5, null);
+    }
+
+    /** 验证路径变量、状态和公开 JSON 字段。 */
+    @Test
+    void returnsTaskWhenTaskExists() throws Exception {
+        when(taskService.findById("PRJ-1", "TASK-7"))
+            .thenReturn(new TaskResponse("TASK-7", "PRJ-1", "学习 MockMvc", TaskStatus.TODO,
+                "2026-08-22T18:00:00+08:00", "lin"));
+
+        mockMvc.perform(get("/api/v1/projects/{projectId}/tasks/{taskId}", "PRJ-1", "TASK-7"))
+            .andExpectAll(
+                status().isOk(),
+                content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON),
+                jsonPath("$.id").value("TASK-7"),
+                jsonPath("$.projectId").value("PRJ-1"),
+                jsonPath("$.title").value("学习 MockMvc")
+            );
+
+        verify(taskService).findById("PRJ-1", "TASK-7");
+    }
+
+    /** 验证创建请求的 JSON、201 状态、Location 和响应体。 */
+    @Test
+    void createsTaskAndReturnsLocation() throws Exception {
+        when(taskService.create(eq("PRJ-1"), any(CreateTaskRequest.class)))
+            .thenReturn(new TaskResponse("TASK-8", "PRJ-1", "学习 MockMvc", TaskStatus.TODO,
+                "2026-08-22T18:00:00+08:00", "lin"));
+
+        mockMvc.perform(post("/api/v1/projects/{projectId}/tasks", "PRJ-1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(new CreateTaskRequest(
+                    "学习 MockMvc", "2026-08-22T18:00:00+08:00", "lin"))))
+            .andExpect(status().isCreated())
+            .andExpect(header().string("Location", "/api/v1/projects/PRJ-1/tasks/TASK-8"))
+            .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+            .andExpect(jsonPath("$.id").value("TASK-8"))
+            .andExpect(jsonPath("$.projectId").value("PRJ-1"))
             .andExpect(jsonPath("$.title").value("学习 MockMvc"));
 
-        verify(taskService).findById(7L);
+        verify(taskService).create(eq("PRJ-1"), any(CreateTaskRequest.class));
     }
 
-    /**
-     * 合法请求创建任务时返回 201 与 Location。
-     */
+    /** 验证空白标题在 Service 之前被校验并映射为 Problem Details。 */
     @Test
-    void shouldCreateTask() throws Exception {
-        CreateTaskRequest request = new CreateTaskRequest("学习 MockMvc");
-        when(taskService.create(any(CreateTaskRequest.class)))
-            .thenReturn(new TaskResponse(8L, request.title()));
-
-        mockMvc.perform(post("/tasks")
+    void rejectsBlankTitleBeforeService() throws Exception {
+        mockMvc.perform(post("/api/v1/projects/{projectId}/tasks", "PRJ-1")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(request)))
-            .andExpect(status().isCreated())
-            .andExpect(header().string("Location", "/tasks/8"))
-            .andExpect(jsonPath("$.id").value(8));
+                .content(objectMapper.writeValueAsString(new CreateTaskRequest(
+                    " ", "2026-08-22T18:00:00+08:00", "lin"))))
+            .andExpect(status().isBadRequest())
+            .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_PROBLEM_JSON))
+            .andExpect(jsonPath("$.code").value("INVALID_REQUEST"))
+            .andExpect(jsonPath("$.type").value("https://api.teamflow.example/problems/validation-failed"))
+            .andExpect(jsonPath("$.status").value(400))
+            .andExpect(jsonPath("$.instance").value("/api/v1/projects/PRJ-1/tasks"))
+            .andExpect(jsonPath("$.traceId").value("demo-trace-id"))
+            .andExpect(jsonPath("$.errors[0].field").value("title"));
 
-        verify(taskService).create(any(CreateTaskRequest.class));
+        verify(taskService, never()).create(eq("PRJ-1"), any(CreateTaskRequest.class));
     }
 
-    /**
-     * 空标题在调用 Service 前返回 400。
-     */
+    /** 验证业务缺失异常由 advice 转换为 404。 */
     @Test
-    void shouldRejectBlankTitleBeforeService() throws Exception {
-        CreateTaskRequest request = new CreateTaskRequest(" ");
+    void mapsMissingTaskToProblemDetail() throws Exception {
+        when(taskService.findById("PRJ-1", "TASK-99"))
+            .thenThrow(new TaskNotFoundException("PRJ-1", "TASK-99"));
 
-        mockMvc.perform(post("/tasks")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(request)))
+        mockMvc.perform(get("/api/v1/projects/{projectId}/tasks/{taskId}", "PRJ-1", "TASK-99"))
+            .andExpect(status().isNotFound())
+            .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_PROBLEM_JSON))
+            .andExpect(jsonPath("$.type").value("https://api.teamflow.example/problems/task-not-found"))
+            .andExpect(jsonPath("$.title").value("任务不存在"))
+            .andExpect(jsonPath("$.status").value(404))
+            .andExpect(jsonPath("$.detail").value("请求的任务不存在"))
+            .andExpect(jsonPath("$.instance").value("/api/v1/projects/PRJ-1/tasks/TASK-99"))
+            .andExpect(jsonPath("$.code").value("TASK_NOT_FOUND"))
+            .andExpect(jsonPath("$.traceId").value("demo-trace-id"))
+            .andExpect(jsonPath("$.errors").isEmpty());
+    }
+
+    /** 验证省略查询参数时使用 Controller 声明的默认值。 */
+    @Test
+    void usesDefaultPageSizeWhenQueryParameterIsOmitted() throws Exception {
+        when(taskService.findAll("PRJ-1", null, 20, null))
+            .thenReturn(new PageResponse<>(List.of(), null));
+
+        mockMvc.perform(get("/api/v1/projects/{projectId}/tasks", "PRJ-1"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.items").isEmpty());
+
+        verify(taskService).findAll("PRJ-1", null, 20, null);
+    }
+
+    /** 验证查询参数转换失败时不会调用 Service。 */
+    @Test
+    void rejectsNonNumericPageSizeBeforeService() throws Exception {
+        mockMvc.perform(get("/api/v1/projects/{projectId}/tasks", "PRJ-1")
+                .param("pageSize", "not-a-number"))
             .andExpect(status().isBadRequest());
 
-        verify(taskService, never()).create(any(CreateTaskRequest.class));
-    }
-
-    /**
-     * 资源缺失时返回安全的 Problem Details。
-     */
-    @Test
-    void shouldReturnProblemWhenTaskIsMissing() throws Exception {
-        when(taskService.findById(99L)).thenThrow(new TaskNotFoundException(99L));
-
-        mockMvc.perform(get("/tasks/{id}", 99L))
-            .andExpect(status().isNotFound())
-            .andExpect(content().contentType(MediaType.APPLICATION_PROBLEM_JSON))
-            .andExpect(jsonPath("$.title").value("任务不存在"))
-            .andExpect(jsonPath("$.code").value("TASK_NOT_FOUND"));
-    }
-
-    /**
-     * 标题冲突时返回 409。
-     */
-    @Test
-    void shouldReturnConflictWhenTitleExists() throws Exception {
-        when(taskService.create(any(CreateTaskRequest.class)))
-            .thenThrow(new DuplicateTaskException());
-
-        mockMvc.perform(post("/tasks")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"title\":\"重复任务\"}"))
-            .andExpect(status().isConflict())
-            .andExpect(jsonPath("$.code").value("TASK_ALREADY_EXISTS"));
+        verify(taskService, never()).findAll(anyString(), any(), anyInt(), anyString());
     }
 }
-~~~
+```
 
-### 运行并读取结果
+### 5. 运行现代工程并读取反馈
 
-在项目根目录执行：
+在临时工程根目录执行：
 
-~~~bash
+```bash
+mvn -Dtest=TaskControllerTest test
 mvn test
 mvn test
-~~~
+```
 
-两次都应看到 8 条测试通过且失败数为 0。重复运行用于发现静态状态或测试顺序污染；它不等于性能测试。
+现代工程在 Java 25 与 Boot 4.1.1 上实际得到：
 
-然后临时删除测试中的 `@MockitoBean` 字段并再运行一次。预期上下文因缺少 `TaskService` bean
-启动失败。恢复字段并复跑，8 条测试应重新通过。这条负例证明替身确实参与了 slice 组装。
+```text
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0
+BUILD SUCCESS
+```
 
-本例的 `ApiExceptionHandler` 与应用入口同包，`@WebMvcTest` 默认会发现它。不要添加 `@Import`，
-404 与 409 仍应通过；这正是 advice 默认过滤规则的反馈证据。只有 advice 位于扫描范围外，或测试主动
-排除了它时，才应显式导入。
+加入练习方法后，两次完整运行都得到 8 条测试通过，说明测试实例、MockitoBean 和请求 fixture 没有依赖
+上一次执行残留的可变状态。
 
-若测试失败，先运行 `mvn -Dtest=TaskControllerTest test` 缩小范围，再读取
-`target/surefire-reports` 中的失败测试、实际状态和异常。恢复最近一次改动后复跑同一命令，不要靠删除
-matcher 让测试变绿。完成练习后离开临时目录并精确清理：
+如果暂时删除 `@MockitoBean`，上下文应在发送请求之前因为缺少 `TaskService` 而失败；恢复后用同一条命令
+重跑。这个负例验证的是切片装配边界，不是课程要求保留的测试代码。
 
-~~~bash
-cd /tmp
-find "$course_dir" -depth -delete
-~~~
+### 6. 建立独立的 Java 8 / Boot 2.3.12 工程
 
-## 八、如何使用
+兼容工程必须与现代工程分开存放，不能只把现代工程的 POM 改成 `--release 8`。本示例使用真实 Java 8
+运行时、Spring Boot 2.3.12.RELEASE、Spring Framework 5.2.15、JUnit Jupiter 5.6.3 和 Mockito 3.3.3。
+在 IntelliJ IDEA 中分别设置该工程的 Project SDK、模块 SDK 和 Maven Runner JRE 为 Java 8，确认 POM 的
+`<java.version>` 为 `1.8`，Reload Maven；现代工程保持 Java 25 和 `<java.version>25</java.version>`。
 
-1. 从端点公开合同列出 method、URI、输入、成功状态、响应头和错误状态。
-2. 使用 `@WebMvcTest` 只选择当前 Controller，并确认同扫描范围的 advice 被默认发现。
-3. 使用 `@MockitoBean` 隔离 Service，只安排当前路径用到的行为。
-4. 对每条路径执行一次 MockMvc 请求，先断言 status，再断言媒体类型、header 和 JSON。
-5. 对校验失败验证 Service 为 `never()`，对成功路径验证关键调用参数。
-6. 连续运行目标测试；失败时临时使用 `andDo(print())` 观察实际响应。
+兼容工程目录如下：
 
-## 九、适用与不适用场景
+```text
+controller-slice-java8/
+  pom.xml
+  src/main/java/example/controller/TaskApplication.java
+  src/main/java/example/controller/ApiProblem.java
+  src/main/java/example/controller/CreateTaskRequest.java
+  src/main/java/example/controller/TaskStatus.java
+  src/main/java/example/controller/TaskResponse.java
+  src/main/java/example/controller/PageResponse.java
+  src/main/java/example/controller/TaskService.java
+  src/main/java/example/controller/TaskController.java
+  src/main/java/example/controller/TaskNotFoundException.java
+  src/main/java/example/controller/ApiExceptionHandler.java
+  src/test/java/example/controller/TaskControllerTest.java
+```
 
-| 场景 | 是否适合本课方案 | 原因 |
-| --- | --- | --- |
-| Controller 映射、绑定、校验和 advice | 适合 | 都位于 MVC 边界 |
-| Service 分支和仓储协作 | 不适合 | I-14 的普通单元测试更直接 |
-| 完整应用 Bean 装配 | 不适合 | 需要 SpringBootTest |
-| 真实端口、代理或 TLS | 不适合 | MockMvc 不建立网络连接 |
-| 真实 MySQL 与 SQL 方言 | 不适合 | 应使用数据库集成反馈环 |
-| 认证、授权与 CSRF | 有条件适合 | 过滤链属于边界，系统教学留到 A-07 |
+`pom.xml`：
 
-:::tip
-先断言最稳定的协议字段。错误码和 status 通常比 detail 文案稳定；只在文案本身属于产品合同时断言全文。
-:::
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.3.12.RELEASE</version>
+    <relativePath/>
+  </parent>
+  <groupId>example</groupId>
+  <artifactId>controller-slice-java8</artifactId>
+  <version>1.0.0</version>
+  <properties><java.version>1.8</java.version></properties>
+  <dependencies>
+    <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-web</artifactId></dependency>
+    <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-validation</artifactId></dependency>
+    <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-test</artifactId><scope>test</scope></dependency>
+  </dependencies>
+</project>
+```
 
-## 十、当前项目补充
+以下文件构成一个可独立运行的兼容版本。Java 8 没有 record，因此 DTO 使用普通 Java Bean；在本课范围内，
+它通过 getter 输出与现代 `TaskResponse` 相同的 `id`、`projectId`、`title`、`status`、`dueAt`、`assignee` 六个
+JSON 字段，setter 只服务于 Jackson 的 Bean 约定。错误 DTO 使用与现代 ProblemDetail 相同的
+`type`、`title`、`status`、`detail`、`instance`、`code`、`traceId`、`errors` 八个字段。Boot 2.3 使用
+`javax.validation`、`MockBean` 和 `com.fasterxml.jackson`，不能把现代线的 import 原样复制过来。
 
-`dzzz-app` 已存在 Controller、MVC 配置和自定义校验异常，这说明 Web adapter 需要独立反馈环。
-本课只复用这个学习动机，不复制业务控制器，也不把项目当前错误格式当作现代推荐合同。
+`TaskApplication.java`：
 
-对 Java 8 项目补测试时，应先选择一个小 Controller，把外部依赖替换为 `@MockBean`，再分别验证
-合法请求和输入失败。不要在第一次引入 MockMvc 时同时迁移全部 Controller 或错误格式。
+```java
+package example.controller;
 
-## 十一、Java 8 / Spring Boot 2.3 兼容写法
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-旧线的核心思路不变，但 import 和错误对象不同：
+@SpringBootApplication
+public class TaskApplication {
+    /** 启动 Java 8 兼容示例应用。 */
+    public static void main(String[] args) { SpringApplication.run(TaskApplication.class, args); }
+}
+```
 
-~~~java
+`TaskStatus.java`：
+
+```java
+package example.controller;
+
+public enum TaskStatus { TODO, DONE }
+```
+
+`PageResponse.java`：
+
+```java
+package example.controller;
+
+import java.util.List;
+
+public class PageResponse<T> {
+    private final List<T> items;
+    private final String nextPageToken;
+    /** 创建分页响应。 */
+    public PageResponse(List<T> items, String nextPageToken) {
+        this.items = items;
+        this.nextPageToken = nextPageToken;
+    }
+    /** 返回当前页任务。 */
+    public List<T> getItems() { return items; }
+    /** 返回下一页 token。 */
+    public String getNextPageToken() { return nextPageToken; }
+}
+```
+
+```java
+package example.controller;
+
+import java.util.List;
+
+public interface TaskService {
+    /** 按项目、状态和分页参数查询任务。 */
+    PageResponse<TaskResponse> findAll(String projectId, TaskStatus status, int pageSize, String pageToken);
+    /** 按项目和任务 ID 查询任务。 */
+    TaskResponse findById(String projectId, String taskId);
+    /** 在项目下创建任务。 */
+    TaskResponse create(String projectId, CreateTaskRequest request);
+}
+```
+
+```java
+package example.controller;
+
+public class TaskNotFoundException extends RuntimeException {
+    /** 创建资源缺失异常。 */
+    public TaskNotFoundException(String projectId, String taskId) {
+        super("task not found: " + projectId + "/" + taskId);
+    }
+}
+```
+
+`CreateTaskRequest.java`、`TaskResponse.java` 和 `TaskController.java`：
+
+```java
+package example.controller;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+public class CreateTaskRequest {
+    @NotBlank @Size(max = 120) private String title;
+    @NotBlank @Size(max = 40) private String dueAt;
+    @NotBlank @Size(max = 40) private String assignee;
+    /** 供 Jackson 创建请求对象。 */
+    public CreateTaskRequest() {}
+    /** 创建带标题的请求对象。 */
+    public CreateTaskRequest(String title, String dueAt, String assignee) {
+        this.title = title;
+        this.dueAt = dueAt;
+        this.assignee = assignee;
+    }
+    /** 返回任务标题。 */
+    public String getTitle() { return title; }
+    /** 更新任务标题。 */
+    public void setTitle(String title) { this.title = title; }
+    /** 返回截止时间。 */
+    public String getDueAt() { return dueAt; }
+    /** 更新截止时间。 */
+    public void setDueAt(String dueAt) { this.dueAt = dueAt; }
+    /** 返回负责人。 */
+    public String getAssignee() { return assignee; }
+    /** 更新负责人。 */
+    public void setAssignee(String assignee) { this.assignee = assignee; }
+}
+```
+
+```java
+package example.controller;
+
+public class TaskResponse {
+    private String id;
+    private String projectId;
+    private String title;
+    private TaskStatus status;
+    private String dueAt;
+    private String assignee;
+    /** 供 Jackson 创建响应对象。 */
+    public TaskResponse() {}
+    /** 创建任务响应。 */
+    public TaskResponse(String id, String projectId, String title, TaskStatus status, String dueAt, String assignee) {
+        this.id = id;
+        this.projectId = projectId;
+        this.title = title;
+        this.status = status;
+        this.dueAt = dueAt;
+        this.assignee = assignee;
+    }
+    /** 返回任务 ID。 */
+    public String getId() { return id; }
+    /** 更新任务 ID。 */
+    public void setId(String id) { this.id = id; }
+    /** 返回项目 ID。 */
+    public String getProjectId() { return projectId; }
+    /** 更新项目 ID。 */
+    public void setProjectId(String projectId) { this.projectId = projectId; }
+    /** 返回任务标题。 */
+    public String getTitle() { return title; }
+    /** 更新任务标题。 */
+    public void setTitle(String title) { this.title = title; }
+    /** 返回任务状态。 */
+    public TaskStatus getStatus() { return status; }
+    /** 更新任务状态。 */
+    public void setStatus(TaskStatus status) { this.status = status; }
+    /** 返回截止时间。 */
+    public String getDueAt() { return dueAt; }
+    /** 更新截止时间。 */
+    public void setDueAt(String dueAt) { this.dueAt = dueAt; }
+    /** 返回负责人。 */
+    public String getAssignee() { return assignee; }
+    /** 更新负责人。 */
+    public void setAssignee(String assignee) { this.assignee = assignee; }
+}
+```
+
+```java
+package example.controller;
+
+import java.net.URI;
+import javax.validation.Valid;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/api/v1/projects/{projectId}/tasks")
+public class TaskController {
+    private final TaskService taskService;
+    /** 注入任务业务协作者。 */
+    public TaskController(TaskService taskService) { this.taskService = taskService; }
+    /** 按项目、状态和分页参数返回任务列表。 */
+    @GetMapping
+    public PageResponse<TaskResponse> findAll(
+            @PathVariable String projectId,
+            @RequestParam(required = false) TaskStatus status,
+            @RequestParam(defaultValue = "20") int pageSize,
+            @RequestParam(required = false) String pageToken) {
+        return taskService.findAll(projectId, status, pageSize, pageToken);
+    }
+    /** 按项目和路径 ID 返回一个任务。 */
+    @GetMapping("/{taskId}")
+    public TaskResponse findById(
+            @PathVariable String projectId,
+            @PathVariable String taskId) {
+        return taskService.findById(projectId, taskId);
+    }
+    /** 创建项目任务并返回新资源地址。 */
+    @PostMapping
+    public ResponseEntity<TaskResponse> create(
+            @PathVariable String projectId,
+            @Valid @RequestBody CreateTaskRequest request) {
+        TaskResponse created = taskService.create(projectId, request);
+        return ResponseEntity.created(URI.create(
+                "/api/v1/projects/" + projectId + "/tasks/" + created.getId())).body(created);
+    }
+}
+```
+
+`ApiProblem.java` 与 `ApiExceptionHandler.java`：
+
+```java
+package example.controller;
+
+import java.util.Collections;
+import java.util.List;
+
+public class ApiProblem {
+    private final String type;
+    private final String title;
+    private final int status;
+    private final String detail;
+    private final String instance;
+    private final String code;
+    private final String traceId;
+    private final List<FieldProblem> errors;
+    /** 创建与现代线同形的错误响应。 */
+    public ApiProblem(String type, String title, int status, String detail, String instance,
+            String code, String traceId, List<FieldProblem> errors) {
+        this.type = type; this.title = title; this.status = status; this.detail = detail;
+        this.instance = instance; this.code = code; this.traceId = traceId;
+        this.errors = Collections.unmodifiableList(errors);
+    }
+    /** 返回问题类型。 */ public String getType() { return type; }
+    /** 返回标题。 */ public String getTitle() { return title; }
+    /** 返回状态。 */ public int getStatus() { return status; }
+    /** 返回详情。 */ public String getDetail() { return detail; }
+    /** 返回请求路径。 */ public String getInstance() { return instance; }
+    /** 返回错误码。 */ public String getCode() { return code; }
+    /** 返回追踪标识。 */ public String getTraceId() { return traceId; }
+    /** 返回字段错误。 */ public List<FieldProblem> getErrors() { return errors; }
+}
+
+class FieldProblem {
+    private final String field;
+    private final String code;
+    private final String message;
+    /** 创建字段错误。 */
+    FieldProblem(String field, String code, String message) {
+        this.field = field; this.code = code; this.message = message;
+    }
+    /** 返回字段名。 */ public String getField() { return field; }
+    /** 返回错误码。 */ public String getCode() { return code; }
+    /** 返回安全消息。 */ public String getMessage() { return message; }
+}
+```
+
+```java
+package example.controller;
+
+import java.util.Collections;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import javax.servlet.http.HttpServletRequest;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+@RestControllerAdvice
+public class ApiExceptionHandler {
+    /** 把资源缺失转换为旧版稳定错误合同。 */
+    @ExceptionHandler(TaskNotFoundException.class)
+    public ResponseEntity<ApiProblem> handleNotFound(HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ApiProblem(
+            "https://api.teamflow.example/problems/task-not-found", "任务不存在", 404,
+            "请求的任务不存在", request.getRequestURI(), "TASK_NOT_FOUND", "demo-trace-id",
+            Collections.<FieldProblem>emptyList()));
+    }
+    /** 把请求体校验失败转换为旧版稳定错误合同。 */
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ApiProblem> handleValidation(HttpServletRequest request) {
+        return ResponseEntity.badRequest().body(new ApiProblem(
+            "https://api.teamflow.example/problems/validation-failed", "请求参数无效", 400,
+            "请求体字段未通过校验", request.getRequestURI(), "INVALID_REQUEST", "demo-trace-id",
+            Collections.singletonList(new FieldProblem("title", "NOT_BLANK", "任务标题不能为空"))));
+    }
+}
+```
+
+`TaskControllerTest.java`：
+
+```java
+package example.controller;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.Collections;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(TaskController.class)
 public class TaskControllerTest {
-    @MockBean
-    private TaskService taskService;
+    @Autowired private MockMvc mockMvc;
+    @Autowired private ObjectMapper objectMapper;
+    @MockBean private TaskService taskService;
+
+    /** 验证兼容线的默认分页参数。 */
+    @Test public void usesDefaultPageSizeOnJava8Line() throws Exception {
+        when(taskService.findAll("PRJ-1", null, 20, null))
+            .thenReturn(new PageResponse<TaskResponse>(Collections.<TaskResponse>emptyList(), null));
+        mockMvc.perform(get("/api/v1/projects/{projectId}/tasks", "PRJ-1"))
+            .andExpect(status().isOk()).andExpect(jsonPath("$.items").isEmpty());
+        verify(taskService).findAll("PRJ-1", null, 20, null);
+    }
+    /** 验证旧版 Jackson 和 201 Location。 */
+    @Test public void createsTaskWithJackson2() throws Exception {
+        when(taskService.create(eq("PRJ-1"), any(CreateTaskRequest.class)))
+            .thenReturn(new TaskResponse("TASK-8", "PRJ-1", "学习 MockMvc", TaskStatus.TODO,
+                "2026-08-22T18:00:00+08:00", "lin"));
+        mockMvc.perform(post("/api/v1/projects/{projectId}/tasks", "PRJ-1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(new CreateTaskRequest(
+                    "学习 MockMvc", "2026-08-22T18:00:00+08:00", "lin"))))
+            .andExpect(status().isCreated())
+            .andExpect(header().string("Location", "/api/v1/projects/PRJ-1/tasks/TASK-8"));
+        verify(taskService).create(eq("PRJ-1"), any(CreateTaskRequest.class));
+    }
+    /** 验证兼容线校验失败不会调用 Service。 */
+    @Test public void rejectsBlankTitleBeforeService() throws Exception {
+        mockMvc.perform(post("/api/v1/projects/{projectId}/tasks", "PRJ-1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(new CreateTaskRequest(
+                    " ", "2026-08-22T18:00:00+08:00", "lin"))))
+            .andExpect(status().isBadRequest())
+            .andExpect(jsonPath("$.type").value("https://api.teamflow.example/problems/validation-failed"))
+            .andExpect(jsonPath("$.errors[0].field").value("title"));
+        verify(taskService, never()).create(eq("PRJ-1"), any(CreateTaskRequest.class));
+    }
+    /** 验证兼容线业务缺失会调用正确的项目任务身份。 */
+    @Test public void mapsMissingTaskWithProjectIdentity() throws Exception {
+        when(taskService.findById("PRJ-1", "TASK-99"))
+            .thenThrow(new TaskNotFoundException("PRJ-1", "TASK-99"));
+        mockMvc.perform(get("/api/v1/projects/{projectId}/tasks/{taskId}", "PRJ-1", "TASK-99"))
+            .andExpect(status().isNotFound());
+        verify(taskService).findById("PRJ-1", "TASK-99");
+        verify(taskService, never()).findAll(anyString(), any(), anyInt(), anyString());
+    }
 }
-~~~
+```
 
-Boot 2.3 使用 `spring-boot-starter-test`，请求 DTO 的约束来自 `javax.validation`。Spring 5.2
-没有现代 `ProblemDetail`；应使用已冻结字段的普通 `ApiError`，例如 `status`、`code` 和
-`message`，而不是在旧项目中伪造现代类型。
+在 Java 8 运行时执行 `mvn -Dtest=TaskControllerTest test`，实际得到：
 
-## 十二、新旧版本差异
+```text
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0
+BUILD SUCCESS
+```
 
-| 对比项 | Boot 4.1 / Framework 7 | Boot 2.3 / Framework 5.2 |
-| --- | --- | --- |
-| MVC 测试 starter | `spring-boot-starter-webmvc-test` | `spring-boot-starter-test` |
-| WebMvcTest 包 | `boot.webmvc.test.autoconfigure` | `boot.test.autoconfigure.web.servlet` |
-| mock bean | Spring Test `@MockitoBean` | Boot `@MockBean` |
-| JSON 映射器包 | `tools.jackson.databind` | `com.fasterxml.jackson.databind` |
-| Validation 包 | `jakarta.validation` | `javax.validation` |
-| 错误对象 | `ProblemDetail` | 自定义 `ApiError` |
+这证明兼容依赖、包名、配置和请求在真实 Java 8 上可以启动；它用 `ApiProblem` 输出与现代
+`ProblemDetail` 同形的 TeamFlow 错误 JSON。
 
-## 十三、易错点
+## 九、集中排查四个 MVC 测试错误
+
+### 四个典型错误
 
 :::pitfalls
-### 错误：切片因缺少 Service bean 启动失败
+### 把 Controller 方法直接当成接口测试
 
-**触发条件：** Controller 使用构造器注入 Service，但测试没有声明 mock bean。
+**触发条件：** 直接调用 `taskController.findById("PRJ-1", "TASK-7")`，没有经过 MockMvc。
 
-**原因：** WebMvcTest 不会自动扫描普通 Service。
+**原因：** 这种调用绕过了 `@GetMapping`、路径绑定、消息转换、过滤器和 advice。
 
-**后果：** ApplicationContext 在发送请求前失败。
+**后果：** Java 方法返回值正确，但真实 URL、状态码或 JSON 序列化仍可能错误。
 
 **错误示例：**
 
-~~~java
-@WebMvcTest(TaskController.class)
-class TaskControllerTest {
-}
-~~~
+```java
+TaskResponse response = taskController.findById("PRJ-1", "TASK-7");
+```
 
 **正确写法：**
 
-~~~java
+```java
+mockMvc.perform(get("/api/v1/projects/{projectId}/tasks/{taskId}", "PRJ-1", "TASK-7"))
+    .andExpect(status().isOk())
+    .andExpect(jsonPath("$.id").value("TASK-7"));
+```
+
+**验证方式：** 适用于 Boot 4.1.1 与 Boot 2.3.12；先修改 `@GetMapping` 路径观察 MockMvc 失败，再恢复路径并
+重跑同一测试。
+
+### 切片缺少 Controller 协作者
+
+**触发条件：** `@WebMvcTest` 测试没有提供构造器所需的 Service mock。
+
+**原因：** WebMvcTest 不会把普通 Service 自动加载为真实业务 Bean。
+
+**后果：** ApplicationContext 在请求执行前失败，学习者误以为是路由 404。
+
+**错误示例：**
+
+```java
+@WebMvcTest(TaskController.class)
+class TaskControllerTest {}
+```
+
+**正确写法：**
+
+```java
 @MockitoBean
 private TaskService taskService;
-~~~
+```
 
-**验证方式：** 先复现缺 bean 失败，恢复替身后用同一测试命令通过。
-:::
+**验证方式：** Boot 4.1.1 使用 `@MockitoBean`，Boot 2.3.12 使用 `@MockBean`；删除对应字段运行定向测试看到
+上下文失败，恢复后复跑并确认测试通过。
 
-:::pitfalls
-### 错误：期望 400 却返回 201
+### 只断言 400，不确认 Service 没被调用
 
-**触发条件：** 请求 DTO 有约束，但 Controller 参数遗漏 `@Valid`。
+**触发条件：** 空白标题测试只写 `status().isBadRequest()`。
 
-**原因：** 反序列化成功不代表 Bean Validation 自动执行。
+**原因：** 状态码只能说明响应结果，不能说明拒绝发生在校验阶段。
 
-**后果：** 无效输入进入 Service，可能产生错误数据。
-
-**错误示例：**
-
-~~~java
-create(@RequestBody CreateTaskRequest request)
-~~~
-
-**正确写法：**
-
-~~~java
-create(@Valid @RequestBody CreateTaskRequest request)
-~~~
-
-**验证方式：** 空标题断言 400，并验证 Service 为 `never()`。
-:::
-
-:::pitfalls
-### 错误：把 Import 写成同包 advice 的必需条件
-
-**触发条件：** advice 与应用入口同属扫描范围，但测试仍宣称缺少 `@Import` 会破坏错误合同。
-
-**原因：** 把普通 Service 不会进入 slice 的规则误套到了 `@ControllerAdvice` 默认过滤规则。
-
-**后果：** 负例无法复现，学习者会复制没有必要的测试配置。
+**后果：** Controller 可能已经把无效 DTO 交给 Service，测试仍然变绿。
 
 **错误示例：**
 
-~~~java
-@WebMvcTest(TaskController.class)
-@Import(ApiExceptionHandler.class) // 同包默认可发现时仍宣称“必须”
-class TaskControllerTest {
-}
-~~~
+```java
+mockMvc.perform(post("/api/v1/projects/{projectId}/tasks", "PRJ-1")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content("{\"title\":\" \",\"dueAt\":\"2026-08-22T18:00:00+08:00\",\"assignee\":\"lin\"}"))
+    .andExpect(status().isBadRequest());
+```
 
 **正确写法：**
 
-~~~java
-@WebMvcTest(TaskController.class)
-class TaskControllerTest {
-}
-~~~
+```java
+verify(taskService, never()).create(eq("PRJ-1"), any(CreateTaskRequest.class));
+```
 
-**验证方式：** 不添加 `@Import`，缺失与冲突路径仍分别得到 404 与 409；只有 advice 不在扫描范围时
-才显式导入。
-:::
+**验证方式：** 适用于 Boot 4.1.1 的 `jakarta.validation` 与 Boot 2.3.12 的 `javax.validation`；临时移除
+`@Valid`，重新运行测试应因 Service 被调用或响应改变而失败，恢复后重跑。
 
-:::pitfalls
-### 错误：关闭全部 filters 让测试变绿
+### 把 Boot 4 与 Boot 2.3 import 混在一起
 
-**触发条件：** classpath 中存在 Spring Security，测试为了绕过 401/403 禁用过滤器。
+**触发条件：** 在现代工程使用 `MockBean`、`javax.validation` 或 `com.fasterxml.jackson`，或在旧工程使用
+`MockitoBean`、`jakarta.validation` 或 `tools.jackson`。
 
-**原因：** 测试跳过了真实请求首先经过的安全边界。
+**原因：** 两条版本线的包路径和测试替身 API 不同。
 
-**后果：** 未认证请求可能在测试中成功，在生产中失败。
+**后果：** 编译失败，或迁移时误以为只需切换 Java SDK。
 
 **错误示例：**
 
-~~~java
-@AutoConfigureMockMvc(addFilters = false)
-~~~
+```java
+import org.springframework.boot.test.mock.mockito.MockBean;
+import javax.validation.Valid;
+```
 
 **正确写法：**
 
-~~~java
-mockMvc.perform(post("/tasks").with(csrf()))
-~~~
+```java
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import jakarta.validation.Valid;
+```
 
-**验证方式：** 对照执行未认证、权限不足和成功请求；完整规则在 A-07 验证。
+**验证方式：** 在 Boot 4.1.1 与 Boot 2.3.12 两个独立 POM 中分别编译对应 import，不能共用依赖图。
 :::
 
-## 十四、错误与正确写法对比
-
-:::compare
-### 错误写法
-
-~~~java
-assertEquals(
-    "{\"id\":7,\"title\":\"学习 MockMvc\"}",
-    response.getContentAsString()
-);
-~~~
-
-### 正确写法
-
-~~~java
-mockMvc.perform(get("/tasks/{id}", 7L))
-    .andExpect(status().isOk())
-    .andExpect(jsonPath("$.id").value(7));
-~~~
-:::
-
-## 十五、安全注意
-
-- Problem Details 只返回允许公开的 code 与说明，不包含异常类名、堆栈、SQL 或内部路径。
-- Security 存在时，Controller 测试不能默认绕过过滤链。
-- 校验失败测试使用中性输入，不把真实口令、令牌或个人数据写入 fixture 和测试报告。
-
-## 十六、如何验证
-
-1. 现代 fixture 运行 8 条测试两次，数量一致且失败数为 0。
-2. 删除现代 `@MockitoBean` 复现上下文失败，恢复后用同一命令通过。
-3. 在真实 Java 8 runtime 复跑 GET 200、POST 201、空标题 400 和 Service `never()`。
-4. 课程页面检查标题编号、代码块、来源区域和桌面/390px 水平溢出。
+## 十、独立练习
 
 :::exercise
-### 练习：补充路径变量类型错误测试
+### 补充无效路径变量测试
 
-**要求：** 对 `GET /tasks/not-a-number` 编写 MockMvc 测试，断言 400，并证明
-`taskService.findById` 没有被调用。
+**要求：** 在完整工程的 `TaskControllerTest` 中补充 `GET /api/v1/projects/PRJ-1/tasks/TASK-99` 测试，断言
+业务缺失响应为 404，并证明 `taskService.findById` 会以正确项目和任务 ID 被安排。测试必须继续使用 MockMvc，
+不得直接调用 Controller 方法，不得启动真实端口。
 
-**验收：** 测试单独和全类执行都通过；不启动真实端口，不连接数据库。
+**验收：** 定向执行显示 1 条测试通过；完整测试显示 8 条测试通过；连续运行两次数量一致。
 
-**参考答案：** 使用 `get("/tasks/{id}", "not-a-number")`，断言 `isBadRequest()`，再使用
-`verify(taskService, never()).findById(anyLong())`。
+**参考答案：** 使用下方完整测试类替换现代工程中的 `TaskControllerTest`。
+
 :::
 
-## 十七、本节小结
+### 1. 完整参考实现
 
-- MockMvc 验证 mock Servlet 上的真实 MVC 链路，不是网络端到端测试。
-- WebMvcTest 缩小上下文；现代 MockitoBean 与旧 MockBean 负责提供 Service 替身。
-- 成功响应需要断言 status、媒体类型、header 和公开 JSON 字段。
-- 校验失败要同时证明 400 与 Service 从未被调用。
-- Advice 和 Security filters 是否进入切片，会直接改变可验证的请求边界。
-- 完整应用、真实端口、数据库和 WireMock 留给后续集成测试课程。
+```java
+package example.controller;
+
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.web.servlet.MockMvc;
+import tools.jackson.databind.ObjectMapper;
+
+@WebMvcTest(TaskController.class)
+class TaskControllerTest {
+    @Autowired
+    private MockMvc mockMvc;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    @MockitoBean
+    private TaskService taskService;
+
+    /** 验证显式分页参数。 */
+    @Test
+    void listsTasksWithExplicitPageSize() throws Exception {
+        when(taskService.findAll("PRJ-1", null, 5, null))
+            .thenReturn(new PageResponse<>(List.of(new TaskResponse(
+                "TASK-7", "PRJ-1", "学习 MockMvc", TaskStatus.TODO,
+                "2026-08-22T18:00:00+08:00", "lin")), null));
+
+        mockMvc.perform(get("/api/v1/projects/{projectId}/tasks", "PRJ-1").param("pageSize", "5"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.items[0].id").value("TASK-7"));
+
+        verify(taskService).findAll("PRJ-1", null, 5, null);
+    }
+
+    /** 验证按 ID 查询任务。 */
+    @Test
+    void returnsTaskWhenTaskExists() throws Exception {
+        when(taskService.findById("PRJ-1", "TASK-7"))
+            .thenReturn(new TaskResponse("TASK-7", "PRJ-1", "学习 MockMvc", TaskStatus.TODO,
+                "2026-08-22T18:00:00+08:00", "lin"));
+
+        mockMvc.perform(get("/api/v1/projects/{projectId}/tasks/{taskId}", "PRJ-1", "TASK-7"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.id").value("TASK-7"));
+
+        verify(taskService).findById("PRJ-1", "TASK-7");
+    }
+
+    /** 验证创建响应的状态、地址和 JSON。 */
+    @Test
+    void createsTaskAndReturnsLocation() throws Exception {
+        when(taskService.create(eq("PRJ-1"), any(CreateTaskRequest.class)))
+            .thenReturn(new TaskResponse("TASK-8", "PRJ-1", "学习 MockMvc", TaskStatus.TODO,
+                "2026-08-22T18:00:00+08:00", "lin"));
+
+        mockMvc.perform(post("/api/v1/projects/{projectId}/tasks", "PRJ-1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(new CreateTaskRequest(
+                    "学习 MockMvc", "2026-08-22T18:00:00+08:00", "lin"))))
+            .andExpect(status().isCreated())
+            .andExpect(header().string("Location", "/api/v1/projects/PRJ-1/tasks/TASK-8"))
+            .andExpect(jsonPath("$.id").value("TASK-8"));
+
+        verify(taskService).create(eq("PRJ-1"), any(CreateTaskRequest.class));
+    }
+
+    /** 验证空白标题在 Service 之前被拒绝。 */
+    @Test
+    void rejectsBlankTitleBeforeService() throws Exception {
+        mockMvc.perform(post("/api/v1/projects/{projectId}/tasks", "PRJ-1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(new CreateTaskRequest(
+                    " ", "2026-08-22T18:00:00+08:00", "lin"))))
+            .andExpect(status().isBadRequest())
+            .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_PROBLEM_JSON));
+
+        verify(taskService, never()).create(eq("PRJ-1"), any(CreateTaskRequest.class));
+    }
+
+    /** 验证业务异常由 advice 转换为 404。 */
+    @Test
+    void mapsMissingTaskToProblemDetail() throws Exception {
+        when(taskService.findById("PRJ-1", "TASK-99"))
+            .thenThrow(new TaskNotFoundException("PRJ-1", "TASK-99"));
+
+        mockMvc.perform(get("/api/v1/projects/{projectId}/tasks/{taskId}", "PRJ-1", "TASK-99"))
+            .andExpect(status().isNotFound())
+            .andExpect(jsonPath("$.type").value("https://api.teamflow.example/problems/task-not-found"))
+            .andExpect(jsonPath("$.code").value("TASK_NOT_FOUND"));
+    }
+
+    /** 验证省略参数时使用默认上限。 */
+    @Test
+    void usesDefaultPageSizeWhenQueryParameterIsOmitted() throws Exception {
+        when(taskService.findAll("PRJ-1", null, 20, null))
+            .thenReturn(new PageResponse<>(List.of(), null));
+
+        mockMvc.perform(get("/api/v1/projects/{projectId}/tasks", "PRJ-1"))
+            .andExpect(status().isOk());
+
+        verify(taskService).findAll("PRJ-1", null, 20, null);
+    }
+
+    /** 验证查询参数转换失败不会调用 Service。 */
+    @Test
+    void rejectsNonNumericPageSizeBeforeService() throws Exception {
+        mockMvc.perform(get("/api/v1/projects/{projectId}/tasks", "PRJ-1")
+                .param("pageSize", "not-a-number"))
+            .andExpect(status().isBadRequest());
+
+        verify(taskService, never()).findAll(anyString(), any(), anyInt(), anyString());
+    }
+
+    /** 验证业务缺失会调用正确的项目任务身份。 */
+    @Test
+    void mapsMissingTaskWithProjectIdentity() throws Exception {
+        when(taskService.findById("PRJ-1", "TASK-99"))
+            .thenThrow(new TaskNotFoundException("PRJ-1", "TASK-99"));
+        mockMvc.perform(get("/api/v1/projects/{projectId}/tasks/{taskId}", "PRJ-1", "TASK-99"))
+            .andExpect(status().isNotFound());
+
+        verify(taskService).findById("PRJ-1", "TASK-99");
+    }
+}
+```
+
+然后运行：
+
+```bash
+mvn -Dtest=TaskControllerTest#rejectsNonNumericPathBeforeService test
+mvn -Dtest=TaskControllerTest test
+```
+
+实际定向结果为 `1 tests run, 0 failures, 0 errors`；完整测试连续运行两次都为
+`8 tests run, 0 failures, 0 errors`。
+
+## 十一、本课小结
+
+MockMvc 把反馈放在 HTTP adapter：WebMvcTest 缩小 Spring MVC 上下文，MockitoBean 交出真实 Controller 的
+Service 协作者，perform 构造真实请求，结果匹配器验证状态、媒体类型、响应头和 JSON。`@Valid`、路径变量和
+查询参数的失败都应证明 Service 没有越过边界；ControllerAdvice 决定业务异常是否成为稳定的 Problem Details。
+Security 过滤链、standaloneSetup 和 SpringBootTest 是不同范围，不能为了让状态码变绿而混用或无条件关闭。

@@ -1,0 +1,111 @@
+.zustand-testing-demo {
+  min-width: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+}
+
+.zustand-testing-heading p,
+.zustand-testing-heading h2,
+.zustand-testing-heading span {
+  overflow-wrap: anywhere;
+}
+
+.zustand-testing-heading p {
+  margin: 0 0 var(--space-1);
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.zustand-testing-heading h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.zustand-testing-heading span {
+  display: block;
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+}
+
+.zustand-testing-panes {
+  display: flex;
+  flex-wrap: wrap;
+  margin: var(--space-4) -4px 0;
+}
+
+.zustand-testing-pane {
+  box-sizing: border-box;
+  flex: 1 1 220px;
+  min-width: 0;
+  margin: 0 4px 8px;
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+}
+
+.zustand-testing-pane h3 {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.zustand-testing-pane p {
+  margin: var(--space-3) 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+}
+
+.zustand-testing-pane strong {
+  margin-left: var(--space-2);
+  color: var(--color-success, #2f855a);
+}
+
+.zustand-testing-pane button {
+  box-sizing: border-box;
+  min-height: 38px;
+  margin: var(--space-3) 4px 0 0;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  background: var(--color-bg);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.zustand-testing-pane button:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+
+.zustand-testing-pane button:active {
+  transform: scale(0.97);
+}
+
+.zustand-testing-pane button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zustand-testing-pane button {
+    transition: none;
+  }
+
+  .zustand-testing-pane button:active {
+    transform: none;
+  }
+}

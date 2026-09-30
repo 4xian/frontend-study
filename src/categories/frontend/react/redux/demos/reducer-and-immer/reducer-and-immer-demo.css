@@ -1,0 +1,178 @@
+.reducer-immer-demo {
+  min-width: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+}
+
+.reducer-immer-heading p,
+.reducer-immer-heading h2,
+.reducer-immer-heading span {
+  overflow-wrap: anywhere;
+}
+
+.reducer-immer-heading p {
+  margin: 0 0 var(--space-1);
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.reducer-immer-heading h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.reducer-immer-heading span {
+  display: block;
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+}
+
+.reducer-immer-action,
+.reducer-immer-state,
+.reducer-immer-references,
+.reducer-immer-snapshot,
+.reducer-immer-controls {
+  margin-top: var(--space-4);
+}
+
+.reducer-immer-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: var(--space-3);
+  border-left: 3px solid var(--color-accent);
+  background: var(--color-bg);
+}
+
+.reducer-immer-action span,
+.reducer-immer-state-heading span,
+.reducer-immer-reference-heading span,
+.reducer-immer-snapshot > span {
+  color: var(--color-text-secondary);
+  font-size: 0.74rem;
+}
+
+.reducer-immer-action code {
+  margin-left: var(--space-3);
+  color: var(--color-accent);
+  font-size: 0.78rem;
+  overflow-wrap: anywhere;
+}
+
+.reducer-immer-state,
+.reducer-immer-references,
+.reducer-immer-snapshot {
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.reducer-immer-state-heading,
+.reducer-immer-reference-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.reducer-immer-state-heading strong {
+  margin-left: var(--space-3);
+  color: var(--color-success, #2f855a);
+  font-size: 0.82rem;
+}
+
+.reducer-immer-reference-heading small {
+  margin-left: var(--space-3);
+  color: var(--color-text-secondary);
+  font-size: 0.72rem;
+}
+
+.reducer-immer-state pre,
+.reducer-immer-snapshot pre {
+  max-width: 100%;
+  margin: var(--space-3) 0 0;
+  padding: var(--space-3);
+  overflow: auto;
+  background: var(--color-bg-secondary);
+  color: var(--color-text);
+  font:
+    0.74rem/1.55 ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    monospace;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.reducer-immer-references ul {
+  margin: var(--space-3) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.reducer-immer-references li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--color-border);
+}
+
+.reducer-immer-references li span,
+.reducer-immer-references li strong {
+  overflow-wrap: anywhere;
+}
+
+.reducer-immer-references li strong {
+  margin-left: var(--space-3);
+  color: var(--color-text-secondary);
+  font-size: 0.76rem;
+}
+
+.reducer-immer-controls {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -4px;
+  margin-left: -4px;
+}
+
+.reducer-immer-controls button {
+  min-height: 40px;
+  margin: 0 4px 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-sm);
+  background: var(--color-accent);
+  color: #fff;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.reducer-immer-controls button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.reducer-immer-controls button:active {
+  opacity: 0.8;
+}
+
+@media (max-width: 480px) {
+  .reducer-immer-demo {
+    padding: var(--space-3);
+  }
+
+  .reducer-immer-controls button {
+    box-sizing: border-box;
+    width: calc(100% - 8px);
+  }
+}

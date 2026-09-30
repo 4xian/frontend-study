@@ -161,14 +161,14 @@ JSON”，而是让相同业务含义始终拥有相同的外部形状。
 客户端已经能从 HTTP status 判断请求结果。查询成员成功时，body 只需要描述成员：
 
 ```json
-{"id":1,"displayName":"周宁","role":"Designer"}
+{"id":"1","displayName":"周宁","role":"Designer"}
 ```
 
 如果再把同一结果包装成下面的形状，客户端必须多穿过一层 `data`，而 `success` 与数字 `code` 又重复了
 HTTP 已经表达的信息：
 
 ```json
-{"success":true,"code":200,"message":"ok","data":{"id":1,"displayName":"周宁","role":"Designer"}}
+{"success":true,"code":200,"message":"ok","data":{"id":"1","displayName":"周宁","role":"Designer"}}
 ```
 
 外壳本身不会带来一致性。真正需要统一的是同类结果的字段、空值语义、状态、响应头和正文有无。例如，
@@ -218,7 +218,7 @@ record Member(long id, String displayName, String role, String internalNote) {
  * @param displayName 成员显示名称
  * @param role 成员角色
  */
-public record MemberResponse(long id, String displayName, String role) {
+public record MemberResponse(String id, String displayName, String role) {
 
     /**
      * 从内部成员模型创建公开响应。
@@ -227,13 +227,13 @@ public record MemberResponse(long id, String displayName, String role) {
      * @return 公开成员响应
      */
     static MemberResponse from(Member member) {
-        return new MemberResponse(member.id(), member.displayName(), member.role());
+        return new MemberResponse(Long.toString(member.id()), member.displayName(), member.role());
     }
 }
 ```
 
-转换点明确列出公开字段。内部模型以后增加字段时，JSON 不会自动变化；公开合同要变化时，也能直接定位到
-响应 DTO。
+转换点明确列出公开字段，并把内部数值 ID 转为公开字符串。内部模型以后增加字段时，JSON 不会自动变化；
+公开合同要变化时，也能直接定位到响应 DTO。
 
 ### 2. DTO 名称表达响应方向
 
@@ -269,6 +269,12 @@ return ResponseEntity.ok(MemberResponse.from(member));
 查询一个成员时，JSON 根对象就是成员，不增加 `data`：
 
 ```java
+/**
+ * 查询一个成员并直接返回资源表示。
+ *
+ * @param memberId 成员 ID
+ * @return 成员资源或 404
+ */
 @GetMapping(path = "/{memberId}", produces = MediaType.APPLICATION_JSON_VALUE)
 public ResponseEntity<MemberResponse> find(@PathVariable long memberId) {
     Member member = members.get(memberId);
@@ -311,7 +317,7 @@ public record PageResponse<T>(List<T> items, String nextPageToken) {
 
 ```json
 {
-  "items": [{"id":1,"displayName":"周宁","role":"Designer"}],
+  "items": [{"id":"1","displayName":"周宁","role":"Designer"}],
   "nextPageToken": "PAGE-2"
 }
 ```
@@ -406,7 +412,7 @@ Java 8 没有 record。兼容版声明 final 字段，在构造器中一次写�
 
 ```java
 public final class MemberResponse {
-    private final long id;
+    private final String id;
     private final String displayName;
     private final String role;
 
@@ -417,7 +423,7 @@ public final class MemberResponse {
      * @param displayName 成员显示名称
      * @param role 成员角色
      */
-    public MemberResponse(long id, String displayName, String role) {
+    public MemberResponse(String id, String displayName, String role) {
         this.id = id;
         this.displayName = displayName;
         this.role = role;
@@ -428,7 +434,7 @@ public final class MemberResponse {
      *
      * @return 成员 ID
      */
-    public long getId() {
+    public String getId() {
         return id;
     }
 }
@@ -604,7 +610,7 @@ package com.teamflow.response;
  * @param displayName 成员显示名称
  * @param role 成员角色
  */
-public record MemberResponse(long id, String displayName, String role) {
+public record MemberResponse(String id, String displayName, String role) {
 
     /**
      * 从内部模型创建公开响应。
@@ -613,7 +619,7 @@ public record MemberResponse(long id, String displayName, String role) {
      * @return 公开成员响应
      */
     static MemberResponse from(Member member) {
-        return new MemberResponse(member.id(), member.displayName(), member.role());
+        return new MemberResponse(Long.toString(member.id()), member.displayName(), member.role());
     }
 }
 ```
@@ -802,12 +808,15 @@ java -jar target/teamflow-unified-response-modern-1.0.0.jar
 
 ```bash
 curl --silent --show-error \
+  --write-out '\nstatus=%{http_code}\n' \
   'http://localhost:8080/api/v1/teams/TEAM-1/members/1'
 
 curl --silent --show-error \
+  --write-out '\nstatus=%{http_code}\n' \
   'http://localhost:8080/api/v1/teams/TEAM-1/members'
 
 curl --silent --show-error \
+  --write-out '\nstatus=%{http_code}\n' \
   'http://localhost:8080/api/v1/teams/TEAM-EMPTY/members'
 
 curl --silent --show-error --include \
@@ -834,8 +843,8 @@ curl --silent --show-error --output /dev/null \
 关键结果应为：
 
 ```text
-单成员：200 / {"id":1,"displayName":"周宁","role":"Designer"}
-第一页：200 / {"items":[{"id":1,"displayName":"周宁","role":"Designer"}],"nextPageToken":"PAGE-2"}
+单成员：200 / {"id":"1","displayName":"周宁","role":"Designer"}
+第一页：200 / {"items":[{"id":"1","displayName":"周宁","role":"Designer"}],"nextPageToken":"PAGE-2"}
 空团队：200 / {"items":[],"nextPageToken":null}
 创建成员：201 / Location: http://localhost:8080/api/v1/teams/TEAM-1/members/3
 删除成员：status=204,bytes=0
@@ -1090,7 +1099,7 @@ package com.teamflow.response;
  * 表示客户端可见的成员资源。
  */
 public final class MemberResponse {
-    private final long id;
+    private final String id;
     private final String displayName;
     private final String role;
 
@@ -1101,7 +1110,7 @@ public final class MemberResponse {
      * @param displayName 成员显示名称
      * @param role 成员角色
      */
-    public MemberResponse(long id, String displayName, String role) {
+    public MemberResponse(String id, String displayName, String role) {
         this.id = id;
         this.displayName = displayName;
         this.role = role;
@@ -1114,7 +1123,8 @@ public final class MemberResponse {
      * @return 公开成员响应
      */
     static MemberResponse from(Member member) {
-        return new MemberResponse(member.getId(), member.getDisplayName(), member.getRole());
+        return new MemberResponse(
+                String.valueOf(member.getId()), member.getDisplayName(), member.getRole());
     }
 
     /**
@@ -1122,7 +1132,7 @@ public final class MemberResponse {
      *
      * @return 成员 ID
      */
-    public long getId() {
+    public String getId() {
         return id;
     }
 
@@ -1418,6 +1428,12 @@ return ResponseEntity.ok(new PageResponse<>(List.of(), null));
 **错误示例：**
 
 ```java
+/**
+ * 演示直接返回内部模型的错误写法。
+ *
+ * @param memberId 成员 ID
+ * @return 未隔离内部字段的成员响应
+ */
 public ResponseEntity<Member> find(long memberId) {
     return ResponseEntity.ok(members.get(memberId));
 }
@@ -1426,6 +1442,12 @@ public ResponseEntity<Member> find(long memberId) {
 **正确写法：**
 
 ```java
+/**
+ * 演示转换为公开响应 DTO 的正确写法。
+ *
+ * @param memberId 成员 ID
+ * @return 只包含公开字段的成员响应
+ */
 public ResponseEntity<MemberResponse> find(long memberId) {
     return ResponseEntity.ok(MemberResponse.from(members.get(memberId)));
 }
@@ -1501,6 +1523,11 @@ public class GlobalResponseWrapper {
 **正确写法：**
 
 ```java
+/**
+ * 查询一页成员并返回固定分页结构。
+ *
+ * @return 成员分页响应
+ */
 public ResponseEntity<PageResponse<MemberResponse>> list() {
     return ResponseEntity.ok(new PageResponse<>(items, nextPageToken));
 }
@@ -1780,7 +1807,7 @@ public class InvitationController {
      * @param email 被邀请邮箱
      * @param status 邀请状态
      */
-    public record InvitationResponse(long id, String email, String status) {
+    public record InvitationResponse(String id, String email, String status) {
 
         /**
          * 从内部邀请模型创建公开响应。
@@ -1789,7 +1816,8 @@ public class InvitationController {
          * @return 公开邀请响应
          */
         private static InvitationResponse from(Invitation invitation) {
-            return new InvitationResponse(invitation.id(), invitation.email(), invitation.status());
+            return new InvitationResponse(
+                    Long.toString(invitation.id()), invitation.email(), invitation.status());
         }
     }
 
@@ -2126,7 +2154,7 @@ public class InvitationController {
      * 表示客户端可见的邀请资源。
      */
     public static final class InvitationResponse {
-        private final long id;
+        private final String id;
         private final String email;
         private final String status;
 
@@ -2137,7 +2165,7 @@ public class InvitationController {
          * @param email 被邀请邮箱
          * @param status 邀请状态
          */
-        public InvitationResponse(long id, String email, String status) {
+        public InvitationResponse(String id, String email, String status) {
             this.id = id;
             this.email = email;
             this.status = status;
@@ -2151,7 +2179,9 @@ public class InvitationController {
          */
         private static InvitationResponse from(Invitation invitation) {
             return new InvitationResponse(
-                    invitation.getId(), invitation.getEmail(), invitation.getStatus());
+                    String.valueOf(invitation.getId()),
+                    invitation.getEmail(),
+                    invitation.getStatus());
         }
 
         /**
@@ -2159,7 +2189,7 @@ public class InvitationController {
          *
          * @return 邀请 ID
          */
-        public long getId() {
+        public String getId() {
             return id;
         }
 
@@ -2236,12 +2266,15 @@ java -jar target/teamflow-invitation-response-java8-1.0.0.jar --server.port=8083
 
 ```bash
 curl --silent --show-error \
+  --write-out '\nstatus=%{http_code}\n' \
   'http://localhost:8082/api/v1/teams/TEAM-1/invitations/1'
 
 curl --silent --show-error \
+  --write-out '\nstatus=%{http_code}\n' \
   'http://localhost:8082/api/v1/teams/TEAM-1/invitations'
 
 curl --silent --show-error \
+  --write-out '\nstatus=%{http_code}\n' \
   'http://localhost:8082/api/v1/teams/TEAM-EMPTY/invitations'
 
 curl --silent --show-error --include \
@@ -2268,10 +2301,10 @@ curl --silent --show-error --output /dev/null \
 两个版本都应观察到：
 
 ```text
-单邀请：200 / {"id":1,"email":"lead@example.com","status":"PENDING"}
+单邀请：200 / {"id":"1","email":"lead@example.com","status":"PENDING"}
 第一页：200 / items 含邀请 1，nextPageToken 为 INVITE-PAGE-2
 空团队：200 / {"items":[],"nextPageToken":null}
-创建邀请：201 / Location 以 /invitations/3 结尾，body 的 id 为 3
+创建邀请：201 / Location 以 /invitations/3 结尾，body 的 id 为字符串 "3"
 删除邀请：status=204,bytes=0
 不存在邀请：not-found=404
 非法邮箱：invalid=400
@@ -2291,3 +2324,8 @@ body 的 `204`，不存在与校验失败保持 `404` 和 `400`。本课没有�
 
 JDK 25 使用 record 与 `List.copyOf`，Java 8 使用带 getter 的不可变类和不可变列表快照。实现语法不同，
 但两条版本线对外暴露相同的资源字段、分页结构、状态、响应头与正文有无。
+
+## 累计项目衔接
+
+累计项目继续使用单资源 DTO 和 `items/nextPageToken` 分页外形，不增加统一成功外壳。用户、团队、成员、项目
+和任务各自拥有公开响应类型，现代版与 Java 8 版由共享黑盒矩阵比较外部结果。

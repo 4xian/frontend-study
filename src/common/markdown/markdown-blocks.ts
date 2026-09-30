@@ -1,4 +1,4 @@
-import type { ContentBlock, PitfallExample, PitfallItem } from '../content'
+import type { CodeExample, ContentBlock, PitfallExample, PitfallItem } from '../content'
 
 export interface MarkdownAstNode {
   type: string
@@ -328,9 +328,15 @@ function convertExercise(node: MarkdownAstNode, context: ConversionContext): Con
   }
   const fields = new Map<string, string>()
   let pendingCodeField: string | undefined
+  let answerCode: CodeExample | undefined
   for (const child of children.slice(1)) {
     if (child.type === 'code' && pendingCodeField) {
-      fields.set(pendingCodeField, child.value ?? '')
+      if (!child.lang) fail(context, `exercise ${pendingCodeField}代码缺少语言`)
+      if (pendingCodeField === '参考答案') {
+        answerCode = { lang: child.lang, content: child.value ?? '' }
+      } else {
+        fields.set(pendingCodeField, child.value ?? '')
+      }
       pendingCodeField = undefined
       continue
     }
@@ -353,7 +359,7 @@ function convertExercise(node: MarkdownAstNode, context: ConversionContext): Con
     title: phrasingText(heading, context),
     instructions: fields.get('要求')!,
     acceptance: fields.get('验收')!,
-    answer: fields.get('参考答案'),
+    answer: answerCode ?? fields.get('参考答案'),
   }
 }
 

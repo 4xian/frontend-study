@@ -1,0 +1,347 @@
+.action-submission-demo {
+  width: 100%;
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  color: #172033;
+  background: #f8fafc;
+  box-sizing: border-box;
+}
+
+.action-submission-demo *,
+.action-submission-demo *::before,
+.action-submission-demo *::after {
+  box-sizing: border-box;
+}
+
+.action-submission-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.action-submission-heading > div {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.action-submission-heading p,
+.action-submission-list p,
+.action-submission-result > p {
+  margin: 0;
+  color: #0f766e;
+  font-size: 12px;
+  font-weight: 750;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.action-submission-heading h2,
+.action-submission-list h3 {
+  color: #172033;
+  overflow-wrap: anywhere;
+}
+
+.action-submission-heading h2 {
+  margin: 4px 0 0;
+  font-size: 23px;
+  line-height: 1.3;
+}
+
+.action-submission-heading > div > span {
+  display: block;
+  margin-top: 6px;
+  color: #526176;
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.action-submission-heading > strong {
+  min-width: 92px;
+  flex: 0 0 92px;
+  margin-left: 16px;
+  padding: 7px 10px;
+  border-radius: 6px;
+  color: #164e63;
+  background: #cffafe;
+  font-size: 12px;
+  line-height: 1.4;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.action-submission-status {
+  min-height: 62px;
+  margin-top: 18px;
+  padding: 11px 14px;
+  border-left: 4px solid #2563a6;
+  background: #eef4fb;
+}
+
+.action-submission-status strong,
+.action-submission-status span {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.action-submission-status strong {
+  color: #173b66;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.action-submission-status span {
+  margin-top: 4px;
+  color: #526176;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.action-submission-form {
+  margin-top: 16px;
+  padding: 14px;
+  border: 1px solid #d4dde7;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.action-submission-form label {
+  display: block;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.action-submission-form > div {
+  display: flex;
+  align-items: stretch;
+  min-width: 0;
+  margin-top: 7px;
+}
+
+.action-submission-form input {
+  min-width: 0;
+  min-height: 42px;
+  flex: 1 1 auto;
+  padding: 8px 11px;
+  border: 1px solid #94a3b8;
+  border-radius: 6px;
+  color: #172033;
+  background: #ffffff;
+  font: inherit;
+}
+
+.action-submission-form input:focus-visible,
+.action-submission-form button:focus-visible {
+  outline: 3px solid #f4b942;
+  outline-offset: 2px;
+}
+
+.action-submission-form button {
+  min-width: 112px;
+  min-height: 42px;
+  flex: 0 0 112px;
+  margin-left: 10px;
+  padding: 8px 14px;
+  border: 1px solid #0f766e;
+  border-radius: 6px;
+  color: #ffffff;
+  background: #0f766e;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.action-submission-form button:hover:not(:disabled) {
+  border-color: #115e59;
+  background: #115e59;
+}
+
+.action-submission-form button:disabled {
+  border-color: #94a3b8;
+  background: #64748b;
+  cursor: wait;
+}
+
+.action-submission-form > small {
+  display: block;
+  margin-top: 7px;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.action-submission-observer {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  min-width: 0;
+  margin: 14px -5px -10px;
+}
+
+.action-submission-observer > div {
+  min-width: 140px;
+  flex: 1 1 0;
+  margin: 0 5px 10px;
+  padding: 10px 11px;
+  border: 1px solid #dbe3ec;
+  border-radius: 6px;
+  background: #ffffff;
+}
+
+.action-submission-observer dt,
+.action-submission-result dt {
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.action-submission-observer dd,
+.action-submission-result dd {
+  margin: 4px 0 0;
+  color: #172033;
+  font-size: 14px;
+  font-weight: 750;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.action-submission-content {
+  display: flex;
+  align-items: stretch;
+  min-width: 0;
+  margin-top: 16px;
+}
+
+.action-submission-list {
+  min-width: 0;
+  flex: 1 1 auto;
+  padding: 16px;
+  border: 1px solid #d4dde7;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.action-submission-list h3 {
+  margin: 4px 0 0;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.action-submission-list ol {
+  margin: 13px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.action-submission-list li {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  padding: 10px 0;
+  border-top: 1px solid #e2e8f0;
+}
+
+.action-submission-list li:first-child {
+  border-top: 0;
+}
+
+.action-submission-list li > span {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  border-radius: 6px;
+  color: #1e3a5f;
+  background: #dbeafe;
+  font-size: 12px;
+  font-weight: 750;
+  line-height: 28px;
+  text-align: center;
+}
+
+.action-submission-list li > strong {
+  min-width: 0;
+  margin-left: 10px;
+  color: #334155;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.action-submission-result {
+  width: 220px;
+  min-width: 0;
+  flex: 0 0 220px;
+  margin-left: 14px;
+  padding: 16px;
+  border: 1px solid #e6c46a;
+  border-radius: 8px;
+  background: #fffdf3;
+}
+
+.action-submission-result > p {
+  color: #92400e;
+}
+
+.action-submission-result dl {
+  margin: 12px 0 0;
+}
+
+.action-submission-result dl > div {
+  margin-top: 11px;
+}
+
+.action-submission-result dl > div:first-child {
+  margin-top: 0;
+}
+
+@media (max-width: 620px) {
+  .action-submission-content {
+    display: block;
+  }
+
+  .action-submission-result {
+    width: auto;
+    margin: 14px 0 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .action-submission-demo {
+    padding: 14px;
+  }
+
+  .action-submission-heading {
+    display: block;
+  }
+
+  .action-submission-heading > strong {
+    display: inline-block;
+    min-width: 0;
+    margin: 10px 0 0;
+  }
+
+  .action-submission-form > div {
+    display: block;
+  }
+
+  .action-submission-form button {
+    width: 100%;
+    margin: 9px 0 0;
+  }
+
+  .action-submission-observer {
+    display: block;
+  }
+
+  .action-submission-observer > div {
+    min-width: 0;
+  }
+}

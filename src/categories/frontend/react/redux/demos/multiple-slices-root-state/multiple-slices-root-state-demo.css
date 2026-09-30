@@ -1,0 +1,123 @@
+.multiple-slices-demo {
+  min-width: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+}
+
+.multiple-slices-heading p,
+.multiple-slices-heading h2,
+.multiple-slices-heading span {
+  overflow-wrap: anywhere;
+}
+
+.multiple-slices-heading p {
+  margin: 0 0 var(--space-1);
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.multiple-slices-heading h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.multiple-slices-heading span {
+  display: block;
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+}
+
+.multiple-slices-state,
+.multiple-slices-tree,
+.multiple-slices-controls {
+  margin-top: var(--space-4);
+}
+
+.multiple-slices-state {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -4px;
+  margin-left: -4px;
+}
+
+.multiple-slices-branch {
+  min-width: 0;
+  flex: 1 1 180px;
+  padding: var(--space-3);
+  margin: 0 4px 8px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.multiple-slices-branch strong {
+  display: block;
+  overflow-wrap: anywhere;
+  color: var(--color-text-secondary);
+  font-size: 0.78rem;
+}
+
+.multiple-slices-branch b {
+  display: block;
+  margin-top: var(--space-2);
+  color: var(--color-accent);
+  font-size: 1.15rem;
+}
+
+.multiple-slices-tree {
+  min-width: 0;
+  padding: var(--space-3);
+  border-left: 3px solid var(--color-accent);
+  background: var(--color-bg);
+}
+
+.multiple-slices-tree code {
+  display: block;
+  overflow-wrap: anywhere;
+  color: var(--color-text);
+  font-size: 0.78rem;
+}
+
+.multiple-slices-controls {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -4px;
+  margin-left: -4px;
+}
+
+.multiple-slices-controls button {
+  min-height: 40px;
+  margin: 0 4px 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-sm);
+  background: var(--color-accent);
+  color: #fff;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.multiple-slices-controls button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.multiple-slices-controls button:active {
+  opacity: 0.8;
+}
+
+@media (max-width: 480px) {
+  .multiple-slices-demo {
+    padding: var(--space-3);
+  }
+
+  .multiple-slices-controls button {
+    box-sizing: border-box;
+    width: calc(100% - 8px);
+  }
+}

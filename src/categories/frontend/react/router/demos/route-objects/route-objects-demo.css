@@ -1,0 +1,123 @@
+.route-objects-demo {
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+}
+
+.route-objects-heading p {
+  margin: 0 0 var(--space-1);
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.route-objects-heading h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.route-objects-switch {
+  display: flex;
+  flex-wrap: wrap;
+  margin: var(--space-3) -4px 0;
+}
+
+.route-objects-switch button {
+  margin: 0 4px 8px;
+  padding: 6px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  color: var(--color-text-secondary);
+  font: inherit;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.route-objects-switch button[aria-pressed='true'] {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+}
+
+.route-objects-switch button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.route-objects-fields {
+  display: flex;
+  flex-wrap: wrap;
+  margin: var(--space-2) -4px 0;
+}
+
+.route-objects-fields div {
+  min-width: 112px;
+  margin: 0 4px 8px;
+  padding: 8px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+}
+
+.route-objects-fields dt {
+  color: var(--color-text-secondary);
+  font-size: 0.72rem;
+}
+
+.route-objects-fields dd {
+  margin: 4px 0 0;
+  color: var(--color-accent);
+  font-family: ui-monospace, 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.82rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.route-objects-viewport {
+  min-width: 0;
+  min-height: 136px;
+  margin-top: var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+}
+
+.route-objects-page {
+  padding: var(--space-4);
+}
+
+.route-objects-page span,
+.route-objects-page h3,
+.route-objects-page p {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.route-objects-page span {
+  color: var(--color-text-secondary);
+  font-size: 0.75rem;
+}
+
+.route-objects-page h3 {
+  margin: var(--space-2) 0 0;
+  font-size: 1rem;
+}
+
+.route-objects-page p,
+.route-objects-note {
+  color: var(--color-text-secondary);
+}
+
+.route-objects-page p {
+  margin: var(--space-2) 0 0;
+}
+
+.route-objects-note {
+  margin: var(--space-3) 0 0;
+  font-size: 0.8rem;
+  overflow-wrap: anywhere;
+}

@@ -31,60 +31,60 @@ SSR/hydration 等能力统一放在高级阶段。
 
 ## 3. 基础课程
 
-- [ ] 01. 服务端状态与 TanStack Query
-- [ ] 02. Query Client 与 Provider
-- [ ] 03. 第一个 useQuery
-- [ ] 04. Query Function 与 fetch
-- [ ] 05. Query Key
-- [ ] 06. 查询状态
-- [ ] 07. 查询错误处理
-- [ ] 08. 查询缓存与数据共享
-- [ ] 09. staleTime 与数据新鲜度
-- [ ] 10. 后台重新获取
-- [ ] 11. 缓存生命周期与 gcTime
-- [ ] 12. 条件查询
-- [ ] 13. TypeScript 查询
-- [ ] 14. React Query Devtools
-- [ ] 15. 实战：用户信息面板
-- [ ] 16. 实战：文章列表与详情
+- [x] 01. 服务端状态与 TanStack Query
+- [x] 02. Query Client 与 Provider
+- [x] 03. 第一个 useQuery
+- [x] 04. Query Function 与 fetch
+- [x] 05. Query Key
+- [x] 06. 查询状态
+- [x] 07. 查询错误处理
+- [x] 08. 查询缓存与数据共享
+- [x] 09. staleTime 与数据新鲜度
+- [x] 10. 后台重新获取
+- [x] 11. 缓存生命周期与 gcTime
+- [x] 12. 条件查询
+- [x] 13. TypeScript 查询
+- [x] 14. React Query Devtools
+- [x] 15. 实战：用户信息面板
+- [x] 16. 实战：文章列表与详情
 
 ## 4. 中级课程
 
-- [ ] 01. Query Key 组织
-- [ ] 02. 查询配置复用
-- [ ] 03. 依赖查询
-- [ ] 04. 并行查询
-- [ ] 05. 查询重试
-- [ ] 06. 查询取消
-- [ ] 07. 初始数据与占位数据
-- [ ] 08. 分页查询
-- [ ] 09. useMutation
-- [ ] 10. Mutation 生命周期
-- [ ] 11. 查询失效
-- [ ] 12. Mutation 响应更新缓存
-- [ ] 13. 乐观更新与回滚
-- [ ] 14. 数据 Hooks 与模块组织
-- [ ] 15. 实战：分页内容管理
-- [ ] 16. 实战：CRUD 管理工作区
+- [x] 01. Query Key 组织
+- [x] 02. 查询配置复用
+- [x] 03. 依赖查询
+- [x] 04. 并行查询
+- [x] 05. 查询重试
+- [x] 06. 查询取消
+- [x] 07. 初始数据与占位数据
+- [x] 08. 分页查询
+- [x] 09. useMutation
+- [x] 10. Mutation 生命周期
+- [x] 11. 查询失效
+- [x] 12. Mutation 响应更新缓存
+- [x] 13. 乐观更新与回滚
+- [x] 14. 数据 Hooks 与模块组织
+- [x] 15. 实战：分页内容管理
+- [x] 16. 实战：CRUD 管理工作区
 
 ## 5. 高级课程
 
-- [ ] 01. 无限查询
-- [ ] 02. 无限查询内存控制
-- [ ] 03. 查询预取
-- [ ] 04. React Router 数据集成
-- [ ] 05. 请求瀑布优化
-- [ ] 06. 查询渲染优化
-- [ ] 07. Query Client 与缓存操作
-- [ ] 08. 并发 Mutation 状态
-- [ ] 09. Suspense 查询
-- [ ] 10. Query Error Boundary
-- [ ] 11. 离线查询与缓存持久化
-- [ ] 12. SSR 与 Hydration
-- [ ] 13. TanStack Query 测试
-- [ ] 14. 生产级数据层架构
-- [ ] 15. 实战：协作内容平台
-- [ ] 16. 实战：生产级服务端数据中心
+- [x] 01. 无限查询
+- [x] 02. 无限查询内存控制
+- [x] 03. 查询预取
+- [x] 04. React Router 数据集成
+- [x] 05. 请求瀑布优化
+- [x] 06. 查询渲染优化
+- [x] 07. Query Client 与缓存操作
+- [x] 08. 并发 Mutation 状态
+- [x] 09. Suspense 查询
+- [x] 10. Query Error Boundary
+- [x] 11. 离线查询与缓存持久化
+- [x] 12. SSR 与 Hydration
+- [x] 13. TanStack Query 测试
+- [x] 14. 生产级数据层架构
+- [x] 15. 实战：协作内容平台
+- [x] 16. 实战：生产级服务端数据中心
 
 ## 6. 范围边界
 

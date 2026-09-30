@@ -1,0 +1,175 @@
+.data-hooks-demo {
+  min-width: 0;
+  max-width: 100%;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+}
+
+.data-hooks-demo *,
+.data-hooks-demo *::before,
+.data-hooks-demo *::after {
+  box-sizing: border-box;
+}
+
+.data-hooks-header span,
+.data-hooks-header h2,
+.data-hooks-header p,
+.data-hooks-metrics span,
+.data-hooks-metrics strong,
+.data-hooks-message,
+.data-hooks-card,
+.data-hooks-card h3,
+.data-hooks-card p,
+.data-hooks-card li {
+  overflow-wrap: anywhere;
+}
+
+.data-hooks-header span {
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.data-hooks-header h2 {
+  margin: var(--space-1) 0 0;
+  font-size: 1.08rem;
+}
+
+.data-hooks-header p {
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.data-hooks-metrics,
+.data-hooks-actions,
+.data-hooks-columns {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -4px;
+  margin-left: -4px;
+}
+
+.data-hooks-metrics {
+  margin-top: var(--space-4);
+}
+
+.data-hooks-metrics > div {
+  flex: 1 1 140px;
+  min-width: 0;
+  margin: 0 4px 8px;
+  padding: 10px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.data-hooks-metrics span,
+.data-hooks-metrics strong {
+  display: block;
+}
+
+.data-hooks-metrics span {
+  color: var(--color-text-secondary);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.data-hooks-metrics strong {
+  margin-top: 4px;
+  color: var(--color-accent);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.data-hooks-actions {
+  margin-top: 4px;
+}
+
+.data-hooks-actions button {
+  min-height: 38px;
+  margin: 0 4px 8px;
+  padding: 7px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  background: var(--color-bg);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.data-hooks-actions button[data-kind='primary'] {
+  color: var(--color-bg);
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.data-hooks-actions button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.data-hooks-actions button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.data-hooks-columns {
+  margin-top: 4px;
+}
+
+.data-hooks-card {
+  flex: 1 1 220px;
+  min-width: 0;
+  margin: 0 4px 8px;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.data-hooks-card h3 {
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+.data-hooks-card p,
+.data-hooks-card ul {
+  margin: 8px 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.data-hooks-card ul {
+  padding: 0 0 0 1.2em;
+}
+
+.data-hooks-message {
+  margin: 8px 0 0;
+  padding: 10px;
+  border-left: 3px solid var(--color-accent);
+  color: var(--color-text);
+  background: var(--color-bg-secondary);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 480px) {
+  .data-hooks-demo {
+    padding: var(--space-3);
+  }
+
+  .data-hooks-metrics > div,
+  .data-hooks-card,
+  .data-hooks-actions button {
+    flex-basis: 100%;
+  }
+
+  .data-hooks-actions button {
+    width: calc(100% - 8px);
+  }
+}

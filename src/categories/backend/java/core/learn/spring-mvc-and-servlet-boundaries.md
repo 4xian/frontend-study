@@ -2406,3 +2406,8 @@ Java 8 版也必须依次得到 `404`、`405`、`415`、`406`。只有源码、�
 - 404、405、415、406 分别对应路径、method、请求媒体类型和响应媒体类型的典型失败方向。
 - TeamFlow 主程序与练习都只返回固定文本，证明映射选择，而没有提前进入请求参数、请求体和响应设计。
 - JDK 25 / Boot 4.1.0 与 Java 8 / Boot 2.3.12.RELEASE 使用相同映射源码，Web starter 和运行 JDK 分开配置。
+
+## 累计项目衔接
+
+累计项目的映射由 `UserController`、`TeamController`、`TeamFlowController` 和 `TaskAttachmentController`
+共同拥有，统一位于 `/api/v1` 下。固定子路径、资源变量、HTTP 方法及媒体类型都由这些真实 Controller 声明。

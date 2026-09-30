@@ -1,0 +1,175 @@
+.request-waterfall-demo {
+  min-width: 0;
+  max-width: 100%;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+}
+
+.request-waterfall-demo *,
+.request-waterfall-demo *::before,
+.request-waterfall-demo *::after {
+  box-sizing: border-box;
+}
+
+.request-waterfall-header span,
+.request-waterfall-header h2,
+.request-waterfall-header p,
+.request-waterfall-metrics span,
+.request-waterfall-metrics strong,
+.request-waterfall-message,
+.request-waterfall-card,
+.request-waterfall-card h3,
+.request-waterfall-card p,
+.request-waterfall-card li {
+  overflow-wrap: anywhere;
+}
+
+.request-waterfall-header span {
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.request-waterfall-header h2 {
+  margin: var(--space-1) 0 0;
+  font-size: 1.08rem;
+}
+
+.request-waterfall-header p {
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.request-waterfall-metrics,
+.request-waterfall-actions,
+.request-waterfall-columns {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -4px;
+  margin-left: -4px;
+}
+
+.request-waterfall-metrics {
+  margin-top: var(--space-4);
+}
+
+.request-waterfall-metrics > div {
+  flex: 1 1 140px;
+  min-width: 0;
+  margin: 0 4px 8px;
+  padding: 10px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.request-waterfall-metrics span,
+.request-waterfall-metrics strong {
+  display: block;
+}
+
+.request-waterfall-metrics span {
+  color: var(--color-text-secondary);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.request-waterfall-metrics strong {
+  margin-top: 4px;
+  color: var(--color-accent);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.request-waterfall-actions {
+  margin-top: 4px;
+}
+
+.request-waterfall-actions button {
+  min-height: 38px;
+  margin: 0 4px 8px;
+  padding: 7px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  background: var(--color-bg);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.request-waterfall-actions button[data-kind='primary'] {
+  color: var(--color-bg);
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.request-waterfall-actions button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.request-waterfall-actions button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.request-waterfall-columns {
+  margin-top: 4px;
+}
+
+.request-waterfall-card {
+  flex: 1 1 220px;
+  min-width: 0;
+  margin: 0 4px 8px;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.request-waterfall-card h3 {
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+.request-waterfall-card p,
+.request-waterfall-card ul {
+  margin: 8px 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.request-waterfall-card ul {
+  padding: 0 0 0 1.2em;
+}
+
+.request-waterfall-message {
+  margin: 8px 0 0;
+  padding: 10px;
+  border-left: 3px solid var(--color-accent);
+  color: var(--color-text);
+  background: var(--color-bg-secondary);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 480px) {
+  .request-waterfall-demo {
+    padding: var(--space-3);
+  }
+
+  .request-waterfall-metrics > div,
+  .request-waterfall-card,
+  .request-waterfall-actions button {
+    flex-basis: 100%;
+  }
+
+  .request-waterfall-actions button {
+    width: calc(100% - 8px);
+  }
+}

@@ -1,0 +1,318 @@
+.layout-routes-demo {
+  min-width: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-secondary);
+  color: var(--color-text);
+}
+
+.layout-routes-demo-heading p,
+.layout-routes-demo-heading h2,
+.layout-routes-demo-heading span {
+  overflow-wrap: anywhere;
+}
+
+.layout-routes-demo-heading p {
+  margin: 0 0 var(--space-1);
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.layout-routes-demo-heading h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.layout-routes-demo-heading span {
+  display: block;
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+}
+
+.layout-routes-viewport {
+  min-width: 0;
+  min-height: 540px;
+  margin-top: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+}
+
+.layout-route-shell {
+  min-width: 0;
+  padding: var(--space-3);
+}
+
+.layout-route-addresses {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -4px -8px;
+}
+
+.layout-route-addresses div {
+  box-sizing: border-box;
+  min-width: 180px;
+  flex: 1 1 30%;
+  padding: 9px 10px;
+  margin: 0 4px 8px;
+  border-left: 3px solid var(--color-accent);
+  background: var(--color-bg-secondary);
+}
+
+.layout-route-addresses span,
+.layout-route-addresses code {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.layout-route-addresses span {
+  color: var(--color-text-secondary);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.layout-route-addresses code {
+  margin-top: 4px;
+  color: var(--color-text);
+  font-size: 0.74rem;
+}
+
+.layout-route-shell-heading {
+  padding: var(--space-4);
+  margin-top: var(--space-4);
+  border-left: 4px solid var(--color-accent);
+  background: var(--color-bg-secondary);
+}
+
+.layout-route-shell-heading p,
+.layout-route-shell-heading h3,
+.layout-route-shell-heading span {
+  overflow-wrap: anywhere;
+}
+
+.layout-route-shell-heading p {
+  margin: 0;
+  color: var(--color-accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.layout-route-shell-heading h3 {
+  margin: var(--space-1) 0 0;
+  font-size: 1.1rem;
+}
+
+.layout-route-shell-heading span {
+  display: block;
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+}
+
+.layout-route-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  padding: var(--space-2);
+  margin-top: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-secondary);
+}
+
+.layout-route-navigation a,
+.layout-route-help a {
+  box-sizing: border-box;
+  min-height: 40px;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+  font-weight: 750;
+  text-align: center;
+  text-decoration: none;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease;
+}
+
+.layout-route-navigation a {
+  min-width: 132px;
+  flex: 1 1 0;
+  margin: 3px;
+}
+
+.layout-route-navigation a:hover,
+.layout-route-help a:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.layout-route-navigation a:focus-visible,
+.layout-route-help a:focus-visible,
+.layout-route-draft input:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.layout-route-draft {
+  display: block;
+  padding: 10px 12px;
+  margin-top: var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-secondary);
+}
+
+.layout-route-draft span {
+  display: block;
+  color: var(--color-text-secondary);
+  font-size: 0.76rem;
+  font-weight: 750;
+}
+
+.layout-route-draft input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 40px;
+  padding: 8px 10px;
+  margin-top: var(--space-2);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 0.82rem;
+}
+
+.layout-route-outlet {
+  min-height: 160px;
+  padding: var(--space-4);
+  margin-top: var(--space-3);
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-secondary);
+}
+
+.layout-route-outlet-heading p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.layout-route-outlet-heading h3 {
+  margin: 2px 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+  overflow-wrap: anywhere;
+}
+
+.layout-route-child {
+  padding: var(--space-4);
+  margin-top: var(--space-3);
+  border-left: 4px solid var(--color-success, #16803c);
+  background: var(--color-bg);
+}
+
+.layout-route-child p,
+.layout-route-child h3,
+.layout-route-child span,
+.layout-route-help p,
+.layout-route-help h3,
+.layout-route-help span {
+  overflow-wrap: anywhere;
+}
+
+.layout-route-child p,
+.layout-route-help p {
+  margin: 0;
+  color: var(--color-success, #16803c);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.layout-route-child h3,
+.layout-route-help h3 {
+  margin: var(--space-1) 0 0;
+  font-size: 1rem;
+}
+
+.layout-route-child span,
+.layout-route-help span {
+  display: block;
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+}
+
+.layout-route-help {
+  min-height: 300px;
+  padding: var(--space-5);
+  border-left: 4px solid var(--color-warning, #b45309);
+  background: var(--color-bg-secondary);
+}
+
+.layout-route-help code {
+  overflow-wrap: anywhere;
+}
+
+.layout-route-help a {
+  display: inline-block;
+  margin-top: var(--space-4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .layout-route-navigation a,
+  .layout-route-help a {
+    transition: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .layout-routes-demo {
+    padding: var(--space-3);
+  }
+
+  .layout-routes-viewport {
+    min-height: 740px;
+  }
+
+  .layout-route-addresses {
+    display: block;
+    margin: 0;
+  }
+
+  .layout-route-addresses div {
+    width: 100%;
+    min-width: 0;
+    margin: 0 0 var(--space-2);
+  }
+
+  .layout-route-shell-heading,
+  .layout-route-outlet,
+  .layout-route-child,
+  .layout-route-help {
+    padding: var(--space-3);
+  }
+
+  .layout-route-navigation {
+    display: block;
+  }
+
+  .layout-route-navigation a {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    margin: 0 0 var(--space-2);
+  }
+
+  .layout-route-navigation a:last-child {
+    margin-bottom: 0;
+  }
+}

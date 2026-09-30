@@ -1644,3 +1644,8 @@ Java 8 验收结果。
 - JDK 25 / Spring Boot 4.1.0 与 Java 8 / Spring Boot 2.3.12.RELEASE 可以使用相同参数绑定源码；工程仍需
   以各自 JDK、Boot 版本和 Web starter 独立构建、启动和请求验证。
 - JSON 字段、Bean Validation、自定义转换和统一错误响应不属于本课，不能用 RequestParam 提前替代它们。
+
+## 累计项目衔接
+
+累计项目把 `projectId`、`taskId`、`teamId` 和 `memberId` 保留为路径变量，把 `pageSize`、`pageToken` 与任务
+`status` 保留为查询参数。转换、分页范围和不透明 token 失败统一进入公开 Problem Details，而不进入业务方法。

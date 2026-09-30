@@ -1,0 +1,816 @@
+- generic [active] [ref=f39e1]:
+  - generic [ref=f39e3]:
+    - link "跳到正文" [ref=f39e4] [cursor=pointer]:
+      - /url: "#main-content"
+    - banner [ref=f39e5]:
+      - generic [ref=f39e6]:
+        - link "IT" [ref=f39e7] [cursor=pointer]:
+          - /url: /
+        - navigation "主导航" [ref=f39e9]:
+          - button "前端" [ref=f39e10] [cursor=pointer]
+          - button "后端" [ref=f39e11] [cursor=pointer]
+          - button "网络" [ref=f39e12] [cursor=pointer]
+        - generic [ref=f39e13]:
+          - button "搜索" [ref=f39e14] [cursor=pointer]
+          - button "切换到暗色" [ref=f39e18] [cursor=pointer]
+    - main [ref=f39e21]:
+      - navigation "技术模块" [ref=f39e22]:
+        - generic [ref=f39e24]:
+          - link "React 核心" [ref=f39e25] [cursor=pointer]:
+            - /url: /frontend/react/core
+          - link "React Router" [ref=f39e26] [cursor=pointer]:
+            - /url: /frontend/react/router
+          - link "Redux Toolkit + React Redux" [ref=f39e27] [cursor=pointer]:
+            - /url: /frontend/react/redux
+          - link "Zustand" [ref=f39e28] [cursor=pointer]:
+            - /url: /frontend/react/zustand
+          - link "TanStack Query" [ref=f39e29] [cursor=pointer]:
+            - /url: /frontend/react/data
+      - article [ref=f39e45]:
+        - button "打开学习路径" [ref=f39e46] [cursor=pointer]
+        - generic [ref=f39e47]:
+          - paragraph [ref=f39e48]: 课程 · 高级课程
+          - heading "React Router 数据集成" [level=1] [ref=f39e49]
+          - paragraph [ref=f39e50]: 在 React Router Loader 里 await queryClient.query，用同一份 queryOptions 让详情页直接读缓存。
+          - region [ref=f39e51]:
+            - heading "学完能做什么" [level=2] [ref=f39e52]
+            - list [ref=f39e53]:
+              - listitem [ref=f39e54]: 能说明路由集成是在进入页面前，由 Loader 把关键查询写入同一条缓存。
+              - listitem [ref=f39e55]: 能抽出一份 queryOptions，同时交给 Loader 的 query 和页面里的 useQuery。
+              - listitem [ref=f39e56]: 能在 Loader 里 await queryClient.query，并用 staleTime static 避免已有缓存时再挡住导航。
+              - listitem [ref=f39e57]: 能说明关键数据不要用 catch 吞掉错误，失败应交给路由错误处理。
+              - listitem [ref=f39e58]: 能说明页面组件读的是 Query 缓存，不是把 loader 返回值当成第二份数据源。
+        - complementary [ref=f39e59]:
+          - paragraph [ref=f39e60]: 学习建议
+          - heading "建议先完成" [level=2] [ref=f39e61]
+          - link "查询预取 尚未完成" [ref=f39e62] [cursor=pointer]:
+            - /url: /frontend/react/data/learn/query-prefetching
+            - generic [ref=f39e63]: 查询预取
+            - generic [ref=f39e64]: 尚未完成
+          - link "查询配置复用 尚未完成" [ref=f39e65] [cursor=pointer]:
+            - /url: /frontend/react/data/learn/query-options-reuse
+            - generic [ref=f39e66]: 查询配置复用
+            - generic [ref=f39e67]: 尚未完成
+          - link "查询缓存与数据共享 尚未完成" [ref=f39e68] [cursor=pointer]:
+            - /url: /frontend/react/data/learn/query-cache-and-sharing
+            - generic [ref=f39e69]: 查询缓存与数据共享
+            - generic [ref=f39e70]: 尚未完成
+        - group [ref=f39e71]:
+          - generic "查看本页大纲" [ref=f39e72] [cursor=pointer]
+        - group [ref=f39e73]:
+          - generic "查看课程信息" [ref=f39e74] [cursor=pointer]
+        - generic [ref=f39e75]:
+          - heading "一、学习目标" [level=2] [ref=f39e76]:
+            - link [aria-hidden] [ref=f39e77] [cursor=pointer]:
+              - /url: "#一学习目标"
+              - text: "#"
+            - text: 一、学习目标
+          - list [ref=f39e78]:
+            - listitem [ref=f39e79]:
+              - paragraph [ref=f39e80]: 说明路由集成是在进入页面前，由 Loader 把关键查询写入同一条缓存。
+            - listitem [ref=f39e81]:
+              - paragraph [ref=f39e82]:
+                - text: 抽出一份
+                - code [ref=f39e83]: queryOptions
+                - text: ，同时交给 Loader 的
+                - code [ref=f39e84]: query
+                - text: 和页面里的
+                - code [ref=f39e85]: useQuery
+                - text: 。
+            - listitem [ref=f39e86]:
+              - paragraph [ref=f39e87]:
+                - text: 在 Loader 里
+                - code [ref=f39e88]: await queryClient.query
+                - text: ，并用
+                - code [ref=f39e89]: "staleTime: 'static'"
+                - text: 避免已有缓存时再挡住导航。
+            - listitem [ref=f39e90]:
+              - paragraph [ref=f39e91]:
+                - text: 说明关键数据不要用
+                - code [ref=f39e92]: catch
+                - text: 吞掉错误，失败应交给路由错误处理。
+            - listitem [ref=f39e93]:
+              - paragraph [ref=f39e94]: 说明页面组件读的是 Query 缓存，不是把 loader 返回值当成第二份数据源。
+          - heading "二、为什么要把查询放到路由 Loader" [level=2] [ref=f39e95]:
+            - link [aria-hidden] [ref=f39e96] [cursor=pointer]:
+              - /url: "#二为什么要把查询放到路由-loader"
+              - text: "#"
+            - text: 二、为什么要把查询放到路由 Loader
+          - paragraph [ref=f39e97]:
+            - text: 上一课已经能在点击时预取详情。那一次预取不挡住页面，失败也可以先吞掉，之后的
+            - code [ref=f39e98]: useQuery
+            - text: 再处理。
+          - paragraph [ref=f39e99]: 进入详情路由时情况不同。详情是这个页面的关键数据：路由已经匹配，画面却还没有林晓的现有任务。如果等组件挂上再发请求，导航已经结束，用户会先看到等待。
+          - paragraph [ref=f39e100]:
+            - text: 把同一份查询放到 React Router 的 Loader 里，导航会等到
+            - code [ref=f39e101]: query
+            - text: 完成再渲染详情。列表仍只订阅
+            - code [ref=f39e102]: "['tasks']"
+            - text: 。详情的
+            - code [ref=f39e103]: queryFn
+            - text: 只在进入
+            - code [ref=f39e104]: /tasks/t-1
+            - text: 时运行。本课不把服务端渲染、TanStack Router 或 Suspense 查询写成主线。
+          - heading "三、核心概念" [level=2] [ref=f39e105]:
+            - link [aria-hidden] [ref=f39e106] [cursor=pointer]:
+              - /url: "#三核心概念"
+              - text: "#"
+            - text: 三、核心概念
+          - heading "1. Loader 写入的是 Query 缓存" [level=3] [ref=f39e107]:
+            - link [aria-hidden] [ref=f39e108] [cursor=pointer]:
+              - /url: "#1-loader-写入的是-query-缓存"
+              - text: "#"
+            - text: 1. Loader 写入的是 Query 缓存
+          - generic [ref=f39e109]:
+            - generic [ref=f39e110]:
+              - generic [ref=f39e111]: tsx
+              - button "复制代码" [ref=f39e112] [cursor=pointer]: 复制
+            - generic [ref=f39e113]:
+              - generic [aria-hidden] [ref=f39e114]:
+                - generic [ref=f39e115]: "1"
+                - generic [ref=f39e116]: "2"
+                - generic [ref=f39e117]: "3"
+                - generic [ref=f39e118]: "4"
+                - generic [ref=f39e119]: "5"
+                - generic [ref=f39e120]: "6"
+                - generic [ref=f39e121]: "7"
+                - generic [ref=f39e122]: "8"
+                - generic [ref=f39e123]: "9"
+                - generic [ref=f39e124]: "10"
+                - generic [ref=f39e125]: "11"
+                - generic [ref=f39e126]: "12"
+                - generic [ref=f39e127]: "13"
+                - generic [ref=f39e128]: "14"
+              - code [ref=f39e131]:
+                - generic [ref=f39e132]: "const taskDetailOptions = queryOptions({"
+                - generic [ref=f39e133]: "queryKey: ['tasks', 'detail', 't-1'],"
+                - generic [ref=f39e134]: "queryFn: () => loadTaskDetail('t-1'),"
+                - generic [ref=f39e135]: "staleTime: Infinity,"
+                - generic [ref=f39e136]: "retry: false,"
+                - generic [ref=f39e137]: "})"
+                - generic [ref=f39e138]: "async function taskDetailLoader() {"
+                - generic [ref=f39e139]: "await queryClient.query({"
+                - generic [ref=f39e140]: ...taskDetailOptions,
+                - generic [ref=f39e141]: "staleTime: 'static',"
+                - generic [ref=f39e142]: "})"
+                - generic [ref=f39e143]: return null
+                - generic [ref=f39e144]: "}"
+          - paragraph [ref=f39e145]:
+            - text: Loader 的职责是在渲染前把结果放进
+            - code [ref=f39e146]: QueryCache
+            - text: 。详情页接着写
+            - code [ref=f39e147]: useQuery(taskDetailOptions)
+            - text: ，读的是同一条
+            - code [ref=f39e148]: queryKey
+            - text: 。不要把 loader 的返回值再抄一份到组件里当数据源。
+          - heading "2. 关键数据要 await，不要吞掉错误" [level=3] [ref=f39e149]:
+            - link [aria-hidden] [ref=f39e150] [cursor=pointer]:
+              - /url: "#2-关键数据要-await不要吞掉错误"
+              - text: "#"
+            - text: 2. 关键数据要 await，不要吞掉错误
+          - paragraph [ref=f39e151]:
+            - text: 事件预取可以
+            - code [ref=f39e152]: void queryClient.query(...).catch(noop)
+            - text: 。路由里的关键详情不行。官方要求对页面离不开的数据使用
+            - code [ref=f39e153]: await
+            - text: ，出错时让路由错误处理接手，而不是先渲染一个没有数据的详情页。
+          - heading "3. staleTime static 只约束这次 Loader 拉取" [level=3] [ref=f39e154]:
+            - link [aria-hidden] [ref=f39e155] [cursor=pointer]:
+              - /url: "#3-staletime-static-只约束这次-loader-拉取"
+              - text: "#"
+            - text: 3. staleTime static 只约束这次 Loader 拉取
+          - paragraph [ref=f39e156]:
+            - code [ref=f39e157]: query
+            - text: 用这次传入的
+            - code [ref=f39e158]: staleTime
+            - text: 判断要不要打网络。没有 data 时始终会请求。已经有 data 且
+            - code [ref=f39e159]: staleTime
+            - text: 为
+            - code [ref=f39e160]: "'static'"
+            - text: 时，视为不过期，Loader 立刻返回，不再挡住导航。
+          - paragraph [ref=f39e161]:
+            - code [ref=f39e162]: "'static'"
+            - text: 不会改页面里
+            - code [ref=f39e163]: useQuery
+            - text: 的新鲜度。观察者仍要自己写
+            - code [ref=f39e164]: staleTime
+            - text: 。本课把观察者设成
+            - code [ref=f39e165]: "Infinity"
+            - text: ，用来看清「Loader 写过一次后，再打开详情不会加请求」。
+          - heading "四、用法与示例" [level=2] [ref=f39e166]:
+            - link [aria-hidden] [ref=f39e167] [cursor=pointer]:
+              - /url: "#四用法与示例"
+              - text: "#"
+            - text: 四、用法与示例
+          - heading "1. 共用 queryOptions，再在 Loader 里覆盖 staleTime" [level=3] [ref=f39e168]:
+            - link [aria-hidden] [ref=f39e169] [cursor=pointer]:
+              - /url: "#1-共用-queryoptions再在-loader-里覆盖-staletime"
+              - text: "#"
+            - text: 1. 共用 queryOptions，再在 Loader 里覆盖 staleTime
+          - generic [ref=f39e170]:
+            - generic [ref=f39e171]:
+              - generic [ref=f39e172]: tsx
+              - button "复制代码" [ref=f39e173] [cursor=pointer]: 复制
+            - generic [ref=f39e174]:
+              - generic [aria-hidden] [ref=f39e175]:
+                - generic [ref=f39e176]: "1"
+                - generic [ref=f39e177]: "2"
+                - generic [ref=f39e178]: "3"
+                - generic [ref=f39e179]: "4"
+                - generic [ref=f39e180]: "5"
+                - generic [ref=f39e181]: "6"
+                - generic [ref=f39e182]: "7"
+                - generic [ref=f39e183]: "8"
+                - generic [ref=f39e184]: "9"
+                - generic [ref=f39e185]: "10"
+                - generic [ref=f39e186]: "11"
+                - generic [ref=f39e187]: "12"
+                - generic [ref=f39e188]: "13"
+                - generic [ref=f39e189]: "14"
+                - generic [ref=f39e190]: "15"
+                - generic [ref=f39e191]: "16"
+                - generic [ref=f39e192]: "17"
+                - generic [ref=f39e193]: "18"
+                - generic [ref=f39e194]: "19"
+                - generic [ref=f39e195]: "20"
+                - generic [ref=f39e196]: "21"
+                - generic [ref=f39e197]: "22"
+                - generic [ref=f39e198]: "23"
+                - generic [ref=f39e199]: "24"
+                - generic [ref=f39e200]: "25"
+                - generic [ref=f39e201]: "26"
+                - generic [ref=f39e202]: "27"
+                - generic [ref=f39e203]: "28"
+                - generic [ref=f39e204]: "29"
+                - generic [ref=f39e205]: "30"
+                - generic [ref=f39e206]: "31"
+                - generic [ref=f39e207]: "32"
+                - generic [ref=f39e208]: "33"
+                - generic [ref=f39e209]: "34"
+                - generic [ref=f39e210]: "35"
+                - generic [ref=f39e211]: "36"
+                - generic [ref=f39e212]: "37"
+                - generic [ref=f39e213]: "38"
+                - generic [ref=f39e214]: "39"
+                - generic [ref=f39e215]: "40"
+                - generic [ref=f39e216]: "41"
+                - generic [ref=f39e217]: "42"
+                - generic [ref=f39e218]: "43"
+                - generic [ref=f39e219]: "44"
+                - generic [ref=f39e220]: "45"
+                - generic [ref=f39e221]: "46"
+              - code [ref=f39e224]:
+                - generic [ref=f39e225]: "import { queryOptions, useQuery } from '@tanstack/react-query'"
+                - generic [ref=f39e226]: "import { createMemoryRouter } from 'react-router'"
+                - generic [ref=f39e227]: "import { RouterProvider } from 'react-router/dom'"
+                - generic [ref=f39e228]: "type TaskItem = {"
+                - generic [ref=f39e229]: "id: string"
+                - generic [ref=f39e230]: "title: string"
+                - generic [ref=f39e231]: "owner: string"
+                - generic [ref=f39e232]: "}"
+                - generic [ref=f39e233]: /** 读取任务详情，非 2xx 时抛出带状态码的 Error。 */
+                - generic [ref=f39e234]: "async function loadTaskDetail(taskId: string): Promise<TaskItem> {"
+                - generic [ref=f39e235]: "const response = await fetch(`/api/tasks/${taskId}`)"
+                - generic [ref=f39e236]: "if (!response.ok) {"
+                - generic [ref=f39e237]: "throw new Error(`读取失败：HTTP ${response.status}`)"
+                - generic [ref=f39e238]: "}"
+                - generic [ref=f39e239]: return (await response.json()) as TaskItem
+                - generic [ref=f39e240]: "}"
+                - generic [ref=f39e241]: "const taskDetailOptions = queryOptions({"
+                - generic [ref=f39e242]: "queryKey: ['tasks', 'detail', 't-1'],"
+                - generic [ref=f39e243]: "queryFn: () => loadTaskDetail('t-1'),"
+                - generic [ref=f39e244]: "staleTime: Infinity,"
+                - generic [ref=f39e245]: "retry: false,"
+                - generic [ref=f39e246]: "})"
+                - generic [ref=f39e247]: /** 进入详情前写入缓存；已有数据时不再挡住导航。 */
+                - generic [ref=f39e248]: "async function taskDetailLoader() {"
+                - generic [ref=f39e249]: "await queryClient.query({"
+                - generic [ref=f39e250]: ...taskDetailOptions,
+                - generic [ref=f39e251]: "staleTime: 'static',"
+                - generic [ref=f39e252]: "})"
+                - generic [ref=f39e253]: return null
+                - generic [ref=f39e254]: "}"
+                - generic [ref=f39e255]: "function TaskDetailPage() {"
+                - generic [ref=f39e256]: const detailQuery = useQuery(taskDetailOptions)
+                - generic [ref=f39e257]: "if (!detailQuery.isSuccess) {"
+                - generic [ref=f39e258]: return <p>正在读取详情。</p>
+                - generic [ref=f39e259]: "}"
+                - generic [ref=f39e260]: return (
+                - generic [ref=f39e261]: <p>
+                - generic [ref=f39e262]: "{detailQuery.data.title} / {detailQuery.data.owner}"
+                - generic [ref=f39e263]: </p>
+                - generic [ref=f39e264]: )
+                - generic [ref=f39e265]: "}"
+          - paragraph [ref=f39e266]:
+            - text: 列表路由
+            - code [ref=f39e267]: /
+            - text: 不运行详情的
+            - code [ref=f39e268]: queryFn
+            - text: 。第一次打开
+            - code [ref=f39e269]: /tasks/t-1
+            - text: 时，Loader 会请求一次。返回列表后再打开，缓存还在，Loader 不再挡住，请求次数也不增加。
+          - heading "2. 非关键数据仍可在 Loader 里丢掉 Promise" [level=3] [ref=f39e270]:
+            - link [aria-hidden] [ref=f39e271] [cursor=pointer]:
+              - /url: "#2-非关键数据仍可在-loader-里丢掉-promise"
+              - text: "#"
+            - text: 2. 非关键数据仍可在 Loader 里丢掉 Promise
+          - paragraph [ref=f39e272]:
+            - text: 评论、侧栏这类不是页面成立条件的数据，可以继续
+            - code [ref=f39e273]: void queryClient.query(options).catch(noop)
+            - text: 。本课 Demo 只演示关键详情，不把这类次要预取写成第二条主线。
+          - heading "五、用法示例：对照 Loader 写入后再打开详情" [level=2] [ref=f39e274]:
+            - link [aria-hidden] [ref=f39e275] [cursor=pointer]:
+              - /url: "#五用法示例对照-loader-写入后再打开详情"
+              - text: "#"
+            - text: 五、用法示例：对照 Loader 写入后再打开详情
+          - paragraph [ref=f39e276]:
+            - text: 下面的 Demo 用嵌套内存路由模拟列表和详情。首页只显示林晓的现有任务，详情缓存为否。点「打开详情」后，Loader 先
+            - code [ref=f39e277]: await query
+            - text: ，请求次数加一，再显示现有任务 / 林晓。返回列表后缓存仍在；再打开详情时请求次数不再增加。离开页面会释放这次内存路由和
+            - code [ref=f39e278]: QueryClient
+            - text: 。
+          - generic [ref=f39e279]:
+            - generic [ref=f39e283]:
+              - generic [ref=f39e284]:
+                - text: TanStack Query
+                - heading "React Router 数据集成" [level=2] [ref=f39e285]
+                - paragraph [ref=f39e286]: 打开详情时由 Loader 写入缓存。详情页用同一份 queryOptions 直接读结果。
+              - generic [ref=f39e287]:
+                - generic [ref=f39e288]:
+                  - generic [ref=f39e289]: 请求次数
+                  - strong [ref=f39e290]: "1"
+                - generic [ref=f39e291]:
+                  - generic [ref=f39e292]: 当前路径
+                  - strong [ref=f39e293]: /
+                - generic [ref=f39e294]:
+                  - generic [ref=f39e295]: 详情已缓存
+                  - strong [ref=f39e296]: 否
+                - generic [ref=f39e297]:
+                  - generic [ref=f39e298]: 缓存标题
+                  - strong [ref=f39e299]: 无
+                - generic [ref=f39e300]:
+                  - generic [ref=f39e301]: 导航等待中
+                  - strong [ref=f39e302]: 否
+                - generic [ref=f39e303]:
+                  - generic [ref=f39e304]: 详情等待中
+                  - strong [ref=f39e305]: 否
+                - generic [ref=f39e306]:
+                  - generic [ref=f39e307]: 列表标题
+                  - strong [ref=f39e308]: 现有任务
+                - generic [ref=f39e309]:
+                  - generic [ref=f39e310]: 负责人
+                  - strong [ref=f39e311]: 林晓
+              - generic [ref=f39e312]:
+                - button "打开详情" [ref=f39e313] [cursor=pointer]
+                - button "返回列表" [ref=f39e314] [cursor=pointer]
+                - button "重置" [ref=f39e315] [cursor=pointer]
+              - generic [ref=f39e316]:
+                - generic [ref=f39e317]:
+                  - heading "任务列表" [level=3] [ref=f39e318]
+                  - list [ref=f39e319]:
+                    - listitem [ref=f39e320]: 现有任务 / 林晓
+                - generic [ref=f39e321]:
+                  - heading "任务详情" [level=3] [ref=f39e322]
+                  - paragraph [ref=f39e323]: 尚未打开详情。
+            - button "查看源码" [ref=f39e325] [cursor=pointer]
+          - heading "六、易错使用提示" [level=2] [ref=f39e326]:
+            - link [aria-hidden] [ref=f39e327] [cursor=pointer]:
+              - /url: "#六易错使用提示"
+              - text: "#"
+            - text: 六、易错使用提示
+          - list [ref=f39e328]:
+            - listitem [ref=f39e329]:
+              - heading "1. 错误：继续调用已经废弃的 ensureQueryData" [level=3] [ref=f39e330]
+              - generic [ref=f39e331]:
+                - strong [ref=f39e332]: 触发条件
+                - paragraph [ref=f39e333]:
+                  - text: Loader 写成
+                  - code [ref=f39e334]: await queryClient.ensureQueryData(taskDetailOptions)
+                  - text: 。
+              - generic [ref=f39e335]:
+                - strong [ref=f39e336]: 原因
+                - paragraph [ref=f39e337]:
+                  - text: 当前稳定版把
+                  - code [ref=f39e338]: ensureQueryData
+                  - text: 标成废弃，替代写法是
+                  - code [ref=f39e339]: query
+                  - text: 并传入
+                  - code [ref=f39e340]: "staleTime: 'static'"
+                  - text: 。
+              - generic [ref=f39e341]:
+                - strong [ref=f39e342]: 实际后果
+                - paragraph [ref=f39e343]: 行为还能跑，但会踩废弃 API，下个大版本会被删掉。
+              - generic [ref=f39e344]:
+                - generic [ref=f39e345]:
+                  - paragraph [ref=f39e346]: 错误示范
+                  - generic [ref=f39e347]:
+                    - generic [ref=f39e348]:
+                      - generic [ref=f39e349]: tsx
+                      - button "复制代码" [ref=f39e350] [cursor=pointer]: 复制
+                    - generic [ref=f39e351]:
+                      - generic [ref=f39e353]: "1"
+                      - code [ref=f39e356]:
+                        - generic [ref=f39e357]: await queryClient.ensureQueryData(taskDetailOptions)
+                - generic [ref=f39e358]:
+                  - paragraph [ref=f39e359]: 正确示范
+                  - generic [ref=f39e360]:
+                    - generic [ref=f39e361]:
+                      - generic [ref=f39e362]: tsx
+                      - button "复制代码" [ref=f39e363] [cursor=pointer]: 复制
+                    - generic [ref=f39e364]:
+                      - generic [aria-hidden] [ref=f39e365]:
+                        - generic [ref=f39e366]: "1"
+                        - generic [ref=f39e367]: "2"
+                        - generic [ref=f39e368]: "3"
+                        - generic [ref=f39e369]: "4"
+                      - code [ref=f39e372]:
+                        - generic [ref=f39e373]: "await queryClient.query({"
+                        - generic [ref=f39e374]: ...taskDetailOptions,
+                        - generic [ref=f39e375]: "staleTime: 'static',"
+                        - generic [ref=f39e376]: "})"
+              - generic [ref=f39e377]:
+                - strong [ref=f39e378]: 验证方式
+                - paragraph [ref=f39e379]: 第一次打开详情后面会显示现有任务 / 林晓；再打开时请求次数不增加。
+            - listitem [ref=f39e380]:
+              - heading "2. 错误：关键详情用 catch 吞掉错误" [level=3] [ref=f39e381]
+              - generic [ref=f39e382]:
+                - strong [ref=f39e383]: 触发条件
+                - paragraph [ref=f39e384]:
+                  - text: Loader 写成
+                  - code [ref=f39e385]: void queryClient.query(taskDetailOptions).catch(noop)
+                  - text: ，详情接口失败。
+              - generic [ref=f39e386]:
+                - strong [ref=f39e387]: 原因
+                - paragraph [ref=f39e388]: 非关键预取才吞错误。详情是这个路由的成立条件，失败必须让路由知道。
+              - generic [ref=f39e389]:
+                - strong [ref=f39e390]: 实际后果
+                - paragraph [ref=f39e391]: 详情页照样渲染，画面没有数据，真正的失败被丢掉。
+              - generic [ref=f39e392]:
+                - generic [ref=f39e393]:
+                  - paragraph [ref=f39e394]: 错误示范
+                  - generic [ref=f39e395]:
+                    - generic [ref=f39e396]:
+                      - generic [ref=f39e397]: tsx
+                      - button "复制代码" [ref=f39e398] [cursor=pointer]: 复制
+                    - generic [ref=f39e399]:
+                      - generic [ref=f39e401]: "1"
+                      - code [ref=f39e404]:
+                        - generic [ref=f39e405]: void queryClient.query(taskDetailOptions).catch(noop)
+                - generic [ref=f39e406]:
+                  - paragraph [ref=f39e407]: 正确示范
+                  - generic [ref=f39e408]:
+                    - generic [ref=f39e409]:
+                      - generic [ref=f39e410]: tsx
+                      - button "复制代码" [ref=f39e411] [cursor=pointer]: 复制
+                    - generic [ref=f39e412]:
+                      - generic [aria-hidden] [ref=f39e413]:
+                        - generic [ref=f39e414]: "1"
+                        - generic [ref=f39e415]: "2"
+                        - generic [ref=f39e416]: "3"
+                        - generic [ref=f39e417]: "4"
+                      - code [ref=f39e420]:
+                        - generic [ref=f39e421]: "await queryClient.query({"
+                        - generic [ref=f39e422]: ...taskDetailOptions,
+                        - generic [ref=f39e423]: "staleTime: 'static',"
+                        - generic [ref=f39e424]: "})"
+              - generic [ref=f39e425]:
+                - strong [ref=f39e426]: 验证方式
+                - paragraph [ref=f39e427]: 详情请求失败时，路由停在错误处理，不会先画出空详情。
+            - listitem [ref=f39e428]:
+              - heading "3. 错误：Loader 和页面各写一套 queryKey" [level=3] [ref=f39e429]
+              - generic [ref=f39e430]:
+                - strong [ref=f39e431]: 触发条件
+                - paragraph [ref=f39e432]:
+                  - text: Loader 用
+                  - code [ref=f39e433]: "['tasks', 'detail', 't-1']"
+                  - text: ，页面再用手写的另一组数组或另一份
+                  - code [ref=f39e434]: queryFn
+                  - text: 。
+              - generic [ref=f39e435]:
+                - strong [ref=f39e436]: 原因
+                - paragraph [ref=f39e437]: 缓存身份对不上时，页面会当成另一条查询，Loader 写入的结果读不到。
+              - generic [ref=f39e438]:
+                - strong [ref=f39e439]: 实际后果
+                - paragraph [ref=f39e440]: 导航已经等过一次网络，组件挂上后又打第二次，Loader 像没生效。
+              - generic [ref=f39e441]:
+                - generic [ref=f39e442]:
+                  - paragraph [ref=f39e443]: 错误示范
+                  - generic [ref=f39e444]:
+                    - generic [ref=f39e445]:
+                      - generic [ref=f39e446]: tsx
+                      - button "复制代码" [ref=f39e447] [cursor=pointer]: 复制
+                    - generic [ref=f39e448]:
+                      - generic [aria-hidden] [ref=f39e449]:
+                        - generic [ref=f39e450]: "1"
+                        - generic [ref=f39e451]: "2"
+                        - generic [ref=f39e452]: "3"
+                        - generic [ref=f39e453]: "4"
+                        - generic [ref=f39e454]: "5"
+                        - generic [ref=f39e455]: "6"
+                        - generic [ref=f39e456]: "7"
+                        - generic [ref=f39e457]: "8"
+                        - generic [ref=f39e458]: "9"
+                      - code [ref=f39e461]:
+                        - generic [ref=f39e462]: "await queryClient.query({"
+                        - generic [ref=f39e463]: "queryKey: ['task-detail', 't-1'],"
+                        - generic [ref=f39e464]: "queryFn: () => loadTaskDetail('t-1'),"
+                        - generic [ref=f39e465]: "})"
+                        - generic [ref=f39e466]: "useQuery({"
+                        - generic [ref=f39e467]: "queryKey: ['tasks', 'detail', 't-1'],"
+                        - generic [ref=f39e468]: "queryFn: () => loadTaskDetail('t-1'),"
+                        - generic [ref=f39e469]: "})"
+                - generic [ref=f39e470]:
+                  - paragraph [ref=f39e471]: 正确示范
+                  - generic [ref=f39e472]:
+                    - generic [ref=f39e473]:
+                      - generic [ref=f39e474]: tsx
+                      - button "复制代码" [ref=f39e475] [cursor=pointer]: 复制
+                    - generic [ref=f39e476]:
+                      - generic [aria-hidden] [ref=f39e477]:
+                        - generic [ref=f39e478]: "1"
+                        - generic [ref=f39e479]: "2"
+                        - generic [ref=f39e480]: "3"
+                        - generic [ref=f39e481]: "4"
+                        - generic [ref=f39e482]: "5"
+                        - generic [ref=f39e483]: "6"
+                      - code [ref=f39e486]:
+                        - generic [ref=f39e487]: "await queryClient.query({"
+                        - generic [ref=f39e488]: ...taskDetailOptions,
+                        - generic [ref=f39e489]: "staleTime: 'static',"
+                        - generic [ref=f39e490]: "})"
+                        - generic [ref=f39e491]: useQuery(taskDetailOptions)
+              - generic [ref=f39e492]:
+                - strong [ref=f39e493]: 验证方式
+                - paragraph [ref=f39e494]: 打开详情后请求次数只加一，详情等待中为否。
+            - listitem [ref=f39e495]:
+              - heading "4. 错误：已经有缓存时仍用默认 staleTime 挡住导航" [level=3] [ref=f39e496]
+              - generic [ref=f39e497]:
+                - strong [ref=f39e498]: 触发条件
+                - paragraph [ref=f39e499]:
+                  - text: Loader 写
+                  - code [ref=f39e500]: await queryClient.query(taskDetailOptions)
+                  - text: ，不覆盖
+                  - code [ref=f39e501]: staleTime
+                  - text: 。
+              - generic [ref=f39e502]:
+                - strong [ref=f39e503]: 原因
+                - paragraph [ref=f39e504]:
+                  - text: 这次拉取用的是调用处传入的
+                  - code [ref=f39e505]: staleTime
+                  - text: 。默认把已有数据当成过期，会再请求并挡住路由。
+              - generic [ref=f39e506]:
+                - strong [ref=f39e507]: 实际后果
+                - paragraph [ref=f39e508]: 第二次打开详情又等一轮网络，缓存没有起到导航加速的作用。
+              - generic [ref=f39e509]:
+                - generic [ref=f39e510]:
+                  - paragraph [ref=f39e511]: 错误示范
+                  - generic [ref=f39e512]:
+                    - generic [ref=f39e513]:
+                      - generic [ref=f39e514]: tsx
+                      - button "复制代码" [ref=f39e515] [cursor=pointer]: 复制
+                    - generic [ref=f39e516]:
+                      - generic [ref=f39e518]: "1"
+                      - code [ref=f39e521]:
+                        - generic [ref=f39e522]: await queryClient.query(taskDetailOptions)
+                - generic [ref=f39e523]:
+                  - paragraph [ref=f39e524]: 正确示范
+                  - generic [ref=f39e525]:
+                    - generic [ref=f39e526]:
+                      - generic [ref=f39e527]: tsx
+                      - button "复制代码" [ref=f39e528] [cursor=pointer]: 复制
+                    - generic [ref=f39e529]:
+                      - generic [aria-hidden] [ref=f39e530]:
+                        - generic [ref=f39e531]: "1"
+                        - generic [ref=f39e532]: "2"
+                        - generic [ref=f39e533]: "3"
+                        - generic [ref=f39e534]: "4"
+                      - code [ref=f39e537]:
+                        - generic [ref=f39e538]: "await queryClient.query({"
+                        - generic [ref=f39e539]: ...taskDetailOptions,
+                        - generic [ref=f39e540]: "staleTime: 'static',"
+                        - generic [ref=f39e541]: "})"
+              - generic [ref=f39e542]:
+                - strong [ref=f39e543]: 验证方式
+                - paragraph [ref=f39e544]: 返回列表后再打开详情，导航等待中很快变为否，请求次数保持不变。
+            - listitem [ref=f39e545]:
+              - heading "5. 错误：只用 useLoaderData 保存详情，不写入 Query 缓存" [level=3] [ref=f39e546]
+              - generic [ref=f39e547]:
+                - strong [ref=f39e548]: 触发条件
+                - paragraph [ref=f39e549]:
+                  - text: Loader
+                  - code [ref=f39e550]: return await loadTaskDetail('t-1')
+                  - text: ，页面只读
+                  - code [ref=f39e551]: useLoaderData
+                  - text: 。
+              - generic [ref=f39e552]:
+                - strong [ref=f39e553]: 原因
+                - paragraph [ref=f39e554]:
+                  - text: 那是路由自己的一次返回值，不是
+                  - code [ref=f39e555]: "['tasks', 'detail', 't-1']"
+                  - text: 这条缓存。列表页、失效和后续观察者都看不到。
+              - generic [ref=f39e556]:
+                - strong [ref=f39e557]: 实际后果
+                - paragraph [ref=f39e558]: 返回列表后再打开详情会重新请求；Query 的跨页面缓存没有接上。
+              - generic [ref=f39e559]:
+                - generic [ref=f39e560]:
+                  - paragraph [ref=f39e561]: 错误示范
+                  - generic [ref=f39e562]:
+                    - generic [ref=f39e563]:
+                      - generic [ref=f39e564]: tsx
+                      - button "复制代码" [ref=f39e565] [cursor=pointer]: 复制
+                    - generic [ref=f39e566]:
+                      - generic [aria-hidden] [ref=f39e567]:
+                        - generic [ref=f39e568]: "1"
+                        - generic [ref=f39e569]: "2"
+                        - generic [ref=f39e570]: "3"
+                        - generic [ref=f39e571]: "4"
+                        - generic [ref=f39e572]: "5"
+                        - generic [ref=f39e573]: "6"
+                        - generic [ref=f39e574]: "7"
+                        - generic [ref=f39e575]: "8"
+                        - generic [ref=f39e576]: "9"
+                        - generic [ref=f39e577]: "10"
+                        - generic [ref=f39e578]: "11"
+                        - generic [ref=f39e579]: "12"
+                      - code [ref=f39e582]:
+                        - generic [ref=f39e583]: "async function taskDetailLoader() {"
+                        - generic [ref=f39e584]: return loadTaskDetail('t-1')
+                        - generic [ref=f39e585]: "}"
+                        - generic [ref=f39e586]: "function TaskDetailPage() {"
+                        - generic [ref=f39e587]: const task = useLoaderData()
+                        - generic [ref=f39e588]: return (
+                        - generic [ref=f39e589]: <p>
+                        - generic [ref=f39e590]: "{task.title} / {task.owner}"
+                        - generic [ref=f39e591]: </p>
+                        - generic [ref=f39e592]: )
+                        - generic [ref=f39e593]: "}"
+                - generic [ref=f39e594]:
+                  - paragraph [ref=f39e595]: 正确示范
+                  - generic [ref=f39e596]:
+                    - generic [ref=f39e597]:
+                      - generic [ref=f39e598]: tsx
+                      - button "复制代码" [ref=f39e599] [cursor=pointer]: 复制
+                    - generic [ref=f39e600]:
+                      - generic [aria-hidden] [ref=f39e601]:
+                        - generic [ref=f39e602]: "1"
+                        - generic [ref=f39e603]: "2"
+                        - generic [ref=f39e604]: "3"
+                        - generic [ref=f39e605]: "4"
+                        - generic [ref=f39e606]: "5"
+                        - generic [ref=f39e607]: "6"
+                        - generic [ref=f39e608]: "7"
+                        - generic [ref=f39e609]: "8"
+                        - generic [ref=f39e610]: "9"
+                        - generic [ref=f39e611]: "10"
+                        - generic [ref=f39e612]: "11"
+                        - generic [ref=f39e613]: "12"
+                        - generic [ref=f39e614]: "13"
+                        - generic [ref=f39e615]: "14"
+                        - generic [ref=f39e616]: "15"
+                        - generic [ref=f39e617]: "16"
+                        - generic [ref=f39e618]: "17"
+                        - generic [ref=f39e619]: "18"
+                        - generic [ref=f39e620]: "19"
+                      - code [ref=f39e623]:
+                        - generic [ref=f39e624]: "async function taskDetailLoader() {"
+                        - generic [ref=f39e625]: "await queryClient.query({"
+                        - generic [ref=f39e626]: ...taskDetailOptions,
+                        - generic [ref=f39e627]: "staleTime: 'static',"
+                        - generic [ref=f39e628]: "})"
+                        - generic [ref=f39e629]: return null
+                        - generic [ref=f39e630]: "}"
+                        - generic [ref=f39e631]: "function TaskDetailPage() {"
+                        - generic [ref=f39e632]: const detailQuery = useQuery(taskDetailOptions)
+                        - generic [ref=f39e633]: "if (!detailQuery.isSuccess) {"
+                        - generic [ref=f39e634]: return <p>正在读取详情。</p>
+                        - generic [ref=f39e635]: "}"
+                        - generic [ref=f39e636]: return (
+                        - generic [ref=f39e637]: <p>
+                        - generic [ref=f39e638]: "{detailQuery.data.title} / {detailQuery.data.owner}"
+                        - generic [ref=f39e639]: </p>
+                        - generic [ref=f39e640]: )
+                        - generic [ref=f39e641]: "}"
+              - generic [ref=f39e642]:
+                - strong [ref=f39e643]: 验证方式
+                - paragraph [ref=f39e644]: 返回列表后详情已缓存仍为是，再打开详情时请求次数不增加。
+          - heading "七、源码推导与适用场景" [level=2] [ref=f39e645]:
+            - link [aria-hidden] [ref=f39e646] [cursor=pointer]:
+              - /url: "#七源码推导与适用场景"
+              - text: "#"
+            - text: 七、源码推导与适用场景
+          - list [ref=f39e647]:
+            - listitem [ref=f39e648]:
+              - paragraph [ref=f39e649]:
+                - text: 官方事实： 路由集成可在 Loader 里
+                - code [ref=f39e650]: await query
+                - text: 。关键数据不要吞掉错误。已经有缓存时传入
+                - code [ref=f39e651]: "staleTime: 'static'"
+                - text: ，
+                - code [ref=f39e652]: isStaleByTime
+                - text: 见到
+                - code [ref=f39e653]: "'static'"
+                - text: 且已有 data 就不会再 fetch。
+                - code [ref=f39e654]: ensureQueryData
+                - text: 在当前源码里已标记废弃。
+            - listitem [ref=f39e655]:
+              - paragraph [ref=f39e656]:
+                - text: 课程推导： 详情路由用 React Router Loader 写入
+                - code [ref=f39e657]: "['tasks', 'detail', 't-1']"
+                - text: 。第一次打开会加一次请求；返回后再打开直接读缓存。
+            - listitem [ref=f39e658]:
+              - paragraph [ref=f39e659]: 适用边界： 本课不把服务端渲染、TanStack Router、请求瀑布拆分或 Suspense 查询写成主线。
+          - heading "八、练习" [level=2] [ref=f39e660]:
+            - link [aria-hidden] [ref=f39e661] [cursor=pointer]:
+              - /url: "#八练习"
+              - text: "#"
+            - text: 八、练习
+          - generic [ref=f39e662]:
+            - heading "练习目标" [level=2] [ref=f39e663]
+            - paragraph [ref=f39e664]: "抽出 `taskDetailOptions`，`queryKey` 为 `['tasks', 'detail', 't-1']`。Loader 里 `await queryClient.query({ ...taskDetailOptions, staleTime: 'static' })`，不要 `catch`。详情页用 `useQuery(taskDetailOptions)` 读取同一条缓存。`queryFn` 调 `fetch`，非 2xx 时抛出带状态码的 `Error`。观察者 `staleTime` 为 `Infinity`，`retry` 为 `false`。"
+            - generic [ref=f39e665]:
+              - strong [ref=f39e666]: 验收标准
+              - paragraph [ref=f39e667]: 列表先显示林晓的现有任务，详情已缓存为否。打开详情后面会显示现有任务 / 林晓，请求次数加一。返回列表后缓存仍在；再打开详情时请求次数不增加。
+            - group [ref=f39e668]:
+              - generic "查看参考答案" [ref=f39e669] [cursor=pointer]
+          - heading "九、本节小结" [level=2] [ref=f39e670]:
+            - link [aria-hidden] [ref=f39e671] [cursor=pointer]:
+              - /url: "#九本节小结"
+              - text: "#"
+            - text: 九、本节小结
+          - list [ref=f39e672]:
+            - listitem [ref=f39e673]:
+              - paragraph [ref=f39e674]: 路由集成在 Loader 里把关键查询写入同一条缓存。
+            - listitem [ref=f39e675]:
+              - paragraph [ref=f39e676]:
+                - text: Loader 和页面共用一份
+                - code [ref=f39e677]: queryOptions
+                - text: 。
+            - listitem [ref=f39e678]:
+              - paragraph [ref=f39e679]:
+                - text: 关键数据要
+                - code [ref=f39e680]: await query
+                - text: ，已有缓存时用
+                - code [ref=f39e681]: "staleTime: 'static'"
+                - text: 。
+            - listitem [ref=f39e682]:
+              - paragraph [ref=f39e683]: 关键数据出错时不要吞掉，交给路由错误处理。
+            - listitem [ref=f39e684]:
+              - paragraph [ref=f39e685]: 本课不展开服务端渲染或 Suspense 查询。
+          - heading "十、参考资料" [level=2] [ref=f39e686]:
+            - link [aria-hidden] [ref=f39e687] [cursor=pointer]:
+              - /url: "#十参考资料"
+              - text: "#"
+            - text: 十、参考资料
+          - list [ref=f39e688]:
+            - listitem [ref=f39e689]:
+              - paragraph [ref=f39e690]: Prefetching & Router Integration (https://tanstack.com/query/latest/docs/framework/react/guides/prefetching) - 支持在路由 Loader 里 await query，关键数据使用 staleTime static。
+            - listitem [ref=f39e691]:
+              - paragraph [ref=f39e692]: QueryClient (https://tanstack.com/query/latest/docs/framework/react/reference/classes/QueryClient) - 支持用 query 拉取并缓存，ensureQueryData 已标记废弃。
+            - listitem [ref=f39e693]:
+              - paragraph [ref=f39e694]: QueryClient source (https://unpkg.com/@tanstack/query-core@5.102.8/src/queryClient.ts) - 支持 query 按 staleTime 决定是否 fetch。
+            - listitem [ref=f39e695]:
+              - paragraph [ref=f39e696]: Query isStaleByTime source (https://unpkg.com/@tanstack/query-core@5.102.8/src/query.ts) - 支持 staleTime 为 static 且已有 data 时不再视为过期。
+        - region [ref=f39e697]:
+          - paragraph [ref=f39e698]: 课程总结
+          - heading "回顾本课" [level=2] [ref=f39e699]
+          - list [ref=f39e700]:
+            - listitem [ref=f39e701]: 路由集成把关键查询放到 Loader 里，渲染前写入缓存。
+            - listitem [ref=f39e702]: Loader 和页面共用同一份 queryOptions，不要各写一套 queryKey。
+            - listitem [ref=f39e703]: 关键数据要 await query，已经有缓存时用 staleTime static 不再挡住导航。
+            - listitem [ref=f39e704]: 关键数据出错时不要吞掉，交给路由错误处理。
+            - listitem [ref=f39e705]: 本课不把 SSR、TanStack Router 或 Suspense 查询写成主线。
+        - region [ref=f39e706]:
+          - paragraph [ref=f39e707]: 继续探索
+          - heading "关联学习" [level=2] [ref=f39e708]
+          - generic [ref=f39e709]:
+            - heading "相关课程" [level=3] [ref=f39e710]
+            - link "实战：文章列表与详情" [ref=f39e711] [cursor=pointer]:
+              - /url: /frontend/react/data/learn/article-list-and-detail
+            - link "Query Client 与 Provider" [ref=f39e712] [cursor=pointer]:
+              - /url: /frontend/react/data/learn/query-client-and-provider
+            - link "第一个 useQuery" [ref=f39e713] [cursor=pointer]:
+              - /url: /frontend/react/data/learn/first-use-query
+        - region [ref=f39e714]:
+          - paragraph [ref=f39e715]: 延伸阅读
+          - heading "资料来源" [level=2] [ref=f39e716]
+          - link "Prefetching & Router Integration" [ref=f39e717] [cursor=pointer]:
+            - /url: https://tanstack.com/query/latest/docs/framework/react/guides/prefetching
+          - link "QueryClient" [ref=f39e718] [cursor=pointer]:
+            - /url: https://tanstack.com/query/latest/docs/framework/react/reference/classes/QueryClient
+          - link "QueryClient source" [ref=f39e719] [cursor=pointer]:
+            - /url: https://unpkg.com/@tanstack/query-core@5.102.8/src/queryClient.ts
+          - link "Query isStaleByTime source" [ref=f39e720] [cursor=pointer]:
+            - /url: https://unpkg.com/@tanstack/query-core@5.102.8/src/query.ts
+        - region "课程完成状态" [ref=f39e721]:
+          - generic [ref=f39e722]:
+            - paragraph [ref=f39e723]: 本课进度
+            - strong [ref=f39e724]: 学习完成后记录进度
+          - button "标记为已完成" [ref=f39e725] [cursor=pointer]
+        - navigation "课程前后篇" [ref=f39e726]:
+          - link "上一篇：查询预取" [ref=f39e727] [cursor=pointer]:
+            - /url: /frontend/react/data/learn/query-prefetching
+            - generic [ref=f39e728]: 上一篇：
+            - generic [ref=f39e729]: 查询预取
+  - generic [ref=f39e32]:
+    - generic "Toggle devtools panel" [ref=f39e33] [cursor=pointer]
+    - generic "Toggle Component Inspector" [ref=f39e39] [cursor=pointer]

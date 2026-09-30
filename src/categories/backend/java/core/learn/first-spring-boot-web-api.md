@@ -941,3 +941,9 @@ Spring Boot Web 应用，但还不是可调用的任务 API。根路径 404 正�
 
 不要为了消除 404 就复制一整套 Controller，也不要修改端口、添加环境文件、Bean、请求参数或统一响应。
 接下来先学习配置与环境，再学习依赖注入和请求映射；每一步都建立在本课这个可重复启动的工程上。
+
+## 累计项目衔接
+
+本课的启动外壳在 `demos/teamflow-complete-delivery` 中由两版根包下的 `dev.teamflow.TeamFlowApplication`
+承接。课程独立工程继续只验证启动与停止；累计项目在同一入口上逐课增加后续能力，不把最终 Controller 提前
+复制回本课。

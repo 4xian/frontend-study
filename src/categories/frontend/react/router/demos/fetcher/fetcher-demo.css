@@ -1,0 +1,521 @@
+.fetcher-demo {
+  width: 100%;
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  color: #172033;
+  background: #f8fafc;
+  box-sizing: border-box;
+}
+
+.fetcher-demo *,
+.fetcher-demo *::before,
+.fetcher-demo *::after {
+  box-sizing: border-box;
+}
+
+.fetcher-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.fetcher-heading > div {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.fetcher-heading p,
+.fetcher-panel-heading p,
+.fetcher-task-list > div > p {
+  margin: 0;
+  color: #0f766e;
+  font-size: 12px;
+  font-weight: 750;
+  line-height: 1.5;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.fetcher-heading h2,
+.fetcher-panel-heading h3,
+.fetcher-task-list h3 {
+  color: #172033;
+  overflow-wrap: anywhere;
+}
+
+.fetcher-heading h2 {
+  margin: 4px 0 0;
+  font-size: 23px;
+  line-height: 1.3;
+}
+
+.fetcher-heading > div > span {
+  display: block;
+  margin-top: 6px;
+  color: #526176;
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.fetcher-heading-actions {
+  display: flex;
+  align-items: flex-end;
+  flex: 0 0 140px;
+  flex-direction: column;
+  min-width: 140px;
+  margin-left: 16px;
+}
+
+.fetcher-heading-actions > strong {
+  min-width: 140px;
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 6px;
+  color: #164e63;
+  background: #cffafe;
+  font-size: 12px;
+  line-height: 1.4;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.fetcher-reset {
+  min-height: 36px;
+  margin-top: 9px;
+  padding: 7px 11px;
+  border: 1px solid #64748b;
+  border-radius: 6px;
+  color: #334155;
+  background: #ffffff;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.fetcher-reset:hover {
+  border-color: #334155;
+  background: #f1f5f9;
+}
+
+.fetcher-reset:focus-visible {
+  outline: 3px solid #f4b942;
+  outline-offset: 2px;
+}
+
+.fetcher-global-observer,
+.fetcher-mutation-observer {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  min-width: 0;
+  margin: 16px -5px -10px;
+}
+
+.fetcher-global-observer > div,
+.fetcher-mutation-observer > div {
+  min-width: 130px;
+  flex: 1 1 0;
+  margin: 0 5px 10px;
+  padding: 10px 11px;
+  border: 1px solid #dbe3ec;
+  border-radius: 6px;
+  background: #ffffff;
+}
+
+.fetcher-global-observer dt,
+.fetcher-mutation-observer dt {
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+.fetcher-global-observer dd,
+.fetcher-mutation-observer dd {
+  margin: 4px 0 0;
+  color: #172033;
+  font-size: 14px;
+  font-weight: 750;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.fetcher-workspace {
+  display: flex;
+  align-items: stretch;
+  min-width: 0;
+  margin: 18px -8px 0;
+}
+
+.fetcher-panel {
+  min-width: 0;
+  flex: 1 1 0;
+  margin: 0 8px;
+  padding: 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.fetcher-panel-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.fetcher-panel-heading > div {
+  min-width: 0;
+}
+
+.fetcher-panel-heading h3,
+.fetcher-task-list h3 {
+  margin: 4px 0 0;
+  font-size: 18px;
+  line-height: 1.4;
+}
+
+.fetcher-panel-heading > strong {
+  min-width: 86px;
+  flex: 0 0 86px;
+  margin-left: 12px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  color: #1e3a5f;
+  background: #dbeafe;
+  font-size: 12px;
+  line-height: 1.4;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.fetcher-status {
+  min-height: 62px;
+  margin-top: 14px;
+  padding: 10px 12px;
+  border-left: 4px solid #2563a6;
+  background: #eef4fb;
+}
+
+.fetcher-status strong,
+.fetcher-status span {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.fetcher-status strong {
+  color: #173b66;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.fetcher-status span {
+  margin-top: 4px;
+  color: #526176;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.fetcher-load-controls,
+.fetcher-mutation-form {
+  margin-top: 15px;
+}
+
+.fetcher-load-controls label,
+.fetcher-mutation-form label {
+  display: block;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.fetcher-load-controls > div,
+.fetcher-mutation-form {
+  display: flex;
+  align-items: flex-end;
+  min-width: 0;
+}
+
+.fetcher-load-controls > div {
+  margin-top: 7px;
+}
+
+.fetcher-mutation-form {
+  flex-wrap: wrap;
+}
+
+.fetcher-mutation-form label {
+  flex: 0 0 100%;
+  margin-bottom: 7px;
+}
+
+.fetcher-load-controls input,
+.fetcher-mutation-form input {
+  width: 100%;
+  min-width: 0;
+  min-height: 42px;
+  flex: 1 1 auto;
+  padding: 8px 11px;
+  border: 1px solid #94a3b8;
+  border-radius: 6px;
+  color: #172033;
+  background: #ffffff;
+  font: inherit;
+}
+
+.fetcher-load-controls button,
+.fetcher-mutation-form button {
+  min-width: 108px;
+  min-height: 42px;
+  flex: 0 0 108px;
+  margin-left: 9px;
+  padding: 8px 12px;
+  border: 1px solid #0f766e;
+  border-radius: 6px;
+  color: #ffffff;
+  background: #0f766e;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.fetcher-load-controls input:focus-visible,
+.fetcher-mutation-form input:focus-visible,
+.fetcher-load-controls button:focus-visible,
+.fetcher-mutation-form button:focus-visible {
+  outline: 3px solid #f4b942;
+  outline-offset: 2px;
+}
+
+.fetcher-load-controls button:hover:not(:disabled),
+.fetcher-mutation-form button:hover:not(:disabled) {
+  border-color: #115e59;
+  background: #115e59;
+}
+
+.fetcher-load-controls button:disabled,
+.fetcher-mutation-form button:disabled {
+  border-color: #94a3b8;
+  background: #64748b;
+  cursor: wait;
+}
+
+.fetcher-result,
+.fetcher-action-result {
+  min-width: 0;
+  margin-top: 15px;
+  padding: 13px;
+  border: 1px solid #d4dde7;
+  border-radius: 6px;
+  background: #f8fafc;
+}
+
+.fetcher-result > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.fetcher-result > div > span {
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.fetcher-result > div > strong {
+  margin-left: 10px;
+  color: #075985;
+  font-size: 12px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.fetcher-result > small {
+  display: block;
+  margin-top: 9px;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.fetcher-result ul {
+  margin: 9px 0 0;
+  padding-left: 19px;
+}
+
+.fetcher-result li {
+  margin-top: 6px;
+  color: #334155;
+  font-size: 13px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.fetcher-result p,
+.fetcher-action-result span {
+  margin: 10px 0 0;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.fetcher-mutation-observer {
+  margin-top: 14px;
+}
+
+.fetcher-action-result {
+  min-height: 68px;
+}
+
+.fetcher-action-result strong {
+  display: block;
+  color: #166534;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.fetcher-task-list {
+  min-width: 0;
+  margin-top: 18px;
+  padding: 16px;
+  border: 1px solid #d4dde7;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.fetcher-task-list ol {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  margin: 12px -6px -10px;
+  padding: 0;
+  list-style: none;
+}
+
+.fetcher-task-list li {
+  display: flex;
+  align-items: center;
+  min-width: 190px;
+  flex: 1 1 240px;
+  margin: 0 6px 10px;
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: #f8fafc;
+}
+
+.fetcher-task-list li > span {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 28px;
+  border-radius: 6px;
+  color: #92400e;
+  background: #fef3c7;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 28px;
+  text-align: center;
+}
+
+.fetcher-task-list li > strong {
+  min-width: 0;
+  margin-left: 10px;
+  color: #172033;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 720px) {
+  .fetcher-workspace {
+    display: block;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .fetcher-panel {
+    margin: 0;
+  }
+
+  .fetcher-panel + .fetcher-panel {
+    margin-top: 16px;
+  }
+}
+
+@media (max-width: 520px) {
+  .fetcher-demo {
+    padding: 14px;
+  }
+
+  .fetcher-heading {
+    display: block;
+  }
+
+  .fetcher-heading-actions {
+    display: block;
+    width: 100%;
+    margin: 12px 0 0;
+  }
+
+  .fetcher-heading-actions > strong {
+    min-width: 0;
+  }
+
+  .fetcher-reset {
+    width: 100%;
+  }
+
+  .fetcher-load-controls > div,
+  .fetcher-mutation-form {
+    display: block;
+  }
+
+  .fetcher-load-controls button,
+  .fetcher-mutation-form button {
+    width: 100%;
+    margin: 9px 0 0;
+  }
+
+  .fetcher-task-list li {
+    min-width: 0;
+    flex-basis: 100%;
+  }
+}
+
+@media (max-width: 260px) {
+  .fetcher-panel-heading {
+    display: block;
+  }
+
+  .fetcher-heading-actions,
+  .fetcher-panel-heading > strong {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    margin: 10px 0 0;
+  }
+
+  .fetcher-global-observer > div,
+  .fetcher-mutation-observer > div {
+    min-width: 0;
+    flex-basis: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fetcher-demo * {
+    scroll-behavior: auto;
+  }
+}

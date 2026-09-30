@@ -1,0 +1,175 @@
+.mutation-lifecycle-demo {
+  min-width: 0;
+  max-width: 100%;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+}
+
+.mutation-lifecycle-demo *,
+.mutation-lifecycle-demo *::before,
+.mutation-lifecycle-demo *::after {
+  box-sizing: border-box;
+}
+
+.mutation-lifecycle-header span,
+.mutation-lifecycle-header h2,
+.mutation-lifecycle-header p,
+.mutation-lifecycle-metrics span,
+.mutation-lifecycle-metrics strong,
+.mutation-lifecycle-message,
+.mutation-lifecycle-card,
+.mutation-lifecycle-card h3,
+.mutation-lifecycle-card p,
+.mutation-lifecycle-card li {
+  overflow-wrap: anywhere;
+}
+
+.mutation-lifecycle-header span {
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.mutation-lifecycle-header h2 {
+  margin: var(--space-1) 0 0;
+  font-size: 1.08rem;
+}
+
+.mutation-lifecycle-header p {
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.mutation-lifecycle-metrics,
+.mutation-lifecycle-actions,
+.mutation-lifecycle-columns {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -4px;
+  margin-left: -4px;
+}
+
+.mutation-lifecycle-metrics {
+  margin-top: var(--space-4);
+}
+
+.mutation-lifecycle-metrics > div {
+  flex: 1 1 140px;
+  min-width: 0;
+  margin: 0 4px 8px;
+  padding: 10px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.mutation-lifecycle-metrics span,
+.mutation-lifecycle-metrics strong {
+  display: block;
+}
+
+.mutation-lifecycle-metrics span {
+  color: var(--color-text-secondary);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.mutation-lifecycle-metrics strong {
+  margin-top: 4px;
+  color: var(--color-accent);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.mutation-lifecycle-actions {
+  margin-top: 4px;
+}
+
+.mutation-lifecycle-actions button {
+  min-height: 38px;
+  margin: 0 4px 8px;
+  padding: 7px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  background: var(--color-bg);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.mutation-lifecycle-actions button[data-kind='primary'] {
+  color: var(--color-bg);
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.mutation-lifecycle-actions button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.mutation-lifecycle-actions button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.mutation-lifecycle-columns {
+  margin-top: 4px;
+}
+
+.mutation-lifecycle-card {
+  flex: 1 1 220px;
+  min-width: 0;
+  margin: 0 4px 8px;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.mutation-lifecycle-card h3 {
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+.mutation-lifecycle-card p,
+.mutation-lifecycle-card ul {
+  margin: 8px 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.mutation-lifecycle-card ul {
+  padding: 0 0 0 1.2em;
+}
+
+.mutation-lifecycle-message {
+  margin: 8px 0 0;
+  padding: 10px;
+  border-left: 3px solid var(--color-accent);
+  color: var(--color-text);
+  background: var(--color-bg-secondary);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 480px) {
+  .mutation-lifecycle-demo {
+    padding: var(--space-3);
+  }
+
+  .mutation-lifecycle-metrics > div,
+  .mutation-lifecycle-card,
+  .mutation-lifecycle-actions button {
+    flex-basis: 100%;
+  }
+
+  .mutation-lifecycle-actions button {
+    width: calc(100% - 8px);
+  }
+}

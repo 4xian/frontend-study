@@ -1,0 +1,185 @@
+.query-cancellation-demo {
+  min-width: 0;
+  max-width: 100%;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+}
+
+.query-cancellation-demo *,
+.query-cancellation-demo *::before,
+.query-cancellation-demo *::after {
+  box-sizing: border-box;
+}
+
+.query-cancellation-header span,
+.query-cancellation-header h2,
+.query-cancellation-header p,
+.query-cancellation-metrics span,
+.query-cancellation-metrics strong,
+.query-cancellation-message,
+.query-cancellation-card,
+.query-cancellation-card h3,
+.query-cancellation-card p,
+.query-cancellation-card li {
+  overflow-wrap: anywhere;
+}
+
+.query-cancellation-header span {
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.query-cancellation-header h2 {
+  margin: var(--space-1) 0 0;
+  font-size: 1.08rem;
+}
+
+.query-cancellation-header p {
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.query-cancellation-metrics,
+.query-cancellation-actions,
+.query-cancellation-columns {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -4px;
+  margin-left: -4px;
+}
+
+.query-cancellation-metrics {
+  margin-top: var(--space-4);
+}
+
+.query-cancellation-metrics > div {
+  flex: 1 1 140px;
+  min-width: 0;
+  margin: 0 4px 8px;
+  padding: 10px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.query-cancellation-metrics span,
+.query-cancellation-metrics strong {
+  display: block;
+}
+
+.query-cancellation-metrics span {
+  color: var(--color-text-secondary);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.query-cancellation-metrics strong {
+  margin-top: 4px;
+  color: var(--color-accent);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.query-cancellation-actions {
+  margin-top: 4px;
+}
+
+.query-cancellation-actions button {
+  min-height: 38px;
+  margin: 0 4px 8px;
+  padding: 7px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  background: var(--color-bg);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.query-cancellation-actions button[data-kind='primary'] {
+  color: var(--color-bg);
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.query-cancellation-actions button[aria-pressed='true'] {
+  color: var(--color-bg);
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.query-cancellation-actions button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.query-cancellation-actions button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.query-cancellation-columns {
+  margin-top: 4px;
+}
+
+.query-cancellation-card {
+  flex: 1 1 220px;
+  min-width: 0;
+  margin: 0 4px 8px;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.query-cancellation-card h3 {
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+.query-cancellation-card p,
+.query-cancellation-card ul {
+  margin: 8px 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.query-cancellation-card ul {
+  padding: 0 0 0 1.2em;
+}
+
+.query-cancellation-message {
+  margin: 8px 0 0;
+  padding: 10px;
+  border-left: 3px solid var(--color-accent);
+  color: var(--color-text);
+  background: var(--color-bg-secondary);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.query-cancellation-message[role='alert'] {
+  border-left-color: var(--color-danger, #b42318);
+}
+
+@media (max-width: 480px) {
+  .query-cancellation-demo {
+    padding: var(--space-3);
+  }
+
+  .query-cancellation-metrics > div,
+  .query-cancellation-card,
+  .query-cancellation-actions button {
+    flex-basis: 100%;
+  }
+
+  .query-cancellation-actions button {
+    width: calc(100% - 8px);
+  }
+}

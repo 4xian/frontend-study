@@ -30,40 +30,40 @@ Hooks、组件订阅和渲染边界。两者作为同一教学主线实施，但
 
 ## 3. 基础课程
 
-- [ ] 01. 现代 Redux 技术栈
-- [ ] 02. Redux 单向数据流
-- [ ] 03. configureStore
-- [ ] 04. Provider
-- [ ] 05. createSlice
-- [ ] 06. Action 与 Payload
-- [ ] 07. Reducer 与 Immer
-- [ ] 08. useSelector
-- [ ] 09. useDispatch
-- [ ] 10. TypeScript 与预类型 Hooks
-- [ ] 11. 多 Slice 与 RootState
-- [ ] 12. Redux 状态所有权
-- [ ] 13. Redux DevTools
-- [ ] 14. Feature 目录与模块组织
-- [ ] 15. 实战：任务筛选面板
-- [ ] 16. 实战：购物车状态中心
+- [x] 01. 现代 Redux 技术栈
+- [x] 02. Redux 单向数据流
+- [x] 03. configureStore
+- [x] 04. Provider
+- [x] 05. createSlice
+- [x] 06. Action 与 Payload
+- [x] 07. Reducer 与 Immer
+- [x] 08. useSelector
+- [x] 09. useDispatch
+- [x] 10. TypeScript 与预类型 Hooks
+- [x] 11. 多 Slice 与 RootState
+- [x] 12. Redux 状态所有权
+- [x] 13. Redux DevTools
+- [x] 14. Feature 目录与模块组织
+- [x] 15. 实战：任务筛选面板
+- [x] 16. 实战：购物车状态中心
 
 ## 4. 中级课程
 
-- [ ] 01. Selector
-- [ ] 02. createSelector
-- [ ] 03. useSelector 结果身份与订阅
-- [ ] 04. Thunk 异步逻辑
-- [ ] 05. createAsyncThunk
-- [ ] 06. 异步生命周期状态
-- [ ] 07. 异步错误与 rejectWithValue
-- [ ] 08. 异步取消与请求条件
-- [ ] 09. extraReducers 与 Action Matcher
-- [ ] 10. Middleware 执行链
-- [ ] 11. 默认 Middleware 检查
-- [ ] 12. Listener Middleware
-- [ ] 13. 标准化状态
-- [ ] 14. createEntityAdapter
-- [ ] 15. 实战：异步内容管理工作区
+- [x] 01. Selector
+- [x] 02. createSelector
+- [x] 03. useSelector 结果身份与订阅
+- [x] 04. Thunk 异步逻辑
+- [x] 05. createAsyncThunk
+- [x] 06. 异步生命周期状态
+- [x] 07. 异步错误与 rejectWithValue
+- [x] 08. 异步取消与请求条件
+- [x] 09. extraReducers 与 Action Matcher
+- [x] 10. Middleware 执行链
+- [x] 11. 默认 Middleware 检查
+- [x] 12. Listener Middleware
+- [x] 13. 标准化状态
+- [x] 14. createEntityAdapter
+- [x] 15. 实战：异步内容管理工作区
 - [ ] 16. 实战：实体关系管理台
 
 ## 5. 高级课程

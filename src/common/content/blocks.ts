@@ -1,7 +1,9 @@
-export interface PitfallExample {
+export interface CodeExample {
   lang: string
   content: string
 }
+
+export type PitfallExample = CodeExample
 
 export interface PitfallItem {
   title: string
@@ -32,7 +34,7 @@ export type ContentBlock =
       title: string
       instructions: string
       acceptance?: string
-      answer?: string
+      answer?: string | CodeExample
     }
   | { type: 'list'; ordered: boolean; items: string[] }
   | { type: 'checklist'; items: { label: string; checked?: boolean }[] }

@@ -35,7 +35,7 @@ export interface CategoryModuleManifest {
 
 export interface CategoryContentEntryManifest {
   slug: string
-  meta: ContentMeta
+  meta: CatalogContentMeta
   load: EntryLoader
 }
 
@@ -97,6 +97,28 @@ export interface CatalogNode {
   summary?: string
   status: CatalogStatus
   path: string
+}
+
+/** 首屏目录所需的轻量正文元数据，不包含搜索专用字段。 */
+export interface CatalogContentMeta {
+  id: string
+  type: ContentMeta['type']
+  title: string
+  summary: string
+  domain: ContentMeta['domain']
+  technology: string
+  module: string
+  level?: ContentMeta['level']
+  prerequisites?: string[]
+  related?: string[]
+  stage?: string
+  group?: string
+  headingIds?: string[]
+}
+
+/** 延迟加载的搜索字段，按正文稳定 ID 对应。 */
+export interface CatalogSearchRecord {
+  values: string[]
 }
 
 export interface CatalogEntryNode extends CatalogNode {
@@ -278,10 +300,11 @@ export interface LearningCatalog {
   getLearningTrack(scope: ModuleScope): LearningTrack | undefined
   getReferenceOverview(scope: ModuleScope): ReferenceOverview | undefined
   getDemos(scope: ModuleScope): CatalogDemo[]
-  getEntry(id: string): ContentMeta | undefined
-  getEntryByPath(path: string): ContentMeta | undefined
+  getEntry(id: string): CatalogContentMeta | undefined
+  getEntryByPath(path: string): CatalogContentMeta | undefined
   loadEntry(id: string): Promise<ContentEntry>
   search(query: string, scope?: CategoryScope): SearchHit[]
+  prepareSearch(): Promise<void>
   getNeighbors(id: string): EntryNeighbors
 }
 

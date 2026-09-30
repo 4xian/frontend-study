@@ -1,0 +1,114 @@
+.typed-hooks-demo {
+  min-width: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+}
+
+.typed-hooks-heading p,
+.typed-hooks-heading h2,
+.typed-hooks-heading span {
+  overflow-wrap: anywhere;
+}
+
+.typed-hooks-heading p {
+  margin: 0 0 var(--space-1);
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.typed-hooks-heading h2 {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.typed-hooks-heading span {
+  display: block;
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+}
+
+.typed-hooks-state,
+.typed-hooks-controls {
+  margin-top: var(--space-4);
+}
+
+.typed-hooks-state {
+  padding: var(--space-3);
+  border: 1px solid var(--color-success, #2f855a);
+  background: var(--color-bg);
+}
+
+.typed-hooks-state > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-2);
+}
+
+.typed-hooks-state > div:last-child {
+  margin-bottom: 0;
+}
+
+.typed-hooks-state span {
+  margin-right: var(--space-3);
+  color: var(--color-text-secondary);
+  font-size: 0.76rem;
+  overflow-wrap: anywhere;
+}
+
+.typed-hooks-state strong {
+  color: var(--color-success, #2f855a);
+  font-size: 1.2rem;
+}
+
+.typed-hooks-state code {
+  color: var(--color-accent);
+  font-size: 0.8rem;
+  overflow-wrap: anywhere;
+}
+
+.typed-hooks-controls {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -4px;
+  margin-left: -4px;
+}
+
+.typed-hooks-controls button {
+  min-height: 40px;
+  margin: 0 4px 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-sm);
+  background: var(--color-accent);
+  color: #fff;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.typed-hooks-controls button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.typed-hooks-controls button:active {
+  opacity: 0.8;
+}
+
+@media (max-width: 480px) {
+  .typed-hooks-demo {
+    padding: var(--space-3);
+  }
+
+  .typed-hooks-controls button {
+    box-sizing: border-box;
+    width: calc(100% - 8px);
+  }
+}

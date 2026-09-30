@@ -2,8 +2,8 @@
 
 > 版本：v1.2
 > 日期：2026-08-16
-> 状态：课程表已确认，课程正文正在按本路线逐课实施
-> 当前实施进度：59 / 104
+> 状态：课程表已确认，104 课课程正文已全部完成
+> 当前实施进度：104 / 104
 > 当前主线：从 Java 零基础到前后端分离的 JSON REST API
 
 ## 1. 课程定位
@@ -169,29 +169,29 @@ Java 全家桶的延期候选继续保存在 [`java-full-stack-curriculum-planni
 | [x] | spring-06 | 请求与响应 | 请求体 |
 | [x] | spring-07 | 请求与响应 | 响应与状态码 |
 | [x] | spring-08 | 合同校验与错误 | 参数校验 |
-| [ ] | spring-09 | 合同校验与错误 | 统一接口响应 |
-| [ ] | spring-10 | 合同校验与错误 | 全局异常处理 |
-| [ ] | spring-11 | 合同校验与错误 | 实战：用户与团队 API |
-| [ ] | spring-12 | 文件、联调与文档 | 文件上传与下载 |
-| [ ] | spring-13 | 文件、联调与文档 | 跨域与前端联调 |
-| [ ] | spring-14 | 文件、联调与文档 | OpenAPI 与 Swagger UI |
-| [ ] | spring-15 | 文件、联调与文档 | 实战：项目与任务 API |
+| [x] | spring-09 | 合同校验与错误 | 统一接口响应 |
+| [x] | spring-10 | 合同校验与错误 | 全局异常处理 |
+| [x] | spring-11 | 合同校验与错误 | 实战：用户与团队 API |
+| [x] | spring-12 | 文件、联调与文档 | 文件上传与下载 |
+| [x] | spring-13 | 文件、联调与文档 | 跨域与前端联调 |
+| [x] | spring-14 | 文件、联调与文档 | OpenAPI 与 Swagger UI |
+| [x] | spring-15 | 文件、联调与文档 | 实战：项目与任务 API |
 
 ### 4.8 MySQL 与 MyBatis
 
 | 状态 | ID | 主题组 | 课程 |
 | --- | --- | --- | --- |
-| [ ] | mysql-01 | 关系数据基础 | 关系数据建模 |
-| [ ] | mysql-02 | 关系数据基础 | SQL 查询 |
-| [ ] | mysql-03 | 关系数据基础 | 数据库迁移 |
-| [ ] | mysql-04 | MyBatis 查询与写入 | MyBatis 配置 |
-| [ ] | mysql-05 | MyBatis 查询与写入 | MyBatis 查询映射 |
-| [ ] | mysql-06 | MyBatis 查询与写入 | MyBatis 写入与动态 SQL |
-| [ ] | mysql-07 | MyBatis 查询与写入 | 实战：用户与团队持久化 |
-| [ ] | mysql-08 | MyBatis 增强与分页 | MyBatis-Plus |
-| [ ] | mysql-09 | MyBatis 增强与分页 | 分页与筛选 |
-| [ ] | mysql-10 | 事务与持久化实战 | 事务 |
-| [ ] | mysql-11 | 事务与持久化实战 | 实战：项目与任务持久化 |
+| [x] | mysql-01 | 关系数据基础 | 关系数据建模 |
+| [x] | mysql-02 | 关系数据基础 | SQL 查询 |
+| [x] | mysql-03 | 关系数据基础 | 数据库迁移 |
+| [x] | mysql-04 | MyBatis 查询与写入 | MyBatis 配置 |
+| [x] | mysql-05 | MyBatis 查询与写入 | MyBatis 查询映射 |
+| [x] | mysql-06 | MyBatis 查询与写入 | MyBatis 写入与动态 SQL |
+| [x] | mysql-07 | MyBatis 查询与写入 | 实战：用户与团队持久化 |
+| [x] | mysql-08 | MyBatis 增强与分页 | MyBatis-Plus |
+| [x] | mysql-09 | MyBatis 增强与分页 | 分页与筛选 |
+| [x] | mysql-10 | 事务与持久化实战 | 事务 |
+| [x] | mysql-11 | 事务与持久化实战 | 实战：项目与任务持久化 |
 
 该部分只讲 Web 项目直接需要的建模、SQL、迁移、CRUD、分页和事务。索引调优、执行计划、锁、
 备份恢复、分库分表等内容留给后续数据库专项。
@@ -200,12 +200,12 @@ Java 全家桶的延期候选继续保存在 [`java-full-stack-curriculum-planni
 
 | 状态 | ID | 主题组 | 课程 |
 | --- | --- | --- | --- |
-| [ ] | redis-web-01 | 集成与缓存生命周期 | Redis Web 集成 |
-| [ ] | redis-web-02 | 集成与缓存生命周期 | 缓存读取 |
-| [ ] | redis-web-03 | 集成与缓存生命周期 | 缓存失效 |
-| [ ] | redis-web-04 | Web 状态与幂等 | 验证码 |
-| [ ] | redis-web-05 | Web 状态与幂等 | 接口幂等 |
-| [ ] | redis-web-06 | Web 状态与幂等 | 实战：任务查询缓存 |
+| [x] | redis-web-01 | 集成与缓存生命周期 | Redis Web 集成 |
+| [x] | redis-web-02 | 集成与缓存生命周期 | 缓存读取 |
+| [x] | redis-web-03 | 集成与缓存生命周期 | 缓存失效 |
+| [x] | redis-web-04 | Web 状态与幂等 | 验证码 |
+| [x] | redis-web-05 | Web 状态与幂等 | 接口幂等 |
+| [x] | redis-web-06 | Web 状态与幂等 | 实战：任务查询缓存 |
 
 这里只讲 Web 项目需要的连接、缓存读写、TTL、失效、验证码和接口幂等。Lua、Streams、Sentinel、
 Cluster、分布式锁原理等内容留给 Redis 专项。
@@ -214,32 +214,32 @@ Cluster、分布式锁原理等内容留给 Redis 专项。
 
 | 状态 | ID | 主题组 | 课程 |
 | --- | --- | --- | --- |
-| [ ] | delivery-01 | 测试 | 单元测试 |
-| [ ] | delivery-02 | 测试 | MockMvc 接口测试 |
-| [ ] | delivery-03 | 测试 | 集成测试 |
-| [ ] | delivery-04 | 认证与授权 | 密码与登录 |
-| [ ] | delivery-05 | 认证与授权 | JWT 认证 |
-| [ ] | delivery-06 | 认证与授权 | 角色与权限 |
-| [ ] | delivery-07 | 观测与运行 | 日志与可观测性 |
-| [ ] | delivery-08 | 观测与运行 | 健康检查与优雅停机 |
-| [ ] | delivery-09 | 打包与部署 | 应用打包 |
-| [ ] | delivery-10 | 打包与部署 | 容器化部署 |
-| [ ] | delivery-11 | 打包与部署 | 实战：测试与交付检查 |
+| [x] | delivery-01 | 测试 | 单元测试 |
+| [x] | delivery-02 | 测试 | MockMvc 接口测试 |
+| [x] | delivery-03 | 测试 | 集成测试 |
+| [x] | delivery-04 | 认证与授权 | 密码与登录 |
+| [x] | delivery-05 | 认证与授权 | JWT 认证 |
+| [x] | delivery-06 | 认证与授权 | 角色与权限 |
+| [x] | delivery-07 | 观测与运行 | 日志与可观测性 |
+| [x] | delivery-08 | 观测与运行 | 健康检查与优雅停机 |
+| [x] | delivery-09 | 打包与部署 | 应用打包 |
+| [x] | delivery-10 | 打包与部署 | 容器化部署 |
+| [x] | delivery-11 | 打包与部署 | 实战：测试与交付检查 |
 
 ### 4.11 高级 Web 与结课
 
 | 状态 | ID | 主题组 | 课程 |
 | --- | --- | --- | --- |
-| [ ] | advanced-01 | 外部服务集成 | 外部 HTTP 调用 |
-| [ ] | advanced-02 | 外部服务集成 | HTTP 客户端配置 |
-| [ ] | advanced-03 | 异步与调度 | 异步任务 |
-| [ ] | advanced-04 | 异步与调度 | 定时任务 |
-| [ ] | advanced-05 | 消息驱动 | 消息队列使用边界 |
-| [ ] | advanced-06 | 消息驱动 | RabbitMQ 消息收发 |
-| [ ] | advanced-07 | 消息驱动 | 可靠消费与消费幂等 |
-| [ ] | advanced-08 | 并发与一致性 | 并发更新与一致性 |
-| [ ] | advanced-09 | 综合实战 | 实战：异步通知链路 |
-| [ ] | advanced-10 | 综合实战 | 结课项目：TeamFlow 完整交付 |
+| [x] | advanced-01 | 外部服务集成 | 外部 HTTP 调用 |
+| [x] | advanced-02 | 外部服务集成 | HTTP 客户端配置 |
+| [x] | advanced-03 | 异步与调度 | 异步任务 |
+| [x] | advanced-04 | 异步与调度 | 定时任务 |
+| [x] | advanced-05 | 消息驱动 | 消息队列使用边界 |
+| [x] | advanced-06 | 消息驱动 | RabbitMQ 消息收发 |
+| [x] | advanced-07 | 消息驱动 | 可靠消费与消费幂等 |
+| [x] | advanced-08 | 并发与一致性 | 并发更新与一致性 |
+| [x] | advanced-09 | 综合实战 | 实战：异步通知链路 |
+| [x] | advanced-10 | 综合实战 | 结课项目：TeamFlow 完整交付 |
 
 外部 HTTP 客户端与前端调用后端的 HTTP 基础不同，现代线使用 `RestClient`，兼容线使用
 `RestTemplate`。消息队列课程以 RabbitMQ 为示例，重点放在 Web 项目中的使用边界、可靠消费和幂等，

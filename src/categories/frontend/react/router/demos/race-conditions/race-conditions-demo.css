@@ -1,0 +1,250 @@
+.race-conditions-demo {
+  min-width: 0;
+  padding: 22px;
+  color: #1d2b3a;
+  border: 1px solid #d3dce8;
+  border-radius: 8px;
+  background: #f7f9fc;
+}
+
+.race-conditions-demo *,
+.race-conditions-demo *::before,
+.race-conditions-demo *::after {
+  box-sizing: border-box;
+}
+
+.race-conditions-header,
+.race-conditions-panel-heading,
+.race-conditions-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.race-conditions-header,
+.race-conditions-panel-heading {
+  justify-content: space-between;
+}
+
+.race-conditions-header {
+  margin-bottom: 18px;
+}
+
+.race-conditions-eyebrow {
+  margin: 0;
+  color: #8a4b2a;
+  font-size: 0.75rem;
+  font-weight: 750;
+  letter-spacing: 0;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.race-conditions-header h2,
+.race-conditions-panel h3,
+.race-conditions-events h3 {
+  margin: 4px 0 8px;
+  color: #1d2b3a;
+  overflow-wrap: anywhere;
+}
+
+.race-conditions-header p:not(.race-conditions-eyebrow),
+.race-conditions-help,
+.race-conditions-note,
+.race-conditions-result {
+  line-height: 1.6;
+}
+
+.race-conditions-header p:not(.race-conditions-eyebrow) {
+  max-width: 720px;
+  margin: 0;
+  color: #526477;
+}
+
+.race-conditions-demo button {
+  min-height: 40px;
+  margin: 5px;
+  padding: 8px 12px;
+  border: 1px solid #2d6680;
+  border-radius: 6px;
+  color: #fff;
+  background: #2d6680;
+  font: inherit;
+  font-size: 0.87rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.race-conditions-demo button:hover:not(:disabled) {
+  border-color: #174e68;
+  background: #174e68;
+}
+
+.race-conditions-demo button:disabled {
+  border-color: #b7c1cc;
+  color: #6b7785;
+  background: #e5eaf0;
+  cursor: not-allowed;
+}
+
+.race-conditions-demo button:focus-visible {
+  outline: 3px solid #e3a329;
+  outline-offset: 2px;
+}
+
+.race-conditions-reset {
+  border-color: #68758a !important;
+  color: #334155 !important;
+  background: #fff !important;
+}
+
+.race-conditions-fact {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  border-left: 4px solid #c66b32;
+  background: #fff4eb;
+}
+
+.race-conditions-fact span {
+  margin-right: 12px;
+  color: #87502f;
+  font-size: 0.82rem;
+}
+
+.race-conditions-fact strong {
+  margin-right: 12px;
+  color: #7d351e;
+  font-size: 1.1rem;
+  overflow-wrap: anywhere;
+}
+
+.race-conditions-columns {
+  display: flex;
+  align-items: stretch;
+  flex-wrap: wrap;
+  margin: 0 -7px;
+}
+
+.race-conditions-panel {
+  min-width: 260px;
+  flex: 1 1 360px;
+  margin: 0 7px 14px;
+  padding: 16px;
+  border: 1px solid #d3dce8;
+  border-radius: 8px;
+  background: #fff;
+}
+
+.race-conditions-panel-heading > div {
+  min-width: 0;
+}
+
+.race-conditions-panel-heading > span {
+  margin-left: 12px;
+  color: #607286;
+  font-size: 0.8rem;
+  overflow-wrap: anywhere;
+}
+
+.race-conditions-help {
+  margin: 0 0 12px;
+  color: #526477;
+  font-size: 0.88rem;
+}
+
+.race-conditions-actions {
+  margin: 0 -5px 5px;
+}
+
+.race-conditions-actions > span {
+  margin: 5px;
+  color: #526477;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.78rem;
+  overflow-wrap: anywhere;
+}
+
+.race-conditions-result {
+  margin: 12px 0 0;
+  padding: 10px 12px;
+  color: #33586a;
+  border-left: 3px solid #4b8a9d;
+  background: #eff8fa;
+  overflow-wrap: anywhere;
+}
+
+.race-conditions-events {
+  margin-top: 4px;
+  padding-top: 16px;
+  border-top: 1px solid #d3dce8;
+}
+
+.race-conditions-events ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.race-conditions-events li {
+  margin-top: 7px;
+  padding: 9px 11px;
+  border-left: 4px solid #758399;
+  color: #334155;
+  background: #fff;
+  overflow-wrap: anywhere;
+}
+
+.race-event-action {
+  border-left-color: #c66b32 !important;
+}
+
+.race-event-revalidation {
+  border-left-color: #7657a6 !important;
+}
+
+.race-event-search {
+  border-left-color: #2d8391 !important;
+}
+
+.race-conditions-empty,
+.race-conditions-note {
+  color: #607286;
+  font-size: 0.88rem;
+}
+
+.race-conditions-note {
+  margin: 16px 0 0;
+}
+
+@media (max-width: 620px) {
+  .race-conditions-demo {
+    padding: 16px;
+  }
+
+  .race-conditions-header > div {
+    flex-basis: 100%;
+  }
+
+  .race-conditions-reset {
+    margin-left: 0 !important;
+  }
+
+  .race-conditions-panel-heading > span {
+    flex-basis: 100%;
+    margin: 0;
+  }
+
+  .race-conditions-actions > button {
+    flex: 1 1 42%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .race-conditions-demo * {
+    scroll-behavior: auto;
+    transition: none;
+  }
+}

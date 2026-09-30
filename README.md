@@ -20,6 +20,22 @@ Pinia、TypeScript 和 Java Core；未实施的技术不会创建空入口。
 - [后端文档](./docs/backend/)：后端模板、来源规范、路线与审计资产。
 - [贡献指南](./AGENTS.md)：仓库结构、编码约束和验证命令。
 
+## TeamFlow 结课项目
+
+Java Core 的 TeamFlow 完整交付 Demo 位于
+`src/categories/backend/java/core/demos/teamflow-complete-delivery/`，包含 JDK 25 / Spring Boot 4.1
+现代版、Java 8 / Spring Boot 2.3.12 兼容版、React 联调前端以及 MySQL、Redis、RabbitMQ Compose 依赖。
+两版共享 API、事件和验收合同，覆盖登录、用户/团队、项目、任务、缓存、幂等、消息通知、并发冲突和健康探针。
+
+在该目录分别运行以下命令可执行完整双版本门禁：
+
+```sh
+bash delivery-gate.sh modern 18080
+bash delivery-gate.sh legacy 18081
+```
+
+前端默认连接 `http://127.0.0.1:18080`，可通过 `VITE_TEAMFLOW_API_BASE_URL` 切换到兼容版端口。
+
 ## 本地开发
 
 ```sh

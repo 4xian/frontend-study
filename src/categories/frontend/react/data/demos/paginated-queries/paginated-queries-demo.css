@@ -1,0 +1,181 @@
+.paginated-queries-demo {
+  min-width: 0;
+  max-width: 100%;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+}
+
+.paginated-queries-demo *,
+.paginated-queries-demo *::before,
+.paginated-queries-demo *::after {
+  box-sizing: border-box;
+}
+
+.paginated-queries-header span,
+.paginated-queries-header h2,
+.paginated-queries-header p,
+.paginated-queries-metrics span,
+.paginated-queries-metrics strong,
+.paginated-queries-message,
+.paginated-queries-card,
+.paginated-queries-card h3,
+.paginated-queries-card p,
+.paginated-queries-card li {
+  overflow-wrap: anywhere;
+}
+
+.paginated-queries-header span {
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.paginated-queries-header h2 {
+  margin: var(--space-1) 0 0;
+  font-size: 1.08rem;
+}
+
+.paginated-queries-header p {
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.paginated-queries-metrics,
+.paginated-queries-actions,
+.paginated-queries-columns {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -4px;
+  margin-left: -4px;
+}
+
+.paginated-queries-metrics {
+  margin-top: var(--space-4);
+}
+
+.paginated-queries-metrics > div {
+  flex: 1 1 140px;
+  min-width: 0;
+  margin: 0 4px 8px;
+  padding: 10px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.paginated-queries-metrics span,
+.paginated-queries-metrics strong {
+  display: block;
+}
+
+.paginated-queries-metrics span {
+  color: var(--color-text-secondary);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.paginated-queries-metrics strong {
+  margin-top: 4px;
+  color: var(--color-accent);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.paginated-queries-actions {
+  margin-top: 4px;
+}
+
+.paginated-queries-actions button {
+  min-height: 38px;
+  margin: 0 4px 8px;
+  padding: 7px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  background: var(--color-bg);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.paginated-queries-actions button[data-kind='primary'] {
+  color: var(--color-bg);
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.paginated-queries-actions button[aria-pressed='true'] {
+  color: var(--color-bg);
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.paginated-queries-actions button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.paginated-queries-actions button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.paginated-queries-columns {
+  margin-top: 4px;
+}
+
+.paginated-queries-card {
+  flex: 1 1 220px;
+  min-width: 0;
+  margin: 0 4px 8px;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.paginated-queries-card h3 {
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+.paginated-queries-card p,
+.paginated-queries-card ul {
+  margin: 8px 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.paginated-queries-card ul {
+  padding: 0 0 0 1.2em;
+}
+
+.paginated-queries-message {
+  margin: 8px 0 0;
+  padding: 10px;
+  border-left: 3px solid var(--color-accent);
+  color: var(--color-text);
+  background: var(--color-bg-secondary);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 480px) {
+  .paginated-queries-demo {
+    padding: var(--space-3);
+  }
+
+  .paginated-queries-metrics > div,
+  .paginated-queries-card,
+  .paginated-queries-actions button {
+    flex-basis: 100%;
+  }
+
+  .paginated-queries-actions button {
+    width: calc(100% - 8px);
+  }
+}

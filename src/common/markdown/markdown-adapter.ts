@@ -16,6 +16,16 @@ export interface ContentMarkdownInput {
   assets: MarkdownAssetAllowlist
 }
 
+interface ParsedMarkdownDocument {
+  frontmatter: CategoryFrontmatter
+  bodyNodes: MarkdownAstNode[]
+}
+
+interface MarkdownFence {
+  marker: '`' | '~'
+  length: number
+}
+
 const markdownParser = unified()
   .use(remarkParse)
   .use(remarkFrontmatter, ['yaml'])
@@ -83,8 +93,80 @@ function toMeta(frontmatter: CategoryFrontmatter): ContentMeta {
   }
 }
 
-/** 把统一类别 Markdown 转换为运行时 ContentEntry。 */
-export function parseContentMarkdown(input: ContentMarkdownInput): ContentEntry {
+/** 只保留 frontmatter 与根级标题，避免 Catalog 索引解析完整正文 AST。 */
+function projectContentMetaSource(source: string, sourcePath: string): string {
+  const lines = source.split(/\r?\n/)
+  if (lines[0]?.trim() !== '---') fail(sourcePath, '必须在文档开头提供 YAML frontmatter')
+  const frontmatterEnd = lines.findIndex((line, index) => index > 0 && line.trim() === '---')
+  if (frontmatterEnd < 0) fail(sourcePath, 'YAML frontmatter 缺少结束分隔符')
+
+  const projected = lines.slice(0, frontmatterEnd + 1)
+  let fence: MarkdownFence | undefined
+  let inDirective = false
+  for (const line of lines.slice(frontmatterEnd + 1)) {
+    const fenceMatch = line.match(/^ {0,3}(`{3,}|~{3,})/)
+    if (fenceMatch) {
+      const marker = fenceMatch[1]![0] as MarkdownFence['marker']
+      const length = fenceMatch[1]!.length
+      if (!fence) fence = { marker, length }
+      else if (fence.marker === marker && length >= fence.length) fence = undefined
+      continue
+    }
+    if (fence) continue
+
+    if (/^ {0,3}:::[a-z]/i.test(line)) {
+      inDirective = true
+      continue
+    }
+    if (inDirective && /^ {0,3}:::\s*$/.test(line)) {
+      inDirective = false
+      continue
+    }
+    if (!inDirective && /^ {0,3}#{1,6}(?:\s|$)/.test(line)) projected.push(line)
+  }
+  return projected.join('\n')
+}
+
+/** 校验标题层级并返回 frontmatter 与根级标题节点。 */
+function parseContentMetaDocument(input: ContentMarkdownInput): ParsedMarkdownDocument {
+  const projectedSource = projectContentMetaSource(input.source, input.sourcePath)
+  const tree = markdownParser.parse(projectedSource) as unknown as { children: MarkdownAstNode[] }
+  const yamlNodes = tree.children.filter((node) => node.type === 'yaml')
+  if (tree.children[0]?.type !== 'yaml' || yamlNodes.length !== 1) {
+    fail(input.sourcePath, '必须且只能在文档开头提供一个 YAML frontmatter')
+  }
+  const frontmatter = parseCategoryFrontmatter(yamlNodes[0]!.value ?? '', input.sourcePath)
+  validateLocation(frontmatter, input.sourcePath)
+
+  const bodyNodes = tree.children.slice(1)
+  validateDocumentStructure(frontmatter, bodyNodes, input.sourcePath)
+  return { frontmatter, bodyNodes }
+}
+
+/** 校验统一 Markdown 的标题结构，确保索引和正文解析使用同一规则。 */
+function validateDocumentStructure(
+  frontmatter: CategoryFrontmatter,
+  bodyNodes: MarkdownAstNode[],
+  sourcePath: string,
+): void {
+  const titleNode = bodyNodes[0]
+  if (titleNode?.type !== 'heading' || titleNode.depth !== 1) {
+    fail(sourcePath, '正文必须以唯一一级标题开始')
+  }
+  const title = readMarkdownHeadingText(titleNode, sourcePath)
+  if (title !== frontmatter.title) fail(sourcePath, '一级标题必须与 title 一致')
+  if (bodyNodes.slice(1).some((node) => node.type === 'heading' && node.depth === 1)) {
+    fail(sourcePath, '正文只能包含一个一级标题')
+  }
+  if (
+    bodyNodes.slice(1).some((node) => node.type === 'heading' && ![2, 3].includes(node.depth ?? 0))
+  ) {
+    fail(sourcePath, '正文只允许二级或三级标题')
+  }
+}
+
+/** 解析统一 Markdown 的 frontmatter、根标题和可用于索引的标题节点。 */
+function parseMarkdownDocument(input: ContentMarkdownInput): ParsedMarkdownDocument {
   const tree = markdownParser.parse(input.source) as unknown as { children: MarkdownAstNode[] }
   const yamlNodes = tree.children.filter((node) => node.type === 'yaml')
   if (tree.children[0]?.type !== 'yaml' || yamlNodes.length !== 1) {
@@ -94,15 +176,40 @@ export function parseContentMarkdown(input: ContentMarkdownInput): ContentEntry 
   validateLocation(frontmatter, input.sourcePath)
 
   const bodyNodes = tree.children.slice(1)
-  const titleNode = bodyNodes[0]
-  if (titleNode?.type !== 'heading' || titleNode.depth !== 1) {
-    fail(input.sourcePath, '正文必须以唯一一级标题开始')
+  validateDocumentStructure(frontmatter, bodyNodes, input.sourcePath)
+
+  return { frontmatter, bodyNodes }
+}
+
+/** 仅提取 Catalog 所需的元数据，避免索引阶段转换正文和 directive。 */
+export function parseContentMeta(input: ContentMarkdownInput): ContentEntry['meta'] {
+  const { frontmatter, bodyNodes } = parseContentMetaDocument(input)
+  const meta = toMeta(frontmatter)
+  if (frontmatter.type === 'lesson') {
+    return {
+      ...meta,
+      type: 'lesson',
+      stage: frontmatter.stage,
+      level: frontmatter.level,
+      prerequisites: frontmatter.prerequisites,
+      estimatedMinutes: frontmatter.estimatedMinutes,
+    }
   }
-  const title = readMarkdownHeadingText(titleNode, input.sourcePath)
-  if (title !== frontmatter.title) fail(input.sourcePath, '一级标题必须与 title 一致')
-  if (bodyNodes.slice(1).some((node) => node.type === 'heading' && node.depth === 1)) {
-    fail(input.sourcePath, '正文只能包含一个一级标题')
+  return {
+    ...meta,
+    type: 'reference',
+    group: frontmatter.group,
+    anchors: frontmatter.anchors,
+    headingIds: bodyNodes
+      .slice(1)
+      .filter((node) => node.type === 'heading')
+      .map((node) => headingId(readMarkdownHeadingText(node, input.sourcePath))),
   }
+}
+
+/** 把统一类别 Markdown 转换为运行时 ContentEntry。 */
+export function parseContentMarkdown(input: ContentMarkdownInput): ContentEntry {
+  const { frontmatter, bodyNodes } = parseMarkdownDocument(input)
 
   const blocks = convertMarkdownBlocks(bodyNodes.slice(1), input.sourcePath, input.assets)
   const meta = toMeta(frontmatter)

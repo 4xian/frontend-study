@@ -1,0 +1,207 @@
+.crud-workspace-demo {
+  min-width: 0;
+  max-width: 100%;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-secondary);
+}
+
+.crud-workspace-demo *,
+.crud-workspace-demo *::before,
+.crud-workspace-demo *::after {
+  box-sizing: border-box;
+}
+
+.crud-workspace-header span,
+.crud-workspace-header h2,
+.crud-workspace-header p,
+.crud-workspace-metrics span,
+.crud-workspace-metrics strong,
+.crud-workspace-message,
+.crud-workspace-card,
+.crud-workspace-card h3,
+.crud-workspace-card p,
+.crud-workspace-card li,
+.crud-workspace-card button {
+  overflow-wrap: anywhere;
+}
+
+.crud-workspace-header span {
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.crud-workspace-header h2 {
+  margin: var(--space-1) 0 0;
+  font-size: 1.08rem;
+}
+
+.crud-workspace-header p {
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.crud-workspace-metrics,
+.crud-workspace-actions,
+.crud-workspace-columns {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -4px;
+  margin-left: -4px;
+}
+
+.crud-workspace-metrics {
+  margin-top: var(--space-4);
+}
+
+.crud-workspace-metrics > div {
+  flex: 1 1 140px;
+  min-width: 0;
+  margin: 0 4px 8px;
+  padding: 10px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.crud-workspace-metrics span,
+.crud-workspace-metrics strong {
+  display: block;
+}
+
+.crud-workspace-metrics span {
+  color: var(--color-text-secondary);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.crud-workspace-metrics strong {
+  margin-top: 4px;
+  color: var(--color-accent);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.crud-workspace-actions {
+  margin-top: 4px;
+}
+
+.crud-workspace-actions button {
+  min-height: 38px;
+  margin: 0 4px 8px;
+  padding: 7px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  background: var(--color-bg);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.crud-workspace-actions button[data-kind='primary'] {
+  color: var(--color-bg);
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.crud-workspace-actions button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.crud-workspace-actions button:focus-visible,
+.crud-workspace-list button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.crud-workspace-columns {
+  margin-top: 4px;
+}
+
+.crud-workspace-card {
+  flex: 1 1 220px;
+  min-width: 0;
+  margin: 0 4px 8px;
+  padding: 12px;
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.crud-workspace-card h3 {
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+.crud-workspace-card p,
+.crud-workspace-card ul {
+  margin: 8px 0 0;
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.crud-workspace-card ul {
+  padding: 0 0 0 1.2em;
+}
+
+.crud-workspace-list {
+  display: flex;
+  flex-direction: column;
+  margin: 8px 0 0;
+}
+
+.crud-workspace-list button {
+  min-height: 36px;
+  margin: 0 0 8px;
+  padding: 7px 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  background: var(--color-bg-secondary);
+  font: inherit;
+  font-size: 0.82rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.crud-workspace-list button[data-selected='true'] {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.crud-workspace-list button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.crud-workspace-message {
+  margin: 8px 0 0;
+  padding: 10px;
+  border-left: 3px solid var(--color-accent);
+  color: var(--color-text);
+  background: var(--color-bg-secondary);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 480px) {
+  .crud-workspace-demo {
+    padding: var(--space-3);
+  }
+
+  .crud-workspace-metrics > div,
+  .crud-workspace-card,
+  .crud-workspace-actions button {
+    flex-basis: 100%;
+  }
+
+  .crud-workspace-actions button {
+    width: calc(100% - 8px);
+  }
+}

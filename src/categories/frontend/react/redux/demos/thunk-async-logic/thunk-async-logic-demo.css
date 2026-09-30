@@ -1,0 +1,219 @@
+.thunk-async-demo {
+  min-width: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+}
+
+.thunk-async-demo__heading p,
+.thunk-async-demo__heading h2,
+.thunk-async-demo__heading span {
+  overflow-wrap: anywhere;
+}
+
+.thunk-async-demo__heading p {
+  margin: 0 0 var(--space-1);
+  color: var(--color-accent);
+  font-size: var(--font-size-xs);
+  font-weight: 800;
+}
+
+.thunk-async-demo__heading h2 {
+  margin: 0;
+  font-size: var(--font-size-md);
+}
+
+.thunk-async-demo__heading span {
+  display: block;
+  margin-top: var(--space-2);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.thunk-async-demo__flow,
+.thunk-async-demo__controls,
+.thunk-async-demo__state {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -4px;
+  margin-left: -4px;
+}
+
+.thunk-async-demo__flow {
+  align-items: center;
+  margin-top: var(--space-4);
+}
+
+.thunk-async-demo__flow span,
+.thunk-async-demo__flow strong {
+  margin: 0 4px 8px;
+  overflow-wrap: anywhere;
+}
+
+.thunk-async-demo__flow span {
+  padding: 6px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-sunken);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+}
+
+.thunk-async-demo__flow strong {
+  color: var(--color-accent);
+  font-size: var(--font-size-xs);
+}
+
+.thunk-async-demo__editor {
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border);
+}
+
+.thunk-async-demo__editor label {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+}
+
+.thunk-async-demo__editor input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 42px;
+  margin-top: var(--space-2);
+  padding: 8px 10px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: inherit;
+}
+
+.thunk-async-demo__editor input:focus-visible {
+  border-color: var(--color-accent);
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.thunk-async-demo__editor p {
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+  overflow-wrap: anywhere;
+}
+
+.thunk-async-demo__controls {
+  margin-top: var(--space-3);
+}
+
+.thunk-async-demo__controls button {
+  min-height: 40px;
+  margin: 0 4px 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-elevated);
+  color: var(--color-text);
+  font: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.thunk-async-demo__controls .thunk-async-demo__primary {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.thunk-async-demo__controls button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.thunk-async-demo__controls button:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+.thunk-async-demo__state {
+  margin-top: var(--space-3);
+}
+
+.thunk-async-demo__state > div {
+  box-sizing: border-box;
+  flex: 1 1 180px;
+  min-width: 0;
+  min-height: 86px;
+  margin: 0 4px 8px;
+  padding: var(--space-3);
+  border-left: 3px solid var(--color-accent);
+  background: var(--color-bg-sunken);
+}
+
+.thunk-async-demo__state dt {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-xs);
+}
+
+.thunk-async-demo__state dd {
+  margin: var(--space-2) 0 0;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.thunk-async-demo__trace {
+  margin-top: var(--space-3);
+  padding: var(--space-3);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.thunk-async-demo__trace h3 {
+  margin: 0;
+  font-size: var(--font-size-base);
+}
+
+.thunk-async-demo__trace ol {
+  margin: var(--space-2) 0 0;
+  padding-left: var(--space-5);
+}
+
+.thunk-async-demo__trace li {
+  margin-top: var(--space-1);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  overflow-wrap: anywhere;
+}
+
+.thunk-async-demo__result {
+  min-height: 22px;
+  margin: var(--space-3) 0 0;
+  color: var(--color-accent);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 480px) {
+  .thunk-async-demo {
+    padding: var(--space-3);
+  }
+
+  .thunk-async-demo__flow strong {
+    width: 100%;
+    margin-bottom: var(--space-1);
+  }
+
+  .thunk-async-demo__controls button {
+    box-sizing: border-box;
+    width: calc(100% - 8px);
+  }
+
+  .thunk-async-demo__state > div {
+    flex-basis: calc(100% - 8px);
+  }
+}
